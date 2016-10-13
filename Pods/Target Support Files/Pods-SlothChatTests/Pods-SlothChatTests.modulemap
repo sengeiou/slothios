@@ -1,0 +1,6 @@
+framework module Pods_SlothChatTests {
+  umbrella header "Pods-SlothChatTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
