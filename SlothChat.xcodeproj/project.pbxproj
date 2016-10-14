@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */; };
+		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
+		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
+		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
+		04AC920E1DB0B02C0048A9FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92091DB0B02C0048A9FD /* LoginViewController.swift */; };
+		04AC920F1DB0B02C0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC920A1DB0B02C0048A9FD /* RegisterViewController.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -38,6 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
+		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
+		04AC92091DB0B02C0048A9FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		04AC920A1DB0B02C0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +101,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04AC92011DB0B02C0048A9FD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				04AC92021DB0B02C0048A9FD /* Base */,
+				04AC92041DB0B02C0048A9FD /* CustomView */,
+				04AC92061DB0B02C0048A9FD /* Global */,
+				04AC92081DB0B02C0048A9FD /* Login */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		04AC92021DB0B02C0048A9FD /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				04AC92031DB0B02C0048A9FD /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		04AC92041DB0B02C0048A9FD /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				04AC92051DB0B02C0048A9FD /* SingleInputView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		04AC92061DB0B02C0048A9FD /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				04AC92071DB0B02C0048A9FD /* SGColor.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		04AC92081DB0B02C0048A9FD /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				04AC92091DB0B02C0048A9FD /* LoginViewController.swift */,
+				04AC920A1DB0B02C0048A9FD /* RegisterViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		19273B071DA9EE1300150460 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +170,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				04AC92011DB0B02C0048A9FD /* UI */,
 				19273B131DA9EE1300150460 /* AppDelegate.swift */,
 				19273B151DA9EE1300150460 /* FirstViewController.swift */,
 				19273B171DA9EE1300150460 /* SecondViewController.swift */,
@@ -449,9 +504,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AC920E1DB0B02C0048A9FD /* LoginViewController.swift in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
+				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
+				04AC920F1DB0B02C0048A9FD /* RegisterViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
+				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
+				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
