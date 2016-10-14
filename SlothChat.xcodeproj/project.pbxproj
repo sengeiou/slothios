@@ -11,8 +11,11 @@
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
-		04AC920E1DB0B02C0048A9FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92091DB0B02C0048A9FD /* LoginViewController.swift */; };
-		04AC920F1DB0B02C0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC920A1DB0B02C0048A9FD /* RegisterViewController.swift */; };
+		04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92151DB0B6DE0048A9FD /* CountryCodeViewController.swift */; };
+		04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */; };
+		04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */; };
+		04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */; };
+		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -46,8 +49,11 @@
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
-		04AC92091DB0B02C0048A9FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		04AC920A1DB0B02C0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		04AC92151DB0B6DE0048A9FD /* CountryCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeViewController.swift; sourceTree = "<group>"; };
+		04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshCell.swift; sourceTree = "<group>"; };
+		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -139,10 +145,37 @@
 		04AC92081DB0B02C0048A9FD /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				04AC92091DB0B02C0048A9FD /* LoginViewController.swift */,
-				04AC920A1DB0B02C0048A9FD /* RegisterViewController.swift */,
+				04AC92121DB0B6DE0048A9FD /* Model */,
+				04AC92131DB0B6DE0048A9FD /* View */,
+				04AC92141DB0B6DE0048A9FD /* ViewController */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		04AC92121DB0B6DE0048A9FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04AC92131DB0B6DE0048A9FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04AC92141DB0B6DE0048A9FD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04AC92151DB0B6DE0048A9FD /* CountryCodeViewController.swift */,
+				04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */,
+				04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		19273B071DA9EE1300150460 = {
@@ -504,14 +537,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AC920E1DB0B02C0048A9FD /* LoginViewController.swift in Sources */,
+				04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
-				04AC920F1DB0B02C0048A9FD /* RegisterViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
+				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
+				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
+				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,
+				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

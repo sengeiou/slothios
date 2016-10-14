@@ -21,7 +21,7 @@ class RegisterViewController: BaseViewController {
         view.addSubview(iconImgView)
         
         let titleLabel = UILabel.init()
-        titleLabel.text = "树懒"
+//        titleLabel.text = "树懒"
         titleLabel.font = UIFont.systemFont(ofSize: 24)
         titleLabel.textColor = UIColor.red
         view.addSubview(titleLabel)
@@ -58,15 +58,10 @@ class RegisterViewController: BaseViewController {
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        let pushVC  = CountryCodeViewController.init()
+        navigationController?.pushViewController(pushVC, animated: true)
     }
-    */
-
 }
