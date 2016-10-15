@@ -13,6 +13,8 @@
 		048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */; };
 		048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */; };
 		048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */; };
+		048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB61DB27CAC00F5A399 /* BaseView.swift */; };
+		048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB81DB27D0000F5A399 /* IconTitleView.swift */; };
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
@@ -61,6 +63,8 @@
 		048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDatePicker.swift; sourceTree = "<group>"; };
 		048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIDatePicker.xib; sourceTree = "<group>"; };
 		048B0BB51DB2490A00F5A399 /* EnumDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDefine.swift; sourceTree = "<group>"; };
+		048B0BB61DB27CAC00F5A399 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		048B0BB81DB27D0000F5A399 /* IconTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTitleView.swift; sourceTree = "<group>"; };
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				04AC92031DB0B02C0048A9FD /* BaseViewController.swift */,
+				048B0BB61DB27CAC00F5A399 /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				04AC92051DB0B02C0048A9FD /* SingleInputView.swift */,
+				048B0BB81DB27D0000F5A399 /* IconTitleView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -602,6 +608,8 @@
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
+				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
+				048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

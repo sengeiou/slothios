@@ -111,7 +111,7 @@ class PerfectionInfoViewController: BaseViewController {
         }
         
         femaleButton.snp.makeConstraints { (make) in
-            make.left.equalTo(genderLabel.snp.right).offset(4)
+            make.left.equalTo(genderLabel.snp.right).offset(120)
             make.centerY.equalTo(genderLabel.snp.centerY)
             make.size.equalTo(CGSize.init(width: 24, height: 24))
         }

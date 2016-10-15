@@ -20,22 +20,12 @@ class RegisterViewController: BaseViewController {
     }
 
     func sentupViews() {
-        let iconImgView = UIImageView.init(image: UIImage.init(named: ""))
-        view.addSubview(iconImgView)
-        
-        let titleLabel = UILabel.init()
-//        titleLabel.text = "树懒"
-        titleLabel.font = UIFont.systemFont(ofSize: 24)
-        titleLabel.textColor = UIColor.red
-        view.addSubview(titleLabel)
-        
-        iconImgView.snp.makeConstraints { (make) in
+        let iconView = IconTitleView.init(frame: CGRect.zero)
+        view.addSubview(iconView)
+        iconView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.height.equalTo(60)
             make.top.equalTo(100)
-            make.centerX.equalTo(self.view).offset(-40)
-        }
-        titleLabel.snp.makeConstraints  { (make) in
-            make.left.equalTo(iconImgView.snp.right).offset(40)
-            make.centerY.equalTo(iconImgView.snp.centerY)
         }
         
        
@@ -46,15 +36,19 @@ class RegisterViewController: BaseViewController {
         view.addSubview(codeView)
         
         phoneView.configInputView(titleStr: "手机号:", contentStr: "")
+        phoneView.inputTextfield.keyboardType = .numberPad
+
         view.addSubview(phoneView)
         
         passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
+
+        
         
         codeView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(180)
+            make.top.equalTo(iconView.snp.bottom).offset(100)
             make.height.equalTo(44)
         }
         
@@ -133,7 +127,7 @@ class RegisterViewController: BaseViewController {
         let pushVC  = CountryCodeViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
         pushVC.setClosurePass { (code) in
-            self.codeView.configInputView(titleStr: "国家区号:", contentStr: code)
+            self.codeView.configContent(contentStr: "+" + code)
         }
     }
     
