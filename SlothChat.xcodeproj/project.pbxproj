@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */; };
+		048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */; };
+		048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */; };
+		048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */; };
+		048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */; };
+		048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */; };
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
@@ -46,6 +51,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfectionInfoViewController.swift; sourceTree = "<group>"; };
+		048B0BA81DB241AD00F5A399 /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
+		048B0BA91DB241AD00F5A399 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		048B0BAB1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlothChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDatePicker.swift; sourceTree = "<group>"; };
+		048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIDatePicker.xib; sourceTree = "<group>"; };
+		048B0BB51DB2490A00F5A399 /* EnumDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDefine.swift; sourceTree = "<group>"; };
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
@@ -107,6 +122,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		048B0BA61DB241A400F5A399 /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				048B0BB01DB2473E00F5A399 /* MIDatePicker */,
+				048B0BA71DB241AD00F5A399 /* MKAdditions */,
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		048B0BA71DB241AD00F5A399 /* MKAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				048B0BA81DB241AD00F5A399 /* MKBlockAdditions.h */,
+				048B0BA91DB241AD00F5A399 /* NSObject+MKBlockAdditions.h */,
+				048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */,
+				048B0BAB1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.h */,
+				048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */,
+			);
+			path = MKAdditions;
+			sourceTree = "<group>";
+		};
+		048B0BB01DB2473E00F5A399 /* MIDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */,
+				048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */,
+			);
+			path = MIDatePicker;
+			sourceTree = "<group>";
+		};
 		04AC92011DB0B02C0048A9FD /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				04AC92071DB0B02C0048A9FD /* SGColor.swift */,
+				048B0BB51DB2490A00F5A399 /* EnumDefine.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -174,6 +220,7 @@
 				04AC92151DB0B6DE0048A9FD /* CountryCodeViewController.swift */,
 				04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */,
 				04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */,
+				048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -203,6 +250,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				048B0BA61DB241A400F5A399 /* Third */,
 				04AC92011DB0B02C0048A9FD /* UI */,
 				19273B131DA9EE1300150460 /* AppDelegate.swift */,
 				19273B151DA9EE1300150460 /* FirstViewController.swift */,
@@ -211,6 +259,7 @@
 				19273B1C1DA9EE1300150460 /* Assets.xcassets */,
 				19273B1E1DA9EE1300150460 /* LaunchScreen.storyboard */,
 				19273B211DA9EE1300150460 /* Info.plist */,
+				048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */,
 			);
 			path = SlothChat;
 			sourceTree = "<group>";
@@ -375,6 +424,7 @@
 				19273B201DA9EE1300150460 /* LaunchScreen.storyboard in Resources */,
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				19273B1B1DA9EE1300150460 /* Main.storyboard in Resources */,
+				048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,11 +589,15 @@
 			files = (
 				04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
+				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
+				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
+				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,
@@ -702,6 +756,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -715,6 +770,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

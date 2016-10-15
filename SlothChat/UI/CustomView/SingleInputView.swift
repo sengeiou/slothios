@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 
-
 enum InputType {
     case textField
     case button
@@ -80,6 +79,7 @@ class SingleInputView: UIView {
                 make.right.equalTo(-4)
                 make.centerY.equalTo(self.snp.centerY)
                 make.right.equalTo(-4)
+                make.size.equalTo(CGSize.init(width: 16, height: 16))
             }
             line.snp.makeConstraints { (make) in
                 make.left.right.bottom.equalTo(inputTextfield)
@@ -104,6 +104,10 @@ class SingleInputView: UIView {
     
     func configInputView(titleStr: String,contentStr: String) {
         titleLabel.text = titleStr
+        inputTextfield.text = contentStr
+    }
+    
+    func configContent(contentStr: String) {
         inputTextfield.text = contentStr
     }
     

@@ -102,23 +102,25 @@ class RegisterViewController: BaseViewController {
     //MARK:- Action
     func registerButtonClick() {
         print("registerButtonClick")
-        let codeStr = codeView.getInputContent()
-        if (codeStr?.isEmpty)! {
-            print("请选择国家码")
-            return
-        }
-        
-        let phoneStr = phoneView.getInputContent()
-        if (phoneStr?.isEmpty)! {
-            print("请输入手机号")
-            return
-        }
-        
-        let passwordStr = passwordView.getInputContent()
-        if (passwordStr?.isEmpty)! {
-            print("请输入密码")
-            return
-        }
+//        let codeStr = codeView.getInputContent()
+//        if (codeStr?.isEmpty)! {
+//            print("请选择国家码")
+//            return
+//        }
+//        
+//        let phoneStr = phoneView.getInputContent()
+//        if (phoneStr?.isEmpty)! {
+//            print("请输入手机号")
+//            return
+//        }
+//        
+//        let passwordStr = passwordView.getInputContent()
+//        if (passwordStr?.isEmpty)! {
+//            print("请输入密码")
+//            return
+//        }
+        let pushVC  = PerfectionInfoViewController.init()
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func loginButtonClick() {
