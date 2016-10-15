@@ -21,6 +21,8 @@ class PerfectionInfoViewController: BaseViewController {
     
     var datePicker = MIDatePicker.getFromNib()
     var dateFormatter = DateFormatter()
+    
+    var selectedAvatar : UIImage?
     var gender : SGGenderType = .male
     
 
@@ -163,9 +165,23 @@ class PerfectionInfoViewController: BaseViewController {
     //MARK:- Action
     func registerButtonClick() {
         print("registerButtonClick")
-        if avatarButton.image(for: .normal) == nil {
+        
+        if self.selectedAvatar == nil {
+            print("请选择头像")
             return
         }
+        let nickName = nickNameView.getInputContent()
+        if (nickName?.isEmpty)! {
+            print("请输入昵称")
+            return
+        }
+        
+        let birthday = birthdayView.getInputContent()
+        if (birthday?.isEmpty)! {
+            print("请选择生日")
+            return
+        }
+        print("注册信息齐全")
     }
     
     func femaleButtonClick() {
@@ -178,6 +194,7 @@ class PerfectionInfoViewController: BaseViewController {
     
     func avatarButtonClick() {
         UIActionSheet.photoPicker(withTitle: "选择头像", showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+            self.selectedAvatar = avatar
            self.avatarButton.setImage(avatar, for: .normal)
             }, onCancel: nil, allowsEditing: true)
     }

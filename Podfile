@@ -8,7 +8,7 @@ target 'SlothChat' do
   pod "SwiftyJSON"
   pod "Kingfisher"
   pod "SnapKit"
-  pod "PKHUD"
+#  pod "PKHUD"
 
   # Pods for SlothChat
 
