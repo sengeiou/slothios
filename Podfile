@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '8.0'
+swift_version = "3.0"
 
 target 'SlothChat' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -8,6 +9,8 @@ target 'SlothChat' do
   pod "SwiftyJSON"
   pod "Kingfisher"
   pod "SnapKit"
+  pod "PromiseKit"
+  pod "AsyncSwift"
   # Pods for SlothChat
 
   target 'SlothChatTests' do
