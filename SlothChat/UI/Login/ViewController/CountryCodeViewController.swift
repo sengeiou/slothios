@@ -8,12 +8,16 @@
 
 import UIKit
 
+typealias SelectCodeClosureType = (_ code: String) -> Void
+
 class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
     let refreshControl = UIRefreshControl.init()
     let tableView = UITableView.init(frame: CGRect.zero, style: .plain)
     var dataSource = [Array<CountryCodeObj>]()
     
+    var selectPassValue:SelectCodeClosureType?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "下拉刷新"
@@ -97,6 +101,10 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         return header
     }
     
+    func setClosurePass(temClosure: @escaping SelectCodeClosureType){
+        self.selectPassValue = temClosure
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
     }
@@ -107,7 +115,13 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         print(indexPath.row);
         let rowList = dataSource[indexPath.section]
         let obj = rowList[indexPath.row]
-        print(obj.code)
+        
+        if let sp = self.selectPassValue {
+            if let code = obj.code{
+                sp(code)
+            }
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
