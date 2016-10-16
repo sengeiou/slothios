@@ -114,7 +114,14 @@ class LoginViewController: BaseViewController {
     
     func forgetButtonClick() {
         print("forgetButtonClick")
-
+        let phoneStr = phoneView.getInputContent()
+        if (phoneStr?.isEmpty)! {
+            print("请输入手机号")
+            return
+        }
+        let pushVC  = CaptchaViewController.init()
+        pushVC.phoneNo = phoneStr
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func loginButtonClick() {
