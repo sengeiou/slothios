@@ -20,7 +20,7 @@ class IconTitleView: UIView {
     
     
     func sentupView() {
-        let iconImgView = UIImageView.init(image: UIImage.init(named: ""))
+        let iconImgView = UIImageView.init(image: UIImage.init(named: "icon"))
         addSubview(iconImgView)
         
         let titleLabel = UILabel.init()
@@ -32,6 +32,7 @@ class IconTitleView: UIView {
         iconImgView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             make.centerX.equalTo(self).offset(-40)
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
         titleLabel.snp.makeConstraints  { (make) in
             make.left.equalTo(iconImgView.snp.right).offset(40)

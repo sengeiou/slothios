@@ -96,31 +96,48 @@ class RegisterViewController: BaseViewController {
     //MARK:- Action
     func registerButtonClick() {
         print("registerButtonClick")
-//        let codeStr = codeView.getInputContent()
-//        if (codeStr?.isEmpty)! {
-//            print("请选择国家码")
-//            return
-//        }
-//        
-//        let phoneStr = phoneView.getInputContent()
-//        if (phoneStr?.isEmpty)! {
-//            print("请输入手机号")
-//            return
-//        }
-//        
-//        let passwordStr = passwordView.getInputContent()
-//        if (passwordStr?.isEmpty)! {
-//            print("请输入密码")
-//            return
-//        }
-        let pushVC  = PerfectionInfoViewController.init()
+        let codeStr = codeView.getInputContent()
+        if (codeStr?.isEmpty)! {
+            print("请选择国家码")
+            return
+        }
+        
+        let phoneStr = phoneView.getInputContent()
+        if (phoneStr?.isEmpty)! {
+            print("请输入手机号")
+            return
+        }
+        
+        let passwordStr = passwordView.getInputContent()
+        if (passwordStr?.isEmpty)! {
+            print("请输入密码")
+            return
+        }
+        
+        let pushVC  = CaptchaViewController.init()
+        pushVC.phoneNo = codeStr! + phoneStr!
         navigationController?.pushViewController(pushVC, animated: true)
+        
+        
     }
     
     func loginButtonClick() {
         print("loginButtonClick")
-        let pushVC  = LoginViewController.init()
-        navigationController?.pushViewController(pushVC, animated: true)
+        var loginVC : UIViewController?
+        let arrayOfVCs = navigationController?.viewControllers
+        
+        for subvc in arrayOfVCs! {
+            if subvc.isKind(of: LoginViewController.self) {
+                loginVC = subvc
+            }
+        }
+        if loginVC != nil {
+            _ = navigationController?.popViewController(animated: true)
+        }else{
+            let pushVC  = LoginViewController.init()
+            navigationController?.pushViewController(pushVC, animated: true)
+        }
+        
     }
     
     func pushCountryCode() {

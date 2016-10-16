@@ -121,7 +121,7 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
                 sp(code)
             }
         }
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {

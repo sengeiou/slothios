@@ -14,6 +14,10 @@ enum SGGenderType {
 }
 
 class PerfectionInfoViewController: BaseViewController {
+    
+    public var phoneNo:String!
+    public var password:String!
+    
     let avatarButton = UIButton.init(type: .custom)
 
     let nickNameView = SingleInputView.init()
@@ -36,7 +40,7 @@ class PerfectionInfoViewController: BaseViewController {
     }
 
     func sentupViews() {
-        let iconImgView = UIImageView.init(image: UIImage.init(named: ""))
+        let iconImgView = UIImageView.init(image: UIImage.init(named: "icon"))
         view.addSubview(iconImgView)
         
         let titleLabel = UILabel.init()
@@ -48,6 +52,7 @@ class PerfectionInfoViewController: BaseViewController {
         iconImgView.snp.makeConstraints { (make) in
             make.top.equalTo(100)
             make.centerX.equalTo(self.view).offset(-40)
+            make.size.equalTo(CGSize.init(width: 44, height: 44))
         }
         titleLabel.snp.makeConstraints  { (make) in
             make.left.equalTo(iconImgView.snp.right).offset(40)

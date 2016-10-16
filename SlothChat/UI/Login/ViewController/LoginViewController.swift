@@ -114,41 +114,46 @@ class LoginViewController: BaseViewController {
     
     func forgetButtonClick() {
         print("forgetButtonClick")
-        let phoneStr = phoneView.getInputContent()
-        if (phoneStr?.isEmpty)! {
-            print("请输入手机号")
+        if !checkDataValid(){
             return
         }
-        let pushVC  = CaptchaViewController.init()
-        pushVC.phoneNo = phoneStr
+        let phoneStr = phoneView.getInputContent()!
+        let code = self.codeButton.title(for: .normal)!
+        
+        let pushVC  = ModifyPasswordViewController.init()
+        pushVC.phoneNo = code + phoneStr
         navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func loginButtonClick() {
         print("loginButtonClick")
-        //        let codeStr = codeView.getInputContent()
-        //        if (codeStr?.isEmpty)! {
-        //            print("请选择国家码")
-        //            return
-        //        }
-        //
-        //        let phoneStr = phoneView.getInputContent()
-        //        if (phoneStr?.isEmpty)! {
-        //            print("请输入手机号")
-        //            return
-        //        }
-        //
-        //        let passwordStr = passwordView.getInputContent()
-        //        if (passwordStr?.isEmpty)! {
-        //            print("请输入密码")
-        //            return
-        //        }
-        print("登录成功")
+        if !checkDataValid(){
+            return
+        }
+        let phoneStr = phoneView.getInputContent()!
+        let codeStr = self.codeButton.title(for: .normal)!
+        print("登录成功" + codeStr + phoneStr )
+    }
+    
+    func checkDataValid() -> Bool {
+        let phoneStr = phoneView.getInputContent()
+        if (phoneStr?.isEmpty)! {
+            print("请输入手机号")
+            return false
+        }
+        
+        let code = self.codeButton.title(for: .normal)
+        if (code?.isEmpty)! {
+            print("请输入手机号")
+            return false
+        }
+        return true
     }
     
     func registerButtonClick() {
         print("registerButtonClick")
-        navigationController?.popViewController(animated: true)
+        let pushVC  = RegisterViewController.init()
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func codeButtonClick() {

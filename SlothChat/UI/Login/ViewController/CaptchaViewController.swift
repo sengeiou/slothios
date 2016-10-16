@@ -9,21 +9,24 @@
 import UIKit
 
 class CaptchaViewController: BaseViewController {
-//    var phoneNo = ""
     var timer = Timer()
     var timeout = 0
     
-    var phoneNo:String!{
-        willSet{
+    public var phoneNo:String!
+    public var password:String!
+
+    let tipLabel = UILabel.init()
+    let captchaView = SingleInputView.init()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !(phoneNo?.isEmpty)! {
             self.fireTimer()
         }
     }
     
-    let tipLabel = UILabel.init()
-    let captchaView = SingleInputView.init()
-    let passwordView = SingleInputView.init()
-
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         if timer.isValid {
             timer.invalidate()
         }
@@ -68,16 +71,6 @@ class CaptchaViewController: BaseViewController {
             make.height.equalTo(44)
         }
         
-        passwordView.configInputView(titleStr: "验证码:", contentStr: "")
-        passwordView.inputTextfield.isSecureTextEntry = true
-        view.addSubview(passwordView)
-        
-        passwordView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.top.equalTo(passwordView.snp.bottom).offset(24)
-            make.height.equalTo(44)
-        }
-        
         let confirmButton = UIButton.init(type: .custom)
         confirmButton.setTitle("确认", for: .normal)
         confirmButton.layer.cornerRadius = 20
@@ -95,7 +88,7 @@ class CaptchaViewController: BaseViewController {
     }
     
     func update() {
-        let string1 = "已经向您的手机" + phoneNo + "发送验证码。\n"
+        let string1 = "已经向您的手机" + phoneNo! + "发送验证码。\n"
         let timeStr = String(timeout)
         let string2 = "如果" + timeStr + "秒后未收到验证码，再次申请。"
         let range = NSRange.init(location: string1.characters.count + 2, length: timeStr.characters.count)
@@ -122,8 +115,9 @@ class CaptchaViewController: BaseViewController {
         if timeout > 0 {
             return
         }
-        timeout = 6
+        timeout = 60
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true);
+        timer.fire()
     }
     
     //MARK:- Action
@@ -135,6 +129,10 @@ class CaptchaViewController: BaseViewController {
             return
         }
         print("注册信息齐全")
+        let pushVC  = PerfectionInfoViewController.init()
+        pushVC.phoneNo = self.phoneNo
+        pushVC.password = self.password
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
 }
