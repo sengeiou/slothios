@@ -26,6 +26,10 @@
 		040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576DB1DB3353E00C55D02 /* IQToolbar.swift */; };
 		040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576DC1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift */; };
 		040576EF1DB3353E00C55D02 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 040576DE1DB3353E00C55D02 /* IQKeyboardManager.bundle */; };
+		044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643501DB4F05C0050F8BC /* ChatViewController.swift */; };
+		044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643521DB4F0660050F8BC /* DiscoveryViewController.swift */; };
+		044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* MeViewController.swift */; };
+		044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643571DB4F6960050F8BC /* UIViewController+Extension.swift */; };
 		048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */; };
 		048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */; };
 		048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */; };
@@ -43,6 +47,8 @@
 		04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */; };
 		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
+		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
+		04F4D6F11DB50F0000F89790 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6F01DB50F0000F89790 /* SettingCell.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -92,6 +98,10 @@
 		040576DB1DB3353E00C55D02 /* IQToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQToolbar.swift; sourceTree = "<group>"; };
 		040576DC1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		040576DE1DB3353E00C55D02 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IQKeyboardManager.bundle; sourceTree = "<group>"; };
+		044643501DB4F05C0050F8BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		044643521DB4F0660050F8BC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
+		044643541DB4F06D0050F8BC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		044643571DB4F6960050F8BC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfectionInfoViewController.swift; sourceTree = "<group>"; };
 		048B0BA81DB241AD00F5A399 /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
 		048B0BA91DB241AD00F5A399 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
@@ -114,6 +124,8 @@
 		04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshCell.swift; sourceTree = "<group>"; };
 		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		04F4D6F01DB50F0000F89790 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingCell.swift; path = SlothChat/UI/Main/Me/ViewController/SettingCell.swift; sourceTree = SOURCE_ROOT; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +244,112 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		044643441DB4F03E0050F8BC /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				044643451DB4F03E0050F8BC /* Model */,
+				044643461DB4F03E0050F8BC /* View */,
+				044643471DB4F03E0050F8BC /* ViewController */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		044643451DB4F03E0050F8BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		044643461DB4F03E0050F8BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		044643471DB4F03E0050F8BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				044643501DB4F05C0050F8BC /* ChatViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		044643481DB4F03E0050F8BC /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				044643491DB4F03E0050F8BC /* Model */,
+				0446434A1DB4F03E0050F8BC /* View */,
+				0446434B1DB4F03E0050F8BC /* ViewController */,
+			);
+			path = Discovery;
+			sourceTree = "<group>";
+		};
+		044643491DB4F03E0050F8BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0446434A1DB4F03E0050F8BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0446434B1DB4F03E0050F8BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				044643521DB4F0660050F8BC /* DiscoveryViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0446434C1DB4F03E0050F8BC /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				0446434D1DB4F03E0050F8BC /* Model */,
+				0446434E1DB4F03E0050F8BC /* View */,
+				0446434F1DB4F03E0050F8BC /* ViewController */,
+			);
+			path = Me;
+			sourceTree = "<group>";
+		};
+		0446434D1DB4F03E0050F8BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0446434E1DB4F03E0050F8BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04F4D6F01DB50F0000F89790 /* SettingCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0446434F1DB4F03E0050F8BC /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				044643541DB4F06D0050F8BC /* MeViewController.swift */,
+				04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		044643561DB4F60F0050F8BC /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				044643571DB4F6960050F8BC /* UIViewController+Extension.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,25 +462,12 @@
 		04B385A41DB4AB2A00A8C116 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				04B385A51DB4AB2A00A8C116 /* Model */,
-				04B385A61DB4AB2A00A8C116 /* View */,
+				044643441DB4F03E0050F8BC /* Chat */,
+				044643481DB4F03E0050F8BC /* Discovery */,
+				0446434C1DB4F03E0050F8BC /* Me */,
 				04B385A71DB4AB2A00A8C116 /* ViewController */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		04B385A51DB4AB2A00A8C116 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		04B385A61DB4AB2A00A8C116 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		04B385A71DB4AB2A00A8C116 /* ViewController */ = {
@@ -398,6 +503,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				044643561DB4F60F0050F8BC /* Category */,
 				048B0BA61DB241A400F5A399 /* Third */,
 				04AC92011DB0B02C0048A9FD /* UI */,
 				19273B131DA9EE1300150460 /* AppDelegate.swift */,
@@ -737,6 +843,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */,
 				04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
@@ -744,6 +851,7 @@
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
 				040576EB1DB3353E00C55D02 /* IQPreviousNextView.swift in Sources */,
 				040576E81DB3353E00C55D02 /* IQKeyboardReturnKeyHandler.swift in Sources */,
+				044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */,
 				040576E91DB3353E00C55D02 /* IQTextView.swift in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
@@ -758,6 +866,7 @@
 				040576C61DB32CB100C55D02 /* ModifyPasswordViewController.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
@@ -766,11 +875,14 @@
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
 				040576E61DB3353E00C55D02 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
+				04F4D6F11DB50F0000F89790 /* SettingCell.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
+				044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
+				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
 				048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */,
 			);
