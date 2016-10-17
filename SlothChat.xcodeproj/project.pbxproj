@@ -530,7 +530,8 @@
 				TargetAttributes = {
 					19273B0F1DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = D2C7BQTTK5;
+						ProvisioningStyle = Manual;
 					};
 					19273B251DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
@@ -844,6 +845,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -893,6 +895,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -921,11 +924,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9DB8E50078C2DE24FC01CA78 /* Pods-SlothChat.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = D2C7BQTTK5;
 				INFOPLIST_FILE = SlothChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "089407aa-4fbb-4bc6-b6a6-237750eb97eb";
+				PROVISIONING_PROFILE_SPECIFIER = sc;
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -935,11 +943,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 33DA91F226A2C2524F375C5F /* Pods-SlothChat.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Juan Chen (D2C7BQTTK5)";
+				DEVELOPMENT_TEAM = D2C7BQTTK5;
 				INFOPLIST_FILE = SlothChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "089407aa-4fbb-4bc6-b6a6-237750eb97eb";
+				PROVISIONING_PROFILE_SPECIFIER = sc;
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
