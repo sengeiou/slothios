@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import PKHUD
 
 class RegisterViewController: BaseViewController {
     let codeView = SingleInputView.init(type : .button)
@@ -98,26 +99,25 @@ class RegisterViewController: BaseViewController {
         print("registerButtonClick")
         let codeStr = codeView.getInputContent()
         if (codeStr?.isEmpty)! {
-            print("请选择国家码")
+            HUD.flash(.label("请选择国家码"))
             return
         }
         
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            print("请输入手机号")
+            HUD.flash(.label("请输入手机号"))
             return
         }
         
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            print("请输入密码")
+            HUD.flash(.label("请输入密码"))
             return
         }
         
         let pushVC  = CaptchaViewController.init()
         pushVC.phoneNo = codeStr! + phoneStr!
         navigationController?.pushViewController(pushVC, animated: true)
-        
         
     }
     

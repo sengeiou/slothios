@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class LoginViewController: BaseViewController {
 
@@ -138,15 +139,22 @@ class LoginViewController: BaseViewController {
     func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            print("请输入手机号")
+            HUD.flash(.label("请输入手机号"))
             return false
         }
         
         let code = self.codeButton.title(for: .normal)
         if (code?.isEmpty)! {
-            print("请输入手机号")
+            HUD.flash(.label("请选择国家码"))
+
             return false
         }
+        let passwordStr = passwordView.getInputContent()
+        if (passwordStr?.isEmpty)! {
+            HUD.flash(.label("请输入密码"))
+            return false
+        }
+        
         return true
     }
     

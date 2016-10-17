@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class ModifyPasswordViewController: BaseViewController {
     var timer = Timer()
@@ -135,10 +136,10 @@ class ModifyPasswordViewController: BaseViewController {
         print("confirmButtonClick")
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
-            print("请输入验证码")
+            HUD.flash(.label("请输入验证码"))
             return
         }
-        print("注册信息齐全")
+        HUD.flash(.label("登录成功"))
     }
     
 }

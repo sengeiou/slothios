@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class CaptchaViewController: BaseViewController {
     var timer = Timer()
@@ -125,10 +126,10 @@ class CaptchaViewController: BaseViewController {
         print("confirmButtonClick")
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
-            print("请输入验证码")
+            HUD.flash(.label("请输入验证码"))
             return
         }
-        print("注册信息齐全")
+        
         let pushVC  = PerfectionInfoViewController.init()
         pushVC.phoneNo = self.phoneNo
         pushVC.password = self.password

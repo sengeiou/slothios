@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 enum SGGenderType {
     case male
@@ -172,18 +173,18 @@ class PerfectionInfoViewController: BaseViewController {
         print("registerButtonClick")
         
         if self.selectedAvatar == nil {
-            print("请选择头像")
+            HUD.flash(.label("请选择头像"))
             return
         }
         let nickName = nickNameView.getInputContent()
         if (nickName?.isEmpty)! {
-            print("请输入昵称")
+            HUD.flash(.label("请输入昵称"))
             return
         }
         
         let birthday = birthdayView.getInputContent()
         if (birthday?.isEmpty)! {
-            print("请选择生日")
+            HUD.flash(.label("请选择生日"))
             return
         }
         print("注册信息齐全")
