@@ -18,6 +18,8 @@ typealias SelectClosureType = () -> Void
 class SingleInputView: UIView {
 
     let titleLabel = UILabel.init()
+    let errorLabel = UILabel.init()
+    
     let inputTextfield = UITextField.init()
     
     let selectButton = UIButton.init()
@@ -50,13 +52,23 @@ class SingleInputView: UIView {
         
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(4)
-            make.top.bottom.equalTo(0)
+            make.bottom.equalTo(0)
             make.width.equalTo(100)
         }
+        errorLabel.font = UIFont.systemFont(ofSize: 12)
+        errorLabel.textColor = SGColor.SGRedColor()
+        addSubview(errorLabel)
+        errorLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(titleLabel.snp.right)
+            make.top.equalTo(0)
+            make.height.equalTo(16)
+        }
+        
         addSubview(inputTextfield)
         inputTextfield.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
-            make.top.bottom.equalTo(0)
+            make.top.equalTo(errorLabel.snp.bottom)
+            make.bottom.equalTo(0)
             make.right.equalTo(-4)
         }
         line.snp.makeConstraints { (make) in
@@ -113,6 +125,16 @@ class SingleInputView: UIView {
     
     func getInputContent() -> String? {
         return inputTextfield.text
+    }
+    
+    func setErrorContent(error: String?) {
+        if let error = error {
+            errorLabel.text = error
+            inputTextfield.backgroundColor = UIColor(red:0.99, green:0.91, blue:0.91, alpha:1.00)
+        }else{
+            errorLabel.text = ""
+            inputTextfield.backgroundColor = UIColor.white
+        }
     }
     
 }

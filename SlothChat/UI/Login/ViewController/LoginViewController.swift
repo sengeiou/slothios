@@ -151,7 +151,7 @@ class LoginViewController: BaseViewController {
         }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            HUD.flash(.label("请输入密码"))
+            passwordView.setErrorContent(error: "请输入密码")
             return false
         }
         

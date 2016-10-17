@@ -42,6 +42,7 @@
 		04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */; };
 		04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */; };
 		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
+		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -112,6 +113,7 @@
 		04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshCell.swift; sourceTree = "<group>"; };
 		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
+		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				04AC92041DB0B02C0048A9FD /* CustomView */,
 				04AC92061DB0B02C0048A9FD /* Global */,
 				04AC92081DB0B02C0048A9FD /* Login */,
+				04B385A41DB4AB2A00A8C116 /* Main */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -334,6 +337,38 @@
 				048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */,
 				048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */,
 				040576C51DB32CB100C55D02 /* ModifyPasswordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04B385A41DB4AB2A00A8C116 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				04B385A51DB4AB2A00A8C116 /* Model */,
+				04B385A61DB4AB2A00A8C116 /* View */,
+				04B385A71DB4AB2A00A8C116 /* ViewController */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		04B385A51DB4AB2A00A8C116 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04B385A61DB4AB2A00A8C116 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04B385A71DB4AB2A00A8C116 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04B385A81DB4AB4E00A8C116 /* MainViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -716,6 +751,7 @@
 				040576E31DB3353E00C55D02 /* IQUIViewController+Additions.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
+				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* ModifyPasswordViewController.swift in Sources */,
