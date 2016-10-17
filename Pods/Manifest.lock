@@ -1,21 +1,33 @@
 PODS:
   - Alamofire (4.0.1)
   - Kingfisher (3.1.3)
-  - SnapKit (3.0.1)
-  - SwiftyJSON (3.1.0)
+  - PKHUD (3.2.1)
+  - SnapKit (3.0.2)
+  - SwiftyJSON (3.1.1)
 
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
+  - PKHUD (from `https://github.com/toyship/PKHUD.git`)
   - SnapKit
   - SwiftyJSON
+
+EXTERNAL SOURCES:
+  PKHUD:
+    :git: https://github.com/toyship/PKHUD.git
+
+CHECKOUT OPTIONS:
+  PKHUD:
+    :commit: 28fb970b41d63134e962f9da766b96670c0f55f0
+    :git: https://github.com/toyship/PKHUD.git
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   Kingfisher: 007f5851c18c81e7cc106c9cbac1bafea1cce5dc
-  SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
-  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
+  PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
-PODFILE CHECKSUM: 66e6c34d5759ccdae052ee089d0f6e37a143edf1
+PODFILE CHECKSUM: bcf5d992c9939dda248f481d38e26479fcf88d92
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.0.beta.2

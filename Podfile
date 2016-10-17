@@ -8,8 +8,7 @@ target 'SlothChat' do
   pod "SwiftyJSON"
   pod "Kingfisher"
   pod "SnapKit"
-#  pod "PKHUD"
-
+  pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
   # Pods for SlothChat
 
   target 'SlothChatTests' do

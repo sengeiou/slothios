@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3C212EDCC7A079204DFDC8EFDFCC8BE7"
+               BlueprintIdentifier = "420188781D154266DFA0835FA09EE0D8"
                BuildableName = "Pods_SlothChat.framework"
                BlueprintName = "Pods-SlothChat"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3C212EDCC7A079204DFDC8EFDFCC8BE7"
+            BlueprintIdentifier = "420188781D154266DFA0835FA09EE0D8"
             BuildableName = "Pods_SlothChat.framework"
             BlueprintName = "Pods-SlothChat"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3C212EDCC7A079204DFDC8EFDFCC8BE7"
-            BuildableName = "Pods_SlothChat.framework"
-            BlueprintName = "Pods-SlothChat"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
