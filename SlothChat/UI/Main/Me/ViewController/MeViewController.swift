@@ -10,19 +10,31 @@ import UIKit
 
 class MeViewController: BaseViewController {
     var isEdited = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "我"
+        self.title = "我"
+            
         self.setNavtionConfirm(titleStr: "设置")
+        
+        setupView()
     }
     
     override func confirmClick() {
-        if isEdited {
-            self.setNavtionConfirm(titleStr: "设置")
-        }else{
-            self.setNavtionConfirm(titleStr: "编辑")
-        }
+        print("confirmClick")
+        let pushVC = SettingViewController.init()
+        self.navigationController?.pushViewController(pushVC, animated: true)
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let pushVC = SettingViewController.init()
+        self.navigationController?.pushViewController(pushVC, animated: true)
+    }
+    
+    func setupView() {
+        
     }
 
 }

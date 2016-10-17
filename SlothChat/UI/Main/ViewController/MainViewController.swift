@@ -13,13 +13,13 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let discovery = UINavigationController.init(rootViewController: DiscoveryViewController())
-        let chat = UINavigationController.init(rootViewController:ChatViewController())
-        let me = UINavigationController.init(rootViewController:MeViewController())
+        let discoveryNav = UINavigationController(rootViewController: DiscoveryViewController())
+        let chatNav = UINavigationController(rootViewController:ChatViewController())
+        let meNav = UINavigationController(rootViewController:MeViewController())
         
-        self.viewControllers = [discovery,chat,me]
+        self.viewControllers = [discoveryNav,chatNav,meNav]
         
-        
+        UINavigationBar.appearance()
         //设置tabbar的选择颜色
 //        UITabBar.appearance().tintColor = UIColor.redColor(, 0, 0);
         

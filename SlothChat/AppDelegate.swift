@@ -50,10 +50,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if logined {
-            let rootVC = UINavigationController.init(rootViewController: MainViewController.init())
+            let rootVC = MainViewController()
             self.window?.rootViewController = rootVC
         }else{
             let rootVC = UINavigationController.init(rootViewController: LoginViewController.init())
+            rootVC.navigationBar.isHidden = true
             self.window?.rootViewController = rootVC
         }
     }
