@@ -139,19 +139,20 @@ class LoginViewController: BaseViewController {
     func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            HUD.flash(.label("请输入手机号"))
+            HUD.flash(.label("请输入手机号"), delay: 2)
             return false
         }
         
         let code = self.codeButton.title(for: .normal)
         if (code?.isEmpty)! {
-            HUD.flash(.label("请选择国家码"))
+            HUD.flash(.label("请选择国家码"), delay: 2)
 
             return false
         }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            passwordView.setErrorContent(error: "请输入密码")
+            HUD.flash(.label("请输入密码"), delay: 2)
+//            passwordView.setErrorContent(error: "请输入密码")
             return false
         }
         

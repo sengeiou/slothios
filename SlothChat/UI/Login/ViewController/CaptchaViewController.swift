@@ -126,7 +126,7 @@ class CaptchaViewController: BaseViewController {
         print("confirmButtonClick")
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
-            HUD.flash(.label("请输入验证码"))
+            HUD.flash(.label("请输入验证码"), delay: 2)
             return
         }
         

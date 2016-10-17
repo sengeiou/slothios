@@ -99,19 +99,19 @@ class RegisterViewController: BaseViewController {
         print("registerButtonClick")
         let codeStr = codeView.getInputContent()
         if (codeStr?.isEmpty)! {
-            HUD.flash(.label("请选择国家码"))
+            HUD.flash(.label("请选择国家码"), delay: 2)
             return
         }
         
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            HUD.flash(.label("请输入手机号"))
+            HUD.flash(.label("请输入手机号"), delay: 2)
             return
         }
         
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            HUD.flash(.label("请输入密码"))
+            HUD.flash(.label("请输入密码"), delay: 2)
             return
         }
         

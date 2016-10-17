@@ -173,18 +173,18 @@ class PerfectionInfoViewController: BaseViewController {
         print("registerButtonClick")
         
         if self.selectedAvatar == nil {
-            HUD.flash(.label("请选择头像"))
+            HUD.flash(.label("请选择头像"), delay: 2)
             return
         }
         let nickName = nickNameView.getInputContent()
         if (nickName?.isEmpty)! {
-            HUD.flash(.label("请输入昵称"))
+            HUD.flash(.label("请输入昵称"), delay: 2)
             return
         }
         
         let birthday = birthdayView.getInputContent()
         if (birthday?.isEmpty)! {
-            HUD.flash(.label("请选择生日"))
+            HUD.flash(.label("请选择生日"), delay: 2)
             return
         }
         print("注册信息齐全")

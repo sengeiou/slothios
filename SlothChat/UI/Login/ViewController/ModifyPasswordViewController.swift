@@ -136,10 +136,10 @@ class ModifyPasswordViewController: BaseViewController {
         print("confirmButtonClick")
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
-            HUD.flash(.label("请输入验证码"))
+            HUD.flash(.label("请输入验证码"), delay: 2)
             return
         }
-        HUD.flash(.label("登录成功"))
+        HUD.flash(.label("登录成功"), delay: 2)
     }
     
 }
