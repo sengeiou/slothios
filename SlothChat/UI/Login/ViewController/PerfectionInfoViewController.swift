@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import AwesomeCache
 
 enum SGGenderType {
     case male
@@ -188,6 +189,14 @@ class PerfectionInfoViewController: BaseViewController {
             return
         }
         print("注册信息齐全")
+        
+        do {
+            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
+            cache[SGGlobalKey.SCLoginStatusKey] = true.description as NSString?
+            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        } catch _ {
+            print("Something went wrong :(")
+        }
     }
     
     func femaleButtonClick() {

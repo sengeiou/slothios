@@ -7,23 +7,55 @@
 //
 
 import UIKit
+import AwesomeCache
 
+struct SGGlobalKey {
+    static let SCCacheName = "SCCacheName"
+    static let SCLoginStatusKey = "SCLoginStatusKey"
+
+    public static let LoginStatusDidChange = Notification.Name(rawValue: "SlothChat.LoginStatusDidChange")
+
+}
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.sharedManager().enable = true
-
-        self.window = UIWindow.init()
-        let rootVC = UINavigationController.init(rootViewController: LoginViewController.init())
         
-        self.window?.rootViewController = rootVC
+        NotificationCenter.default.addObserver(self, selector: #selector(changeRootViewController), name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        
+        self.window = UIWindow.init()
+        self.changeRootViewController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true
+    }
+    
+    
+    
+    func changeRootViewController() {
+        var logined = false
+        
+        do {
+            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
+//            cache[SGGlobalKey.SCLoginStatusKey] = nil
+            
+            if (cache[SGGlobalKey.SCLoginStatusKey] != nil) {
+                logined = (cache[SGGlobalKey.SCLoginStatusKey]?.boolValue)!
+            }
+        } catch _ {
+            print("Something went wrong :(")
+        }
+        
+        if logined {
+            let rootVC = UINavigationController.init(rootViewController: MainViewController.init())
+            self.window?.rootViewController = rootVC
+        }else{
+            let rootVC = UINavigationController.init(rootViewController: LoginViewController.init())
+            self.window?.rootViewController = rootVC
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

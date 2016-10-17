@@ -8,6 +8,7 @@
 
 import UIKit
 import PKHUD
+import AwesomeCache
 
 class ModifyPasswordViewController: BaseViewController {
     var timer = Timer()
@@ -139,7 +140,14 @@ class ModifyPasswordViewController: BaseViewController {
             HUD.flash(.label("请输入验证码"), delay: 2)
             return
         }
-        HUD.flash(.label("登录成功"), delay: 2)
+//        HUD.flash(.label("登录成功"), delay: 2)
+        do {
+            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
+            cache[SGGlobalKey.SCLoginStatusKey] = true.description as NSString?
+            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        } catch _ {
+            print("Something went wrong :(")
+        }
     }
     
 }
