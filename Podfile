@@ -9,6 +9,8 @@ target 'SlothChat' do
   pod "Kingfisher"
   pod "SnapKit"
   pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
+  pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
+
   # Pods for SlothChat
 
   target 'SlothChatTests' do
