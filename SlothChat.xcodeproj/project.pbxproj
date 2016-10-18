@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */; };
-		040576C61DB32CB100C55D02 /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C51DB32CB100C55D02 /* ModifyPasswordViewController.swift */; };
+		040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */; };
 		040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */; };
 		040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */; };
 		040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576CB1DB3353E00C55D02 /* IQUITextFieldView+Additions.swift */; };
@@ -38,6 +38,11 @@
 		048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB61DB27CAC00F5A399 /* BaseView.swift */; };
 		048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB81DB27D0000F5A399 /* IconTitleView.swift */; };
 		048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */; };
+		04966B391DB6586D000721BD /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B381DB6586D000721BD /* BaseObject.swift */; };
+		04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B3E1DB658C4000721BD /* SettingCell.swift */; };
+		04966B411DB658CF000721BD /* SettingObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B401DB658CF000721BD /* SettingObj.swift */; };
+		04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */; };
+		04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B441DB665E7000721BD /* AboutUsViewController.swift */; };
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
@@ -48,7 +53,6 @@
 		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
 		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
-		04F4D6F11DB50F0000F89790 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6F01DB50F0000F89790 /* SettingCell.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -79,7 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		040576C51DB32CB100C55D02 /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
+		040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
 		040576CB1DB3353E00C55D02 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
@@ -115,6 +119,11 @@
 		048B0BB61DB27CAC00F5A399 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		048B0BB81DB27D0000F5A399 /* IconTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTitleView.swift; sourceTree = "<group>"; };
 		048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
+		04966B381DB6586D000721BD /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
+		04966B3E1DB658C4000721BD /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		04966B401DB658CF000721BD /* SettingObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObj.swift; sourceTree = "<group>"; };
+		04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
+		04966B441DB665E7000721BD /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
@@ -125,7 +134,6 @@
 		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		04F4D6F01DB50F0000F89790 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingCell.swift; path = SlothChat/UI/Main/Me/ViewController/SettingCell.swift; sourceTree = SOURCE_ROOT; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -311,26 +319,11 @@
 		0446434C1DB4F03E0050F8BC /* Me */ = {
 			isa = PBXGroup;
 			children = (
-				0446434D1DB4F03E0050F8BC /* Model */,
-				0446434E1DB4F03E0050F8BC /* View */,
+				04966B3C1DB658C4000721BD /* Model */,
+				04966B3D1DB658C4000721BD /* View */,
 				0446434F1DB4F03E0050F8BC /* ViewController */,
 			);
 			path = Me;
-			sourceTree = "<group>";
-		};
-		0446434D1DB4F03E0050F8BC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0446434E1DB4F03E0050F8BC /* View */ = {
-			isa = PBXGroup;
-			children = (
-				04F4D6F01DB50F0000F89790 /* SettingCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		0446434F1DB4F03E0050F8BC /* ViewController */ = {
@@ -338,6 +331,8 @@
 			children = (
 				044643541DB4F06D0050F8BC /* MeViewController.swift */,
 				04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */,
+				04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */,
+				04966B441DB665E7000721BD /* AboutUsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -381,6 +376,22 @@
 			path = MIDatePicker;
 			sourceTree = "<group>";
 		};
+		04966B3C1DB658C4000721BD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04966B401DB658CF000721BD /* SettingObj.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04966B3D1DB658C4000721BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04966B3E1DB658C4000721BD /* SettingCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		04AC92011DB0B02C0048A9FD /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,6 +409,7 @@
 			children = (
 				04AC92031DB0B02C0048A9FD /* BaseViewController.swift */,
 				048B0BB61DB27CAC00F5A399 /* BaseView.swift */,
+				04966B381DB6586D000721BD /* BaseObject.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -454,7 +466,7 @@
 				04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */,
 				048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */,
 				048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */,
-				040576C51DB32CB100C55D02 /* ModifyPasswordViewController.swift */,
+				040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -847,6 +859,7 @@
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
+				04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */,
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
 				040576EB1DB3353E00C55D02 /* IQPreviousNextView.swift in Sources */,
 				040576E81DB3353E00C55D02 /* IQKeyboardReturnKeyHandler.swift in Sources */,
@@ -854,15 +867,18 @@
 				040576E91DB3353E00C55D02 /* IQTextView.swift in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
+				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
 				040576EA1DB3353E00C55D02 /* IQBarButtonItem.swift in Sources */,
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,
+				04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */,
 				040576E31DB3353E00C55D02 /* IQUIViewController+Additions.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
-				040576C61DB32CB100C55D02 /* ModifyPasswordViewController.swift in Sources */,
+				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
+				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
@@ -874,7 +890,7 @@
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
 				040576E61DB3353E00C55D02 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
-				04F4D6F11DB50F0000F89790 /* SettingCell.swift in Sources */,
+				04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,

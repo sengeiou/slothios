@@ -53,7 +53,7 @@ class SingleInputView: UIView {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(4)
             make.bottom.equalTo(0)
-            make.width.equalTo(100)
+            make.width.equalTo(128)
         }
         errorLabel.font = UIFont.systemFont(ofSize: 12)
         errorLabel.textColor = SGColor.SGRedColor()
@@ -125,6 +125,15 @@ class SingleInputView: UIView {
     
     func getInputContent() -> String? {
         return inputTextfield.text
+    }
+    
+    func getSumbitValid() -> Bool {
+        let input = getInputContent()
+        if (input?.isEmpty)! {
+            return false
+        }else{
+            return true
+        }
     }
     
     func setErrorContent(error: String?) {
