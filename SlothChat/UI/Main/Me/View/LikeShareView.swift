@@ -29,6 +29,7 @@ class LikeShareView: BaseView {
     }
     
     private func sentupView() {
+        imgView.image = UIImage.init(named: "heart-solid")
         addSubview(imgView)
         likeLabel.text = "0人喜欢"
         addSubview(likeLabel)
@@ -43,7 +44,7 @@ class LikeShareView: BaseView {
             make.left.equalTo(imgView.snp.right).offset(4)
             make.centerY.equalTo(self.snp.centerY)
         }
-        
+        shareButton.setImage(UIImage.init(named: "share"), for: .normal)
         shareButton.snp.makeConstraints { (make) in
             make.left.equalTo(likeLabel.snp.right).offset(4)
             make.centerY.equalTo(self.snp.centerY)

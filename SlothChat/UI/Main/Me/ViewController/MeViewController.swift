@@ -13,6 +13,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     let scrollView = UIScrollView()
     let container = UIView()
     let infoView = UserInfoView()
+    
+    var bannerView: SDCycleScrollView?
     var editView: UserInfoEditView?
     var shareView: LikeShareView?
     
@@ -24,7 +26,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.title = "我"
             
         self.setNavtionConfirm(titleStr: "设置")
-        
+        isMyself = true
         setupView()
     }
     
@@ -33,7 +35,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         let pushVC = SettingViewController.init()
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
-    
     
     func setupView() {
         view.addSubview(scrollView)
@@ -53,7 +54,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         ]
         
         let w = UIScreen.main.bounds.width
-        let bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: 180), delegate: self, placeholderImage: nil)
+        bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: 180), delegate: self, placeholderImage: nil)
         bannerView?.infiniteLoop = true
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
@@ -66,7 +67,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             make.left.top.right.equalTo(0)
             make.height.equalTo(180)
         })
-        
+
         if isMyself {
             shareView = LikeShareView()
             container.addSubview(shareView!)
@@ -76,6 +77,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
                 make.height.equalTo(44)
             })
         }
+        configUserInfoView()
+    }
+    
+    func configUserInfoView() {
         
         container.addSubview(infoView)
         infoView.snp.makeConstraints { (make) in
@@ -86,9 +91,53 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
                 make.top.equalTo(shareView!.snp.bottom)
             }
         }
+        infoView.configViewWihObject(userObj: "" as NSObject)
+        
+        infoView.setEditUserInfoValue {
+            self.configEditUserInfoView()
+        }
         
         container.snp.makeConstraints { (make) in
             make.bottom.equalTo(infoView.snp.bottom)
+        }
+    }
+    
+    func configEditUserInfoView() {
+        if (self.editView != nil) {
+            self.editView?.isHidden = false
+            self.infoView.isHidden = true
+            self.shareView?.isHidden = true
+            editView!.configViewWihObject(userObj: "" as NSObject)
+            return
+        }
+        self.shareView?.isHidden = true
+        self.infoView.isHidden = true
+        
+        self.editView = UserInfoEditView()
+        editView?.showVC = self
+        container.addSubview(editView!)
+        editView!.configViewWihObject(userObj: "" as NSObject)
+
+        editView!.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            if shareView == nil{
+                make.top.equalTo(bannerView!.snp.bottom)
+            }else{
+                make.top.equalTo(shareView!.snp.bottom)
+            }
+            make.height.equalTo(300)
+        }
+        container.snp.makeConstraints { (make) in
+            make.bottom.equalTo(editView!.snp.bottom)
+        }
+        
+        editView!.setDoneUserInfoValue {
+            self.editView?.isHidden = true
+            self.infoView.isHidden = false
+            self.shareView?.isHidden = false
+            self.container.snp.makeConstraints { (make) in
+                make.bottom.equalTo(self.infoView.snp.bottom)
+            }
         }
     }
 

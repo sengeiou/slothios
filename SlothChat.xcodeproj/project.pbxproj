@@ -43,6 +43,8 @@
 		04966B411DB658CF000721BD /* SettingObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B401DB658CF000721BD /* SettingObj.swift */; };
 		04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */; };
 		04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B441DB665E7000721BD /* AboutUsViewController.swift */; };
+		04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B461DB79957000721BD /* UserInfoSingleView.swift */; };
+		04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B481DB7B1D9000721BD /* SexPickView.swift */; };
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
@@ -150,6 +152,8 @@
 		04966B401DB658CF000721BD /* SettingObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObj.swift; sourceTree = "<group>"; };
 		04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPasswordViewController.swift; sourceTree = "<group>"; };
 		04966B441DB665E7000721BD /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		04966B461DB79957000721BD /* UserInfoSingleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoSingleView.swift; sourceTree = "<group>"; };
+		04966B481DB7B1D9000721BD /* SexPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SexPickView.swift; sourceTree = "<group>"; };
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
@@ -469,6 +473,7 @@
 				04FEB7F51DB77BB8004509D1 /* UserInfoView.swift */,
 				04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */,
 				04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */,
+				04966B461DB79957000721BD /* UserInfoSingleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 			children = (
 				04AC92051DB0B02C0048A9FD /* SingleInputView.swift */,
 				048B0BB81DB27D0000F5A399 /* IconTitleView.swift */,
+				04966B481DB7B1D9000721BD /* SexPickView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1010,12 +1016,14 @@
 				04FEB7BD1DB76EDB004509D1 /* SDCollectionViewCell.m in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
+				04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
 				04FEB7E81DB76F13004509D1 /* SDWebImageDownloaderOperation.m in Sources */,
 				04FEB7F11DB76F13004509D1 /* UIView+WebCacheOperation.m in Sources */,
 				04FEB7EB1DB76F13004509D1 /* UIButton+WebCache.m in Sources */,
 				04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */,
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
+				04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */,
 				04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */,
 				04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */,
 				04FEB7E51DB76F13004509D1 /* SDWebImageCompat.m in Sources */,

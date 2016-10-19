@@ -21,7 +21,8 @@ class SingleInputView: UIView {
     let errorLabel = UILabel.init()
     
     let inputTextfield = UITextField.init()
-    
+    let line = UIView.init()
+
     let selectButton = UIButton.init()
     let arrowImgView = UIImageView.init()
     
@@ -46,7 +47,6 @@ class SingleInputView: UIView {
     
     func sentupView() {
         addSubview(titleLabel)
-        let line = UIView.init()
         line.backgroundColor = SGColor.SGLineColor()
         addSubview(line)
         
@@ -100,8 +100,12 @@ class SingleInputView: UIView {
         default:
             print("default")
         }
-            
-        
+    }
+    
+    func setInputTextfieldLeftMagin(left: Float) {
+        titleLabel.snp.updateConstraints { (make) in
+            make.width.equalTo(left - 4)
+        }
     }
     
     func setClosurePass(temClosure: @escaping SelectClosureType){
@@ -112,6 +116,11 @@ class SingleInputView: UIView {
         if let sp = self.selectPassValue {
             sp()
         }
+    }
+    
+    func allowEditing(allowEdit: Bool) {
+        inputTextfield.isEnabled = allowEdit
+        line.isHidden = !allowEdit
     }
     
     func configInputView(titleStr: String,contentStr: String) {
