@@ -24,7 +24,6 @@ class MeViewController: BaseViewController {
         print("confirmClick")
         let pushVC = SettingViewController.init()
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

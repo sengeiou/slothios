@@ -49,6 +49,13 @@
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
 		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
 		04F4D6F11DB50F0000F89790 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6F01DB50F0000F89790 /* SettingCell.swift */; };
+		04FEB7A21DB76E15004509D1 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7951DB76E15004509D1 /* TAAbstractDotView.m */; };
+		04FEB7A31DB76E15004509D1 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7971DB76E15004509D1 /* TAAnimatedDotView.m */; };
+		04FEB7A41DB76E15004509D1 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7991DB76E15004509D1 /* TADotView.m */; };
+		04FEB7A51DB76E15004509D1 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB79B1DB76E15004509D1 /* TAPageControl.m */; };
+		04FEB7A61DB76E15004509D1 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB79D1DB76E15004509D1 /* SDCollectionViewCell.m */; };
+		04FEB7A71DB76E15004509D1 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB79F1DB76E15004509D1 /* SDCycleScrollView.m */; };
+		04FEB7A81DB76E15004509D1 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7A11DB76E15004509D1 /* UIView+SDExtension.m */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -126,6 +133,20 @@
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		04F4D6F01DB50F0000F89790 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingCell.swift; path = SlothChat/UI/Main/Me/ViewController/SettingCell.swift; sourceTree = SOURCE_ROOT; };
+		04FEB7941DB76E15004509D1 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		04FEB7951DB76E15004509D1 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		04FEB7961DB76E15004509D1 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		04FEB7971DB76E15004509D1 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		04FEB7981DB76E15004509D1 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		04FEB7991DB76E15004509D1 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		04FEB79A1DB76E15004509D1 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		04FEB79B1DB76E15004509D1 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		04FEB79C1DB76E15004509D1 /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		04FEB79D1DB76E15004509D1 /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		04FEB79E1DB76E15004509D1 /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		04FEB79F1DB76E15004509D1 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		04FEB7A01DB76E15004509D1 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		04FEB7A11DB76E15004509D1 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +374,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04FEB7921DB76E15004509D1 /* SDCycleScrollView */,
 				040576C71DB3353E00C55D02 /* IQKeyboardManagerSwift */,
 				048B0BB01DB2473E00F5A399 /* MIDatePicker */,
 				048B0BA71DB241AD00F5A399 /* MKAdditions */,
@@ -476,6 +498,35 @@
 				04B385A81DB4AB4E00A8C116 /* MainViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04FEB7921DB76E15004509D1 /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				04FEB7931DB76E15004509D1 /* PageControl */,
+				04FEB79C1DB76E15004509D1 /* SDCollectionViewCell.h */,
+				04FEB79D1DB76E15004509D1 /* SDCollectionViewCell.m */,
+				04FEB79E1DB76E15004509D1 /* SDCycleScrollView.h */,
+				04FEB79F1DB76E15004509D1 /* SDCycleScrollView.m */,
+				04FEB7A01DB76E15004509D1 /* UIView+SDExtension.h */,
+				04FEB7A11DB76E15004509D1 /* UIView+SDExtension.m */,
+			);
+			path = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		04FEB7931DB76E15004509D1 /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				04FEB7941DB76E15004509D1 /* TAAbstractDotView.h */,
+				04FEB7951DB76E15004509D1 /* TAAbstractDotView.m */,
+				04FEB7961DB76E15004509D1 /* TAAnimatedDotView.h */,
+				04FEB7971DB76E15004509D1 /* TAAnimatedDotView.m */,
+				04FEB7981DB76E15004509D1 /* TADotView.h */,
+				04FEB7991DB76E15004509D1 /* TADotView.m */,
+				04FEB79A1DB76E15004509D1 /* TAPageControl.h */,
+				04FEB79B1DB76E15004509D1 /* TAPageControl.m */,
+			);
+			path = PageControl;
 			sourceTree = "<group>";
 		};
 		19273B071DA9EE1300150460 = {
@@ -843,6 +894,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FEB7A81DB76E15004509D1 /* UIView+SDExtension.m in Sources */,
 				044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */,
 				04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
@@ -854,6 +906,7 @@
 				044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */,
 				040576E91DB3353E00C55D02 /* IQTextView.swift in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
+				04FEB7A51DB76E15004509D1 /* TAPageControl.m in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
 				040576EA1DB3353E00C55D02 /* IQBarButtonItem.swift in Sources */,
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,
@@ -862,6 +915,7 @@
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
+				04FEB7A41DB76E15004509D1 /* TADotView.m in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* ModifyPasswordViewController.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
@@ -872,9 +926,12 @@
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,
+				04FEB7A71DB76E15004509D1 /* SDCycleScrollView.m in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
 				040576E61DB3353E00C55D02 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
+				04FEB7A61DB76E15004509D1 /* SDCollectionViewCell.m in Sources */,
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
+				04FEB7A31DB76E15004509D1 /* TAAnimatedDotView.m in Sources */,
 				04F4D6F11DB50F0000F89790 /* SettingCell.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
@@ -884,6 +941,7 @@
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
+				04FEB7A21DB76E15004509D1 /* TAAbstractDotView.m in Sources */,
 				048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
