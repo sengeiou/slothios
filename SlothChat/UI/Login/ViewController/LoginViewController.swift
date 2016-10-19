@@ -122,7 +122,7 @@ class LoginViewController: BaseViewController {
         let phoneStr = phoneView.getInputContent()!
         let code = self.codeButton.title(for: .normal)!
         
-        let pushVC  = ModifyPasswordViewController.init()
+        let pushVC  = FindPasswordViewController.init()
         pushVC.phoneNo = code + phoneStr
         navigationController?.pushViewController(pushVC, animated: true)
     }

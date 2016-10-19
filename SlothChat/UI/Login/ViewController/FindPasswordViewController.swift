@@ -1,5 +1,5 @@
 //
-//  ModifyPasswordViewController.swift
+//  FindPasswordViewController.swift
 //  SlothChat
 //
 //  Created by Fly on 16/10/16.
@@ -10,7 +10,7 @@ import UIKit
 import PKHUD
 import AwesomeCache
 
-class ModifyPasswordViewController: BaseViewController {
+class FindPasswordViewController: BaseViewController {
     var timer = Timer()
     var timeout = 0
     

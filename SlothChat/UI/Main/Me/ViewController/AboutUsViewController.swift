@@ -1,19 +1,19 @@
 //
-//  BaseViewController.swift
-//  Chat
+//  AboutUsViewController.swift
+//  SlothChat
 //
-//  Created by Fly on 16/10/13.
-//  Copyright © 2016年 Fly. All rights reserved.
+//  Created by Fly on 16/10/18.
+//  Copyright © 2016年 ssloth.com. All rights reserved.
 //
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class AboutUsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SGColor.SGBgGrayColor()
-        self.hidesBottomBarWhenPushed = true
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +26,7 @@ class BaseViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
