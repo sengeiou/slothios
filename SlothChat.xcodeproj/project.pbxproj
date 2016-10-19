@@ -76,6 +76,9 @@
 		04FEB7EF1DB76F13004509D1 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7DD1DB76F13004509D1 /* UIImageView+HighlightedWebCache.m */; };
 		04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7DF1DB76F13004509D1 /* UIImageView+WebCache.m */; };
 		04FEB7F11DB76F13004509D1 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7E11DB76F13004509D1 /* UIView+WebCacheOperation.m */; };
+		04FEB7F61DB77BB8004509D1 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7F51DB77BB8004509D1 /* UserInfoView.swift */; };
+		04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */; };
+		04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -204,6 +207,9 @@
 		04FEB7DF1DB76F13004509D1 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		04FEB7E01DB76F13004509D1 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		04FEB7E11DB76F13004509D1 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		04FEB7F51DB77BB8004509D1 /* UserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoEditView.swift; sourceTree = "<group>"; };
+		04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeShareView.swift; sourceTree = "<group>"; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -460,6 +466,9 @@
 			isa = PBXGroup;
 			children = (
 				04966B3E1DB658C4000721BD /* SettingCell.swift */,
+				04FEB7F51DB77BB8004509D1 /* UserInfoView.swift */,
+				04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */,
+				04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1025,6 +1034,7 @@
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,
 				04FEB7E61DB76F13004509D1 /* SDWebImageDecoder.m in Sources */,
 				04FEB7E91DB76F13004509D1 /* SDWebImageManager.m in Sources */,
+				04FEB7F61DB77BB8004509D1 /* UserInfoView.swift in Sources */,
 				04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */,
 				040576E31DB3353E00C55D02 /* IQUIViewController+Additions.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
@@ -1035,6 +1045,7 @@
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
+				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
@@ -1043,6 +1054,7 @@
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04FEB7EC1DB76F13004509D1 /* UIImage+GIF.m in Sources */,
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,
+				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,

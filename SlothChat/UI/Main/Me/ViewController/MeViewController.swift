@@ -8,9 +8,17 @@
 
 import UIKit
 
-class MeViewController: BaseViewController {
+class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var isEdited = false
-
+    let scrollView = UIScrollView()
+    let container = UIView()
+    let infoView = UserInfoView()
+    var editView: UserInfoEditView?
+    var shareView: LikeShareView?
+    
+    var isMyself = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "我"
@@ -26,14 +34,62 @@ class MeViewController: BaseViewController {
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        let pushVC = SettingViewController.init()
-        self.navigationController?.pushViewController(pushVC, animated: true)
-    }
     
     func setupView() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        scrollView.addSubview(container)
+        container.snp.makeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
         
+        let imagesURLStrings = [
+            "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a4b3d7085dee3d6d2293d48b252b5910/0e2442a7d933c89524cd5cd4d51373f0830200ea.jpg",
+             "https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
+              "http://c.hiphotos.baidu.com/image/w%3D400/sign=c2318ff84334970a4773112fa5c8d1c0/b7fd5266d0160924c1fae5ccd60735fae7cd340d.jpg"
+        ]
+        
+        let w = UIScreen.main.bounds.width
+        let bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: 180), delegate: self, placeholderImage: nil)
+        bannerView?.infiniteLoop = true
+        bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
+        bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
+        bannerView?.pageControlDotSize = CGSize.init(width: 12, height: 12)
+        bannerView?.pageControlBottomOffset = 150
+        bannerView?.localizationImageNamesGroup = imagesURLStrings
+        container.addSubview(bannerView!)
+        
+        bannerView?.snp.makeConstraints({ (make) in
+            make.left.top.right.equalTo(0)
+            make.height.equalTo(180)
+        })
+        
+        if isMyself {
+            shareView = LikeShareView()
+            container.addSubview(shareView!)
+            shareView?.snp.makeConstraints({ (make) in
+                make.left.right.equalTo(0)
+                make.top.equalTo(bannerView!.snp.bottom)
+                make.height.equalTo(44)
+            })
+        }
+        
+        container.addSubview(infoView)
+        infoView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            if shareView == nil{
+                make.top.equalTo(bannerView!.snp.bottom)
+            }else{
+                make.top.equalTo(shareView!.snp.bottom)
+            }
+        }
+        
+        container.snp.makeConstraints { (make) in
+            make.bottom.equalTo(infoView.snp.bottom)
+        }
     }
 
 }
