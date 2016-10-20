@@ -19,7 +19,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = SGColor.SGBgGrayColor()
-        tableView.rowHeight = 88
+        tableView.rowHeight = 74
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")

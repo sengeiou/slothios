@@ -61,10 +61,10 @@ class ModifyPasswordViewController: BaseViewController {
         
         
         confirmButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
+            make.left.equalTo(10)
+            make.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
         }
     }
     

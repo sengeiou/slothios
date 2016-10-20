@@ -13,25 +13,26 @@ class SettingCell: UITableViewCell {
     let titleLabel = UILabel()
     let contentLabel = UILabel()
     let mSwitch = UISwitch()
-    
+    let arrowImgView = UIImageView()
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
         contentView.addSubview(contentLabel)
         contentView.addSubview(mSwitch)
-        
+
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
         contentLabel.textColor = SGColor.SGMainColor()
         contentLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
         mSwitch.snp.makeConstraints { (make) in
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
     }

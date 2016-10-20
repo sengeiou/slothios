@@ -58,6 +58,7 @@ class UserInfoEditView: BaseView {
                 self.datePicker.show(inVC: self.showVC!)
             }
         }
+        birthdayView.arrowImgView.isHidden = true
         birthdayView.setInputTextfieldLeftMagin(left: 80)
         birthdayView.configInputView(titleStr: "生日:", contentStr: "")
         addSubview(birthdayView)
@@ -76,48 +77,58 @@ class UserInfoEditView: BaseView {
         
         nameView.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.left.right.equalTo(0)
-            make.height.equalTo(36)
+            make.left.equalTo(0)
+            make.right.equalTo(-94)
+            make.height.equalTo(46)
         }
         
         sexView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
+            make.left.equalTo(0)
+            make.right.equalTo(nameView.snp.right)
             make.top.equalTo(nameView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.height.equalTo(66)
         }
         
         sexPickView.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
+            make.top.right.equalTo(0)
             make.left.equalTo(80)
-            make.width.equalTo(100)
             make.height.equalTo(sexView.snp.height)
         }
         
         birthdayView.snp.makeConstraints { (make) in
-            make.left.equalTo(sexView.snp.left)
+            make.left.equalTo(nameView.snp.left)
+            make.right.equalTo(nameView.snp.right)
             make.top.equalTo(sexView.snp.bottom).offset(12)
+            make.height.equalTo(nameView.snp.height)
         }
         
         locationView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.top.equalTo(birthdayView.snp.bottom).offset(24)
-            make.height.equalTo(36)
+            make.top.equalTo(birthdayView.snp.bottom).offset(12)
+            
+            make.left.equalTo(nameView.snp.left)
+            make.right.equalTo(nameView.snp.right)
+            make.height.equalTo(nameView.snp.height)
         }
         
         hauntView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.top.equalTo(locationView.snp.bottom)
-            make.height.equalTo(36)
+            make.top.equalTo(locationView.snp.bottom).offset(12)
+
+            make.left.equalTo(nameView.snp.left)
+            make.right.equalTo(nameView.snp.right)
+            make.height.equalTo(nameView.snp.height)
         }
         schoolView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.top.equalTo(hauntView.snp.bottom)
-            make.height.equalTo(36)
+            make.top.equalTo(hauntView.snp.bottom).offset(12)
+
+            make.left.equalTo(nameView.snp.left)
+            make.right.equalTo(nameView.snp.right)
+            make.height.equalTo(nameView.snp.height)
         }
         
         let editView = UIView()
         let editLabel = UILabel()
         editLabel.text = "完成"
+        editLabel.font = UIFont.systemFont(ofSize: 15)
         editLabel.textColor = SGColor.SGMainColor()
         
         let editButton = UIButton(type: .custom)
@@ -128,11 +139,12 @@ class UserInfoEditView: BaseView {
         
         editView.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
-            make.size.equalTo(CGSize.init(width: 68, height: 36))
+            make.centerY.equalTo(nameView.snp.centerY)
+            make.size.equalTo(CGSize.init(width: 50, height: 36))
         }
         
         editLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
+            make.right.equalTo(-10)
             make.centerY.equalTo(editView.snp.centerY)
         }
         

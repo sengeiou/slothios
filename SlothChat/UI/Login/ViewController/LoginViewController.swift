@@ -62,7 +62,7 @@ class LoginViewController: BaseViewController {
         
         forgetButton.snp.makeConstraints { (make) in
             make.left.equalTo(100)
-            make.top.equalTo(passwordView.snp.bottom).offset(-4)
+            make.top.equalTo(passwordView.snp.bottom).offset(-10)
             make.height.equalTo(44)
             make.width.equalTo(80)
         }
@@ -85,17 +85,17 @@ class LoginViewController: BaseViewController {
         
         
         loginButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
+            make.left.equalTo(10)
+            make.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(registerButton.snp.left).offset(4)
+            make.right.equalTo(registerButton.snp.left).offset(10)
             make.width.equalTo(registerButton.snp.width).dividedBy(0.668)
         }
         
         registerButton.snp.makeConstraints { (make) in
-            make.right.bottom.equalTo(-4)
+            make.right.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(loginButton.snp.right).offset(-4)
+            make.right.equalTo(loginButton.snp.right).offset(-10)
         }
     }
     

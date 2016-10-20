@@ -32,8 +32,10 @@ class UserInfoView: BaseView {
     }
     
     func sentupView() {
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
         addSubview(nameLabel)
         addSubview(sexImgView)
+        ageInfoLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(ageInfoLabel)
         
         locationView.allowEditing(allowEdit: false)
@@ -55,33 +57,33 @@ class UserInfoView: BaseView {
         addSubview(schoolView)
         
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(8)
             make.top.equalTo(0)
         }
         sexImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(nameLabel.snp.right).offset(8)
+            make.left.equalTo(nameLabel.snp.right).offset(14)
             make.bottom.equalTo(nameLabel.snp.bottom)
-            make.size.equalTo(CGSize.init(width: 16, height: 16))
+            make.size.equalTo(CGSize.init(width: 14, height: 14))
         }
         ageInfoLabel.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.left)
-            make.top.equalTo(nameLabel.snp.bottom).offset(12)
+            make.top.equalTo(nameLabel.snp.bottom).offset(16)
         }
         
         locationView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(ageInfoLabel.snp.bottom).offset(24)
-            make.height.equalTo(36)
+            make.height.equalTo(46)
         }
         hauntView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(locationView.snp.bottom)
-            make.height.equalTo(36)
+            make.height.equalTo(46)
         }
         schoolView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(hauntView.snp.bottom)
-            make.height.equalTo(36)
+            make.height.equalTo(46)
         }
         
         let editImgView = UIImageView()
@@ -100,7 +102,7 @@ class UserInfoView: BaseView {
         
         editView.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
-            make.size.equalTo(CGSize.init(width: 68, height: 36))
+            make.size.equalTo(CGSize.init(width: 68, height: 46))
         }
         
         editImgView.snp.makeConstraints { (make) in

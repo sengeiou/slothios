@@ -95,7 +95,7 @@ class PerfectionInfoViewController: BaseViewController {
         view.addSubview(birthdayView)
         
         avatarLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(10)
             make.top.equalTo(titleLabel.snp.bottom).offset(36)
             make.width.equalTo(100)
         }
@@ -124,7 +124,7 @@ class PerfectionInfoViewController: BaseViewController {
         }
         
         maleButton.snp.makeConstraints { (make) in
-            make.left.equalTo(femaleButton.snp.right).offset(4)
+            make.left.equalTo(femaleButton.snp.right).offset(10)
             make.centerY.equalTo(genderLabel.snp.centerY)
             make.size.equalTo(CGSize.init(width: 24, height: 24))
         }
@@ -144,10 +144,10 @@ class PerfectionInfoViewController: BaseViewController {
         
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
+            make.left.equalTo(10)
+            make.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
         }
     }
     

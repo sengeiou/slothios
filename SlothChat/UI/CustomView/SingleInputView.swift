@@ -46,12 +46,13 @@ class SingleInputView: UIView {
     }
     
     func sentupView() {
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
         line.backgroundColor = SGColor.SGLineColor()
         addSubview(line)
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(10)
             make.bottom.equalTo(0)
             make.width.equalTo(128)
         }
@@ -64,12 +65,13 @@ class SingleInputView: UIView {
             make.height.equalTo(16)
         }
         
+        inputTextfield.font = UIFont.systemFont(ofSize: 14)
         addSubview(inputTextfield)
         inputTextfield.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
             make.top.equalTo(errorLabel.snp.bottom)
             make.bottom.equalTo(0)
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
         }
         line.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(inputTextfield)
@@ -88,9 +90,9 @@ class SingleInputView: UIView {
             }
             arrowImgView.image = UIImage.init(named: "go-right")
             arrowImgView.snp.makeConstraints { (make) in
-                make.right.equalTo(-4)
+                make.right.equalTo(-10)
                 make.centerY.equalTo(self.snp.centerY)
-                make.right.equalTo(-4)
+                make.right.equalTo(-10)
                 make.size.equalTo(CGSize.init(width: 16, height: 16))
             }
             line.snp.makeConstraints { (make) in

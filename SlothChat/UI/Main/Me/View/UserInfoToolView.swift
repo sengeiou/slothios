@@ -31,7 +31,7 @@ class UserInfoToolView: BaseView {
         addSubview(likeButton)
         
         likeButton.snp.makeConstraints { (make) in
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
             make.centerY.equalTo(self.snp.centerY)
             make.size.equalTo(CGSize.init(width: 44, height: 44))
         }

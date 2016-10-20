@@ -35,20 +35,20 @@ class LikeShareView: BaseView {
         addSubview(likeLabel)
         addSubview(shareButton)
         imgView.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(10)
             make.centerY.equalTo(self.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 16, height: 16))
+            make.size.equalTo(CGSize.init(width: 14, height: 14))
         }
         
         likeLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(imgView.snp.right).offset(4)
+            make.left.equalTo(imgView.snp.right).offset(10)
             make.centerY.equalTo(self.snp.centerY)
         }
         shareButton.setImage(UIImage.init(named: "share"), for: .normal)
         shareButton.snp.makeConstraints { (make) in
-            make.left.equalTo(likeLabel.snp.right).offset(4)
+            make.left.equalTo(likeLabel.snp.right).offset(20)
             make.centerY.equalTo(self.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.size.equalTo(CGSize.init(width: 20, height: 24))
         }
     }
     

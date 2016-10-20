@@ -43,7 +43,7 @@ class SexPickView: BaseView {
         }
         
         femaleView.snp.makeConstraints { (make) in
-            make.left.equalTo(maleView.snp.right).offset(4)
+            make.left.equalTo(maleView.snp.right).offset(10)
             make.centerY.equalTo(self.snp.centerY)
             make.size.equalTo(CGSize.init(width: 44, height: 44))
         }

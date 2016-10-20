@@ -52,8 +52,8 @@ class CaptchaViewController: BaseViewController {
         view.addSubview(tipLabel)
 
         tipLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.right.equalTo(-4)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
             make.top.equalTo(iconView.snp.bottom).offset(100)
         }
         
@@ -81,10 +81,10 @@ class CaptchaViewController: BaseViewController {
         
         
         confirmButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
+            make.left.equalTo(10)
+            make.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
         }
     }
     

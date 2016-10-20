@@ -80,17 +80,17 @@ class RegisterViewController: BaseViewController {
         view.addSubview(loginButton)
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
+            make.left.equalTo(10)
+            make.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(loginButton.snp.left).offset(4)
+            make.right.equalTo(loginButton.snp.left).offset(10)
             make.width.equalTo(loginButton.snp.width).dividedBy(0.668)
         }
         
         loginButton.snp.makeConstraints { (make) in
-            make.right.bottom.equalTo(-4)
+            make.right.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(registerButton.snp.right).offset(-4)
+            make.right.equalTo(registerButton.snp.right).offset(-10)
         }
     }
     

@@ -74,7 +74,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             shareView?.snp.makeConstraints({ (make) in
                 make.left.right.equalTo(0)
                 make.top.equalTo(bannerView!.snp.bottom)
-                make.height.equalTo(44)
+                make.height.equalTo(52)
             })
         } else{
             toolView = UserInfoToolView()
@@ -102,7 +102,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             if shareView == nil{
                 make.top.equalTo(bannerView!.snp.bottom).offset(12)
             }else{
-                make.top.equalTo(shareView!.snp.bottom).offset(12)
+                make.top.equalTo(shareView!.snp.bottom)
             }
         }
         infoView.configViewWihObject(userObj: "" as NSObject)
@@ -139,7 +139,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(300)
+            make.height.equalTo(330)
         }
         container.snp.makeConstraints { (make) in
             make.bottom.equalTo(editView!.snp.bottom)

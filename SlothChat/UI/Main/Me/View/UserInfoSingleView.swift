@@ -29,7 +29,7 @@ class UserInfoSingleView: BaseView {
         addSubview(line)
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(10)
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(88)
         }
@@ -38,7 +38,7 @@ class UserInfoSingleView: BaseView {
         inputTextfield.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
             make.centerY.equalTo(self.snp.centerY)
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
         }
         line.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(inputTextfield)
