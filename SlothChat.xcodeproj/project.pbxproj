@@ -57,6 +57,7 @@
 		19273B201DA9EE1300150460 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19273B1E1DA9EE1300150460 /* LaunchScreen.storyboard */; };
 		19273B2B1DA9EE1300150460 /* SlothChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B2A1DA9EE1300150460 /* SlothChatTests.swift */; };
 		19273B361DA9EE1300150460 /* SlothChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B351DA9EE1300150460 /* SlothChatUITests.swift */; };
+		19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */; };
 		BDB5146AE1A2FB0938FA652B /* Pods_SlothChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8551761BBE9788DFCE101E /* Pods_SlothChatUITests.framework */; };
 		E1CB22759AC5EC8B12D8F81F /* Pods_SlothChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8BA903E786F1B2AE3654BE /* Pods_SlothChat.framework */; };
 /* End PBXBuildFile section */
@@ -140,6 +141,7 @@
 		19273B311DA9EE1300150460 /* SlothChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlothChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B351DA9EE1300150460 /* SlothChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothChatUITests.swift; sourceTree = "<group>"; };
 		19273B371DA9EE1300150460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
 		1D8A2E6627D0E4BDA2A35328 /* Pods-SlothChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E8BA903E786F1B2AE3654BE /* Pods_SlothChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -503,6 +505,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				19AA4A791DB534570001568B /* Network */,
 				044643561DB4F60F0050F8BC /* Category */,
 				048B0BA61DB241A400F5A399 /* Third */,
 				04AC92011DB0B02C0048A9FD /* UI */,
@@ -534,6 +537,14 @@
 				19273B371DA9EE1300150460 /* Info.plist */,
 			);
 			path = SlothChatUITests;
+			sourceTree = "<group>";
+		};
+		19AA4A791DB534570001568B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		758FD716B6EC2B00B2FE486B /* Pods */ = {
@@ -870,6 +881,7 @@
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
+				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
@@ -1041,6 +1053,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
 				INFOPLIST_FILE = SlothChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1060,6 +1073,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Juan Chen (D2C7BQTTK5)";
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
 				INFOPLIST_FILE = SlothChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
