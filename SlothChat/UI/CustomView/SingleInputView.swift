@@ -100,7 +100,7 @@ class SingleInputView: UIView {
                 make.height.equalTo(1)
             }
         default:
-            print("default")
+            print("")
         }
     }
     

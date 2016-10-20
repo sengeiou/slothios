@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias DoneUserInfoType = () -> Void
+typealias DoneUserInfoType = (_ userObj: UserObj) -> Void
 
 class UserInfoEditView: BaseView {
 
@@ -27,7 +27,8 @@ class UserInfoEditView: BaseView {
     var dateFormatter = DateFormatter()
     var showVC: UIViewController?
     
-    
+    var userObj: UserObj?
+
     override init(frame: CGRect ){
         super.init(frame: frame)
         sentupView()
@@ -51,7 +52,6 @@ class UserInfoEditView: BaseView {
         
         addSubview(sexView)
         sexView.addSubview(sexPickView)
-        
         
         birthdayView.setClosurePass {
             if self.showVC != nil{
@@ -78,7 +78,7 @@ class UserInfoEditView: BaseView {
         nameView.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.left.equalTo(0)
-            make.right.equalTo(-94)
+            make.right.equalTo(-90)
             make.height.equalTo(46)
         }
         
@@ -87,6 +87,10 @@ class UserInfoEditView: BaseView {
             make.right.equalTo(nameView.snp.right)
             make.top.equalTo(nameView.snp.bottom).offset(24)
             make.height.equalTo(66)
+        }
+        
+        sexView.titleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(sexView.snp.centerY)
         }
         
         sexPickView.snp.makeConstraints { (make) in
@@ -153,15 +157,22 @@ class UserInfoEditView: BaseView {
         }
     }
     
-    func configViewWihObject(userObj: NSObject) {
+    func configViewWihObject(userObj: UserObj) {
+        self.userObj = userObj
+        nameView.configContent(contentStr: userObj.name)
+        birthdayView.configContent(contentStr: userObj.birthday)
+        sexPickView.selectSexView(isMale: (userObj.gender == .male))
         
-        nameView.configContent(contentStr: "小恶魔")
-        birthdayView.configContent(contentStr: "1991/9/6")
-        sexPickView.selectSexView(isMale: true)
+        birthdayView.configContent(contentStr: userObj.birthday)
+        locationView.configContent(contentStr: userObj.location)
+        hauntView.configContent(contentStr: userObj.haunt)
+        schoolView.configContent(contentStr: userObj.school)
         
-        locationView.configContent(contentStr: "美国，波士顿")
-        hauntView.configContent(contentStr: "波士顿，纽约，多伦多，费城")
-        schoolView.configContent(contentStr: "波士顿大学")
+        if self.userObj != nil {
+            datePicker.config.startDate = self.userObj?.birthday.toYMDDate()
+        }else{
+            datePicker.config.startDate = Date()
+        }
     }
     
     func setDoneUserInfoValue(temClosure: @escaping DoneUserInfoType){
@@ -170,16 +181,25 @@ class UserInfoEditView: BaseView {
     
     func confirmButtonClick() {
         print("confirmButtonClick")
+        
+        self.userObj?.name = nameView.getInputContent()!
+        if sexPickView.isMalePick {
+            self.userObj?.gender = .male
+        }else{
+            self.userObj?.gender = .female
+        }
+        self.userObj?.location = locationView.getInputContent()!
+        self.userObj?.haunt = hauntView.getInputContent()!
+        self.userObj?.school = schoolView.getInputContent()!
+
         if let sp = self.editUserInfoValue {
-            sp()
+            sp(self.userObj!)
         }
     }
     
     fileprivate func setupDatePicker() {
         
         datePicker.delegate = self
-        
-        datePicker.config.startDate = Date()
         
         datePicker.config.animationDuration = 0.35
         
@@ -199,8 +219,7 @@ extension UserInfoEditView: MIDatePickerDelegate {
     
     func miDatePicker(_ amDatePicker: MIDatePicker, didSelect date: Date) {
         birthdayView.configContent(contentStr: dateFormatter.string(from: date))
-        let constellation = Constellation.calculateWithDate(date: Date())
-        print(constellation)
+        self.userObj?.birthday = date.toYMDString()!
     }
     func miDatePickerDidCancelSelection(_ amDatePicker: MIDatePicker) {
         // NOP

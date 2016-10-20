@@ -10,10 +10,6 @@ import UIKit
 import PKHUD
 import AwesomeCache
 
-enum SGGenderType {
-    case male
-    case female
-}
 
 class PerfectionInfoViewController: BaseViewController {
     

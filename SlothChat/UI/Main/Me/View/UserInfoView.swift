@@ -19,7 +19,9 @@ class UserInfoView: BaseView {
     let hauntView = SingleInputView()
     let schoolView = SingleInputView()
     let editView = UIView()
-
+    
+    var userObj: UserObj?
+    
     var editUserInfoValue:EditUserInfoType?
 
     override init(frame: CGRect ){
@@ -122,14 +124,21 @@ class UserInfoView: BaseView {
         }
     }
     
-    func configViewWihObject(userObj: NSObject) {
-        nameLabel.text = "小恶魔"
-        sexImgView.image = UIImage.init(named: "female")
-        ageInfoLabel.text = "25，处女座"
+    func configViewWihObject(userObj: UserObj) {
+        self.userObj = userObj
         
-        locationView.configContent(contentStr: "美国，波士顿")
-        hauntView.configContent(contentStr: "波士顿，纽约，多伦多，费城")
-        schoolView.configContent(contentStr: "波士顿大学")
+        nameLabel.text = userObj.name
+        let sexName = (userObj.gender == .male ? "male" : "female")
+        sexImgView.image = UIImage.init(named: sexName)
+        
+        let birthday = userObj.birthday.toYMDDate()
+        let age = birthday?.toAgeString()
+        let constellation = birthday?.toConstellationString()
+        ageInfoLabel.text = age! + "，" + constellation!
+        
+        locationView.configContent(contentStr: userObj.location)
+        hauntView.configContent(contentStr: userObj.haunt)
+        schoolView.configContent(contentStr: userObj.school)
     }
     
     func setUserEntity(isMyself: Bool) {

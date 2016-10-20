@@ -9,6 +9,11 @@
 import UIKit
 import SnapKit
 
+enum SGGenderType {
+    case male
+    case female
+}
+
 class SexPickView: BaseView {
     let maleView = SexButtonView(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44), isMale: true)
     let femaleView = SexButtonView(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44), isMale: false)

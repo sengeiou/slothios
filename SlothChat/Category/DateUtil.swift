@@ -8,19 +8,37 @@
 
 import UIKit
 
-class Constellation: NSObject {
-    /**
-     通过日期获取星座
-     
-     - parameter date: 日期
-     
-     - returns: 星座名称
-     */
-    class func calculateWithDate(date: Date) -> String {
+extension String{
+    func toYMDDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        return dateFormatter.date(from: self)
+    }
+}
+
+extension Date{
+    func toYMDString() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        return dateFormatter.string(from: self)
+    }
+    func toAgeString() -> String {
         guard let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian) else {
             return ""
         }
-        let components = calendar.components([.month, .day], from: date)
+        let oldComponents = calendar.components([.year], from: self)
+        let nowComponents = calendar.components([.year], from: Date())
+
+        let oldYear = oldComponents.year!
+        let nowYear = nowComponents.year!
+        return String(nowYear - oldYear)
+    }
+    
+    func toConstellationString() -> String {
+        guard let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian) else {
+            return ""
+        }
+        let components = calendar.components([.month, .day], from: self)
         let month = components.month!
         let day = components.day!
         
