@@ -38,7 +38,7 @@ class PerfectionInfoViewController: BaseViewController {
         
         setupDatePicker()
         
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "yyyy/MM/dd"
     }
 
     func sentupViews() {

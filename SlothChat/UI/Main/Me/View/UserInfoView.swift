@@ -18,7 +18,8 @@ class UserInfoView: BaseView {
     let locationView = SingleInputView()
     let hauntView = SingleInputView()
     let schoolView = SingleInputView()
-    
+    let editView = UIView()
+
     var editUserInfoValue:EditUserInfoType?
 
     override init(frame: CGRect ){
@@ -83,7 +84,6 @@ class UserInfoView: BaseView {
             make.height.equalTo(36)
         }
         
-        let editView = UIView()
         let editImgView = UIImageView()
         editImgView.image = UIImage.init(named: "pen")
         editImgView.tintColor = SGColor.SGMainColor()
@@ -130,6 +130,10 @@ class UserInfoView: BaseView {
         locationView.configContent(contentStr: "美国，波士顿")
         hauntView.configContent(contentStr: "波士顿，纽约，多伦多，费城")
         schoolView.configContent(contentStr: "波士顿大学")
+    }
+    
+    func setUserEntity(isMyself: Bool) {
+        editView.isHidden = !isMyself
     }
     
     func setEditUserInfoValue(temClosure: @escaping EditUserInfoType){

@@ -13,7 +13,9 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SGColor.SGBgGrayColor()
-        self.hidesBottomBarWhenPushed = true
+        if (self.navigationController?.viewControllers.count)! > 1 {
+            self.hidesBottomBarWhenPushed = true
+        }
     }
 
     override func didReceiveMemoryWarning() {

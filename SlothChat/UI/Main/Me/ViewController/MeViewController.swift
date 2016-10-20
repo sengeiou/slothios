@@ -17,9 +17,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var bannerView: SDCycleScrollView?
     var editView: UserInfoEditView?
     var shareView: LikeShareView?
-    
+    var toolView: UserInfoToolView?
+
     var isMyself = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +76,17 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
                 make.top.equalTo(bannerView!.snp.bottom)
                 make.height.equalTo(44)
             })
+        } else{
+            toolView = UserInfoToolView()
+            toolView?.chatButton.addTarget(self, action:#selector(chatButtonClick), for: .touchUpInside)
+            toolView?.likeButton.addTarget(self, action:#selector(likeButtonClick), for: .touchUpInside)
+            
+            container.addSubview(toolView!)
+            toolView?.snp.makeConstraints({ (make) in
+                make.left.right.equalTo(0)
+                make.top.equalTo(bannerView!.snp.bottom).offset(-22)
+                make.height.equalTo(44)
+            })
         }
         configUserInfoView()
     }
@@ -83,12 +94,15 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     func configUserInfoView() {
         
         container.addSubview(infoView)
+        toolView?.bringSubview(toFront: infoView)
+        
+        infoView.setUserEntity(isMyself: isMyself)
         infoView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             if shareView == nil{
-                make.top.equalTo(bannerView!.snp.bottom)
+                make.top.equalTo(bannerView!.snp.bottom).offset(12)
             }else{
-                make.top.equalTo(shareView!.snp.bottom)
+                make.top.equalTo(shareView!.snp.bottom).offset(12)
             }
         }
         infoView.configViewWihObject(userObj: "" as NSObject)
@@ -140,5 +154,16 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }
         }
     }
+    
+    //MARK:- Action
+    func chatButtonClick() {
+        SGLog(message: "")
+    }
+    
+    func likeButtonClick() {
+        SGLog(message: "")
+    }
+    
+    
 
 }

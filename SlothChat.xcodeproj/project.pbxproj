@@ -54,6 +54,9 @@
 		04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */; };
 		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
+		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
+		04D39B7F1DB8B5CC009FBD60 /* Constellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* Constellation.swift */; };
+		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
 		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
 		04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7AC1DB76EDB004509D1 /* TAAbstractDotView.m */; };
 		04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7AE1DB76EDB004509D1 /* TAAnimatedDotView.m */; };
@@ -163,6 +166,9 @@
 		04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshCell.swift; sourceTree = "<group>"; };
 		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
+		04D39B7E1DB8B5CC009FBD60 /* Constellation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constellation.swift; sourceTree = "<group>"; };
+		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
 		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		04FEB7AB1DB76EDB004509D1 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		04FEB7AC1DB76EDB004509D1 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
@@ -421,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				044643571DB4F6960050F8BC /* UIViewController+Extension.swift */,
+				04D39B7E1DB8B5CC009FBD60 /* Constellation.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -462,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				04966B401DB658CF000721BD /* SettingObj.swift */,
+				04D39B801DB8CE0D009FBD60 /* UserObj.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +482,7 @@
 				04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */,
 				04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */,
 				04966B461DB79957000721BD /* UserInfoSingleView.swift */,
+				04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1056,6 +1065,7 @@
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
+				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
@@ -1078,8 +1088,10 @@
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
 				044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */,
+				04D39B7F1DB8B5CC009FBD60 /* Constellation.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
+				04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
@@ -1242,6 +1254,7 @@
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
 				INFOPLIST_FILE = SlothChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "089407aa-4fbb-4bc6-b6a6-237750eb97eb";
@@ -1261,6 +1274,7 @@
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
 				INFOPLIST_FILE = SlothChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.SlothChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "089407aa-4fbb-4bc6-b6a6-237750eb97eb";

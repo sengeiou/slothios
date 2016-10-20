@@ -31,6 +31,8 @@ class UserInfoEditView: BaseView {
     override init(frame: CGRect ){
         super.init(frame: frame)
         sentupView()
+        setupDatePicker()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -185,6 +187,8 @@ extension UserInfoEditView: MIDatePickerDelegate {
     
     func miDatePicker(_ amDatePicker: MIDatePicker, didSelect date: Date) {
         birthdayView.configContent(contentStr: dateFormatter.string(from: date))
+        let constellation = Constellation.calculateWithDate(date: Date())
+        print(constellation)
     }
     func miDatePickerDidCancelSelection(_ amDatePicker: MIDatePicker) {
         // NOP
