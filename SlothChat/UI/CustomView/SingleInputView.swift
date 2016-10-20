@@ -54,7 +54,7 @@ class SingleInputView: UIView {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.bottom.equalTo(0)
-            make.width.equalTo(128)
+            make.width.equalTo(95)
         }
         errorLabel.font = UIFont.systemFont(ofSize: 12)
         errorLabel.textColor = SGColor.SGRedColor()

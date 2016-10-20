@@ -58,7 +58,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         bannerView?.infiniteLoop = true
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
-        bannerView?.pageControlDotSize = CGSize.init(width: 12, height: 12)
+        bannerView?.pageControlDotSize = CGSize.init(width: 8, height: 8)
         bannerView?.pageControlBottomOffset = 150
         bannerView?.localizationImageNamesGroup = imagesURLStrings
         container.addSubview(bannerView!)
@@ -67,6 +67,15 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             make.left.top.right.equalTo(0)
             make.height.equalTo(180)
         })
+        
+        let deleteButton = UIButton(type: .custom)
+        deleteButton.setImage(UIImage.init(named: "trash-can"), for: .normal)
+        container.addSubview(deleteButton)
+        deleteButton.snp.makeConstraints { (make) in
+            make.top.right.equalTo(0)
+            make.size.equalTo(CGSize.init(width: 46, height: 52))
+        }
+        
 
         if isMyself {
             shareView = LikeShareView()
@@ -104,6 +113,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
+            make.height.equalTo(330)
         }
         infoView.configViewWihObject(userObj: "" as NSObject)
         
@@ -120,11 +130,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         if (self.editView != nil) {
             self.editView?.isHidden = false
             self.infoView.isHidden = true
-            self.shareView?.isHidden = true
             editView!.configViewWihObject(userObj: "" as NSObject)
             return
         }
-        self.shareView?.isHidden = true
         self.infoView.isHidden = true
         
         self.editView = UserInfoEditView()
@@ -149,9 +157,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             self.editView?.isHidden = true
             self.infoView.isHidden = false
             self.shareView?.isHidden = false
-            self.container.snp.makeConstraints { (make) in
-                make.bottom.equalTo(self.infoView.snp.bottom)
-            }
         }
     }
     

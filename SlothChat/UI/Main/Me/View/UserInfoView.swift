@@ -59,6 +59,7 @@ class UserInfoView: BaseView {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.top.equalTo(0)
+            make.right.lessThanOrEqualTo(-65)
         }
         sexImgView.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.right).offset(14)
@@ -72,18 +73,18 @@ class UserInfoView: BaseView {
         
         locationView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(ageInfoLabel.snp.bottom).offset(24)
-            make.height.equalTo(46)
+            make.top.equalTo(ageInfoLabel.snp.bottom).offset(12)
+            make.height.equalTo(34)
         }
         hauntView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(locationView.snp.bottom)
-            make.height.equalTo(46)
+            make.height.equalTo(34)
         }
         schoolView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(hauntView.snp.bottom)
-            make.height.equalTo(46)
+            make.height.equalTo(34)
         }
         
         let editImgView = UIImageView()
@@ -102,25 +103,22 @@ class UserInfoView: BaseView {
         
         editView.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
-            make.size.equalTo(CGSize.init(width: 68, height: 46))
+            make.size.equalTo(CGSize.init(width: 64, height: 46))
         }
         
         editImgView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.centerY.equalTo(editView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 16, height: 16))
+            make.size.equalTo(CGSize.init(width: 15, height: 15))
         }
         
         editLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(editImgView.snp.right).offset(8)
-            make.centerY.equalTo(editView.snp.centerY)
+            make.left.equalTo(editImgView.snp.right).offset(11)
+            make.centerY.equalTo(editImgView.snp.centerY)
         }
         
         editButton.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
-        }
-        self.snp.makeConstraints { (make) in
-            make.bottom.equalTo(schoolView.snp.bottom)
         }
     }
     

@@ -132,7 +132,7 @@ class UserInfoEditView: BaseView {
         editLabel.textColor = SGColor.SGMainColor()
         
         let editButton = UIButton(type: .custom)
-        editButton.addTarget(self, action: #selector(editButtonClick), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(confirmButtonClick), for: .touchUpInside)
         addSubview(editView)
         editView.addSubview(editLabel)
         editView.addSubview(editButton)
@@ -168,8 +168,8 @@ class UserInfoEditView: BaseView {
         self.editUserInfoValue = temClosure
     }
     
-    func editButtonClick() {
-        print("editButtonClick")
+    func confirmButtonClick() {
+        print("confirmButtonClick")
         if let sp = self.editUserInfoValue {
             sp()
         }
