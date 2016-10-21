@@ -20,7 +20,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var toolView: UserInfoToolView?
 
     var isMyself = false
-    var userObj = UserObj.defaultUserObj()
+    var userObj = UserObj.UserInfoFromCache()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,8 +116,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }
             make.height.equalTo(330)
         }
-        infoView.configViewWihObject(userObj: self.userObj)
-        
+        if self.userObj != nil{
+            infoView.configViewWihObject(userObj: self.userObj!)
+        }
         infoView.setEditUserInfoValue {
             self.configEditUserInfoView()
         }
@@ -131,7 +132,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         if (self.editView != nil) {
             self.editView?.isHidden = false
             self.infoView.isHidden = true
-            editView!.configViewWihObject(userObj: self.userObj)
+            if self.userObj != nil{
+                editView!.configViewWihObject(userObj: self.userObj!)
+            }
             return
         }
         self.infoView.isHidden = true
@@ -139,7 +142,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.editView = UserInfoEditView()
         editView?.showVC = self
         container.addSubview(editView!)
-        editView!.configViewWihObject(userObj: self.userObj)
+        if self.userObj != nil{
+            editView!.configViewWihObject(userObj: self.userObj!)
+        }
 
         editView!.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
@@ -156,7 +161,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         
         editView?.setDoneUserInfoValue(temClosure: { (_ editUserObj) in
             self.userObj = editUserObj
-            self.infoView.configViewWihObject(userObj: self.userObj)
+            editUserObj.caheForUserInfo()
+            if self.userObj != nil {
+                self.infoView.configViewWihObject(userObj: self.userObj!)
+            }
             self.editView?.isHidden = true
             self.infoView.isHidden = false
             self.shareView?.isHidden = false

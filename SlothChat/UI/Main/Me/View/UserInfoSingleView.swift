@@ -10,8 +10,8 @@ import UIKit
 
 class UserInfoSingleView: BaseView {
     
-    let titleLabel = UILabel.init()
-    let inputTextfield = UITextField.init()
+    let titleLabel = UILabel()
+    let contenLabel = UILabel()
     
     override init(frame: CGRect ){
         super.init(frame: frame)
@@ -24,48 +24,33 @@ class UserInfoSingleView: BaseView {
     
     func sentupView() {
         addSubview(titleLabel)
-        let line = UIView.init()
-        line.backgroundColor = SGColor.SGLineColor()
-        addSubview(line)
-        
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.centerY.equalTo(self.snp.centerY)
-            make.width.equalTo(88)
+            make.width.equalTo(80)
         }
         
-        addSubview(inputTextfield)
-        inputTextfield.snp.makeConstraints { (make) in
+        contenLabel.lineBreakMode = .byCharWrapping
+        contenLabel.numberOfLines = 0
+        let screenWidth = UIScreen.main.bounds.size.width
+        contenLabel.preferredMaxLayoutWidth = screenWidth - 80 - 10
+        
+        addSubview(contenLabel)
+        contenLabel.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
-            make.centerY.equalTo(self.snp.centerY)
+            
+            make.top.equalTo(10)
             make.right.equalTo(-10)
+            make.bottom.equalTo(-10)
         }
-        line.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(inputTextfield)
-            make.height.equalTo(1)
-        }
-    }
-    
-    
-    func configInputView(titleStr: String,contentStr: String) {
-        titleLabel.text = titleStr
-        inputTextfield.text = contentStr
     }
     
     func configContent(contentStr: String) {
-        inputTextfield.text = contentStr
+        contenLabel.text = contentStr
     }
     
-    func getInputContent() -> String? {
-        return inputTextfield.text
-    }
-    
-    func getSumbitValid() -> Bool {
-        let input = getInputContent()
-        if (input?.isEmpty)! {
-            return false
-        }else{
-            return true
-        }
+    func configInputView(titleStr: String,contentStr: String) {
+        titleLabel.text = titleStr
+        contenLabel.text = contentStr
     }
 }

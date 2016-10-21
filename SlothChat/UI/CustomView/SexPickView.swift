@@ -9,9 +9,9 @@
 import UIKit
 import SnapKit
 
-enum SGGenderType {
-    case male
-    case female
+enum SGGenderType: Int {
+    case male = 0
+    case female = 1
 }
 
 class SexPickView: BaseView {

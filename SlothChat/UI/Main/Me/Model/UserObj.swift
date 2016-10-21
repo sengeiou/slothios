@@ -19,6 +19,10 @@ class UserObj: BaseObject,NSCoding {
     var haunt = ""
     var school = ""
     
+    override init() {
+        
+    }
+    
     class func defaultUserObj() -> UserObj {
         let user = UserObj()
         user.usrId = 100001
@@ -31,25 +35,26 @@ class UserObj: BaseObject,NSCoding {
         return user
     }
     
-    open func cacheForUserDefault() {
+    open func caheForUserInfo() {
         let data = NSKeyedArchiver.archivedData(withRootObject: self)
         UserDefaults.standard.setValue(data, forKey: "UserInfoCacheKey")
     }
     
-    open func getUserInfoFromUserDefault() -> UserObj? {
+    open class func UserInfoFromCache() -> UserObj? {
         let data = UserDefaults.standard.value(forKey: "UserInfoCacheKey")
         if data != nil {
             let userObj = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)
-            return userObj
+            return userObj as! UserObj?
         }
-        
-        return nil
+        let userObj = UserObj.defaultUserObj()
+        return userObj
     }
     
     
     //MARK:- NSCoding
+
     
-    func encode(with aCoder: NSCoder) {
+    func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encode(self.usrId, forKey: "usrId")
         aCoder.encode(self.gender, forKey: "gender")
         
@@ -60,12 +65,23 @@ class UserObj: BaseObject,NSCoding {
         aCoder.encode(self.school, forKey: "school")
     }
     
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.usrId, forKey: "usrId")
+        aCoder.encode(self.gender.rawValue, forKey: "gender")
+        
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.birthday, forKey: "birthday")
+        aCoder.encode(self.location, forKey: "location")
+        aCoder.encode(self.haunt, forKey: "haunt")
+        aCoder.encode(self.school, forKey: "school")
+    }
+
     
     required convenience init(coder aDecoder: NSCoder) {
         self.init()
         
         self.usrId = Int(aDecoder.decodeInt32(forKey: "usrId"))
-        self.gender = aDecoder.decodeObject(forKey: "gender") as! SGGenderType
+        self.gender = SGGenderType(rawValue: Int(aDecoder.decodeInt32(forKey: "gender")))!
         
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.birthday = aDecoder.decodeObject(forKey: "birthday") as! String

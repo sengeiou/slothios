@@ -15,9 +15,9 @@ class UserInfoView: BaseView {
     let sexImgView = UIImageView()
     let ageInfoLabel = UILabel()
     
-    let locationView = SingleInputView()
-    let hauntView = SingleInputView()
-    let schoolView = SingleInputView()
+    let locationView = UserInfoSingleView()
+    let hauntView = UserInfoSingleView()
+    let schoolView = UserInfoSingleView()
     let editView = UIView()
     
     var userObj: UserObj?
@@ -40,20 +40,14 @@ class UserInfoView: BaseView {
         ageInfoLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(ageInfoLabel)
         
-        locationView.allowEditing(allowEdit: false)
-        locationView.setInputTextfieldLeftMagin(left: 80)
         locationView.titleLabel.textColor = SGColor.SGTextColor()
         locationView.configInputView(titleStr: "所在地:", contentStr: "")
         addSubview(locationView)
         
-        hauntView.allowEditing(allowEdit: false)
-        hauntView.setInputTextfieldLeftMagin(left: 80)
         hauntView.titleLabel.textColor = SGColor.SGTextColor()
         hauntView.configInputView(titleStr: "经常:", contentStr: "")
         addSubview(hauntView)
         
-        schoolView.allowEditing(allowEdit: false)
-        schoolView.setInputTextfieldLeftMagin(left: 80)
         schoolView.titleLabel.textColor = SGColor.SGTextColor()
         schoolView.configInputView(titleStr: "学校:", contentStr: "")
         addSubview(schoolView)
@@ -76,17 +70,17 @@ class UserInfoView: BaseView {
         locationView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(ageInfoLabel.snp.bottom).offset(12)
-            make.height.equalTo(34)
+//            make.height.equalTo(34)
         }
         hauntView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(locationView.snp.bottom)
-            make.height.equalTo(34)
+//            make.height.equalTo(34)
         }
         schoolView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(hauntView.snp.bottom)
-            make.height.equalTo(34)
+//            make.height.equalTo(34)
         }
         
         let editImgView = UIImageView()
