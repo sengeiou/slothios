@@ -21,76 +21,88 @@ class RegisterViewController: BaseViewController {
     }
 
     func sentupViews() {
+        view.backgroundColor = UIColor.white
+
         let iconView = IconTitleView.init(frame: CGRect.zero)
         view.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.height.equalTo(60)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
+            make.size.equalTo(CGSize.init(width: 184, height: 55))
         }
-        
        
         codeView.setClosurePass {
             self.pushCountryCode()
         }
+        
+        codeView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        codeView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        codeView.setInputTextfieldLeftMagin(left: 106)
         codeView.configInputView(titleStr: "国家区号:", contentStr: "+1")
         view.addSubview(codeView)
         
+        phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        phoneView.setInputTextfieldLeftMagin(left: 106)
         phoneView.configInputView(titleStr: "手机号:", contentStr: "")
         phoneView.inputTextfield.keyboardType = .numberPad
 
         view.addSubview(phoneView)
         
+        passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        passwordView.setInputTextfieldLeftMagin(left: 106)
         passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
 
-        
-        
         codeView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(iconView.snp.bottom).offset(100)
-            make.height.equalTo(44)
+            make.top.equalTo(iconView.snp.bottom).offset(88)
+            make.height.equalTo(60)
         }
         
         phoneView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(codeView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(codeView.snp.bottom).offset(19)
+            make.height.equalTo(60)
         }
         
         passwordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(phoneView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(phoneView.snp.bottom).offset(19)
+            make.height.equalTo(60)
         }
         
         let registerButton = UIButton.init(type: .custom)
+        registerButton.layer.cornerRadius = 23
         registerButton.setTitle("注册", for: .normal)
-        registerButton.layer.cornerRadius = 20
         registerButton.backgroundColor = SGColor.SGMainColor()
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
         view.addSubview(registerButton)
         
         let loginButton = UIButton.init(type: .custom)
         loginButton.setTitle("登录", for: .normal)
+        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         loginButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
         loginButton.addTarget(self, action:#selector(loginButtonClick), for: .touchUpInside)
-
+        
         view.addSubview(loginButton)
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(8)
             make.bottom.equalTo(-10)
-            make.height.equalTo(44)
-            make.right.equalTo(loginButton.snp.left).offset(10)
+            make.height.equalTo(46)
+            make.right.equalTo(loginButton.snp.left)
             make.width.equalTo(loginButton.snp.width).dividedBy(0.668)
         }
         
         loginButton.snp.makeConstraints { (make) in
-            make.right.bottom.equalTo(-10)
-            make.height.equalTo(44)
-            make.right.equalTo(registerButton.snp.right).offset(-10)
+            make.right.equalTo(-8)
+            make.bottom.equalTo(-10)
+            make.height.equalTo(46)
+            make.right.equalTo(registerButton.snp.right)
         }
     }
     
@@ -99,19 +111,22 @@ class RegisterViewController: BaseViewController {
         print("registerButtonClick")
         let codeStr = codeView.getInputContent()
         if (codeStr?.isEmpty)! {
-            HUD.flash(.label("请选择国家码"), delay: 2)
+//            HUD.flash(.label("请选择国家码"), delay: 2)
+            codeView.setErrorContent(error: "请选择国家码")
             return
         }
         
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            HUD.flash(.label("请输入手机号"), delay: 2)
+//            HUD.flash(.label("请输入手机号"), delay: 2)
+            phoneView.setErrorContent(error: "请输入手机号")
             return
         }
         
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            HUD.flash(.label("请输入密码"), delay: 2)
+//            HUD.flash(.label("请输入密码"), delay: 2)
+            passwordView.setErrorContent(error: "请输入密码")
             return
         }
         

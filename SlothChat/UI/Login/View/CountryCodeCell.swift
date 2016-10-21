@@ -1,5 +1,5 @@
 //
-//  PullToRefreshCell.swift
+//  CountryCodeCell.swift
 //  swiftProjects
 //
 //  Created by fly on 6/11/16.
@@ -9,17 +9,18 @@
 import UIKit
 import SnapKit
 
-class PullToRefreshCell: UITableViewCell {
-    var iconImageView : UIImageView?
+class CountryCodeCell: UITableViewCell {
+    var titleLabel = UILabel()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        iconImageView = UIImageView.init(frame : CGRect.zero)
         
-        self.contentView.addSubview(iconImageView!)
-        iconImageView!.snp.makeConstraints({ (make) in
-            make.edges.equalTo(UIEdgeInsets.zero)
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        self.contentView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints({ (make) in
+            make.left.equalTo(19)
+            make.centerY.equalTo(self.contentView.snp.centerY)
         });
     }
     

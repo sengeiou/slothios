@@ -51,7 +51,7 @@
 		04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92151DB0B6DE0048A9FD /* CountryCodeViewController.swift */; };
 		04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */; };
 		04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */; };
-		04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */; };
+		04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */; };
 		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
@@ -163,7 +163,7 @@
 		04AC92151DB0B6DE0048A9FD /* CountryCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeViewController.swift; sourceTree = "<group>"; };
 		04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefreshCell.swift; sourceTree = "<group>"; };
+		04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeCell.swift; sourceTree = "<group>"; };
 		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
@@ -549,7 +549,7 @@
 		04AC92131DB0B6DE0048A9FD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04AC921B1DB0B6F50048A9FD /* PullToRefreshCell.swift */,
+				04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1075,7 +1075,7 @@
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
-				04AC921C1DB0B6F50048A9FD /* PullToRefreshCell.swift in Sources */,
+				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
 				04FEB7BB1DB76EDB004509D1 /* TADotView.m in Sources */,
 				040576E61DB3353E00C55D02 /* IQKeyboardManagerConstantsInternal.swift in Sources */,

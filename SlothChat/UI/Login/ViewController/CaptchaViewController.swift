@@ -61,7 +61,9 @@ class CaptchaViewController: BaseViewController {
         tipLabel.addGestureRecognizer(tap)
         tipLabel.isUserInteractionEnabled = true
         
-        
+        captchaView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        captchaView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        captchaView.setInputTextfieldLeftMagin(left: 106)
         captchaView.configInputView(titleStr: "验证码:", contentStr: "")
         captchaView.inputTextfield.keyboardType = .numberPad
         view.addSubview(captchaView)

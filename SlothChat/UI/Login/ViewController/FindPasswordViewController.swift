@@ -40,12 +40,14 @@ class FindPasswordViewController: BaseViewController {
     }
     
     func sentupViews() {
+        view.backgroundColor = UIColor.white
+        
         let iconView = IconTitleView.init(frame: CGRect.zero)
         view.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.height.equalTo(60)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
+            make.size.equalTo(CGSize.init(width: 184, height: 55))
         }
         
         tipLabel.numberOfLines = 0
@@ -53,54 +55,60 @@ class FindPasswordViewController: BaseViewController {
         view.addSubview(tipLabel)
         
         tipLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.top.equalTo(iconView.snp.bottom).offset(100)
+            make.left.equalTo(8)
+            make.right.equalTo(-8)
+            make.top.equalTo(iconView.snp.bottom).offset(122)
         }
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(fireTimer))
         tipLabel.addGestureRecognizer(tap)
         tipLabel.isUserInteractionEnabled = true
         
-        
+        captchaView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        captchaView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        captchaView.setInputTextfieldLeftMagin(left: 106)
         captchaView.configInputView(titleStr: "验证码:", contentStr: "")
         captchaView.inputTextfield.keyboardType = .numberPad
         view.addSubview(captchaView)
         
         captchaView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(tipLabel.snp.bottom).offset(48)
+            make.top.equalTo(tipLabel.snp.bottom).offset(50)
             make.height.equalTo(44)
         }
         
+        passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        passwordView.setInputTextfieldLeftMagin(left: 106)
         passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
         
         passwordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(captchaView.snp.bottom).offset(24)
+            make.top.equalTo(captchaView.snp.bottom).offset(20)
             make.height.equalTo(44)
         }
         
         let confirmButton = UIButton.init(type: .custom)
         confirmButton.setTitle("登录", for: .normal)
-        confirmButton.layer.cornerRadius = 20
+        confirmButton.layer.cornerRadius = 22
+        confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         confirmButton.backgroundColor = SGColor.SGMainColor()
         confirmButton.addTarget(self, action:#selector(confirmButtonClick), for: .touchUpInside)
         view.addSubview(confirmButton)
         
         
         confirmButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.bottom.equalTo(-10)
+            make.left.equalTo(8)
+            make.bottom.equalTo(-8)
             make.height.equalTo(44)
             make.right.equalTo(-10)
         }
     }
     
     func update() {
-        let string1 = "已经向您的手机" + phoneNo! + "发送验证码。\n"
+        let string1 = "已经向您的手机" + phoneNo! + "发送验证码。\n \n"
         let timeStr = String(timeout)
         let string2 = "如果" + timeStr + "秒后未收到验证码，再次申请。"
         let range = NSRange.init(location: string1.characters.count + 2, length: timeStr.characters.count)

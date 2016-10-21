@@ -55,7 +55,7 @@ class UserInfoEditView: BaseView {
         
         birthdayView.setClosurePass {
             if self.showVC != nil{
-                self.datePicker.show(inVC: self.showVC!)
+                self.datePicker.show(inVC: (self.showVC?.tabBarController)!)
             }
         }
         birthdayView.arrowImgView.isHidden = true

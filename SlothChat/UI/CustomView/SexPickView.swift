@@ -41,14 +41,14 @@ class SexPickView: BaseView {
         maleView.button.addTarget(self, action: #selector(maleButtonClick), for: .touchUpInside)
         femaleView.button.addTarget(self, action: #selector(femaleButtonClick), for: .touchUpInside)
 
-        maleView.snp.makeConstraints { (make) in
+        femaleView.snp.makeConstraints { (make) in
             make.left.equalTo(0)
             make.centerY.equalTo(self.snp.centerY)
             make.size.equalTo(CGSize.init(width: 44, height: 44))
         }
         
-        femaleView.snp.makeConstraints { (make) in
-            make.left.equalTo(maleView.snp.right).offset(10)
+        maleView.snp.makeConstraints { (make) in
+            make.left.equalTo(femaleView.snp.right).offset(10)
             make.centerY.equalTo(self.snp.centerY)
             make.size.equalTo(CGSize.init(width: 44, height: 44))
         }

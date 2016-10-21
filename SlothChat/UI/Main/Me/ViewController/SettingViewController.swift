@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AwesomeCache
 
 class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = SettingObj.getSettingList()
@@ -20,12 +21,28 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         tableView.dataSource = self
         tableView.backgroundColor = SGColor.SGBgGrayColor()
         tableView.rowHeight = 74
-        tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
+        
+        let screenWidth = UIScreen.main.bounds.size.width
+
+        let footerView = UIView(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 100))
+        let exitButton = UIButton(type: .custom)
+        exitButton.layer.cornerRadius = 22
+        exitButton.setTitle("退出", for: .normal)
+        exitButton.backgroundColor = SGColor.SGMainColor()
+        exitButton.addTarget(self, action: #selector(exitButtonClick), for: .touchUpInside)
+        footerView.addSubview(exitButton)
+        exitButton.snp.makeConstraints { (make) in
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+            make.top.equalTo(40)
+            make.height.equalTo(44)
+        }
+        tableView.tableFooterView = footerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,7 +81,20 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
     }
     
+    //Mark:- Action
+    
     func charge() {
+        
+    }
+    
+    func exitButtonClick() {
+        do {
+            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
+            cache.removeObject(forKey: SGGlobalKey.SCLoginStatusKey)
+            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        } catch _ {
+            print("Something went wrong :(")
+        }
         
     }
 
