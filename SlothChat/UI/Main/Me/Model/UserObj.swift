@@ -72,7 +72,7 @@ class UserObj: BaseObject,NSCoding {
             bannerList.append(avatar)
         }
         for _ in avatarList.count..<MaxAvatarCount{
-            bannerList.append("pen")
+            bannerList.append("camera-gray")
         }
         return bannerList
     }

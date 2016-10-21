@@ -31,6 +31,8 @@ class SettingCell: UITableViewCell {
             make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
+        mSwitch.onTintColor = SGColor.SGMainColor()
+        mSwitch.backgroundColor = UIColor.init(red: 229/255.0, green: 202/255.0, blue: 182/255.0, alpha: 1.0)
         mSwitch.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)

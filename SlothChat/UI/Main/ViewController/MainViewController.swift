@@ -38,7 +38,7 @@ class MainViewController: UITabBarController {
         let thirdbar = self.tabBar.items![2];
         
         thirdbar.title = "我"
-        thirdbar.image = UIImage(named: "add-group-black")?.withRenderingMode(.alwaysOriginal)
+        thirdbar.image = UIImage(named: "add-group-gray")?.withRenderingMode(.alwaysOriginal)
         thirdbar.selectedImage = UIImage(named: "add-group-champagne")?.withRenderingMode(.alwaysOriginal)
     }
 
