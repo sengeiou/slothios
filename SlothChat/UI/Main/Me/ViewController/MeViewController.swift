@@ -33,6 +33,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     override func confirmClick() {
         print("confirmClick")
+
         let pushVC = SettingViewController.init()
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
@@ -48,21 +49,16 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             make.width.equalTo(scrollView)
         }
         
-        let imagesURLStrings = [
-            "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a4b3d7085dee3d6d2293d48b252b5910/0e2442a7d933c89524cd5cd4d51373f0830200ea.jpg",
-             "https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
-              "http://c.hiphotos.baidu.com/image/w%3D400/sign=c2318ff84334970a4773112fa5c8d1c0/b7fd5266d0160924c1fae5ccd60735fae7cd340d.jpg"
-        ]
-        
         let w = UIScreen.main.bounds.width
         bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: 180), delegate: self, placeholderImage: nil)
-        bannerView?.infiniteLoop = true
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
         bannerView?.pageControlDotSize = CGSize.init(width: 8, height: 8)
         bannerView?.pageControlBottomOffset = 150
-        bannerView?.localizationImageNamesGroup = imagesURLStrings
         container.addSubview(bannerView!)
+        bannerView?.delegate = self
+        
+        refreshBannerView()
         
         bannerView?.snp.makeConstraints({ (make) in
             make.left.top.right.equalTo(0)
@@ -71,6 +67,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         
         let deleteButton = UIButton(type: .custom)
         deleteButton.setImage(UIImage.init(named: "trash-can"), for: .normal)
+        deleteButton.addTarget(self, action: #selector(deleteButtonClick), for: .touchUpInside)
         container.addSubview(deleteButton)
         deleteButton.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
@@ -180,6 +177,38 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         SGLog(message: "")
     }
     
+    func deleteButtonClick() {
+        let page = bannerView?.currentPage()
+        SGLog(message: page)
+        self.userObj?.deleteAvatar(at: page!)
+        self.refreshBannerView()
+        self.userObj?.caheForUserInfo()
+    }
     
-
+    func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
+        cycleScrollView.pause()
+        var titleStr = "选择头像"
+        let avatar = (cycleScrollView.localizationImageNamesGroup[index] as! String)
+        
+        if avatar.hasPrefix("http://") ||
+            avatar.hasPrefix("https://") {
+            titleStr = "替换头像"
+        }
+        UIActionSheet.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+            cycleScrollView.play()
+            self.userObj?.setNewAvatar(newAvatar: "http://e.hiphotos.baidu.com/zhidao/pic/item/3b292df5e0fe992580c7009035a85edf8cb17122.jpg",at: index)
+            self.userObj?.caheForUserInfo()
+            
+            self.refreshBannerView()
+//            self.selectedAvatar = avatar
+//            self.avatarButton.setImage(avatar, for: .normal)
+            }, onCancel:{
+                cycleScrollView.play()
+            }, allowsEditing: true)
+    }
+    
+    func refreshBannerView() {
+        let imagesURLStrings = self.userObj?.getBannerAvatarList()
+        bannerView?.localizationImageNamesGroup = imagesURLStrings
+    }
 }

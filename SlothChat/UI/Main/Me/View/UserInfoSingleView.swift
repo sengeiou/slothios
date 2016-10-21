@@ -23,13 +23,14 @@ class UserInfoSingleView: BaseView {
     }
     
     func sentupView() {
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(80)
         }
-        
+        contenLabel.font = UIFont.systemFont(ofSize: 14)
         contenLabel.lineBreakMode = .byCharWrapping
         contenLabel.numberOfLines = 0
         let screenWidth = UIScreen.main.bounds.size.width

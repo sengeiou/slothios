@@ -450,6 +450,25 @@ NSString * const ID = @"cycleCell";
     [[self class] clearImagesCache];
 }
 
+- (NSInteger)currentPage{
+    if ([self.pageControl isKindOfClass:[TAPageControl class]]) {
+        TAPageControl *pageControl = (TAPageControl *)_pageControl;
+        return pageControl.currentPage;
+    } else {
+        UIPageControl *pageControl = (UIPageControl *)_pageControl;
+        return pageControl.currentPage;
+    }
+    return 0;
+}
+
+- (void)pause{
+    [self invalidateTimer];
+}
+
+- (void)play{
+    [self setupTimer];
+}
+
 + (void)clearImagesCache
 {
     [[[SDWebImageManager sharedManager] imageCache] clearDisk];

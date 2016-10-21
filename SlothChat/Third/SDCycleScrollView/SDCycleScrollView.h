@@ -174,8 +174,6 @@ typedef enum {
 /** 轮播文字label高度 */
 @property (nonatomic, assign) CGFloat titleLabelHeight;
 
-
-
 //////////////////////  清除缓存接口  //////////////////////
 
 /** 清除图片缓存（此次升级后统一使用SDWebImage管理图片加载和缓存）  */
@@ -183,5 +181,11 @@ typedef enum {
 
 /** 清除图片缓存（兼容旧版本方法） */
 - (void)clearCache;
+
+- (NSInteger)currentPage;
+
+- (void)pause;
+
+- (void)play;
 
 @end
