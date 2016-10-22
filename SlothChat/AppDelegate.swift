@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.sharedManager().enable = true
+        NSObject.registerShareSDK()
         
         NotificationCenter.default.addObserver(self, selector: #selector(changeRootViewController), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         

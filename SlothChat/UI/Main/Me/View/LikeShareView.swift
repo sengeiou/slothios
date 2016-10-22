@@ -44,6 +44,7 @@ class LikeShareView: BaseView {
             make.left.equalTo(imgView.snp.right).offset(10)
             make.centerY.equalTo(self.snp.centerY)
         }
+        shareButton.addTarget(self, action: #selector(shareButtonClick), for: .touchUpInside)
         shareButton.setImage(UIImage.init(named: "share"), for: .normal)
         shareButton.snp.makeConstraints { (make) in
             make.left.equalTo(likeLabel.snp.right).offset(20)
@@ -54,6 +55,12 @@ class LikeShareView: BaseView {
     
     func configLikeLabel(count: Int) {
         likeLabel.text = String(count) + "人喜欢"
+    }
+    
+    func shareButtonClick() {
+        SGLog(message: "")
+        
+        NSObject.share()
     }
     
 }

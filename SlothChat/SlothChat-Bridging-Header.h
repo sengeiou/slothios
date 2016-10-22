@@ -15,5 +15,6 @@
 #import "SDCycleScrollView.h"
 
 #import "UIViewController+Purchase.h"
+#import "NSObject+ShareSDK.h"
 
 #endif /* SlothChat_Bridging_Header_h */
