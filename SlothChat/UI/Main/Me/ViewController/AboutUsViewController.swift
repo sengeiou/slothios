@@ -19,9 +19,13 @@ class AboutUsViewController: BaseViewController {
     func sentupView() {
         let imageView = UIImageView.init(image: UIImage.init(named: "icon"))
         view.addSubview(imageView)
+//        [[NSBundle mainBundle]                                                       \
+//            objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+//        let version = NSBundle.mainBundle().objectForInfoDictionaryKey
         
+        let version =  Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let label = UILabel.init()
-        label.text = "Copyright @ 2016 树懒"
+        label.text = "Copyright @ 2016 树懒 " + version
         label.font = UIFont.systemFont(ofSize: 14)
         view.addSubview(label)
         

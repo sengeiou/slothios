@@ -111,7 +111,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(330)
+            make.height.equalTo(380)
         }
         if self.userObj != nil{
             infoView.configViewWihObject(userObj: self.userObj!)
@@ -150,7 +150,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(330)
+            make.height.equalTo(380)
         }
         container.snp.makeConstraints { (make) in
             make.bottom.equalTo(editView!.snp.bottom)

@@ -89,13 +89,25 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     func exitButtonClick() {
-        do {
-            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
-            cache.removeObject(forKey: SGGlobalKey.SCLoginStatusKey)
-            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-        } catch _ {
-            print("Something went wrong :(")
-        }
+        
+        let alertController = UIAlertController(title: "是否退出树懒", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
+        let exitAction = UIAlertAction(title: "退出", style: .default, handler:{ (action) in
+            do {
+                let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
+                cache.removeObject(forKey: SGGlobalKey.SCLoginStatusKey)
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            } catch _ {
+                print("Something went wrong :(")
+            }
+        })
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(exitAction)
+
+        self.present(alertController, animated: true, completion: nil)
+        
+       
         
     }
 
