@@ -60,7 +60,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             break
         case .likeUsersType:
             let pushVC = LikeUsersViewController()
-            _ = navigationController?.popToViewController(pushVC, animated: true)
+            navigationController?.pushViewController(pushVC, animated: true)
             break
         }
     }
