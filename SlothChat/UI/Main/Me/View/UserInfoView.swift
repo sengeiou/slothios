@@ -88,6 +88,7 @@ class UserInfoView: BaseView {
         editImgView.tintColor = SGColor.SGMainColor()
         let editLabel = UILabel()
         editLabel.text = "编辑"
+        editLabel.font = UIFont.systemFont(ofSize: 15) 
         editLabel.textColor = SGColor.SGMainColor()
         
         let editButton = UIButton(type: .custom)
@@ -109,7 +110,7 @@ class UserInfoView: BaseView {
         }
         
         editLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(editImgView.snp.right).offset(11)
+            make.right.equalTo(-10)
             make.centerY.equalTo(editImgView.snp.centerY)
         }
         

@@ -19,7 +19,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         title = "设置"
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = SGColor.SGBgGrayColor()
+        tableView.backgroundColor = UIColor.white
+        tableView.separatorStyle = .none
         tableView.rowHeight = 74
         view.addSubview(tableView)
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")

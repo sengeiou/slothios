@@ -15,10 +15,8 @@ class BaseViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         if (self.navigationController?.viewControllers.count)! > 1 {
-            self.hidesBottomBarWhenPushed = true
             self.setNavtionBack(imageStr: "go-back")
         }
-        
     }
     
     func showAlertView(message: String) {

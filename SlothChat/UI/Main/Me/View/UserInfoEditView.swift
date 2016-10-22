@@ -144,7 +144,7 @@ class UserInfoEditView: BaseView {
         editView.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
             make.centerY.equalTo(nameView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 50, height: 36))
+            make.size.equalTo(CGSize.init(width: 64, height: 46))
         }
         
         editLabel.snp.makeConstraints { (make) in
