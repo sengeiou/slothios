@@ -22,47 +22,56 @@ class ModifyPasswordViewController: BaseViewController {
     
     func sentupViews() {
         
+        oldPassordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        oldPassordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        oldPassordView.setInputTextfieldLeftMagin(left: 142)
         oldPassordView.configInputView(titleStr: "请输入原密码:", contentStr: "")
         oldPassordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(oldPassordView)
         
         oldPassordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(64)
-            make.height.equalTo(44)
+            make.top.equalTo(64 + 16)
+            make.height.equalTo(52)
         }
         
+        new1PasswordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        new1PasswordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        new1PasswordView.setInputTextfieldLeftMagin(left: 142)
         new1PasswordView.configInputView(titleStr: "请输入新密码:", contentStr: "")
         new1PasswordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(new1PasswordView)
         
         new1PasswordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(oldPassordView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(oldPassordView.snp.bottom).offset(16)
+            make.height.equalTo(52)
         }
         
+        new2PasswordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        new2PasswordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        new2PasswordView.setInputTextfieldLeftMagin(left: 142)
         new2PasswordView.configInputView(titleStr: "请再次输入密码:", contentStr: "")
         new2PasswordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(new2PasswordView)
         
         new2PasswordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(new1PasswordView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(new1PasswordView.snp.bottom).offset(16)
+            make.height.equalTo(52)
         }
         
         let confirmButton = UIButton.init(type: .custom)
         confirmButton.setTitle("确定", for: .normal)
-        confirmButton.layer.cornerRadius = 20
+        confirmButton.layer.cornerRadius = 22
+        confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         confirmButton.backgroundColor = SGColor.SGMainColor()
         confirmButton.addTarget(self, action:#selector(confirmButtonClick), for: .touchUpInside)
         view.addSubview(confirmButton)
-        
-        
+
         confirmButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
-            make.bottom.equalTo(-10)
+            make.left.equalTo(8)
+            make.bottom.equalTo(-8)
             make.height.equalTo(44)
             make.right.equalTo(-10)
         }
@@ -74,7 +83,8 @@ class ModifyPasswordViewController: BaseViewController {
         if !checkSubmitValid() {
             return
         }
-        HUD.flash(.label("修改密码成功"), delay: 2)
+        showAlertView(message: "修改密码成功")
+//        HUD.flash(.label("修改密码成功"), delay: 2)
     }
 
     func checkSubmitValid() -> Bool {

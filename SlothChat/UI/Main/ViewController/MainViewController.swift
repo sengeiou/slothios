@@ -13,9 +13,9 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let discoveryNav = UINavigationController(rootViewController: DiscoveryViewController())
-        let chatNav = UINavigationController(rootViewController:ChatViewController())
-        let meNav = UINavigationController(rootViewController:MeViewController())
+        let discoveryNav = BaseNavigationController(rootViewController: DiscoveryViewController())
+        let chatNav = BaseNavigationController(rootViewController:ChatViewController())
+        let meNav = BaseNavigationController(rootViewController:MeViewController())
         
         self.viewControllers = [discoveryNav,chatNav,meNav]
         

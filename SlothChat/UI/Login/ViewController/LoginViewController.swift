@@ -22,7 +22,6 @@ class LoginViewController: BaseViewController {
     }
     
     func sentupViews() {
-        view.backgroundColor = UIColor.white
         
         let iconView = IconTitleView.init(frame: CGRect.zero)
         view.addSubview(iconView)

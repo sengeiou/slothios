@@ -12,24 +12,29 @@ class AboutUsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        title = "关于我们"
+        sentupView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func sentupView() {
+        let imageView = UIImageView.init(image: UIImage.init(named: "icon"))
+        view.addSubview(imageView)
+        
+        let label = UILabel.init()
+        label.text = "Copyright @ 2016 树懒"
+        label.font = UIFont.systemFont(ofSize: 14)
+        view.addSubview(label)
+        
+        imageView.snp.makeConstraints { (make) in
+            make.top.equalTo(185)
+            make.centerX.equalTo(view.snp.centerX)
+            make.size.equalTo(CGSize.init(width: 122, height: 122))
+        }
+        
+        label.snp.makeConstraints { (make) in
+            make.top.equalTo(imageView.snp.bottom).offset(36)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+        
     }
-    */
-
 }
