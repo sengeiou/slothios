@@ -32,6 +32,8 @@ class LikeUsersCell: UITableViewCell {
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(lookButton)
         
+        avatarImgView.layer.cornerRadius = 18
+        avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.centerY.equalTo(self.contentView.snp.centerY)
@@ -43,6 +45,8 @@ class LikeUsersCell: UITableViewCell {
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
         lookButton.setTitle("查看", for: .normal)
+        lookButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
+        lookButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         lookButton.addTarget(self, action: #selector(lookButtonClick), for: .touchUpInside)
         lookButton.snp.makeConstraints { (make) in
             make.right.equalTo(0)
