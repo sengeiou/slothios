@@ -85,7 +85,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //Mark:- Action
     
     func charge() {
-        
+        self.purchaseForProduct()
     }
     
     func exitButtonClick() {

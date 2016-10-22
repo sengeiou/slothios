@@ -31,6 +31,11 @@
 		044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* MeViewController.swift */; };
 		044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643571DB4F6960050F8BC /* UIViewController+Extension.swift */; };
 		0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */; };
+		0486BB681DBB41C900086303 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB611DBB41C900086303 /* IAPHelper.m */; };
+		0486BB691DBB41C900086303 /* IAPShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB631DBB41C900086303 /* IAPShare.m */; };
+		0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB651DBB41C900086303 /* NSString+Base64.m */; };
+		0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB671DBB41C900086303 /* SFHFKeychainUtils.m */; };
+		0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB6D1DBB44E100086303 /* UIViewController+Purchase.m */; };
 		048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */; };
 		048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */; };
 		048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */; };
@@ -139,6 +144,16 @@
 		044643541DB4F06D0050F8BC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		044643571DB4F6960050F8BC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		0486BB601DBB41C900086303 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		0486BB611DBB41C900086303 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		0486BB621DBB41C900086303 /* IAPShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPShare.h; sourceTree = "<group>"; };
+		0486BB631DBB41C900086303 /* IAPShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPShare.m; sourceTree = "<group>"; };
+		0486BB641DBB41C900086303 /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		0486BB651DBB41C900086303 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		0486BB661DBB41C900086303 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
+		0486BB671DBB41C900086303 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		0486BB6C1DBB44E100086303 /* UIViewController+Purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Purchase.h"; sourceTree = "<group>"; };
+		0486BB6D1DBB44E100086303 /* UIViewController+Purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Purchase.m"; sourceTree = "<group>"; };
 		048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PerfectionInfoViewController.swift; sourceTree = "<group>"; };
 		048B0BA81DB241AD00F5A399 /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
 		048B0BA91DB241AD00F5A399 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
@@ -421,6 +436,8 @@
 				04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */,
 				04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */,
 				04966B441DB665E7000721BD /* AboutUsViewController.swift */,
+				0486BB6C1DBB44E100086303 /* UIViewController+Purchase.h */,
+				0486BB6D1DBB44E100086303 /* UIViewController+Purchase.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -434,9 +451,25 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		0486BB5F1DBB41C900086303 /* IAPHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0486BB601DBB41C900086303 /* IAPHelper.h */,
+				0486BB611DBB41C900086303 /* IAPHelper.m */,
+				0486BB621DBB41C900086303 /* IAPShare.h */,
+				0486BB631DBB41C900086303 /* IAPShare.m */,
+				0486BB641DBB41C900086303 /* NSString+Base64.h */,
+				0486BB651DBB41C900086303 /* NSString+Base64.m */,
+				0486BB661DBB41C900086303 /* SFHFKeychainUtils.h */,
+				0486BB671DBB41C900086303 /* SFHFKeychainUtils.m */,
+			);
+			path = IAPHelper;
+			sourceTree = "<group>";
+		};
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				0486BB5F1DBB41C900086303 /* IAPHelper */,
 				04FEB7C01DB76F13004509D1 /* SDWebImage */,
 				04FEB7A91DB76EDB004509D1 /* SDCycleScrollView */,
 				040576C71DB3353E00C55D02 /* IQKeyboardManagerSwift */,
@@ -1068,14 +1101,17 @@
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
+				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04FEB7EC1DB76F13004509D1 /* UIImage+GIF.m in Sources */,
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,
+				0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */,
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
@@ -1089,9 +1125,11 @@
 				04FEB7ED1DB76F13004509D1 /* UIImage+MultiFormat.m in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
 				04FEB7BE1DB76EDB004509D1 /* SDCycleScrollView.m in Sources */,
+				0486BB691DBB41C900086303 /* IAPShare.m in Sources */,
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
 				044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */,
+				0486BB681DBB41C900086303 /* IAPHelper.m in Sources */,
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
