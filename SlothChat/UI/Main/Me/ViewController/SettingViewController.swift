@@ -106,9 +106,6 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         alertController.addAction(exitAction)
 
         self.present(alertController, animated: true, completion: nil)
-        
-       
-        
     }
 
 }

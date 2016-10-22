@@ -14,7 +14,8 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        if (self.navigationController?.viewControllers.count)! > 1 {
+        if self.navigationController != nil &&
+            (self.navigationController?.viewControllers.count)! > 1 {
             self.setNavtionBack(imageStr: "go-back")
         }
     }

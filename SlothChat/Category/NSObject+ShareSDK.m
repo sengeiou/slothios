@@ -79,7 +79,7 @@
                        
                        switch (state) {
                            case SSDKResponseStateSuccess:{
-
+                               UIAlertController *alertVC = [[UIAlertController alloc] init];
                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
                                                                                    message:nil
                                                                                   delegate:nil

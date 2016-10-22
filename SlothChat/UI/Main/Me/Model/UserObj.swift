@@ -14,7 +14,7 @@ class UserObj: BaseObject,NSCoding {
     var usrId = 0
     var name = ""
     var gender: SGGenderType = .male
-    var avatarList = ["","","","",""]
+    var avatarList: [String]?
     var phoneNo = ""
     var birthday = ""
     var location = ""
@@ -49,6 +49,17 @@ class UserObj: BaseObject,NSCoding {
         UserDefaults.standard.setValue(data, forKey: "UserInfoCacheKey")
     }
     
+    class open func getTestUserList() -> [UserObj] {
+        var userList = [UserObj]()
+        
+        for _ in 0...20 {
+            let user = defaultUserObj()
+            userList.append(user)
+        }
+        return userList
+
+    }
+    
     open class func UserInfoFromCache() -> UserObj? {
         let data = UserDefaults.standard.value(forKey: "UserInfoCacheKey")
         if data != nil {
@@ -68,10 +79,10 @@ class UserObj: BaseObject,NSCoding {
     func getBannerAvatarList() -> [String]{
         var bannerList = [String]()
         
-        for avatar in self.avatarList {
+        for avatar in self.avatarList! {
             bannerList.append(avatar)
         }
-        for _ in avatarList.count..<MaxAvatarCount{
+        for _ in (avatarList?.count)!..<MaxAvatarCount{
             bannerList.append("camera-gray")
         }
         return bannerList
@@ -92,11 +103,11 @@ class UserObj: BaseObject,NSCoding {
     }
     
     func deleteAvatar(at: Int) {
-        if at <= 0 || at > self.avatarList.count  {
+        if at <= 0 || at > (self.avatarList?.count)!  {
             SGLog(message: "page出错" + String(at))
             return
         }
-        avatarList[at] = "pen"
+        avatarList?[at] = "pen"
     }
     
     //MARK:- NSCoding
