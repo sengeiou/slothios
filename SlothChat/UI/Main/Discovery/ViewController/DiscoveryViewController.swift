@@ -48,7 +48,7 @@ class DiscoveryViewController: BaseViewController {
             .bottomMenuHairlineColor(SGColor.SGLineColor()),
             .selectedMenuItemLabelColor(SGColor.SGMainColor()),
             .unselectedMenuItemLabelColor(SGColor.SGTextColor()),
-            .menuItemFont(UIFont.systemFont(ofSize: 13)),
+            .menuItemFont(UIFont.systemFont(ofSize: 14)),
             .menuHeight(44.0),
             .menuItemWidth(90.0),
             .centerMenuItems(true)

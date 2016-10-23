@@ -37,7 +37,7 @@ class PublishHeaderView: BaseView {
         }
     }
     
-    var isFollow = false
+    var isJoin = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -161,6 +161,9 @@ class PublishHeaderView: BaseView {
         selectButton.isSelected = !selectButton.isSelected
         priceView.isHidden = !selectButton.isSelected
         contentLabel.isHidden = selectButton.isSelected
+        
+        isJoin = selectButton.isSelected
+        
         if selectButton.isSelected {
             selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .highlighted)
         }else{

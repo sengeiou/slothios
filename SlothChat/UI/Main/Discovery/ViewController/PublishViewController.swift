@@ -13,7 +13,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
-    var isBidding = false
+    var isJoin = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,21 +34,24 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         headerView.setClosurePass {
-            self.isBidding = !self.isBidding
+            self.isJoin = !self.isJoin
             self.tableView.reloadData()
         }
         tableView.tableHeaderView = headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.isBidding ? dataSource.count : 0)
+        return (self.isJoin ? dataSource.count : 0)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
+        return (self.isJoin ? 32 : 0)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if !isJoin {
+            return nil
+        }
         let headerView = UIView()
         let titleLabel = UILabel()
         titleLabel.text = "当前竞价排行"
@@ -100,7 +103,9 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //MARK:- Action
     
     override func confirmClick() {
+        SGLog(message: headerView.isJoin)
+
         SGLog(message: headerView.price)
-        
+        _ = navigationController?.popViewController(animated: true)
     }
 }
