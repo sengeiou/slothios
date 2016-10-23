@@ -12,25 +12,65 @@ class DiscoveryViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "探索"
+        navigationItem.title = "探"
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    var pageMenu : CAPSPageMenu?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // MARK: - UI Setup
+        
+        // MARK: - Scroll menu setup
+        
+        // Initialize view controllers to display and place in array
+        var controllerArray : [UIViewController] = []
+        
+        let controller1 = HotestViewController()
+        controller1.title = "热门"
+        controllerArray.append(controller1)
+        let controller2  = NewestViewController()
+        controller2.title = "最新"
+        controllerArray.append(controller2)
+        let controller3 = MyPhotosViewController()
+        controller3.title = "我"
+        controllerArray.append(controller3)
+        
+        
+        // Customize menu (Optional)
+        let parameters: [CAPSPageMenuOption] = [
+            .scrollMenuBackgroundColor(UIColor.white),
+            .selectionIndicatorColor(SGColor.SGMainColor()),
+            .bottomMenuHairlineColor(SGColor.SGLineColor()),
+            .selectedMenuItemLabelColor(SGColor.SGMainColor()),
+            .unselectedMenuItemLabelColor(SGColor.SGTextColor()),
+            .menuItemFont(UIFont.systemFont(ofSize: 13)),
+            .menuHeight(44.0),
+            .menuItemWidth(90.0),
+            .centerMenuItems(true)
+        ]
+        
+        // Initialize scroll menu
+        
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect.init(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
+        
+        self.addChildViewController(pageMenu!)
+        self.view.addSubview(pageMenu!.view)
+        
+        pageMenu!.didMove(toParentViewController: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - Container View Controller
+//    override func shouldAutomaticallyForwardAppearanceMethods() -> Bool {
+//        return true
+//    }
+    
+    override func shouldAutomaticallyForwardRotationMethods() -> Bool {
+        return true
     }
-    */
+
 
 }

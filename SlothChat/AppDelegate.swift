@@ -9,6 +9,12 @@
 import UIKit
 import AwesomeCache
 
+public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
+    #if DEBUG
+        print("\(fileName as NSString)\nmethodName:\(methodName)\nLine:\(lineNumber)\nLog:\(message)");
+    #endif
+}
+
 struct SGGlobalKey {
     static let SCCacheName = "SCCacheName"
     static let SCLoginStatusKey = "SCLoginStatusKey"
@@ -23,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.sharedManager().enable = true
+        NSObject.registerShareSDK()
         
         NotificationCenter.default.addObserver(self, selector: #selector(changeRootViewController), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         

@@ -17,30 +17,34 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     var dataSource = [Array<CountryCodeObj>]()
     
     var selectPassValue:SelectCodeClosureType?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "下拉刷新"
+        self.title = "国家电话区号"
         self.configDataSource()
         self.configTableView()
     }
     
     func configTableView() {
-        tableView.rowHeight = 44
+        tableView.rowHeight = 50
         tableView.delegate = self
         tableView.dataSource = self
         tableView.frame = self.view.bounds
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.white
-        tableView.register(PullToRefreshCell.self, forCellReuseIdentifier: "PullToRefreshCell")
-        //            tableView.registerClass(PullToRefreshCell.self, forCellReuseIdentifier: "PullToRefreshCell")
+        tableView.sectionIndexColor = SGColor.SGTextColor()
+        tableView.register(CountryCodeCell.self, forCellReuseIdentifier: "CountryCodeCell")
         self.view.addSubview(tableView)
-        
-        //            let attributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
-        //
-        //            refreshControl.attributedTitle = NSAttributedString.init(string: "努力下载中...", attributes: attributes)
-        //            tableView.addSubview(refreshControl)
-        //            refreshControl.addTarget(self, action: #selector(refreshAction), for: .ValueChanged)
     }
     
     func configDataSource() {
@@ -70,8 +74,9 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : PullToRefreshCell = tableView.dequeueReusableCell(withIdentifier: "PullToRefreshCell", for: indexPath) as! PullToRefreshCell
+        let cell : CountryCodeCell = tableView.dequeueReusableCell(withIdentifier: "CountryCodeCell", for: indexPath) as! CountryCodeCell
         let rowList = dataSource[indexPath.section]
         let obj = rowList[indexPath.row]
         cell.textLabel?.text = obj.name! + obj.code!
@@ -82,10 +87,12 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         let header = UIView.init()
         let label = UILabel.init()
         label.text = String(section)
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = SGColor.SGTextColor()
         header.addSubview(label)
         label.snp.makeConstraints { (make) in
-            make.left.equalTo(24)
-            make.centerY.equalTo(header.snp.centerY)
+            make.left.equalTo(18)
+            make.bottom.equalTo(-10)
         }
         
         let line = UIView.init()
@@ -106,7 +113,7 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 58
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

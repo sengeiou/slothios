@@ -22,19 +22,26 @@ class LoginViewController: BaseViewController {
     }
     
     func sentupViews() {
+        
         let iconView = IconTitleView.init(frame: CGRect.zero)
         view.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.height.equalTo(60)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
+            make.size.equalTo(CGSize.init(width: 184, height: 55))
         }
         
+        phoneView.setInputTextfieldLeftMagin(left: 106)
+        phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         phoneView.configInputView(titleStr: "手机号:", contentStr: "")
         configPhoneInputView(inputView: phoneView)
         phoneView.inputTextfield.keyboardType = .numberPad
         view.addSubview(phoneView)
         
+        passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
+        passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
+        passwordView.setInputTextfieldLeftMagin(left: 106)
         passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
@@ -50,62 +57,66 @@ class LoginViewController: BaseViewController {
         
         phoneView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(iconView.snp.bottom).offset(100)
-            make.height.equalTo(44)
+            make.top.equalTo(iconView.snp.bottom).offset(88)
+            make.height.equalTo(60)
         }
         
         passwordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(phoneView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(phoneView.snp.bottom).offset(19)
+            make.height.equalTo(60)
         }
         
         forgetButton.snp.makeConstraints { (make) in
             make.left.equalTo(100)
-            make.top.equalTo(passwordView.snp.bottom).offset(-4)
-            make.height.equalTo(44)
-            make.width.equalTo(80)
+            make.top.equalTo(passwordView.snp.bottom)
+            make.size.equalTo(CGSize.init(width: 88, height: 38))
         }
         
         let loginButton = UIButton.init(type: .custom)
+        loginButton.layer.cornerRadius = 23
         loginButton.setTitle("登录", for: .normal)
-        loginButton.layer.cornerRadius = 20
         loginButton.backgroundColor = SGColor.SGMainColor()
+        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         loginButton.addTarget(self, action:#selector(loginButtonClick), for: .touchUpInside)
         view.addSubview(loginButton)
         
         let registerButton = UIButton.init(type: .custom)
         registerButton.setTitle("注册", for: .normal)
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         registerButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
         
         view.addSubview(registerButton)
         
-        
-        
-        
         loginButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
-            make.height.equalTo(44)
-            make.right.equalTo(registerButton.snp.left).offset(4)
+            make.left.equalTo(8)
+            make.bottom.equalTo(-10)
+            make.height.equalTo(46)
+            make.right.equalTo(registerButton.snp.left)
             make.width.equalTo(registerButton.snp.width).dividedBy(0.668)
         }
         
         registerButton.snp.makeConstraints { (make) in
-            make.right.bottom.equalTo(-4)
-            make.height.equalTo(44)
-            make.right.equalTo(loginButton.snp.right).offset(-4)
+            make.right.equalTo(-8)
+            make.bottom.equalTo(-10)
+            make.height.equalTo(46)
+            make.right.equalTo(loginButton.snp.right)
         }
     }
     
     func configPhoneInputView(inputView : SingleInputView) {
-        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44))
+        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 44))
         codeButton.frame = leftView.bounds
-        codeButton.setTitleColor(UIColor.black, for: .normal)
         codeButton.setTitle("+86", for: .normal)
+        codeButton.setTitleColor(UIColor.black, for: .normal)
+        codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
         leftView.addSubview(codeButton)
+        
+        let line = UIView.init(frame: CGRect.init(x: 44, y: 6, width: 1, height: 32))
+        line.backgroundColor = SGColor.SGLineColor()
+        leftView.addSubview(line)
         
         inputView.inputTextfield.leftView = leftView
         inputView.inputTextfield.leftViewMode = .always
@@ -116,14 +127,16 @@ class LoginViewController: BaseViewController {
     
     func forgetButtonClick() {
         print("forgetButtonClick")
-        if !checkDataValid(){
+        let phoneStr = phoneView.getInputContent()
+        if (phoneStr?.isEmpty)! {
+            phoneView.setErrorContent(error: "请输入手机号")
             return
         }
-        let phoneStr = phoneView.getInputContent()!
+        
         let code = self.codeButton.title(for: .normal)!
         
-        let pushVC  = ModifyPasswordViewController.init()
-        pushVC.phoneNo = code + phoneStr
+        let pushVC  = FindPasswordViewController.init()
+        pushVC.phoneNo = code + phoneStr!
         navigationController?.pushViewController(pushVC, animated: true)
     }
     
@@ -148,20 +161,18 @@ class LoginViewController: BaseViewController {
     func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            HUD.flash(.label("请输入手机号"), delay: 2)
+            phoneView.setErrorContent(error: "请输入手机号")
             return false
         }
         
         let code = self.codeButton.title(for: .normal)
         if (code?.isEmpty)! {
-            HUD.flash(.label("请选择国家码"), delay: 2)
-
+            phoneView.setErrorContent(error: "请选择国家码")
             return false
         }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            HUD.flash(.label("请输入密码"), delay: 2)
-//            passwordView.setErrorContent(error: "请输入密码")
+            passwordView.setErrorContent(error: "请输入密码")
             return false
         }
         
@@ -170,7 +181,7 @@ class LoginViewController: BaseViewController {
     
     func registerButtonClick() {
         print("registerButtonClick")
-        let pushVC  = RegisterViewController.init()
+        let pushVC  = PerfectionInfoViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
     }
     
@@ -181,7 +192,6 @@ class LoginViewController: BaseViewController {
             self.codeButton.setTitle("+" + code, for: .normal)
         }
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

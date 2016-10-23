@@ -10,10 +10,6 @@ import UIKit
 import PKHUD
 import AwesomeCache
 
-enum SGGenderType {
-    case male
-    case female
-}
 
 class PerfectionInfoViewController: BaseViewController {
     
@@ -23,14 +19,15 @@ class PerfectionInfoViewController: BaseViewController {
     let avatarButton = UIButton.init(type: .custom)
 
     let nickNameView = SingleInputView.init()
+    let sexPickView = SexPickView()
+    
     let birthdayView = SingleInputView.init(type : .button)
+    
     
     var datePicker = MIDatePicker.getFromNib()
     var dateFormatter = DateFormatter()
     
     var selectedAvatar : UIImage?
-    var gender : SGGenderType = .male
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,27 +35,18 @@ class PerfectionInfoViewController: BaseViewController {
         
         setupDatePicker()
         
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "yyyy/MM/dd"
     }
 
     func sentupViews() {
-        let iconImgView = UIImageView.init(image: UIImage.init(named: "icon"))
-        view.addSubview(iconImgView)
         
-        let titleLabel = UILabel.init()
-        titleLabel.text = "树懒"
-        titleLabel.font = UIFont.systemFont(ofSize: 24)
-        titleLabel.textColor = UIColor.red
-        view.addSubview(titleLabel)
-        
-        iconImgView.snp.makeConstraints { (make) in
+        let iconView = IconTitleView.init(frame: CGRect.zero)
+        iconView.titleLabel.font = UIFont.systemFont(ofSize: 24)
+        view.addSubview(iconView)
+        iconView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
-            make.centerX.equalTo(self.view).offset(-40)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
-        }
-        titleLabel.snp.makeConstraints  { (make) in
-            make.left.equalTo(iconImgView.snp.right).offset(40)
-            make.centerY.equalTo(iconImgView.snp.centerY)
+            make.size.equalTo(CGSize.init(width: 134, height: 42))
         }
         
         let avatarLabel = UILabel.init()
@@ -72,22 +60,15 @@ class PerfectionInfoViewController: BaseViewController {
         nickNameView.configInputView(titleStr: "昵称:", contentStr: "")
         view.addSubview(nickNameView)
         
+        
         let genderLabel = UILabel.init()
         
         genderLabel.text = "性别:"
         view.addSubview(genderLabel)
         
-        let femaleButton = UIButton.init(type: .custom)
-        femaleButton.setImage(UIImage.init(named: "female"), for: .normal)
-        femaleButton.addTarget(self, action:#selector(femaleButtonClick), for: .touchUpInside)
+        sexPickView.selectSexView(isMale: false)
+        view.addSubview(sexPickView)
 
-        view.addSubview(femaleButton)
-        
-        let maleButton = UIButton.init(type: .custom)
-        maleButton.setImage(UIImage.init(named: "male"), for: .normal)
-        maleButton.addTarget(self, action:#selector(maleButtonClick), for: .touchUpInside)
-        view.addSubview(maleButton)
-        
         birthdayView.configInputView(titleStr: "生日:", contentStr: "")
         birthdayView.setClosurePass { 
             self.datePicker.show(inVC: self)
@@ -95,59 +76,55 @@ class PerfectionInfoViewController: BaseViewController {
         view.addSubview(birthdayView)
         
         avatarLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.top.equalTo(titleLabel.snp.bottom).offset(36)
-            make.width.equalTo(100)
+            make.left.equalTo(8)
+            make.top.equalTo(iconView.snp.bottom).offset(72)
+            make.width.equalTo(114)
         }
         
         avatarButton.snp.makeConstraints { (make) in
             make.left.equalTo(avatarLabel.snp.right)
-            make.top.equalTo(avatarLabel.snp.top)
-            make.size.equalTo(CGSize.init(width: 100, height: 100))
+            make.top.equalTo(iconView.snp.bottom).offset(63)
+            make.size.equalTo(CGSize.init(width: 122, height: 122))
         }
+        
         nickNameView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(avatarButton.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(avatarButton.snp.bottom).offset(12)
+            make.height.equalTo(60)
         }
         
         genderLabel.snp.makeConstraints { (make) in
             make.left.equalTo(avatarLabel.snp.left)
-            make.top.equalTo(nickNameView.snp.bottom).offset(24)
+            make.top.equalTo(nickNameView.snp.bottom).offset(60)
             make.width.equalTo(100)
         }
         
-        femaleButton.snp.makeConstraints { (make) in
-            make.left.equalTo(genderLabel.snp.right).offset(120)
+        sexPickView.snp.makeConstraints { (make) in
+            make.left.equalTo(genderLabel.snp.right).offset(14)
             make.centerY.equalTo(genderLabel.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 24, height: 24))
-        }
-        
-        maleButton.snp.makeConstraints { (make) in
-            make.left.equalTo(femaleButton.snp.right).offset(4)
-            make.centerY.equalTo(genderLabel.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 24, height: 24))
+            make.size.equalTo(CGSize.init(width: 140, height: 44))
         }
         
         birthdayView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(genderLabel.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(genderLabel.snp.bottom).offset(12)
+            make.height.equalTo(60)
         }
         
         let registerButton = UIButton.init(type: .custom)
         registerButton.setTitle("注册", for: .normal)
-        registerButton.layer.cornerRadius = 20
+        registerButton.layer.cornerRadius = 22
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registerButton.backgroundColor = SGColor.SGMainColor()
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
         view.addSubview(registerButton)
         
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
-            make.bottom.equalTo(-4)
+            make.left.equalTo(8)
+            make.bottom.equalTo(-8)
             make.height.equalTo(44)
-            make.right.equalTo(-4)
+            make.right.equalTo(-10)
         }
     }
     
@@ -197,14 +174,6 @@ class PerfectionInfoViewController: BaseViewController {
         } catch _ {
             print("Something went wrong :(")
         }
-    }
-    
-    func femaleButtonClick() {
-        gender = .female
-    }
-    
-    func maleButtonClick() {
-        gender = .male
     }
     
     func avatarButtonClick() {

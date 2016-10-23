@@ -9,6 +9,8 @@
 import UIKit
 
 class IconTitleView: UIView {
+    let titleLabel = UILabel.init()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         sentupView()
@@ -23,19 +25,19 @@ class IconTitleView: UIView {
         let iconImgView = UIImageView.init(image: UIImage.init(named: "icon"))
         addSubview(iconImgView)
         
-        let titleLabel = UILabel.init()
         titleLabel.text = "树懒"
-        titleLabel.font = UIFont.systemFont(ofSize: 24)
+        titleLabel.font = UIFont.systemFont(ofSize: 36)
         titleLabel.textColor = SGColor.SGMainColor()
         addSubview(titleLabel)
         
         iconImgView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.centerX.equalTo(self).offset(-40)
-            make.size.equalTo(CGSize.init(width: 60, height: 60))
+            make.left.equalTo(0)
+            make.height.equalTo(self.snp.height)
+            make.width.equalTo(self.snp.height)
         }
         titleLabel.snp.makeConstraints  { (make) in
-            make.left.equalTo(iconImgView.snp.right).offset(40)
+            make.right.equalTo(0)
             make.centerY.equalTo(iconImgView.snp.centerY)
         }
     }

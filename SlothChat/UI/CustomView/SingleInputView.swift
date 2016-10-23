@@ -21,7 +21,8 @@ class SingleInputView: UIView {
     let errorLabel = UILabel.init()
     
     let inputTextfield = UITextField.init()
-    
+    let line = UIView.init()
+
     let selectButton = UIButton.init()
     let arrowImgView = UIImageView.init()
     
@@ -45,32 +46,38 @@ class SingleInputView: UIView {
     }
     
     func sentupView() {
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
-        let line = UIView.init()
+        
+        inputTextfield.font = UIFont.systemFont(ofSize: 14)
+        addSubview(inputTextfield)
+        
         line.backgroundColor = SGColor.SGLineColor()
         addSubview(line)
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(4)
+            make.left.equalTo(10)
             make.bottom.equalTo(0)
-            make.width.equalTo(100)
+            make.width.equalTo(95)
         }
-        errorLabel.font = UIFont.systemFont(ofSize: 12)
+        errorLabel.font = UIFont.systemFont(ofSize: 11)
         errorLabel.textColor = SGColor.SGRedColor()
         addSubview(errorLabel)
         errorLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(titleLabel.snp.right)
+            make.left.equalTo(titleLabel.snp.right).offset(10)
             make.top.equalTo(0)
-            make.height.equalTo(16)
         }
+
         
-        addSubview(inputTextfield)
         inputTextfield.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
-            make.top.equalTo(errorLabel.snp.bottom)
+//            make.top.equalTo(errorLabel.snp.bottom)
             make.bottom.equalTo(0)
-            make.right.equalTo(-4)
+            make.right.equalTo(-8)
+            make.height.equalTo(44)
         }
+
+        
         line.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(inputTextfield)
             make.height.equalTo(1)
@@ -88,9 +95,9 @@ class SingleInputView: UIView {
             }
             arrowImgView.image = UIImage.init(named: "go-right")
             arrowImgView.snp.makeConstraints { (make) in
-                make.right.equalTo(-4)
+                make.right.equalTo(-10)
                 make.centerY.equalTo(self.snp.centerY)
-                make.right.equalTo(-4)
+                make.right.equalTo(-10)
                 make.size.equalTo(CGSize.init(width: 16, height: 16))
             }
             line.snp.makeConstraints { (make) in
@@ -98,10 +105,14 @@ class SingleInputView: UIView {
                 make.height.equalTo(1)
             }
         default:
-            print("default")
+            print("")
         }
-            
-        
+    }
+    
+    func setInputTextfieldLeftMagin(left: Float) {
+        titleLabel.snp.updateConstraints { (make) in
+            make.width.equalTo(left - 4)
+        }
     }
     
     func setClosurePass(temClosure: @escaping SelectClosureType){
@@ -112,6 +123,11 @@ class SingleInputView: UIView {
         if let sp = self.selectPassValue {
             sp()
         }
+    }
+    
+    func allowEditing(allowEdit: Bool) {
+        inputTextfield.isEnabled = allowEdit
+        line.isHidden = !allowEdit
     }
     
     func configInputView(titleStr: String,contentStr: String) {
@@ -127,13 +143,30 @@ class SingleInputView: UIView {
         return inputTextfield.text
     }
     
+    func getSumbitValid() -> Bool {
+        let input = getInputContent()
+        if (input?.isEmpty)! {
+            return false
+        }else{
+            return true
+        }
+    }
+    
     func setErrorContent(error: String?) {
         if let error = error {
             errorLabel.text = error
-            inputTextfield.backgroundColor = UIColor(red:0.99, green:0.91, blue:0.91, alpha:1.00)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.inputTextfield.backgroundColor = UIColor(red:0.99, green:0.91, blue:0.91, alpha:1.0)
+            })
+            let deadlineTime = DispatchTime.now() + .seconds(1)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                self.setErrorContent(error: nil)
+            }
         }else{
             errorLabel.text = ""
-            inputTextfield.backgroundColor = UIColor.white
+            UIView.animate(withDuration: 0.3, animations: { 
+                self.inputTextfield.backgroundColor = UIColor.white
+            })
         }
     }
     
