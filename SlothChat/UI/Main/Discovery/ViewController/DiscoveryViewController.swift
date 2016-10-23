@@ -84,7 +84,7 @@ class DiscoveryViewController: BaseViewController {
 //            }, onCancel:nil)
     }
     func publishAdvert(image: UIImage) {
-        let pushVC = PublishViewController()
+        let pushVC = BiddingStatusViewController()
         pushVC.configWithObject(image: image)
         self.navigationController?.pushViewController(pushVC, animated: true)
     }

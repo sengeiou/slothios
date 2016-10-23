@@ -1,5 +1,5 @@
 //
-//  PublishHeaderView.swift
+//  BiddingStatusView.swift
 //  SlothChat
 //
 //  Created by Fly on 16/10/23.
@@ -8,31 +8,43 @@
 
 import UIKit
 
-typealias PublishAdvertClosureType = () -> Void
+enum  BiddingStatus: Int{
+    case bidding
+    case bidded
+}
 
-class PublishHeaderView: BaseView {
+class BiddingStatusView: BaseView {
     let mainImgView = UIImageView()
     
     let selectButton = UIButton(type: .custom)
     
-    let contentLabel = UILabel()
+    let usersView = LikeUsersView()
+    
     let priceView = UIView()
     let priceLabel = UILabel()
+    let overweightButton = UIButton(type: .custom)
+
+    let timeoutLabel = UILabel()
     
     let pickerView = ValuePickerView.init()
     
     var selectPassValue: PublishAdvertClosureType?
+    var bidstatus: BiddingStatus = .bidding
     var price = 1{
         didSet{
-            configPriceLabel()
+          configPriceLabel()
         }
     }
     
-    var isJoin = false
-    
-    override init(frame: CGRect) {
+    init(frame: CGRect,status: BiddingStatus) {
         super.init(frame: frame)
         sentupView()
+        
+        if status == .bidded {
+            timeoutLabel.isHidden = false
+            overweightButton.isEnabled = false
+            overweightButton.backgroundColor = SGColor.SGBgGrayColor()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,63 +54,25 @@ class PublishHeaderView: BaseView {
     func sentupView() {
         
         addSubview(mainImgView)
-        addSubview(contentLabel)
         
-        let joinView = UIView()
-        addSubview(joinView)
+        addSubview(usersView)
         
-        let biddingLabel = UILabel()
-        contentLabel.font = UIFont.systemFont(ofSize: 15)
-
-        biddingLabel.text = "是否用此图片参与广告竞价"
-        joinView.addSubview(biddingLabel)
-        
-        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .normal)
-        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .highlighted)
-        selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .selected)
-        selectButton.addTarget(self, action: #selector(selectButtonCLick), for: .touchUpInside)
-        addSubview(selectButton)
-        
-        contentLabel.numberOfLines = 0
-        contentLabel.lineBreakMode = .byCharWrapping
-        let w = UIScreen.main.bounds.width
-        contentLabel.preferredMaxLayoutWidth = w - 8 * 2
-        contentLabel.font = UIFont.systemFont(ofSize: 14)
-        contentLabel.textColor = SGColor.SGTextColor()
-        contentLabel.text = "什么是广告位\n您可以支付一定金额参与图片的广告位竞价。若在截止时间您出价最高，则竞价成功。您将获得图片分享首页广告位一周时间。"
         
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(300)
+            make.height.equalTo(256)
         }
         
-        joinView.snp.makeConstraints { (make) in
+        usersView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom).offset(24)
             make.height.equalTo(44)
         }
-        
-        biddingLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
-            make.centerY.equalTo(joinView.snp.centerY)
-        }
-        
-        selectButton.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
-            make.centerY.equalTo(joinView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 70, height: 40))
-        }
-        
-        contentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
-            make.right.equalTo(-8)
-            make.top.equalTo(joinView.snp.bottom).offset(24)
-        }
-        
+
         addSubview(priceView)
         priceView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(joinView.snp.bottom).offset(24)
+            make.top.equalTo(usersView.snp.bottom).offset(24)
             make.height.equalTo(44)
         }
         configPriceView()
@@ -106,20 +80,24 @@ class PublishHeaderView: BaseView {
     }
     
     func configPriceView() {
-        priceView.isHidden = true
         
         configPriceLabel()
-        
+        priceLabel.font = UIFont.systemFont(ofSize: 14)
         priceView.addSubview(priceLabel)
         
-        let overweightButton = UIButton(type: .custom)
         overweightButton.addTarget(self, action: #selector(overweightButtonClick), for: .touchUpInside)
-
+        
         overweightButton.setTitle("加码", for: .normal)
         overweightButton.setTitleColor(UIColor.white, for: .normal)
         overweightButton.backgroundColor = SGColor.SGMainColor()
         overweightButton.layer.cornerRadius = 20
         priceView.addSubview(overweightButton)
+        
+        timeoutLabel.text = "竞价时间结束"
+        timeoutLabel.textColor = SGColor.SGTextColor()
+        timeoutLabel.font = UIFont.systemFont(ofSize: 12)
+        priceView.addSubview(timeoutLabel)
+        timeoutLabel.isHidden = true
         
         priceLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
@@ -131,17 +109,11 @@ class PublishHeaderView: BaseView {
             make.centerY.equalTo(priceView.snp.centerY)
             make.size.equalTo(CGSize.init(width: 64, height: 40))
         }
-    }
-    
-    func configPickerView() {
-        pickerView.pickerTitle = "加码金额"
-        let completionBlock: (String?) -> Void = {(_ value: String?) in
-            SGLog(message: value)
-            
-            self.price += Int(value!.components(separatedBy: "/").first!)!
-        }
-        pickerView.valueDidSelect = completionBlock
-        pickerView.dataSource = ["1","5","10","50","100","500","1000"]
+        
+        timeoutLabel.snp.makeConstraints { (make) in
+            make.right.equalTo(-8)
+            make.top.equalTo(overweightButton.snp.bottom).offset(10)
+        }        
     }
     
     func configPriceLabel() {
@@ -155,14 +127,22 @@ class PublishHeaderView: BaseView {
         priceLabel.attributedText = attributedText
     }
     
+    func configPickerView() {
+        pickerView.pickerTitle = "加码金额"
+        let completionBlock: (String?) -> Void = {(_ value: String?) in
+            SGLog(message: value)
+            
+            self.price += Int(value!.components(separatedBy: "/").first!)!
+        }
+        pickerView.valueDidSelect = completionBlock
+        pickerView.dataSource = ["1","5","10","50","100","500","1000"]
+    }
+    
     //MARK:- Action
-
+    
     func selectButtonCLick() {
         selectButton.isSelected = !selectButton.isSelected
         priceView.isHidden = !selectButton.isSelected
-        contentLabel.isHidden = selectButton.isSelected
-        
-        isJoin = selectButton.isSelected
         
         if selectButton.isSelected {
             selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .highlighted)
@@ -178,14 +158,12 @@ class PublishHeaderView: BaseView {
     func configWithObject(image: UIImage) {
         
         self.mainImgView.image = image
+        let userObj = UserObj.defaultUserObj()
+        usersView.configViewWithObject(avatarList: userObj.avatarList)
+        
     }
     
     func overweightButtonClick() {
         pickerView.show()
     }
-    
-    func setClosurePass(temClosure: @escaping PublishAdvertClosureType){
-        self.selectPassValue = temClosure
-    }
-    
 }

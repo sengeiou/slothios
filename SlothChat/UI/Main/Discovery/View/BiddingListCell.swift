@@ -66,11 +66,11 @@ class BiddingListCell: UITableViewCell {
         }
     }
     
-    func configCellWithObj(userObj: UserObj) {
+    func configCellWithObj(userObj: UserObj, indexPatch: IndexPath) {
         let avatarUrl = URL(string: (userObj.avatarList?.first)!)
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         self.nameLabel.text = userObj.name
-        
+        self.priceLabel.text = "￥101"
     }
 
 }

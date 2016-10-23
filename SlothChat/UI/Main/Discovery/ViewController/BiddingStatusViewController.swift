@@ -1,5 +1,5 @@
 //
-//  PublishViewController.swift
+//  BiddingStatusViewController.swift
 //  SlothChat
 //
 //  Created by Fly on 16/10/23.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
-    var isJoin = false
+    var bidstatus: BiddingStatus = .bidding
+
+    let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 420), status: .bidding)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sentupView()
-        setNavtionConfirm(titleStr: "发送")
+        setNavtionConfirm(imageStr: "trash-can")
     }
     
     func sentupView() {
@@ -33,53 +34,48 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
-        headerView.setClosurePass {
-            self.isJoin = !self.isJoin
-            self.tableView.reloadData()
-        }
+        
         tableView.tableHeaderView = headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (self.isJoin ? dataSource.count : 0)
+        return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (self.isJoin ? 32 : 0)
+        return 32
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !isJoin {
-            return nil
-        }
         let headerView = UIView()
         let titleLabel = UILabel()
         titleLabel.text = "当前竞价排行"
         titleLabel.font = UIFont.systemFont(ofSize: 12)
         headerView.addSubview(titleLabel)
-
+        
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.centerY.equalTo(headerView.snp.centerY)
         }
-        
-        let timeLabel = UILabel()
-        timeLabel.font = UIFont.systemFont(ofSize: 12)
-        headerView.addSubview(timeLabel)
-        
-        timeLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
-            make.centerY.equalTo(headerView.snp.centerY)
+        if bidstatus == .bidding {
+            let timeLabel = UILabel()
+            timeLabel.font = UIFont.systemFont(ofSize: 12)
+            headerView.addSubview(timeLabel)
+            
+            timeLabel.snp.makeConstraints { (make) in
+                make.right.equalTo(-8)
+                make.centerY.equalTo(headerView.snp.centerY)
+            }
+            
+            let string1 = "剩余"
+            let string2 = "3天2小时"
+            let attributedText = NSMutableAttributedString.init(string: string1 + string2)
+            
+            let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
+            attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGMainColor(), range: range)
+            timeLabel.attributedText = attributedText
         }
         
-        let string1 = "剩余"
-        let string2 = "3天2小时"
-        let attributedText = NSMutableAttributedString.init(string: string1 + string2)
-        
-        let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGMainColor(), range: range)
-        timeLabel.attributedText = attributedText
-
         
         return headerView
         
@@ -103,8 +99,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //MARK:- Action
     
     override func confirmClick() {
-        SGLog(message: headerView.isJoin)
-
+        
         SGLog(message: headerView.price)
         _ = navigationController?.popViewController(animated: true)
     }
