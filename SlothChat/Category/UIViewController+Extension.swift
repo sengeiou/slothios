@@ -47,8 +47,6 @@ extension UIViewController{
         }
     }
     
-    //MARK:- Action
-    
     func backClick() {
         SGLog(message: "")
         _ = self.navigationController?.popViewController(animated: true)

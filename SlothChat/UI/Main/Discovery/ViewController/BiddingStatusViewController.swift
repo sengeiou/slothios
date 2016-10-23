@@ -12,15 +12,18 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    var bidstatus: BiddingStatus = .bidding
 
     let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 420), status: .bidding)
     
+    var bidstatus: BiddingStatus = .bidding
+    var isMyself = true
+    var isFollow = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sentupView()
-        setNavtionConfirm(imageStr: "trash-can")
+        configNavigationRightItem()
     }
     
     func sentupView() {
@@ -98,9 +101,29 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     
     //MARK:- Action
     
-    override func confirmClick() {
+    func followClick() {
+        isFollow = !isFollow
+        configNavigationRightItem()
+    }
+    
+    func deleteClick() {
         
-        SGLog(message: headerView.price)
-        _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func configNavigationRightItem() {
+        let followImg = isFollow ? "heart-solid" : "heart-hollow"
+        
+        let followItem = UIBarButtonItem.init(image: UIImage.init(named: followImg), style: .plain, target: self, action: #selector(followClick))
+        followItem.tintColor = UIColor.red
+        
+        if isMyself {
+            let deleteItem = UIBarButtonItem.init(image: UIImage.init(named: "trash-can"), style: .plain, target: self, action: #selector(deleteClick))
+            deleteItem.tintColor = SGColor.SGTextColor()
+
+            self.navigationItem.rightBarButtonItems = [deleteItem,followItem]
+        }else{
+            self.navigationItem.rightBarButtonItem = followItem
+        }
+        
     }
 }

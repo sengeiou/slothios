@@ -14,7 +14,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
     var isJoin = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
