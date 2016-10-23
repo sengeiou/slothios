@@ -155,9 +155,11 @@ class BiddingStatusView: BaseView {
         }
     }
     
-    func configWithObject(image: UIImage) {
+    func configWithObject(imgUrl: String) {
         
-        self.mainImgView.image = image
+        let avatarUrl = URL(string: imgUrl)
+        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
         let userObj = UserObj.defaultUserObj()
         usersView.configViewWithObject(avatarList: userObj.avatarList)
         

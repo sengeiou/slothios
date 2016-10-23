@@ -85,6 +85,10 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
                 }, onCancel:nil)
             return
         }
+        let imgUrl = dataSource[indexPath.row - 1]
+        let pushVC = BiddingStatusViewController()
+        pushVC.configWithObject(imgUrl: imgUrl)
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func publishAdvert(image: UIImage) {

@@ -95,8 +95,8 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func configWithObject(image: UIImage) {
-        headerView.configWithObject(image: image)
+    func configWithObject(imgUrl: String) {
+        headerView.configWithObject(imgUrl: imgUrl)
     }
     
     //MARK:- Action
