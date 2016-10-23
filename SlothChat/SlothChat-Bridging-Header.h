@@ -16,5 +16,6 @@
 
 #import "UIViewController+Purchase.h"
 #import "NSObject+ShareSDK.h"
+#import "ValuePickerView.h"
 
 #endif /* SlothChat_Bridging_Header_h */

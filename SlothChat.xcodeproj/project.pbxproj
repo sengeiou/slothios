@@ -93,6 +93,7 @@
 		04B1CEEF1DBC45F9003482DF /* BiddingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */; };
 		04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF01DBC46D9003482DF /* BiddingListCell.swift */; };
 		04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF21DBC8B20003482DF /* PublishHeaderView.swift */; };
+		04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF61DBCAB96003482DF /* ValuePickerView.m */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
 		04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */; };
@@ -269,6 +270,8 @@
 		04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingListView.swift; sourceTree = "<group>"; };
 		04B1CEF01DBC46D9003482DF /* BiddingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingListCell.swift; sourceTree = "<group>"; };
 		04B1CEF21DBC8B20003482DF /* PublishHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishHeaderView.swift; sourceTree = "<group>"; };
+		04B1CEF51DBCAB96003482DF /* ValuePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuePickerView.h; sourceTree = "<group>"; };
+		04B1CEF61DBCAB96003482DF /* ValuePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerView.m; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
 		04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
@@ -670,6 +673,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04B1CEF41DBCAB96003482DF /* ValuePickerView */,
 				041289D41DBB729000D308C0 /* CAPSPageMenu */,
 				0486BB6F1DBB53D200086303 /* ShareSDK3.5.0 */,
 				0486BB5F1DBB41C900086303 /* IAPHelper */,
@@ -804,6 +808,15 @@
 				040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04B1CEF41DBCAB96003482DF /* ValuePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				04B1CEF51DBCAB96003482DF /* ValuePickerView.h */,
+				04B1CEF61DBCAB96003482DF /* ValuePickerView.m */,
+			);
+			path = ValuePickerView;
 			sourceTree = "<group>";
 		};
 		04B385A41DB4AB2A00A8C116 /* Main */ = {
@@ -1352,6 +1365,7 @@
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
+				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,

@@ -49,7 +49,7 @@ class BiddingListCell: UITableViewCell {
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(indexLabel.snp.right).offset(10)
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 36, height: 36))
+            make.size.equalTo(CGSize.init(width: 30, height: 30))
         }
         
         nameLabel.font = UIFont.systemFont(ofSize: 14)

@@ -77,14 +77,15 @@ class DiscoveryViewController: BaseViewController {
     //MARK:- Action
     
     override func confirmClick() {
-        UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-            self.publishAdvert(image: avatar!)
-            }, onCancel:nil)
+        self.publishAdvert(image: UIImage.init(named: "litmatrix")!)
+
+//        UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+//            self.publishAdvert(image: avatar!)
+//            }, onCancel:nil)
     }
     func publishAdvert(image: UIImage) {
         let pushVC = PublishViewController()
-//        pushVC.configWithObject(image: image)
-        pushVC.configWithObject(image: UIImage.init(named: "litmatrix")!)
+        pushVC.configWithObject(image: image)
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
 
