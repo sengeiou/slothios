@@ -1,22 +1,24 @@
 //
-//  LikeUsersViewController.swift
+//  PublishViewController.swift
 //  SlothChat
 //
-//  Created by Fly on 16/10/22.
+//  Created by Fly on 16/10/23.
 //  Copyright © 2016年 ssloth.com. All rights reserved.
 //
 
 import UIKit
 
-class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-    let dataSource = UserObj.getTestUserList()
+class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    let dataSource = DiscoveryUserObj.getDiscoveryUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    
+    let headerView = PublishHeaderView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "喜欢的人"
+        
         sentupView()
+        setNavtionConfirm(titleStr: "发送")
     }
     
     func sentupView() {
@@ -26,10 +28,12 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView.separatorStyle = .none
         tableView.rowHeight = 44
         view.addSubview(tableView)
-        tableView.register(LikeUsersCell.self, forCellReuseIdentifier: "LikeUsersCell")
+        tableView.register(BiddingListCell.self, forCellReuseIdentifier: "BiddingListCell")
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
+        
+        tableView.tableHeaderView = headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,13 +41,10 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: LikeUsersCell = tableView.dequeueReusableCell(withIdentifier: "LikeUsersCell", for: indexPath) as! LikeUsersCell
-        let userObj = dataSource[indexPath.row]
-        cell.configCellWithObj(userObj: userObj)
-        cell.indexPath = indexPath
-        cell.setClosurePass { (actionIndexPath) in
-            self.performCellAction( indexPatch: actionIndexPath)
-        }
+        let cell: BiddingListCell = tableView.dequeueReusableCell(withIdentifier: "BiddingListCell", for: indexPath) as! BiddingListCell
+//        let userObj = dataSource[indexPath.row]
+//        cell.configCellWithObj(userObj: userObj)
+//        cell.indexPath = indexPath
         return cell
     }
     
@@ -51,15 +52,14 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
-    func performCellAction( indexPatch: IndexPath) {
-        SGLog(message: indexPatch.row)
-        let pushVC = BrowseAdvertViewController()
-        let user = dataSource[indexPatch.row]
-        pushVC.configWithObject(user: user)
-        
-        self.navigationController?.pushViewController(pushVC, animated: true)
-        
+    func configWithObject(image: UIImage) {
+        headerView.configWithObject(image: image)
+       
     }
     
+    //MARK:- Action
+    
+    override func confirmClick() {
+        
+    }
 }

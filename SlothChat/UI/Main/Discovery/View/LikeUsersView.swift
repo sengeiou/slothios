@@ -12,6 +12,9 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
     var collectionView: UICollectionView?
     let countLabel = UILabel()
     
+    let bgImgView = UIImageView.init()
+    var dataSource = [String]()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         sentupView()
@@ -20,9 +23,6 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    let bgImgView = UIImageView.init()
-    var dataSource = [String]()
     
     func sentupView() {
         let frame = CGRect.zero
@@ -69,18 +69,19 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
         return cell
     }
     
-    func configViewWithObject(userObj: DiscoveryUserObj) {
-        
-        dataSource.removeAll()
-        let count = userObj.likeUserList.count
-        
-        if count > 0 {
-            dataSource.append(contentsOf: userObj.likeUserList)
-        }
-        collectionView?.reloadData()
-        countLabel.text = "等" + String(count) + "人喜欢"
-        countLabel.snp.updateConstraints { (make) in
-            make.left.equalTo((4 + 24) * count + 4)
+    func configViewWithObject(avatarList: [String]?) {
+        if avatarList != nil{
+            dataSource.removeAll()
+            let count = avatarList!.count
+            
+            if count > 0 {
+                dataSource.append(contentsOf: avatarList!)
+            }
+            collectionView?.reloadData()
+            countLabel.text = "等" + String(count) + "人喜欢"
+            countLabel.snp.updateConstraints { (make) in
+                make.left.equalTo((4 + 24) * count + 4)
+            }
         }
     }
 }

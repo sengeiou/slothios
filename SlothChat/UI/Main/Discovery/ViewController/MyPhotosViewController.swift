@@ -65,9 +65,12 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         let cell : MyPhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath as IndexPath) as! MyPhotosCell
         
         if indexPath.row == 0 {
+            cell.imgView.contentMode = .redraw
             cell.imgView.image = UIImage.init(named: "camera-gray")
             return cell
         }
+        cell.imgView.contentMode = .scaleAspectFit
+
         let imgUrl = dataSource[indexPath.row - 1]
         
         let url = URL(string: imgUrl)
@@ -76,13 +79,18 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 1 {
+        if indexPath.row == 0 {
             UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                
+                self.publishAdvert(image: avatar!)
                 }, onCancel:nil)
             return
         }
-        
+    }
+    
+    func publishAdvert(image: UIImage) {
+        let pushVC = PublishViewController()
+        pushVC.configWithObject(image: image)
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
 }

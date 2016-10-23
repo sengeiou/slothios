@@ -61,7 +61,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             cell.accessoryType = .none
             cell.selectionStyle = .none
         }
-        cell.mSwitch.isHidden = !(indexPath.row == 1 || indexPath.row == 2)
+        cell.selectButton.isHidden = !(indexPath.row == 1 || indexPath.row == 2)
         return cell
 
     }

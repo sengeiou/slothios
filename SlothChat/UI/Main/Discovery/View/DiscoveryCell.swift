@@ -35,6 +35,7 @@ class DiscoveryCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         sentupView()
+
     }
     
     func sentupView()  {
@@ -118,11 +119,11 @@ class DiscoveryCell: UITableViewCell {
         self.nameLabel.text = userObj.name
         self.locationLabel.text = userObj.location
         if userObj.isLike {
-            likeButton.setImage(UIImage.init(named: ""), for: .normal)
+            likeButton.setImage(UIImage.init(named: "heart-solid"), for: .normal)
         }else{
-            likeButton.setImage(UIImage.init(named: ""), for: .normal)
+            likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         }
-        likeUsersView.configViewWithObject(userObj: userObj)
+        likeUsersView.configViewWithObject(avatarList: userObj.likeUserList)
     }
     
     required init?(coder aDecoder: NSCoder) {

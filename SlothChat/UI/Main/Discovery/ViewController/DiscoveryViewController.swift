@@ -13,6 +13,8 @@ class DiscoveryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "探"
+        setNavtionConfirm(imageStr: "camera-champagne")
+        self.navigationItem.rightBarButtonItem?.tintColor = SGColor.SGMainColor()
 
         // Do any additional setup after loading the view.
     }
@@ -72,5 +74,18 @@ class DiscoveryViewController: BaseViewController {
         return true
     }
 
+    //MARK:- Action
+    
+    override func confirmClick() {
+        UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+            self.publishAdvert(image: avatar!)
+            }, onCancel:nil)
+    }
+    func publishAdvert(image: UIImage) {
+        let pushVC = PublishViewController()
+//        pushVC.configWithObject(image: image)
+        pushVC.configWithObject(image: UIImage.init(named: "litmatrix")!)
+        self.navigationController?.pushViewController(pushVC, animated: true)
+    }
 
 }

@@ -1,22 +1,25 @@
 //
-//  LikeUsersViewController.swift
+//  BiddingListView.swift
 //  SlothChat
 //
-//  Created by Fly on 16/10/22.
+//  Created by Fly on 16/10/23.
 //  Copyright © 2016年 ssloth.com. All rights reserved.
 //
 
 import UIKit
 
-class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-    let dataSource = UserObj.getTestUserList()
+class BiddingListView: BaseView,UITableViewDelegate,UITableViewDataSource {
+    let dataSource = DiscoveryUserObj.getDiscoveryUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "喜欢的人"
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         sentupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func sentupView() {
@@ -24,12 +27,13 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 44
-        view.addSubview(tableView)
-        tableView.register(LikeUsersCell.self, forCellReuseIdentifier: "LikeUsersCell")
+        tableView.rowHeight = 260
+        addSubview(tableView)
+        tableView.register(DiscoveryCell.self, forCellReuseIdentifier: "DiscoveryCell")
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,13 +41,10 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: LikeUsersCell = tableView.dequeueReusableCell(withIdentifier: "LikeUsersCell", for: indexPath) as! LikeUsersCell
+        let cell: DiscoveryCell = tableView.dequeueReusableCell(withIdentifier: "DiscoveryCell", for: indexPath) as! DiscoveryCell
         let userObj = dataSource[indexPath.row]
         cell.configCellWithObj(userObj: userObj)
         cell.indexPath = indexPath
-        cell.setClosurePass { (actionIndexPath) in
-            self.performCellAction( indexPatch: actionIndexPath)
-        }
         return cell
     }
     
@@ -51,15 +52,9 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
-    func performCellAction( indexPatch: IndexPath) {
-        SGLog(message: indexPatch.row)
-        let pushVC = BrowseAdvertViewController()
-        let user = dataSource[indexPatch.row]
-        pushVC.configWithObject(user: user)
-        
-        self.navigationController?.pushViewController(pushVC, animated: true)
+    func config() {
         
     }
     
 }
+
