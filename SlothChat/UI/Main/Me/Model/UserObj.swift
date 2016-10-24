@@ -11,26 +11,29 @@ import UIKit
 let MaxAvatarCount: Int = 5
 
 class UserObj: BaseObject,NSCoding {
-    var usrId = 0
+    var uuid = ""
     var name = ""
     var gender: SGGenderType = .male
     var avatarList: [String]?
-    var phoneNo = ""
+    var mobile = ""
+    var country = ""
+
     var birthday = ""
     var location = ""
     var haunt = ""
     var school = ""
-    
+    var email = ""
+
     override init() {
         
     }
     
     class func defaultUserObj() -> UserObj {
         let user = UserObj()
-        user.usrId = 100001
+        user.uuid = ""
         user.name = "小恶魔"
         user.gender = .male
-        user.phoneNo = "18667931202"
+        user.mobile = "18667931202"
         user.birthday = "1987/12/02"
         user.location = "美国，波士顿"
         user.haunt = "波士顿，纽约，多伦多，费城"
@@ -113,7 +116,7 @@ class UserObj: BaseObject,NSCoding {
     //MARK:- NSCoding
     
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encode(self.usrId, forKey: "usrId")
+        aCoder.encode(self.uuid, forKey: "uuid")
         aCoder.encode(self.gender, forKey: "gender")
         
         aCoder.encode(self.name, forKey: "name")
@@ -122,11 +125,12 @@ class UserObj: BaseObject,NSCoding {
         aCoder.encode(self.haunt, forKey: "haunt")
         aCoder.encode(self.school, forKey: "school")
         aCoder.encode(self.avatarList, forKey: "avatarList")
-        aCoder.encode(self.phoneNo, forKey: "phoneNo")
+        aCoder.encode(self.mobile, forKey: "mobile")
+        aCoder.encode(self.email, forKey: "email")
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.usrId, forKey: "usrId")
+        aCoder.encode(self.uuid, forKey: "uuid")
         aCoder.encode(self.gender.rawValue, forKey: "gender")
         
         aCoder.encode(self.name, forKey: "name")
@@ -135,13 +139,15 @@ class UserObj: BaseObject,NSCoding {
         aCoder.encode(self.haunt, forKey: "haunt")
         aCoder.encode(self.school, forKey: "school")
         aCoder.encode(self.avatarList, forKey: "avatarList")
-        aCoder.encode(self.phoneNo, forKey: "phoneNo")
+        aCoder.encode(self.mobile, forKey: "mobile")
+        aCoder.encode(self.country, forKey: "country")
+        aCoder.encode(self.email, forKey: "email")
     }
     
     required convenience init(coder aDecoder: NSCoder) {
         self.init()
         
-        self.usrId = Int(aDecoder.decodeInt32(forKey: "usrId"))
+        self.uuid = aDecoder.decodeObject(forKey: "uuid") as! String
         self.gender = SGGenderType(rawValue: Int(aDecoder.decodeInt32(forKey: "gender")))!
         
         self.name = aDecoder.decodeObject(forKey: "name") as! String
@@ -149,7 +155,10 @@ class UserObj: BaseObject,NSCoding {
         self.location = aDecoder.decodeObject(forKey: "location") as! String
         self.haunt = aDecoder.decodeObject(forKey: "haunt") as! String
         self.school = aDecoder.decodeObject(forKey: "school") as! String
-        self.phoneNo = aDecoder.decodeObject(forKey: "phoneNo") as! String
+        self.mobile = aDecoder.decodeObject(forKey: "mobile") as! String
+        self.country = aDecoder.decodeObject(forKey: "country") as! String
+        self.email = aDecoder.decodeObject(forKey: "email") as! String
+
     }
 }
 
