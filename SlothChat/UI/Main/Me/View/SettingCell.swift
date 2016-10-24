@@ -12,7 +12,7 @@ class SettingCell: UITableViewCell {
 
     let titleLabel = UILabel()
     let contentLabel = UILabel()
-    let mSwitch = UISwitch()
+    let selectButton = UIButton(type: .custom)
     let arrowImgView = UIImageView()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
@@ -20,7 +20,7 @@ class SettingCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(titleLabel)
         contentView.addSubview(contentLabel)
-        contentView.addSubview(mSwitch)
+        contentView.addSubview(selectButton)
 
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -31,10 +31,13 @@ class SettingCell: UITableViewCell {
             make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
-        mSwitch.onTintColor = SGColor.SGMainColor()
-        mSwitch.snp.makeConstraints { (make) in
-            make.right.equalTo(-10)
+        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .normal)
+        selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .selected)
+        selectButton.addTarget(self, action: #selector(selectButtonCLick), for: .touchUpInside)
+        selectButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-8)
             make.centerY.equalTo(self.contentView.snp.centerY)
+            make.size.equalTo(CGSize.init(width: 70, height: 40))
         }
     }
     
@@ -44,10 +47,10 @@ class SettingCell: UITableViewCell {
             contentLabel.text = ""
             if settingObj.titleStr == "接受私信" ||
                 settingObj.titleStr == "接受通知"{
-                mSwitch.isHidden = false
-                mSwitch.isOn = settingObj.isOn
+                selectButton.isHidden = false
+                selectButton.isSelected = settingObj.isOn
             }else{
-                mSwitch.isHidden = true
+                selectButton.isHidden = true
             }
         }else{
             contentLabel.text = settingObj.contentStr
@@ -57,6 +60,10 @@ class SettingCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func selectButtonCLick() {
+        selectButton.isSelected = !selectButton.isSelected
     }
 
 }

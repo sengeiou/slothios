@@ -10,20 +10,24 @@ import UIKit
 
 class DiscoveryViewController: BaseViewController {
 
+//    override open var shouldAutomaticallyForwardAppearanceMethods: Bool {
+//        get {
+//            return true
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "探"
+        setNavtionConfirm(imageStr: "camera-champagne")
+        self.navigationItem.rightBarButtonItem?.tintColor = SGColor.SGMainColor()
 
-        // Do any additional setup after loading the view.
+        self.sentupView()
+
     }
     var pageMenu : CAPSPageMenu?
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // MARK: - UI Setup
-        
-        // MARK: - Scroll menu setup
+    func sentupView() {
         
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
@@ -46,7 +50,7 @@ class DiscoveryViewController: BaseViewController {
             .bottomMenuHairlineColor(SGColor.SGLineColor()),
             .selectedMenuItemLabelColor(SGColor.SGMainColor()),
             .unselectedMenuItemLabelColor(SGColor.SGTextColor()),
-            .menuItemFont(UIFont.systemFont(ofSize: 13)),
+            .menuItemFont(UIFont.systemFont(ofSize: 14)),
             .menuHeight(44.0),
             .menuItemWidth(90.0),
             .centerMenuItems(true)
@@ -54,7 +58,7 @@ class DiscoveryViewController: BaseViewController {
         
         // Initialize scroll menu
         
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect.init(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), pageMenuOptions: parameters)
         
         self.addChildViewController(pageMenu!)
         self.view.addSubview(pageMenu!.view)
@@ -68,9 +72,21 @@ class DiscoveryViewController: BaseViewController {
 //        return true
 //    }
     
-    override func shouldAutomaticallyForwardRotationMethods() -> Bool {
-        return true
-    }
+//    override func shouldAutomaticallyForwardRotationMethods() -> Bool {
+//        return true
+//    }
 
+    //MARK:- Action
+    
+    override func confirmClick() {
+        UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+            self.publishAdvert(image: avatar!)
+            }, onCancel:nil)
+    }
+    func publishAdvert(image: UIImage) {
+        let pushVC = PublishViewController()
+        pushVC.configWithObject(image: image)
+        self.navigationController?.pushViewController(pushVC, animated: true)
+    }
 
 }

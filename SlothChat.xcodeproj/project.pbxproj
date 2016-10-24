@@ -88,6 +88,14 @@
 		04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */; };
 		04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */; };
 		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
+		04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEA1DBC3428003482DF /* BrowseAdvertViewController.swift */; };
+		04B1CEED1DBC42DA003482DF /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEC1DBC42DA003482DF /* PublishViewController.swift */; };
+		04B1CEEF1DBC45F9003482DF /* BiddingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */; };
+		04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF01DBC46D9003482DF /* BiddingListCell.swift */; };
+		04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF21DBC8B20003482DF /* PublishHeaderView.swift */; };
+		04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF61DBCAB96003482DF /* ValuePickerView.m */; };
+		04B1CEF91DBCCFDA003482DF /* BiddingStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF81DBCCFDA003482DF /* BiddingStatusViewController.swift */; };
+		04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEFA1DBCD097003482DF /* BiddingStatusView.swift */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
 		04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */; };
@@ -260,6 +268,15 @@
 		04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeCell.swift; sourceTree = "<group>"; };
 		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
+		04B1CEEA1DBC3428003482DF /* BrowseAdvertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseAdvertViewController.swift; sourceTree = "<group>"; };
+		04B1CEEC1DBC42DA003482DF /* PublishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
+		04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingListView.swift; sourceTree = "<group>"; };
+		04B1CEF01DBC46D9003482DF /* BiddingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingListCell.swift; sourceTree = "<group>"; };
+		04B1CEF21DBC8B20003482DF /* PublishHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishHeaderView.swift; sourceTree = "<group>"; };
+		04B1CEF51DBCAB96003482DF /* ValuePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuePickerView.h; sourceTree = "<group>"; };
+		04B1CEF61DBCAB96003482DF /* ValuePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerView.m; sourceTree = "<group>"; };
+		04B1CEF81DBCCFDA003482DF /* BiddingStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingStatusViewController.swift; sourceTree = "<group>"; };
+		04B1CEFA1DBCD097003482DF /* BiddingStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingStatusView.swift; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
 		04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
@@ -513,6 +530,9 @@
 				04E25B841DBB77DE002B727F /* NewestViewController.swift */,
 				04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */,
 				043C911E1DBBAB5800431965 /* LikeUsersViewController.swift */,
+				04B1CEEA1DBC3428003482DF /* BrowseAdvertViewController.swift */,
+				04B1CEEC1DBC42DA003482DF /* PublishViewController.swift */,
+				04B1CEF81DBCCFDA003482DF /* BiddingStatusViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -660,6 +680,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04B1CEF41DBCAB96003482DF /* ValuePickerView */,
 				041289D41DBB729000D308C0 /* CAPSPageMenu */,
 				0486BB6F1DBB53D200086303 /* ShareSDK3.5.0 */,
 				0486BB5F1DBB41C900086303 /* IAPHelper */,
@@ -796,6 +817,15 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		04B1CEF41DBCAB96003482DF /* ValuePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				04B1CEF51DBCAB96003482DF /* ValuePickerView.h */,
+				04B1CEF61DBCAB96003482DF /* ValuePickerView.m */,
+			);
+			path = ValuePickerView;
+			sourceTree = "<group>";
+		};
 		04B385A41DB4AB2A00A8C116 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -830,6 +860,10 @@
 				043C91181DBB8FA400431965 /* DiscoveryCell.swift */,
 				043C911C1DBB9BDA00431965 /* LikeUsersView.swift */,
 				043C91201DBBACA400431965 /* LikeUsersCell.swift */,
+				04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */,
+				04B1CEF01DBC46D9003482DF /* BiddingListCell.swift */,
+				04B1CEF21DBC8B20003482DF /* PublishHeaderView.swift */,
+				04B1CEFA1DBCD097003482DF /* BiddingStatusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1301,11 +1335,14 @@
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
 				04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
+				04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */,
 				04FEB7E81DB76F13004509D1 /* SDWebImageDownloaderOperation.m in Sources */,
 				04FEB7F11DB76F13004509D1 /* UIView+WebCacheOperation.m in Sources */,
+				04B1CEF91DBCCFDA003482DF /* BiddingStatusViewController.swift in Sources */,
 				04FEB7EB1DB76F13004509D1 /* UIButton+WebCache.m in Sources */,
 				04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */,
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
+				04B1CEEF1DBC45F9003482DF /* BiddingListView.swift in Sources */,
 				04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */,
 				04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */,
 				04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */,
@@ -1334,6 +1371,8 @@
 				04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */,
 				040576E31DB3353E00C55D02 /* IQUIViewController+Additions.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
+				04B1CEED1DBC42DA003482DF /* PublishViewController.swift in Sources */,
+				04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
 				04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */,
@@ -1344,12 +1383,14 @@
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
+				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
+				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,
 				04E25B831DBB77D4002B727F /* HotestViewController.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
@@ -1361,6 +1402,7 @@
 				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,
+				04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
 				04FEB7BB1DB76EDB004509D1 /* TADotView.m in Sources */,
 				040576E61DB3353E00C55D02 /* IQKeyboardManagerConstantsInternal.swift in Sources */,

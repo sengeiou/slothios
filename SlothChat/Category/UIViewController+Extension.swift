@@ -43,7 +43,7 @@ extension UIViewController{
         }
         if let imageStr = imageStr {
             let barItem = UIBarButtonItem.init(image: UIImage.init(named: imageStr), style: .plain, target: self, action: #selector(confirmClick))
-            self.navigationItem.leftBarButtonItem = barItem
+            self.navigationItem.rightBarButtonItem = barItem
         }
     }
     
