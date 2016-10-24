@@ -134,6 +134,8 @@ class PerfectionInfoViewController: BaseViewController {
         datePicker.delegate = self
         
         datePicker.config.startDate = Date()
+        datePicker.datePicker.maximumDate = Date()
+        datePicker.datePicker.minimumDate = Date.init(timeIntervalSinceNow: -60 * 60 * 24 * 30 * 12 * 70)
         
         datePicker.config.animationDuration = 0.35
         

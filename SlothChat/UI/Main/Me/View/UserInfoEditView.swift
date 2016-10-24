@@ -201,6 +201,9 @@ class UserInfoEditView: BaseView {
         
         datePicker.delegate = self
         
+        datePicker.datePicker.maximumDate = Date()
+        datePicker.datePicker.minimumDate = Date.init(timeIntervalSinceNow: -60 * 60 * 24 * 30 * 12 * 70)
+        
         datePicker.config.animationDuration = 0.35
         
         datePicker.config.cancelButtonTitle = "取消"
