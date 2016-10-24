@@ -13,7 +13,7 @@ let MaxAvatarCount: Int = 5
 class UserObj: BaseObject,NSCoding {
     var uuid = ""
     var name = ""
-    var gender: SGGenderType = .male
+    var gender = ""
     var avatarList: [String]?
     var mobile = ""
     var country = ""
@@ -32,7 +32,7 @@ class UserObj: BaseObject,NSCoding {
         let user = UserObj()
         user.uuid = ""
         user.name = "小恶魔"
-        user.gender = .male
+        user.gender = SGGenderType.male.rawValue
         user.mobile = "18667931202"
         user.birthday = "1987/12/02"
         user.location = "美国，波士顿"
@@ -131,7 +131,7 @@ class UserObj: BaseObject,NSCoding {
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.uuid, forKey: "uuid")
-        aCoder.encode(self.gender.rawValue, forKey: "gender")
+        aCoder.encode(self.gender, forKey: "gender")
         
         aCoder.encode(self.name, forKey: "name")
         aCoder.encode(self.birthday, forKey: "birthday")
@@ -148,7 +148,7 @@ class UserObj: BaseObject,NSCoding {
         self.init()
         
         self.uuid = aDecoder.decodeObject(forKey: "uuid") as! String
-        self.gender = SGGenderType(rawValue: Int(aDecoder.decodeInt32(forKey: "gender")))!
+        self.gender = aDecoder.decodeObject(forKey: "gender") as! String
         
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.birthday = aDecoder.decodeObject(forKey: "birthday") as! String

@@ -161,7 +161,9 @@ class UserInfoEditView: BaseView {
         self.userObj = userObj
         nameView.configContent(contentStr: userObj.name)
         birthdayView.configContent(contentStr: userObj.birthday)
-        sexPickView.selectSexView(isMale: (userObj.gender == .male))
+        
+        let isMale = userObj.gender == SGGenderType.male.rawValue
+        sexPickView.selectSexView(isMale: isMale)
         
         birthdayView.configContent(contentStr: userObj.birthday)
         locationView.configContent(contentStr: userObj.location)
@@ -184,9 +186,9 @@ class UserInfoEditView: BaseView {
         
         self.userObj?.name = nameView.getInputContent()!
         if sexPickView.isMalePick {
-            self.userObj?.gender = .male
+            self.userObj?.gender = SGGenderType.male.rawValue
         }else{
-            self.userObj?.gender = .female
+            self.userObj?.gender = SGGenderType.female.rawValue
         }
         self.userObj?.location = locationView.getInputContent()!
         self.userObj?.haunt = hauntView.getInputContent()!

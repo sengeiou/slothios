@@ -114,6 +114,7 @@
 		04D0C70F1DBE379B0083BBA2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */; };
 		04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70D1DBE379B0083BBA2 /* README.mdown */; };
 		04D0C7121DBE64EF0083BBA2 /* UserProfileObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C7111DBE64EF0083BBA2 /* UserProfileObj.swift */; };
+		04D0C7141DBE6BDD0083BBA2 /* SysConfigObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C7131DBE6BDD0083BBA2 /* SysConfigObj.swift */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
 		04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */; };
 		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
@@ -326,6 +327,7 @@
 		04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		04D0C70D1DBE379B0083BBA2 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
 		04D0C7111DBE64EF0083BBA2 /* UserProfileObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileObj.swift; sourceTree = "<group>"; };
+		04D0C7131DBE6BDD0083BBA2 /* SysConfigObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfigObj.swift; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
 		04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				04966B401DB658CF000721BD /* SettingObj.swift */,
 				04D39B801DB8CE0D009FBD60 /* UserObj.swift */,
 				04D0C7111DBE64EF0083BBA2 /* UserProfileObj.swift */,
+				04D0C7131DBE6BDD0083BBA2 /* SysConfigObj.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1505,6 +1508,7 @@
 				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,
 				04E25B831DBB77D4002B727F /* HotestViewController.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
+				04D0C7141DBE6BDD0083BBA2 /* SysConfigObj.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04FEB7EC1DB76F13004509D1 /* UIImage+GIF.m in Sources */,
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,

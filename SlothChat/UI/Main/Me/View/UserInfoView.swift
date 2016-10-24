@@ -123,7 +123,8 @@ class UserInfoView: BaseView {
         self.userObj = userObj
         
         nameLabel.text = userObj.name
-        let sexName = (userObj.gender == .male ? "male" : "female")
+        let isMale = userObj.gender == SGGenderType.male.rawValue
+        let sexName = (isMale ? "male" : "female")
         sexImgView.image = UIImage.init(named: sexName)
         
         let birthday = userObj.birthday.toYMDDate()
