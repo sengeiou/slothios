@@ -181,7 +181,7 @@ class LoginViewController: BaseViewController {
     
     func registerButtonClick() {
         print("registerButtonClick")
-        let pushVC  = PerfectionInfoViewController.init()
+        let pushVC  = RegisterViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
     }
     
