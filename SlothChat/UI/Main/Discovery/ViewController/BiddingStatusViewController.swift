@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -18,6 +18,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var bidstatus: BiddingStatus = .bidding
     var isMyself = true
     var isFollow = false
+    var mainImgUrl: String?
+    
+    var photoList = [MWPhoto]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
+        headerView.mainImgView.isUserInteractionEnabled = true
+        headerView.mainImgView.addGestureRecognizer(tap)
         tableView.tableHeaderView = headerView
     }
     
@@ -96,6 +102,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     }
     
     func configWithObject(imgUrl: String) {
+        self.mainImgUrl = imgUrl
         headerView.configWithObject(imgUrl: imgUrl)
     }
     
@@ -125,5 +132,30 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             self.navigationItem.rightBarButtonItem = followItem
         }
         
+    }
+    
+    func tapMainImgView() {
+        if mainImgUrl == nil {
+            return
+        }
+        let photoUrl = URL.init(string: mainImgUrl!)
+        let photo = MWPhoto(url: photoUrl)
+        
+        photoList.append(photo!)
+        
+        let browser = MWPhotoBrowser(delegate: self)
+        self.navigationController?.pushViewController(browser!, animated: true)
+        
+    }
+    
+    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
+        return UInt(photoList.count)
+    }
+    
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
+        if (index < UInt(photoList.count)) {
+            return photoList[Int(index)]
+        }
+        return nil;
     }
 }

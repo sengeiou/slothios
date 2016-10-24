@@ -8,12 +8,13 @@
 
 import UIKit
 
-class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
     var isJoin = false
+    var photoList = [MWPhoto]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,11 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.isJoin = !self.isJoin
             self.tableView.reloadData()
         }
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
+        headerView.mainImgView.isUserInteractionEnabled = true
+        headerView.mainImgView.addGestureRecognizer(tap)
         tableView.tableHeaderView = headerView
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,6 +105,11 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         headerView.configWithObject(image: image)
     }
     
+    func configWithObject(imageUrl: String) {
+        headerView.configWithObject(imageUrl: imageUrl)
+    }
+    
+    
     //MARK:- Action
     
     override func confirmClick() {
@@ -107,5 +117,26 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
 
         SGLog(message: headerView.price)
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func tapMainImgView() {
+        let photo = MWPhoto(image: headerView.mainImgView.image)
+        
+        photoList.append(photo!)
+        
+        let browser = MWPhotoBrowser(delegate: self)
+        self.navigationController?.pushViewController(browser!, animated: true)
+        
+    }
+    
+    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
+        return UInt(photoList.count)
+    }
+    
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
+        if (index < UInt(photoList.count)) {
+            return photoList[Int(index)]
+        }
+        return nil;
     }
 }

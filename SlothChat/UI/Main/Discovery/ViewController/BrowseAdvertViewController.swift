@@ -115,7 +115,7 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
         photoList.append(photo!)
         
         let browser = MWPhotoBrowser(delegate: self)
-        self.present(browser!, animated: true, completion: nil)
+        self.navigationController?.pushViewController(browser!, animated: true)
         
     }
     
