@@ -36,6 +36,7 @@
 		044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643521DB4F0660050F8BC /* DiscoveryViewController.swift */; };
 		044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* MeViewController.swift */; };
 		044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643571DB4F6960050F8BC /* UIViewController+Extension.swift */; };
+		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
 		0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */; };
 		0486BB681DBB41C900086303 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB611DBB41C900086303 /* IAPHelper.m */; };
 		0486BB691DBB41C900086303 /* IAPShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB631DBB41C900086303 /* IAPShare.m */; };
@@ -96,7 +97,22 @@
 		04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF61DBCAB96003482DF /* ValuePickerView.m */; };
 		04B1CEF91DBCCFDA003482DF /* BiddingStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEF81DBCCFDA003482DF /* BiddingStatusViewController.swift */; };
 		04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEFA1DBCD097003482DF /* BiddingStatusView.swift */; };
+		04B1CF411DBE3638003482DF /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 04B1CF2B1DBE3638003482DF /* .gitkeep */; };
+		04B1CF421DBE3638003482DF /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF2D1DBE3638003482DF /* MWCaptionView.m */; };
+		04B1CF431DBE3638003482DF /* MWGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF301DBE3638003482DF /* MWGridCell.m */; };
+		04B1CF441DBE3638003482DF /* MWGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF321DBE3638003482DF /* MWGridViewController.m */; };
+		04B1CF451DBE3638003482DF /* MWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF341DBE3638003482DF /* MWPhoto.m */; };
+		04B1CF461DBE3638003482DF /* MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF361DBE3638003482DF /* MWPhotoBrowser.m */; };
+		04B1CF471DBE3639003482DF /* MWTapDetectingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF3A1DBE3638003482DF /* MWTapDetectingImageView.m */; };
+		04B1CF481DBE3639003482DF /* MWTapDetectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF3C1DBE3638003482DF /* MWTapDetectingView.m */; };
+		04B1CF491DBE3639003482DF /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF3E1DBE3638003482DF /* MWZoomingScrollView.m */; };
+		04B1CF4A1DBE3639003482DF /* UIImage+MWPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF401DBE3638003482DF /* UIImage+MWPhotoBrowser.m */; };
+		04B1CF501DBE36B6003482DF /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF4D1DBE36B6003482DF /* DACircularProgressView.m */; };
+		04B1CF511DBE36B6003482DF /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF4F1DBE36B6003482DF /* DALabeledCircularProgressView.m */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
+		04D0C70E1DBE379B0083BBA2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04D0C70A1DBE379B0083BBA2 /* LICENSE */; };
+		04D0C70F1DBE379B0083BBA2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */; };
+		04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70D1DBE379B0083BBA2 /* README.mdown */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
 		04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */; };
 		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
@@ -191,6 +207,7 @@
 		044643521DB4F0660050F8BC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		044643541DB4F06D0050F8BC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		044643571DB4F6960050F8BC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		0486BB601DBB41C900086303 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
 		0486BB611DBB41C900086303 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
@@ -277,7 +294,37 @@
 		04B1CEF61DBCAB96003482DF /* ValuePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerView.m; sourceTree = "<group>"; };
 		04B1CEF81DBCCFDA003482DF /* BiddingStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingStatusViewController.swift; sourceTree = "<group>"; };
 		04B1CEFA1DBCD097003482DF /* BiddingStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingStatusView.swift; sourceTree = "<group>"; };
+		04B1CF2B1DBE3638003482DF /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		04B1CF2C1DBE3638003482DF /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCaptionView.h; sourceTree = "<group>"; };
+		04B1CF2D1DBE3638003482DF /* MWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWCaptionView.m; sourceTree = "<group>"; };
+		04B1CF2E1DBE3638003482DF /* MWCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCommon.h; sourceTree = "<group>"; };
+		04B1CF2F1DBE3638003482DF /* MWGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGridCell.h; sourceTree = "<group>"; };
+		04B1CF301DBE3638003482DF /* MWGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWGridCell.m; sourceTree = "<group>"; };
+		04B1CF311DBE3638003482DF /* MWGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWGridViewController.h; sourceTree = "<group>"; };
+		04B1CF321DBE3638003482DF /* MWGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWGridViewController.m; sourceTree = "<group>"; };
+		04B1CF331DBE3638003482DF /* MWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhoto.h; sourceTree = "<group>"; };
+		04B1CF341DBE3638003482DF /* MWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWPhoto.m; sourceTree = "<group>"; };
+		04B1CF351DBE3638003482DF /* MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoBrowser.h; sourceTree = "<group>"; };
+		04B1CF361DBE3638003482DF /* MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWPhotoBrowser.m; sourceTree = "<group>"; };
+		04B1CF371DBE3638003482DF /* MWPhotoBrowserPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoBrowserPrivate.h; sourceTree = "<group>"; };
+		04B1CF381DBE3638003482DF /* MWPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoProtocol.h; sourceTree = "<group>"; };
+		04B1CF391DBE3638003482DF /* MWTapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingImageView.h; sourceTree = "<group>"; };
+		04B1CF3A1DBE3638003482DF /* MWTapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTapDetectingImageView.m; sourceTree = "<group>"; };
+		04B1CF3B1DBE3638003482DF /* MWTapDetectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingView.h; sourceTree = "<group>"; };
+		04B1CF3C1DBE3638003482DF /* MWTapDetectingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTapDetectingView.m; sourceTree = "<group>"; };
+		04B1CF3D1DBE3638003482DF /* MWZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWZoomingScrollView.h; sourceTree = "<group>"; };
+		04B1CF3E1DBE3638003482DF /* MWZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWZoomingScrollView.m; sourceTree = "<group>"; };
+		04B1CF3F1DBE3638003482DF /* UIImage+MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MWPhotoBrowser.h"; sourceTree = "<group>"; };
+		04B1CF401DBE3638003482DF /* UIImage+MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MWPhotoBrowser.m"; sourceTree = "<group>"; };
+		04B1CF4C1DBE36B6003482DF /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		04B1CF4D1DBE36B6003482DF /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		04B1CF4E1DBE36B6003482DF /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		04B1CF4F1DBE36B6003482DF /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		04D0C70A1DBE379B0083BBA2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		04D0C70B1DBE379B0083BBA2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		04D0C70D1DBE379B0083BBA2 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
 		04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
@@ -370,6 +417,7 @@
 				0486BBBB1DBB593000086303 /* UIKit.framework in Frameworks */,
 				0486BBB91DBB592400086303 /* Foundation.framework in Frameworks */,
 				0486BBAC1DBB543300086303 /* libsqlite3.tbd in Frameworks */,
+				044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */,
 				0486BBAA1DBB542C00086303 /* ImageIO.framework in Frameworks */,
 				0486BBA81DBB541800086303 /* JavaScriptCore.framework in Frameworks */,
 				0486BBA61DBB540B00086303 /* libstdc++.tbd in Frameworks */,
@@ -680,6 +728,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04B1CF2A1DBE3638003482DF /* MWPhotoBrowser */,
 				04B1CEF41DBCAB96003482DF /* ValuePickerView */,
 				041289D41DBB729000D308C0 /* CAPSPageMenu */,
 				0486BB6F1DBB53D200086303 /* ShareSDK3.5.0 */,
@@ -826,6 +875,48 @@
 			path = ValuePickerView;
 			sourceTree = "<group>";
 		};
+		04B1CF2A1DBE3638003482DF /* MWPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				04D0C7091DBE379B0083BBA2 /* MBProgressHUD */,
+				04B1CF4B1DBE36B6003482DF /* DACircularProgress */,
+				04B1CF2B1DBE3638003482DF /* .gitkeep */,
+				04B1CF2C1DBE3638003482DF /* MWCaptionView.h */,
+				04B1CF2D1DBE3638003482DF /* MWCaptionView.m */,
+				04B1CF2E1DBE3638003482DF /* MWCommon.h */,
+				04B1CF2F1DBE3638003482DF /* MWGridCell.h */,
+				04B1CF301DBE3638003482DF /* MWGridCell.m */,
+				04B1CF311DBE3638003482DF /* MWGridViewController.h */,
+				04B1CF321DBE3638003482DF /* MWGridViewController.m */,
+				04B1CF331DBE3638003482DF /* MWPhoto.h */,
+				04B1CF341DBE3638003482DF /* MWPhoto.m */,
+				04B1CF351DBE3638003482DF /* MWPhotoBrowser.h */,
+				04B1CF361DBE3638003482DF /* MWPhotoBrowser.m */,
+				04B1CF371DBE3638003482DF /* MWPhotoBrowserPrivate.h */,
+				04B1CF381DBE3638003482DF /* MWPhotoProtocol.h */,
+				04B1CF391DBE3638003482DF /* MWTapDetectingImageView.h */,
+				04B1CF3A1DBE3638003482DF /* MWTapDetectingImageView.m */,
+				04B1CF3B1DBE3638003482DF /* MWTapDetectingView.h */,
+				04B1CF3C1DBE3638003482DF /* MWTapDetectingView.m */,
+				04B1CF3D1DBE3638003482DF /* MWZoomingScrollView.h */,
+				04B1CF3E1DBE3638003482DF /* MWZoomingScrollView.m */,
+				04B1CF3F1DBE3638003482DF /* UIImage+MWPhotoBrowser.h */,
+				04B1CF401DBE3638003482DF /* UIImage+MWPhotoBrowser.m */,
+			);
+			path = MWPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		04B1CF4B1DBE36B6003482DF /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				04B1CF4C1DBE36B6003482DF /* DACircularProgressView.h */,
+				04B1CF4D1DBE36B6003482DF /* DACircularProgressView.m */,
+				04B1CF4E1DBE36B6003482DF /* DALabeledCircularProgressView.h */,
+				04B1CF4F1DBE36B6003482DF /* DALabeledCircularProgressView.m */,
+			);
+			path = DACircularProgress;
+			sourceTree = "<group>";
+		};
 		04B385A41DB4AB2A00A8C116 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,6 +934,17 @@
 				04B385A81DB4AB4E00A8C116 /* MainViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		04D0C7091DBE379B0083BBA2 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				04D0C70A1DBE379B0083BBA2 /* LICENSE */,
+				04D0C70B1DBE379B0083BBA2 /* MBProgressHUD.h */,
+				04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */,
+				04D0C70D1DBE379B0083BBA2 /* README.mdown */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		04E25B8A1DBB794A002B727F /* Model */ = {
@@ -1020,6 +1122,7 @@
 		EABF46E165501AE099B412D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				044DEC681DBE08C00067B1EF /* StoreKit.framework */,
 				0486BBBA1DBB593000086303 /* UIKit.framework */,
 				0486BBB81DBB592400086303 /* Foundation.framework */,
 				0486BBAB1DBB543300086303 /* libsqlite3.tbd */,
@@ -1112,8 +1215,17 @@
 				TargetAttributes = {
 					19273B0F1DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
+<<<<<<< HEAD
 						DevelopmentTeam = D2C7BQTTK5;
+=======
+						DevelopmentTeam = UFLXQ9JK9Z;
+>>>>>>> Fly
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					19273B251DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
@@ -1154,9 +1266,11 @@
 			files = (
 				040576EF1DB3353E00C55D02 /* IQKeyboardManager.bundle in Resources */,
 				0486BB9D1DBB53D200086303 /* README.txt in Resources */,
+				04B1CF411DBE3638003482DF /* .gitkeep in Resources */,
 				19273B201DA9EE1300150460 /* LaunchScreen.storyboard in Resources */,
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				19273B1B1DA9EE1300150460 /* Main.storyboard in Resources */,
+				04D0C70E1DBE379B0083BBA2 /* LICENSE in Resources */,
 				0486BB9A1DBB53D200086303 /* WeiboSDK.bundle in Resources */,
 				0486BB9F1DBB53D200086303 /* ShareSDK.bundle in Resources */,
 				0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */,
@@ -1324,15 +1438,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B1CF511DBE36B6003482DF /* DALabeledCircularProgressView.m in Sources */,
 				043C911D1DBB9BDA00431965 /* LikeUsersView.swift in Sources */,
+				04B1CF441DBE3638003482DF /* MWGridViewController.m in Sources */,
 				044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */,
 				04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */,
 				0486BBB71DBB577300086303 /* NSObject+ShareSDK.m in Sources */,
 				04FEB7BD1DB76EDB004509D1 /* SDCollectionViewCell.m in Sources */,
+				04D0C70F1DBE379B0083BBA2 /* MBProgressHUD.m in Sources */,
 				043C911F1DBBAB5800431965 /* LikeUsersViewController.swift in Sources */,
 				043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */,
+				04B1CF4A1DBE3639003482DF /* UIImage+MWPhotoBrowser.m in Sources */,
+				04B1CF461DBE3638003482DF /* MWPhotoBrowser.m in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
+				04B1CF431DBE3638003482DF /* MWGridCell.m in Sources */,
 				04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
 				04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */,
@@ -1351,7 +1471,9 @@
 				043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */,
 				04E25B851DBB77DE002B727F /* NewestViewController.swift in Sources */,
 				04FEB7E71DB76F13004509D1 /* SDWebImageDownloader.m in Sources */,
+				04B1CF471DBE3639003482DF /* MWTapDetectingImageView.m in Sources */,
 				04FEB7E31DB76F13004509D1 /* NSData+ImageContentType.m in Sources */,
+				04B1CF481DBE3639003482DF /* MWTapDetectingView.m in Sources */,
 				040576EB1DB3353E00C55D02 /* IQPreviousNextView.swift in Sources */,
 				040576E81DB3353E00C55D02 /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */,
@@ -1379,6 +1501,7 @@
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
+				04B1CF501DBE36B6003482DF /* DACircularProgressView.m in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
@@ -1398,10 +1521,12 @@
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,
 				0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */,
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
+				04B1CF421DBE3638003482DF /* MWCaptionView.m in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,
+				04B1CF491DBE3639003482DF /* MWZoomingScrollView.m in Sources */,
 				04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
 				04FEB7BB1DB76EDB004509D1 /* TADotView.m in Sources */,
@@ -1423,7 +1548,9 @@
 				04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,
+				04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
+				04B1CF451DBE3638003482DF /* MWPhoto.m in Sources */,
 				048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */,
 				04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */,
 				04FEB7E41DB76F13004509D1 /* SDImageCache.m in Sources */,
@@ -1580,8 +1707,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+<<<<<<< HEAD
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
+=======
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
+>>>>>>> Fly
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -1614,10 +1746,15 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epoch.tracing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "7fe138d0-4efc-49ed-b3de-6e3c413648fc";
 				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
+=======
+				PROVISIONING_PROFILE = "a6b19944-56f9-486a-b070-c6044ce5cc88";
+				PROVISIONING_PROFILE_SPECIFIER = ssloth_dev;
+>>>>>>> Fly
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1630,7 +1767,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Juan Chen (D2C7BQTTK5)";
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
+=======
+				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
+>>>>>>> Fly
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -1663,10 +1804,15 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.epoch.tracing;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "7fe138d0-4efc-49ed-b3de-6e3c413648fc";
 				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
+=======
+				PROVISIONING_PROFILE = "a6b19944-56f9-486a-b070-c6044ce5cc88";
+				PROVISIONING_PROFILE_SPECIFIER = ssloth_dev;
+>>>>>>> Fly
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

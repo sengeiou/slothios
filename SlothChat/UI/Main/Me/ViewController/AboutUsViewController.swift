@@ -30,7 +30,7 @@ class AboutUsViewController: BaseViewController {
         view.addSubview(label)
         
         imageView.snp.makeConstraints { (make) in
-            make.top.equalTo(185)
+            make.centerY.equalTo(view.snp.centerY).offset(-32)
             make.centerX.equalTo(view.snp.centerX)
             make.size.equalTo(CGSize.init(width: 122, height: 122))
         }
