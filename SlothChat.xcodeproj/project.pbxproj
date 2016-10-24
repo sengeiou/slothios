@@ -147,6 +147,18 @@
 		04FEB7F61DB77BB8004509D1 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7F51DB77BB8004509D1 /* UserInfoView.swift */; };
 		04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */; };
 		04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */; };
+		19008B9C1DBE75D500319B86 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008B991DBE75D500319B86 /* Country.swift */; };
+		19008B9D1DBE75D500319B86 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008B9A1DBE75D500319B86 /* List.swift */; };
+		19008BA01DBE7E4700319B86 /* SCData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008B9F1DBE7E4700319B86 /* SCData.swift */; };
+		19008BA21DBE831200319B86 /* SMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BA11DBE831200319B86 /* SMS.swift */; };
+		19008BA51DBE8A6600319B86 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BA31DBE8A6600319B86 /* UserPhoto.swift */; };
+		19008BA61DBE8A6600319B86 /* UserPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BA41DBE8A6600319B86 /* UserPhotoData.swift */; };
+		19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BA71DBE8CE300319B86 /* UserAndProfile.swift */; };
+		19008BAA1DBE8CE300319B86 /* UserAndProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BA81DBE8CE300319B86 /* UserAndProfileData.swift */; };
+		19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BAB1DBE8D7C00319B86 /* UserSignupModel.swift */; };
+		19008BAF1DBE925800319B86 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BAD1DBE925800319B86 /* LoginModel.swift */; };
+		19008BB01DBE925800319B86 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BAE1DBE925800319B86 /* LoginUser.swift */; };
+		19008BB21DBE935500319B86 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19008BB11DBE935500319B86 /* Response.swift */; };
 		19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B131DA9EE1300150460 /* AppDelegate.swift */; };
 		19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B151DA9EE1300150460 /* FirstViewController.swift */; };
 		19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B171DA9EE1300150460 /* SecondViewController.swift */; };
@@ -383,6 +395,18 @@
 		04FEB7F51DB77BB8004509D1 /* UserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		04FEB7F71DB77BC3004509D1 /* UserInfoEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoEditView.swift; sourceTree = "<group>"; };
 		04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeShareView.swift; sourceTree = "<group>"; };
+		19008B991DBE75D500319B86 /* Country.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		19008B9A1DBE75D500319B86 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		19008B9F1DBE7E4700319B86 /* SCData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCData.swift; sourceTree = "<group>"; };
+		19008BA11DBE831200319B86 /* SMS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMS.swift; sourceTree = "<group>"; };
+		19008BA31DBE8A6600319B86 /* UserPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
+		19008BA41DBE8A6600319B86 /* UserPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotoData.swift; sourceTree = "<group>"; };
+		19008BA71DBE8CE300319B86 /* UserAndProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAndProfile.swift; sourceTree = "<group>"; };
+		19008BA81DBE8CE300319B86 /* UserAndProfileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAndProfileData.swift; sourceTree = "<group>"; };
+		19008BAB1DBE8D7C00319B86 /* UserSignupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSignupModel.swift; sourceTree = "<group>"; };
+		19008BAD1DBE925800319B86 /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		19008BAE1DBE925800319B86 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		19008BB11DBE935500319B86 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		19273B101DA9EE1300150460 /* SlothChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlothChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19273B131DA9EE1300150460 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19273B151DA9EE1300150460 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -1039,6 +1063,25 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		19008B921DBE614500319B86 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				19008BB11DBE935500319B86 /* Response.swift */,
+				19008BAD1DBE925800319B86 /* LoginModel.swift */,
+				19008BAE1DBE925800319B86 /* LoginUser.swift */,
+				19008BA71DBE8CE300319B86 /* UserAndProfile.swift */,
+				19008BA81DBE8CE300319B86 /* UserAndProfileData.swift */,
+				19008B9F1DBE7E4700319B86 /* SCData.swift */,
+				19008BA11DBE831200319B86 /* SMS.swift */,
+				19008B991DBE75D500319B86 /* Country.swift */,
+				19008B9A1DBE75D500319B86 /* List.swift */,
+				19008BA31DBE8A6600319B86 /* UserPhoto.swift */,
+				19008BA41DBE8A6600319B86 /* UserPhotoData.swift */,
+				19008BAB1DBE8D7C00319B86 /* UserSignupModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		19273B071DA9EE1300150460 = {
 			isa = PBXGroup;
 			children = (
@@ -1064,6 +1107,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				19008B921DBE614500319B86 /* Model */,
 				19AA4A791DB534570001568B /* Network */,
 				044643561DB4F60F0050F8BC /* Category */,
 				048B0BA61DB241A400F5A399 /* Third */,
@@ -1215,11 +1259,7 @@
 				TargetAttributes = {
 					19273B0F1DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
-<<<<<<< HEAD
 						DevelopmentTeam = D2C7BQTTK5;
-=======
-						DevelopmentTeam = UFLXQ9JK9Z;
->>>>>>> Fly
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -1449,6 +1489,7 @@
 				043C911F1DBBAB5800431965 /* LikeUsersViewController.swift in Sources */,
 				043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */,
 				04B1CF4A1DBE3639003482DF /* UIImage+MWPhotoBrowser.m in Sources */,
+				19008B9D1DBE75D500319B86 /* List.swift in Sources */,
 				04B1CF461DBE3638003482DF /* MWPhotoBrowser.m in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
@@ -1456,9 +1497,12 @@
 				04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
 				04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */,
+				19008BA61DBE8A6600319B86 /* UserPhotoData.swift in Sources */,
 				04FEB7E81DB76F13004509D1 /* SDWebImageDownloaderOperation.m in Sources */,
 				04FEB7F11DB76F13004509D1 /* UIView+WebCacheOperation.m in Sources */,
+				19008BB01DBE925800319B86 /* LoginUser.swift in Sources */,
 				04B1CEF91DBCCFDA003482DF /* BiddingStatusViewController.swift in Sources */,
+				19008BA51DBE8A6600319B86 /* UserPhoto.swift in Sources */,
 				04FEB7EB1DB76F13004509D1 /* UIButton+WebCache.m in Sources */,
 				04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */,
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
@@ -1490,11 +1534,13 @@
 				04FEB7E91DB76F13004509D1 /* SDWebImageManager.m in Sources */,
 				043C91211DBBACA400431965 /* LikeUsersCell.swift in Sources */,
 				04FEB7F61DB77BB8004509D1 /* UserInfoView.swift in Sources */,
+				19008BB21DBE935500319B86 /* Response.swift in Sources */,
 				04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */,
 				040576E31DB3353E00C55D02 /* IQUIViewController+Additions.swift in Sources */,
 				04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */,
 				04B1CEED1DBC42DA003482DF /* PublishViewController.swift in Sources */,
 				04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */,
+				19008BAA1DBE8CE300319B86 /* UserAndProfileData.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
 				04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */,
@@ -1519,7 +1565,9 @@
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04FEB7EC1DB76F13004509D1 /* UIImage+GIF.m in Sources */,
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,
+				19008BAF1DBE925800319B86 /* LoginModel.swift in Sources */,
 				0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */,
+				19008B9C1DBE75D500319B86 /* Country.swift in Sources */,
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
 				04B1CF421DBE3638003482DF /* MWCaptionView.m in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
@@ -1534,6 +1582,7 @@
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
 				04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
+				19008BA01DBE7E4700319B86 /* SCData.swift in Sources */,
 				04FEB7ED1DB76F13004509D1 /* UIImage+MultiFormat.m in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
 				04FEB7BE1DB76EDB004509D1 /* SDCycleScrollView.m in Sources */,
@@ -1544,9 +1593,12 @@
 				0486BB681DBB41C900086303 /* IAPHelper.m in Sources */,
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
+				19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
 				04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */,
+				19008BA21DBE831200319B86 /* SMS.swift in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
+				19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,
 				04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
@@ -1707,13 +1759,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-<<<<<<< HEAD
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
-=======
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
->>>>>>> Fly
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -1748,13 +1795,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
 				PROVISIONING_PROFILE = "7fe138d0-4efc-49ed-b3de-6e3c413648fc";
 				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
-=======
-				PROVISIONING_PROFILE = "a6b19944-56f9-486a-b070-c6044ce5cc88";
-				PROVISIONING_PROFILE_SPECIFIER = ssloth_dev;
->>>>>>> Fly
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1767,11 +1809,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Juan Chen (D2C7BQTTK5)";
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = D2C7BQTTK5;
-=======
-				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
->>>>>>> Fly
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -1806,13 +1844,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< HEAD
 				PROVISIONING_PROFILE = "7fe138d0-4efc-49ed-b3de-6e3c413648fc";
 				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
-=======
-				PROVISIONING_PROFILE = "a6b19944-56f9-486a-b070-c6044ce5cc88";
-				PROVISIONING_PROFILE_SPECIFIER = ssloth_dev;
->>>>>>> Fly
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

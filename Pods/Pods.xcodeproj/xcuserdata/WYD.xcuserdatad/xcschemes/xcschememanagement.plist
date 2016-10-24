@@ -8,60 +8,56 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
+		</dict>
+		<key>AlamofireObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>AwesomeCache.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
+		</dict>
+		<key>ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>PKHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-SlothChat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-SlothChatTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-SlothChatUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -76,12 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C212EDCC7A079204DFDC8EFDFCC8BE7</key>
+		<key>6C8D1DDF0E91DDCE294BCB3EA8380C0E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>73EB768EA018EDB07EA21AF36B8A367D</key>
+		<key>723F8FD86CC202B6D5EE83464453B32E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -96,17 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83C8FDAAF0E2927805EAA55303C64F58</key>
+		<key>AE7FDC0379CE7D872D71E01A847BC3ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8695C97741ADC44C01A73A58AEC27EBD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AFF063D44CA2E8F3063C997AA06D3DE3</key>
+		<key>C5CBCAA97E951CC882334464FBDF983D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -116,7 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC100525D6994AF2051DCD1E9DDD8FFD</key>
+		<key>FBD082A0D35F7917EAB9DD9D3CCA9976</key>
 		<dict>
 			<key>primary</key>
 			<true/>

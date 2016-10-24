@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireObjectMapper
 
 struct ResponseError {
     static let SUCCESS = ("100", "成功")
@@ -28,6 +30,77 @@ struct ResponseError {
     static let FAILURE = ("500", "未知的系统异常")
 }
 
+enum API_URI:String {
+    case public_coutry = "/api/public/country"
+    case public_sms = "/api/public/sms"
+    case public_sms_check = "/api/public/sms/check"
+    case public_userPhoto = "/api/public/userPhoto"
+    case auth_login = "/auth/login"
+    case auth_mobileapps_logout  = "/auth/mobileapps/logout"
+}
+
 class NetworkEngine: NSObject {
+    let Base_URL:String = "http://api.ssloth.com"
     
+    override init() {
+        
+    }
+    
+    func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
+        let URLString:String = Base_URL + API_URI.public_coutry.rawValue
+        Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    func postPublicSMS(withType type:String, toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
+        let URLString:String = Base_URL + API_URI.public_sms.rawValue
+        Alamofire.request(URLString, method: .post, parameters: ["type":type,"toPhoneno":toPhoneno]).responseObject { (response:DataResponse<SMS>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
+        let URLString:String = Base_URL + API_URI.public_sms_check.rawValue
+        Alamofire.request(URLString, method: .post, parameters: ["toPhoneno":toPhoneno]).responseObject { (response:DataResponse<SMS>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    func post(picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
+        let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
+        Alamofire.request(URLString, method: .post, parameters: ["picFile": picFile]).responseObject { (response:DataResponse<UserPhoto>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    func postPublicUserAndProfileSignup(withSignpModel signup:UserSignupModel ,completeHandler :@escaping(_ userAndProfile:UserAndProfile?) -> Void) -> Void {
+        let URLString:String = self.Base_URL + API_URI.public_userPhoto.rawValue
+        let parameters = [
+            "userPhotoUuid":signup.userPhotoUuid,
+            "mobile": signup.mobile,
+            "passwd": signup.passwd,
+            "country": signup.country,
+            "nickname": signup.nickname,
+            "sex": signup.sex,
+            "birthdate":signup.birthdate
+        ]
+        Alamofire.request(URLString, method: .post, parameters: parameters).responseObject { (response:DataResponse<UserAndProfile>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
+        let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
+        Alamofire.request(URLString, method: .post, parameters: ["mobile":mobile,"passwd":passwd]).responseObject { (response:DataResponse<LoginModel>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    func postAuthLogout(withUUID uuid:String,token:String,completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
+        let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
+        Alamofire.request(URLString, method: .post, parameters: ["uuid":uuid,"token":token]).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
 }
