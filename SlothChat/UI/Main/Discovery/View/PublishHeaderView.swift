@@ -150,7 +150,7 @@ class PublishHeaderView: BaseView {
         let attributedText = NSMutableAttributedString.init(string: string1 + string2)
         
         let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGBlueColor(), range: range)
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGMainColor(), range: range)
         attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: range)
         priceLabel.attributedText = attributedText
     }

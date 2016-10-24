@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class BrowseAdvertViewController: BaseViewController {
+class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
     let scrollView = UIScrollView()
     let container = UIView()
     
@@ -18,7 +18,8 @@ class BrowseAdvertViewController: BaseViewController {
     let contentLabel = UILabel()
 
     var isFollow = false
-    
+    var userObj: UserObj?
+    var photoList = [MWPhoto]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,9 @@ class BrowseAdvertViewController: BaseViewController {
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         contentLabel.textColor = SGColor.SGTextColor()
         
+        mainImgView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
+        mainImgView.addGestureRecognizer(tap)
         
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
@@ -72,12 +76,17 @@ class BrowseAdvertViewController: BaseViewController {
         }
     }
     
-    func configWithObject(user: UserObj) {
+    func configWithObject(user: UserObj?) {
+        SGLog(message: user)
+        if user == nil{
+            return
+        }
+        self.userObj = user
         
-        let mainImgUrl = URL(string: (user.avatarList?.first)!)
+        let mainImgUrl = URL(string: (user!.avatarList?.first)!)
         self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        usersListView.configViewWithObject(avatarList: user.avatarList)
+        usersListView.configViewWithObject(avatarList: user!.avatarList)
         
         self.contentLabel.text = "这是一个广告\n\n您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"
     }
@@ -85,6 +94,7 @@ class BrowseAdvertViewController: BaseViewController {
     //MARK:- Action
 
     override func confirmClick() {
+        SGLog(message: "")
         isFollow = !isFollow
         configNavigationRightItem()
     }
@@ -96,5 +106,27 @@ class BrowseAdvertViewController: BaseViewController {
             setNavtionConfirm(imageStr: "heart-hollow")
         }
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.red
+    }
+    
+    func tapMainImgView() {
+        let photoUrl = URL.init(string: (self.userObj!.avatarList?.first)!)
+        let photo = MWPhoto(url: photoUrl)
+        
+        photoList.append(photo!)
+        
+        let browser = MWPhotoBrowser(delegate: self)
+        self.present(browser!, animated: true, completion: nil)
+        
+    }
+    
+    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
+        return UInt(photoList.count)
+    }
+    
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
+        if (index < UInt(photoList.count)) {
+            return photoList[Int(index)]
+        }
+        return nil;
     }
 }
