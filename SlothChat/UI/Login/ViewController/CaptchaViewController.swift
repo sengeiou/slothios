@@ -98,18 +98,22 @@ class CaptchaViewController: BaseViewController {
                 self.fireTimer()
             }else{
                 self.update()
+                HUD.flash(.label(sms?.msg), delay: 2)
             }
         }
     }
     
     func checkPublicSMS(phoneNo: String,verifyCode: String) {
         let engine = NetworkEngine()
+        //
         engine.postPublicSMSCheck(WithPhoneNumber: phoneNo,verifyCode:verifyCode) { (sms) in
             if sms?.status == ResponseError.SUCCESS.0{
                 let pushVC  = PerfectionInfoViewController.init()
                 pushVC.phoneNo = self.phoneNo
                 pushVC.password = self.password
                 self.navigationController?.pushViewController(pushVC, animated: true)
+            }else{
+                HUD.flash(.label(sms?.msg), delay: 2)
             }
             
         }

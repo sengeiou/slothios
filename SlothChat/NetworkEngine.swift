@@ -69,14 +69,15 @@ class NetworkEngine: NSObject {
         
     }
     
-    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
+    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String,verifyCode:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms_check.rawValue
         
         var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let values = ["toPhoneno":toPhoneno]
+        let values = ["toPhoneno":toPhoneno,
+                      "verifyCode":verifyCode]
         
         request.httpBody = try! JSONSerialization.data(withJSONObject: values)
         
