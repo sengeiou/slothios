@@ -56,18 +56,35 @@ class NetworkEngine: NSObject {
     func postPublicSMS(withType type:String, toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms.rawValue
         
-        let headers = ["Content-Type": "application/json"]
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        Alamofire.request(URLString, method: .post, parameters: ["type":type,"toPhoneno":toPhoneno],headers:headers).responseObject { (response:DataResponse<SMS>) in
+        let values = ["type":type,"toPhoneno":toPhoneno]
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
+        Alamofire.request(request).responseObject { (response:DataResponse<SMS>) in
             completeHandler(response.result.value);
         }
+        
     }
     
-    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String,verifyCode:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
+    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms_check.rawValue
-        Alamofire.request(URLString, method: .post, parameters: ["toPhoneno":toPhoneno,"verifyCode":verifyCode]).responseObject { (response:DataResponse<SMS>) in
+        
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let values = ["toPhoneno":toPhoneno]
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
+        
+        Alamofire.request(request)
+            .responseObject { (response:DataResponse<SMS>) in
             completeHandler(response.result.value);
         }
+ 
     }
     
     func post(picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
@@ -104,23 +121,6 @@ class NetworkEngine: NSObject {
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
         Alamofire.request(URLString, method: .post, parameters: ["uuid":uuid,"token":token]).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
-        }
-    }
-    
-    
-    func upload(uploadImage: UIImage,address: String,scale: CGFloat) {
-        let data = UIImageJPEGRepresentation(uploadImage, scale)
-
-        if data == nil{
-            SGLog(message: "不存在图片")
-            return
-        }
-        let headers = ["Content-Type": "mutipart/form-data"]
-        
-        Alamofire
-            .upload(data!, to: address, method: .post, headers: headers)
-            .responseJSON { response in
-            print(response)
         }
     }
 }
