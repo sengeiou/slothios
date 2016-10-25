@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'SlothChat' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -10,7 +10,7 @@ target 'SlothChat' do
   pod "SnapKit"
   pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
   pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
-
+  pod "AlamofireObjectMapper"
   # Pods for SlothChat
 
   target 'SlothChatTests' do

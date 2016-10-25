@@ -14,6 +14,8 @@ static PhotoPickedBlock _photoPickedBlock;
 static UIViewController *_presentVC;
 static BOOL isAllowsEditing = YES;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 @implementation UIActionSheet (MKBlockAdditions)
 
 +(void)actionSheetWithTitle:(NSString*)title
@@ -226,3 +228,4 @@ static BOOL isAllowsEditing = YES;
     }
 }
 @end
+#pragma clang diagnostic pop
