@@ -238,4 +238,90 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
+    //13.通过短信验证码修改账户密码
+    func postChangePwd(toPhoneno: String,verifyCode: String,smsChangeNewPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let URLString:String = self.Base_URL + API_URI.post_changePwd.rawValue
+        let request = HTTPRequestGenerator(withParam:[
+            "toPhoneno":toPhoneno,
+            "verifyCode":verifyCode,
+            "smsChangeNewPwd":smsChangeNewPwd,]
+            , URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
+    //14.账户APPLE STORE充值
+    func getMoney(toPhoneno: String,type: String, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let URLString:String = self.Base_URL + API_URI.get_money.rawValue
+        let request = HTTPRequestGenerator(withParam:[
+            "toPhoneno":toPhoneno,
+            "type":type,]
+            , URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    //15.修改个人设置
+
+    func putSysConfig(uuid: String,userUuid: String,token:String,isAcceptSysNotify:Bool,isAcceptPrivateChat: Bool,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: uuid)
+
+        let request = HTTPRequestGenerator(withParam:[
+            "isAcceptPrivateChat":isAcceptPrivateChat,
+            "isAcceptSysNotify":isAcceptSysNotify]
+            , URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    //17.用户资料页面，添加个人照片
+
+    func postUserPhoto(uuid:String,token:String,picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
+            
+        var URLString:String = self.Base_URL + API_URI.post_userPhoto.rawValue
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
+            // code
+            let imageData:NSData = try! NSData.init(contentsOf: NSURL.init(string: picFile) as! URL )
+            multipartFormData.append(imageData as Data, withName: "picFile", mimeType: "image/jpeg");
+            
+            }, to: URLString, encodingCompletion: { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseObject { (response:DataResponse<UserPhoto>) in
+                        completeHandler(response.result.value);
+                    }
+                case .failure(let encodingError):
+                    print("error")
+                    print(encodingError)
+                }
+        })
+        
+    }
+    
+    //18.用户资料页面，删除指定的个人照片
+    
+    func deleteUserPhoto(uuid: String,userUuid: String,token:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        var URLString:String = self.Base_URL + API_URI.delete_userPhoto.rawValue
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: uuid)
+        
+        let request = HTTPRequestGenerator(withParam:["":""]
+            , URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
 }
