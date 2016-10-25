@@ -176,8 +176,12 @@ class PublishHeaderView: BaseView {
     }
     
     func configWithObject(image: UIImage) {
-        
         self.mainImgView.image = image
+    }
+    
+    func configWithObject(imageUrl: String) {
+        let avatarUrl = URL(string: imageUrl)
+        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     }
     
     func overweightButtonClick() {

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
     let dataSource = DiscoveryUserObj.getDiscoveryUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    
+    var photoList = [MWPhoto]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -27,7 +28,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
         
     }
-    
+    //MARK:- UITableViewDelegate,UITableViewDataSource,
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -38,18 +39,19 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         cell.configCellWithObj(userObj: userObj)
         cell.indexPath = indexPath
         cell.setClosurePass { (actionType, actionIndexPath) in
-            self.performCellAction(actionType: actionType, indexPatch: actionIndexPath)
+            self.performCellAction(actionType: actionType, indexPath: actionIndexPath)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
-    func performCellAction(actionType: DiscoveryActionType, indexPatch: IndexPath) {
+    func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {
         SGLog(message: actionType)
-        SGLog(message: indexPatch.row)
+        SGLog(message: indexPath.row)
 
         switch actionType {
         case .likeType:
@@ -57,12 +59,33 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             break
         case .mainImgType:
             
+            let userObj = dataSource[indexPath.row]
+            let photoUrl = URL.init(string: userObj.mainImgUrl)
+            let photo = MWPhoto(url: photoUrl)
+            
+            photoList.append(photo!)
+            
+            let browser = MWPhotoBrowser(delegate: self)
+            self.navigationController?.pushViewController(browser!, animated: true)
             break
         case .likeUsersType:
             let pushVC = LikeUsersViewController()
             navigationController?.pushViewController(pushVC, animated: true)
             break
         }
+    }
+    
+    //MARK:- MWPhotoBrowserDelegate
+
+    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
+        return UInt(photoList.count)
+    }
+    
+    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
+        if (index < UInt(photoList.count)) {
+            return photoList[Int(index)]
+        }
+        return nil;
     }
     
 }

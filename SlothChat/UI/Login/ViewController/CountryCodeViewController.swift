@@ -14,7 +14,8 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     
     let refreshControl = UIRefreshControl.init()
     let tableView = UITableView.init(frame: CGRect.zero, style: .plain)
-    var dataSource = [Array<CountryCodeObj>]()
+    var countryList = [Array<List>]()
+    var initialList = [String]()
     
     var selectPassValue:SelectCodeClosureType?
     
@@ -31,8 +32,8 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "国家电话区号"
-        self.configDataSource()
         self.configTableView()
+        self.getCountryCodeList()
     }
     
     func configTableView() {
@@ -45,16 +46,8 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         tableView.sectionIndexColor = SGColor.SGTextColor()
         tableView.register(CountryCodeCell.self, forCellReuseIdentifier: "CountryCodeCell")
         self.view.addSubview(tableView)
-    }
-    
-    func configDataSource() {
-        for _ in 1...6 {
-            var rowList =  [CountryCodeObj]()
-            for _ in 1...3{
-                let obj = CountryCodeObj.countryCode(name: "中国", code: "86")
-                rowList.append(obj)
-            }
-            dataSource.append(rowList)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
         }
     }
     
@@ -62,31 +55,81 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         refreshControl.beginRefreshing()
         
         self.refreshControl.endRefreshing()
+    }
+    
+    //Mark:- Network
+    
+    func getCountryCodeList() {
+        let engine = NetworkEngine()
+        engine.getPublicCountry(withName: "") { (countryObj) in
+            print(countryObj)
+            let list = countryObj?.data?.list
+            let result = self.splitCountryList(countryList: list!)
+            self.countryList.removeAll()
+            self.countryList = result.countryList
+
+            self.initialList.removeAll()
+            self.initialList = result.initialList
+            self.tableView.reloadData()
+        }
+    }
+    
+    func splitCountryList(countryList: [List]) -> (countryList: [Array<List>],initialList: [String]) {
+        let sorteList = countryList.sorted { (list1, list2) -> Bool in
+            return (list1.display!.compare(list2.display!) == ComparisonResult.orderedAscending)
+        }
         
+        var tmpInitial = ""
+        var resultList = [Array<List>]()
+        var initialList = [String]()
+        var subList = [List]()
+
+        for listObj in sorteList{
+            
+            let index: String.Index = listObj.display!.index(listObj.display!.startIndex, offsetBy: 1)
+
+            let initial = listObj.display?.substring(to: index)
+            
+            if initial == tmpInitial{
+                subList.append(listObj)
+            }else{
+                initialList.append(initial!)
+                tmpInitial = initial!
+                if subList.count > 0 {
+                    resultList.append(subList)
+                }else{
+                    subList = [List]()
+                    subList.append(listObj)
+                }
+            }
+        }
+        return (resultList,initialList)
     }
     
     // MARK: - UITableViewDelegate,UITableViewDataSource
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let rowList = dataSource[section]
-        return rowList.count
-    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.count
+        return countryList.count
+    }
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let rowList = countryList[section]
+        return rowList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : CountryCodeCell = tableView.dequeueReusableCell(withIdentifier: "CountryCodeCell", for: indexPath) as! CountryCodeCell
-        let rowList = dataSource[indexPath.section]
+        let rowList = countryList[indexPath.section]
         let obj = rowList[indexPath.row]
-        cell.textLabel?.text = obj.name! + obj.code!
+        cell.textLabel?.text = obj.display!
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView.init()
         let label = UILabel.init()
-        label.text = String(section)
+        let initialStr = initialList[section]
+        label.text = initialStr
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = SGColor.SGTextColor()
         header.addSubview(label)
@@ -120,11 +163,11 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         tableView.deselectRow(at: indexPath, animated: true)
         print(indexPath.section);
         print(indexPath.row);
-        let rowList = dataSource[indexPath.section]
+        let rowList = countryList[indexPath.section]
         let obj = rowList[indexPath.row]
         
         if let sp = self.selectPassValue {
-            if let code = obj.code{
+            if let code = obj.telPrefix{
                 sp(code)
             }
         }
@@ -132,11 +175,10 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return ["A","B","C","D","E","F"];
+        return initialList;
     }
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        print("sectionForSectionIndexTitle:" + title + "index:" + String(index))
         tableView.scrollToRow(at: NSIndexPath.init(row: 0, section: index) as IndexPath, at: .top, animated: true)
         return index
     }

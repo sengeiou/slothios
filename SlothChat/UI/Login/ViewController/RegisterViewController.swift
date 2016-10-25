@@ -38,13 +38,13 @@ class RegisterViewController: BaseViewController {
         codeView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         codeView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         codeView.setInputTextfieldLeftMagin(left: 106)
-        codeView.configInputView(titleStr: "国家区号:", contentStr: "+1")
+        codeView.configInputView(titleStr: "国家区号:", contentStr: "86")
         view.addSubview(codeView)
         
         phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         phoneView.setInputTextfieldLeftMagin(left: 106)
-        phoneView.configInputView(titleStr: "手机号:", contentStr: "")
+        phoneView.configInputView(titleStr: "手机号:", contentStr: "18667931202")
         phoneView.inputTextfield.keyboardType = .numberPad
 
         view.addSubview(phoneView)
@@ -52,7 +52,7 @@ class RegisterViewController: BaseViewController {
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         passwordView.setInputTextfieldLeftMagin(left: 106)
-        passwordView.configInputView(titleStr: "密码:", contentStr: "")
+        passwordView.configInputView(titleStr: "密码:", contentStr: "111111")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
 
@@ -159,7 +159,7 @@ class RegisterViewController: BaseViewController {
         let pushVC  = CountryCodeViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
         pushVC.setClosurePass { (code) in
-            self.codeView.configContent(contentStr: "+" + code)
+            self.codeView.configContent(contentStr: code)
         }
     }
     

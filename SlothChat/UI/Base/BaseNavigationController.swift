@@ -8,12 +8,19 @@
 
 import UIKit
 
-class BaseNavigationController: UINavigationController {
+class BaseNavigationController: UINavigationController,UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.interactivePopGestureRecognizer?.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if self.viewControllers.count <= 1{
+            return false
+        }
+        return true
     }
 
     override func didReceiveMemoryWarning() {
