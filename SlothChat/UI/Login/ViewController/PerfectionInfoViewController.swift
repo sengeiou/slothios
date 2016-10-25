@@ -169,6 +169,12 @@ class PerfectionInfoViewController: BaseViewController {
             return
         }
         print("注册信息齐全")
+        let user = UserSignupModel()
+        
+        let engine = NetworkEngine()
+        engine.postPublicUserAndProfileSignup(withSignpModel: user) { (profile) in
+            
+        }
         
         do {
             let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
@@ -180,9 +186,20 @@ class PerfectionInfoViewController: BaseViewController {
     }
     
     func avatarButtonClick() {
+        
+
         UIActionSheet.photoPicker(withTitle: "选择头像", showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
             self.selectedAvatar = avatar
-           self.avatarButton.setImage(avatar, for: .normal)
+
+            let engine = NetworkEngine()
+            engine.postPicFile(picFile: avatar!) { (userPhoto) in
+                if userPhoto?.status == ResponseError.SUCCESS.0{
+                    self.selectedAvatar = avatar
+                    self.avatarButton.setImage(avatar, for: .normal)
+                }else{
+                    HUD.flash(.label(userPhoto?.msg), delay: 2)
+                }
+            }
             }, onCancel: nil, allowsEditing: true)
     }
 }

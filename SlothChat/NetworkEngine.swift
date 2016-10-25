@@ -108,13 +108,14 @@ class NetworkEngine: NSObject {
         
     }
     
-    func postPicFile(picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
+    func postPicFile(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
-        
+
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let imageData:NSData = try! NSData.init(contentsOf: NSURL.init(string: picFile) as! URL )
-            multipartFormData.append(imageData as Data, withName: "picFile", mimeType: "image/jpeg");
+            let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
+            
+            multipartFormData.append(imageData, withName: "picFile", mimeType: "image/jpeg");
             
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
