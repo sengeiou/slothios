@@ -95,13 +95,16 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
             }else{
                 initialList.append(initial!)
                 tmpInitial = initial!
-                if subList.count > 0 {
+                
+                if subList.count > 0{
                     resultList.append(subList)
-                }else{
-                    subList = [List]()
-                    subList.append(listObj)
                 }
+                subList = [List]()
+                subList.append(listObj)
             }
+        }
+        if subList.count > 0{
+            resultList.append(subList)
         }
         return (resultList,initialList)
     }
