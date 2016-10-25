@@ -37,6 +37,31 @@ enum API_URI:String {
     case public_userPhoto = "/api/public/userPhoto"
     case auth_login = "/auth/login"
     case auth_mobileapps_logout  = "/auth/mobileapps/logout"
+    //7.修改个人资料页面的文字资料//POST
+    case post_user_userProfile  = "/api/user/{userUuid}/userProfile/{uuid}?token={token}"
+    //8.修改个人资料页面的5张图片的显示顺序（此功能预留暂时不做）
+    case get_api_us  = "/api/us"//GET
+    //9.查看个人资料页面的文字和图片//GET
+    case get_user_userProfile  = "/api/user/{userUuid}/userProfile"
+    //10.陌生人查看个人资料页面时对资料点赞PUT
+    case put_userProfile_like = "/api/user/{userUuid}/userProfile/{uuid}/like?token={token}"
+    //11.查看个人设置
+    case get_sysConfig = "/api/user/{userUuid}/userProfile/{uuid}/sysConfig?token={token}"
+    //12.用原有登录密码修改账户密码
+    case put_updatePwd = "/api/public/user/{uuid}"
+    //13.通过短信验证码修改账户密码
+    case post_changePwd = "/api/public/sms/changePwd"
+    //14.账户APPLE STORE充值
+    case get_money = "/api/public/money"
+    //15.修改个人设置
+//    case put_sysConfig = "/api/user/{userUuid}/userProfile/{uuid}/sysConfig?token={token}"
+    //17.用户资料页面，添加个人照片
+    case post_userPhoto = "/api/user/{uuid}/userPhoto?token={token}"
+    //18.用户资料页面，删除指定的个人照片
+    case delete_userPhoto = "/api/user/{userUuid}/userPhoto/{uuid}?token={token}"
+
+
+
 }
 
 class NetworkEngine: NSObject {
