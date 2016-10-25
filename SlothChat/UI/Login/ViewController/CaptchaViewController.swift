@@ -15,6 +15,8 @@ class CaptchaViewController: BaseViewController {
     
     public var phoneNo:String!
     public var password:String!
+    public var countryName = "cn"
+
 
     let tipLabel = UILabel.init()
     let captchaView = SingleInputView.init()
@@ -111,6 +113,7 @@ class CaptchaViewController: BaseViewController {
                 let pushVC  = PerfectionInfoViewController.init()
                 pushVC.phoneNo = self.phoneNo
                 pushVC.password = self.password
+                pushVC.countryName = self.countryName
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }else{
                 HUD.flash(.label(sms?.msg), delay: 2)

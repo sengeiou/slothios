@@ -15,6 +15,8 @@ class RegisterViewController: BaseViewController {
     let phoneView = SingleInputView.init()
     let passwordView = SingleInputView.init()
     
+    public var countryName = "cn"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
@@ -132,6 +134,8 @@ class RegisterViewController: BaseViewController {
         
         let pushVC  = CaptchaViewController.init()
         pushVC.phoneNo = codeStr! + phoneStr!
+        pushVC.password = passwordStr!
+        pushVC.countryName = countryName
         navigationController?.pushViewController(pushVC, animated: true)
         
     }
@@ -158,8 +162,9 @@ class RegisterViewController: BaseViewController {
     func pushCountryCode() {
         let pushVC  = CountryCodeViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
-        pushVC.setClosurePass { (code) in
-            self.codeView.configContent(contentStr: code)
+        pushVC.setClosurePass { (tmpCountry) in
+            self.countryName = tmpCountry.name!
+            self.codeView.configContent(contentStr: tmpCountry.telPrefix!)
         }
     }
     

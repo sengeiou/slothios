@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias SelectCodeClosureType = (_ code: String) -> Void
+typealias SelectCodeClosureType = (_ country: List) -> Void
 
 class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -18,7 +18,7 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     var initialList = [String]()
     
     var selectPassValue:SelectCodeClosureType?
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
@@ -167,8 +167,8 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         let obj = rowList[indexPath.row]
         
         if let sp = self.selectPassValue {
-            if let code = obj.telPrefix{
-                sp(code)
+            if obj.telPrefix != nil{
+                sp(obj)
             }
         }
         _ = self.navigationController?.popViewController(animated: true)

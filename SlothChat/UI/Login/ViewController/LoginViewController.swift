@@ -16,6 +16,8 @@ class LoginViewController: BaseViewController {
     let passwordView = SingleInputView.init()
     let codeButton = UIButton(type: .custom)
     
+    public var countryName = "cn"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
@@ -42,7 +44,7 @@ class LoginViewController: BaseViewController {
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         passwordView.setInputTextfieldLeftMagin(left: 106)
-        passwordView.configInputView(titleStr: "密码:", contentStr: "")
+        passwordView.configInputView(titleStr: "密码:", contentStr: "111111")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
         
@@ -147,7 +149,19 @@ class LoginViewController: BaseViewController {
         }
         let phoneStr = phoneView.getInputContent()!
         let codeStr = self.codeButton.title(for: .normal)!
-        print("登录成功" + codeStr + phoneStr )
+        let passwordStr = passwordView.getInputContent()!
+
+        let engine = NetworkEngine()
+        engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (loginModel) in
+            if loginModel?.token != nil{
+                self.loginSystem()
+            }else{
+                HUD.flash(.label("登录失败"), delay: 2)
+            }
+        }
+    }
+    
+    func loginSystem() {
         
         do {
             let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
@@ -188,8 +202,9 @@ class LoginViewController: BaseViewController {
     func codeButtonClick() {
         let pushVC  = CountryCodeViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
-        pushVC.setClosurePass { (code) in
-            self.codeButton.setTitle("+" + code, for: .normal)
+        pushVC.setClosurePass { (tmpCountry) in
+            self.countryName = tmpCountry.name!
+            self.codeButton.setTitle(tmpCountry.telPrefix, for: .normal)
         }
     }
     

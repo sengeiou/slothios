@@ -15,7 +15,8 @@ class PerfectionInfoViewController: BaseViewController {
     
     public var phoneNo:String!
     public var password:String!
-    
+    public var countryName = "cn"
+
     let avatarButton = UIButton.init(type: .custom)
 
     let nickNameView = SingleInputView.init()
@@ -28,14 +29,15 @@ class PerfectionInfoViewController: BaseViewController {
     var dateFormatter = DateFormatter()
     
     var selectedAvatar : UIImage?
-
+    var userPhoto: UserPhotoData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
         
         setupDatePicker()
         
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
     }
 
     func sentupViews() {
@@ -170,11 +172,35 @@ class PerfectionInfoViewController: BaseViewController {
         }
         print("注册信息齐全")
         let user = UserSignupModel()
+        if self.userPhoto != nil{
+            user.userPhotoUuid = self.userPhoto!.uuid!
+
+        }else{
+            user.userPhotoUuid = "dc2c96ae5165404e86197a4fd734d20c"
+        }
+        user.mobile = self.phoneNo
+        user.passwd = self.password
+        user.country = self.countryName
+        user.nickname = nickName!
+        user.sex = sexPickView.isMalePick ? "male" : "female"
+        user.birthdate = birthday!
         
         let engine = NetworkEngine()
         engine.postPublicUserAndProfileSignup(withSignpModel: user) { (profile) in
-            
+            if profile?.status == ResponseError.SUCCESS.0{
+                HUD.flash(.label("注册成功"), delay: 2)
+                let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                    self.loginSystem()
+                })
+            }else{
+                HUD.flash(.label(profile?.msg), delay: 2)
+            }
         }
+        
+    }
+    
+    func loginSystem() {
         
         do {
             let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
@@ -195,6 +221,7 @@ class PerfectionInfoViewController: BaseViewController {
             engine.postPicFile(picFile: avatar!) { (userPhoto) in
                 if userPhoto?.status == ResponseError.SUCCESS.0{
                     self.selectedAvatar = avatar
+                    self.userPhoto = userPhoto?.data
                     self.avatarButton.setImage(avatar, for: .normal)
                 }else{
                     HUD.flash(.label(userPhoto?.msg), delay: 2)

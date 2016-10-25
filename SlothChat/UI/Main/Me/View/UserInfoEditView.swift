@@ -33,7 +33,7 @@ class UserInfoEditView: BaseView {
         super.init(frame: frame)
         sentupView()
         setupDatePicker()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
     }
     
     required init?(coder aDecoder: NSCoder) {
