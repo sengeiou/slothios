@@ -46,6 +46,18 @@ class NetworkEngine: NSObject {
         
     }
     
+    func HTTPRequestGenerator(withParam parameters:NSDictionary,URLString:String)->URLRequest {
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let values = parameters
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
+        
+        return request
+    }
+    
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
@@ -55,48 +67,49 @@ class NetworkEngine: NSObject {
     
     func postPublicSMS(withType type:String, toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms.rawValue
+        let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
         
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let values = ["type":type,"toPhoneno":toPhoneno]
-        
-        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
         Alamofire.request(request).responseObject { (response:DataResponse<SMS>) in
             completeHandler(response.result.value);
         }
         
     }
     
-    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
+    func postPublicSMSCheck(WithPhoneNumber toPhoneno:String,verifyCode:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms_check.rawValue
-        
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let values = ["toPhoneno":toPhoneno]
-        
-        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
-        
+        let request = HTTPRequestGenerator(withParam: ["toPhoneno":toPhoneno,
+                                                       "verifyCode":verifyCode], URLString: URLString);
         Alamofire.request(request)
             .responseObject { (response:DataResponse<SMS>) in
-            completeHandler(response.result.value);
+                completeHandler(response.result.value);
         }
- 
+        
     }
     
-    func post(picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
+    func postPicFile(picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
-        Alamofire.request(URLString, method: .post, parameters: ["picFile": picFile]).responseObject { (response:DataResponse<UserPhoto>) in
-            completeHandler(response.result.value);
-        }
+        
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
+            // code
+            let imageData:NSData = try! NSData.init(contentsOf: NSURL.init(string: picFile) as! URL )
+            multipartFormData.append(imageData as Data, withName: "picFile", mimeType: "image/jpeg");
+            
+            }, to: URLString, encodingCompletion: { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseObject { (response:DataResponse<UserPhoto>) in
+                        completeHandler(response.result.value);
+                    }
+                case .failure(let encodingError):
+                    print("error")
+                    print(encodingError)
+                }
+        })
     }
     
     func postPublicUserAndProfileSignup(withSignpModel signup:UserSignupModel ,completeHandler :@escaping(_ userAndProfile:UserAndProfile?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.public_userPhoto.rawValue
-        let parameters = [
+        let request = HTTPRequestGenerator(withParam:[
             "userPhotoUuid":signup.userPhotoUuid,
             "mobile": signup.mobile,
             "passwd": signup.passwd,
@@ -104,22 +117,25 @@ class NetworkEngine: NSObject {
             "nickname": signup.nickname,
             "sex": signup.sex,
             "birthdate":signup.birthdate
-        ]
-        Alamofire.request(URLString, method: .post, parameters: parameters).responseObject { (response:DataResponse<UserAndProfile>) in
+        ], URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
             completeHandler(response.result.value);
         }
     }
     
     func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
-        Alamofire.request(URLString, method: .post, parameters: ["mobile":mobile,"passwd":passwd]).responseObject { (response:DataResponse<LoginModel>) in
+        let request = HTTPRequestGenerator(withParam: ["mobile":mobile,"passwd":passwd], URLString: URLString)
+        Alamofire.request(request).responseObject { (response:DataResponse<LoginModel>) in
             completeHandler(response.result.value);
         }
     }
     
     func postAuthLogout(withUUID uuid:String,token:String,completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
-        Alamofire.request(URLString, method: .post, parameters: ["uuid":uuid,"token":token]).responseObject { (response:DataResponse<Response>) in
+        let request = HTTPRequestGenerator(withParam:["uuid":uuid,"token":token], URLString: URLString);
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
         }
     }
