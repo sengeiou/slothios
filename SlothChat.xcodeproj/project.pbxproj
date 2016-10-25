@@ -117,6 +117,7 @@
 		04B499AD1DBFB61A004659BA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AA1DBFB61A004659BA /* UserProfile.swift */; };
 		04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AE1DBFB7F4004659BA /* SysConfig.swift */; };
 		04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AF1DBFB7F4004659BA /* SysConfigData.swift */; };
+		04B499B41DBFBECC004659BA /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B31DBFBECC004659BA /* Global.swift */; };
 		04D0C70E1DBE379B0083BBA2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04D0C70A1DBE379B0083BBA2 /* LICENSE */; };
 		04D0C70F1DBE379B0083BBA2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */; };
 		04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70D1DBE379B0083BBA2 /* README.mdown */; };
@@ -347,6 +348,7 @@
 		04B499AA1DBFB61A004659BA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		04B499AE1DBFB7F4004659BA /* SysConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfig.swift; sourceTree = "<group>"; };
 		04B499AF1DBFB7F4004659BA /* SysConfigData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfigData.swift; sourceTree = "<group>"; };
+		04B499B31DBFBECC004659BA /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		04D0C70A1DBE379B0083BBA2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		04D0C70B1DBE379B0083BBA2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -974,6 +976,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		04B499B21DBFBEC4004659BA /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				04B499B31DBFBECC004659BA /* Global.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		04D0C7091DBE379B0083BBA2 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1128,6 +1138,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				04B499B21DBFBEC4004659BA /* Global */,
 				19008B921DBE614500319B86 /* Model */,
 				19AA4A791DB534570001568B /* Network */,
 				044643561DB4F60F0050F8BC /* Category */,
@@ -1515,6 +1526,7 @@
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
 				04B1CF431DBE3638003482DF /* MWGridCell.m in Sources */,
+				04B499B41DBFBECC004659BA /* Global.swift in Sources */,
 				04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
 				04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */,

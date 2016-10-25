@@ -191,7 +191,7 @@ class PerfectionInfoViewController: BaseViewController {
                 HUD.flash(.label("注册成功"), delay: 2)
                 let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
                 DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
-                    self.loginSystem()
+                    _ = self.navigationController?.popToRootViewController(animated: true)
                 })
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)

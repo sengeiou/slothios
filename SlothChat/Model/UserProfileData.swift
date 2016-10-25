@@ -8,6 +8,9 @@
 import Foundation 
 import ObjectMapper
 
+let MaxUserAvatarCount: Int = 5
+let DefaultBannerImgName = "camera-gray"
+
 
 class UserProfileData : NSObject, NSCoding, Mappable{
 
@@ -24,6 +27,59 @@ class UserProfileData : NSObject, NSCoding, Mappable{
 	var userUuid : String?
 	var uuid : String?
 
+    
+    
+    open func caheForUserProfile() {
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.setValue(data, forKey: "UserProfileDataCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func ProfileFromCache() -> UserProfileData? {
+        let data = UserDefaults.standard.value(forKey: "UserProfileDataCacheKey")
+        if data != nil {
+            let user = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)  as! UserProfileData?
+            return user
+        }
+        return nil
+    }
+    
+    func getBannerAvatarList() -> [String]{
+        var bannerList = [String]()
+        if self.userPhotoList == nil{
+            for _ in 0..<MaxUserAvatarCount{
+                bannerList.append(DefaultBannerImgName)
+            }
+        }
+        for userPhoto in self.userPhotoList! {
+            bannerList.append(userPhoto.profilePicUrl!)
+        }
+        for _ in self.userPhotoList!.count..<MaxUserAvatarCount{
+            bannerList.append(DefaultBannerImgName)
+        }
+        return bannerList
+    }
+    
+    func setNewAvatar(newAvatar: UserPhotoList,at: Int) {
+        if at >= MaxUserAvatarCount || at < 0{
+            SGLog(message: "at出错" + String(at))
+            return
+        }
+        if (newAvatar.profilePicUrl?.isEmpty)! {
+            SGLog(message: "头像为空")
+            return
+        }
+        userPhotoList?.append(newAvatar)
+    }
+    
+    func deleteAvatar(at: Int) {
+        if at <= 0 || at > (self.userPhotoList?.count)!  {
+            SGLog(message: "page出错" + String(at))
+            return
+        }
+        userPhotoList?.remove(at: at)
+    }
+    
 
 	class func newInstance(map: Map) -> Mappable?{
 		return UserProfileData()

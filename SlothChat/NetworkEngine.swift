@@ -139,7 +139,9 @@ class NetworkEngine: NSObject {
             "country": signup.country,
             "nickname": signup.nickname,
             "sex": signup.sex,
-            "birthdate":signup.birthdate
+            "birthdate":signup.birthdate,
+//            "constellation":"水瓶座",
+//            "age":"4"
         ], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
