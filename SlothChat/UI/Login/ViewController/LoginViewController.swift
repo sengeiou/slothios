@@ -34,7 +34,7 @@ class LoginViewController: BaseViewController {
         phoneView.setInputTextfieldLeftMagin(left: 106)
         phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
-        phoneView.configInputView(titleStr: "手机号:", contentStr: "")
+        phoneView.configInputView(titleStr: "手机号:", contentStr: "18667931202")
         configPhoneInputView(inputView: phoneView)
         phoneView.inputTextfield.keyboardType = .numberPad
         view.addSubview(phoneView)

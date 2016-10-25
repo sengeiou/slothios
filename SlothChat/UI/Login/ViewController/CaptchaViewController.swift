@@ -18,13 +18,6 @@ class CaptchaViewController: BaseViewController {
 
     let tipLabel = UILabel.init()
     let captchaView = SingleInputView.init()
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if !(phoneNo?.isEmpty)! {
-            self.fireTimer()
-        }
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -36,15 +29,16 @@ class CaptchaViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
+        self.getPublicSMS()
     }
     
     func sentupViews() {
         let iconView = IconTitleView.init(frame: CGRect.zero)
         view.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.height.equalTo(60)
+            make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
+            make.size.equalTo(CGSize.init(width: 184, height: 55))
         }
         
         tipLabel.numberOfLines = 0
@@ -57,7 +51,7 @@ class CaptchaViewController: BaseViewController {
             make.top.equalTo(iconView.snp.bottom).offset(100)
         }
         
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(fireTimer))
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(getPublicSMS))
         tipLabel.addGestureRecognizer(tap)
         tipLabel.isUserInteractionEnabled = true
         
@@ -90,6 +84,37 @@ class CaptchaViewController: BaseViewController {
         }
     }
     
+    //Mark:- Network
+    
+    func getPublicSMS() {
+        if timeout > 0 {
+            return
+        }
+        
+        let engine = NetworkEngine()
+        engine.postPublicSMS(withType: "signup", toPhoneno: self.phoneNo) { (sms) in
+            if sms?.status == ResponseError.SUCCESS.0 &&
+                !(self.phoneNo.isEmpty) {
+                self.fireTimer()
+            }else{
+                self.update()
+            }
+        }
+    }
+    
+    func checkPublicSMS(phoneNo: String,verifyCode: String) {
+        let engine = NetworkEngine()
+        engine.postPublicSMSCheck(WithPhoneNumber: phoneNo,verifyCode:verifyCode) { (sms) in
+            if sms?.status == ResponseError.SUCCESS.0{
+                let pushVC  = PerfectionInfoViewController.init()
+                pushVC.phoneNo = self.phoneNo
+                pushVC.password = self.password
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            }
+            
+        }
+    }
+    
     func update() {
         let string1 = "已经向您的手机" + phoneNo! + "发送验证码。\n"
         let timeStr = String(timeout)
@@ -115,9 +140,7 @@ class CaptchaViewController: BaseViewController {
     }
     
     func fireTimer() {
-        if timeout > 0 {
-            return
-        }
+        
         timeout = 60
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true);
         timer.fire()
@@ -132,10 +155,8 @@ class CaptchaViewController: BaseViewController {
             return
         }
         
-        let pushVC  = PerfectionInfoViewController.init()
-        pushVC.phoneNo = self.phoneNo
-        pushVC.password = self.password
-        navigationController?.pushViewController(pushVC, animated: true)
+        checkPublicSMS(phoneNo: self.phoneNo, verifyCode: captcha!)
+        
     }
     
 }
