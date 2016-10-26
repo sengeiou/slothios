@@ -8,6 +8,7 @@
 
 import UIKit
 import AwesomeCache
+import PKHUD
 
 class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = SettingObj.getSettingList()
@@ -93,13 +94,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         let alertController = UIAlertController(title: "是否退出树懒", message: "", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
         let exitAction = UIAlertAction(title: "退出", style: .default, handler:{ (action) in
-            do {
-                let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
-                cache.removeObject(forKey: SGGlobalKey.SCLoginStatusKey)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            } catch _ {
-                print("Something went wrong :(")
-            }
+            self.logout()
         })
 
         alertController.addAction(cancelAction)
@@ -107,5 +102,23 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
 
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    //MARK:- Network
+    
+    func logout() {
+        let engine = NetworkEngine()
+        let uuid = Global.shared.globalLogin?.user?.uuid
+        let token = Global.shared.globalLogin?.token
+
+        engine.postAuthLogout(withUUID: uuid!, token: token!) { (response) in
+            if response?.status == ResponseError.SUCCESS.0{
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+            
+        }
+    }
+
 
 }
