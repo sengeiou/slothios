@@ -20,15 +20,39 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var shareView: LikeShareView?
     var toolView: UserInfoToolView?
 
-    var isMyself = false
-    var profile = Global.shared.globalProfile
+    var isMyselfFlag = false
+    
+    var mUserUuid: String?{
+        didSet{
+            if mUserUuid != nil &&
+                mUserUuid == Global.shared.globalLogin?.user?.uuid{
+                isMyselfFlag = true
+            }
+        }
+    }
+    var mProfile: UserProfileData?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.mProfile == nil && self.mUserUuid != nil {
+            self.getUserProfile(userUuid: self.mUserUuid!)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "我"
             
         self.setNavtionConfirm(titleStr: "设置")
-        isMyself = true
+        isMyselfFlag = true
+
+        if isMyselfFlag{
+            let userUuid = Global.shared.globalLogin?.user?.uuid
+            self.getUserProfile(userUuid: userUuid!)
+        }else{
+            let userUuid = Global.shared.globalLogin?.user?.uuid
+            self.getUserProfile(userUuid: userUuid!)
+        }
         setupView()
     }
     
@@ -76,9 +100,12 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
 
-        if isMyself {
+        if isMyselfFlag {
             shareView = LikeShareView()
             container.addSubview(shareView!)
+            if mProfile != nil{
+                shareView?.configLikeLabel(count: (mProfile?.likesCount)!)
+            }
             shareView?.snp.makeConstraints({ (make) in
                 make.left.right.equalTo(0)
                 make.top.equalTo(bannerView!.snp.bottom)
@@ -104,7 +131,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         container.addSubview(infoView)
         toolView?.bringSubview(toFront: infoView)
         
-        infoView.setUserEntity(isMyself: isMyself)
+        infoView.setUserEntity(isMyself: isMyselfFlag)
         infoView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             if shareView == nil{
@@ -114,8 +141,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }
             make.height.equalTo(380)
         }
-        if self.profile != nil{
-            infoView.configViewWihObject(userObj: self.profile!)
+        if self.mProfile != nil{
+            infoView.configViewWihObject(userObj: mProfile!)
         }
         infoView.setEditUserInfoValue {
             self.configEditUserInfoView()
@@ -130,8 +157,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         if (self.editView != nil) {
             self.editView?.isHidden = false
             self.infoView.isHidden = true
-            if self.profile != nil{
-                editView!.configViewWihObject(userObj: self.profile!)
+            if self.mProfile != nil{
+                editView!.configViewWihObject(userObj: self.mProfile!)
             }
             return
         }
@@ -140,8 +167,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.editView = UserInfoEditView()
         editView?.showVC = self
         container.addSubview(editView!)
-        if self.profile != nil{
-            editView!.configViewWihObject(userObj: self.profile!)
+        if self.mProfile != nil{
+            editView!.configViewWihObject(userObj: self.mProfile!)
         }
 
         editView!.snp.makeConstraints { (make) in
@@ -161,7 +188,28 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             self.updateProfile(editProfile: editUserObj)
         })
     }
-    //MARK:- NetWork
+    
+    //MARK:- Network
+    
+    func getUserProfile(userUuid: String) {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.getUserProfile(userUuid: userUuid) { (profile) in
+            HUD.hide()
+            if profile?.status == ResponseError.SUCCESS.0 {
+                self.mProfile = profile?.data
+                if self.isMyselfFlag{
+                    Global.shared.globalProfile = profile?.data
+                    self.infoView.configViewWihObject(userObj: (profile?.data)!);
+                }else{
+                    self.infoView.configViewWihObject(userObj: (profile?.data)!);
+                }
+                
+            }else{
+                HUD.flash(.label(profile?.msg), delay: 2)
+            }
+        }
+    }
     
     func updateProfile(editProfile: UserProfileData)  {
         let engine = NetworkEngine()
@@ -169,10 +217,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
             HUD.hide()
             if userProfile?.status == ResponseError.SUCCESS.0 {
-                self.profile = editProfile
+                self.mProfile = editProfile
                 editProfile.caheForUserProfile()
-                if self.profile != nil {
-                    self.infoView.configViewWihObject(userObj: self.profile!)
+                if self.mProfile != nil {
+                    self.infoView.configViewWihObject(userObj: self.mProfile!)
                 }
                 self.editView?.isHidden = true
                 self.infoView.isHidden = false
@@ -184,40 +232,37 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
     }
     
-    func likeSomeBody(editProfile: UserProfileData)  {
+    func likeSomeBody()  {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
+        let uuid = Global.shared.globalProfile?.userUuid
+        
+        engine.putUserProfileLike(uuid: uuid!) { (response) in
             HUD.hide()
-            if userProfile?.status == ResponseError.SUCCESS.0 {
-                self.profile = editProfile
-                editProfile.caheForUserProfile()
-                if self.profile != nil {
-                    self.infoView.configViewWihObject(userObj: self.profile!)
-                }
-                self.editView?.isHidden = true
-                self.infoView.isHidden = false
-                self.shareView?.isHidden = false
+            if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{
-                HUD.flash(.label("更新失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
     
     func deletePhoto(at: Int) {
-        let userPhoto = self.profile?.userPhotoList?[at]
+        self.bannerView?.pause()
+
+        let userPhoto = self.mProfile?.userPhotoList?[at]
         
         let engine = NetworkEngine()
         
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.deleteUserPhoto(photoUuid: (userPhoto?.uuid)!) { (response) in
             HUD.hide()
+            self.bannerView?.play()
             if response?.status == ResponseError.SUCCESS.0 {
 
-                self.profile?.deleteAvatar(at: at)
+                self.mProfile?.deleteAvatar(at: at)
                 self.refreshBannerView()
-                self.profile?.caheForUserProfile()
+                self.mProfile?.caheForUserProfile()
                 
             }else{
                 HUD.flash(.label("删除照片失败"), delay: 2)
@@ -226,20 +271,21 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func uploadPhoto(image: UIImage,at: Int) {
+        self.bannerView?.pause()
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postUserPhoto(image: image) { (userPhoto) in
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
-                self.profile?.setNewAvatar(newAvatar: newPhoto, at: at)
-                self.profile?.caheForUserProfile()
+                self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
+                self.mProfile?.caheForUserProfile()
                 self.refreshBannerView()
-                self.bannerView?.play()
 
             }else{
                 HUD.flash(.label("添加照片失败"), delay: 2)
             }
+            self.bannerView?.play()
         }
     }
 
@@ -251,6 +297,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func likeButtonClick() {
         SGLog(message: "")
+        self.likeSomeBody()
     }
     
     func deleteButtonClick() {
@@ -275,7 +322,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func refreshBannerView() {
-        let imagesURLStrings = self.profile?.getBannerAvatarList()
+        let imagesURLStrings = self.mProfile?.getBannerAvatarList()
         bannerView?.localizationImageNamesGroup = imagesURLStrings
     }
 }
