@@ -66,7 +66,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
         if indexPath.row == 0 {
             cell.imgView.contentMode = .redraw
-            cell.imgView.image = UIImage.init(named: "camera-gray")
+            cell.imgView.image = UIImage.init(named: "select_photoBg")
             return cell
         }
         cell.imgView.contentMode = .scaleAspectFit

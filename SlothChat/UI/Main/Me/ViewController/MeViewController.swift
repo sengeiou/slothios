@@ -20,7 +20,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var shareView: LikeShareView?
     var toolView: UserInfoToolView?
 
-    var isMyselfFlag = false
+    var isMyselfFlag = true
     
     var mUserUuid: String?{
         didSet{
@@ -44,10 +44,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.title = "我"
             
         self.setNavtionConfirm(titleStr: "设置")
-        isMyselfFlag = true
 
         if isMyselfFlag{
             let userUuid = Global.shared.globalLogin?.user?.uuid
+            mProfile = Global.shared.globalProfile
             self.getUserProfile(userUuid: userUuid!)
         }else{
             let userUuid = Global.shared.globalLogin?.user?.uuid
@@ -75,7 +75,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         let w = UIScreen.main.bounds.width
-        bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: 180), delegate: self, placeholderImage: nil)
+        let h = (w * 156.0 / 187.0)
+        
+        bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: h), delegate: self, placeholderImage: nil)
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
         bannerView?.pageControlDotSize = CGSize.init(width: 8, height: 8)
@@ -193,18 +195,24 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        if !isMyselfFlag{
+            HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        }
         engine.getUserProfile(userUuid: userUuid) { (profile) in
-            HUD.hide()
+            if !self.isMyselfFlag{
+                HUD.hide()
+            }
             if profile?.status == ResponseError.SUCCESS.0 {
                 self.mProfile = profile?.data
                 if self.isMyselfFlag{
                     Global.shared.globalProfile = profile?.data
-                    self.infoView.configViewWihObject(userObj: (profile?.data)!);
+                    self.shareView?.configLikeLabel(count: (profile?.data?.likesCount)!)
+
                 }else{
-                    self.infoView.configViewWihObject(userObj: (profile?.data)!);
                 }
-                
+                self.refreshBannerView()
+                self.infoView.configViewWihObject(userObj: (profile?.data)!);
+
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
             }
@@ -240,7 +248,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         engine.putUserProfileLike(uuid: uuid!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                
+                HUD.flash(.label("谢谢您哦~"), delay: 2)
+
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
@@ -276,8 +285,11 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postUserPhoto(image: image) { (userPhoto) in
+            HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
+                newPhoto.profilePicUrl = userPhoto?.data?.profilePicUrl
+                newPhoto.uuid = userPhoto?.data?.uuid
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
                 self.refreshBannerView()

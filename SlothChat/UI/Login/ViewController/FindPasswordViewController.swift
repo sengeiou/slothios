@@ -103,7 +103,7 @@ class FindPasswordViewController: BaseViewController {
         }
         
         container.snp.makeConstraints { (make) in
-            make.bottom.equalTo(passwordView.snp.bottom).offset(20)
+            make.bottom.equalTo(passwordView.snp.bottom).offset(80)
         }
         
         let confirmButton = UIButton.init(type: .custom)
@@ -179,6 +179,8 @@ class FindPasswordViewController: BaseViewController {
     
     func changeUserPassword(verifyCode: String,newPwd: String)  {
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+
         engine.postChangePwd(toPhoneno: self.phoneNo!, verifyCode: verifyCode, smsChangeNewPwd: newPwd) { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showAlertView(message: "成功修改密码")
