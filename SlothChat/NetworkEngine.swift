@@ -283,22 +283,28 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
-        let request = HTTPRequestGenerator(withParam:["":""], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<SysConfig>) in
+        Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
             completeHandler(response.result.value);
         }
     }
     
     //12.用原有登录密码修改账户密码
-    func putUpdatePwd(uuid: String,oldPwd: String,newPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func putUpdatePwd(oldPwd: String,newPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let uuid = Global.shared.globalProfile?.uuid
+        
+        if  (uuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
         var URLString:String = self.Base_URL + API_URI.put_updatePwd.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
         
         let request = HTTPRequestGenerator(withParam:[
             "oldPwd":oldPwd,
             "newPwd":newPwd,]
-            , URLString: URLString)
+            , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);

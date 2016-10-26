@@ -12,6 +12,7 @@ class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.getSystemConfig()
         
         let discoveryNav = BaseNavigationController(rootViewController: DiscoveryViewController())
         let chatNav = BaseNavigationController(rootViewController:ChatViewController())
@@ -45,7 +46,7 @@ class MainViewController: UITabBarController {
     
     //MARK:- NetWork
     
-    func getSystemConfig(editProfile: UserProfileData)  {
+    func getSystemConfig()  {
         let engine = NetworkEngine()
         engine.getSysConfig { (config) in
             if config?.status == ResponseError.SUCCESS.0 {

@@ -77,14 +77,29 @@ class ModifyPasswordViewController: BaseViewController {
         }
     }
     
+    //MARK:- NetWork
+    
+    func modifyUserPassword(oldPwd: String,newPwd: String)  {
+        let engine = NetworkEngine()
+        engine.putUpdatePwd(oldPwd: oldPwd, newPwd: newPwd) { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.showAlertView(message: "修改密码成功")
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
     //MARK:- Action
     func confirmButtonClick() {
         print("confirmButtonClick")
         if !checkSubmitValid() {
             return
         }
-        showAlertView(message: "修改密码成功")
-//        HUD.flash(.label("修改密码成功"), delay: 2)
+        let oldPwd = oldPassordView.getInputContent()
+        let newPwd = new1PasswordView.getInputContent()
+
+        self.modifyUserPassword(oldPwd: oldPwd!, newPwd: newPwd!)
     }
 
     func checkSubmitValid() -> Bool {
