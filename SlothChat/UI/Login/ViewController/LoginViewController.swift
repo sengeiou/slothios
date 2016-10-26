@@ -44,7 +44,7 @@ class LoginViewController: BaseViewController {
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         passwordView.setInputTextfieldLeftMagin(left: 106)
-        passwordView.configInputView(titleStr: "密码:", contentStr: "lfdH384fs")
+        passwordView.configInputView(titleStr: "密码:", contentStr: "Aa123456")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
         
