@@ -12,7 +12,11 @@
 #import "MKBlockAdditions.h"
 #import "NSObject+MKBlockAdditions.h"
 #import "UIActionSheet+MKBlockAdditions.h"
+
 #import "SDCycleScrollView.h"
+
+#import "GVUserDefaults.h"
+#import "GVUserDefaults+Properties.h"
 
 #import "UIViewController+Purchase.h"
 #import "NSObject+ShareSDK.h"

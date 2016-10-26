@@ -118,6 +118,8 @@
 		04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AE1DBFB7F4004659BA /* SysConfig.swift */; };
 		04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AF1DBFB7F4004659BA /* SysConfigData.swift */; };
 		04B499B41DBFBECC004659BA /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B31DBFBECC004659BA /* Global.swift */; };
+		04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B71DC106F0004659BA /* GVUserDefaults.m */; };
+		04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */; };
 		04D0C70E1DBE379B0083BBA2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04D0C70A1DBE379B0083BBA2 /* LICENSE */; };
 		04D0C70F1DBE379B0083BBA2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */; };
 		04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70D1DBE379B0083BBA2 /* README.mdown */; };
@@ -349,6 +351,10 @@
 		04B499AE1DBFB7F4004659BA /* SysConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfig.swift; sourceTree = "<group>"; };
 		04B499AF1DBFB7F4004659BA /* SysConfigData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfigData.swift; sourceTree = "<group>"; };
 		04B499B31DBFBECC004659BA /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		04B499B61DC106F0004659BA /* GVUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVUserDefaults.h; sourceTree = "<group>"; };
+		04B499B71DC106F0004659BA /* GVUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVUserDefaults.m; sourceTree = "<group>"; };
+		04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+Properties.h"; sourceTree = "<group>"; };
+		04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+Properties.m"; sourceTree = "<group>"; };
 		04D0C70A1DBE379B0083BBA2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		04D0C70B1DBE379B0083BBA2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -651,6 +657,8 @@
 		044643561DB4F60F0050F8BC /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */,
+				04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */,
 				044643571DB4F6960050F8BC /* UIViewController+Extension.swift */,
 				04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */,
 				0486BBB51DBB577300086303 /* NSObject+ShareSDK.h */,
@@ -768,6 +776,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04B499B51DC106F0004659BA /* GVUserDefaults */,
 				04B1CF2A1DBE3638003482DF /* MWPhotoBrowser */,
 				04B1CEF41DBCAB96003482DF /* ValuePickerView */,
 				041289D41DBB729000D308C0 /* CAPSPageMenu */,
@@ -982,6 +991,15 @@
 				04B499B31DBFBECC004659BA /* Global.swift */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		04B499B51DC106F0004659BA /* GVUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				04B499B61DC106F0004659BA /* GVUserDefaults.h */,
+				04B499B71DC106F0004659BA /* GVUserDefaults.m */,
+			);
+			path = GVUserDefaults;
 			sourceTree = "<group>";
 		};
 		04D0C7091DBE379B0083BBA2 /* MBProgressHUD */ = {
@@ -1542,6 +1560,7 @@
 				04B1CEEF1DBC45F9003482DF /* BiddingListView.swift in Sources */,
 				04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */,
 				04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */,
+				04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */,
 				04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */,
 				04FEB7E51DB76F13004509D1 /* SDWebImageCompat.m in Sources */,
 				041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */,
@@ -1558,6 +1577,7 @@
 				04FEB7EF1DB76F13004509D1 /* UIImageView+HighlightedWebCache.m in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
+				04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */,
 				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
 				04FEB7E21DB76F13004509D1 /* MKAnnotationView+WebCache.m in Sources */,
