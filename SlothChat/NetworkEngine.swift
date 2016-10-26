@@ -213,7 +213,6 @@ class NetworkEngine: NSObject {
         
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
         Alamofire.upload(multipartFormData: {(multipartFormData) in
-            // code
             let uuidData = uuid?.data(using: String.Encoding.utf8)
             let tokenData = token?.data(using: String.Encoding.utf8)
             
