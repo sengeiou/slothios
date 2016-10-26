@@ -105,6 +105,7 @@ class NetworkEngine: NSObject {
         return request
     }
     
+    //1.注册选择国家信息列表 GET
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
@@ -112,6 +113,7 @@ class NetworkEngine: NSObject {
         }
     }
     
+    //2.获取短信验证码 POST
     func postPublicSMS(withType type:String, toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms.rawValue
         let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
@@ -122,6 +124,7 @@ class NetworkEngine: NSObject {
         
     }
     
+    //3.校验短信验证码是否正确 POST
     func postPublicSMSCheck(WithPhoneNumber toPhoneno:String,verifyCode:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms_check.rawValue
         let request = HTTPRequestGenerator(withParam: ["toPhoneno":toPhoneno,
@@ -133,6 +136,7 @@ class NetworkEngine: NSObject {
         
     }
     
+    //4.1.注册初始化用户头像 POST
     func postPicFile(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
         
@@ -154,6 +158,7 @@ class NetworkEngine: NSObject {
         })
     }
     
+    //4.2.注册用户和资料 POST
     func postPublicUserAndProfileSignup(withSignpModel signup:UserSignupModel ,completeHandler :@escaping(_ userAndProfile:UserAndProfile?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.public_signup.rawValue
         let request = HTTPRequestGenerator(withParam:[
@@ -171,6 +176,7 @@ class NetworkEngine: NSObject {
         }
     }
     
+    //5.登录 POST
     func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
         
@@ -195,12 +201,21 @@ class NetworkEngine: NSObject {
         
     }
     
-    func postAuthLogout(withUUID uuid:String,token:String,completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
+    //6.登出 POST
+    func postAuthLogout(completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
+        let uuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (uuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let mobileData = uuid.data(using: String.Encoding.utf8)
-            let passwdData = token.data(using: String.Encoding.utf8)
+            let mobileData = uuid?.data(using: String.Encoding.utf8)
+            let passwdData = token?.data(using: String.Encoding.utf8)
             
             multipartFormData.append(mobileData!, withName: "uuid")
             multipartFormData.append(passwdData!, withName: "token")
@@ -215,16 +230,19 @@ class NetworkEngine: NSObject {
                     print(encodingError)
                 }
         })
-
     }
     
-//    7.修改个人资料页面的文字资料
-        
+    //7.修改个人资料页面的文字资料
     func postUserProfile(nickname:String,sex:String,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
         let userUuid = Global.shared.globalProfile?.userUuid
         let uuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
-
+        
+        if (userUuid?.isEmpty)! || (uuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
         var URLString:String = self.Base_URL + API_URI.post_userProfile.rawValue
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
@@ -252,11 +270,12 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
+    
     //10.陌生人查看个人资料页面时对资料点赞
     func putUserProfileLike(uuid:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
-        
+    
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{
             SGLog(message: "数据为空")
             return
@@ -275,6 +294,7 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
+    
     //11.查看个人设置
     func getSysConfig(completeHandler :@escaping(_ response:SysConfig?) -> Void)  -> Void {
         var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
@@ -318,9 +338,11 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
+    
     //13.通过短信验证码修改账户密码
     func postChangePwd(toPhoneno: String,verifyCode: String,smsChangeNewPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         let URLString:String = self.Base_URL + API_URI.post_changePwd.rawValue
+        
         let request = HTTPRequestGenerator(withParam:[
             "toPhoneno":toPhoneno,
             "verifyCode":verifyCode,
@@ -331,6 +353,7 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
+    
     //14.账户APPLE STORE充值
     func getMoney(toPhoneno: String,type: String, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         let URLString:String = self.Base_URL + API_URI.get_money.rawValue
@@ -345,7 +368,6 @@ class NetworkEngine: NSObject {
     }
     
     //15.修改个人设置
-
     func putSysConfig(isAcceptSysNotify:Bool,isAcceptPrivateChat: Bool,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         let userUuid = Global.shared.globalProfile?.userUuid
         let uuid = Global.shared.globalProfile?.uuid
@@ -372,10 +394,14 @@ class NetworkEngine: NSObject {
     }
     
     //17.用户资料页面，添加个人照片
-
     func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
         
         var URLString:String = self.Base_URL + API_URI.post_userPhoto.rawValue
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: userUuid!)
@@ -402,11 +428,15 @@ class NetworkEngine: NSObject {
     }
     
     //18.用户资料页面，删除指定的个人照片
-    
     func deleteUserPhoto(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
         
         var URLString:String = self.Base_URL + API_URI.delete_userPhoto.rawValue
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: photoUuid)
@@ -420,4 +450,8 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
+    
+    
+    //MARK:B2.探索图片模块
+    //1.图片新增
 }
