@@ -186,7 +186,9 @@ class PerfectionInfoViewController: BaseViewController {
         user.birthdate = birthday!
         
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postPublicUserAndProfileSignup(withSignpModel: user) { (profile) in
+            HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0{
                 HUD.flash(.label("注册成功"), delay: 2)
                 let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
@@ -218,7 +220,9 @@ class PerfectionInfoViewController: BaseViewController {
             self.selectedAvatar = avatar
 
             let engine = NetworkEngine()
+            HUD.show(.labeledProgress(title: nil, subtitle: nil))
             engine.postPicFile(picFile: avatar!) { (userPhoto) in
+                HUD.hide()
                 if userPhoto?.status == ResponseError.SUCCESS.0{
                     self.selectedAvatar = avatar
                     self.userPhoto = userPhoto?.data

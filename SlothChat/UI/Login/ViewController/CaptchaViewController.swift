@@ -94,7 +94,9 @@ class CaptchaViewController: BaseViewController {
         }
         
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postPublicSMS(withType: "signup", toPhoneno: self.phoneNo) { (sms) in
+            HUD.hide()
             if sms?.status == ResponseError.SUCCESS.0 &&
                 !(self.phoneNo.isEmpty) {
                 self.fireTimer()
@@ -107,8 +109,9 @@ class CaptchaViewController: BaseViewController {
     
     func checkPublicSMS(phoneNo: String,verifyCode: String) {
         let engine = NetworkEngine()
-        //
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postPublicSMSCheck(WithPhoneNumber: phoneNo,verifyCode:verifyCode) { (sms) in
+            HUD.hide()
             if sms?.status == ResponseError.SUCCESS.0{
                 let pushVC  = PerfectionInfoViewController.init()
                 pushVC.phoneNo = self.phoneNo

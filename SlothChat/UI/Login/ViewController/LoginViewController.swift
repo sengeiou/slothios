@@ -128,8 +128,9 @@ class LoginViewController: BaseViewController {
     
     func getUserProfile() {
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.getUserProfile(userUuid: "45bc88e9c2d043908c852388b7794b95") { (profile) in
-            
+            HUD.hide()
         }
     }
 
@@ -160,9 +161,11 @@ class LoginViewController: BaseViewController {
         let phoneStr = phoneView.getInputContent()!
         let codeStr = self.codeButton.title(for: .normal)!
         let passwordStr = passwordView.getInputContent()!
-
+        
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (loginModel) in
+            HUD.hide()
             if loginModel?.token != nil{
                 Global.shared.globalLogin = loginModel!
                 self.getUserProfile()

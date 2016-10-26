@@ -107,10 +107,13 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func logout() {
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        
         let uuid = Global.shared.globalLogin?.user?.uuid
         let token = Global.shared.globalLogin?.token
 
         engine.postAuthLogout(withUUID: uuid!, token: token!) { (response) in
+            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{

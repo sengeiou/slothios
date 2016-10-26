@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 typealias SelectCodeClosureType = (_ country: List) -> Void
 
@@ -61,8 +62,9 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     
     func getCountryCodeList() {
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.getPublicCountry(withName: "") { (countryObj) in
-            print(countryObj)
+            HUD.hide()
             let list = countryObj?.data?.list
             let result = self.splitCountryList(countryList: list!)
             self.countryList.removeAll()
