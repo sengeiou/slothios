@@ -52,4 +52,10 @@ class Global: BaseObject {
         }
         return false
     }
+    
+    func logout() {
+        globalLogin = nil
+        globalProfile = nil
+        globalSysConfig = nil
+    }
 }

@@ -291,7 +291,7 @@ class NetworkEngine: NSObject {
     
     //12.用原有登录密码修改账户密码
     func putUpdatePwd(oldPwd: String,newPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let uuid = Global.shared.globalProfile?.uuid
+        let uuid = Global.shared.globalProfile?.userUuid
         
         if  (uuid?.isEmpty)!{
             SGLog(message: "数据为空")

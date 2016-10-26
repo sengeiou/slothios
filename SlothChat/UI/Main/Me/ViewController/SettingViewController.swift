@@ -118,6 +118,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }
             
         }
