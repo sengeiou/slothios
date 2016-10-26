@@ -46,7 +46,7 @@ class RegisterViewController: BaseViewController {
         phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         phoneView.setInputTextfieldLeftMagin(left: 106)
-        phoneView.configInputView(titleStr: "手机号:", contentStr: "18667931202")
+        phoneView.configInputView(titleStr: "手机号:", contentStr: "")
         phoneView.inputTextfield.keyboardType = .numberPad
 
         view.addSubview(phoneView)
@@ -54,7 +54,7 @@ class RegisterViewController: BaseViewController {
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         passwordView.setInputTextfieldLeftMagin(left: 106)
-        passwordView.configInputView(titleStr: "密码:", contentStr: "111111")
+        passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
 
