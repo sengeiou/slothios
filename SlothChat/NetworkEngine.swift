@@ -338,16 +338,25 @@ class NetworkEngine: NSObject {
     
     //15.修改个人设置
 
-    func putSysConfig(uuid: String,userUuid: String,token:String,isAcceptSysNotify:Bool,isAcceptPrivateChat: Bool,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func putSysConfig(isAcceptSysNotify:Bool,isAcceptPrivateChat: Bool,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let uuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (uuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
         var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
 
         let request = HTTPRequestGenerator(withParam:[
             "isAcceptPrivateChat":isAcceptPrivateChat,
             "isAcceptSysNotify":isAcceptSysNotify]
-            , URLString: URLString)
+            , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
@@ -397,7 +406,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         let request = HTTPRequestGenerator(withParam:["":""]
-            , URLString: URLString)
+            , method: .delete, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);

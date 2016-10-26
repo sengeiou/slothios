@@ -139,6 +139,23 @@ class FindPasswordViewController: BaseViewController {
         timer.fire()
     }
     
+    //MARK:- NetWork
+    
+    func changeUserPassword(verifyCode: String,newPwd: String)  {
+        let engine = NetworkEngine()
+        engine.postChangePwd(toPhoneno: self.phoneNo!, verifyCode: verifyCode, smsChangeNewPwd: newPwd) { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.showAlertView(message: "成功修改密码")
+                let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                    _ = self.navigationController?.popToRootViewController(animated: true)
+                })
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
     //MARK:- Action
     func confirmButtonClick() {
         print("confirmButtonClick")
@@ -147,14 +164,13 @@ class FindPasswordViewController: BaseViewController {
             HUD.flash(.label("请输入验证码"), delay: 2)
             return
         }
-//        HUD.flash(.label("登录成功"), delay: 2)
-        do {
-            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
-            cache[SGGlobalKey.SCLoginStatusKey] = true.description as NSString?
-            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-        } catch _ {
-            print("Something went wrong :(")
+        let password = passwordView.getInputContent()
+        if (password?.isEmpty)! {
+            HUD.flash(.label("请输入验证码"), delay: 2)
+            return
         }
+        
+        self.changeUserPassword(verifyCode: captcha!, newPwd: password!)
     }
     
 }
