@@ -76,7 +76,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         let w = UIScreen.main.bounds.width
-        bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: 180), delegate: self, placeholderImage: nil)
+        let h = (w * 156.0 / 187.0)
+        
+        bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: h), delegate: self, placeholderImage: nil)
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
         bannerView?.pageControlDotSize = CGSize.init(width: 8, height: 8)
