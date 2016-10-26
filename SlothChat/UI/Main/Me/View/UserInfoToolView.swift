@@ -24,22 +24,22 @@ class UserInfoToolView: BaseView {
     
     fileprivate func sentupView() {
 //        likeButton.backgroundColor = SGColor.SGRedColor()
-        likeButton.setImage(UIImage.init(named: "like_button"), for: .normal)
+        likeButton.setBackgroundImage(UIImage.init(named: "follow_button"), for: .normal)
 //        chatButton.backgroundColor = SGColor.SGMainColor()
-        chatButton.setImage(UIImage.init(named: "chat_button"), for: .normal)
+        chatButton.setBackgroundImage(UIImage.init(named: "chat_button"), for: .normal)
         addSubview(chatButton)
         addSubview(likeButton)
         
         likeButton.snp.makeConstraints { (make) in
             make.right.equalTo(-10)
             make.centerY.equalTo(self.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
         
         chatButton.snp.makeConstraints { (make) in
             make.right.equalTo(likeButton.snp.left).offset(-24)
             make.centerY.equalTo(self.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
     }
 }
