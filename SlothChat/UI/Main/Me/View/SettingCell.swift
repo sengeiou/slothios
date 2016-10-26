@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class SettingCell: UITableViewCell {
 
@@ -63,7 +64,39 @@ class SettingCell: UITableViewCell {
     }
     
     func selectButtonCLick() {
-        selectButton.isSelected = !selectButton.isSelected
+        let isSysNotify = (titleLabel.text  == "接受通知")
+        self.modifySystemConfig(isSelect: !selectButton.isSelected, isSysNotify: isSysNotify)
     }
 
+    //MARK:- Network
+    
+    func modifySystemConfig(isSelect:Bool,isSysNotify:Bool) {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        
+        var sysNotify = Global.shared.globalSysConfig?.acceptSysNotify
+        var privateChat = Global.shared.globalSysConfig?.acceptPrivateChat
+        
+        if isSysNotify {
+            sysNotify = isSelect
+        }else{
+            privateChat = isSelect
+        }
+        
+        engine.putSysConfig(isAcceptSysNotify: sysNotify!, isAcceptPrivateChat: privateChat!) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0{
+                self.selectButton.isSelected = isSelect
+                if isSysNotify {
+                    Global.shared.globalSysConfig?.acceptSysNotify = isSelect
+                }else{
+                    Global.shared.globalSysConfig?.acceptPrivateChat = isSelect
+                }
+                Global.shared.globalSysConfig?.cacheForSysConfig()
+                
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
 }

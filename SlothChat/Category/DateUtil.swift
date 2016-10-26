@@ -11,7 +11,7 @@ import UIKit
 extension String{
     func toYMDDate() -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: self)
     }
 }
@@ -19,7 +19,7 @@ extension String{
 extension Date{
     func toYMDString() -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
     func toAgeString() -> String {

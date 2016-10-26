@@ -15,6 +15,20 @@ class SysConfigData : NSObject, NSCoding, Mappable{
 	var acceptSysNotify : Bool?
 	var banlace : Int?
 
+    open func cacheForSysConfig() {
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.setValue(data, forKey: "SysConfigDataCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func ConfigFromCache() -> SysConfigData? {
+        let data = UserDefaults.standard.value(forKey: "SysConfigDataCacheKey")
+        if data != nil {
+            let config = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)  as! SysConfigData?
+            return config
+        }
+        return nil
+    }
 
 	class func newInstance(map: Map) -> Mappable?{
 		return SysConfigData()
