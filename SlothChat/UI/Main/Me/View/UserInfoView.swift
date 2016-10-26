@@ -20,7 +20,7 @@ class UserInfoView: BaseView {
     let schoolView = UserInfoSingleView()
     let editView = UIView()
     
-    var userObj: UserObj?
+    var userObj: UserProfileData?
     
     var editUserInfoValue:EditUserInfoType?
 
@@ -119,22 +119,22 @@ class UserInfoView: BaseView {
         }
     }
     
-    func configViewWihObject(userObj: UserObj) {
+    func configViewWihObject(userObj: UserProfileData) {
         self.userObj = userObj
         
-        nameLabel.text = userObj.name
-        let isMale = userObj.gender == SGGenderType.male.rawValue
+        nameLabel.text = userObj.nickname
+        let isMale = (userObj.sex == SGGenderType.male.rawValue)
         let sexName = (isMale ? "male" : "female")
         sexImgView.image = UIImage.init(named: sexName)
         
-        let birthday = userObj.birthday.toYMDDate()
+        let birthday = userObj.birthdate?.toYMDDate()
         let age = birthday?.toAgeString()
         let constellation = birthday?.toConstellationString()
         ageInfoLabel.text = age! + "，" + constellation!
         
-        locationView.configContent(contentStr: userObj.location)
-        hauntView.configContent(contentStr: userObj.haunt)
-        schoolView.configContent(contentStr: userObj.school)
+        locationView.configContent(contentStr: userObj.area!)
+        hauntView.configContent(contentStr: userObj.commonCities!)
+        schoolView.configContent(contentStr: userObj.university!)
     }
     
     func setUserEntity(isMyself: Bool) {

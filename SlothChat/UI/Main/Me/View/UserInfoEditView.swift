@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias DoneUserInfoType = (_ userObj: UserObj) -> Void
+typealias DoneUserInfoType = (_ userObj: UserProfileData) -> Void
 
 class UserInfoEditView: BaseView {
 
@@ -27,7 +27,7 @@ class UserInfoEditView: BaseView {
     var dateFormatter = DateFormatter()
     var showVC: UIViewController?
     
-    var userObj: UserObj?
+    var userObj: UserProfileData?
 
     override init(frame: CGRect ){
         super.init(frame: frame)
@@ -157,21 +157,21 @@ class UserInfoEditView: BaseView {
         }
     }
     
-    func configViewWihObject(userObj: UserObj) {
+    func configViewWihObject(userObj: UserProfileData) {
         self.userObj = userObj
-        nameView.configContent(contentStr: userObj.name)
-        birthdayView.configContent(contentStr: userObj.birthday)
+        nameView.configContent(contentStr: userObj.nickname!)
+        birthdayView.configContent(contentStr: userObj.birthdate!)
         
-        let isMale = userObj.gender == SGGenderType.male.rawValue
+        let isMale = userObj.sex == SGGenderType.male.rawValue
         sexPickView.selectSexView(isMale: isMale)
         
-        birthdayView.configContent(contentStr: userObj.birthday)
-        locationView.configContent(contentStr: userObj.location)
-        hauntView.configContent(contentStr: userObj.haunt)
-        schoolView.configContent(contentStr: userObj.school)
+        birthdayView.configContent(contentStr: userObj.birthdate!)
+        locationView.configContent(contentStr: userObj.area!)
+        hauntView.configContent(contentStr: userObj.commonCities!)
+        schoolView.configContent(contentStr: userObj.university!)
         
         if self.userObj != nil {
-            datePicker.config.startDate = self.userObj?.birthday.toYMDDate()
+            datePicker.config.startDate = self.userObj?.birthdate!.toYMDDate()
         }else{
             datePicker.config.startDate = Date()
         }
@@ -184,15 +184,15 @@ class UserInfoEditView: BaseView {
     func confirmButtonClick() {
         print("confirmButtonClick")
         
-        self.userObj?.name = nameView.getInputContent()!
+        self.userObj?.nickname = nameView.getInputContent()!
         if sexPickView.isMalePick {
-            self.userObj?.gender = SGGenderType.male.rawValue
+            self.userObj?.sex = SGGenderType.male.rawValue
         }else{
-            self.userObj?.gender = SGGenderType.female.rawValue
+            self.userObj?.sex = SGGenderType.female.rawValue
         }
-        self.userObj?.location = locationView.getInputContent()!
-        self.userObj?.haunt = hauntView.getInputContent()!
-        self.userObj?.school = schoolView.getInputContent()!
+        self.userObj?.area = locationView.getInputContent()!
+        self.userObj?.commonCities = hauntView.getInputContent()!
+        self.userObj?.university = schoolView.getInputContent()!
 
         if let sp = self.editUserInfoValue {
             sp(self.userObj!)
@@ -224,7 +224,7 @@ extension UserInfoEditView: MIDatePickerDelegate {
     
     func miDatePicker(_ amDatePicker: MIDatePicker, didSelect date: Date) {
         birthdayView.configContent(contentStr: dateFormatter.string(from: date))
-        self.userObj?.birthday = date.toYMDString()!
+        self.userObj?.birthdate = date.toYMDString()!
     }
     func miDatePickerDidCancelSelection(_ amDatePicker: MIDatePicker) {
         // NOP
