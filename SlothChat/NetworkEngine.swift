@@ -81,6 +81,30 @@ class NetworkEngine: NSObject {
         return request
     }
     
+    func HTTPRequestGenerator(withParam parameters: NSDictionary,method: HTTPMethod,URLString: String)->URLRequest {
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = method.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let values = parameters
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
+        
+        return request
+    }
+    
+    func HTTPRequestGenerator(withParam parameters: NSDictionary,method: HTTPMethod,contentType: String,URLString: String)->URLRequest {
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = method.rawValue
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        
+        let values = parameters
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
+        
+        return request
+    }
+    
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
@@ -140,8 +164,6 @@ class NetworkEngine: NSObject {
             "nickname": signup.nickname,
             "sex": signup.sex,
             "birthdate":signup.birthdate,
-//            "constellation":"水瓶座",
-//            "age":"4"
         ], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
@@ -151,7 +173,8 @@ class NetworkEngine: NSObject {
     
     func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
-        let request = HTTPRequestGenerator(withParam: ["mobile":mobile,"passwd":passwd], URLString: URLString)
+
+        let request = HTTPRequestGenerator(withParam: ["mobile":mobile,"passwd":passwd], method: .post, contentType: "x-www-form-urlencoded", URLString: URLString)
         Alamofire.request(request).responseObject { (response:DataResponse<LoginModel>) in
             completeHandler(response.result.value);
         }
