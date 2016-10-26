@@ -44,7 +44,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.title = "我"
             
         self.setNavtionConfirm(titleStr: "设置")
-//        isMyselfFlag = true
+        isMyselfFlag = true
 
         if isMyselfFlag{
             let userUuid = Global.shared.globalLogin?.user?.uuid
