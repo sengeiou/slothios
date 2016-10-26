@@ -25,6 +25,13 @@ class Global: BaseObject {
         }
     }
     
+    var globalSysConfig: SysConfigData?{
+        didSet{
+            if globalSysConfig != nil {
+                globalSysConfig?.cacheForSysConfig()
+            }
+        }
+    }
     static var shared : Global {
         struct Static {
             static let instance : Global = Global()
@@ -35,10 +42,12 @@ class Global: BaseObject {
     override init() {
         globalLogin = LoginModel.ModelFromCache()
         globalProfile = UserProfileData.ProfileFromCache()
+        globalSysConfig = SysConfigData.ConfigFromCache()
     }
     
     func isLogin() -> Bool {
-        if (globalLogin != nil) && !(globalLogin?.token?.isEmpty)! {
+        if (globalLogin != nil) && !(globalLogin?.token?.isEmpty)!
+        && (globalProfile != nil){
             return true
         }
         return false

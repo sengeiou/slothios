@@ -20,7 +20,7 @@ class UserPhotoList : NSObject, NSCoding, Mappable{
 		return UserPhotoList()
 	}
 	required init?(map: Map){}
-	private override init(){}
+    override init(){}
 
 	func mapping(map: Map)
 	{

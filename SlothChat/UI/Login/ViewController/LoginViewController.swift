@@ -126,11 +126,17 @@ class LoginViewController: BaseViewController {
     }
     //MARK:- Network
     
-    func getUserProfile() {
+    func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getUserProfile(userUuid: "45bc88e9c2d043908c852388b7794b95") { (profile) in
+        engine.getUserProfile(userUuid: userUuid) { (profile) in
             HUD.hide()
+            if profile?.status == ResponseError.SUCCESS.0 {
+                Global.shared.globalProfile = profile?.data
+                self.loginSystem()
+            }else{
+                HUD.flash(.label("登录失败"), delay: 2)
+            }
         }
     }
 
@@ -166,9 +172,10 @@ class LoginViewController: BaseViewController {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (loginModel) in
             HUD.hide()
-            if loginModel?.token != nil{
+            if  loginModel != nil &&
+                loginModel?.token != nil{
                 Global.shared.globalLogin = loginModel!
-                self.getUserProfile()
+                self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
             }else{
                 HUD.flash(.label("登录失败"), delay: 2)
             }

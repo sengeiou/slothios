@@ -41,5 +41,18 @@ class MainViewController: UITabBarController {
         thirdbar.image = UIImage(named: "add-group-gray")?.withRenderingMode(.alwaysOriginal)
         thirdbar.selectedImage = UIImage(named: "add-group-champagne")?.withRenderingMode(.alwaysOriginal)
     }
-
+    
+    
+    //MARK:- NetWork
+    
+    func getSystemConfig(editProfile: UserProfileData)  {
+        let engine = NetworkEngine()
+        engine.getSysConfig { (config) in
+            if config?.status == ResponseError.SUCCESS.0 {
+                Global.shared.globalSysConfig = config?.data
+            }else{
+                SGLog(message: "获取系统配置失败")
+            }
+        }
+    }
 }

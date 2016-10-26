@@ -173,37 +173,71 @@ class NetworkEngine: NSObject {
     
     func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
+        
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
+            // code
+            let mobileData = mobile.data(using: String.Encoding.utf8)
+            let passwdData = passwd.data(using: String.Encoding.utf8)
 
-        let request = HTTPRequestGenerator(withParam: ["mobile":mobile,"passwd":passwd], method: .post, contentType: "x-www-form-urlencoded", URLString: URLString)
-        Alamofire.request(request).responseObject { (response:DataResponse<LoginModel>) in
-            completeHandler(response.result.value);
-        }
+            multipartFormData.append(mobileData!, withName: "mobile")
+            multipartFormData.append(passwdData!, withName: "passwd")
+            }, to: URLString, encodingCompletion: { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseObject { (response:DataResponse<LoginModel>) in
+                        completeHandler(response.result.value);
+                    }
+                case .failure(let encodingError):
+                    print("error")
+                    print(encodingError)
+                }
+        })
+        
     }
     
     func postAuthLogout(withUUID uuid:String,token:String,completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
-        let request = HTTPRequestGenerator(withParam:["uuid":uuid,"token":token], URLString: URLString);
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
-        }
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
+            // code
+            let mobileData = uuid.data(using: String.Encoding.utf8)
+            let passwdData = token.data(using: String.Encoding.utf8)
+            
+            multipartFormData.append(mobileData!, withName: "uuid")
+            multipartFormData.append(passwdData!, withName: "token")
+            }, to: URLString, encodingCompletion: { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseObject { (response:DataResponse<Response>) in
+                        completeHandler(response.result.value);
+                    }
+                case .failure(let encodingError):
+                    print("error")
+                    print(encodingError)
+                }
+        })
+
     }
     
 //    7.修改个人资料页面的文字资料
         
-    func postUserProfile(withUUID uuid:String,userUuid:String,nickname:String,sex:SGGenderType,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
+    func postUserProfile(nickname:String,sex:String,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let uuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+
         var URLString:String = self.Base_URL + API_URI.post_userProfile.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
 
         let request = HTTPRequestGenerator(withParam:[
             "nickname": nickname,
-            "sex": sex.rawValue,
+            "sex": sex,
             "birthdate":birthdate,
             "area": area,
             "commonCities": commonCities,
             "university": university,
-            ], URLString: URLString)
-        
+            ], method: .put, URLString: URLString)
         Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
             completeHandler(response.result.value);
         }
@@ -211,14 +245,10 @@ class NetworkEngine: NSObject {
     
     //9.查看个人资料页面的文字和图片
     func getUserProfile(userUuid: String,completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
-        var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue
+        var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue + "?token=" + (Global.shared.globalLogin?.token)!
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
-        
-        let request = HTTPRequestGenerator(withParam:[
-            "userUuid": userUuid,
-            ], URLString: URLString)
-        
-        Alamofire.request(request).responseObject { (response:DataResponse<UserProfile>) in
+
+        Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
             completeHandler(response.result.value);
         }
     }
@@ -238,15 +268,24 @@ class NetworkEngine: NSObject {
         }
     }
     //11.查看个人设置
-    func getSysConfig(userUuid: String,uuid:String,token:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func getSysConfig(completeHandler :@escaping(_ response:SysConfig?) -> Void)  -> Void {
         var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let uuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (uuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         let request = HTTPRequestGenerator(withParam:["":""], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        Alamofire.request(request).responseObject { (response:DataResponse<SysConfig>) in
             completeHandler(response.result.value);
         }
     }
@@ -311,16 +350,19 @@ class NetworkEngine: NSObject {
     
     //17.用户资料页面，添加个人照片
 
-    func postUserPhoto(uuid:String,token:String,picFile:String,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
-            
+    func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
         var URLString:String = self.Base_URL + API_URI.post_userPhoto.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let imageData:NSData = try! NSData.init(contentsOf: NSURL.init(string: picFile) as! URL )
-            multipartFormData.append(imageData as Data, withName: "picFile", mimeType: "image/jpeg");
+            let imageData:Data = UIImageJPEGRepresentation(image, 0.7)!
+            
+            multipartFormData.append(imageData, withName: "picFile", mimeType: "image/jpeg");
             
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
@@ -338,11 +380,15 @@ class NetworkEngine: NSObject {
     
     //18.用户资料页面，删除指定的个人照片
     
-    func deleteUserPhoto(uuid: String,userUuid: String,token:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func deleteUserPhoto(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
         var URLString:String = self.Base_URL + API_URI.delete_userPhoto.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: photoUuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         let request = HTTPRequestGenerator(withParam:["":""]
             , URLString: URLString)

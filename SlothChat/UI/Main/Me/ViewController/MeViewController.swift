@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var isEdited = false
@@ -157,16 +158,91 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         editView?.setDoneUserInfoValue(temClosure: { (_ editUserObj) in
-            self.profile = editUserObj
-            editUserObj.caheForUserProfile()
-            if self.profile != nil {
-                self.infoView.configViewWihObject(userObj: self.profile!)
-            }
-            self.editView?.isHidden = true
-            self.infoView.isHidden = false
-            self.shareView?.isHidden = false
+            self.updateProfile(editProfile: editUserObj)
         })
     }
+    //MARK:- NetWork
+    
+    func updateProfile(editProfile: UserProfileData)  {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
+            HUD.hide()
+            if userProfile?.status == ResponseError.SUCCESS.0 {
+                self.profile = editProfile
+                editProfile.caheForUserProfile()
+                if self.profile != nil {
+                    self.infoView.configViewWihObject(userObj: self.profile!)
+                }
+                self.editView?.isHidden = true
+                self.infoView.isHidden = false
+                self.shareView?.isHidden = false
+                
+            }else{
+                HUD.flash(.label("更新失败"), delay: 2)
+            } 
+        }
+    }
+    
+    func likeSomeBody(editProfile: UserProfileData)  {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
+            HUD.hide()
+            if userProfile?.status == ResponseError.SUCCESS.0 {
+                self.profile = editProfile
+                editProfile.caheForUserProfile()
+                if self.profile != nil {
+                    self.infoView.configViewWihObject(userObj: self.profile!)
+                }
+                self.editView?.isHidden = true
+                self.infoView.isHidden = false
+                self.shareView?.isHidden = false
+                
+            }else{
+                HUD.flash(.label("更新失败"), delay: 2)
+            }
+        }
+    }
+    
+    func deletePhoto(at: Int) {
+        let userPhoto = self.profile?.userPhotoList?[at]
+        
+        let engine = NetworkEngine()
+        
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.deleteUserPhoto(photoUuid: (userPhoto?.uuid)!) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+
+                self.profile?.deleteAvatar(at: at)
+                self.refreshBannerView()
+                self.profile?.caheForUserProfile()
+                
+            }else{
+                HUD.flash(.label("删除照片失败"), delay: 2)
+            }
+        }
+    }
+    
+    func uploadPhoto(image: UIImage,at: Int) {
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postUserPhoto(image: image) { (userPhoto) in
+            if userPhoto?.status == ResponseError.SUCCESS.0 {
+                let newPhoto = UserPhotoList.init()
+                self.profile?.setNewAvatar(newAvatar: newPhoto, at: at)
+                self.profile?.caheForUserProfile()
+                self.refreshBannerView()
+                self.bannerView?.play()
+
+            }else{
+                HUD.flash(.label("添加照片失败"), delay: 2)
+            }
+        }
+    }
+
     
     //MARK:- Action
     func chatButtonClick() {
@@ -178,11 +254,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deleteButtonClick() {
-        let page = bannerView?.currentPage()
-        SGLog(message: page)
-        self.profile?.deleteAvatar(at: page!)
-        self.refreshBannerView()
-        self.profile?.caheForUserProfile()
+        let at = bannerView?.currentPage()
+        self.deletePhoto(at: at!)
     }
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
@@ -195,11 +268,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             titleStr = "替换头像"
         }
         UIActionSheet.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-            cycleScrollView.play()
-//            self.profile?.setNewAvatar(newAvatar: "http://e.hiphotos.baidu.com/zhidao/pic/item/3b292df5e0fe992580c7009035a85edf8cb17122.jpg",at: index)
-            self.profile?.caheForUserProfile()
-            
-            self.refreshBannerView()
+                self.uploadPhoto(image: avatar!, at: index)
             }, onCancel:{
                 cycleScrollView.play()
             }, allowsEditing: true)
