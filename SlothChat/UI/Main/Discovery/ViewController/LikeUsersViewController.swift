@@ -9,7 +9,8 @@
 import UIKit
 
 class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-    let dataSource = UserObj.getTestUserList()
+    var dataSource = [UserProfileData]()
+    
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     
@@ -17,6 +18,12 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         super.viewDidLoad()
         title = "喜欢的人"
         sentupView()
+        for _ in 0...20{
+            let profile = Global.shared.globalProfile
+            if let profile = profile{
+                dataSource.append(profile)
+            }
+        }
     }
     
     func sentupView() {
@@ -49,14 +56,19 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let pushVC = MeViewController()
+        pushVC.mUserUuid = Global.shared.globalProfile?.userUuid
+        pushVC.isMyselfFlag = false
+        self.navigationController?.pushViewController(pushVC, animated: true)
+
     }
     
     
     func performCellAction( indexPatch: IndexPath) {
         SGLog(message: indexPatch.row)
         let pushVC = BrowseAdvertViewController()
-        let user = dataSource[indexPatch.row]
-        pushVC.configWithObject(user: user)
+//        let user = dataSource[indexPatch.row]
+//        pushVC.configWithObject(user: user)
         
         self.navigationController?.pushViewController(pushVC, animated: true)
         

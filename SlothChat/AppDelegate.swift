@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func changeRootViewController() {
-        var logined = Global.shared.isLogin()
+        let logined = Global.shared.isLogin()
         
         if logined {
             let rootVC = MainViewController()

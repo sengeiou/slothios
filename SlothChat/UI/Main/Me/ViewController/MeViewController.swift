@@ -20,7 +20,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var shareView: LikeShareView?
     var toolView: UserInfoToolView?
 
-    var isMyselfFlag = false
+    var isMyselfFlag = true
     
     var mUserUuid: String?{
         didSet{
@@ -44,7 +44,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.title = "我"
             
         self.setNavtionConfirm(titleStr: "设置")
-        isMyselfFlag = true
 
         if isMyselfFlag{
             let userUuid = Global.shared.globalLogin?.user?.uuid
@@ -211,6 +210,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
 
                 }else{
                 }
+                self.refreshBannerView()
                 self.infoView.configViewWihObject(userObj: (profile?.data)!);
 
             }else{
@@ -248,7 +248,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         engine.putUserProfileLike(uuid: uuid!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                
+                HUD.flash(.label("谢谢您哦~"), delay: 2)
+
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
