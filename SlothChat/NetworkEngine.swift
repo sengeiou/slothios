@@ -203,7 +203,7 @@ class NetworkEngine: NSObject {
     
     //6.登出 POST
     func postAuthLogout(completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
-        let uuid = Global.shared.globalProfile?.uuid
+        let uuid = Global.shared.globalLogin?.user?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (uuid?.isEmpty)! || (token?.isEmpty)!{
@@ -213,12 +213,11 @@ class NetworkEngine: NSObject {
         
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
         Alamofire.upload(multipartFormData: {(multipartFormData) in
-            // code
-            let mobileData = uuid?.data(using: String.Encoding.utf8)
-            let passwdData = token?.data(using: String.Encoding.utf8)
+            let uuidData = uuid?.data(using: String.Encoding.utf8)
+            let tokenData = token?.data(using: String.Encoding.utf8)
             
-            multipartFormData.append(mobileData!, withName: "uuid")
-            multipartFormData.append(passwdData!, withName: "token")
+            multipartFormData.append(uuidData!, withName: "uuid")
+            multipartFormData.append(tokenData!, withName: "token")
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
