@@ -282,8 +282,11 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postUserPhoto(image: image) { (userPhoto) in
+            HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
+                newPhoto.profilePicUrl = userPhoto?.data?.profilePicUrl
+                newPhoto.uuid = userPhoto?.data?.uuid
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
                 self.refreshBannerView()

@@ -140,7 +140,7 @@ class NetworkEngine: NSObject {
             // code
             let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
             
-            multipartFormData.append(imageData, withName: "picFile", mimeType: "image/jpeg");
+            multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
@@ -385,7 +385,7 @@ class NetworkEngine: NSObject {
             // code
             let imageData:Data = UIImageJPEGRepresentation(image, 0.7)!
             
-            multipartFormData.append(imageData, withName: "picFile", mimeType: "image/jpeg");
+            multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
             
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
