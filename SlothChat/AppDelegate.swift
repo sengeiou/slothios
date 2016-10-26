@@ -43,18 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func changeRootViewController() {
-        var logined = false
-        
-        do {
-            let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
-//            cache[SGGlobalKey.SCLoginStatusKey] = nil
-            
-            if (cache[SGGlobalKey.SCLoginStatusKey] != nil) {
-                logined = (cache[SGGlobalKey.SCLoginStatusKey]?.boolValue)!
-            }
-        } catch _ {
-            print("Something went wrong :(")
-        }
+        var logined = Global.shared.isLogin()
         
         if logined {
             let rootVC = MainViewController()

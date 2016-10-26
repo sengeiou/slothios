@@ -20,7 +20,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var toolView: UserInfoToolView?
 
     var isMyself = false
-    var userObj = UserObj.UserInfoFromCache()
+    var profile = Global.shared.globalProfile
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,8 +113,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }
             make.height.equalTo(380)
         }
-        if self.userObj != nil{
-            infoView.configViewWihObject(userObj: self.userObj!)
+        if self.profile != nil{
+            infoView.configViewWihObject(userObj: self.profile!)
         }
         infoView.setEditUserInfoValue {
             self.configEditUserInfoView()
@@ -129,8 +129,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         if (self.editView != nil) {
             self.editView?.isHidden = false
             self.infoView.isHidden = true
-            if self.userObj != nil{
-                editView!.configViewWihObject(userObj: self.userObj!)
+            if self.profile != nil{
+                editView!.configViewWihObject(userObj: self.profile!)
             }
             return
         }
@@ -139,8 +139,8 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.editView = UserInfoEditView()
         editView?.showVC = self
         container.addSubview(editView!)
-        if self.userObj != nil{
-            editView!.configViewWihObject(userObj: self.userObj!)
+        if self.profile != nil{
+            editView!.configViewWihObject(userObj: self.profile!)
         }
 
         editView!.snp.makeConstraints { (make) in
@@ -157,10 +157,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         editView?.setDoneUserInfoValue(temClosure: { (_ editUserObj) in
-            self.userObj = editUserObj
-            editUserObj.caheForUserInfo()
-            if self.userObj != nil {
-                self.infoView.configViewWihObject(userObj: self.userObj!)
+            self.profile = editUserObj
+            editUserObj.caheForUserProfile()
+            if self.profile != nil {
+                self.infoView.configViewWihObject(userObj: self.profile!)
             }
             self.editView?.isHidden = true
             self.infoView.isHidden = false
@@ -180,9 +180,9 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     func deleteButtonClick() {
         let page = bannerView?.currentPage()
         SGLog(message: page)
-        self.userObj?.deleteAvatar(at: page!)
+        self.profile?.deleteAvatar(at: page!)
         self.refreshBannerView()
-        self.userObj?.caheForUserInfo()
+        self.profile?.caheForUserProfile()
     }
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
@@ -196,19 +196,17 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         UIActionSheet.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
             cycleScrollView.play()
-            self.userObj?.setNewAvatar(newAvatar: "http://e.hiphotos.baidu.com/zhidao/pic/item/3b292df5e0fe992580c7009035a85edf8cb17122.jpg",at: index)
-            self.userObj?.caheForUserInfo()
+//            self.profile?.setNewAvatar(newAvatar: "http://e.hiphotos.baidu.com/zhidao/pic/item/3b292df5e0fe992580c7009035a85edf8cb17122.jpg",at: index)
+            self.profile?.caheForUserProfile()
             
             self.refreshBannerView()
-//            self.selectedAvatar = avatar
-//            self.avatarButton.setImage(avatar, for: .normal)
             }, onCancel:{
                 cycleScrollView.play()
             }, allowsEditing: true)
     }
     
     func refreshBannerView() {
-        let imagesURLStrings = self.userObj?.getBannerAvatarList()
+        let imagesURLStrings = self.profile?.getBannerAvatarList()
         bannerView?.localizationImageNamesGroup = imagesURLStrings
     }
 }

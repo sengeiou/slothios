@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import PKHUD
 
-typealias SelectCodeClosureType = (_ code: String) -> Void
+typealias SelectCodeClosureType = (_ country: List) -> Void
 
 class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     
@@ -18,7 +19,7 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     var initialList = [String]()
     
     var selectPassValue:SelectCodeClosureType?
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
@@ -61,8 +62,9 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     
     func getCountryCodeList() {
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.getPublicCountry(withName: "") { (countryObj) in
-            print(countryObj)
+            HUD.hide()
             let list = countryObj?.data?.list
             let result = self.splitCountryList(countryList: list!)
             self.countryList.removeAll()
@@ -95,13 +97,16 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
             }else{
                 initialList.append(initial!)
                 tmpInitial = initial!
-                if subList.count > 0 {
+                
+                if subList.count > 0{
                     resultList.append(subList)
-                }else{
-                    subList = [List]()
-                    subList.append(listObj)
                 }
+                subList = [List]()
+                subList.append(listObj)
             }
+        }
+        if subList.count > 0{
+            resultList.append(subList)
         }
         return (resultList,initialList)
     }
@@ -167,8 +172,8 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
         let obj = rowList[indexPath.row]
         
         if let sp = self.selectPassValue {
-            if let code = obj.telPrefix{
-                sp(code)
+            if obj.telPrefix != nil{
+                sp(obj)
             }
         }
         _ = self.navigationController?.popViewController(animated: true)

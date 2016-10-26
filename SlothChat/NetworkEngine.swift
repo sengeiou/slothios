@@ -35,6 +35,7 @@ enum API_URI:String {
     case public_sms = "/api/public/sms"
     case public_sms_check = "/api/public/sms/check"
     case public_userPhoto = "/api/public/userPhoto"
+    case public_signup = "/api/public/userAndProfile/signup"
     case auth_login = "/auth/login"
     case auth_mobileapps_logout  = "/auth/mobileapps/logout"
     //7.修改个人资料页面的文字资料
@@ -110,13 +111,12 @@ class NetworkEngine: NSObject {
     
     func postPicFile(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
-
+        
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
             let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
             
             multipartFormData.append(imageData, withName: "picFile", mimeType: "image/jpeg");
-            
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
@@ -131,7 +131,7 @@ class NetworkEngine: NSObject {
     }
     
     func postPublicUserAndProfileSignup(withSignpModel signup:UserSignupModel ,completeHandler :@escaping(_ userAndProfile:UserAndProfile?) -> Void) -> Void {
-        let URLString:String = self.Base_URL + API_URI.public_userPhoto.rawValue
+        let URLString:String = self.Base_URL + API_URI.public_signup.rawValue
         let request = HTTPRequestGenerator(withParam:[
             "userPhotoUuid":signup.userPhotoUuid,
             "mobile": signup.mobile,
@@ -139,7 +139,9 @@ class NetworkEngine: NSObject {
             "country": signup.country,
             "nickname": signup.nickname,
             "sex": signup.sex,
-            "birthdate":signup.birthdate
+            "birthdate":signup.birthdate,
+//            "constellation":"水瓶座",
+//            "age":"4"
         ], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
@@ -164,7 +166,8 @@ class NetworkEngine: NSObject {
     }
     
 //    7.修改个人资料页面的文字资料
-    func postUserProfile(withUUID uuid:String,userUuid:String,nickname:String,sex:SGGenderType,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
+        
+    func postUserProfile(withUUID uuid:String,userUuid:String,nickname:String,sex:SGGenderType,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
         var URLString:String = self.Base_URL + API_URI.post_userProfile.rawValue
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
@@ -178,13 +181,13 @@ class NetworkEngine: NSObject {
             "university": university,
             ], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
             completeHandler(response.result.value);
         }
     }
     
     //9.查看个人资料页面的文字和图片
-    func getUserProfile(userUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func getUserProfile(userUuid: String,completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
         var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         
@@ -192,7 +195,7 @@ class NetworkEngine: NSObject {
             "userUuid": userUuid,
             ], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        Alamofire.request(request).responseObject { (response:DataResponse<UserProfile>) in
             completeHandler(response.result.value);
         }
     }

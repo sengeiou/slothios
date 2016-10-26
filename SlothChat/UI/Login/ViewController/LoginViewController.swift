@@ -16,6 +16,8 @@ class LoginViewController: BaseViewController {
     let passwordView = SingleInputView.init()
     let codeButton = UIButton(type: .custom)
     
+    public var countryName = "cn"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
@@ -34,7 +36,7 @@ class LoginViewController: BaseViewController {
         phoneView.setInputTextfieldLeftMagin(left: 106)
         phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
-        phoneView.configInputView(titleStr: "手机号:", contentStr: "18667931202")
+        phoneView.configInputView(titleStr: "手机号:", contentStr: "18996071924")
         configPhoneInputView(inputView: phoneView)
         phoneView.inputTextfield.keyboardType = .numberPad
         view.addSubview(phoneView)
@@ -42,7 +44,7 @@ class LoginViewController: BaseViewController {
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         passwordView.setInputTextfieldLeftMagin(left: 106)
-        passwordView.configInputView(titleStr: "密码:", contentStr: "")
+        passwordView.configInputView(titleStr: "密码:", contentStr: "lfdH384fs")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
         
@@ -108,7 +110,7 @@ class LoginViewController: BaseViewController {
     func configPhoneInputView(inputView : SingleInputView) {
         let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 44))
         codeButton.frame = leftView.bounds
-        codeButton.setTitle("+86", for: .normal)
+        codeButton.setTitle("86", for: .normal)
         codeButton.setTitleColor(UIColor.black, for: .normal)
         codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
@@ -122,6 +124,17 @@ class LoginViewController: BaseViewController {
         inputView.inputTextfield.leftViewMode = .always
         
     }
+    //MARK:- Network
+    
+    func getUserProfile() {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.getUserProfile(userUuid: "45bc88e9c2d043908c852388b7794b95") { (profile) in
+            HUD.hide()
+        }
+    }
+
+    
     
     //MARK:- Action
     
@@ -147,7 +160,22 @@ class LoginViewController: BaseViewController {
         }
         let phoneStr = phoneView.getInputContent()!
         let codeStr = self.codeButton.title(for: .normal)!
-        print("登录成功" + codeStr + phoneStr )
+        let passwordStr = passwordView.getInputContent()!
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (loginModel) in
+            HUD.hide()
+            if loginModel?.token != nil{
+                Global.shared.globalLogin = loginModel!
+                self.getUserProfile()
+            }else{
+                HUD.flash(.label("登录失败"), delay: 2)
+            }
+        }
+    }
+    
+    func loginSystem() {
         
         do {
             let cache = try Cache<NSString>(name: SGGlobalKey.SCCacheName)
@@ -188,8 +216,9 @@ class LoginViewController: BaseViewController {
     func codeButtonClick() {
         let pushVC  = CountryCodeViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
-        pushVC.setClosurePass { (code) in
-            self.codeButton.setTitle("+" + code, for: .normal)
+        pushVC.setClosurePass { (tmpCountry) in
+            self.countryName = tmpCountry.name!
+            self.codeButton.setTitle(tmpCountry.telPrefix, for: .normal)
         }
     }
     

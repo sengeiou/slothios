@@ -110,6 +110,14 @@
 		04B1CF501DBE36B6003482DF /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF4D1DBE36B6003482DF /* DACircularProgressView.m */; };
 		04B1CF511DBE36B6003482DF /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CF4F1DBE36B6003482DF /* DALabeledCircularProgressView.m */; };
 		04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B385A81DB4AB4E00A8C116 /* MainViewController.swift */; };
+		04B499A61DBFB2F2004659BA /* ModifyUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499A41DBFB2F2004659BA /* ModifyUserProfile.swift */; };
+		04B499A71DBFB2F2004659BA /* ModifyUserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499A51DBFB2F2004659BA /* ModifyUserProfileData.swift */; };
+		04B499AB1DBFB61A004659BA /* UserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499A81DBFB61A004659BA /* UserProfileData.swift */; };
+		04B499AC1DBFB61A004659BA /* UserPhotoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499A91DBFB61A004659BA /* UserPhotoList.swift */; };
+		04B499AD1DBFB61A004659BA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AA1DBFB61A004659BA /* UserProfile.swift */; };
+		04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AE1DBFB7F4004659BA /* SysConfig.swift */; };
+		04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499AF1DBFB7F4004659BA /* SysConfigData.swift */; };
+		04B499B41DBFBECC004659BA /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B31DBFBECC004659BA /* Global.swift */; };
 		04D0C70E1DBE379B0083BBA2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04D0C70A1DBE379B0083BBA2 /* LICENSE */; };
 		04D0C70F1DBE379B0083BBA2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */; };
 		04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */ = {isa = PBXBuildFile; fileRef = 04D0C70D1DBE379B0083BBA2 /* README.mdown */; };
@@ -333,6 +341,14 @@
 		04B1CF4E1DBE36B6003482DF /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		04B1CF4F1DBE36B6003482DF /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 		04B385A81DB4AB4E00A8C116 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		04B499A41DBFB2F2004659BA /* ModifyUserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyUserProfile.swift; sourceTree = "<group>"; };
+		04B499A51DBFB2F2004659BA /* ModifyUserProfileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyUserProfileData.swift; sourceTree = "<group>"; };
+		04B499A81DBFB61A004659BA /* UserProfileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileData.swift; sourceTree = "<group>"; };
+		04B499A91DBFB61A004659BA /* UserPhotoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPhotoList.swift; sourceTree = "<group>"; };
+		04B499AA1DBFB61A004659BA /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		04B499AE1DBFB7F4004659BA /* SysConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfig.swift; sourceTree = "<group>"; };
+		04B499AF1DBFB7F4004659BA /* SysConfigData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SysConfigData.swift; sourceTree = "<group>"; };
+		04B499B31DBFBECC004659BA /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		04D0C70A1DBE379B0083BBA2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		04D0C70B1DBE379B0083BBA2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		04D0C70C1DBE379B0083BBA2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -960,6 +976,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		04B499B21DBFBEC4004659BA /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				04B499B31DBFBECC004659BA /* Global.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 		04D0C7091DBE379B0083BBA2 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1078,6 +1102,13 @@
 				19008BA31DBE8A6600319B86 /* UserPhoto.swift */,
 				19008BA41DBE8A6600319B86 /* UserPhotoData.swift */,
 				19008BAB1DBE8D7C00319B86 /* UserSignupModel.swift */,
+				04B499A41DBFB2F2004659BA /* ModifyUserProfile.swift */,
+				04B499A51DBFB2F2004659BA /* ModifyUserProfileData.swift */,
+				04B499A81DBFB61A004659BA /* UserProfileData.swift */,
+				04B499A91DBFB61A004659BA /* UserPhotoList.swift */,
+				04B499AA1DBFB61A004659BA /* UserProfile.swift */,
+				04B499AE1DBFB7F4004659BA /* SysConfig.swift */,
+				04B499AF1DBFB7F4004659BA /* SysConfigData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1107,6 +1138,7 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
+				04B499B21DBFBEC4004659BA /* Global */,
 				19008B921DBE614500319B86 /* Model */,
 				19AA4A791DB534570001568B /* Network */,
 				044643561DB4F60F0050F8BC /* Category */,
@@ -1494,6 +1526,7 @@
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
 				04B1CF431DBE3638003482DF /* MWGridCell.m in Sources */,
+				04B499B41DBFBECC004659BA /* Global.swift in Sources */,
 				04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */,
 				040576EC1DB3353E00C55D02 /* IQTitleBarButtonItem.swift in Sources */,
 				04B1CEF11DBC46D9003482DF /* BiddingListCell.swift in Sources */,
@@ -1542,14 +1575,18 @@
 				04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */,
 				19008BAA1DBE8CE300319B86 /* UserAndProfileData.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
+				04B499A71DBFB2F2004659BA /* ModifyUserProfileData.swift in Sources */,
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
+				04B499A61DBFB2F2004659BA /* ModifyUserProfile.swift in Sources */,
 				04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */,
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				04B1CF501DBE36B6003482DF /* DACircularProgressView.m in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
+				04B499AB1DBFB61A004659BA /* UserProfileData.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
+				04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
 				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
@@ -1586,6 +1623,7 @@
 				04FEB7ED1DB76F13004509D1 /* UIImage+MultiFormat.m in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
 				04FEB7BE1DB76EDB004509D1 /* SDCycleScrollView.m in Sources */,
+				04B499AC1DBFB61A004659BA /* UserPhotoList.swift in Sources */,
 				0486BB691DBB41C900086303 /* IAPShare.m in Sources */,
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
@@ -1599,9 +1637,11 @@
 				19008BA21DBE831200319B86 /* SMS.swift in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */,
+				04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,
 				04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
+				04B499AD1DBFB61A004659BA /* UserProfile.swift in Sources */,
 				04B1CF451DBE3638003482DF /* MWPhoto.m in Sources */,
 				048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */,
 				04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */,

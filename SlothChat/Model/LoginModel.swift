@@ -15,6 +15,21 @@ class LoginModel : NSObject, NSCoding, Mappable{
 	var user : LoginUser?
 
 
+    open func caheForLoginModel() {
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.setValue(data, forKey: "LoginModelCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func ModelFromCache() -> LoginModel? {
+        let data = UserDefaults.standard.value(forKey: "LoginModelCacheKey")
+        if data != nil {
+            let user = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)  as! LoginModel?
+            return user
+        }
+        return nil
+    }
+    
 	class func newInstance(map: Map) -> Mappable?{
 		return LoginModel()
 	}
