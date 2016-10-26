@@ -31,7 +31,7 @@ class CaptchaViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
-        self.getPublicSMS()
+        getPublicSMS()
     }
     
     func sentupViews() {

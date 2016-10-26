@@ -37,12 +37,25 @@ class FindPasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupViews()
+        getPublicSMS()
     }
     
     func sentupViews() {
+        let scrollView = UIScrollView()
+        let container = UIView()
+        
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        scrollView.addSubview(container)
+        container.snp.makeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
         
         let iconView = IconTitleView.init(frame: CGRect.zero)
-        view.addSubview(iconView)
+        container.addSubview(iconView)
         iconView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
@@ -51,7 +64,7 @@ class FindPasswordViewController: BaseViewController {
         
         tipLabel.numberOfLines = 0
         tipLabel.lineBreakMode = .byCharWrapping
-        view.addSubview(tipLabel)
+        container.addSubview(tipLabel)
         
         tipLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
@@ -59,7 +72,7 @@ class FindPasswordViewController: BaseViewController {
             make.top.equalTo(iconView.snp.bottom).offset(122)
         }
         
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(fireTimer))
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(getPublicSMS))
         tipLabel.addGestureRecognizer(tap)
         tipLabel.isUserInteractionEnabled = true
         
@@ -68,7 +81,7 @@ class FindPasswordViewController: BaseViewController {
         captchaView.setInputTextfieldLeftMagin(left: 106)
         captchaView.configInputView(titleStr: "验证码:", contentStr: "")
         captchaView.inputTextfield.keyboardType = .numberPad
-        view.addSubview(captchaView)
+        container.addSubview(captchaView)
         
         captchaView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
@@ -81,12 +94,16 @@ class FindPasswordViewController: BaseViewController {
         passwordView.setInputTextfieldLeftMagin(left: 106)
         passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
-        view.addSubview(passwordView)
+        container.addSubview(passwordView)
         
         passwordView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(captchaView.snp.bottom).offset(20)
             make.height.equalTo(44)
+        }
+        
+        container.snp.makeConstraints { (make) in
+            make.bottom.equalTo(passwordView.snp.bottom).offset(20)
         }
         
         let confirmButton = UIButton.init(type: .custom)
@@ -140,6 +157,25 @@ class FindPasswordViewController: BaseViewController {
     }
     
     //MARK:- NetWork
+    
+    func getPublicSMS() {
+        if timeout > 0 {
+            return
+        }
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postPublicSMS(withType: "signup", toPhoneno: self.phoneNo!) { (sms) in
+            HUD.hide()
+            if sms?.status == ResponseError.SUCCESS.0 &&
+                !((self.phoneNo?.isEmpty)!) {
+                self.fireTimer()
+            }else{
+                self.update()
+                HUD.flash(.label(sms?.msg), delay: 2)
+            }
+        }
+    }
     
     func changeUserPassword(verifyCode: String,newPwd: String)  {
         let engine = NetworkEngine()

@@ -253,15 +253,23 @@ class NetworkEngine: NSObject {
         }
     }
     //10.陌生人查看个人资料页面时对资料点赞
-    func getUserProfile(userUuid: String,uuid:String,token:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func putUserProfileLike(uuid:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
         var URLString:String = self.Base_URL + API_URI.put_userProfile_like.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
 
         let request = HTTPRequestGenerator(withParam:[
             "likesCount": "1",
-            ], URLString: URLString)
+            ] , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
