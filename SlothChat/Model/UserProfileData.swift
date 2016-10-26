@@ -9,7 +9,7 @@ import Foundation
 import ObjectMapper
 
 let MaxUserAvatarCount: Int = 5
-let DefaultBannerImgName = "camera-gray"
+let DefaultBannerImgName = "user_photoBg"
 
 
 class UserProfileData : NSObject, NSCoding, Mappable{

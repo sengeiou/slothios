@@ -24,9 +24,9 @@ class UserInfoToolView: BaseView {
     
     fileprivate func sentupView() {
 //        likeButton.backgroundColor = SGColor.SGRedColor()
-        likeButton.setImage(UIImage.init(named: "heart-solid"), for: .normal)
+        likeButton.setImage(UIImage.init(named: "like_button"), for: .normal)
 //        chatButton.backgroundColor = SGColor.SGMainColor()
-        chatButton.setImage(UIImage.init(named: "send-message"), for: .normal)
+        chatButton.setImage(UIImage.init(named: "chat_button"), for: .normal)
         addSubview(chatButton)
         addSubview(likeButton)
         
