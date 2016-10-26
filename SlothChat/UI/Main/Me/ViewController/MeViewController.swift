@@ -48,6 +48,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
 
         if isMyselfFlag{
             let userUuid = Global.shared.globalLogin?.user?.uuid
+            mProfile = Global.shared.globalProfile
             self.getUserProfile(userUuid: userUuid!)
         }else{
             let userUuid = Global.shared.globalLogin?.user?.uuid
@@ -193,18 +194,23 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        if !isMyselfFlag{
+            HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        }
         engine.getUserProfile(userUuid: userUuid) { (profile) in
-            HUD.hide()
+            if !self.isMyselfFlag{
+                HUD.hide()
+            }
             if profile?.status == ResponseError.SUCCESS.0 {
                 self.mProfile = profile?.data
                 if self.isMyselfFlag{
                     Global.shared.globalProfile = profile?.data
-                    self.infoView.configViewWihObject(userObj: (profile?.data)!);
+                    self.shareView?.configLikeLabel(count: (profile?.data?.likesCount)!)
+
                 }else{
-                    self.infoView.configViewWihObject(userObj: (profile?.data)!);
                 }
-                
+                self.infoView.configViewWihObject(userObj: (profile?.data)!);
+
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
             }

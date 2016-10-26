@@ -115,6 +115,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         engine.postAuthLogout(withUUID: uuid!, token: token!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
+                Global.shared.logout()
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
