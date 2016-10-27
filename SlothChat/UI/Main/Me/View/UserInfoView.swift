@@ -59,7 +59,7 @@ class UserInfoView: BaseView {
         }
         sexImgView.snp.makeConstraints { (make) in
             make.left.equalTo(nameLabel.snp.right).offset(14)
-            make.bottom.equalTo(nameLabel.snp.bottom)
+            make.bottom.equalTo(nameLabel.snp.bottom).offset(-2)
             make.size.equalTo(CGSize.init(width: 14, height: 14))
         }
         ageInfoLabel.snp.makeConstraints { (make) in
@@ -81,6 +81,7 @@ class UserInfoView: BaseView {
             make.left.right.equalTo(0)
             make.top.equalTo(hauntView.snp.bottom)
             make.height.equalTo(34)
+            make.bottom.equalTo(0)
         }
         
         let editImgView = UIImageView()

@@ -127,6 +127,7 @@ class UserInfoEditView: BaseView {
             make.left.equalTo(nameView.snp.left)
             make.right.equalTo(nameView.snp.right)
             make.height.equalTo(nameView.snp.height)
+            make.bottom.equalTo(0)
         }
         
         let editView = UIView()

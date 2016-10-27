@@ -139,11 +139,11 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         infoView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             if shareView == nil{
-                make.top.equalTo(bannerView!.snp.bottom).offset(12)
+                make.top.equalTo(bannerView!.snp.bottom).offset(18)
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(380)
+//            make.height.equalTo(180)
         }
         if self.mProfile != nil{
             infoView.configViewWihObject(userObj: mProfile!)
@@ -153,20 +153,26 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         container.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoView.snp.bottom)
+            make.bottom.equalTo(infoView.snp.bottom).offset(10)
         }
     }
     
     func configEditUserInfoView() {
+        self.infoView.isHidden = true
+
         if (self.editView != nil) {
             self.editView?.isHidden = false
-            self.infoView.isHidden = true
             if self.mProfile != nil{
                 editView!.configViewWihObject(userObj: self.mProfile!)
             }
+            container.snp.remakeConstraints { (make) in
+                make.edges.equalTo(scrollView)
+                make.width.equalTo(scrollView)
+                make.bottom.equalTo(editView!.snp.bottom).offset(10)
+            }
+            
             return
         }
-        self.infoView.isHidden = true
         
         self.editView = UserInfoEditView()
         editView?.showVC = self
@@ -182,10 +188,12 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(380)
+//            make.height.equalTo(380)
         }
-        container.snp.makeConstraints { (make) in
-            make.bottom.equalTo(editView!.snp.bottom)
+        container.snp.remakeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.bottom.equalTo(editView!.snp.bottom).offset(10)
         }
         
         editView?.setDoneUserInfoValue(temClosure: { (_ editUserObj) in
@@ -226,6 +234,12 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
             HUD.hide()
+            self.container.snp.remakeConstraints { (make) in
+                make.edges.equalTo(self.scrollView)
+                make.width.equalTo(self.scrollView)
+                make.bottom.equalTo(self.infoView.snp.bottom).offset(10)
+            }
+            
             if userProfile?.status == ResponseError.SUCCESS.0 {
                 self.mProfile = editProfile
                 editProfile.caheForUserProfile()
@@ -287,7 +301,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
-                newPhoto.profilePicUrl = userPhoto?.data?.profilePicUrl
+                newPhoto.profileBigPicUrl = userPhoto?.data?.profileBigPicUrl
                 newPhoto.uuid = userPhoto?.data?.uuid
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
