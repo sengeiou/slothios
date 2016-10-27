@@ -23,20 +23,27 @@ class AboutUsViewController: BaseViewController {
 //            objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
 //        let version = NSBundle.mainBundle().objectForInfoDictionaryKey
         
-        let version =  Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+//        let version =  Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let label = UILabel.init()
-        label.text = "Copyright @ 2016 树懒 " + version
+        label.text = "一只无畏躁动的创始者\n一群新新世纪的宝宝们\n私信撩我们？Busy@ets.cc"
         label.font = UIFont.systemFont(ofSize: 14)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byCharWrapping
+        label.textAlignment = .center
+        let w = UIScreen.main.bounds.width
+        label.preferredMaxLayoutWidth = w - 40
         view.addSubview(label)
         
         imageView.snp.makeConstraints { (make) in
-            make.centerY.equalTo(view.snp.centerY).offset(-32)
+            make.centerY.equalTo(view.snp.centerY).offset(-88)
             make.centerX.equalTo(view.snp.centerX)
             make.size.equalTo(CGSize.init(width: 122, height: 122))
         }
         
         label.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(36)
+            make.left.greaterThanOrEqualTo(20)
+            make.right.lessThanOrEqualTo(-20)
             make.centerX.equalTo(view.snp.centerX)
         }
         

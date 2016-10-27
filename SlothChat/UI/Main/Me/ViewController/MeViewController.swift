@@ -75,13 +75,15 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         let w = UIScreen.main.bounds.width
-        let h = (w * 156.0 / 187.0)
-        
+//        let h = (w * 156.0 / 187.0)
+        let h = w
+
         bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: h), delegate: self, placeholderImage: nil)
+        bannerView?.bannerImageViewContentMode = .scaleAspectFill
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
         bannerView?.pageControlDotSize = CGSize.init(width: 8, height: 8)
-        bannerView?.pageControlBottomOffset = 150
+        bannerView?.pageControlBottomOffset = h - 30
         container.addSubview(bannerView!)
         bannerView?.delegate = self
         bannerView?.autoScroll = false
@@ -89,7 +91,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         
         bannerView?.snp.makeConstraints({ (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(180)
+            make.height.equalTo((bannerView?.snp.width)!)
         })
         
         let deleteButton = UIButton(type: .custom)

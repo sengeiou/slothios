@@ -39,8 +39,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         exitButton.addTarget(self, action: #selector(exitButtonClick), for: .touchUpInside)
         footerView.addSubview(exitButton)
         exitButton.snp.makeConstraints { (make) in
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
+            make.left.lessThanOrEqualTo(80)
+            make.right.greaterThanOrEqualTo(-80)
             make.top.equalTo(40)
             make.height.equalTo(44)
         }
