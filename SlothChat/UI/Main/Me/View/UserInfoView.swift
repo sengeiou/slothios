@@ -70,17 +70,17 @@ class UserInfoView: BaseView {
         locationView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(ageInfoLabel.snp.bottom).offset(12)
-//            make.height.equalTo(34)
+            make.height.equalTo(34)
         }
         hauntView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(locationView.snp.bottom)
-//            make.height.equalTo(34)
+            make.height.equalTo(34)
         }
         schoolView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(hauntView.snp.bottom)
-//            make.height.equalTo(34)
+            make.height.equalTo(34)
         }
         
         let editImgView = UIImageView()

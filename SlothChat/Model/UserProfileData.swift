@@ -44,7 +44,7 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         return nil
     }
     
-    func getBannerAvatarList() -> [String]{
+    func getBannerAvatarList(isMyself: Bool) -> [String]{
         var bannerList = [String]()
         if self.userPhotoList == nil{
             for _ in 0..<MaxUserAvatarCount{
@@ -54,9 +54,12 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         for userPhoto in self.userPhotoList! {
             bannerList.append(userPhoto.profilePicUrl!)
         }
-        for _ in self.userPhotoList!.count..<MaxUserAvatarCount{
-            bannerList.append(DefaultBannerImgName)
+        if isMyself{
+            for _ in self.userPhotoList!.count..<MaxUserAvatarCount{
+                bannerList.append(DefaultBannerImgName)
+            }
         }
+        
         return bannerList
     }
     

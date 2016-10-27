@@ -84,7 +84,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         bannerView?.pageControlBottomOffset = 150
         container.addSubview(bannerView!)
         bannerView?.delegate = self
-        
+        bannerView?.autoScroll = false
         refreshBannerView()
         
         bannerView?.snp.makeConstraints({ (make) in
@@ -257,7 +257,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deletePhoto(at: Int) {
-        self.bannerView?.pause()
 
         let userPhoto = self.mProfile?.userPhotoList?[at]
         
@@ -266,7 +265,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.deleteUserPhoto(photoUuid: (userPhoto?.uuid)!) { (response) in
             HUD.hide()
-            self.bannerView?.play()
             if response?.status == ResponseError.SUCCESS.0 {
 
                 self.mProfile?.deleteAvatar(at: at)
@@ -280,7 +278,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func uploadPhoto(image: UIImage,at: Int) {
-        self.bannerView?.pause()
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
@@ -297,7 +294,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 HUD.flash(.label("添加照片失败"), delay: 2)
             }
-            self.bannerView?.play()
         }
     }
 
@@ -318,7 +314,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
-        cycleScrollView.pause()
         var titleStr = "选择头像"
         let avatar = (cycleScrollView.localizationImageNamesGroup[index] as! String)
         
@@ -329,12 +324,11 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         UIActionSheet.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
                 self.uploadPhoto(image: avatar!, at: index)
             }, onCancel:{
-                cycleScrollView.play()
             }, allowsEditing: true)
     }
     
     func refreshBannerView() {
-        let imagesURLStrings = self.mProfile?.getBannerAvatarList()
+        let imagesURLStrings = self.mProfile?.getBannerAvatarList(isMyself: isMyselfFlag)
         bannerView?.localizationImageNamesGroup = imagesURLStrings
     }
 }
