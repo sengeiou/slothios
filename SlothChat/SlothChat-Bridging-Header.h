@@ -23,4 +23,6 @@
 #import "ValuePickerView.h"
 #import "MWPhotoBrowser.h"
 
+#import <tingyunApp/NBSAppAgent.h>
+
 #endif /* SlothChat_Bridging_Header_h */

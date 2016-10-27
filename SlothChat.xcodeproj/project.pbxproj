@@ -32,6 +32,10 @@
 		043C911D1DBB9BDA00431965 /* LikeUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911C1DBB9BDA00431965 /* LikeUsersView.swift */; };
 		043C911F1DBBAB5800431965 /* LikeUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911E1DBBAB5800431965 /* LikeUsersViewController.swift */; };
 		043C91211DBBACA400431965 /* LikeUsersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C91201DBBACA400431965 /* LikeUsersCell.swift */; };
+		04405B1B1DC245F40042BB44 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B1A1DC245F40042BB44 /* tingyunApp.framework */; };
+		04405B1D1DC246160042BB44 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B1C1DC246160042BB44 /* CoreTelephony.framework */; };
+		04405B1F1DC246200042BB44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B1E1DC246200042BB44 /* Security.framework */; };
+		04405B211DC246280042BB44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B201DC246280042BB44 /* SystemConfiguration.framework */; };
 		044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643501DB4F05C0050F8BC /* ChatViewController.swift */; };
 		044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643521DB4F0660050F8BC /* DiscoveryViewController.swift */; };
 		044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* MeViewController.swift */; };
@@ -225,6 +229,10 @@
 		043C911C1DBB9BDA00431965 /* LikeUsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeUsersView.swift; sourceTree = "<group>"; };
 		043C911E1DBBAB5800431965 /* LikeUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeUsersViewController.swift; sourceTree = "<group>"; };
 		043C91201DBBACA400431965 /* LikeUsersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeUsersCell.swift; sourceTree = "<group>"; };
+		04405B1A1DC245F40042BB44 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
+		04405B1C1DC246160042BB44 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		04405B1E1DC246200042BB44 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		04405B201DC246280042BB44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		044643501DB4F05C0050F8BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		044643521DB4F0660050F8BC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		044643541DB4F06D0050F8BC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -460,14 +468,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0486BBA41DBB540300086303 /* libz.tbd in Frameworks */,
+				04405B211DC246280042BB44 /* SystemConfiguration.framework in Frameworks */,
+				04405B1F1DC246200042BB44 /* Security.framework in Frameworks */,
+				04405B1D1DC246160042BB44 /* CoreTelephony.framework in Frameworks */,
 				0486BBBB1DBB593000086303 /* UIKit.framework in Frameworks */,
 				0486BBB91DBB592400086303 /* Foundation.framework in Frameworks */,
 				0486BBAC1DBB543300086303 /* libsqlite3.tbd in Frameworks */,
+				04405B1B1DC245F40042BB44 /* tingyunApp.framework in Frameworks */,
 				044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */,
 				0486BBAA1DBB542C00086303 /* ImageIO.framework in Frameworks */,
 				0486BBA81DBB541800086303 /* JavaScriptCore.framework in Frameworks */,
 				0486BBA61DBB540B00086303 /* libstdc++.tbd in Frameworks */,
-				0486BBA41DBB540300086303 /* libz.tbd in Frameworks */,
 				0486BBA21DBB53F900086303 /* libicucore.tbd in Frameworks */,
 				E1CB22759AC5EC8B12D8F81F /* Pods_SlothChat.framework in Frameworks */,
 				0486BB931DBB53D200086303 /* ShareSDK.framework in Frameworks */,
@@ -776,6 +788,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04405B1A1DC245F40042BB44 /* tingyunApp.framework */,
 				04B499B51DC106F0004659BA /* GVUserDefaults */,
 				04B1CF2A1DBE3638003482DF /* MWPhotoBrowser */,
 				04B1CEF41DBCAB96003482DF /* ValuePickerView */,
@@ -1216,6 +1229,9 @@
 		EABF46E165501AE099B412D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04405B201DC246280042BB44 /* SystemConfiguration.framework */,
+				04405B1E1DC246200042BB44 /* Security.framework */,
+				04405B1C1DC246160042BB44 /* CoreTelephony.framework */,
 				044DEC681DBE08C00067B1EF /* StoreKit.framework */,
 				0486BBBA1DBB593000086303 /* UIKit.framework */,
 				0486BBB81DBB592400086303 /* Foundation.framework */,
@@ -1829,6 +1845,7 @@
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0/Support/Optional",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0/Support/PlatformConnector",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0/Support/Required",
+					"$(PROJECT_DIR)/SlothChat/Third",
 				);
 				INFOPLIST_FILE = SlothChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1879,6 +1896,7 @@
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0/Support/Optional",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0/Support/PlatformConnector",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0/Support/Required",
+					"$(PROJECT_DIR)/SlothChat/Third",
 				);
 				INFOPLIST_FILE = SlothChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

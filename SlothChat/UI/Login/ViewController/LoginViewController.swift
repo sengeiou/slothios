@@ -186,6 +186,14 @@ class LoginViewController: BaseViewController {
                 GVUserDefaults.standard().lastLoginPhone = phoneStr
                 GVUserDefaults.standard().lastLoginCountry = codeStr
                 Global.shared.globalLogin = loginModel!
+                
+                if (loginModel!.user?.uuid) != nil{
+                    NBSAppAgent.setCustomerData((loginModel!.user?.uuid)!, forKey: "LoginUserUuid")
+                }
+                if (loginModel!.user?.username) != nil{
+                    NBSAppAgent.setCustomerData((loginModel!.user?.username)!, forKey: "LoginUserName")
+                }
+
                 self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
             }else{
                 HUD.flash(.label("登录失败"), delay: 2)

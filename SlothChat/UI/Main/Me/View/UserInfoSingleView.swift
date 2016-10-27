@@ -47,7 +47,7 @@ class UserInfoSingleView: BaseView {
     }
     
     func configContent(contentStr: String) {
-        contenLabel.text = contentStr
+        contenLabel.text = (contentStr.isEmpty ? " " : contentStr)
     }
     
     func configInputView(titleStr: String,contentStr: String) {
