@@ -11,7 +11,7 @@
 
 #import "MKBlockAdditions.h"
 #import "NSObject+MKBlockAdditions.h"
-#import "UIActionSheet+MKBlockAdditions.h"
+#import "UIAlertController+MKBlockAdditions.h"
 
 #import "SDCycleScrollView.h"
 

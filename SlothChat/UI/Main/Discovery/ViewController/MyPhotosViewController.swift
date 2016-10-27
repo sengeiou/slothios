@@ -80,7 +80,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+            UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
                 self.publishAdvert(image: avatar!)
                 }, onCancel:nil)
             return

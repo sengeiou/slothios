@@ -337,7 +337,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             avatar.hasPrefix("https://") {
             titleStr = "替换头像"
         }
-        UIActionSheet.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+        UIAlertController.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
                 self.uploadPhoto(image: avatar!, at: index)
             }, onCancel:{
             }, allowsEditing: true)

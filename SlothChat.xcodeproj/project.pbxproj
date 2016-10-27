@@ -68,7 +68,7 @@
 		0486BBBB1DBB593000086303 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486BBBA1DBB593000086303 /* UIKit.framework */; };
 		048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BA41DB2243700F5A399 /* PerfectionInfoViewController.swift */; };
 		048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */; };
-		048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */; };
+		048B0BAE1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BAC1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m */; };
 		048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */; };
 		048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */; };
 		048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB61DB27CAC00F5A399 /* BaseView.swift */; };
@@ -283,8 +283,8 @@
 		048B0BA81DB241AD00F5A399 /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
 		048B0BA91DB241AD00F5A399 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
 		048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKBlockAdditions.m"; sourceTree = "<group>"; };
-		048B0BAB1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+MKBlockAdditions.h"; sourceTree = "<group>"; };
-		048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		048B0BAB1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		048B0BAC1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+MKBlockAdditions.m"; sourceTree = "<group>"; };
 		048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlothChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDatePicker.swift; sourceTree = "<group>"; };
 		048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIDatePicker.xib; sourceTree = "<group>"; };
@@ -797,8 +797,8 @@
 				048B0BA81DB241AD00F5A399 /* MKBlockAdditions.h */,
 				048B0BA91DB241AD00F5A399 /* NSObject+MKBlockAdditions.h */,
 				048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */,
-				048B0BAB1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.h */,
-				048B0BAC1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m */,
+				048B0BAB1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.h */,
+				048B0BAC1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m */,
 			);
 			path = MKAdditions;
 			sourceTree = "<group>";
@@ -1613,7 +1613,7 @@
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
-				048B0BAE1DB241AD00F5A399 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				048B0BAE1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m in Sources */,
 				0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
 				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,

@@ -79,7 +79,7 @@ class DiscoveryViewController: BaseViewController {
     //MARK:- Action
     
     override func confirmClick() {
-        UIActionSheet.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+        UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
             self.publishAdvert(image: avatar!)
             }, onCancel:nil)
     }
