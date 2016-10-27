@@ -1822,6 +1822,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -1871,6 +1872,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",

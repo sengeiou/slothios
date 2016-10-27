@@ -26,15 +26,15 @@ class UserInfoSingleView: BaseView {
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
+            make.left.equalTo(8)
             make.centerY.equalTo(self.snp.centerY)
-            make.width.equalTo(80)
+            make.width.equalTo(95)
         }
         contenLabel.font = UIFont.systemFont(ofSize: 14)
+        let screenWidth = UIScreen.main.bounds.size.width
+        contenLabel.preferredMaxLayoutWidth = screenWidth - 95 - 10
         contenLabel.lineBreakMode = .byCharWrapping
         contenLabel.numberOfLines = 0
-        let screenWidth = UIScreen.main.bounds.size.width
-        contenLabel.preferredMaxLayoutWidth = screenWidth - 80 - 10
         
         addSubview(contenLabel)
         contenLabel.snp.makeConstraints { (make) in

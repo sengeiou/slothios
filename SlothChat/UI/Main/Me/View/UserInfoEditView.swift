@@ -184,6 +184,7 @@ class UserInfoEditView: BaseView {
     
     func confirmButtonClick() {
         print("confirmButtonClick")
+        self.endEditing(true)
         
         self.userObj?.nickname = nameView.getInputContent()!
         if sexPickView.isMalePick {

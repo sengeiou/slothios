@@ -40,9 +40,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "我"
-            
+        super.viewDidLoad()            
         self.setNavtionConfirm(titleStr: "设置")
 
         if isMyselfFlag{
@@ -139,7 +137,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         infoView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             if shareView == nil{
-                make.top.equalTo(bannerView!.snp.bottom).offset(18)
+                make.top.equalTo(bannerView!.snp.bottom).offset(19)
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
