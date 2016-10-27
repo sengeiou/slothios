@@ -63,8 +63,8 @@ class LikeUsersCell: UITableViewCell {
     
     func configCellWithObj(userObj: UserProfileData) {
         let photoObj = userObj.userPhotoList?.first
-        if photoObj != nil && photoObj?.profilePicUrl != nil {
-            let avatarUrl = URL(string: (photoObj?.profilePicUrl!)!)
+        if photoObj != nil && photoObj?.profileBigPicUrl != nil {
+            let avatarUrl = URL(string: (photoObj?.profileBigPicUrl!)!)
             self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
         
