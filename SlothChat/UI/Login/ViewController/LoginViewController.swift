@@ -115,7 +115,7 @@ class LoginViewController: BaseViewController {
         let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 44))
         codeButton.frame = leftView.bounds
         let codeStr = GVUserDefaults.standard().lastLoginCountry
-        if codeStr == nil{
+        if codeStr != nil{
             codeButton.setTitle(codeStr, for: .normal)
         }else{
             codeButton.setTitle("86", for: .normal)
