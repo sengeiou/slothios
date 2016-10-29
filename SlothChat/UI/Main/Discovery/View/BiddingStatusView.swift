@@ -57,12 +57,12 @@ class BiddingStatusView: BaseView {
         
         addSubview(usersView)
         
-        
+        let w = UIScreen.main.bounds.width
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
             make.height.equalTo(256)
+            make.height.equalTo((w * 288.0) / 375.0)
         }
-        
         usersView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom).offset(24)
@@ -112,7 +112,7 @@ class BiddingStatusView: BaseView {
         
         timeoutLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
-            make.top.equalTo(overweightButton.snp.bottom).offset(10)
+            make.top.equalTo(overweightButton.snp.bottom).offset(18)
         }        
     }
     
@@ -123,7 +123,7 @@ class BiddingStatusView: BaseView {
         
         let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
         attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGBlueColor(), range: range)
-        attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: range)
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 18), range: range)
         priceLabel.attributedText = attributedText
     }
     

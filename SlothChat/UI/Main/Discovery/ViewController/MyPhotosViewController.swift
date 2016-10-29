@@ -36,13 +36,15 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         let frame = CGRect.zero
         let layout = UICollectionViewFlowLayout.init()
         layout.scrollDirection = .vertical
+        let photoMagin = CGFloat(6)
         
         let screenWidth = UIScreen.main.bounds.width
-        let width = (screenWidth - 10 * 4) / 3.0
+        let width = (screenWidth - photoMagin * 2) / 3.0
         layout.itemSize = CGSize.init(width: width, height: width)
         
-        layout.sectionInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10);
-        layout.minimumLineSpacing = 10;
+        layout.sectionInset = UIEdgeInsets.zero
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 3
         
         let collectionView = UICollectionView.init(frame: frame, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.clear
@@ -65,12 +67,10 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         let cell : MyPhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath as IndexPath) as! MyPhotosCell
         
         if indexPath.row == 0 {
-            cell.imgView.contentMode = .redraw
             cell.imgView.image = UIImage.init(named: "select_photoBg")
             return cell
         }
-        cell.imgView.contentMode = .scaleAspectFit
-
+        
         let imgUrl = dataSource[indexPath.row - 1]
         
         let url = URL(string: imgUrl)

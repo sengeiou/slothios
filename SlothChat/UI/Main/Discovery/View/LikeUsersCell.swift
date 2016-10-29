@@ -43,11 +43,11 @@ class LikeUsersCell: UITableViewCell {
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 36, height: 36))
+            make.size.equalTo(CGSize.init(width: 40, height: 40))
         }
-        
+        nameLabel.font = UIFont.systemFont(ofSize: 15)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(avatarImgView.snp.right).offset(20)
+            make.left.equalTo(avatarImgView.snp.right).offset(18)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
         browseButton.setTitle("查看", for: .normal)

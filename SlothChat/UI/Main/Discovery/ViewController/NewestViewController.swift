@@ -20,7 +20,10 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 260
+        let w = UIScreen.main.bounds.width
+        let imgViewHeight = (w * 200.0) / 375.0
+        
+        tableView.rowHeight = 145 + imgViewHeight
         view.addSubview(tableView)
         tableView.register(DiscoveryCell.self, forCellReuseIdentifier: "DiscoveryCell")
         tableView.snp.makeConstraints { (make) in

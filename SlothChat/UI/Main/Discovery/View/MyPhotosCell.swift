@@ -13,13 +13,20 @@ class MyPhotosCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.configCell()
+        self.sentupView()
     }
     
-    func configCell()  {
+    func sentupView()  {
         self.clipsToBounds = true
         imgView.frame = self.bounds
         self.addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+    }
+    
+    func configViewObject(imgUrl: String) {
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -45,6 +45,7 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
 
         contentLabel.numberOfLines = 0
         contentLabel.lineBreakMode = .byCharWrapping
+        
         let w = UIScreen.main.bounds.width
         contentLabel.preferredMaxLayoutWidth = w - 8 * 2
         contentLabel.font = UIFont.systemFont(ofSize: 14)
@@ -56,13 +57,12 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
         
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(300)
+            make.height.equalTo((w * 288.0) / 375.0)
         }
-        
         usersListView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom)
-            make.height.equalTo(44)
+            make.height.equalTo(124)
         }
         
         contentLabel.snp.makeConstraints { (make) in
@@ -88,7 +88,15 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
         
         usersListView.configViewWithObject(avatarList: user!.avatarList)
         
-        self.contentLabel.text = "这是一个广告\n\n您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"
+        let string1 = "这是一个广告\n\n"
+        let string2 = "您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"
+        
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        let attributedText = NSMutableAttributedString.init(string: string1 + string2)
+        let range = NSRange.init(location: 0, length: string1.characters.count)
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 17), range: range)
+        self.contentLabel.attributedText = attributedText
     }
     
     //MARK:- Action
