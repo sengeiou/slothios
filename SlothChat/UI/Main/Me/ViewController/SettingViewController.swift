@@ -93,11 +93,13 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         let ratingVC = RatingViewController(nibName: "RatingViewController", bundle: nil)
         let popup = PopupDialog(viewController: ratingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: true)
         let buttonOne = CancelButton(title: "取消") {
-//            self.label.text = "You canceled the rating dialog"
         }
         buttonOne.titleColor = SGColor.black
         let buttonTwo = DefaultButton(title: "确定") {
-//            self.label.text = "You rated \(ratingVC.cosmosStarRating.rating) stars"
+            let price = ratingVC.textField.text
+            if let price = price{
+                self.purchase(forProduct: Int(price)!)
+            }
         }
         buttonTwo.titleColor = SGColor.SGMainColor()
         popup.addButtons([buttonOne, buttonTwo])
