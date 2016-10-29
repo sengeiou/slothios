@@ -8,12 +8,10 @@
 
 import UIKit
 
-class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
+class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = DiscoveryUserObj.getDiscoveryUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    var photoList = [MWPhoto]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self

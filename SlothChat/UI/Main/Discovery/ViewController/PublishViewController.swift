@@ -8,13 +8,12 @@
 
 import UIKit
 
-class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
+class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
     var isJoin = false
-    var photoList = [MWPhoto]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,23 +119,9 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     func tapMainImgView() {
-        let photo = MWPhoto(image: headerView.mainImgView.image)
+        let browser = ImageScrollViewController()
+        browser.disPlay(image: headerView.mainImgView.image!)
+        self.present(browser, animated: true, completion: nil)
         
-        photoList.append(photo!)
-        
-        let browser = MWPhotoBrowser(delegate: self)
-        self.navigationController?.pushViewController(browser!, animated: true)
-        
-    }
-    
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
     }
 }

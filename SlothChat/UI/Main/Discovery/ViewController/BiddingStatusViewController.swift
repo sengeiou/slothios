@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
+class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -19,8 +19,6 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var isMyself = true
     var isFollow = false
     var mainImgUrl: String?
-    
-    var photoList = [MWPhoto]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,24 +136,8 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         if mainImgUrl == nil {
             return
         }
-        let photoUrl = URL.init(string: mainImgUrl!)
-        let photo = MWPhoto(url: photoUrl)
-        
-        photoList.append(photo!)
-        
-        let browser = MWPhotoBrowser(delegate: self)
-        self.navigationController?.pushViewController(browser!, animated: true)
-        
-    }
-    
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
+        let browser = ImageScrollViewController()
+        browser.disPlay(imageUrl: mainImgUrl!)
+        self.present(browser, animated: true, completion: nil)
     }
 }

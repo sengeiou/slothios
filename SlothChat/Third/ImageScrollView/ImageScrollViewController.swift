@@ -92,9 +92,11 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func disPlay(imageUrl: String) {
-//        imageScroller.display(image: UIImage.init(named: "icon")!)
-
         imageScroller.display(imageUrl: imageUrl)
+    }
+    
+    func disPlay(image: UIImage) {
+        imageScroller.display(image: UIImage)
     }
     
     //MARK: - Action

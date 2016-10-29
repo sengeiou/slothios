@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
+class BrowseAdvertViewController: BaseViewController {
     let scrollView = UIScrollView()
     let container = UIView()
     
@@ -19,7 +19,6 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
 
     var isFollow = false
     var userObj: UserObj?
-    var photoList = [MWPhoto]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,24 +116,10 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
     }
     
     func tapMainImgView() {
-        let photoUrl = URL.init(string: (self.userObj!.avatarList?.first)!)
-        let photo = MWPhoto(url: photoUrl)
         
-        photoList.append(photo!)
+        let browser = ImageScrollViewController()
+        browser.disPlay(imageUrl: (self.userObj!.avatarList?.first)!)
+        self.present(browser, animated: true, completion: nil)
         
-        let browser = MWPhotoBrowser(delegate: self)
-        self.navigationController?.pushViewController(browser!, animated: true)
-        
-    }
-    
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
     }
 }
