@@ -86,19 +86,43 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //Mark:- Action
     
     func charge() {
-        self.purchaseForProduct()
+        
+        let alertController = UIAlertController(title: "请输入您想要充值的金额", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler:{ (action) in
+            self.purchaseForProduct()
+        })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+        cancelAction.setValue(SGColor.black, forKey: "_titleTextColor")
+        
+        alertController.addTextField { (textField) in
+            let label = UILabel()
+            textField.leftView = label
+            textField.leftViewMode = .always
+            label.text = "￥"
+            
+//            textField.addTarget(self, action: #selector(exitButtonClick), for: .valueChanged)
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     func exitButtonClick() {
         
         let alertController = UIAlertController(title: "是否退出树懒", message: "", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
-        let exitAction = UIAlertAction(title: "退出", style: .default, handler:{ (action) in
+        let okAction = UIAlertAction(title: "退出", style: .default, handler:{ (action) in
             self.logout()
         })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
 
         alertController.addAction(cancelAction)
-        alertController.addAction(exitAction)
+        alertController.addAction(okAction)
 
         self.present(alertController, animated: true, completion: nil)
     }

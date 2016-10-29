@@ -323,8 +323,19 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deleteButtonClick() {
-        let at = bannerView?.currentPage()
-        self.deletePhoto(at: at!)
+        let alertController = UIAlertController(title: "您确定要删除这张图片？", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler:{ (action) in
+            let at = self.bannerView?.currentPage()
+            self.deletePhoto(at: at!)
+        })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+        cancelAction.setValue(SGColor.black, forKey: "_titleTextColor")
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {

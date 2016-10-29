@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import PKHUD
 
-class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -113,10 +114,32 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     override func confirmClick() {
         SGLog(message: headerView.isJoin)
+        let price = headerView.price
+        
+        SGLog(message: price)
+        if  headerView.isJoin && price > 1{
+            let needPrice = price - 1
+            
+            let title = "当前账户余额不足，为￥" + String(price) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                
+            })
+            okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
 
-        SGLog(message: headerView.price)
-        _ = navigationController?.popViewController(animated: true)
+            alert.addAction(cancelAction)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            
+        }else{
+            HUD.flash(.label("发布成功"), delay: 2, completion: { (result) in
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+        }
     }
+    
     
     func tapMainImgView() {
         let browser = ImageScrollViewController()
