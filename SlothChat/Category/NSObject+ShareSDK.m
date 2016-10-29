@@ -65,7 +65,7 @@
     if (imageArray) {
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"悄悄地告诉Ta~"
+        [shareParams SSDKSetupShareParamsByText:@"悄悄地告诉你哟～～"
                                          images:imageArray
                                             url:[NSURL URLWithString:@"https://www.baidu.com"]
                                           title:nil

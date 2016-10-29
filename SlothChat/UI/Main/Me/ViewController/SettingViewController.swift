@@ -97,6 +97,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         buttonOne.titleColor = SGColor.black
         let buttonTwo = DefaultButton(title: "确定") {
             let price = ratingVC.textField.text
+            if (price?.isEmpty)!{
+                return
+            }
             if let price = price{
                 self.purchase(forProduct: Int(price)!)
             }
