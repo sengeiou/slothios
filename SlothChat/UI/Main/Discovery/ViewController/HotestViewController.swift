@@ -50,6 +50,11 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let pushVC = BrowseAdvertViewController()
+        let user = UserObj.defaultUserObj()
+        pushVC.configWithObject(user: user)
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {

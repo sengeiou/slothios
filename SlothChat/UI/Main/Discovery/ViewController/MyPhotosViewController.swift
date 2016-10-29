@@ -68,6 +68,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
         if indexPath.row == 0 {
             cell.imgView.image = UIImage.init(named: "select_photoBg")
+            cell.isShowFlagView(isShow: true)
             return cell
         }
         
@@ -80,6 +81,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            
             UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
                 self.publishAdvert(image: avatar!)
                 }, onCancel:nil)

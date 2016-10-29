@@ -32,7 +32,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 50
+        tableView.rowHeight = 56
         view.addSubview(tableView)
         tableView.register(BiddingListCell.self, forCellReuseIdentifier: "BiddingListCell")
         tableView.snp.makeConstraints { (make) in

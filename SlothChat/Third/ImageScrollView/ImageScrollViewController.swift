@@ -65,7 +65,11 @@ class ImageScrollViewController: BaseViewController {
         
         toolBar.addSubview(likeButton)
         likeButton.snp.makeConstraints{ (make) in
-            make.right.equalTo(deleteButton.snp.left).offset(-26)
+            if deleteButton.isHidden{
+                make.right.equalTo(-8)
+            }else{
+                make.right.equalTo(deleteButton.snp.left).offset(-26)
+            }
             make.size.equalTo(CGSize.init(width: 32, height: 32))
             make.centerY.equalTo(toolBar.snp.centerY)
         }
@@ -75,12 +79,12 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func isShowDeleteButton(isShow: Bool) {
-        if !isShow {
-            deleteButton.isHidden = !isShow
-            likeButton.snp.updateConstraints({ (make) in
-                make.right.equalTo(-8)
-            })
-        }
+        deleteButton.isHidden = !isShow
+
+    }
+    
+    func isShowLikeButton(isShow: Bool) {
+        likeButton.isHidden = !isShow
     }
     
     func sentupView() {
@@ -96,7 +100,7 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func disPlay(image: UIImage) {
-        imageScroller.display(image: UIImage)
+        imageScroller.display(image: image)
     }
     
     //MARK: - Action

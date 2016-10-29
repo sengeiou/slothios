@@ -21,6 +21,10 @@ class BaseViewController: UIViewController {
         }
     }
     
+    deinit {
+        SGLog(message: String(describing: self))
+    }
+    
     func showAlertView(message: String) {
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler:nil)

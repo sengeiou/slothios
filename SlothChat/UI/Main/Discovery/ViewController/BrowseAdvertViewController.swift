@@ -61,7 +61,7 @@ class BrowseAdvertViewController: BaseViewController {
         usersListView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom)
-            make.height.equalTo(124)
+            make.height.equalTo(44)
         }
         
         contentLabel.snp.makeConstraints { (make) in
@@ -119,6 +119,7 @@ class BrowseAdvertViewController: BaseViewController {
         
         let browser = ImageScrollViewController()
         browser.disPlay(imageUrl: (self.userObj!.avatarList?.first)!)
+        browser.isShowDeleteButton(isShow: false)
         self.present(browser, animated: true, completion: nil)
         
     }

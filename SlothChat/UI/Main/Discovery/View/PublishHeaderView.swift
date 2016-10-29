@@ -85,7 +85,7 @@ class PublishHeaderView: BaseView {
         selectButton.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
             make.centerY.equalTo(joinView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 70, height: 46))
+            make.size.equalTo(CGSize.init(width: 70, height: 40))
         }
         
         contentLabel.snp.makeConstraints { (make) in
@@ -117,7 +117,7 @@ class PublishHeaderView: BaseView {
         overweightButton.setTitle("加码", for: .normal)
         overweightButton.setTitleColor(UIColor.white, for: .normal)
         overweightButton.backgroundColor = SGColor.SGMainColor()
-        overweightButton.layer.cornerRadius = 35
+        overweightButton.layer.cornerRadius = 23
         overweightButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         priceView.addSubview(overweightButton)
         
