@@ -63,34 +63,17 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             break
         case .mainImgType:
-            
             let userObj = dataSource[indexPath.row]
-            let photoUrl = URL.init(string: userObj.mainImgUrl)
-            let photo = MWPhoto(url: photoUrl)
+            let browser = ImageScrollViewController()
+            browser.disPlay(imageUrl: userObj.mainImgUrl)
+            self.present(browser, animated: true, completion: nil)
             
-            photoList.append(photo!)
-            
-            let browser = MWPhotoBrowser(delegate: self)
-            self.navigationController?.pushViewController(browser!, animated: true)
             break
         case .likeUsersType:
             let pushVC = LikeUsersViewController()
             navigationController?.pushViewController(pushVC, animated: true)
             break
         }
-    }
-    
-    //MARK:- MWPhotoBrowserDelegate
-
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
     }
     
 }

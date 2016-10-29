@@ -36,6 +36,8 @@
 		04405B1D1DC246160042BB44 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B1C1DC246160042BB44 /* CoreTelephony.framework */; };
 		04405B1F1DC246200042BB44 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B1E1DC246200042BB44 /* Security.framework */; };
 		04405B211DC246280042BB44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B201DC246280042BB44 /* SystemConfiguration.framework */; };
+		04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04405B2C1DC46CD50042BB44 /* ImageScrollView.swift */; };
+		04405B2F1DC46E310042BB44 /* ImageScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04405B2E1DC46E310042BB44 /* ImageScrollViewController.swift */; };
 		044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643501DB4F05C0050F8BC /* ChatViewController.swift */; };
 		044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643521DB4F0660050F8BC /* DiscoveryViewController.swift */; };
 		044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* MeViewController.swift */; };
@@ -233,6 +235,8 @@
 		04405B1C1DC246160042BB44 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		04405B1E1DC246200042BB44 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		04405B201DC246280042BB44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		04405B2C1DC46CD50042BB44 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
+		04405B2E1DC46E310042BB44 /* ImageScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollViewController.swift; sourceTree = "<group>"; };
 		044643501DB4F05C0050F8BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		044643521DB4F0660050F8BC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		044643541DB4F06D0050F8BC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
@@ -586,6 +590,15 @@
 			path = CAPSPageMenu;
 			sourceTree = "<group>";
 		};
+		04405B221DC46BB70042BB44 /* ImageScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				04405B2C1DC46CD50042BB44 /* ImageScrollView.swift */,
+				04405B2E1DC46E310042BB44 /* ImageScrollViewController.swift */,
+			);
+			path = ImageScrollView;
+			sourceTree = "<group>";
+		};
 		044643441DB4F03E0050F8BC /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +801,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04405B221DC46BB70042BB44 /* ImageScrollView */,
 				04405B1A1DC245F40042BB44 /* tingyunApp.framework */,
 				04B499B51DC106F0004659BA /* GVUserDefaults */,
 				04B1CF2A1DBE3638003482DF /* MWPhotoBrowser */,
@@ -1593,6 +1607,7 @@
 				04FEB7EF1DB76F13004509D1 /* UIImageView+HighlightedWebCache.m in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
+				04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */,
 				04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */,
 				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
@@ -1674,6 +1689,7 @@
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */,
 				04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */,
+				04405B2F1DC46E310042BB44 /* ImageScrollViewController.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,
 				04D0C7101DBE379B0083BBA2 /* README.mdown in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
