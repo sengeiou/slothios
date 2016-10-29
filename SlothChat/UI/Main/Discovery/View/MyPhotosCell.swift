@@ -25,7 +25,6 @@ class MyPhotosCell: UICollectionViewCell {
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
-        let flagView = UIView()
         flagView.layer.borderColor = UIColor.white.cgColor
         flagView.layer.borderWidth = 1.0
         flagView.backgroundColor = UIColor.black.withAlphaComponent(0.1)

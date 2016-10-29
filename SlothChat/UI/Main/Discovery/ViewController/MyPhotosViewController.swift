@@ -68,7 +68,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
         if indexPath.row == 0 {
             cell.imgView.image = UIImage.init(named: "select_photoBg")
-            cell.isShowFlagView(isShow: true)
+            cell.isShowFlagView(isShow: false)
             return cell
         }
         
