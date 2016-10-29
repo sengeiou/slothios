@@ -86,30 +86,22 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //Mark:- Action
     
     func charge() {
-        
-        let alertController = UIAlertController(title: "请输入您想要充值的金额", message: nil, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
-        let okAction = UIAlertAction(title: "确定", style: .default, handler:{ (action) in
-            self.purchaseForProduct()
-        })
-        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
-        cancelAction.setValue(SGColor.black, forKey: "_titleTextColor")
-        
-        alertController.addTextField { (textField) in
-            let label = UILabel()
-            textField.leftView = label
-            textField.leftViewMode = .always
-            label.text = "￥"
-            
-//            textField.addTarget(self, action: #selector(exitButtonClick), for: .valueChanged)
+        self.showCustomDialog()
+    }
+    
+    func showCustomDialog() {
+        let ratingVC = RatingViewController(nibName: "RatingViewController", bundle: nil)
+        let popup = PopupDialog(viewController: ratingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: true)
+        let buttonOne = CancelButton(title: "取消") {
+//            self.label.text = "You canceled the rating dialog"
         }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        
-        
-        self.present(alertController, animated: true, completion: nil)
-        
+        buttonOne.titleColor = SGColor.black
+        let buttonTwo = DefaultButton(title: "确定") {
+//            self.label.text = "You rated \(ratingVC.cosmosStarRating.rating) stars"
+        }
+        buttonTwo.titleColor = SGColor.SGMainColor()
+        popup.addButtons([buttonOne, buttonTwo])
+        present(popup, animated: true, completion: nil)
     }
     
     func exitButtonClick() {

@@ -21,6 +21,7 @@
 #import "UIViewController+Purchase.h"
 #import "NSObject+ShareSDK.h"
 #import "ValuePickerView.h"
+#import "FXBlurView.h"
 
 #import <tingyunApp/NBSAppAgent.h>
 
