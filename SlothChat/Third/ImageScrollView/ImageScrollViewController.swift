@@ -48,7 +48,7 @@ class ImageScrollViewController: BaseViewController {
             make.centerY.equalTo(toolBar.snp.centerY)
         }
         
-        closeButton.setImage(UIImage.init(named: "go-back"), for: .normal)
+        closeButton.setImage(UIImage.init(named: "close"), for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonClick), for: .touchUpInside)
         
         

@@ -66,17 +66,17 @@ class DiscoveryCell: UITableViewCell {
             make.top.equalTo(avatarImgView.snp.top)
             make.right.lessThanOrEqualTo(-44)
         }
-        
+        locationImgView.image = UIImage(named: "location")
         locationImgView.snp.makeConstraints { (make) in
             make.left.equalTo(avatarImgView.snp.right).offset(12)
             make.bottom.equalTo(avatarImgView.snp.bottom)
-            make.size.equalTo(CGSize.init(width: 13, height: 13))
+            make.size.equalTo(CGSize.init(width: 8, height: 12))
         }
         
         locationLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(locationImgView.snp.right).offset(6)
+            make.left.equalTo(locationImgView.snp.right).offset(10)
             make.top.equalTo(locationImgView.snp.top)
-            make.right.lessThanOrEqualTo(-44)
+            make.right.lessThanOrEqualTo(-80)
         }
         
         likeButton.snp.makeConstraints { (make) in
