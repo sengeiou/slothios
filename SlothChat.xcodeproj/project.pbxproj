@@ -142,6 +142,15 @@
 		04E25B851DBB77DE002B727F /* NewestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B841DBB77DE002B727F /* NewestViewController.swift */; };
 		04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */; };
 		04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */; };
+		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
+		04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */; };
+		04ED104C1DC76E0300EBD3C5 /* LikeProfileListUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */; };
+		04ED10501DC787F300EBD3C5 /* UserGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED104D1DC787F300EBD3C5 /* UserGallery.swift */; };
+		04ED10511DC787F300EBD3C5 /* UserGalleryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED104E1DC787F300EBD3C5 /* UserGalleryData.swift */; };
+		04ED10521DC787F300EBD3C5 /* UserGalleryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED104F1DC787F300EBD3C5 /* UserGalleryPhoto.swift */; };
+		04ED10561DC7994900EBD3C5 /* DisplayOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10531DC7994900EBD3C5 /* DisplayOrder.swift */; };
+		04ED10571DC7994900EBD3C5 /* DisplayOrderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10541DC7994900EBD3C5 /* DisplayOrderData.swift */; };
+		04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */; };
 		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
 		04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7AC1DB76EDB004509D1 /* TAAbstractDotView.m */; };
 		04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7AE1DB76EDB004509D1 /* TAAnimatedDotView.m */; };
@@ -376,6 +385,15 @@
 		04E25B841DBB77DE002B727F /* NewestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewestViewController.swift; sourceTree = "<group>"; };
 		04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosViewController.swift; sourceTree = "<group>"; };
 		04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosCell.swift; sourceTree = "<group>"; };
+		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
+		04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileData.swift; sourceTree = "<group>"; };
+		04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileListUser.swift; sourceTree = "<group>"; };
+		04ED104D1DC787F300EBD3C5 /* UserGallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGallery.swift; sourceTree = "<group>"; };
+		04ED104E1DC787F300EBD3C5 /* UserGalleryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGalleryData.swift; sourceTree = "<group>"; };
+		04ED104F1DC787F300EBD3C5 /* UserGalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGalleryPhoto.swift; sourceTree = "<group>"; };
+		04ED10531DC7994900EBD3C5 /* DisplayOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrder.swift; sourceTree = "<group>"; };
+		04ED10541DC7994900EBD3C5 /* DisplayOrderData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrderData.swift; sourceTree = "<group>"; };
+		04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrderPhoto.swift; sourceTree = "<group>"; };
 		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		04FEB7AB1DB76EDB004509D1 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		04FEB7AC1DB76EDB004509D1 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
@@ -1144,6 +1162,15 @@
 				04B499AA1DBFB61A004659BA /* UserProfile.swift */,
 				04B499AE1DBFB7F4004659BA /* SysConfig.swift */,
 				04B499AF1DBFB7F4004659BA /* SysConfigData.swift */,
+				04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */,
+				04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */,
+				04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */,
+				04ED104D1DC787F300EBD3C5 /* UserGallery.swift */,
+				04ED104E1DC787F300EBD3C5 /* UserGalleryData.swift */,
+				04ED104F1DC787F300EBD3C5 /* UserGalleryPhoto.swift */,
+				04ED10531DC7994900EBD3C5 /* DisplayOrder.swift */,
+				04ED10541DC7994900EBD3C5 /* DisplayOrderData.swift */,
+				04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1577,6 +1604,7 @@
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
 				04B1CEEF1DBC45F9003482DF /* BiddingListView.swift in Sources */,
 				04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */,
+				04ED10501DC787F300EBD3C5 /* UserGallery.swift in Sources */,
 				04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */,
 				04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */,
 				04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */,
@@ -1587,6 +1615,7 @@
 				04FEB7E71DB76F13004509D1 /* SDWebImageDownloader.m in Sources */,
 				04FEB7E31DB76F13004509D1 /* NSData+ImageContentType.m in Sources */,
 				040D46E01DC4B587005D1E8E /* UIViewController+Visibility.swift in Sources */,
+				04ED104C1DC76E0300EBD3C5 /* LikeProfileListUser.swift in Sources */,
 				040576EB1DB3353E00C55D02 /* IQPreviousNextView.swift in Sources */,
 				040576E81DB3353E00C55D02 /* IQKeyboardReturnKeyHandler.swift in Sources */,
 				040D46D81DC4B587005D1E8E /* PopupDialogDefaultView.swift in Sources */,
@@ -1613,6 +1642,7 @@
 				04B1CEED1DBC42DA003482DF /* PublishViewController.swift in Sources */,
 				040D46D51DC4B587005D1E8E /* PopupDialogButton.swift in Sources */,
 				04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */,
+				04ED10511DC787F300EBD3C5 /* UserGalleryData.swift in Sources */,
 				19008BAA1DBE8CE300319B86 /* UserAndProfileData.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
 				04B499A71DBFB2F2004659BA /* ModifyUserProfileData.swift in Sources */,
@@ -1623,8 +1653,10 @@
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
+				04ED10521DC787F300EBD3C5 /* UserGalleryPhoto.swift in Sources */,
 				04B499AB1DBFB61A004659BA /* UserProfileData.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
+				04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */,
 				04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
@@ -1638,6 +1670,7 @@
 				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,
 				040D46D31DC4B587005D1E8E /* PopupDialog+Keyboard.swift in Sources */,
 				04E25B831DBB77D4002B727F /* HotestViewController.swift in Sources */,
+				04ED10571DC7994900EBD3C5 /* DisplayOrderData.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04FEB7EC1DB76F13004509D1 /* UIImage+GIF.m in Sources */,
@@ -1655,9 +1688,11 @@
 				040D46DF1DC4B587005D1E8E /* UIView+Animations.swift in Sources */,
 				040D46D71DC4B587005D1E8E /* PopupDialogDefaultButtons.swift in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
+				04ED10561DC7994900EBD3C5 /* DisplayOrder.swift in Sources */,
 				040D46E31DC4B67A005D1E8E /* RatingViewController.swift in Sources */,
 				04FEB7BB1DB76EDB004509D1 /* TADotView.m in Sources */,
 				040576E61DB3353E00C55D02 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
+				04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */,
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
 				04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */,
 				040D46D91DC4B587005D1E8E /* PopupDialogDefaultViewController.swift in Sources */,
@@ -1680,6 +1715,7 @@
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
 				19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */,
+				04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
 				04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */,
 				19008BA21DBE831200319B86 /* SMS.swift in Sources */,

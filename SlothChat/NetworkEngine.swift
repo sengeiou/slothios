@@ -60,6 +60,20 @@ enum API_URI:String {
     case post_userPhoto = "/api/user/{uuid}/userPhoto?token={token}"
     //18.用户资料页面，删除指定的个人照片
     case delete_userPhoto = "/api/user/{userUuid}/userPhoto/{uuid}?token={token}"
+    //19.陌生人查看个人资料页面时对资料点赞
+    case userProfile_likeProfile = "/api/userProfile/{userProfileUuid}/likeProfile?token={token}"
+    //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
+    //case get_likeProfile = "/api/userProfile/{userProfileUuid}/likeProfile?token={token}"
+    
+    //B2.
+    //21.探索图片空间，新添加图片
+    case user_gallery = "/api/user/{userUuid}/gallery?token={token}"
+    //22.探索图片空间，分页获取某人的图片列表
+//    case get_gallery = "/api/user/{userUuid}/gallery?token={token}"
+    //23.探索图片空间，删除指定的图片
+    case delete_gallery = "/api/user/{userUuid}/gallery/{uuid}?token={token}"
+    //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
+    case get_orderGallery = "/api/user/gallery?token={token}&displayOrder={displayOrder}&likeSenderUserUuid={likeSenderUserUuid}"
 }
 
 class NetworkEngine: NSObject {
@@ -450,7 +464,162 @@ class NetworkEngine: NSObject {
         }
     }
     
+    //19.陌生人查看个人资料页面时对资料点赞
+    func post_likeProfile(userProfileUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (userProfileUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userProfileUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        let request = HTTPRequestGenerator(withParam:
+            ["likeSenderUserUuid":"userUuid"]
+            , method: .post, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
+    func get_likeProfile(completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        let request = HTTPRequestGenerator(withParam:["":""]
+            , method: .get, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
     
     //MARK:B2.探索图片模块
-    //1.图片新增
+    //21 探索图片空间，新添加图片 POST
+    func postPhotoGallery(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.user_gallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
+            // code
+            let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
+            
+            multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
+            }, to: URLString, encodingCompletion: { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseObject { (response:DataResponse<UserPhoto>) in
+                        completeHandler(response.result.value);
+                    }
+                case .failure(let encodingError):
+                    print("error")
+                    print(encodingError)
+                }
+        })
+    }
+    //22.探索图片空间，分页获取某人的图片列表
+    func getPhotoGallery(userUuid: String?,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:UserGallery?) -> Void)  -> Void {
+        
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.user_gallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        let request = HTTPRequestGenerator(withParam:
+            ["likeSenderUserUuid":"userUuid",
+            "pageNum":"pageNum",
+            "pageSize":"pageSize"]
+            , method: .post, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<UserGallery>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    //23.探索图片空间，删除指定的图片
+    func deletePhotoFromGallery(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.delete_gallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: photoUuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        let request = HTTPRequestGenerator(withParam:["":""]
+            , method: .delete, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
+    ///displayOrder: newest：hottest
+    
+    enum DisplayOrder: String {
+        case newest = "newest"
+        case hottest = "hottest"
+    }
+    
+    //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
+    func getOrderGallery(likeSenderUserUuid: String?,displayOrder: DisplayOrder,pageNum: String,pageSize: String,completeHandler :@escaping(_ displayOrder:DisplayOrder?) -> Void) -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.get_orderGallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayOrder.rawValue)
+
+        let request = HTTPRequestGenerator(withParam:
+            ["pageNum":"pageNum",
+            "pageSize":"pageSize"]
+            , method: .get, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<DisplayOrder>) in
+            completeHandler(response.result.value);
+        }
+    }
 }

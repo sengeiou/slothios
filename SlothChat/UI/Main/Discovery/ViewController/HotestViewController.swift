@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = DiscoveryUserObj.getDiscoveryUserList()
@@ -29,8 +30,22 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
-        
     }
+    
+    //MARK:- NetWork
+    func getOrderGallery() {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let userUuid = Global.shared.globalProfile?.userUuid
+        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayOrder: .hottest, pageNum: "1", pageSize: "20") { (displayOrder) in
+//            if displayOrder?.status == ResponseError.SUCCESS.0 {
+//                
+//            }else{
+//                HUD.flash(.label("获取照片列表失败"), delay: 2)
+//            }
+        }
+    }
+    
     //MARK:- UITableViewDelegate,UITableViewDataSource,
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count

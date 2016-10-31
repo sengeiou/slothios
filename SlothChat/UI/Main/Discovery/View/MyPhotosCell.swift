@@ -22,7 +22,7 @@ class MyPhotosCell: UICollectionViewCell {
         imgView.frame = self.bounds
         contentView.addSubview(imgView)
         imgView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets.zero)
+            make.edges.equalTo(UIEdgeInsetsMake(2, 2, 2, 2))
         }
         
         flagView.layer.borderColor = UIColor.white.cgColor
