@@ -127,6 +127,7 @@ class UserInfoEditView: BaseView {
             make.left.equalTo(nameView.snp.left)
             make.right.equalTo(nameView.snp.right)
             make.height.equalTo(nameView.snp.height)
+            make.bottom.equalTo(0)
         }
         
         let editView = UIView()
@@ -183,6 +184,7 @@ class UserInfoEditView: BaseView {
     
     func confirmButtonClick() {
         print("confirmButtonClick")
+        self.endEditing(true)
         
         self.userObj?.nickname = nameView.getInputContent()!
         if sexPickView.isMalePick {

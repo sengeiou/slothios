@@ -11,9 +11,9 @@
 
 @implementation UIViewController (Purchase)
 
-- (void)purchaseForProduct{
+- (void)purchaseForProduct:(NSInteger)price{
     if(![IAPShare sharedHelper].iap) {
-        NSSet* dataSet = [[NSSet alloc] initWithObjects:@"com.comquas.iap.test", nil];
+        NSSet* dataSet = [[NSSet alloc] initWithObjects:@"com.ssloth.animal.recharge", nil];
         
         [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:dataSet];
     }
@@ -23,40 +23,43 @@
     [[IAPShare sharedHelper].iap requestProductsWithCompletion:^(SKProductsRequest* request,SKProductsResponse* response)
      {
          if(response > 0 ) {
-             SKProduct* product =[[IAPShare sharedHelper].iap.products objectAtIndex:0];
-             
-             [[IAPShare sharedHelper].iap buyProduct:product
-                                        onCompletion:^(SKPaymentTransaction* trans){
-                                            
-                                            if(trans.error)
-                                            {
-                                                NSLog(@"Fail %@",[trans.error localizedDescription]);
-                                            }
-                                            else if(trans.transactionState == SKPaymentTransactionStatePurchased) {
+             NSArray *products = [IAPShare sharedHelper].iap.products;
+             if ([products count] > 0) {
+                 SKProduct* product =[products objectAtIndex:0];
+                 [[IAPShare sharedHelper].iap buyProduct:product
+                                            onCompletion:^(SKPaymentTransaction* trans){
                                                 
-                                                NSData *data = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
-                                                //NSData *data = trans.transactionReceipt
-                                                [[IAPShare sharedHelper].iap checkReceipt:data AndSharedSecret:@"your sharesecret" onCompletion:^(NSString *response, NSError *error) {
+                                                if(trans.error)
+                                                {
+                                                    NSLog(@"Fail %@",[trans.error localizedDescription]);
+                                                }
+                                                else if(trans.transactionState == SKPaymentTransactionStatePurchased) {
                                                     
-                                                    //Convert JSON String to NSDictionary
-                                                    NSDictionary* rec = [IAPShare toJSON:response];
-                                                    
-                                                    if([rec[@"status"] integerValue]==0)
-                                                    {
+                                                    NSData *data = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
+                                                    //NSData *data = trans.transactionReceipt
+                                                    [[IAPShare sharedHelper].iap checkReceipt:data AndSharedSecret:@"your sharesecret" onCompletion:^(NSString *response, NSError *error) {
                                                         
-                                                        [[IAPShare sharedHelper].iap provideContentWithTransaction:trans];
-                                                        NSLog(@"SUCCESS %@",response);
-                                                        NSLog(@"Pruchases %@",[IAPShare sharedHelper].iap.purchasedProducts);
-                                                    }
-                                                    else {
-                                                        NSLog(@"Fail");
-                                                    }
-                                                }];
-                                            }
-                                            else if(trans.transactionState == SKPaymentTransactionStateFailed) {
-                                                NSLog(@"Fail");
-                                            }
-                                        }];//end of buy product
+                                                        //Convert JSON String to NSDictionary
+                                                        NSDictionary* rec = [IAPShare toJSON:response];
+                                                        
+                                                        if([rec[@"status"] integerValue]==0)
+                                                        {
+                                                            
+                                                            [[IAPShare sharedHelper].iap provideContentWithTransaction:trans];
+                                                            NSLog(@"SUCCESS %@",response);
+                                                            NSLog(@"Pruchases %@",[IAPShare sharedHelper].iap.purchasedProducts);
+                                                        }
+                                                        else {
+                                                            NSLog(@"Fail");
+                                                        }
+                                                    }];
+                                                }
+                                                else if(trans.transactionState == SKPaymentTransactionStateFailed) {
+                                                    NSLog(@"Fail");
+                                                }
+                                            }];
+             }
+             //end of buy product
          }
      }];
 }

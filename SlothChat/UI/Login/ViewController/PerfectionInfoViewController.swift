@@ -216,7 +216,7 @@ class PerfectionInfoViewController: BaseViewController {
     func avatarButtonClick() {
         
 
-        UIActionSheet.photoPicker(withTitle: "选择头像", showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+        UIAlertController.photoPicker(withTitle: "选择头像", showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
             self.selectedAvatar = avatar
 
             let engine = NetworkEngine()

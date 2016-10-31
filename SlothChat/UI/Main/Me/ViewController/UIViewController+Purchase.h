@@ -10,6 +10,6 @@
 
 @interface UIViewController (Purchase)
 
-- (void)purchaseForProduct;
+- (void)purchaseForProduct:(NSInteger)price;
 
 @end

@@ -33,10 +33,14 @@ class LoginViewController: BaseViewController {
             make.size.equalTo(CGSize.init(width: 184, height: 55))
         }
         
+        var phoneStr = GVUserDefaults.standard().lastLoginPhone
+        if phoneStr == nil{
+            phoneStr = ""
+        }
         phoneView.setInputTextfieldLeftMagin(left: 106)
         phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
-        phoneView.configInputView(titleStr: "手机号:", contentStr: "")
+        phoneView.configInputView(titleStr: "手机号:", contentStr: phoneStr!)
         configPhoneInputView(inputView: phoneView)
         phoneView.inputTextfield.keyboardType = .numberPad
         view.addSubview(phoneView)
@@ -110,7 +114,12 @@ class LoginViewController: BaseViewController {
     func configPhoneInputView(inputView : SingleInputView) {
         let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 44))
         codeButton.frame = leftView.bounds
-        codeButton.setTitle("86", for: .normal)
+        let codeStr = GVUserDefaults.standard().lastLoginCountry
+        if codeStr != nil{
+            codeButton.setTitle(codeStr, for: .normal)
+        }else{
+            codeButton.setTitle("86", for: .normal)
+        }
         codeButton.setTitleColor(UIColor.black, for: .normal)
         codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
@@ -174,7 +183,17 @@ class LoginViewController: BaseViewController {
             HUD.hide()
             if  loginModel != nil &&
                 loginModel?.token != nil{
+                GVUserDefaults.standard().lastLoginPhone = phoneStr
+                GVUserDefaults.standard().lastLoginCountry = codeStr
                 Global.shared.globalLogin = loginModel!
+                
+                if (loginModel!.user?.uuid) != nil{
+                    NBSAppAgent.setCustomerData((loginModel!.user?.uuid)!, forKey: "LoginUserUuid")
+                }
+                if (loginModel!.user?.username) != nil{
+                    NBSAppAgent.setCustomerData((loginModel!.user?.username)!, forKey: "LoginUserName")
+                }
+
                 self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
             }else{
                 HUD.flash(.label("登录失败"), delay: 2)

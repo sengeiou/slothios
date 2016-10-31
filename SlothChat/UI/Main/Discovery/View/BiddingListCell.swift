@@ -72,5 +72,23 @@ class BiddingListCell: UITableViewCell {
         self.nameLabel.text = userObj.name
         self.priceLabel.text = "￥101"
     }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        if highlighted {
+            self.contentView.backgroundColor = SGColor.SGMainColor()
+        }else{
+            self.contentView.backgroundColor = UIColor.white
+        }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if selected {
+            self.contentView.backgroundColor = SGColor.SGMainColor()
+        }else{
+            self.contentView.backgroundColor = UIColor.white
+        }
+    }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
+class BrowseAdvertViewController: BaseViewController {
     let scrollView = UIScrollView()
     let container = UIView()
     
@@ -19,7 +19,6 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
 
     var isFollow = false
     var userObj: UserObj?
-    var photoList = [MWPhoto]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +44,7 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
 
         contentLabel.numberOfLines = 0
         contentLabel.lineBreakMode = .byCharWrapping
+        
         let w = UIScreen.main.bounds.width
         contentLabel.preferredMaxLayoutWidth = w - 8 * 2
         contentLabel.font = UIFont.systemFont(ofSize: 14)
@@ -56,9 +56,8 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
         
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(300)
+            make.height.equalTo((w * 288.0) / 375.0)
         }
-        
         usersListView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom)
@@ -88,7 +87,15 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
         
         usersListView.configViewWithObject(avatarList: user!.avatarList)
         
-        self.contentLabel.text = "这是一个广告\n\n您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"
+        let string1 = "这是一个广告\n\n"
+        let string2 = "您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"
+        
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        let attributedText = NSMutableAttributedString.init(string: string1 + string2)
+        let range = NSRange.init(location: 0, length: string1.characters.count)
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 17), range: range)
+        self.contentLabel.attributedText = attributedText
     }
     
     //MARK:- Action
@@ -109,24 +116,11 @@ class BrowseAdvertViewController: BaseViewController,MWPhotoBrowserDelegate {
     }
     
     func tapMainImgView() {
-        let photoUrl = URL.init(string: (self.userObj!.avatarList?.first)!)
-        let photo = MWPhoto(url: photoUrl)
         
-        photoList.append(photo!)
+        let browser = ImageScrollViewController()
+        browser.disPlay(imageUrl: (self.userObj!.avatarList?.first)!)
+        browser.isShowDeleteButton(isShow: false)
+        self.present(browser, animated: true, completion: nil)
         
-        let browser = MWPhotoBrowser(delegate: self)
-        self.navigationController?.pushViewController(browser!, animated: true)
-        
-    }
-    
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
     }
 }

@@ -39,10 +39,10 @@ class DiscoveryCell: UITableViewCell {
     }
     
     func sentupView()  {
-        nameLabel.font = UIFont.systemFont(ofSize: 14)
+        nameLabel.font = UIFont.systemFont(ofSize: 15)
         locationLabel.textColor = SGColor.SGLineColor()
-        locationLabel.font = UIFont.systemFont(ofSize: 11)
-        avatarImgView.layer.cornerRadius = 16
+        locationLabel.font = UIFont.systemFont(ofSize: 12)
+        avatarImgView.layer.cornerRadius = 21
         avatarImgView.layer.masksToBounds = true
         
         self.contentView.addSubview(avatarImgView)
@@ -57,44 +57,46 @@ class DiscoveryCell: UITableViewCell {
         
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(8)
-            make.top.equalTo(20)
-            make.size.equalTo(CGSize.init(width: 32, height: 32))
+            make.top.equalTo(29)
+            make.size.equalTo(CGSize.init(width: 42, height: 42))
         }
         
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(avatarImgView.snp.right).offset(12)
+            make.left.equalTo(avatarImgView.snp.right).offset(14)
             make.top.equalTo(avatarImgView.snp.top)
             make.right.lessThanOrEqualTo(-44)
         }
-        
+        locationImgView.image = UIImage(named: "location")
         locationImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(avatarImgView.snp.right).offset(10)
+            make.left.equalTo(avatarImgView.snp.right).offset(12)
             make.bottom.equalTo(avatarImgView.snp.bottom)
-            make.size.equalTo(CGSize.init(width: 8, height: 8))
+            make.size.equalTo(CGSize.init(width: 8, height: 12))
         }
         
         locationLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(locationImgView.snp.right).offset(4)
+            make.left.equalTo(locationImgView.snp.right).offset(10)
             make.top.equalTo(locationImgView.snp.top)
-            make.right.lessThanOrEqualTo(-44)
+            make.right.lessThanOrEqualTo(-80)
         }
         
         likeButton.snp.makeConstraints { (make) in
-            make.right.equalTo(0)
-            make.top.equalTo(20)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.right.equalTo(-10)
+            make.top.equalTo(34)
+            make.size.equalTo(CGSize.init(width: 32, height: 32))
         }
         
+        let w = UIScreen.main.bounds.width
+
         mainImgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(avatarImgView.snp.bottom).offset(10)
-            make.height.equalTo(150)
+            make.top.equalTo(avatarImgView.snp.bottom).offset(14)
+            make.height.equalTo((w * 200.0) / 375.0)
         }
         
         likeUsersView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(mainImgView.snp.bottom).offset(4)
-            make.height.equalTo(44)
+            make.top.equalTo(mainImgView.snp.bottom).offset(13)
+            make.height.equalTo(30)
         }
     }
     

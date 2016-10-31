@@ -44,7 +44,7 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         return nil
     }
     
-    func getBannerAvatarList() -> [String]{
+    func getBannerAvatarList(isMyself: Bool) -> [String]{
         var bannerList = [String]()
         if self.userPhotoList == nil{
             for _ in 0..<MaxUserAvatarCount{
@@ -52,11 +52,17 @@ class UserProfileData : NSObject, NSCoding, Mappable{
             }
         }
         for userPhoto in self.userPhotoList! {
-            bannerList.append(userPhoto.profilePicUrl!)
+            if userPhoto.profileBigPicUrl != nil {
+                bannerList.append(userPhoto.profileBigPicUrl!)
+
+            }
         }
-        for _ in self.userPhotoList!.count..<MaxUserAvatarCount{
-            bannerList.append(DefaultBannerImgName)
+        if isMyself{
+            for _ in self.userPhotoList!.count..<MaxUserAvatarCount{
+                bannerList.append(DefaultBannerImgName)
+            }
         }
+        
         return bannerList
     }
     
@@ -65,7 +71,7 @@ class UserProfileData : NSObject, NSCoding, Mappable{
             SGLog(message: "at出错" + String(at))
             return
         }
-        if (newAvatar.profilePicUrl?.isEmpty)! {
+        if (newAvatar.profileBigPicUrl?.isEmpty)! {
             SGLog(message: "头像为空")
             return
         }

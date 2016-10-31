@@ -31,7 +31,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 44
+        tableView.rowHeight = 75
         view.addSubview(tableView)
         tableView.register(LikeUsersCell.self, forCellReuseIdentifier: "LikeUsersCell")
         tableView.snp.makeConstraints { (make) in

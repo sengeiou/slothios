@@ -16,8 +16,6 @@ enum  BiddingStatus: Int{
 class BiddingStatusView: BaseView {
     let mainImgView = UIImageView()
     
-    let selectButton = UIButton(type: .custom)
-    
     let usersView = LikeUsersView()
     
     let priceView = UIView()
@@ -57,12 +55,12 @@ class BiddingStatusView: BaseView {
         
         addSubview(usersView)
         
-        
+        let w = UIScreen.main.bounds.width
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
             make.height.equalTo(256)
+            make.height.equalTo((w * 288.0) / 375.0)
         }
-        
         usersView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom).offset(24)
@@ -90,7 +88,7 @@ class BiddingStatusView: BaseView {
         overweightButton.setTitle("加码", for: .normal)
         overweightButton.setTitleColor(UIColor.white, for: .normal)
         overweightButton.backgroundColor = SGColor.SGMainColor()
-        overweightButton.layer.cornerRadius = 20
+        overweightButton.layer.cornerRadius = 23
         priceView.addSubview(overweightButton)
         
         timeoutLabel.text = "竞价时间结束"
@@ -107,12 +105,12 @@ class BiddingStatusView: BaseView {
         overweightButton.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
             make.centerY.equalTo(priceView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 64, height: 40))
+            make.size.equalTo(CGSize.init(width: 70, height: 46))
         }
         
         timeoutLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
-            make.top.equalTo(overweightButton.snp.bottom).offset(10)
+            make.top.equalTo(overweightButton.snp.bottom).offset(18)
         }        
     }
     
@@ -123,7 +121,7 @@ class BiddingStatusView: BaseView {
         
         let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
         attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGBlueColor(), range: range)
-        attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: range)
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 18), range: range)
         priceLabel.attributedText = attributedText
     }
     
@@ -139,21 +137,6 @@ class BiddingStatusView: BaseView {
     }
     
     //MARK:- Action
-    
-    func selectButtonCLick() {
-        selectButton.isSelected = !selectButton.isSelected
-        priceView.isHidden = !selectButton.isSelected
-        
-        if selectButton.isSelected {
-            selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .highlighted)
-        }else{
-            selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .highlighted)
-        }
-        
-        if let sp = self.selectPassValue {
-            sp()
-        }
-    }
     
     func configWithObject(imgUrl: String) {
         

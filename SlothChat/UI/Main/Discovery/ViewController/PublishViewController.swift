@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import PKHUD
 
-class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
+class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate {
     let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
     var isJoin = false
-    var photoList = [MWPhoto]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 50
+        tableView.rowHeight = 56
         view.addSubview(tableView)
         tableView.register(BiddingListCell.self, forCellReuseIdentifier: "BiddingListCell")
         tableView.snp.makeConstraints { (make) in
@@ -114,29 +114,40 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     override func confirmClick() {
         SGLog(message: headerView.isJoin)
+        let price = headerView.price
+        
+        SGLog(message: price)
+        if  headerView.isJoin && price > 1{
+            let needPrice = price - 1
+            
+            let title = "当前账户余额不足，为￥" + String(price) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
+            let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                
+            })
+            okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
 
-        SGLog(message: headerView.price)
-        _ = navigationController?.popViewController(animated: true)
+            alert.addAction(cancelAction)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+            
+        }else{
+            HUD.flash(.label("发布成功"), delay: 2, completion: { (result) in
+                _ = self.navigationController?.popViewController(animated: true)
+            })
+        }
     }
+    
     
     func tapMainImgView() {
-        let photo = MWPhoto(image: headerView.mainImgView.image)
+        let browser = ImageScrollViewController()
+        self.present(browser, animated: true, completion: nil)
+
+        browser.isShowLikeButton(isShow: false)
+        browser.isShowDeleteButton(isShow: false)
+        browser.disPlay(image: headerView.mainImgView.image!)
         
-        photoList.append(photo!)
-        
-        let browser = MWPhotoBrowser(delegate: self)
-        self.navigationController?.pushViewController(browser!, animated: true)
-        
-    }
-    
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
     }
 }

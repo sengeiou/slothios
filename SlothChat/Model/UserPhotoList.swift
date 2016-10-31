@@ -12,7 +12,7 @@ import ObjectMapper
 class UserPhotoList : NSObject, NSCoding, Mappable{
 
 	var orderNum : Int?
-	var profilePicUrl : String?
+	var profileBigPicUrl : String?
 	var uuid : String?
 
 
@@ -25,7 +25,7 @@ class UserPhotoList : NSObject, NSCoding, Mappable{
 	func mapping(map: Map)
 	{
 		orderNum <- map["orderNum"]
-		profilePicUrl <- map["profilePicUrl"]
+		profileBigPicUrl <- map["profileBigPicUrl"]
 		uuid <- map["uuid"]
 		
 	}
@@ -37,7 +37,7 @@ class UserPhotoList : NSObject, NSCoding, Mappable{
     @objc required init(coder aDecoder: NSCoder)
 	{
          orderNum = aDecoder.decodeObject(forKey: "orderNum") as? Int
-         profilePicUrl = aDecoder.decodeObject(forKey: "profilePicUrl") as? String
+         profileBigPicUrl = aDecoder.decodeObject(forKey: "profileBigPicUrl") as? String
          uuid = aDecoder.decodeObject(forKey: "uuid") as? String
 
 	}
@@ -51,8 +51,8 @@ class UserPhotoList : NSObject, NSCoding, Mappable{
 		if orderNum != nil{
 			aCoder.encode(orderNum, forKey: "orderNum")
 		}
-		if profilePicUrl != nil{
-			aCoder.encode(profilePicUrl, forKey: "profilePicUrl")
+		if profileBigPicUrl != nil{
+			aCoder.encode(profileBigPicUrl, forKey: "profileBigPicUrl")
 		}
 		if uuid != nil{
 			aCoder.encode(uuid, forKey: "uuid")

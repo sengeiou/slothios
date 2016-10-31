@@ -8,6 +8,36 @@
 
 import UIKit
 
+
+class LikeUserCell: UICollectionViewCell {
+    let imgView = UIImageView.init()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.sentupView()
+    }
+    
+    func sentupView()  {
+        imgView.clipsToBounds = true
+        imgView.layer.cornerRadius = 15
+        
+        imgView.frame = self.bounds
+        self.addSubview(imgView)
+        imgView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+    }
+    
+    func configViewWithObject(imgUrl: String) {
+        let url = URL(string: imgUrl)
+        imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSource {
     var collectionView: UICollectionView?
     let countLabel = UILabel()
@@ -24,26 +54,33 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
         fatalError("init(coder:) has not been implemented")
     }
     
-    func sentupView() {
+    func refreshItemSize(width:Int,height:Int) {
+        let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize.init(width: width, height: height)
+        self.collectionView?.reloadData()
+    }
+    
+    fileprivate func sentupView() {
         let frame = CGRect.zero
         let layout = UICollectionViewFlowLayout.init()
         layout.scrollDirection = .horizontal
         
-        layout.itemSize = CGSize.init(width: 24, height: 24)
+        layout.itemSize = CGSize.init(width: 30, height: 30)
         
-        layout.sectionInset = UIEdgeInsets.init(top: 4, left: 4, bottom: 4, right: 4);
-        layout.minimumLineSpacing = 4;
+        layout.sectionInset = UIEdgeInsets.init(top: 0, left: 9, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 9;
         
         
         collectionView = UICollectionView.init(frame: frame, collectionViewLayout: layout)
         collectionView!.backgroundColor = UIColor.clear
-        collectionView!.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
+        collectionView!.register(LikeUserCell.self, forCellWithReuseIdentifier: "LikeUserCell")
         collectionView!.delegate = self
         collectionView!.dataSource = self
         self.addSubview(collectionView!)
         
         collectionView!.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets.zero)
+            make.left.top.bottom.equalTo(0)
+            make.right.equalTo(-70)
         }
         collectionView!.isUserInteractionEnabled = false
         
@@ -53,7 +90,6 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
             make.left.equalTo(4)
             make.centerY.equalTo(self.snp.centerY)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -61,11 +97,11 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell : MyPhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath as IndexPath) as! MyPhotosCell
+        let cell : LikeUserCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LikeUserCell", for: indexPath as IndexPath) as! LikeUserCell
         let imgUrl = dataSource[indexPath.row ]
+        cell.configViewWithObject(imgUrl: imgUrl)
+
         
-        let url = URL(string: imgUrl)
-        cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         return cell
     }
     
@@ -78,11 +114,17 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
                 dataSource.append(contentsOf: avatarList!)
             }
             collectionView?.reloadData()
+            
+            let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+            let width = layout.itemSize.width
+            
+            
             countLabel.text = "等" + String(count) + "人喜欢"
             countLabel.snp.updateConstraints { (make) in
-                make.left.equalTo((4 + 24) * count + 4)
+                make.left.equalTo((9 + Int(width)) * count + 10)
             }
         }
     }
 }
+
 

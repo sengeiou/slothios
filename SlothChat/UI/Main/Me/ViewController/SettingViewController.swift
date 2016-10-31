@@ -39,8 +39,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         exitButton.addTarget(self, action: #selector(exitButtonClick), for: .touchUpInside)
         footerView.addSubview(exitButton)
         exitButton.snp.makeConstraints { (make) in
-            make.left.equalTo(16)
-            make.right.equalTo(-16)
+            make.left.lessThanOrEqualTo(80)
+            make.right.greaterThanOrEqualTo(-80)
             make.top.equalTo(40)
             make.height.equalTo(44)
         }
@@ -86,19 +86,40 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //Mark:- Action
     
     func charge() {
-        self.purchaseForProduct()
+        self.showCustomDialog()
+    }
+    
+    func showCustomDialog() {
+        let ratingVC = RatingViewController(nibName: "RatingViewController", bundle: nil)
+        let popup = PopupDialog(viewController: ratingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: true)
+        let buttonOne = CancelButton(title: "取消") {
+        }
+        buttonOne.titleColor = SGColor.black
+        let buttonTwo = DefaultButton(title: "确定") {
+            let price = ratingVC.textField.text
+            if (price?.isEmpty)!{
+                return
+            }
+            if let price = price{
+                self.purchase(forProduct: Int(price)!)
+            }
+        }
+        buttonTwo.titleColor = SGColor.SGMainColor()
+        popup.addButtons([buttonOne, buttonTwo])
+        present(popup, animated: true, completion: nil)
     }
     
     func exitButtonClick() {
         
         let alertController = UIAlertController(title: "是否退出树懒", message: "", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
-        let exitAction = UIAlertAction(title: "退出", style: .default, handler:{ (action) in
+        let okAction = UIAlertAction(title: "退出", style: .default, handler:{ (action) in
             self.logout()
         })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
 
         alertController.addAction(cancelAction)
-        alertController.addAction(exitAction)
+        alertController.addAction(okAction)
 
         self.present(alertController, animated: true, completion: nil)
     }

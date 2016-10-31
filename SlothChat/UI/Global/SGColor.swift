@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SGColor: NSObject {
+class SGColor: UIColor {
     /**
      主题色:#cc966d
      */

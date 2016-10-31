@@ -8,19 +8,22 @@
 
 import UIKit
 
-class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate {
+class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = DiscoveryUserObj.getDiscoveryUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    var photoList = [MWPhoto]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 260
+        
+        let w = UIScreen.main.bounds.width
+        let imgViewHeight = (w * 200.0) / 375.0
+
+        tableView.rowHeight = 145 + imgViewHeight
+
         view.addSubview(tableView)
         tableView.register(DiscoveryCell.self, forCellReuseIdentifier: "DiscoveryCell")
         tableView.snp.makeConstraints { (make) in
@@ -47,6 +50,11 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let pushVC = BrowseAdvertViewController()
+        let user = UserObj.defaultUserObj()
+        pushVC.configWithObject(user: user)
+        
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
     func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {
@@ -58,34 +66,17 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             break
         case .mainImgType:
-            
             let userObj = dataSource[indexPath.row]
-            let photoUrl = URL.init(string: userObj.mainImgUrl)
-            let photo = MWPhoto(url: photoUrl)
+            let browser = ImageScrollViewController()
+            browser.disPlay(imageUrl: userObj.mainImgUrl)
+            self.present(browser, animated: true, completion: nil)
             
-            photoList.append(photo!)
-            
-            let browser = MWPhotoBrowser(delegate: self)
-            self.navigationController?.pushViewController(browser!, animated: true)
             break
         case .likeUsersType:
             let pushVC = LikeUsersViewController()
             navigationController?.pushViewController(pushVC, animated: true)
             break
         }
-    }
-    
-    //MARK:- MWPhotoBrowserDelegate
-
-    func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
-        return UInt(photoList.count)
-    }
-    
-    func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
-        if (index < UInt(photoList.count)) {
-            return photoList[Int(index)]
-        }
-        return nil;
     }
     
 }

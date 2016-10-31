@@ -63,7 +63,7 @@
     
     //控制栏
     self.controllerToolBar = [[UIView alloc] init];
-    self.controllerToolBar.backgroundColor = COLOR_BACKGROUD_GRAY;
+    self.controllerToolBar.backgroundColor = [UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.00];
     [self.bottomView addSubview:_controllerToolBar];
     
     //完成按钮
@@ -91,7 +91,7 @@
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.text = self.pickerTitle;
-    self.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.titleLabel.font = [UIFont systemFontOfSize:18];
     [self.controllerToolBar addSubview:self.titleLabel];
 }
 
@@ -104,7 +104,7 @@
     self.statePicker.frame = CGRectMake(0, 40, SCREEN_WIDTH, self.pickerHeight - 40);
     
     //控制栏
-    self.controllerToolBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
+    self.controllerToolBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
     
     //完成按钮
     self.finishBtn.frame = CGRectMake(SCREEN_WIDTH - 70, 5, 70, 30);

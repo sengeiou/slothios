@@ -40,9 +40,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "我"
-            
+        super.viewDidLoad()            
         self.setNavtionConfirm(titleStr: "设置")
 
         if isMyselfFlag{
@@ -75,21 +73,23 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         let w = UIScreen.main.bounds.width
-        let h = (w * 156.0 / 187.0)
-        
+//        let h = (w * 156.0 / 187.0)
+        let h = w
+
         bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: h), delegate: self, placeholderImage: nil)
+        bannerView?.bannerImageViewContentMode = .scaleAspectFill
         bannerView?.pageControlAliment = SDCycleScrollViewPageContolAlimentLeft
         bannerView?.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
         bannerView?.pageControlDotSize = CGSize.init(width: 8, height: 8)
-        bannerView?.pageControlBottomOffset = 150
+        bannerView?.pageControlBottomOffset = h - 30
         container.addSubview(bannerView!)
         bannerView?.delegate = self
-        
+        bannerView?.autoScroll = false
         refreshBannerView()
         
         bannerView?.snp.makeConstraints({ (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(180)
+            make.height.equalTo((bannerView?.snp.width)!)
         })
         
         let deleteButton = UIButton(type: .custom)
@@ -137,11 +137,11 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         infoView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             if shareView == nil{
-                make.top.equalTo(bannerView!.snp.bottom).offset(12)
+                make.top.equalTo(bannerView!.snp.bottom).offset(19)
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(380)
+//            make.height.equalTo(180)
         }
         if self.mProfile != nil{
             infoView.configViewWihObject(userObj: mProfile!)
@@ -151,20 +151,26 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         container.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoView.snp.bottom)
+            make.bottom.equalTo(infoView.snp.bottom).offset(10)
         }
     }
     
     func configEditUserInfoView() {
+        self.infoView.isHidden = true
+
         if (self.editView != nil) {
             self.editView?.isHidden = false
-            self.infoView.isHidden = true
             if self.mProfile != nil{
                 editView!.configViewWihObject(userObj: self.mProfile!)
             }
+            container.snp.remakeConstraints { (make) in
+                make.edges.equalTo(scrollView)
+                make.width.equalTo(scrollView)
+                make.bottom.equalTo(editView!.snp.bottom).offset(10)
+            }
+            
             return
         }
-        self.infoView.isHidden = true
         
         self.editView = UserInfoEditView()
         editView?.showVC = self
@@ -180,10 +186,12 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 make.top.equalTo(shareView!.snp.bottom)
             }
-            make.height.equalTo(380)
+//            make.height.equalTo(380)
         }
-        container.snp.makeConstraints { (make) in
-            make.bottom.equalTo(editView!.snp.bottom)
+        container.snp.remakeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.bottom.equalTo(editView!.snp.bottom).offset(10)
         }
         
         editView?.setDoneUserInfoValue(temClosure: { (_ editUserObj) in
@@ -224,6 +232,12 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
             HUD.hide()
+            self.container.snp.remakeConstraints { (make) in
+                make.edges.equalTo(self.scrollView)
+                make.width.equalTo(self.scrollView)
+                make.bottom.equalTo(self.infoView.snp.bottom).offset(10)
+            }
+            
             if userProfile?.status == ResponseError.SUCCESS.0 {
                 self.mProfile = editProfile
                 editProfile.caheForUserProfile()
@@ -257,7 +271,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deletePhoto(at: Int) {
-        self.bannerView?.pause()
 
         let userPhoto = self.mProfile?.userPhotoList?[at]
         
@@ -266,7 +279,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.deleteUserPhoto(photoUuid: (userPhoto?.uuid)!) { (response) in
             HUD.hide()
-            self.bannerView?.play()
             if response?.status == ResponseError.SUCCESS.0 {
 
                 self.mProfile?.deleteAvatar(at: at)
@@ -280,7 +292,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func uploadPhoto(image: UIImage,at: Int) {
-        self.bannerView?.pause()
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
@@ -288,7 +299,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
-                newPhoto.profilePicUrl = userPhoto?.data?.profilePicUrl
+                newPhoto.profileBigPicUrl = userPhoto?.data?.profileBigPicUrl
                 newPhoto.uuid = userPhoto?.data?.uuid
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
@@ -297,7 +308,6 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 HUD.flash(.label("添加照片失败"), delay: 2)
             }
-            self.bannerView?.play()
         }
     }
 
@@ -313,12 +323,22 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deleteButtonClick() {
-        let at = bannerView?.currentPage()
-        self.deletePhoto(at: at!)
+        let alertController = UIAlertController(title: "您确定要删除这张图片？", message: "", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler:{ (action) in
+            let at = self.bannerView?.currentPage()
+            self.deletePhoto(at: at!)
+        })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+        cancelAction.setValue(SGColor.black, forKey: "_titleTextColor")
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
-        cycleScrollView.pause()
         var titleStr = "选择头像"
         let avatar = (cycleScrollView.localizationImageNamesGroup[index] as! String)
         
@@ -326,15 +346,14 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
             avatar.hasPrefix("https://") {
             titleStr = "替换头像"
         }
-        UIActionSheet.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+        UIAlertController.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
                 self.uploadPhoto(image: avatar!, at: index)
             }, onCancel:{
-                cycleScrollView.play()
             }, allowsEditing: true)
     }
     
     func refreshBannerView() {
-        let imagesURLStrings = self.mProfile?.getBannerAvatarList()
+        let imagesURLStrings = self.mProfile?.getBannerAvatarList(isMyself: isMyselfFlag)
         bannerView?.localizationImageNamesGroup = imagesURLStrings
     }
 }

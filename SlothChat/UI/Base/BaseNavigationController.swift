@@ -13,6 +13,8 @@ class BaseNavigationController: UINavigationController,UIGestureRecognizerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.interactivePopGestureRecognizer?.delegate = self
+        UINavigationBar.appearance().tintColor = UIColor.black
+        UINavigationBar.appearance().barTintColor = UIColor.white
         // Do any additional setup after loading the view.
     }
     

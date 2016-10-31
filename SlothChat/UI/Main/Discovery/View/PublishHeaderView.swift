@@ -48,8 +48,7 @@ class PublishHeaderView: BaseView {
         addSubview(joinView)
         
         let biddingLabel = UILabel()
-        contentLabel.font = UIFont.systemFont(ofSize: 15)
-
+        biddingLabel.font = UIFont.systemFont(ofSize: 15)
         biddingLabel.text = "是否用此图片参与广告竞价"
         joinView.addSubview(biddingLabel)
         
@@ -74,8 +73,8 @@ class PublishHeaderView: BaseView {
         
         joinView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(mainImgView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(mainImgView.snp.bottom).offset(18)
+            make.height.equalTo(46)
         }
         
         biddingLabel.snp.makeConstraints { (make) in
@@ -92,14 +91,14 @@ class PublishHeaderView: BaseView {
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.right.equalTo(-8)
-            make.top.equalTo(joinView.snp.bottom).offset(24)
+            make.top.equalTo(joinView.snp.bottom).offset(44)
         }
         
         addSubview(priceView)
         priceView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(joinView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.height.equalTo(46)
         }
         configPriceView()
         configPickerView()
@@ -118,7 +117,8 @@ class PublishHeaderView: BaseView {
         overweightButton.setTitle("加码", for: .normal)
         overweightButton.setTitleColor(UIColor.white, for: .normal)
         overweightButton.backgroundColor = SGColor.SGMainColor()
-        overweightButton.layer.cornerRadius = 20
+        overweightButton.layer.cornerRadius = 23
+        overweightButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         priceView.addSubview(overweightButton)
         
         priceLabel.snp.makeConstraints { (make) in
@@ -129,7 +129,7 @@ class PublishHeaderView: BaseView {
         overweightButton.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
             make.centerY.equalTo(priceView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 64, height: 40))
+            make.size.equalTo(CGSize.init(width: 70, height: 46))
         }
     }
     
