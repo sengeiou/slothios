@@ -10,11 +10,17 @@ import UIKit
 import PKHUD
 
 class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-    let dataSource = DiscoveryUserObj.getDiscoveryUserList()
+    var dataSource = [DisplayOrderPhoto]()
+    
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configTableView()
+        getOrderGallery()
+    }
+    
+    func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
@@ -22,9 +28,9 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         
         let w = UIScreen.main.bounds.width
         let imgViewHeight = (w * 200.0) / 375.0
-
+        
         tableView.rowHeight = 145 + imgViewHeight
-
+        
         view.addSubview(tableView)
         tableView.register(DiscoveryCell.self, forCellReuseIdentifier: "DiscoveryCell")
         tableView.snp.makeConstraints { (make) in
@@ -37,12 +43,16 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayOrder: .hottest, pageNum: "1", pageSize: "20") { (displayOrder) in
-//            if displayOrder?.status == ResponseError.SUCCESS.0 {
-//                
-//            }else{
-//                HUD.flash(.label("获取照片列表失败"), delay: 2)
-//            }
+        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .hottest, pageNum: "1", pageSize: "20") { (displayOrder) in
+            if displayOrder?.status == ResponseError.SUCCESS.0 {
+                if let list = displayOrder?.data?.list{
+                    SGLog(message: list)
+                    self.dataSource.append(contentsOf: list)
+                    self.tableView.reloadData()
+                }
+            }else{
+                HUD.flash(.label("获取照片列表失败"), delay: 2)
+            }
         }
     }
     
@@ -53,8 +63,8 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DiscoveryCell = tableView.dequeueReusableCell(withIdentifier: "DiscoveryCell", for: indexPath) as! DiscoveryCell
-        let userObj = dataSource[indexPath.row]
-        cell.configCellWithObj(userObj: userObj)
+        let photoObj = dataSource[indexPath.row]
+        cell.configCellWithObj(photoObj: photoObj)
         cell.indexPath = indexPath
         cell.setClosurePass { (actionType, actionIndexPath) in
             self.performCellAction(actionType: actionType, indexPath: actionIndexPath)
@@ -83,7 +93,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         case .mainImgType:
             let userObj = dataSource[indexPath.row]
             let browser = ImageScrollViewController()
-            browser.disPlay(imageUrl: userObj.mainImgUrl)
+            browser.disPlay(imageUrl: userObj.hdPicUrl!)
             self.present(browser, animated: true, completion: nil)
             
             break

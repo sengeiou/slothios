@@ -561,7 +561,7 @@ class NetworkEngine: NSObject {
             ["likeSenderUserUuid":"userUuid",
             "pageNum":"pageNum",
             "pageSize":"pageSize"]
-            , method: .post, URLString: URLString)
+            , method: .get, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserGallery>) in
             completeHandler(response.result.value);
@@ -593,13 +593,13 @@ class NetworkEngine: NSObject {
     }
     ///displayOrder: newest：hottest
     
-    enum DisplayOrder: String {
+    enum DisplayType: String {
         case newest = "newest"
         case hottest = "hottest"
     }
     
     //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
-    func getOrderGallery(likeSenderUserUuid: String?,displayOrder: DisplayOrder,pageNum: String,pageSize: String,completeHandler :@escaping(_ displayOrder:DisplayOrder?) -> Void) -> Void {
+    func getOrderGallery(likeSenderUserUuid: String?,displayType: DisplayType,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:DisplayOrder?) -> Void)  -> Void {
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
         
@@ -611,7 +611,7 @@ class NetworkEngine: NSObject {
         var URLString:String = Base_URL + API_URI.get_orderGallery.rawValue
         URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-        URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayOrder.rawValue)
+        URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
 
         let request = HTTPRequestGenerator(withParam:
             ["pageNum":"pageNum",

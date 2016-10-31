@@ -42,8 +42,8 @@ class BiddingListView: BaseView,UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: DiscoveryCell = tableView.dequeueReusableCell(withIdentifier: "DiscoveryCell", for: indexPath) as! DiscoveryCell
-        let userObj = dataSource[indexPath.row]
-        cell.configCellWithObj(userObj: userObj)
+//        let userObj = dataSource[indexPath.row]
+//        cell.configCellWithObj(photoObj: userObj)
         cell.indexPath = indexPath
         return cell
     }

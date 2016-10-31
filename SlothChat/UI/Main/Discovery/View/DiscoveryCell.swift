@@ -111,21 +111,21 @@ class DiscoveryCell: UITableViewCell {
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
     }
     
-    func configCellWithObj(userObj: DiscoveryUserObj) {
-        let avatarUrl = URL(string: userObj.avatar)
+    func configCellWithObj(photoObj: DisplayOrderPhoto) {
+        let avatarUrl = URL(string: photoObj.smallPicUrl!)
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     
-        let mainImgUrl = URL(string: userObj.mainImgUrl)
+        let mainImgUrl = URL(string: photoObj.bigPicUrl!)
         self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        self.nameLabel.text = userObj.name
-        self.locationLabel.text = userObj.location
-        if userObj.isLike {
+        self.nameLabel.text = photoObj.nickname
+        self.locationLabel.text = photoObj.adress
+        if photoObj.currentVisitorLiked! {
             likeButton.setImage(UIImage.init(named: "heart-solid"), for: .normal)
         }else{
             likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         }
-        likeUsersView.configViewWithObject(avatarList: userObj.likeUserList)
+        likeUsersView.configViewWithObject(avatarList: photoObj.likeGallerySliceList!)
     }
     
     required init?(coder aDecoder: NSCoder) {
