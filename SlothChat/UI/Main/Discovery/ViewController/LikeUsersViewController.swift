@@ -7,21 +7,40 @@
 //
 
 import UIKit
+import PKHUD
 
 class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-    var dataSource = [UserProfileData]()
+    var dataSource = [LikeProfileListUser]()
+    var photoObj: DisplayOrderPhoto?
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "喜欢的人"
         sentupView()
-        for _ in 0...20{
-            let profile = Global.shared.globalProfile
-            if let profile = profile{
-                dataSource.append(profile)
+        getLikeGalleryList()
+    }
+    
+    //MARK:- NetWork
+    
+    func getLikeGalleryList() {
+        if photoObj == nil {
+            return
+        }
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let userUuid = Global.shared.globalProfile?.userUuid
+        engine.getLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj!.uuid, pageNum: "1", pageSize: "20") { (profileResult) in
+            HUD.hide()
+            if profileResult?.status == ResponseError.SUCCESS.0 {
+                if let list = profileResult?.data?.list{
+                    SGLog(message: list)
+                    self.dataSource.append(contentsOf: list)
+                    self.tableView.reloadData()
+                }
+            }else{
+                HUD.flash(.label("获取列表失败"), delay: 2)
             }
         }
     }

@@ -61,14 +61,11 @@ class LikeUsersCell: UITableViewCell {
         }
     }
     
-    func configCellWithObj(userObj: UserProfileData) {
-        let photoObj = userObj.userPhotoList?.first
-        if photoObj != nil && photoObj?.profileBigPicUrl != nil {
-            let avatarUrl = URL(string: (photoObj?.profileBigPicUrl!)!)
-            self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-        }
+    func configCellWithObj(userObj: LikeProfileListUser) {
+        let avatarUrl = URL(string: userObj.likeSenderProfilePicUrl!)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        self.nameLabel.text = userObj.nickname
+        self.nameLabel.text = userObj.likeSenderNickname
     }
     
     func browseButtonClick() {

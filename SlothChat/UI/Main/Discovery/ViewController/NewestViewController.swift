@@ -44,6 +44,7 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .newest, pageNum: "1", pageSize: "20") { (displayOrder) in
+            HUD.hide()
             if displayOrder?.status == ResponseError.SUCCESS.0 {
                 if let list = displayOrder?.data?.list{
                     SGLog(message: list)
@@ -52,6 +53,23 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 }
             }else{
                 HUD.flash(.label("获取照片列表失败"), delay: 2)
+            }
+        }
+    }
+    
+    func likeGallery(indexPath: IndexPath) {
+        let photoObj = dataSource[indexPath.row]
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let userUuid = Global.shared.globalProfile?.userUuid
+        engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj.uuid) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                photoObj.currentVisitorLiked = true
+                self.tableView.reloadData()
+            }else{
+                HUD.flash(.label("点赞失败"), delay: 2)
             }
         }
     }
@@ -88,12 +106,12 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         
         switch actionType {
         case .likeType:
-            
+            likeGallery(indexPath: indexPath)
             break
         case .mainImgType:
-            let photoObj = dataSource[indexPath.row]
+            let userObj = dataSource[indexPath.row]
             let browser = ImageScrollViewController()
-            browser.disPlay(imageUrl: photoObj.hdPicUrl!)
+            browser.disPlay(imageUrl: userObj.hdPicUrl!)
             self.present(browser, animated: true, completion: nil)
             
             break
@@ -103,4 +121,5 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             break
         }
     }
+
 }

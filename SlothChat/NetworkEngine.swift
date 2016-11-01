@@ -74,6 +74,10 @@ enum API_URI:String {
     case delete_gallery = "/api/user/{userUuid}/gallery/{uuid}?token={token}"
     //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
     case get_orderGallery = "/api/user/gallery?token={token}&displayOrder={displayOrder}&likeSenderUserUuid={likeSenderUserUuid}"
+    //25.陌生人查看探索图片时点赞POST
+    case gallery_likeGallery = "/api/gallery/{galleryUuid}/likeGallery?token={token}"
+    //26.用户查看自己的探索图片左下方的3个点赞头像列表，查看点赞发出者头像名称列表（传分页参数分页）
+//    case get_ = "/api/gallery/{galleryUuid}/likeGallery?token={token}"
 }
 
 class NetworkEngine: NSObject {
@@ -557,11 +561,14 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
-        let request = HTTPRequestGenerator(withParam:
-            ["likeSenderUserUuid":"userUuid",
-            "pageNum":"pageNum",
-            "pageSize":"pageSize"]
-            , method: .get, URLString: URLString)
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = "GET"
+        
+//        let request = HTTPRequestGenerator(withParam:
+//            ["likeSenderUserUuid":"userUuid",
+//            "pageNum": pageNum,
+//            "pageSize": pageSize]
+//            , method: .get, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserGallery>) in
             completeHandler(response.result.value);
@@ -613,12 +620,60 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
 
-        let request = HTTPRequestGenerator(withParam:
-            ["pageNum":"pageNum",
-            "pageSize":"pageSize"]
-            , method: .get, URLString: URLString)
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = "GET"
+        
+//        let request = HTTPRequestGenerator(withParam:
+//            ["pageNum":pageNum,
+//            "pageSize":pageSize]
+//            , method: .get, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<DisplayOrder>) in
+            completeHandler(response.result.value);
+        }
+    }
+    
+    //25.陌生人查看探索图片时点赞POST
+    func postLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+        
+        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.gallery_likeGallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
+        
+        let request = HTTPRequestGenerator(withParam:["":""], URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            completeHandler(response.result.value);
+        }
+    }
+    //26.用户查看自己的探索图片左下方的3个点赞头像列表，查看点赞发出者头像名称列表（传分页参数分页）
+    func getLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+        
+        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.gallery_likeGallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
+        
+        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
+        request.httpMethod = "GET"
+        
+//        let request = HTTPRequestGenerator(withParam:
+//            ["pageNum":pageNum,
+//             "pageSize":pageSize]
+//            , method: .get, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<LikeProfileResult>) in
             completeHandler(response.result.value);
         }
     }

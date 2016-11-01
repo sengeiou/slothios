@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class ImageScrollViewController: BaseViewController {
     private let imageScroller = ImageScrollView(frame: CGRect.init(x: 0, y: 55, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 55))
@@ -15,8 +16,21 @@ class ImageScrollViewController: BaseViewController {
     private let deleteButton = UIButton(type: .custom)
     private let likeButton = UIButton(type: .custom)
     
-    var isFollow = false
-
+    var isFollow = false{
+        didSet{
+            refreshLikeButton()
+        }
+    }
+    var photoObj: DisplayOrderPhoto?{
+        didSet{
+            if photoObj != nil{
+                isFollow = (photoObj?.currentVisitorLiked)!
+            }else{
+                isShowLikeButton(isShow: false)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sentupToolBar()
@@ -103,6 +117,53 @@ class ImageScrollViewController: BaseViewController {
         imageScroller.display(image: image)
     }
     
+    func disPlay(photoObj: DisplayOrderPhoto) {
+        if let picUrl = photoObj.hdPicUrl {
+            imageScroller.display(imageUrl: picUrl)
+        }
+    }
+    
+    //MARK:- NetWork
+    func likeGallery() {
+        if self.photoObj == nil {
+            return
+        }
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let userUuid = Global.shared.globalProfile?.userUuid
+        engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj?.uuid) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.photoObj?.currentVisitorLiked = true
+                self.isFollow = !self.isFollow
+            }else{
+                HUD.flash(.label("点赞失败"), delay: 2)
+            }
+        }
+    }
+    
+    func deleteGallery() {
+        if self.photoObj == nil {
+            return
+        }
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.deletePhotoFromGallery(photoUuid: (self.photoObj?.uuid)!) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("已成功删除"), delay: 2, completion: { (result) in
+                    self.dismiss(animated: true, completion: { 
+                        
+                    })
+                })
+            }else{
+                HUD.flash(.label("删除失败"), delay: 2)
+            }
+        }
+    }
+    
     //MARK: - Action
     
     func closeButtonClick() {
@@ -110,12 +171,11 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func deleteButtonClick() {
-        
+        deleteGallery()
     }
     
     func likeButtonClick() {
-        isFollow = !isFollow
-        refreshLikeButton()
+        likeGallery()
     }
     
     fileprivate func refreshLikeButton() {
