@@ -10,15 +10,19 @@ import UIKit
 import PKHUD
 import Kingfisher
 
+private let PageSize = 20
+
 class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     var collectionView: UICollectionView?
     let bgImgView = UIImageView.init()
     var dataSource = [UserGalleryPhoto]()
-    
+    var pageNum = 1
+
     override func viewDidLoad() {
         super.viewDidLoad()        
         configCollectionView()
-        getGalleryPhoto()
+        setupPullToRefresh()
+        getGalleryPhoto(at: .top)
     }
 
     func configCollectionView() {
@@ -108,14 +112,27 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         }
     }
     
-    func getGalleryPhoto() {
+    func getGalleryPhoto(at: Position) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
+        
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getPhotoGallery(userUuid: userUuid, pageNum: "1", pageSize: "20") { (gallery) in
-            HUD.hide()
+        engine.getPhotoGallery(userUuid: userUuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (gallery) in
+            if at == .top {
+                self.collectionView?.endRefreshing(at: .top)
+            }else{
+                self.collectionView?.endRefreshing(at: .bottom)
+            }
             if gallery?.status == ResponseError.SUCCESS.0 {
                 if let list = gallery?.data?.list{
+                    self.collectionView?.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
                     self.dataSource.append(contentsOf: list)
                     self.collectionView?.reloadData()
                 }
@@ -124,6 +141,18 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             }
         }
     }
-    
+
+}
+private extension MyPhotosViewController {
+        
+    func setupPullToRefresh() {
+        collectionView?.addPullToRefresh(PullToRefresh()) { [weak self] in
+        self?.getGalleryPhoto(at: .top)
+        }
+            
+        collectionView?.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
+            self?.getGalleryPhoto(at: .bottom)
+        }
+    }
 }
 

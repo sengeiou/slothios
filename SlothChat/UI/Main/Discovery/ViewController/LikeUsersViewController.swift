@@ -9,33 +9,50 @@
 import UIKit
 import PKHUD
 
+private let PageSize = 20
+
 class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [LikeProfileListUser]()
     var photoObj: DisplayOrderPhoto?
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
-    
+    var pageNum = 1
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "喜欢的人"
         sentupView()
-        getLikeGalleryList()
+        getLikeGalleryList(at: .top)
     }
     
     //MARK:- NetWork
     
-    func getLikeGalleryList() {
+    func getLikeGalleryList(at: Position) {
         if photoObj == nil {
             return
         }
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
+        
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj!.uuid, pageNum: "1", pageSize: "20") { (profileResult) in
-            HUD.hide()
+
+        engine.getLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj!.uuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
+
+            if at == .top {
+                self.tableView.endRefreshing(at: .top)
+            }else{
+                self.tableView.endRefreshing(at: .bottom)
+            }
             if profileResult?.status == ResponseError.SUCCESS.0 {
                 if let list = profileResult?.data?.list{
-                    SGLog(message: list)
+                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
                     self.dataSource.append(contentsOf: list)
                     self.tableView.reloadData()
                 }
@@ -93,4 +110,18 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         
     }
     
+}
+
+private extension LikeUsersViewController {
+    
+    func setupPullToRefresh() {
+        tableView.addPullToRefresh(PullToRefresh()) { [weak self] in
+            self?.getLikeGalleryList(at: .top)
+            
+        }
+        
+        tableView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
+            self?.getLikeGalleryList(at: .bottom)
+        }
+    }
 }

@@ -112,7 +112,7 @@ class DiscoveryCell: UITableViewCell {
     }
     
     func configCellWithObj(photoObj: DisplayOrderPhoto) {
-        let avatarUrl = URL(string: photoObj.smallPicUrl!)
+        let avatarUrl = URL(string: photoObj.profilePicUrl!)
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     
         let mainImgUrl = URL(string: photoObj.bigPicUrl!)

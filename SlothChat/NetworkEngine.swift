@@ -561,16 +561,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = "GET"
-        
-//        let request = HTTPRequestGenerator(withParam:
-//            ["likeSenderUserUuid":"userUuid",
-//            "pageNum": pageNum,
-//            "pageSize": pageSize]
-//            , method: .get, URLString: URLString)
-        
-        Alamofire.request(request).responseObject { (response:DataResponse<UserGallery>) in
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
             completeHandler(response.result.value);
         }
     }
@@ -620,15 +611,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
 
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = "GET"
-        
-//        let request = HTTPRequestGenerator(withParam:
-//            ["pageNum":pageNum,
-//            "pageSize":pageSize]
-//            , method: .get, URLString: URLString)
-        
-        Alamofire.request(request).responseObject { (response:DataResponse<DisplayOrder>) in
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
             completeHandler(response.result.value);
         }
     }
@@ -665,15 +648,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
         
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = "GET"
-        
-//        let request = HTTPRequestGenerator(withParam:
-//            ["pageNum":pageNum,
-//             "pageSize":pageSize]
-//            , method: .get, URLString: URLString)
-        
-        Alamofire.request(request).responseObject { (response:DataResponse<LikeProfileResult>) in
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             completeHandler(response.result.value);
         }
     }

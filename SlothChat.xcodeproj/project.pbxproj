@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */; };
+		040327E61DC83BE500401683 /* DefaultRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327DF1DC83BE500401683 /* DefaultRefreshView.swift */; };
+		040327E71DC83BE500401683 /* DefaultViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E01DC83BE500401683 /* DefaultViewAnimator.swift */; };
+		040327E81DC83BE500401683 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E21DC83BE500401683 /* PullToRefresh.swift */; };
+		040327E91DC83BE500401683 /* RefreshViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E31DC83BE500401683 /* RefreshViewAnimator.swift */; };
+		040327EA1DC83BE500401683 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E41DC83BE500401683 /* State.swift */; };
+		040327EB1DC83BE500401683 /* UIScrollView+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E51DC83BE500401683 /* UIScrollView+PullToRefresh.swift */; };
 		040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */; };
 		040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */; };
 		040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */; };
@@ -221,6 +227,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040327DF1DC83BE500401683 /* DefaultRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRefreshView.swift; sourceTree = "<group>"; };
+		040327E01DC83BE500401683 /* DefaultViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewAnimator.swift; sourceTree = "<group>"; };
+		040327E11DC83BE500401683 /* PullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefresh.h; sourceTree = "<group>"; };
+		040327E21DC83BE500401683 /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		040327E31DC83BE500401683 /* RefreshViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewAnimator.swift; sourceTree = "<group>"; };
+		040327E41DC83BE500401683 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		040327E51DC83BE500401683 /* UIScrollView+PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToRefresh.swift"; sourceTree = "<group>"; };
 		040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
@@ -534,6 +547,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040327DE1DC83BE500401683 /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				040327DF1DC83BE500401683 /* DefaultRefreshView.swift */,
+				040327E01DC83BE500401683 /* DefaultViewAnimator.swift */,
+				040327E11DC83BE500401683 /* PullToRefresh.h */,
+				040327E21DC83BE500401683 /* PullToRefresh.swift */,
+				040327E31DC83BE500401683 /* RefreshViewAnimator.swift */,
+				040327E41DC83BE500401683 /* State.swift */,
+				040327E51DC83BE500401683 /* UIScrollView+PullToRefresh.swift */,
+			);
+			path = PullToRefresh;
+			sourceTree = "<group>";
+		};
 		040576C71DB3353E00C55D02 /* IQKeyboardManagerSwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,6 +889,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				040327DE1DC83BE500401683 /* PullToRefresh */,
 				040D46B91DC4B586005D1E8E /* PopupDialog */,
 				04405B221DC46BB70042BB44 /* ImageScrollView */,
 				04405B1A1DC245F40042BB44 /* tingyunApp.framework */,
@@ -1663,6 +1691,7 @@
 				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
+				040327E61DC83BE500401683 /* DefaultRefreshView.swift in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m in Sources */,
 				0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */,
@@ -1675,10 +1704,12 @@
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
 				04FEB7EC1DB76F13004509D1 /* UIImage+GIF.m in Sources */,
 				040D46DB1DC4B587005D1E8E /* PresentationController.swift in Sources */,
+				040327EA1DC83BE500401683 /* State.swift in Sources */,
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,
 				19008BAF1DBE925800319B86 /* LoginModel.swift in Sources */,
 				0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */,
 				19008B9C1DBE75D500319B86 /* Country.swift in Sources */,
+				040327E71DC83BE500401683 /* DefaultViewAnimator.swift in Sources */,
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
@@ -1703,11 +1734,13 @@
 				04FEB7BE1DB76EDB004509D1 /* SDCycleScrollView.m in Sources */,
 				04B499AC1DBFB61A004659BA /* UserPhotoList.swift in Sources */,
 				040D46D61DC4B587005D1E8E /* PopupDialogContainerView.swift in Sources */,
+				040327EB1DC83BE500401683 /* UIScrollView+PullToRefresh.swift in Sources */,
 				040D46DD1DC4B587005D1E8E /* TransitionAnimations.swift in Sources */,
 				0486BB691DBB41C900086303 /* IAPShare.m in Sources */,
 				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
 				040D46DA1DC4B587005D1E8E /* PopupDialogOverlayView.swift in Sources */,
+				040327E81DC83BE500401683 /* PullToRefresh.swift in Sources */,
 				044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */,
 				040D46D21DC4B587005D1E8E /* InteractiveTransition.swift in Sources */,
 				040D46DE1DC4B587005D1E8E /* TransitionAnimator.swift in Sources */,
@@ -1716,6 +1749,7 @@
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
 				19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */,
 				04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */,
+				040327E91DC83BE500401683 /* RefreshViewAnimator.swift in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
 				04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */,
 				19008BA21DBE831200319B86 /* SMS.swift in Sources */,

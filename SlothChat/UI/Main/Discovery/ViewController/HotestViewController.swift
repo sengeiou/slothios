@@ -9,15 +9,24 @@
 import UIKit
 import PKHUD
 
+private let PageSize = 20
+
 class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [DisplayOrderPhoto]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
+    var pageNum = 1
+    
+    deinit {
+        tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
+        tableView.removePullToRefresh(tableView.topPullToRefresh!)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
-        getOrderGallery()
+        setupPullToRefresh()
+        getOrderGallery(at: .top)
     }
     
     func configTableView() {
@@ -39,15 +48,27 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
     
     //MARK:- NetWork
-    func getOrderGallery() {
+    func getOrderGallery(at: Position) {
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .hottest, pageNum: "1", pageSize: "20") { (displayOrder) in
-            HUD.hide()
+        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .hottest, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
+            if at == .top {
+                self.tableView.endRefreshing(at: .top)
+            }else{
+                self.tableView.endRefreshing(at: .bottom)
+            }
+            
             if displayOrder?.status == ResponseError.SUCCESS.0 {
                 if let list = displayOrder?.data?.list{
-                    SGLog(message: list)
+                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
                     self.dataSource.append(contentsOf: list)
                     self.tableView.reloadData()
                 }
@@ -124,5 +145,18 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             break
         }
     }
+}
+
+private extension HotestViewController {
     
+    func setupPullToRefresh() {
+        tableView.addPullToRefresh(PullToRefresh()) { [weak self] in
+            self?.getOrderGallery(at: .top)
+            
+        }
+        
+        tableView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
+            self?.getOrderGallery(at: .bottom)
+        }
+    }
 }
