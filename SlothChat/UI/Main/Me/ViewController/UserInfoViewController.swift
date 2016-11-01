@@ -1,5 +1,5 @@
 //
-//  MeViewController.swift
+//  UserInfoViewController.swift
 //  SlothChat
 //
 //  Created by fly on 16/10/17.
@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
+class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     var isEdited = false
     let scrollView = UIScrollView()
     let container = UIView()

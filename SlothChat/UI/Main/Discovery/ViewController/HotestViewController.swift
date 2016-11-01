@@ -145,7 +145,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             break
         case .avatarType:
             let actionPhotoObj = dataSource[indexPath.row]
-            let pushVC = MeViewController()
+            let pushVC = UserInfoViewController()
             pushVC.mUserUuid = actionPhotoObj.userUuid
             navigationController?.pushViewController(pushVC, animated: true)
             

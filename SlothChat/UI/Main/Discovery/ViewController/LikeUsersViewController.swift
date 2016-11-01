@@ -92,7 +92,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let pushVC = MeViewController()
+        let pushVC = UserInfoViewController()
         pushVC.mUserUuid = Global.shared.globalProfile?.userUuid
         pushVC.isMyselfFlag = false
         self.navigationController?.pushViewController(pushVC, animated: true)

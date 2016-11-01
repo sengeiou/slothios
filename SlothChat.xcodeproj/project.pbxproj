@@ -67,7 +67,7 @@
 		04405B311DC480B40042BB44 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B301DC480B40042BB44 /* AssetsLibrary.framework */; };
 		044643511DB4F05C0050F8BC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643501DB4F05C0050F8BC /* ChatViewController.swift */; };
 		044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643521DB4F0660050F8BC /* DiscoveryViewController.swift */; };
-		044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* MeViewController.swift */; };
+		044643551DB4F06D0050F8BC /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* UserInfoViewController.swift */; };
 		044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643571DB4F6960050F8BC /* UIViewController+Extension.swift */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
 		04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */; };
@@ -290,7 +290,7 @@
 		04405B301DC480B40042BB44 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		044643501DB4F05C0050F8BC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		044643521DB4F0660050F8BC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
-		044643541DB4F06D0050F8BC /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		044643541DB4F06D0050F8BC /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		044643571DB4F6960050F8BC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingViewController.xib; sourceTree = "<group>"; };
@@ -757,7 +757,7 @@
 		0446434F1DB4F03E0050F8BC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				044643541DB4F06D0050F8BC /* MeViewController.swift */,
+				044643541DB4F06D0050F8BC /* UserInfoViewController.swift */,
 				04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */,
 				04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */,
 				04966B441DB665E7000721BD /* AboutUsViewController.swift */,
@@ -1609,7 +1609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				043C911D1DBB9BDA00431965 /* LikeUsersView.swift in Sources */,
-				044643551DB4F06D0050F8BC /* MeViewController.swift in Sources */,
+				044643551DB4F06D0050F8BC /* UserInfoViewController.swift in Sources */,
 				04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */,
 				0486BBB71DBB577300086303 /* NSObject+ShareSDK.m in Sources */,
 				04FEB7BD1DB76EDB004509D1 /* SDCollectionViewCell.m in Sources */,
