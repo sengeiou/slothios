@@ -115,8 +115,8 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         tableView.deselectRow(at: indexPath, animated: true)
         
         let pushVC = BrowseAdvertViewController()
-        let user = UserObj.defaultUserObj()
-        pushVC.configWithObject(user: user)
+        let photoObj = dataSource[indexPath.row]
+        pushVC.configWithObject(photoObj: photoObj)
         
         self.navigationController?.pushViewController(pushVC, animated: true)
     }

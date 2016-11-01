@@ -14,6 +14,7 @@
 		040327E91DC83BE500401683 /* RefreshViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E31DC83BE500401683 /* RefreshViewAnimator.swift */; };
 		040327EA1DC83BE500401683 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E41DC83BE500401683 /* State.swift */; };
 		040327EB1DC83BE500401683 /* UIScrollView+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327E51DC83BE500401683 /* UIScrollView+PullToRefresh.swift */; };
+		040327ED1DC873F000401683 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327EC1DC873F000401683 /* FlagView.swift */; };
 		040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */; };
 		040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */; };
 		040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */; };
@@ -234,6 +235,7 @@
 		040327E31DC83BE500401683 /* RefreshViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshViewAnimator.swift; sourceTree = "<group>"; };
 		040327E41DC83BE500401683 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		040327E51DC83BE500401683 /* UIScrollView+PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToRefresh.swift"; sourceTree = "<group>"; };
+		040327EC1DC873F000401683 /* FlagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
 		040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
@@ -1095,6 +1097,7 @@
 				04B1CEF01DBC46D9003482DF /* BiddingListCell.swift */,
 				04B1CEF21DBC8B20003482DF /* PublishHeaderView.swift */,
 				04B1CEFA1DBCD097003482DF /* BiddingStatusView.swift */,
+				040327EC1DC873F000401683 /* FlagView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1731,6 +1734,7 @@
 				19008BA01DBE7E4700319B86 /* SCData.swift in Sources */,
 				04FEB7ED1DB76F13004509D1 /* UIImage+MultiFormat.m in Sources */,
 				040576E11DB3353E00C55D02 /* IQUITextFieldView+Additions.swift in Sources */,
+				040327ED1DC873F000401683 /* FlagView.swift in Sources */,
 				04FEB7BE1DB76EDB004509D1 /* SDCycleScrollView.m in Sources */,
 				04B499AC1DBFB61A004659BA /* UserPhotoList.swift in Sources */,
 				040D46D61DC4B587005D1E8E /* PopupDialogContainerView.swift in Sources */,

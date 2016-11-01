@@ -103,8 +103,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     func performCellAction( indexPatch: IndexPath) {
         SGLog(message: indexPatch.row)
         let pushVC = BrowseAdvertViewController()
-        let user = UserObj.defaultUserObj()
-        pushVC.configWithObject(user: user)
+//        pushVC.configWithObject(photoObj: user)
         
         self.navigationController?.pushViewController(pushVC, animated: true)
         

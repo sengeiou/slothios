@@ -21,6 +21,7 @@ class ImageScrollViewController: BaseViewController {
             refreshLikeButton()
         }
     }
+    
     var photoObj: DisplayOrderPhoto?{
         didSet{
             if photoObj != nil{

@@ -86,7 +86,8 @@ class DiscoveryCell: UITableViewCell {
         }
         
         let w = UIScreen.main.bounds.width
-
+        mainImgView.contentMode = .scaleAspectFill
+        mainImgView.clipsToBounds = true
         mainImgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(avatarImgView.snp.bottom).offset(14)

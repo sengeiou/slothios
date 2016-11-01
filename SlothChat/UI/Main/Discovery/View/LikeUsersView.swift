@@ -110,19 +110,24 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
             dataSource.removeAll()
             let count = avatarList!.count
             
-            if count > 0 {
+            if count <= 0 {
+                countLabel.text = "您要加油哦~"
+                countLabel.snp.updateConstraints { (make) in
+                    make.left.equalTo(9)
+                }
+            }else{
                 dataSource.append(contentsOf: avatarList!)
+                
+                collectionView?.reloadData()
+                
+                let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+                countLabel.text = "等" + String(count) + "人喜欢"
+                let width = layout.itemSize.width
+                countLabel.snp.updateConstraints { (make) in
+                    make.left.equalTo((9 + Int(width)) * count + 10)
+                }
             }
-            collectionView?.reloadData()
             
-            let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
-            let width = layout.itemSize.width
-            
-            
-            countLabel.text = "等" + String(count) + "人喜欢"
-            countLabel.snp.updateConstraints { (make) in
-                make.left.equalTo((9 + Int(width)) * count + 10)
-            }
         }
     }
 }
