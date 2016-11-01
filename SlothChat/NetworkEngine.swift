@@ -44,8 +44,8 @@ enum API_URI:String {
     case get_api_us  = "/api/us"
     //9.查看个人资料页面的文字和图片
     case get_userProfile  = "/api/user/{userUuid}/userProfile"
-    //10.陌生人查看个人资料页面时对资料点赞
-    case put_userProfile_like = "/api/user/{userUuid}/userProfile/{uuid}/like?token={token}"
+//    //10.陌生人查看个人资料页面时对资料点赞
+//    case put_userProfile_like = "/api/user/{userUuid}/userProfile/{uuid}/like?token={token}"
     //11.查看个人设置
     case userProfile_sysConfig = "/api/user/{userUuid}/userProfile/{uuid}/sysConfig?token={token}"
     //12.用原有登录密码修改账户密码
@@ -287,7 +287,7 @@ class NetworkEngine: NSObject {
             completeHandler(response.result.value);
         }
     }
-    
+    /******
     //10.陌生人查看个人资料页面时对资料点赞
     func putUserProfileLike(uuid:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         let userUuid = Global.shared.globalProfile?.userUuid
@@ -310,7 +310,7 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
         }
-    }
+    }******/
     
     //11.查看个人设置
     func getSysConfig(completeHandler :@escaping(_ response:SysConfig?) -> Void)  -> Void {

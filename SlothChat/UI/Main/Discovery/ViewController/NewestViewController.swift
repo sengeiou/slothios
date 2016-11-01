@@ -143,7 +143,15 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             pushVC.photoObj = actionPhotoObj
             navigationController?.pushViewController(pushVC, animated: true)
             break
+        case .avatarType:
+            let actionPhotoObj = dataSource[indexPath.row]
+            let pushVC = MeViewController()
+            pushVC.mUserUuid = actionPhotoObj.userUuid
+            navigationController?.pushViewController(pushVC, animated: true)
+            
+            break
         }
+        
     }
 }
 

@@ -16,7 +16,13 @@ class MainViewController: UITabBarController {
         
         let discoveryNav = BaseNavigationController(rootViewController: DiscoveryViewController())
         let chatNav = BaseNavigationController(rootViewController:ChatViewController())
-        let meNav = BaseNavigationController(rootViewController:MeViewController())
+        
+        let meVC = MeViewController()
+        meVC.isMyselfFlag = true
+        meVC.mProfile = Global.shared.globalProfile
+        meVC.mUserUuid = Global.shared.globalProfile?.userUuid
+        
+        let meNav = BaseNavigationController(rootViewController:meVC)
         
         self.viewControllers = [discoveryNav,chatNav,meNav]
         

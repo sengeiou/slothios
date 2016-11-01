@@ -9,10 +9,11 @@
 import UIKit
 import Kingfisher
 
-enum DiscoveryActionType {
+enum DiscoveryActionType: Int {
     case likeType
     case mainImgType
     case likeUsersType
+    case avatarType
 }
 typealias DiscoveryClosureType = (_ actionType: DiscoveryActionType, _ indexPatch: IndexPath) -> Void
 
@@ -109,6 +110,10 @@ class DiscoveryCell: UITableViewCell {
         mainImgView.addGestureRecognizer(tap1)
         mainImgView.isUserInteractionEnabled = true
         
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(avatarImgClick))
+        avatarImgView.addGestureRecognizer(tap2)
+        avatarImgView.isUserInteractionEnabled = true
+        
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
     }
     
@@ -148,6 +153,12 @@ class DiscoveryCell: UITableViewCell {
     func mainImgClick() {
         if let sp = self.selectPassValue {
             sp(.mainImgType,self.indexPath!)
+        }
+    }
+    
+    func avatarImgClick() {
+        if let sp = self.selectPassValue {
+            sp(.avatarType,self.indexPath!)
         }
     }
     

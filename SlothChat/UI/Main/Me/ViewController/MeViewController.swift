@@ -20,13 +20,15 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var shareView: LikeShareView?
     var toolView: UserInfoToolView?
 
-    var isMyselfFlag = true
+    var isMyselfFlag = false
     
     var mUserUuid: String?{
         didSet{
             if mUserUuid != nil &&
-                mUserUuid == Global.shared.globalLogin?.user?.uuid{
+                mUserUuid == Global.shared.globalProfile?.userUuid{
                 isMyselfFlag = true
+            }else{
+                isMyselfFlag = false
             }
         }
     }
@@ -41,9 +43,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()            
-        self.setNavtionConfirm(titleStr: "设置")
 
         if isMyselfFlag{
+            self.setNavtionConfirm(titleStr: "设置")
+
             let userUuid = Global.shared.globalLogin?.user?.uuid
             mProfile = Global.shared.globalProfile
             self.getUserProfile(userUuid: userUuid!)
@@ -219,7 +222,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
                 }else{
                 }
                 self.refreshBannerView()
-                self.infoView.configViewWihObject(userObj: (profile?.data)!);
+                self.infoView.configViewWihObject(userObj: (profile?.data)!)
 
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
@@ -259,7 +262,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let uuid = Global.shared.globalProfile?.userUuid
         
-        engine.putUserProfileLike(uuid: uuid!) { (response) in
+        engine.post_likeProfile(userProfileUuid: uuid!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("谢谢您哦~"), delay: 2)
