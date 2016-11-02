@@ -13,22 +13,40 @@ private let PageSize = 20
 
 class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [LikeProfileListUser]()
-    var photoObj: DisplayOrderPhoto?
+    var likeSenderUserUuid: String?
+    var galleryUuid: String?
+    
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     var pageNum = 1
 
+    deinit {
+        tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
+        tableView.removePullToRefresh(tableView.topPullToRefresh!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "喜欢的人"
         sentupView()
-        getLikeGalleryList(at: .top)
+        setupPullToRefresh()
+        getLikeUserList(at: .top)
+    }
+    
+    func getLikeUserList(at: Position) {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        if likeSenderUserUuid == userUuid{
+            getLikeProfileList(at: .top)
+        }else{
+            getLikeGalleryList(at: .top)
+        }
     }
     
     //MARK:- NetWork
     
     func getLikeGalleryList(at: Position) {
-        if photoObj == nil {
+        if likeSenderUserUuid == nil ||
+            galleryUuid == nil{
             return
         }
         if at == .top {
@@ -40,7 +58,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         let engine = NetworkEngine()
         let userUuid = Global.shared.globalProfile?.userUuid
 
-        engine.getLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj!.uuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
+        engine.getLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: galleryUuid!, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
 
             if at == .top {
                 self.tableView.endRefreshing(at: .top)
@@ -49,6 +67,40 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
             }
             if profileResult?.status == ResponseError.SUCCESS.0 {
                 if let list = profileResult?.data?.list{
+                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
+                    self.dataSource.append(contentsOf: list)
+                    self.tableView.reloadData()
+                }
+            }else{
+                HUD.flash(.label("获取列表失败"), delay: 2)
+            }
+        }
+    }
+    
+    func getLikeProfileList(at: Position) {
+        if likeSenderUserUuid == nil {
+            return
+        }
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
+        
+        let engine = NetworkEngine()
+//        let userUuid = Global.shared.globalProfile?.userUuid
+        
+        engine.getLikeProfile { (likeResult) in
+            if at == .top {
+                self.tableView.endRefreshing(at: .top)
+            }else{
+                self.tableView.endRefreshing(at: .bottom)
+            }
+            if likeResult?.status == ResponseError.SUCCESS.0 {
+                if let list = likeResult?.data?.list{
                     self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
@@ -115,12 +167,12 @@ private extension LikeUsersViewController {
     
     func setupPullToRefresh() {
         tableView.addPullToRefresh(PullToRefresh()) { [weak self] in
-            self?.getLikeGalleryList(at: .top)
+            self?.getLikeUserList(at: .top)
             
         }
         
         tableView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
-            self?.getLikeGalleryList(at: .bottom)
+            self?.getLikeUserList(at: .bottom)
         }
     }
 }

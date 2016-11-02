@@ -107,6 +107,12 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
 
         if isMyselfFlag {
             shareView = LikeShareView()
+            shareView?.setActionInfoValue(temClosure: { 
+                let pushVC = LikeUsersViewController()
+                let userUuid = Global.shared.globalProfile?.userUuid
+                pushVC.likeSenderUserUuid = userUuid
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
             container.addSubview(shareView!)
             if mProfile != nil{
                 shareView?.configLikeLabel(count: (mProfile?.likesCount)!)

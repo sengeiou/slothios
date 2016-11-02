@@ -9,10 +9,15 @@
 import UIKit
 import SnapKit
 
+typealias LikeUserListType = () -> Void
+
 class LikeShareView: BaseView {
     let imgView = UIImageView()
     let likeLabel = UILabel()
     let shareButton = UIButton(type: .custom)
+    
+    var actionInfoValue:LikeUserListType?
+
     
     override init(frame: CGRect ){
         super.init(frame: frame)
@@ -51,10 +56,29 @@ class LikeShareView: BaseView {
             make.centerY.equalTo(self.snp.centerY)
             make.size.equalTo(CGSize.init(width: 24, height: 24))
         }
+        
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(likeUserTap))
+        imgView.isUserInteractionEnabled = true
+        imgView.addGestureRecognizer(tap1)
+        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(likeUserTap))
+        likeLabel.isUserInteractionEnabled = true
+        likeLabel.addGestureRecognizer(tap2)
     }
     
     func configLikeLabel(count: Int) {
         likeLabel.text = String(count) + "人喜欢"
+    }
+    
+    func setActionInfoValue(temClosure: @escaping LikeUserListType){
+        self.actionInfoValue = temClosure
+    }
+    
+    func likeUserTap() {
+        SGLog(message: "")
+        if let sp = self.actionInfoValue {
+            sp()
+        }
     }
     
     func shareButtonClick() {

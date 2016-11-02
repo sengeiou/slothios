@@ -493,7 +493,7 @@ class NetworkEngine: NSObject {
     }
     
     //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
-    func get_likeProfile(completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func getLikeProfile(completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
         
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
@@ -510,7 +510,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["":""]
             , method: .get, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        Alamofire.request(request).responseObject { (response:DataResponse<LikeProfileResult>) in
             completeHandler(response.result.value);
         }
     }

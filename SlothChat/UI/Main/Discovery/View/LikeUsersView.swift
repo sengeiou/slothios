@@ -127,7 +127,6 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
                     make.left.equalTo((9 + Int(width)) * count + 10)
                 }
             }
-            
         }
     }
 }
