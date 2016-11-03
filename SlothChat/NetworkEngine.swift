@@ -621,7 +621,7 @@ class NetworkEngine: NSObject {
     //MARK:B2.探索图片模块
     //21 探索图片空间，新添加图片 POST
     func postPhotoGallery(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
-        let userUuid = Global.shared.globalProfile?.uuid
+        let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{

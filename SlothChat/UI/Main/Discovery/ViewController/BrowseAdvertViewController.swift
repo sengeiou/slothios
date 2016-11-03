@@ -130,6 +130,7 @@ class BrowseAdvertViewController: BaseViewController {
     func tapMainImgView() {
         
         let browser = ImageScrollViewController()
+        browser.photoObj = photoObj
         browser.disPlay(imageUrl: (photoObj?.hdPicUrl)!)
         browser.isShowDeleteButton(isShow: false)
         self.present(browser, animated: true, completion: nil)

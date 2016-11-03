@@ -31,10 +31,18 @@ class ImageScrollViewController: BaseViewController {
         }
     }
     
+    var isMyself = false{
+        didSet{
+            isShowLikeButton(isShow: !isMyself)
+            isShowDeleteButton(isShow: isMyself)
+        }
+    }
+    
     var photoObj: DisplayOrderPhoto?{
         didSet{
             if photoObj != nil{
                 isFollow = (photoObj?.currentVisitorLiked)!
+                isMyself = Global.shared.isMyself(userUuid: photoObj?.userUuid)
             }else{
                 isShowLikeButton(isShow: false)
             }
@@ -58,6 +66,8 @@ class ImageScrollViewController: BaseViewController {
         super.viewDidLoad()
         sentupToolBar()
         sentupView()
+        isShowLikeButton(isShow: !isMyself)
+        isShowDeleteButton(isShow: isMyself)
     }
     
     func sentupToolBar() {
@@ -158,7 +168,8 @@ class ImageScrollViewController: BaseViewController {
     
     //MARK:- NetWork
     func likeGallery() {
-        if self.photoObj == nil {
+        
+        if (!isMyself && self.photoObj == nil) {
             return
         }
         
@@ -180,13 +191,23 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func deleteGallery() {
-        if self.photoObj == nil {
+        if (self.galleryPhotoObj == nil ||
+            self.galleryPhotoObj?.uuid == nil) &&
+            self.photoObj == nil ||
+            self.photoObj?.uuid == nil{
             return
+        }
+        
+        var photoUuid = ""
+        if self.galleryPhotoObj != nil {
+            photoUuid = (self.galleryPhotoObj?.uuid!)!
+        }else{
+            photoUuid = (self.photoObj?.uuid!)!
         }
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.deletePhotoFromGallery(photoUuid: (self.photoObj?.uuid)!) { (response) in
+        engine.deletePhotoFromGallery(photoUuid: photoUuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 if let sp = self.actionValue {

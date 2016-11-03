@@ -26,6 +26,7 @@ class MyPhotosCell: UICollectionViewCell {
         }
         
         contentView.addSubview(flagView)
+        flagView.isHidden = true
         flagView.snp.makeConstraints { (make) in
             make.top.equalTo(6)
             make.right.equalTo(-6)

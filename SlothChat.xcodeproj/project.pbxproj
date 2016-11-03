@@ -1977,8 +1977,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lifeng Zhang (UFLXQ9JK9Z)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lifeng Zhang (UFLXQ9JK9Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2016,8 +2016,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b63eb6ce-1cf0-4df7-9ad4-62fe1e92b983";
-				PROVISIONING_PROFILE_SPECIFIER = ssloth_dis;
+				PROVISIONING_PROFILE = "a6b19944-56f9-486a-b070-c6044ce5cc88";
+				PROVISIONING_PROFILE_SPECIFIER = ssloth_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
