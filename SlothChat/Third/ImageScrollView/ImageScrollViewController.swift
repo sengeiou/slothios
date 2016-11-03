@@ -54,6 +54,7 @@ class ImageScrollViewController: BaseViewController {
             if galleryPhotoObj != nil{
 //                isFollow = (photoObj?.currentVisitorLiked)!
                 isFollow = false
+                isMyself = Global.shared.isMyself(userUuid: photoObj?.userUuid)
             }else{
                 isShowLikeButton(isShow: false)
             }
