@@ -66,8 +66,6 @@ class ImageScrollViewController: BaseViewController {
         super.viewDidLoad()
         sentupToolBar()
         sentupView()
-        isShowLikeButton(isShow: !isMyself)
-        isShowDeleteButton(isShow: isMyself)
     }
     
     func sentupToolBar() {
@@ -123,6 +121,10 @@ class ImageScrollViewController: BaseViewController {
         //heart-solid
         likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
+        
+        isShowLikeButton(isShow: !isMyself)
+        isShowDeleteButton(isShow: isMyself)
+        refreshLikeButton()
     }
     
     func isShowDeleteButton(isShow: Bool) {
