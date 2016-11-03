@@ -45,8 +45,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     //MARK:- NetWork
     
     func getLikeGalleryList(at: Position) {
-        if likeSenderUserUuid == nil ||
-            galleryUuid == nil{
+        if galleryUuid == nil{
             return
         }
         if at == .top {
