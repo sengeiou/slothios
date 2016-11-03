@@ -21,6 +21,11 @@ class LoginModel : NSObject, NSCoding, Mappable{
         UserDefaults.standard.synchronize()
     }
     
+    open class func removeFromCache(){
+        UserDefaults.standard.removeObject(forKey: "LoginModelCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
     open class func ModelFromCache() -> LoginModel? {
         let data = UserDefaults.standard.value(forKey: "LoginModelCacheKey")
         if data != nil {

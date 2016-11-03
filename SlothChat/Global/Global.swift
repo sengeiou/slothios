@@ -55,7 +55,10 @@ class Global: BaseObject {
     
     func logout() {
         globalLogin = nil
+        LoginModel.removeFromCache()
         globalProfile = nil
+        UserProfileData.removeFromCache()
         globalSysConfig = nil
+        SysConfigData.removeFromCache()
     }
 }

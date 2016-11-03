@@ -21,6 +21,11 @@ class SysConfigData : NSObject, NSCoding, Mappable{
         UserDefaults.standard.synchronize()
     }
     
+    open class func removeFromCache(){
+        UserDefaults.standard.removeObject(forKey: "SysConfigDataCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
     open class func ConfigFromCache() -> SysConfigData? {
         let data = UserDefaults.standard.value(forKey: "SysConfigDataCacheKey")
         if data != nil {

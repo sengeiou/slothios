@@ -34,6 +34,11 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         UserDefaults.standard.synchronize()
     }
     
+    open class func removeFromCache(){
+        UserDefaults.standard.removeObject(forKey: "UserProfileDataCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
     open class func ProfileFromCache() -> UserProfileData? {
         let data = UserDefaults.standard.value(forKey: "UserProfileDataCacheKey")
         if data != nil {

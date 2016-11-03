@@ -84,9 +84,17 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         }
         let galleryPhoto = dataSource[indexPath.row - 1]
         if galleryPhoto.bigPicUrl != nil {
-            let pushVC = BiddingStatusViewController()
-            pushVC.configWithObject(imgUrl: galleryPhoto.bigPicUrl!)
-            self.navigationController?.pushViewController(pushVC, animated: true)
+            let browser = ImageScrollViewController()
+            browser.galleryPhotoObj = galleryPhoto
+            browser.disPlay(galleryPhoto: galleryPhoto)
+            browser.isShowLikeButton(isShow: false)
+            self.present(browser, animated: true, completion: nil)
+            
+            browser.setActionClosure(temClosure: { (actionType) in
+                if actionType == .deleteImg {
+                    self.getGalleryPhoto(at: .top)
+                }
+            })
         }
        
     }
@@ -105,9 +113,10 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         engine.postPhotoGallery(picFile: image) { (userPhoto) in
             HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
+                self.getGalleryPhoto(at: .top)
                 HUD.flash(.label("添加照片成功"), delay: 2)
             }else{
-                HUD.flash(.label("添加照片失败"), delay: 2)
+                HUD.flash(.label(userPhoto?.msg), delay: 2)
             }
         }
     }
