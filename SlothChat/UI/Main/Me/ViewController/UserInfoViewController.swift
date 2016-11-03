@@ -330,10 +330,21 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deleteButtonClick() {
+        let at = self.bannerView?.currentPage()
+        if at! > ((self.mProfile?.userPhotoList?.count)! - 1) ||
+            at! < 0{
+            SGLog(message: "越界")
+            return
+        }
+        
+        if (self.mProfile?.userPhotoList?.count)! <= 1{
+            HUD.flash(.label("至少要有一张照片"), delay: 2)
+            return
+        }
+        
         let alertController = UIAlertController(title: "您确定要删除这张图片？", message: "", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
         let okAction = UIAlertAction(title: "确定", style: .default, handler:{ (action) in
-            let at = self.bannerView?.currentPage()
             self.deletePhoto(at: at!)
         })
         okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")

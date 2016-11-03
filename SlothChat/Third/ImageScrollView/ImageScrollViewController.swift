@@ -54,7 +54,7 @@ class ImageScrollViewController: BaseViewController {
             if galleryPhotoObj != nil{
 //                isFollow = (photoObj?.currentVisitorLiked)!
                 isFollow = false
-                isMyself = Global.shared.isMyself(userUuid: photoObj?.userUuid)
+                isMyself = Global.shared.isMyself(userUuid: galleryPhotoObj?.userUuid)
             }else{
                 isShowLikeButton(isShow: false)
             }
@@ -194,18 +194,16 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func deleteGallery() {
-        if (self.galleryPhotoObj == nil ||
-            self.galleryPhotoObj?.uuid == nil) &&
-            self.photoObj == nil ||
-            self.photoObj?.uuid == nil{
-            return
-        }
         
         var photoUuid = ""
         if self.galleryPhotoObj != nil {
             photoUuid = (self.galleryPhotoObj?.uuid!)!
         }else{
             photoUuid = (self.photoObj?.uuid!)!
+        }
+        
+        if photoUuid.isEmpty{
+            return
         }
         
         let engine = NetworkEngine()
