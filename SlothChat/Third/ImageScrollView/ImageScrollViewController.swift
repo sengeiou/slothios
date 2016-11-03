@@ -119,12 +119,12 @@ class ImageScrollViewController: BaseViewController {
             make.centerY.equalTo(toolBar.snp.centerY)
         }
         //heart-solid
-        likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
+        let followImg = isFollow ? "heart-solid" : "heart-hollow"
+        likeButton.setImage(UIImage.init(named: followImg), for: .normal)
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
         
         isShowLikeButton(isShow: !isMyself)
         isShowDeleteButton(isShow: isMyself)
-        refreshLikeButton()
     }
     
     func isShowDeleteButton(isShow: Bool) {

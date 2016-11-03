@@ -144,7 +144,7 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         case .likeUsersType:
             let actionPhotoObj = dataSource[indexPath.row]
             let pushVC = LikeUsersViewController()
-            pushVC.likeSenderUserUuid = actionPhotoObj.userUuid
+            pushVC.galleryUuid = actionPhotoObj.uuid
             navigationController?.pushViewController(pushVC, animated: true)
             break
         case .avatarType:
