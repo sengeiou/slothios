@@ -469,12 +469,12 @@ class NetworkEngine: NSObject {
     }
     
     //19.陌生人查看个人资料页面时对资料点赞
-    func post_likeProfile(userProfileUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func post_likeProfile(likeSenderUserUuid: String?,userProfileUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
         
-        if (userUuid?.isEmpty)! || (userProfileUuid?.isEmpty)! || (token?.isEmpty)!{
+        if (userUuid?.isEmpty)! || (userProfileUuid?.isEmpty)! || (token?.isEmpty)! || (likeSenderUserUuid?.isEmpty)!{
             SGLog(message: "数据为空")
             return
         }
@@ -484,7 +484,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         let request = HTTPRequestGenerator(withParam:
-            ["likeSenderUserUuid":"userUuid"], URLString: URLString)
+            ["likeSenderUserUuid":likeSenderUserUuid], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
@@ -616,7 +616,8 @@ class NetworkEngine: NSObject {
     func postLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         let token = Global.shared.globalLogin?.token
         
-        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)!{
+        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)! ||
+            (likeSenderUserUuid?.isEmpty)!{
             SGLog(message: "数据为空")
             return
         }
@@ -625,7 +626,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
         
-        let request = HTTPRequestGenerator(withParam:["":""], URLString: URLString)
+        let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);

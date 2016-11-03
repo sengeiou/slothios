@@ -267,8 +267,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let uuid = Global.shared.globalProfile?.userUuid
+        let likeUuid = self.mUserUuid
         
-        engine.post_likeProfile(userProfileUuid: uuid!) { (response) in
+        engine.post_likeProfile(likeSenderUserUuid:likeUuid, userProfileUuid: uuid!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("谢谢您哦~"), delay: 2)
