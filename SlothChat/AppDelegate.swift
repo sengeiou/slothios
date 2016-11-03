@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 import AwesomeCache
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
@@ -33,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NBSAppAgent.start(withAppID: "9618217e76524a188e49ef32475489ac")
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(changeRootViewController), name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         
         self.window = UIWindow.init()
         self.changeRootViewController()
@@ -42,7 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
+    func LoginStatusDidChange() {
+        HUD.flash(.label("账号异常"), delay: 2)
+        changeRootViewController()
+    }
     
     func changeRootViewController() {
         let logined = Global.shared.isLogin()

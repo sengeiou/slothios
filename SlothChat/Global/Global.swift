@@ -53,9 +53,20 @@ class Global: BaseObject {
         return false
     }
     
+    func isMyself(userUuid: String?) -> Bool {
+        if userUuid == nil ||
+            self.globalProfile?.userUuid == nil{
+            return false
+        }
+        return (self.globalProfile?.userUuid == userUuid!)
+    }
+    
     func logout() {
         globalLogin = nil
+        LoginModel.removeFromCache()
         globalProfile = nil
+        UserProfileData.removeFromCache()
         globalSysConfig = nil
+        SysConfigData.removeFromCache()
     }
 }

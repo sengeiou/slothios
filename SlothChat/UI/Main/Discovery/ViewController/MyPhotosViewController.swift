@@ -1,4 +1,4 @@
-//
+    //
 //  MyPhotosViewController.swift
 //  SlothChat
 //
@@ -7,31 +7,24 @@
 //
 
 import UIKit
+import PKHUD
 import Kingfisher
 
-class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-    
-    let bgImgView = UIImageView.init()
-    var dataSource = [String]()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let avatarList = [
-            "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a4b3d7085dee3d6d2293d48b252b5910/0e2442a7d933c89524cd5cd4d51373f0830200ea.jpg",
-            "https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
-            "http://c.hiphotos.baidu.com/image/w%3D400/sign=c2318ff84334970a4773112fa5c8d1c0/b7fd5266d0160924c1fae5ccd60735fae7cd340d.jpg",
-            "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a4b3d7085dee3d6d2293d48b252b5910/0e2442a7d933c89524cd5cd4d51373f0830200ea.jpg",
-            "https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
-            "http://c.hiphotos.baidu.com/image/w%3D400/sign=c2318ff84334970a4773112fa5c8d1c0/b7fd5266d0160924c1fae5ccd60735fae7cd340d.jpg",
-            ]
+private let PageSize = 20
 
-        dataSource.append(contentsOf: avatarList)
-        
-        self.configCollectionView()
+class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+    var collectionView: UICollectionView?
+    let bgImgView = UIImageView.init()
+    var dataSource = [UserGalleryPhoto]()
+    var pageNum = 1
+
+    override func viewDidLoad() {
+        super.viewDidLoad()        
+        configCollectionView()
+        setupPullToRefresh()
+        getGalleryPhoto(at: .top)
     }
 
-    
     func configCollectionView() {
         let frame = CGRect.zero
         let layout = UICollectionViewFlowLayout.init()
@@ -46,14 +39,14 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 3
         
-        let collectionView = UICollectionView.init(frame: frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.clear
-        collectionView.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        self.view.addSubview(collectionView)
+        collectionView = UICollectionView.init(frame: frame, collectionViewLayout: layout)
+        collectionView?.backgroundColor = UIColor.clear
+        collectionView?.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        self.view.addSubview(collectionView!)
         
-        collectionView.snp.makeConstraints { (make) in
+        collectionView?.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
@@ -72,10 +65,12 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             return cell
         }
         
-        let imgUrl = dataSource[indexPath.row - 1]
+        let galleryPhoto = dataSource[indexPath.row - 1]
+        if galleryPhoto.smallPicUrl != nil {
+            let url = URL(string: galleryPhoto.smallPicUrl!)
+            cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        }
         
-        let url = URL(string: imgUrl)
-        cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         return cell
     }
     
@@ -83,14 +78,25 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         if indexPath.row == 0 {
             
             UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                self.publishAdvert(image: avatar!)
+                self.uploadPhoto(image: avatar!)
                 }, onCancel:nil)
             return
         }
-        let imgUrl = dataSource[indexPath.row - 1]
-        let pushVC = BiddingStatusViewController()
-        pushVC.configWithObject(imgUrl: imgUrl)
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        let galleryPhoto = dataSource[indexPath.row - 1]
+        if galleryPhoto.bigPicUrl != nil {
+            let browser = ImageScrollViewController()
+            browser.galleryPhotoObj = galleryPhoto
+            browser.disPlay(galleryPhoto: galleryPhoto)
+            browser.isShowLikeButton(isShow: false)
+            self.present(browser, animated: true, completion: nil)
+            
+            browser.setActionClosure(temClosure: { (actionType) in
+                if actionType == .deleteImg {
+                    self.getGalleryPhoto(at: .top)
+                }
+            })
+        }
+       
     }
     
     func publishAdvert(image: UIImage) {
@@ -99,5 +105,63 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
+    //MARK: - NetWork
+    
+    func uploadPhoto(image: UIImage) {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postPhotoGallery(picFile: image) { (userPhoto) in
+            HUD.hide()
+            if userPhoto?.status == ResponseError.SUCCESS.0 {
+                self.getGalleryPhoto(at: .top)
+                HUD.flash(.label("添加照片成功"), delay: 2)
+            }else{
+                HUD.flash(.label(userPhoto?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func getGalleryPhoto(at: Position) {
+        let engine = NetworkEngine()
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
+        
+        let userUuid = Global.shared.globalProfile?.userUuid
+        engine.getPhotoGallery(userUuid: userUuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (gallery) in
+            if at == .top {
+                self.collectionView?.endRefreshing(at: .top)
+            }else{
+                self.collectionView?.endRefreshing(at: .bottom)
+            }
+            if gallery?.status == ResponseError.SUCCESS.0 {
+                if let list = gallery?.data?.list{
+                    self.collectionView?.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
+                    self.dataSource.append(contentsOf: list)
+                    self.collectionView?.reloadData()
+                }
+            }else{
+                HUD.flash(.label("获取照片列表失败"), delay: 2)
+            }
+        }
+    }
+
+}
+private extension MyPhotosViewController {
+        
+    func setupPullToRefresh() {
+        collectionView?.addPullToRefresh(PullToRefresh()) { [weak self] in
+        self?.getGalleryPhoto(at: .top)
+        }
+            
+        collectionView?.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
+            self?.getGalleryPhoto(at: .bottom)
+        }
+    }
 }
 

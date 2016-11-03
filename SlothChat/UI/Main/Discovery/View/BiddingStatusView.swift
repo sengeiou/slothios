@@ -56,6 +56,8 @@ class BiddingStatusView: BaseView {
         addSubview(usersView)
         
         let w = UIScreen.main.bounds.width
+        mainImgView.contentMode = .scaleAspectFill
+        mainImgView.clipsToBounds = true
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
             make.height.equalTo(256)

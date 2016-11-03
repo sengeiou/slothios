@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let dataSource = UserObj.getTestUserList()
@@ -19,6 +20,8 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var isMyself = true
     var isFollow = false
     var mainImgUrl: String?
+    var photoObj: UserGalleryPhoto?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,20 +102,58 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func configWithObject(imgUrl: String) {
-        self.mainImgUrl = imgUrl
-        headerView.configWithObject(imgUrl: imgUrl)
+    func configWithObject(galleryPhoto: UserGalleryPhoto) {
+        self.photoObj = galleryPhoto
+        
+        if let imgUrl = galleryPhoto.bigPicUrl {
+            self.mainImgUrl = imgUrl
+            headerView.configWithObject(imgUrl: imgUrl)
+        }
+       
     }
     
     //MARK:- Action
     
     func followClick() {
-        isFollow = !isFollow
-        configNavigationRightItem()
+        likeGallery()
     }
     
     func deleteClick() {
+        if self.photoObj?.uuid == nil {
+            SGLog(message: "数据为空")
+            return
+        }
         
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let photoUuid = ""
+        engine.deletePhotoFromGallery(photoUuid: photoUuid) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("添加照片成功"), delay: 2)
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    func likeGallery() {
+        if self.photoObj == nil {
+            return
+        }
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let uuid = Global.shared.globalProfile?.uuid
+        engine.postLikeGalleryList(likeSenderUserUuid: uuid, galleryUuid: photoObj?.uuid) { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+//                self.photoObj?.currentVisitorLiked = true
+                self.isFollow = !self.isFollow
+                self.configNavigationRightItem()
+            }else{
+                HUD.flash(.label("点赞失败"), delay: 2)
+            }
+        }
     }
     
     func configNavigationRightItem() {

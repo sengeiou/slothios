@@ -44,8 +44,8 @@ enum API_URI:String {
     case get_api_us  = "/api/us"
     //9.查看个人资料页面的文字和图片
     case get_userProfile  = "/api/user/{userUuid}/userProfile"
-    //10.陌生人查看个人资料页面时对资料点赞
-    case put_userProfile_like = "/api/user/{userUuid}/userProfile/{uuid}/like?token={token}"
+    //    //10.陌生人查看个人资料页面时对资料点赞
+    //    case put_userProfile_like = "/api/user/{userUuid}/userProfile/{uuid}/like?token={token}"
     //11.查看个人设置
     case userProfile_sysConfig = "/api/user/{userUuid}/userProfile/{uuid}/sysConfig?token={token}"
     //12.用原有登录密码修改账户密码
@@ -60,6 +60,24 @@ enum API_URI:String {
     case post_userPhoto = "/api/user/{uuid}/userPhoto?token={token}"
     //18.用户资料页面，删除指定的个人照片
     case delete_userPhoto = "/api/user/{userUuid}/userPhoto/{uuid}?token={token}"
+    //19.陌生人查看个人资料页面时对资料点赞
+    case userProfile_likeProfile = "/api/userProfile/{userProfileUuid}/likeProfile?token={token}"
+    //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
+    //case get_likeProfile = "/api/userProfile/{userProfileUuid}/likeProfile?token={token}"
+    
+    //B2.
+    //21.探索图片空间，新添加图片
+    case user_gallery = "/api/user/{userUuid}/gallery?token={token}"
+    //22.探索图片空间，分页获取某人的图片列表
+    //    case get_gallery = "/api/user/{userUuid}/gallery?token={token}"
+    //23.探索图片空间，删除指定的图片
+    case delete_gallery = "/api/user/{userUuid}/gallery/{uuid}?token={token}"
+    //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
+    case get_orderGallery = "/api/user/gallery?token={token}&displayOrder={displayOrder}&likeSenderUserUuid={likeSenderUserUuid}"
+    //25.陌生人查看探索图片时点赞POST
+    case gallery_likeGallery = "/api/gallery/{galleryUuid}/likeGallery?token={token}"
+    //26.用户查看自己的探索图片左下方的3个点赞头像列表，查看点赞发出者头像名称列表（传分页参数分页）
+    //    case get_ = "/api/gallery/{galleryUuid}/likeGallery?token={token}"
 }
 
 class NetworkEngine: NSObject {
@@ -109,7 +127,13 @@ class NetworkEngine: NSObject {
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
@@ -119,7 +143,13 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<SMS>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
         
     }
@@ -131,7 +161,13 @@ class NetworkEngine: NSObject {
                                                        "verifyCode":verifyCode], URLString: URLString);
         Alamofire.request(request)
             .responseObject { (response:DataResponse<SMS>) in
-                completeHandler(response.result.value);
+                if (response.result.value?.status) != nil &&
+                    response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                    Global.shared.logout()
+                    NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+                }else{
+                    completeHandler(response.result.value);
+                }
         }
         
     }
@@ -149,7 +185,13 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        completeHandler(response.result.value);
+                        if (response.result.value?.status) != nil &&
+                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                            Global.shared.logout()
+                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+                        }else{
+                            completeHandler(response.result.value);
+                        }
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -169,10 +211,16 @@ class NetworkEngine: NSObject {
             "nickname": signup.nickname,
             "sex": signup.sex,
             "birthdate":signup.birthdate,
-        ], URLString: URLString)
+            ], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
@@ -184,7 +232,7 @@ class NetworkEngine: NSObject {
             // code
             let mobileData = mobile.data(using: String.Encoding.utf8)
             let passwdData = passwd.data(using: String.Encoding.utf8)
-
+            
             multipartFormData.append(mobileData!, withName: "mobile")
             multipartFormData.append(passwdData!, withName: "passwd")
             }, to: URLString, encodingCompletion: { (result) in
@@ -222,7 +270,13 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<Response>) in
-                        completeHandler(response.result.value);
+                        if (response.result.value?.status) != nil &&
+                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                            Global.shared.logout()
+                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+                        }else{
+                            completeHandler(response.result.value);
+                        }
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -246,7 +300,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-
+        
         let request = HTTPRequestGenerator(withParam:[
             "nickname": nickname,
             "sex": sex,
@@ -256,7 +310,13 @@ class NetworkEngine: NSObject {
             "university": university,
             ], method: .put, URLString: URLString)
         Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
@@ -264,35 +324,47 @@ class NetworkEngine: NSObject {
     func getUserProfile(userUuid: String,completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
         var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue + "?token=" + (Global.shared.globalLogin?.token)!
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
-
+        
         Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
-    
-    //10.陌生人查看个人资料页面时对资料点赞
-    func putUserProfileLike(uuid:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let userUuid = Global.shared.globalProfile?.userUuid
-        let token = Global.shared.globalLogin?.token
-    
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
-        }
-        
-        var URLString:String = self.Base_URL + API_URI.put_userProfile_like.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-
-        let request = HTTPRequestGenerator(withParam:[
-            "likesCount": "1",
-            ] , method: .put, URLString: URLString)
-        
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
-        }
-    }
+    /******
+     //10.陌生人查看个人资料页面时对资料点赞
+     func putUserProfileLike(uuid:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+     let userUuid = Global.shared.globalProfile?.userUuid
+     let token = Global.shared.globalLogin?.token
+     
+     if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+     SGLog(message: "数据为空")
+     return
+     }
+     
+     var URLString:String = self.Base_URL + API_URI.put_userProfile_like.rawValue
+     URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+     URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+     URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+     
+     let request = HTTPRequestGenerator(withParam:[
+     "likesCount": "1",
+     ] , method: .put, URLString: URLString)
+     
+     Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+     if (response.result.value?.status) != nil &&
+     response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+     Global.shared.logout()
+     NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+     }else{
+     completeHandler(response.result.value);
+     }
+     }
+     }******/
     
     //11.查看个人设置
     func getSysConfig(completeHandler :@escaping(_ response:SysConfig?) -> Void)  -> Void {
@@ -312,13 +384,19 @@ class NetworkEngine: NSObject {
         
         
         Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
     //12.用原有登录密码修改账户密码
     func putUpdatePwd(oldPwd: String,newPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let uuid = Global.shared.globalProfile?.userUuid
+        let uuid = Global.shared.globalProfile?.uuid
         
         if  (uuid?.isEmpty)!{
             SGLog(message: "数据为空")
@@ -334,7 +412,13 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
@@ -349,7 +433,13 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
@@ -362,7 +452,13 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
@@ -381,20 +477,26 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-
+        
         let request = HTTPRequestGenerator(withParam:[
             "isAcceptPrivateChat":isAcceptPrivateChat,
             "isAcceptSysNotify":isAcceptSysNotify]
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
     //17.用户资料页面，添加个人照片
     func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
-        let userUuid = Global.shared.globalProfile?.userUuid
+        let userUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{
@@ -416,7 +518,13 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        completeHandler(response.result.value);
+                        if (response.result.value?.status) != nil &&
+                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                            Global.shared.logout()
+                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+                        }else{
+                            completeHandler(response.result.value);
+                        }
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -446,11 +554,242 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            completeHandler(response.result.value);
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
         }
     }
     
+    //19.陌生人查看个人资料页面时对资料点赞
+    func post_likeProfile(likeSenderUserUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)!  || (token?.isEmpty)! || (likeSenderUserUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        let request = HTTPRequestGenerator(withParam:
+            ["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
+    
+    //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
+    func getLikeProfile(pageNum: String,pageSize: String,completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
     
     //MARK:B2.探索图片模块
-    //1.图片新增
+    //21 探索图片空间，新添加图片 POST
+    func postPhotoGallery(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.user_gallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
+            // code
+            let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
+            
+            multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
+            }, to: URLString, encodingCompletion: { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    upload.responseObject { (response:DataResponse<UserPhoto>) in
+                        if (response.result.value?.status) != nil &&
+                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                            Global.shared.logout()
+                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+                        }else{
+                            completeHandler(response.result.value);
+                        }
+                    }
+                case .failure(let encodingError):
+                    print("error")
+                    print(encodingError)
+                }
+        })
+    }
+    //22.探索图片空间，分页获取某人的图片列表
+    func getPhotoGallery(userUuid: String?,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:UserGallery?) -> Void)  -> Void {
+        
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.user_gallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
+    
+    //23.探索图片空间，删除指定的图片
+    func deletePhotoFromGallery(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        let userUuid = Global.shared.globalProfile?.uuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = self.Base_URL + API_URI.delete_gallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: photoUuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        
+        let request = HTTPRequestGenerator(withParam:["":""]
+            , method: .delete, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
+    ///displayOrder: newest：hottest
+    
+    enum DisplayType: String {
+        case newest = "newest"
+        case hottest = "hottest"
+    }
+    
+    //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
+    func getOrderGallery(likeSenderUserUuid: String?,displayType: DisplayType,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:DisplayOrder?) -> Void)  -> Void {
+        let userUuid = Global.shared.globalProfile?.userUuid
+        let token = Global.shared.globalLogin?.token
+        
+        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.get_orderGallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
+        
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
+    
+    //25.陌生人查看探索图片时点赞POST
+    func postLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+        
+        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)! ||
+            (likeSenderUserUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.gallery_likeGallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
+        
+        let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
+    //26.用户查看自己的探索图片左下方的3个点赞头像列表，查看点赞发出者头像名称列表（传分页参数分页）
+    func getLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+        
+        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.gallery_likeGallery.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
+        
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
+            if (response.result.value?.status) != nil &&
+                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
+                Global.shared.logout()
+                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+            }else{
+                completeHandler(response.result.value);
+            }
+        }
+    }
 }

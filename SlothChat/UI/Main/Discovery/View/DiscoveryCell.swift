@@ -9,10 +9,11 @@
 import UIKit
 import Kingfisher
 
-enum DiscoveryActionType {
+enum DiscoveryActionType: Int {
     case likeType
     case mainImgType
     case likeUsersType
+    case avatarType
 }
 typealias DiscoveryClosureType = (_ actionType: DiscoveryActionType, _ indexPatch: IndexPath) -> Void
 
@@ -86,7 +87,8 @@ class DiscoveryCell: UITableViewCell {
         }
         
         let w = UIScreen.main.bounds.width
-
+        mainImgView.contentMode = .scaleAspectFill
+        mainImgView.clipsToBounds = true
         mainImgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(avatarImgView.snp.bottom).offset(14)
@@ -108,24 +110,29 @@ class DiscoveryCell: UITableViewCell {
         mainImgView.addGestureRecognizer(tap1)
         mainImgView.isUserInteractionEnabled = true
         
+        let tap2 = UITapGestureRecognizer.init(target: self, action: #selector(avatarImgClick))
+        avatarImgView.addGestureRecognizer(tap2)
+        avatarImgView.isUserInteractionEnabled = true
+        
         likeButton.addTarget(self, action: #selector(likeButtonClick), for: .touchUpInside)
     }
     
-    func configCellWithObj(userObj: DiscoveryUserObj) {
-        let avatarUrl = URL(string: userObj.avatar)
+    func configCellWithObj(photoObj: DisplayOrderPhoto) {
+        let avatarUrl = URL(string: photoObj.profilePicUrl!)
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     
-        let mainImgUrl = URL(string: userObj.mainImgUrl)
+        let mainImgUrl = URL(string: photoObj.bigPicUrl!)
         self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        self.nameLabel.text = userObj.name
-        self.locationLabel.text = userObj.location
-        if userObj.isLike {
+        self.nameLabel.text = photoObj.nickname
+        self.locationLabel.text = photoObj.adress
+        if photoObj.currentVisitorLiked! {
             likeButton.setImage(UIImage.init(named: "heart-solid"), for: .normal)
         }else{
             likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         }
-        likeUsersView.configViewWithObject(avatarList: userObj.likeUserList)
+        
+        likeUsersView.configViewWithObject(avatarList: photoObj.getLikeGallerySliceUrlList())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -147,6 +154,12 @@ class DiscoveryCell: UITableViewCell {
     func mainImgClick() {
         if let sp = self.selectPassValue {
             sp(.mainImgType,self.indexPath!)
+        }
+    }
+    
+    func avatarImgClick() {
+        if let sp = self.selectPassValue {
+            sp(.avatarType,self.indexPath!)
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  MeViewController.swift
+//  UserInfoViewController.swift
 //  SlothChat
 //
 //  Created by fly on 16/10/17.
@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
+class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     var isEdited = false
     let scrollView = UIScrollView()
     let container = UIView()
@@ -20,13 +20,15 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     var shareView: LikeShareView?
     var toolView: UserInfoToolView?
 
-    var isMyselfFlag = true
+    var isMyselfFlag = false
     
     var mUserUuid: String?{
         didSet{
             if mUserUuid != nil &&
-                mUserUuid == Global.shared.globalLogin?.user?.uuid{
+                mUserUuid == Global.shared.globalProfile?.userUuid{
                 isMyselfFlag = true
+            }else{
+                isMyselfFlag = false
             }
         }
     }
@@ -35,23 +37,21 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.mProfile == nil && self.mUserUuid != nil {
-            self.getUserProfile(userUuid: self.mUserUuid!)
+            if isMyselfFlag{
+                let userUuid = Global.shared.globalLogin?.user?.uuid
+                self.getUserProfile(userUuid: userUuid!)
+            }else{
+                self.getUserProfile(userUuid: self.mUserUuid!)
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()            
-        self.setNavtionConfirm(titleStr: "设置")
-
-        if isMyselfFlag{
-            let userUuid = Global.shared.globalLogin?.user?.uuid
-            mProfile = Global.shared.globalProfile
-            self.getUserProfile(userUuid: userUuid!)
-        }else{
-            let userUuid = Global.shared.globalLogin?.user?.uuid
-            self.getUserProfile(userUuid: userUuid!)
-        }
         setupView()
+        if isMyselfFlag{
+            self.setNavtionConfirm(titleStr: "设置")
+        }
     }
     
     override func confirmClick() {
@@ -104,6 +104,12 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
 
         if isMyselfFlag {
             shareView = LikeShareView()
+            shareView?.setActionInfoValue(temClosure: { 
+                let pushVC = LikeUsersViewController()
+                let userUuid = Global.shared.globalProfile?.userUuid
+                pushVC.likeSenderUserUuid = userUuid
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            })
             container.addSubview(shareView!)
             if mProfile != nil{
                 shareView?.configLikeLabel(count: (mProfile?.likesCount)!)
@@ -219,7 +225,7 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
                 }else{
                 }
                 self.refreshBannerView()
-                self.infoView.configViewWihObject(userObj: (profile?.data)!);
+                self.infoView.configViewWihObject(userObj: (profile?.data)!)
 
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
@@ -257,9 +263,10 @@ class MeViewController: BaseViewController,SDCycleScrollViewDelegate {
     func likeSomeBody()  {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let uuid = Global.shared.globalProfile?.userUuid
+//        let uuid = Global.shared.globalProfile?.userUuid
+        let likeUuid = self.mUserUuid
         
-        engine.putUserProfileLike(uuid: uuid!) { (response) in
+        engine.post_likeProfile(likeSenderUserUuid:likeUuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("谢谢您哦~"), delay: 2)

@@ -10,7 +10,7 @@ import UIKit
 
 class MyPhotosCell: UICollectionViewCell {
     let imgView = UIImageView.init()
-    let flagView = UIView()
+    let flagView = FlagView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,26 +22,15 @@ class MyPhotosCell: UICollectionViewCell {
         imgView.frame = self.bounds
         contentView.addSubview(imgView)
         imgView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsets.zero)
+            make.edges.equalTo(UIEdgeInsetsMake(2, 2, 2, 2))
         }
         
-        flagView.layer.borderColor = UIColor.white.cgColor
-        flagView.layer.borderWidth = 1.0
-        flagView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         contentView.addSubview(flagView)
+        flagView.isHidden = true
         flagView.snp.makeConstraints { (make) in
             make.top.equalTo(6)
             make.right.equalTo(-6)
             make.size.equalTo(CGSize.init(width: 45, height: 22))
-        }
-        
-        let label = UILabel()
-        flagView.addSubview(label)
-        label.text = "推荐"
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.snp.makeConstraints { (make) in
-            make.center.equalTo(flagView)
         }
     }
     

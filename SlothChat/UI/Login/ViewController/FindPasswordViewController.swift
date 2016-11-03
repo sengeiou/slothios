@@ -182,6 +182,7 @@ class FindPasswordViewController: BaseViewController {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
 
         engine.postChangePwd(toPhoneno: self.phoneNo!, verifyCode: verifyCode, smsChangeNewPwd: newPwd) { (response) in
+            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showAlertView(message: "成功修改密码")
                 let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)

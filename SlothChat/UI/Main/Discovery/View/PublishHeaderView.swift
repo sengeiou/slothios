@@ -40,7 +40,8 @@ class PublishHeaderView: BaseView {
     }
     
     func sentupView() {
-        
+        mainImgView.contentMode = .scaleAspectFill
+        mainImgView.clipsToBounds = true
         addSubview(mainImgView)
         addSubview(contentLabel)
         
