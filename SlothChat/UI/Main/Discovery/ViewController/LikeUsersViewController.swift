@@ -92,8 +92,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         
         let engine = NetworkEngine()
 //        let userUuid = Global.shared.globalProfile?.userUuid
-        
-        engine.getLikeProfile { (likeResult) in
+        engine.getLikeProfile(pageNum: String(pageNum), pageSize: String(PageSize)) {  (likeResult) in
             if at == .top {
                 self.tableView.endRefreshing(at: .top)
             }else{
