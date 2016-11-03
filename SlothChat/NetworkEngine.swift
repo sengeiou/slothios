@@ -336,7 +336,7 @@ class NetworkEngine: NSObject {
     
     //12.用原有登录密码修改账户密码
     func putUpdatePwd(oldPwd: String,newPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let uuid = Global.shared.globalProfile?.userUuid
+        let uuid = Global.shared.globalProfile?.uuid
         
         if  (uuid?.isEmpty)!{
             SGLog(message: "数据为空")
@@ -412,7 +412,7 @@ class NetworkEngine: NSObject {
     
     //17.用户资料页面，添加个人照片
     func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
-        let userUuid = Global.shared.globalProfile?.userUuid
+        let userUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{
@@ -469,22 +469,21 @@ class NetworkEngine: NSObject {
     }
     
     //19.陌生人查看个人资料页面时对资料点赞
-    func post_likeProfile(likeSenderUserUuid: String?,userProfileUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func post_likeProfile(likeSenderUserUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.userUuid
+        let userUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
-        if (userUuid?.isEmpty)! || (userProfileUuid?.isEmpty)! || (token?.isEmpty)! || (likeSenderUserUuid?.isEmpty)!{
+        if (userUuid?.isEmpty)!  || (token?.isEmpty)! || (likeSenderUserUuid?.isEmpty)!{
             SGLog(message: "数据为空")
             return
         }
         
         var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userProfileUuid!)
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-        
         let request = HTTPRequestGenerator(withParam:
-            ["likeSenderUserUuid":likeSenderUserUuid], URLString: URLString)
+            ["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             completeHandler(response.result.value);
@@ -494,7 +493,7 @@ class NetworkEngine: NSObject {
     //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
     func getLikeProfile(pageNum: String,pageSize: String,completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.userUuid
+        let userUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{
@@ -514,7 +513,7 @@ class NetworkEngine: NSObject {
     //MARK:B2.探索图片模块
     //21 探索图片空间，新添加图片 POST
     func postPhotoGallery(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
-        let userUuid = Global.shared.globalProfile?.userUuid
+        let userUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{
@@ -565,7 +564,7 @@ class NetworkEngine: NSObject {
     //23.探索图片空间，删除指定的图片
     func deletePhotoFromGallery(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.userUuid
+        let userUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)! || (token?.isEmpty)!{

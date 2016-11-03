@@ -18,8 +18,12 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     var pageNum = 1
     
     deinit {
-        tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
-        tableView.removePullToRefresh(tableView.topPullToRefresh!)
+        if (tableView.bottomPullToRefresh != nil) {
+            tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
+        }
+        if (tableView.topPullToRefresh != nil) {
+            tableView.removePullToRefresh(tableView.topPullToRefresh!)
+        }
     }
     
     override func viewDidLoad() {
