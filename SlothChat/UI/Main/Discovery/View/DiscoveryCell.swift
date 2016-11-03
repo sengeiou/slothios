@@ -132,7 +132,7 @@ class DiscoveryCell: UITableViewCell {
             likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         }
         
-        likeUsersView.configViewWithObject(avatarList: photoObj.likeGallerySliceList)
+        likeUsersView.configViewWithObject(avatarList: photoObj.getLikeGallerySliceUrlList())
     }
     
     required init?(coder aDecoder: NSCoder) {

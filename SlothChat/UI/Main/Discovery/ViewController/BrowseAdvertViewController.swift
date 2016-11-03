@@ -98,7 +98,7 @@ class BrowseAdvertViewController: BaseViewController {
         let mainImgUrl = URL(string: (photoObj?.bigPicUrl)!)
         self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        usersListView.configViewWithObject(avatarList: photoObj?.likeGallerySliceList)
+        usersListView.configViewWithObject(avatarList: photoObj?.getLikeGallerySliceUrlList())
         
         let string1 = "这是一个广告\n\n"
         let string2 = "您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"

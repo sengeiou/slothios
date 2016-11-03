@@ -37,24 +37,21 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.mProfile == nil && self.mUserUuid != nil {
-            self.getUserProfile(userUuid: self.mUserUuid!)
+            if isMyselfFlag{
+                let userUuid = Global.shared.globalLogin?.user?.uuid
+                self.getUserProfile(userUuid: userUuid!)
+            }else{
+                self.getUserProfile(userUuid: self.mUserUuid!)
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()            
-
+        setupView()
         if isMyselfFlag{
             self.setNavtionConfirm(titleStr: "设置")
-
-            let userUuid = Global.shared.globalLogin?.user?.uuid
-            mProfile = Global.shared.globalProfile
-            self.getUserProfile(userUuid: userUuid!)
-        }else{
-            let userUuid = Global.shared.globalLogin?.user?.uuid
-            self.getUserProfile(userUuid: userUuid!)
         }
-        setupView()
     }
     
     override func confirmClick() {
@@ -266,10 +263,10 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func likeSomeBody()  {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let uuid = Global.shared.globalProfile?.userUuid
+//        let uuid = Global.shared.globalProfile?.userUuid
         let likeUuid = self.mUserUuid
         
-        engine.post_likeProfile(likeSenderUserUuid:likeUuid, userProfileUuid: uuid!) { (response) in
+        engine.post_likeProfile(likeSenderUserUuid:likeUuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("谢谢您哦~"), delay: 2)

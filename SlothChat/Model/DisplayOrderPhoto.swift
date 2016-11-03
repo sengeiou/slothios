@@ -16,7 +16,7 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
 	var bigPicUrl : String?
 	var currentVisitorLiked : Bool?
 	var hdPicUrl : String?
-	var likeGallerySliceList : [String]?
+	var likeGallerySliceList : [DisplayOrderPhotoSlice]?
 	var likesCount : Int?
 	var memo : String?
 	var nickname : String?
@@ -25,12 +25,23 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
 	var userUuid : String?
 	var uuid : String?
 
-
 	class func newInstance(map: Map) -> Mappable?{
 		return DisplayOrderPhoto()
 	}
 	required init?(map: Map){}
 	private override init(){}
+    
+    func getLikeGallerySliceUrlList() -> [String] {
+        var urlList = [String]()
+        
+        for photo in self.likeGallerySliceList! {
+            if (photo.likeSenderProfilePicUrl != nil) {
+                urlList.append(photo.likeSenderProfilePicUrl!)
+            }
+        }
+        
+        return urlList
+    }
 
 	func mapping(map: Map)
 	{
@@ -61,7 +72,7 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
          bigPicUrl = aDecoder.decodeObject(forKey: "bigPicUrl") as? String
          currentVisitorLiked = aDecoder.decodeObject(forKey: "currentVisitorLiked") as? Bool
          hdPicUrl = aDecoder.decodeObject(forKey: "hdPicUrl") as? String
-         likeGallerySliceList = aDecoder.decodeObject(forKey: "likeGallerySliceList") as? [String]
+         likeGallerySliceList = aDecoder.decodeObject(forKey: "likeGallerySliceList") as? [DisplayOrderPhotoSlice]
          likesCount = aDecoder.decodeObject(forKey: "likesCount") as? Int
          memo = aDecoder.decodeObject(forKey: "memo") as? String
          nickname = aDecoder.decodeObject(forKey: "nickname") as? String

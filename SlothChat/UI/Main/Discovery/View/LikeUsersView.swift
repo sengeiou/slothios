@@ -115,7 +115,10 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
                 countLabel.snp.updateConstraints { (make) in
                     make.left.equalTo(9)
                 }
+                collectionView?.isHidden = true
             }else{
+                collectionView?.isHidden = false
+                
                 dataSource.append(contentsOf: avatarList!)
                 
                 collectionView?.reloadData()

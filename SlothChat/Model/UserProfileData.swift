@@ -26,8 +26,7 @@ class UserProfileData : NSObject, NSCoding, Mappable{
 	var userPhotoList : [UserPhotoList]?
 	var userUuid : String?
 	var uuid : String?
-
-    
+    var currentVisitorLiked : Bool?
     
     open func caheForUserProfile() {
         let data = NSKeyedArchiver.archivedData(withRootObject: self)
@@ -107,7 +106,8 @@ class UserProfileData : NSObject, NSCoding, Mappable{
 		userPhotoList <- map["userPhotoList"]
 		userUuid <- map["userUuid"]
 		uuid <- map["uuid"]
-		
+        currentVisitorLiked <- map["currentVisitorLiked"]
+
 	}
 
     /**
@@ -128,6 +128,7 @@ class UserProfileData : NSObject, NSCoding, Mappable{
          userPhotoList = aDecoder.decodeObject(forKey: "userPhotoList") as? [UserPhotoList]
          userUuid = aDecoder.decodeObject(forKey: "userUuid") as? String
          uuid = aDecoder.decodeObject(forKey: "uuid") as? String
+        currentVisitorLiked = aDecoder.decodeObject(forKey: "currentVisitorLiked") as? Bool
 
 	}
 
@@ -173,6 +174,9 @@ class UserProfileData : NSObject, NSCoding, Mappable{
 		if uuid != nil{
 			aCoder.encode(uuid, forKey: "uuid")
 		}
+        if currentVisitorLiked != nil{
+            aCoder.encode(currentVisitorLiked, forKey: "currentVisitorLiked")
+        }
 
 	}
 
