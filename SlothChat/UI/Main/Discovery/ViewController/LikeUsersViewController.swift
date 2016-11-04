@@ -131,32 +131,32 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         cell.configCellWithObj(userObj: userObj)
         cell.indexPath = indexPath
         cell.setClosurePass { (actionIndexPath) in
-            self.performCellAction( indexPatch: actionIndexPath)
+            self.performCellAction( indexPath: actionIndexPath)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let pushVC = BrowseAdvertViewController()
+        //        pushVC.configWithObject(photoObj: user)
+        self.navigationController?.pushViewController(pushVC, animated: true)
+
+
+    }
+    
+    
+    func performCellAction( indexPath: IndexPath) {
+        SGLog(message: indexPath.row)
         let pushVC = UserInfoViewController()
         let userObj = dataSource[indexPath.row]
-
+        
         pushVC.mUserUuid = userObj.likeSenderUserUuid
         let userUuid = Global.shared.globalProfile?.userUuid
         pushVC.likeSenderUserUuid = userUuid
         pushVC.isMyselfFlag = false
         self.navigationController?.pushViewController(pushVC, animated: true)
-
-    }
-    
-    
-    func performCellAction( indexPatch: IndexPath) {
-        SGLog(message: indexPatch.row)
-        let pushVC = BrowseAdvertViewController()
-//        pushVC.configWithObject(photoObj: user)
-        
-        self.navigationController?.pushViewController(pushVC, animated: true)
-        
     }
     
 }

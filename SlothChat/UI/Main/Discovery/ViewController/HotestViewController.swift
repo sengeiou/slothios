@@ -83,7 +83,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 photoObj.currentVisitorLiked = true
-                self.tableView.reloadData()
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }else{
                 HUD.flash(.label("点赞失败"), delay: 2)
             }
