@@ -145,7 +145,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         let pushVC = UserInfoViewController()
         let userObj = dataSource[indexPath.row]
 
-        pushVC.mUserUuid = userObj.userUuid
+        pushVC.mUserUuid = userObj.likeSenderUserUuid
         let userUuid = Global.shared.globalProfile?.userUuid
         pushVC.likeSenderUserUuid = userUuid
         pushVC.isMyselfFlag = false
