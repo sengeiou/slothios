@@ -1,4 +1,4 @@
-//
+ //
 //  NetworkEngine.swift
 //  SlothChat
 //
@@ -43,7 +43,7 @@ enum API_URI:String {
     //8.修改个人资料页面的5张图片的显示顺序（此功能预留暂时不做）
     case get_api_us  = "/api/us"
     //9.查看个人资料页面的文字和图片
-    case get_userProfile  = "/api/user/{userUuid}/userProfile"
+    case get_userProfile  = "/api/user/{userUuid}/userProfile?token={token}&likeSenderUserUuid={likeSenderUserUuid}"
     //    //10.陌生人查看个人资料页面时对资料点赞
     //    case put_userProfile_like = "/api/user/{userUuid}/userProfile/{uuid}/like?token={token}"
     //11.查看个人设置
@@ -321,10 +321,20 @@ class NetworkEngine: NSObject {
     }
     
     //9.查看个人资料页面的文字和图片
-    func getUserProfile(userUuid: String,completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
-        var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue + "?token=" + (Global.shared.globalLogin?.token)!
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+    func getUserProfile(userUuid: String?,likeSenderUserUuid: String?, completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+
+        if (userUuid?.isEmpty)! || (likeSenderUserUuid?.isEmpty)! || (token?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
         
+        var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue
+        
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+
         Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
@@ -719,10 +729,9 @@ class NetworkEngine: NSObject {
     
     //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
     func getOrderGallery(likeSenderUserUuid: String?,displayType: DisplayType,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:DisplayOrder?) -> Void)  -> Void {
-        let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
         
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
+        if (likeSenderUserUuid?.isEmpty)! || (token?.isEmpty)!{
             SGLog(message: "数据为空")
             return
         }

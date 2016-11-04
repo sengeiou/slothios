@@ -15,6 +15,8 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     var dataSource = [LikeProfileListUser]()
     var likeSenderUserUuid: String?
     var galleryUuid: String?
+    var isLikeMeUsers = false
+    
     
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -34,8 +36,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     }
     
     func getLikeUserList(at: Position) {
-        let userUuid = Global.shared.globalProfile?.userUuid
-        if likeSenderUserUuid == userUuid{
+        if isLikeMeUsers{
             getLikeProfileList(at: .top)
         }else{
             getLikeGalleryList(at: .top)
@@ -45,7 +46,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     //MARK:- NetWork
     
     func getLikeGalleryList(at: Position) {
-        if galleryUuid == nil{
+        if galleryUuid == nil || likeSenderUserUuid == nil{
             return
         }
         if at == .top {
@@ -55,9 +56,8 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         }
         
         let engine = NetworkEngine()
-        let userUuid = Global.shared.globalProfile?.userUuid
 
-        engine.getLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: galleryUuid!, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
+        engine.getLikeGalleryList(likeSenderUserUuid: likeSenderUserUuid, galleryUuid: galleryUuid!, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
 
             if at == .top {
                 self.tableView.endRefreshing(at: .top)
@@ -143,7 +143,11 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let pushVC = UserInfoViewController()
-        pushVC.mUserUuid = Global.shared.globalProfile?.userUuid
+        let userObj = dataSource[indexPath.row]
+
+        pushVC.mUserUuid = userObj.userUuid
+        let userUuid = Global.shared.globalProfile?.userUuid
+        pushVC.likeSenderUserUuid = userUuid
         pushVC.isMyselfFlag = false
         self.navigationController?.pushViewController(pushVC, animated: true)
 

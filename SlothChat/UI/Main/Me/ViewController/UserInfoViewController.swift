@@ -32,6 +32,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             }
         }
     }
+    var likeSenderUserUuid: String?
+    
     var mProfile: UserProfileData?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +108,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             shareView = LikeShareView()
             shareView?.setActionInfoValue(temClosure: { 
                 let pushVC = LikeUsersViewController()
-                let userUuid = Global.shared.globalProfile?.userUuid
+                pushVC.isLikeMeUsers = true
+                let userUuid = Global.shared.globalProfile?.uuid
                 pushVC.likeSenderUserUuid = userUuid
                 self.navigationController?.pushViewController(pushVC, animated: true)
             })
@@ -212,10 +215,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         if !isMyselfFlag{
             HUD.show(.labeledProgress(title: nil, subtitle: nil))
         }
-        engine.getUserProfile(userUuid: userUuid) { (profile) in
-            if !self.isMyselfFlag{
-                HUD.hide()
-            }
+        engine.getUserProfile(userUuid: userUuid,likeSenderUserUuid: likeSenderUserUuid) { (profile) in
+            HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0 {
                 self.mProfile = profile?.data
                 if self.isMyselfFlag{
@@ -225,7 +226,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 }else{
                 }
                 self.refreshBannerView()
-                self.infoView.configViewWihObject(userObj: (profile?.data)!)
+                if let tmpProfile = profile{
+                    self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
+                }
 
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)

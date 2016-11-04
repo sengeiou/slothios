@@ -145,12 +145,16 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             let actionPhotoObj = dataSource[indexPath.row]
             let pushVC = LikeUsersViewController()
             pushVC.galleryUuid = actionPhotoObj.uuid
+            pushVC.likeSenderUserUuid = actionPhotoObj.userUuid
             navigationController?.pushViewController(pushVC, animated: true)
             break
         case .avatarType:
             let actionPhotoObj = dataSource[indexPath.row]
             let pushVC = UserInfoViewController()
             pushVC.mUserUuid = actionPhotoObj.userUuid
+            
+            let userUuid = Global.shared.globalProfile?.userUuid
+            pushVC.likeSenderUserUuid = userUuid
             navigationController?.pushViewController(pushVC, animated: true)
             
             break
