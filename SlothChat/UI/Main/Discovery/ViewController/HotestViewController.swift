@@ -60,7 +60,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             if displayOrder?.status == ResponseError.SUCCESS.0 {
                 if let list = displayOrder?.data?.list{
-//                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
