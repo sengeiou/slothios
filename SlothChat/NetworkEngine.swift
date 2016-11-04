@@ -127,13 +127,7 @@ class NetworkEngine: NSObject {
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
-            }
+            completeHandler(response.result.value);
         }
     }
     
@@ -143,13 +137,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<SMS>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
-            }
+            completeHandler(response.result.value);
         }
         
     }
@@ -161,13 +149,7 @@ class NetworkEngine: NSObject {
                                                        "verifyCode":verifyCode], URLString: URLString);
         Alamofire.request(request)
             .responseObject { (response:DataResponse<SMS>) in
-                if (response.result.value?.status) != nil &&
-                    response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                    Global.shared.logout()
-                    NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-                }else{
-                    completeHandler(response.result.value);
-                }
+                completeHandler(response.result.value);
         }
         
     }
@@ -185,13 +167,7 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if (response.result.value?.status) != nil &&
-                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                            Global.shared.logout()
-                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-                        }else{
-                            completeHandler(response.result.value);
-                        }
+                        completeHandler(response.result.value);
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -214,13 +190,7 @@ class NetworkEngine: NSObject {
             ], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
-            }
+            completeHandler(response.result.value);
         }
     }
     
@@ -270,13 +240,7 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<Response>) in
-                        if (response.result.value?.status) != nil &&
-                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                            Global.shared.logout()
-                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-                        }else{
-                            completeHandler(response.result.value);
-                        }
+                        completeHandler(response.result.value);
                     }
                 case .failure(let encodingError):
                     print("error")
