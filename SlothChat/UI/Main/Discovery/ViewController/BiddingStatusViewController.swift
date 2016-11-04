@@ -151,7 +151,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
                 self.isFollow = !self.isFollow
                 self.configNavigationRightItem()
             }else{
-                HUD.flash(.label("点赞失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }

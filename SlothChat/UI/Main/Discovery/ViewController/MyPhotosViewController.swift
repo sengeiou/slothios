@@ -146,7 +146,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
                     self.collectionView?.reloadData()
                 }
             }else{
-                HUD.flash(.label("获取照片列表失败"), delay: 2)
+                HUD.flash(.label(gallery?.msg), delay: 2)
             }
         }
     }

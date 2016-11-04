@@ -153,7 +153,7 @@ class BrowseAdvertViewController: BaseViewController {
                 self.photoObj?.currentVisitorLiked = true
                 self.isFollow = !self.isFollow
             }else{
-                HUD.flash(.label("点赞失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }

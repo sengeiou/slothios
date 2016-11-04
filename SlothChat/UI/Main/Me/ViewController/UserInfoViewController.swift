@@ -259,8 +259,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 self.shareView?.isHidden = false
                 
             }else{
-                HUD.flash(.label("更新失败"), delay: 2)
-            } 
+                HUD.flash(.label(userProfile?.msg), delay: 2)
+            }
         }
     }
     
@@ -297,7 +297,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 self.mProfile?.caheForUserProfile()
                 
             }else{
-                HUD.flash(.label("删除照片失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
@@ -317,7 +317,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 self.refreshBannerView()
 
             }else{
-                HUD.flash(.label("添加照片失败"), delay: 2)
+                HUD.flash(.label(userPhoto?.msg), delay: 2)
             }
         }
     }

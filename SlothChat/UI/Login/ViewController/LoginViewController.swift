@@ -144,12 +144,10 @@ class LoginViewController: BaseViewController {
                 Global.shared.globalProfile = profile?.data
                 self.loginSystem()
             }else{
-                HUD.flash(.label("登录失败"), delay: 2)
+                HUD.flash(.label(profile?.msg), delay: 2)
             }
         }
     }
-
-    
     
     //MARK:- Action
     

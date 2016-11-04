@@ -70,7 +70,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label("获取列表失败"), delay: 2)
+                HUD.flash(.label(profileResult?.msg), delay: 2)
             }
         }
     }
@@ -103,7 +103,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label("获取列表失败"), delay: 2)
+                HUD.flash(.label(likeResult?.msg), delay: 2)
             }
         }
     }

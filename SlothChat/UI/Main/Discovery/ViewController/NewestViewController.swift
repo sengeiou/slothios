@@ -68,7 +68,7 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label("获取照片列表失败"), delay: 2)
+                HUD.flash(.label(displayOrder?.msg), delay: 2)
             }
         }
     }
@@ -85,7 +85,7 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                 photoObj.currentVisitorLiked = true
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }else{
-                HUD.flash(.label("点赞失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
