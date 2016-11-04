@@ -79,15 +79,15 @@
                        
                        switch (state) {
                            case SSDKResponseStateSuccess:{
-                               UIAlertController *alertVC = [[UIAlertController alloc] init];
-                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"分享成功" style:UIAlertActionStyleCancel handler:nil];
+                               UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
                                [alertVC addAction:action];
                                [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
                                break;
                            }
                            case SSDKResponseStateFail:{
-                               UIAlertController *alertVC = [[UIAlertController alloc] init];
-                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"分享失败" style:UIAlertActionStyleCancel handler:nil];
+                               UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
                                [alertVC addAction:action];
                                [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
                                break;
