@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 import Alamofire
 import AlamofireObjectMapper
 
@@ -277,6 +278,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -303,6 +305,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -333,6 +336,7 @@ class NetworkEngine: NSObject {
      if (response.result.value?.status) != nil &&
      response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
      Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
      NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
      }else{
      completeHandler(response.result.value);
@@ -361,6 +365,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -389,6 +394,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -410,6 +416,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -429,6 +436,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -461,6 +469,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -495,6 +504,7 @@ class NetworkEngine: NSObject {
                         if (response.result.value?.status) != nil &&
                             response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                             Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                             NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
                         }else{
                             completeHandler(response.result.value);
@@ -531,6 +541,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -559,6 +570,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -585,6 +597,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -619,6 +632,7 @@ class NetworkEngine: NSObject {
                         if (response.result.value?.status) != nil &&
                             response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                             Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                             NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
                         }else{
                             completeHandler(response.result.value);
@@ -648,6 +662,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -678,6 +693,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -709,6 +725,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -736,6 +753,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
@@ -759,6 +777,7 @@ class NetworkEngine: NSObject {
             if (response.result.value?.status) != nil &&
                 response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
                 Global.shared.logout()
+                HUD.flash(.label("账号异常"), delay: 2)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 completeHandler(response.result.value);
