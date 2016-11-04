@@ -124,10 +124,10 @@ class PerfectionInfoViewController: BaseViewController {
         
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
             make.bottom.equalTo(-8)
             make.height.equalTo(44)
-            make.right.equalTo(-10)
+            make.left.lessThanOrEqualTo(80)
+            make.right.greaterThanOrEqualTo(-80)
         }
     }
     
