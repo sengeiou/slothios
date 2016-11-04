@@ -60,7 +60,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             
             if displayOrder?.status == ResponseError.SUCCESS.0 {
                 if let list = displayOrder?.data?.list{
-                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
+//                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -161,7 +161,7 @@ private extension HotestViewController {
         })
         tableView.mj_header.isAutomaticallyChangeAlpha = true
         
-        tableView.mj_footer = MJRefreshFooter(refreshingBlock: {
+        tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.getOrderGallery(at: .bottom)
         })
     }

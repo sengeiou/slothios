@@ -169,7 +169,7 @@ private extension LikeUsersViewController {
         })
         tableView.mj_header.isAutomaticallyChangeAlpha = true
         
-        tableView.mj_footer = MJRefreshFooter(refreshingBlock: {
+        tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.getLikeUserList(at: .bottom)
         })
     }

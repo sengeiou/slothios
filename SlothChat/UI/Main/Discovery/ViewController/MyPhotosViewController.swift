@@ -160,7 +160,7 @@ private extension MyPhotosViewController {
         })
         collectionView?.mj_header.isAutomaticallyChangeAlpha = true
         
-        collectionView?.mj_footer = MJRefreshFooter(refreshingBlock: {
+        collectionView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
             self.getGalleryPhoto(at: .bottom)
         })
     }
