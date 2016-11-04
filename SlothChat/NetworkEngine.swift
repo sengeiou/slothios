@@ -528,9 +528,9 @@ class NetworkEngine: NSObject {
     }
     
     //19.陌生人查看个人资料页面时对资料点赞
-    func post_likeProfile(likeSenderUserUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func post_likeProfile(userUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.uuid
+        let likeSenderUserUuid = Global.shared.globalProfile?.uuid
         let token = Global.shared.globalLogin?.token
         
         if (userUuid?.isEmpty)!  || (token?.isEmpty)! || (likeSenderUserUuid?.isEmpty)!{

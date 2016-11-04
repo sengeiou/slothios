@@ -196,7 +196,7 @@ class LoginViewController: BaseViewController {
 
                 self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
             }else{
-                HUD.flash(.label("登录失败"), delay: 2)
+                HUD.flash(.label(loginModel?.msg), delay: 2)
             }
         }
     }

@@ -42,4 +42,24 @@ class UserInfoToolView: BaseView {
             make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
     }
+    
+    
+    func refreshLikeButtonStatus(isLike: Bool) {
+        if isLike {
+            likeButton.backgroundColor = UIColor.red
+        }else{
+            likeButton.backgroundColor = UIColor.clear
+        }
+    }
+}
+
+private extension MyPhotosViewController {
+    
+    func setupPullToRefresh() {
+        collectionView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getGalleryPhoto(at: .top)
+        })
+        collectionView?.mj_header.isAutomaticallyChangeAlpha = true
+        
+    }
 }

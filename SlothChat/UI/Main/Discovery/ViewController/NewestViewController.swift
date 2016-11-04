@@ -21,7 +21,7 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         super.viewDidLoad()
         configTableView()
         setupPullToRefresh()
-        getOrderGallery(at: .top)
+        tableView.mj_header.beginRefreshing()
     }
     
     func configTableView() {

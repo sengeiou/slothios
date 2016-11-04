@@ -13,7 +13,9 @@ class LoginModel : NSObject, NSCoding, Mappable{
 
 	var token : String?
 	var user : LoginUser?
-
+    
+    var msg : String?
+    var status : String?
 
     open func caheForLoginModel() {
         let data = NSKeyedArchiver.archivedData(withRootObject: self)
@@ -45,7 +47,8 @@ class LoginModel : NSObject, NSCoding, Mappable{
 	{
 		token <- map["token"]
 		user <- map["user"]
-		
+        status <- map["status"]
+        msg <- map["msg"]
 	}
 
     /**

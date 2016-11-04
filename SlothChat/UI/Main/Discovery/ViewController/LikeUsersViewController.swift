@@ -27,7 +27,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         title = "喜欢的人"
         sentupView()
         setupPullToRefresh()
-        getLikeUserList(at: .top)
+        tableView.mj_header.beginRefreshing()
     }
     
     func getLikeUserList(at: Position) {

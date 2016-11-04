@@ -22,7 +22,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         super.viewDidLoad()        
         configCollectionView()
         setupPullToRefresh()
-        getGalleryPhoto(at: .top)
+        collectionView?.mj_header.beginRefreshing()
     }
 
     func configCollectionView() {

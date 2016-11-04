@@ -41,12 +41,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.mProfile == nil && self.mUserUuid != nil {
-            if isMyselfFlag{
-                let userUuid = Global.shared.globalLogin?.user?.uuid
-                self.getUserProfile(userUuid: userUuid!)
-            }else{
-                self.getUserProfile(userUuid: self.mUserUuid!)
-            }
+            self.getUserProfile(userUuid: self.mUserUuid!)
         }
     }
     
@@ -220,18 +215,22 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         engine.getUserProfile(userUuid: userUuid,likeSenderUserUuid: likeSenderUserUuid) { (profile) in
             HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0 {
-                self.mProfile = profile?.data
-                if self.isMyselfFlag{
-                    Global.shared.globalProfile = profile?.data
-                    self.shareView?.configLikeLabel(count: (profile?.data?.likesCount)!)
-
+                if (profile?.data) != nil{
+                    self.mProfile = profile?.data
+                    if self.isMyselfFlag{
+                        Global.shared.globalProfile = profile?.data
+                        self.shareView?.configLikeLabel(count: (profile?.data?.likesCount)!)
+                    }else{
+                        self.toolView?.refreshLikeButtonStatus(isLike: (profile?.data?.currentVisitorLiked)!)
+                    }
+                    self.refreshBannerView()
+                    if let tmpProfile = profile{
+                        self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
+                    }
                 }else{
+                    SGLog(message: "返回的数据为空")
                 }
-                self.refreshBannerView()
-                if let tmpProfile = profile{
-                    self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
-                }
-
+                
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
             }
@@ -268,14 +267,14 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func likeSomeBody()  {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-//        let uuid = Global.shared.globalProfile?.userUuid
-        let likeUuid = self.mUserUuid
+        let likeUuid = self.mProfile?.userUuid
         
-        engine.post_likeProfile(likeSenderUserUuid:likeUuid) { (response) in
+        engine.post_likeProfile(userUuid:likeUuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("谢谢您哦~"), delay: 2)
-
+                self.mProfile?.currentVisitorLiked = !(self.mProfile?.currentVisitorLiked)!
+                self.toolView?.refreshLikeButtonStatus(isLike: (self.mProfile?.currentVisitorLiked)!)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
@@ -378,5 +377,15 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func refreshBannerView() {
         let imagesURLStrings = self.mProfile?.getBannerAvatarList(isMyself: isMyselfFlag)
         bannerView?.localizationImageNamesGroup = imagesURLStrings
+    }
+}
+
+private extension UserInfoViewController {
+    
+    func setupPullToRefresh() {
+        scrollView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getUserProfile(userUuid: self.mUserUuid!)
+        })
+        scrollView.mj_header.isAutomaticallyChangeAlpha = true
     }
 }
