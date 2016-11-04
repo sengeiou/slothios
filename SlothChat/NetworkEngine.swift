@@ -660,11 +660,6 @@ class NetworkEngine: NSObject {
     }
     ///displayOrder: newest：hottest
     
-    enum DisplayType: String {
-        case newest = "newest"
-        case hottest = "hottest"
-    }
-    
     //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
     func getOrderGallery(likeSenderUserUuid: String?,displayType: DisplayType,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:DisplayOrder?) -> Void)  -> Void {
         let token = Global.shared.globalLogin?.token

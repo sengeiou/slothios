@@ -32,10 +32,12 @@ class DiscoveryViewController: BaseViewController {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        let controller1 = HotestViewController()
+        let controller1 = GalleryViewController()
+        controller1.displayType = .hottest
         controller1.title = "热门"
         controllerArray.append(controller1)
-        let controller2  = NewestViewController()
+        let controller2  = GalleryViewController()
+        controller2.displayType = .newest
         controller2.title = "最新"
         controllerArray.append(controller2)
         let controller3 = MyPhotosViewController()

@@ -1,17 +1,25 @@
 //
-//  HotestViewController.swift
+//  GalleryViewController.swift
 //  SlothChat
 //
-//  Created by Fly on 16/10/22.
+//  Created by fly on 2016/11/4.
 //  Copyright © 2016年 ssloth.com. All rights reserved.
 //
 
 import UIKit
 import PKHUD
 
+enum DisplayType: String {
+    case newest = "newest"
+    case hottest = "hottest"
+}
+
 private let PageSize = 20
 
-class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    var displayType:DisplayType = .hottest
+    
     var dataSource = [DisplayOrderPhoto]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -51,7 +59,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
         let engine = NetworkEngine()
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .hottest, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
+        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: displayType, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
             if at == .top {
                 self.tableView.mj_header.endRefreshing()
             }else{
@@ -75,7 +83,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     
     func likeGallery(indexPath: IndexPath) {
         let photoObj = dataSource[indexPath.row]
-
+        
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
@@ -119,7 +127,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {
         SGLog(message: actionType)
         SGLog(message: indexPath.row)
-
+        
         switch actionType {
         case .likeType:
             likeGallery(indexPath: indexPath)
@@ -153,7 +161,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 }
 
-private extension HotestViewController {
+private extension GalleryViewController {
     
     func setupPullToRefresh() {
         tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {

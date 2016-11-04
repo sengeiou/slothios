@@ -84,6 +84,7 @@
 		044956981DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956831DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m */; };
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
+		0479C6111DCCE45C00C72DDA /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */; };
 		04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */; };
 		0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */; };
 		0486BB681DBB41C900086303 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB611DBB41C900086303 /* IAPHelper.m */; };
@@ -159,8 +160,6 @@
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
 		04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */; };
 		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
-		04E25B831DBB77D4002B727F /* HotestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B821DBB77D4002B727F /* HotestViewController.swift */; };
-		04E25B851DBB77DE002B727F /* NewestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B841DBB77DE002B727F /* NewestViewController.swift */; };
 		04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */; };
 		04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */; };
 		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
@@ -341,6 +340,7 @@
 		044956841DCCBAA800CBFF45 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingViewController.xib; sourceTree = "<group>"; };
 		0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		0486BB601DBB41C900086303 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
@@ -446,8 +446,6 @@
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
 		04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
-		04E25B821DBB77D4002B727F /* HotestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotestViewController.swift; sourceTree = "<group>"; };
-		04E25B841DBB77DE002B727F /* NewestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewestViewController.swift; sourceTree = "<group>"; };
 		04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosViewController.swift; sourceTree = "<group>"; };
 		04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosCell.swift; sourceTree = "<group>"; };
 		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
@@ -770,8 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				044643521DB4F0660050F8BC /* DiscoveryViewController.swift */,
-				04E25B821DBB77D4002B727F /* HotestViewController.swift */,
-				04E25B841DBB77DE002B727F /* NewestViewController.swift */,
+				0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */,
 				04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */,
 				043C911E1DBBAB5800431965 /* LikeUsersViewController.swift */,
 				04B1CEEA1DBC3428003482DF /* BrowseAdvertViewController.swift */,
@@ -1783,7 +1780,6 @@
 				04FEB7E51DB76F13004509D1 /* SDWebImageCompat.m in Sources */,
 				041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */,
 				043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */,
-				04E25B851DBB77DE002B727F /* NewestViewController.swift in Sources */,
 				04FEB7E71DB76F13004509D1 /* SDWebImageDownloader.m in Sources */,
 				04FEB7E31DB76F13004509D1 /* NSData+ImageContentType.m in Sources */,
 				040D46E01DC4B587005D1E8E /* UIViewController+Visibility.swift in Sources */,
@@ -1849,7 +1845,6 @@
 				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,
 				040D46D31DC4B587005D1E8E /* PopupDialog+Keyboard.swift in Sources */,
 				044956901DCCBAA800CBFF45 /* MJRefreshBackStateFooter.m in Sources */,
-				04E25B831DBB77D4002B727F /* HotestViewController.swift in Sources */,
 				04ED10571DC7994900EBD3C5 /* DisplayOrderData.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
@@ -1904,6 +1899,7 @@
 				04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */,
 				19008BA21DBE831200319B86 /* SMS.swift in Sources */,
 				040D46D11DC4B587005D1E8E /* FXBlurView.m in Sources */,
+				0479C6111DCCE45C00C72DDA /* GalleryViewController.swift in Sources */,
 				044956971DCCBAA800CBFF45 /* UIScrollView+MJExtension.m in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */,
