@@ -20,8 +20,11 @@ struct SGGlobalKey {
     static let SCLoginStatusKey = "SCLoginStatusKey"
 
     public static let LoginStatusDidChange = Notification.Name(rawValue: "SlothChat.LoginStatusDidChange")
-
 }
+public enum Position {
+    case top, bottom
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

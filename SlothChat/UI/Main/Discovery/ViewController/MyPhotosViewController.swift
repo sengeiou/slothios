@@ -132,13 +132,13 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.getPhotoGallery(userUuid: userUuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (gallery) in
             if at == .top {
-                self.collectionView?.endRefreshing(at: .top)
+                self.collectionView?.mj_header.endRefreshing()
             }else{
-                self.collectionView?.endRefreshing(at: .bottom)
+                self.collectionView?.mj_footer.endRefreshing()
             }
             if gallery?.status == ResponseError.SUCCESS.0 {
                 if let list = gallery?.data?.list{
-                    self.collectionView?.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    self.collectionView?.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -155,13 +155,14 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
 private extension MyPhotosViewController {
         
     func setupPullToRefresh() {
-        collectionView?.addPullToRefresh(PullToRefresh()) { [weak self] in
-        self?.getGalleryPhoto(at: .top)
-        }
-            
-        collectionView?.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
-            self?.getGalleryPhoto(at: .bottom)
-        }
+        collectionView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getGalleryPhoto(at: .top)
+        })
+        collectionView?.mj_header.isAutomaticallyChangeAlpha = true
+        
+        collectionView?.mj_footer = MJRefreshFooter(refreshingBlock: {
+            self.getGalleryPhoto(at: .bottom)
+        })
     }
 }
 

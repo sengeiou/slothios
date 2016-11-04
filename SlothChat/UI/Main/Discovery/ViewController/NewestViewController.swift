@@ -17,15 +17,6 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     var pageNum = 1
     
-    deinit {
-        if (tableView.bottomPullToRefresh != nil) {
-            tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
-        }
-        if (tableView.topPullToRefresh != nil) {
-            tableView.removePullToRefresh(tableView.topPullToRefresh!)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
@@ -62,14 +53,14 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .newest, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
             if at == .top {
-                self.tableView.endRefreshing(at: .top)
+                self.tableView.mj_header.endRefreshing()
             }else{
-                self.tableView.endRefreshing(at: .bottom)
+                self.tableView.mj_footer.endRefreshing()
             }
             
             if displayOrder?.status == ResponseError.SUCCESS.0 {
                 if let list = displayOrder?.data?.list{
-                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -166,13 +157,13 @@ class NewestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
 private extension NewestViewController {
     
     func setupPullToRefresh() {
-        tableView.addPullToRefresh(PullToRefresh()) { [weak self] in
-            self?.getOrderGallery(at: .top)
-            
-        }
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getOrderGallery(at: .top)
+        })
+        tableView.mj_header.isAutomaticallyChangeAlpha = true
         
-        tableView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
-            self?.getOrderGallery(at: .bottom)
-        }
+        tableView.mj_footer = MJRefreshFooter(refreshingBlock: {
+            self.getOrderGallery(at: .bottom)
+        })
     }
 }

@@ -14,7 +14,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     let scrollView = UIScrollView()
     let container = UIView()
     let infoView = UserInfoView()
-    
+    let deleteButton = UIButton(type: .custom)
+
     var bannerView: SDCycleScrollView?
     var editView: UserInfoEditView?
     var shareView: LikeShareView?
@@ -30,6 +31,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             }else{
                 isMyselfFlag = false
             }
+            deleteButton.isHidden = !isMyselfFlag
         }
     }
     var likeSenderUserUuid: String?
@@ -54,6 +56,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         if isMyselfFlag{
             self.setNavtionConfirm(titleStr: "设置")
         }
+        deleteButton.isHidden = !isMyselfFlag
     }
     
     override func confirmClick() {
@@ -94,7 +97,6 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             make.height.equalTo((bannerView?.snp.width)!)
         })
         
-        let deleteButton = UIButton(type: .custom)
         deleteButton.setImage(UIImage.init(named: "trash-can"), for: .normal)
         deleteButton.addTarget(self, action: #selector(deleteButtonClick), for: .touchUpInside)
         container.addSubview(deleteButton)

@@ -21,11 +21,6 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     var pageNum = 1
-
-    deinit {
-        tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
-        tableView.removePullToRefresh(tableView.topPullToRefresh!)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,13 +55,14 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         engine.getLikeGalleryList(likeSenderUserUuid: likeSenderUserUuid, galleryUuid: galleryUuid!, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
 
             if at == .top {
-                self.tableView.endRefreshing(at: .top)
+                self.tableView.mj_header.endRefreshing()
             }else{
-                self.tableView.endRefreshing(at: .bottom)
+                self.tableView.mj_footer.endRefreshing()
             }
             if profileResult?.status == ResponseError.SUCCESS.0 {
                 if let list = profileResult?.data?.list{
-                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -93,13 +89,13 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
 //        let userUuid = Global.shared.globalProfile?.userUuid
         engine.getLikeProfile(pageNum: String(pageNum), pageSize: String(PageSize)) {  (likeResult) in
             if at == .top {
-                self.tableView.endRefreshing(at: .top)
+                self.tableView.mj_header.endRefreshing()
             }else{
-                self.tableView.endRefreshing(at: .bottom)
+                self.tableView.mj_footer.endRefreshing()
             }
             if likeResult?.status == ResponseError.SUCCESS.0 {
                 if let list = likeResult?.data?.list{
-                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -168,13 +164,13 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
 private extension LikeUsersViewController {
     
     func setupPullToRefresh() {
-        tableView.addPullToRefresh(PullToRefresh()) { [weak self] in
-            self?.getLikeUserList(at: .top)
-            
-        }
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getLikeUserList(at: .top)
+        })
+        tableView.mj_header.isAutomaticallyChangeAlpha = true
         
-        tableView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
-            self?.getLikeUserList(at: .bottom)
-        }
+        tableView.mj_footer = MJRefreshFooter(refreshingBlock: {
+            self.getLikeUserList(at: .bottom)
+        })
     }
 }
