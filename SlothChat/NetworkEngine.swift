@@ -124,6 +124,19 @@ class NetworkEngine: NSObject {
         return request
     }
     
+    func validAuthCode(code: String?) -> Bool {
+        let authCode = ResponseError.ERROR_AUTH_CODE.0
+        
+        guard let code = code, code == authCode  else {
+            return true
+        }
+        
+        Global.shared.logout()
+        HUD.flash(.label("账号异常"), delay: 2)
+        NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        return false
+    }
+    
     //1.注册选择国家信息列表 GET
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
@@ -274,14 +287,11 @@ class NetworkEngine: NSObject {
             "commonCities": commonCities,
             "university": university,
             ], method: .put, URLString: URLString)
+
         Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -302,13 +312,9 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
 
         Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -362,13 +368,9 @@ class NetworkEngine: NSObject {
         
         
         Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -391,13 +393,9 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -413,13 +411,9 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -433,13 +427,9 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -466,13 +456,9 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -501,13 +487,9 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if (response.result.value?.status) != nil &&
-                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                            Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-                        }else{
-                            completeHandler(response.result.value);
+                        let code = response.result.value?.status
+                        if self.validAuthCode(code: code) {
+                            completeHandler(response.result.value)
                         }
                     }
                 case .failure(let encodingError):
@@ -538,13 +520,9 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -567,13 +545,9 @@ class NetworkEngine: NSObject {
             ["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -594,13 +568,9 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -629,13 +599,9 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if (response.result.value?.status) != nil &&
-                            response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                            Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                            NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-                        }else{
-                            completeHandler(response.result.value);
+                        let code = response.result.value?.status
+                        if self.validAuthCode(code: code) {
+                            completeHandler(response.result.value)
                         }
                     }
                 case .failure(let encodingError):
@@ -659,13 +625,9 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -690,13 +652,9 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -722,13 +680,9 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -750,13 +704,9 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
@@ -774,13 +724,9 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
-            if (response.result.value?.status) != nil &&
-                response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-                Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-                NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-            }else{
-                completeHandler(response.result.value);
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
             }
         }
     }
