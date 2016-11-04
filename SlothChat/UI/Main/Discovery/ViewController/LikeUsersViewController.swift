@@ -138,11 +138,12 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let pushVC = BrowseAdvertViewController()
-        //        pushVC.configWithObject(photoObj: user)
-        self.navigationController?.pushViewController(pushVC, animated: true)
+//        
+//        let pushVC = BrowseAdvertViewController()
+//        //        pushVC.configWithObject(photoObj: user)
+//        self.navigationController?.pushViewController(pushVC, animated: true)
 
+        self.performCellAction( indexPath: indexPath)
 
     }
     
