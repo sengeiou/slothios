@@ -106,7 +106,6 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         let pushVC = PublishViewController()
         pushVC.configWithObject(image: image)
         let nav = BaseNavigationController(rootViewController: pushVC)
-//        self.navigationController?.pushViewController(pushVC, animated: true)
         self.present(nav, animated: true, completion: nil)
     }
     

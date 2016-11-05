@@ -88,7 +88,8 @@ class DiscoveryViewController: BaseViewController {
     func publishAdvert(image: UIImage) {
         let pushVC = PublishViewController()
         pushVC.configWithObject(image: image)
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        let nav = BaseNavigationController(rootViewController: pushVC)
+        self.present(nav, animated: true, completion: nil)
     }
 
 }
