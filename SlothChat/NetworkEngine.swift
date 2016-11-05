@@ -79,6 +79,11 @@ enum API_URI:String {
     case gallery_likeGallery = "/api/gallery/{galleryUuid}/likeGallery?token={token}"
     //26.用户查看自己的探索图片左下方的3个点赞头像列表，查看点赞发出者头像名称列表（传分页参数分页）
     //    case get_ = "/api/gallery/{galleryUuid}/likeGallery?token={token}"
+    //27.第一步发图传图成功后，广告竞价第二步，显示竞价加码页面
+    case get_adsBidOrder = "/api/user/{userUuid}/bidGallery/{bidGalleryUuid}/adsBidOrder?token={token}"
+    //28.在显示竞价加码页面完成加码选择后，付款确认点击“发送”按钮
+    case post_adsBidOrder = "/api/user/{userUuid}/adsBidOrder?token={token}"
+    
 }
 
 class NetworkEngine: NSObject {
@@ -590,6 +595,15 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
         
+        var address = GVUserDefaults.standard().locationDesc
+        if address != nil {
+            address = address?.addingPercentEscapes(using: .utf8)
+            URLString = URLString.appending("&adress=" + address!)
+        }else{
+            URLString = URLString.appending("&adress=")
+        }
+        URLString = URLString.appending("&participateBidAds=" + "false")
+
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
             let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!

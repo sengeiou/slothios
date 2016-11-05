@@ -14,5 +14,6 @@
 @property (nonatomic, copy  ) NSString       *lastLoginPhone;
 @property (nonatomic, copy  ) NSString       *lastLoginCountry;
 @property (nonatomic, copy  ) NSString       *lastAppVersion;
+@property (nonatomic, copy  ) NSString       *locationDesc;
 
 @end

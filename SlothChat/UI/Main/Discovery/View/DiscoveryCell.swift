@@ -77,7 +77,7 @@ class DiscoveryCell: UITableViewCell {
         locationLabel.snp.makeConstraints { (make) in
             make.left.equalTo(locationImgView.snp.right).offset(10)
             make.top.equalTo(locationImgView.snp.top)
-            make.right.lessThanOrEqualTo(-80)
+            make.right.lessThanOrEqualTo(-40)
         }
         
         likeButton.snp.makeConstraints { (make) in

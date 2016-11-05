@@ -47,6 +47,7 @@
 		040D46E01DC4B587005D1E8E /* UIViewController+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D46CE1DC4B587005D1E8E /* UIViewController+Visibility.swift */; };
 		040D46E31DC4B67A005D1E8E /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D46E11DC4B67A005D1E8E /* RatingViewController.swift */; };
 		041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041289D51DBB729000D308C0 /* CAPSPageMenu.swift */; };
+		043718111DCE219E004B5684 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043718101DCE219E004B5684 /* LocationManager.swift */; };
 		043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C91181DBB8FA400431965 /* DiscoveryCell.swift */; };
 		043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911A1DBB973300431965 /* DiscoveryUserObj.swift */; };
 		043C911D1DBB9BDA00431965 /* LikeUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911C1DBB9BDA00431965 /* LikeUsersView.swift */; };
@@ -173,6 +174,9 @@
 		04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */; };
 		04EDED3B1DCB13F00068512E /* DisplayOrderPhotoSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */; };
 		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
+		04FE6DBB1DCE3C3300AD9C96 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE6DB41DCE3C3300AD9C96 /* UIImage+Alpha.m */; };
+		04FE6DBC1DCE3C3300AD9C96 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE6DB61DCE3C3300AD9C96 /* UIImage+Resize.m */; };
+		04FE6DBD1DCE3C3300AD9C96 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE6DB81DCE3C3300AD9C96 /* UIImage+RoundedCorner.m */; };
 		04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7AC1DB76EDB004509D1 /* TAAbstractDotView.m */; };
 		04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7AE1DB76EDB004509D1 /* TAAnimatedDotView.m */; };
 		04FEB7BB1DB76EDB004509D1 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7B01DB76EDB004509D1 /* TADotView.m */; };
@@ -283,6 +287,7 @@
 		040D46CE1DC4B587005D1E8E /* UIViewController+Visibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Visibility.swift"; sourceTree = "<group>"; };
 		040D46E11DC4B67A005D1E8E /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		041289D51DBB729000D308C0 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
+		043718101DCE219E004B5684 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		043C91181DBB8FA400431965 /* DiscoveryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryCell.swift; sourceTree = "<group>"; };
 		043C911A1DBB973300431965 /* DiscoveryUserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryUserObj.swift; sourceTree = "<group>"; };
 		043C911C1DBB9BDA00431965 /* LikeUsersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeUsersView.swift; sourceTree = "<group>"; };
@@ -459,6 +464,13 @@
 		04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrderPhoto.swift; sourceTree = "<group>"; };
 		04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrderPhotoSlice.swift; sourceTree = "<group>"; };
 		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		04FE6DB31DCE3C3300AD9C96 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		04FE6DB41DCE3C3300AD9C96 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		04FE6DB51DCE3C3300AD9C96 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		04FE6DB61DCE3C3300AD9C96 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		04FE6DB71DCE3C3300AD9C96 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		04FE6DB81DCE3C3300AD9C96 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		04FE6DB91DCE3C3300AD9C96 /* UIImageCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageCategories.h; sourceTree = "<group>"; };
 		04FEB7AB1DB76EDB004509D1 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		04FEB7AC1DB76EDB004509D1 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
 		04FEB7AD1DB76EDB004509D1 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
@@ -806,6 +818,7 @@
 		044643561DB4F60F0050F8BC /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				04FE6DB11DCE3C3300AD9C96 /* UIImage-Categories */,
 				04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */,
 				04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */,
 				044643571DB4F6960050F8BC /* UIViewController+Extension.swift */,
@@ -1119,6 +1132,7 @@
 			children = (
 				04AC92071DB0B02C0048A9FD /* SGColor.swift */,
 				048B0BB51DB2490A00F5A399 /* EnumDefine.swift */,
+				043718101DCE219E004B5684 /* LocationManager.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -1229,6 +1243,20 @@
 				040327EC1DC873F000401683 /* FlagView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04FE6DB11DCE3C3300AD9C96 /* UIImage-Categories */ = {
+			isa = PBXGroup;
+			children = (
+				04FE6DB31DCE3C3300AD9C96 /* UIImage+Alpha.h */,
+				04FE6DB41DCE3C3300AD9C96 /* UIImage+Alpha.m */,
+				04FE6DB51DCE3C3300AD9C96 /* UIImage+Resize.h */,
+				04FE6DB61DCE3C3300AD9C96 /* UIImage+Resize.m */,
+				04FE6DB71DCE3C3300AD9C96 /* UIImage+RoundedCorner.h */,
+				04FE6DB81DCE3C3300AD9C96 /* UIImage+RoundedCorner.m */,
+				04FE6DB91DCE3C3300AD9C96 /* UIImageCategories.h */,
+			);
+			path = "UIImage-Categories";
 			sourceTree = "<group>";
 		};
 		04FEB7A91DB76EDB004509D1 /* SDCycleScrollView */ = {
@@ -1764,6 +1792,7 @@
 				19008BB01DBE925800319B86 /* LoginUser.swift in Sources */,
 				04B1CEF91DBCCFDA003482DF /* BiddingStatusViewController.swift in Sources */,
 				19008BA51DBE8A6600319B86 /* UserPhoto.swift in Sources */,
+				04FE6DBD1DCE3C3300AD9C96 /* UIImage+RoundedCorner.m in Sources */,
 				04FEB7EB1DB76F13004509D1 /* UIButton+WebCache.m in Sources */,
 				04966B431DB65F3E000721BD /* ModifyPasswordViewController.swift in Sources */,
 				048B0BAD1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m in Sources */,
@@ -1780,6 +1809,7 @@
 				04FEB7E51DB76F13004509D1 /* SDWebImageCompat.m in Sources */,
 				041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */,
 				043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */,
+				04FE6DBC1DCE3C3300AD9C96 /* UIImage+Resize.m in Sources */,
 				04FEB7E71DB76F13004509D1 /* SDWebImageDownloader.m in Sources */,
 				04FEB7E31DB76F13004509D1 /* NSData+ImageContentType.m in Sources */,
 				040D46E01DC4B587005D1E8E /* UIViewController+Visibility.swift in Sources */,
@@ -1827,6 +1857,7 @@
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
 				04ED10521DC787F300EBD3C5 /* UserGalleryPhoto.swift in Sources */,
+				04FE6DBB1DCE3C3300AD9C96 /* UIImage+Alpha.m in Sources */,
 				04B499AB1DBFB61A004659BA /* UserProfileData.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */,
@@ -1861,6 +1892,7 @@
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,
 				04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */,
+				043718111DCE219E004B5684 /* LocationManager.swift in Sources */,
 				044956871DCCBAA800CBFF45 /* MJRefreshBackFooter.m in Sources */,
 				040D46DF1DC4B587005D1E8E /* UIView+Animations.swift in Sources */,
 				040D46D71DC4B587005D1E8E /* PopupDialogDefaultButtons.swift in Sources */,

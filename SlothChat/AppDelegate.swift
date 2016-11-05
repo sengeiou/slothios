@@ -29,12 +29,14 @@ public enum Position {
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let manager = LocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.sharedManager().enable = true
         NSObject.registerShareSDK()
         NBSAppAgent.start(withAppID: "9618217e76524a188e49ef32475489ac")
         
+        manager.startLocationCity()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         

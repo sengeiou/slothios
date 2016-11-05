@@ -14,5 +14,6 @@
 @dynamic lastLoginPhone;
 @dynamic lastLoginCountry;
 @dynamic lastAppVersion;
+@dynamic locationDesc;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "UIAlertController+MKBlockAdditions.h"
+#import "UIImage+ReSize.h"
 
 static DismissBlock _dismissBlock;
 static CancelBlock _cancelBlock;
@@ -94,9 +95,14 @@ static BOOL isAllowsEditing = YES;
 
 	[picker dismissViewControllerAnimated:YES completion:^{
         UIImage *editedImage = (UIImage*)[info valueForKey:UIImagePickerControllerEditedImage];
-        if(!editedImage)
+        if(!editedImage){
             editedImage = (UIImage*)[info valueForKey:UIImagePickerControllerOriginalImage];
-        
+            CGSize newSize = [UIScreen mainScreen].bounds.size;
+            newSize.width *= [UIScreen mainScreen].scale;
+            newSize.height *= [UIScreen mainScreen].scale;
+
+            editedImage = [editedImage resizedImage:newSize interpolationQuality:kCGInterpolationDefault];
+        }
         _photoPickedBlock(editedImage);
     }];
 }
