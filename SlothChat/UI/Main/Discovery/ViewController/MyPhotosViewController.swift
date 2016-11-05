@@ -70,6 +70,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             let url = URL(string: galleryPhoto.smallPicUrl!)
             cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
+        cell.isShowFlagView(isShow: galleryPhoto.displayAsBidAds!)
         
         return cell
     }
@@ -78,7 +79,9 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         if indexPath.row == 0 {
             
             UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                self.uploadPhoto(image: avatar!)
+                if avatar != nil{
+                    self.publishAdvert(image: avatar!)
+                }
                 }, onCancel:nil)
             return
         }
@@ -102,24 +105,12 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     func publishAdvert(image: UIImage) {
         let pushVC = PublishViewController()
         pushVC.configWithObject(image: image)
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        let nav = BaseNavigationController(rootViewController: pushVC)
+//        self.navigationController?.pushViewController(pushVC, animated: true)
+        self.present(nav, animated: true, completion: nil)
     }
     
     //MARK: - NetWork
-    
-    func uploadPhoto(image: UIImage) {
-        let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPhotoGallery(picFile: image) { (userPhoto) in
-            HUD.hide()
-            if userPhoto?.status == ResponseError.SUCCESS.0 {
-                self.getGalleryPhoto(at: .top)
-                HUD.flash(.label("添加照片成功"), delay: 2)
-            }else{
-                HUD.flash(.label(userPhoto?.msg), delay: 2)
-            }
-        }
-    }
     
     func getGalleryPhoto(at: Position) {
         let engine = NetworkEngine()

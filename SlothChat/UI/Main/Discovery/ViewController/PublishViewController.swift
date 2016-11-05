@@ -15,12 +15,16 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     let headerView = PublishHeaderView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468))
     var isJoin = false
-
+    var bidType = BidAdsType.notParticipateAd
+    
+    var uploadImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sentupView()
         setNavtionConfirm(titleStr: "发送")
+        setNavtionBack(imageStr: "close")
     }
     
     func sentupView() {
@@ -102,6 +106,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     func configWithObject(image: UIImage) {
+        self.uploadImage = image
         headerView.configWithObject(image: image)
     }
     
@@ -109,15 +114,41 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         headerView.configWithObject(imageUrl: imageUrl)
     }
     
+    //MARK: - NetWork
+    
+    func uploadPhotoTogallery(price: Int) {
+        if uploadImage == nil {
+            return
+        }
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postPhotoGallery(picFile: uploadImage!,bidAds:bidType,price: price) { (userPhoto) in
+            HUD.hide()
+            if userPhoto?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("发布成功"), delay: 2, completion: { (result) in
+                    self.dismiss(animated: true, completion: nil)
+                })
+                
+            }else{
+                HUD.flash(.label(userPhoto?.msg), delay: 2)
+            }
+        }
+    }
     
     //MARK:- Action
     
     override func confirmClick() {
         SGLog(message: headerView.isJoin)
-        let price = headerView.price
-        
+        let price = 0
+        if headerView.isJoin {
+            bidType = .isParticipateAd
+        }else{
+            bidType = .notParticipateAd
+        }
         SGLog(message: price)
-        if  headerView.isJoin && price > 1{
+        if  headerView.isJoin && headerView.price > 1{
+            bidType = .isParticipateAd
+            
             let needPrice = price - 1
             
             let title = "当前账户余额不足，为￥" + String(price) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
@@ -133,13 +164,15 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
             
-        }else{
-            HUD.flash(.label("发布成功"), delay: 2, completion: { (result) in
-                _ = self.navigationController?.popViewController(animated: true)
-            })
+            return
         }
+        
+        uploadPhotoTogallery(price: price)
     }
     
+    override func backClick() {
+        dismiss(animated: true, completion: nil)
+    }
     
     func tapMainImgView() {
         let browser = ImageScrollViewController()

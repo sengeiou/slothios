@@ -14,13 +14,13 @@ class UserGalleryPhoto : NSObject, NSCoding, Mappable{
 	var adress : String?
 	var adsImpressionOrderNum : Int?
 	var bigPicUrl : String?
+    var displayAsBidAds: Bool?
 	var hdPicUrl : String?
 	var likesCount : Int?
 	var memo : String?
 	var smallPicUrl : String?
 	var userUuid : String?
 	var uuid : String?
-
 
 	class func newInstance(map: Map) -> Mappable?{
 		return UserGalleryPhoto()
@@ -32,6 +32,7 @@ class UserGalleryPhoto : NSObject, NSCoding, Mappable{
 	{
 		adress <- map["adress"]
 		adsImpressionOrderNum <- map["adsImpressionOrderNum"]
+        displayAsBidAds <- map["displayAsBidAds"]
 		bigPicUrl <- map["bigPicUrl"]
 		hdPicUrl <- map["hdPicUrl"]
 		likesCount <- map["likesCount"]
@@ -51,6 +52,7 @@ class UserGalleryPhoto : NSObject, NSCoding, Mappable{
          adress = aDecoder.decodeObject(forKey: "adress") as? String
          adsImpressionOrderNum = aDecoder.decodeObject(forKey: "adsImpressionOrderNum") as? Int
          bigPicUrl = aDecoder.decodeObject(forKey: "bigPicUrl") as? String
+         displayAsBidAds = aDecoder.decodeObject(forKey: "displayAsBidAds") as? Bool
          hdPicUrl = aDecoder.decodeObject(forKey: "hdPicUrl") as? String
          likesCount = aDecoder.decodeObject(forKey: "likesCount") as? Int
          memo = aDecoder.decodeObject(forKey: "memo") as? String
@@ -75,6 +77,9 @@ class UserGalleryPhoto : NSObject, NSCoding, Mappable{
 		if bigPicUrl != nil{
 			aCoder.encode(bigPicUrl, forKey: "bigPicUrl")
 		}
+        if displayAsBidAds != nil{
+            aCoder.encode(displayAsBidAds, forKey: "displayAsBidAds")
+        }
 		if hdPicUrl != nil{
 			aCoder.encode(hdPicUrl, forKey: "hdPicUrl")
 		}

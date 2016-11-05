@@ -25,6 +25,11 @@ public enum Position {
     case top, bottom
 }
 
+public enum BidAdsType: String {
+    case isParticipateAd = "true"
+    case notParticipateAd = "false"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
