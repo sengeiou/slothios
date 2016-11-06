@@ -161,6 +161,8 @@
 		04B499B41DBFBECC004659BA /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B31DBFBECC004659BA /* Global.swift */; };
 		04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B71DC106F0004659BA /* GVUserDefaults.m */; };
 		04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */; };
+		04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */; };
+		04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */; };
 		04D0FDC81DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */; };
 		04D0FDC91DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDBF1DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift */; };
 		04D0FDCA1DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC01DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift */; };
@@ -463,6 +465,8 @@
 		04B499B71DC106F0004659BA /* GVUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVUserDefaults.m; sourceTree = "<group>"; };
 		04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+Properties.h"; sourceTree = "<group>"; };
 		04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+Properties.m"; sourceTree = "<group>"; };
+		04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhoto.swift; sourceTree = "<group>"; };
+		04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoData.swift; sourceTree = "<group>"; };
 		04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppCompleteTransactionsObserver.swift; sourceTree = "<group>"; };
 		04D0FDBF1DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProductPurchaseRequest.swift; sourceTree = "<group>"; };
 		04D0FDC01DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProductQueryRequest.swift; sourceTree = "<group>"; };
@@ -1395,6 +1399,8 @@
 				04ED10541DC7994900EBD3C5 /* DisplayOrderData.swift */,
 				04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */,
 				04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */,
+				04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */,
+				04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */,
 				04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */,
 				04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */,
 				04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */,
@@ -1933,6 +1939,7 @@
 				0449568D1DCCBAA800CBFF45 /* MJRefreshAutoStateFooter.m in Sources */,
 				04D0FDD31DCEF5B000D0C1D3 /* ViewController.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
+				04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */,
 				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				04814CFA1DCF2A410012030A /* AdsBidOrder.swift in Sources */,
@@ -1960,6 +1967,7 @@
 				19008B9C1DBE75D500319B86 /* Country.swift in Sources */,
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
+				04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */,
 				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,

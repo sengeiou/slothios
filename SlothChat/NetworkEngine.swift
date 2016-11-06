@@ -582,7 +582,7 @@ class NetworkEngine: NSObject {
     
     //MARK:B2.探索图片模块
     //21 探索图片空间，新添加图片 POST
-    func postPhotoGallery(picFile: UIImage,bidAds: BidAdsType,price: Int,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
+    func postPhotoGallery(picFile: UIImage,completeHandler :@escaping(_ userPhoto:GalleryPhoto?) -> Void) -> Void {
         let userUuid = Global.shared.globalProfile?.userUuid
         let token = Global.shared.globalLogin?.token
         
@@ -602,10 +602,7 @@ class NetworkEngine: NSObject {
         }else{
             URLString = URLString.appending("&adress=")
         }
-        URLString = URLString.appending("&participateBidAds=" + bidAds.rawValue)
-//        if price > 0 {
-//            URLString = URLString.appending("&price=" + String(price))
-//        }
+        
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
             let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
@@ -614,7 +611,7 @@ class NetworkEngine: NSObject {
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
-                    upload.responseObject { (response:DataResponse<UserPhoto>) in
+                    upload.responseObject { (response:DataResponse<GalleryPhoto>) in
                         let code = response.result.value?.status
                         if self.validAuthCode(code: code) {
                             completeHandler(response.result.value)
@@ -678,16 +675,19 @@ class NetworkEngine: NSObject {
     
     //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
     func getOrderGallery(likeSenderUserUuid: String?,displayType: DisplayType,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:DisplayOrder?) -> Void)  -> Void {
-        let token = Global.shared.globalLogin?.token
-        
-        if (likeSenderUserUuid?.isEmpty)! || (token?.isEmpty)!{
+
+        guard let likeSenderUserUuid = likeSenderUserUuid else {
+            SGLog(message: "数据为空")
+            return
+        }
+        guard let token = Global.shared.globalLogin?.token else {
             SGLog(message: "数据为空")
             return
         }
         
         var URLString:String = Base_URL + API_URI.get_orderGallery.rawValue
-        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in

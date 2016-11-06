@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class DiscoveryViewController: BaseViewController {
 
@@ -41,6 +42,7 @@ class DiscoveryViewController: BaseViewController {
         controller2.title = "最新"
         controllerArray.append(controller2)
         let controller3 = MyPhotosViewController()
+        controller3.discoverVC = self
         controller3.title = "我"
         controllerArray.append(controller3)
         
@@ -82,14 +84,35 @@ class DiscoveryViewController: BaseViewController {
     
     override func confirmClick() {
         UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-            self.publishAdvert(image: avatar!)
+            self.uploadPhotoToGallery(uploadImage: avatar!)
             }, onCancel:nil)
     }
-    func publishAdvert(image: UIImage) {
-        let pushVC = PublishViewController()
-        pushVC.configWithObject(image: image)
-        let nav = BaseNavigationController(rootViewController: pushVC)
-        self.present(nav, animated: true, completion: nil)
+//    func publishAdvert(image: UIImage) {
+//        let pushVC = PublishViewController()
+//        pushVC.configWithObject(image: image)
+//        let nav = BaseNavigationController(rootViewController: pushVC)
+//        self.present(nav, animated: true, completion: nil)
+//    }
+//    
+    func uploadPhotoToGallery(uploadImage: UIImage?) {
+        if uploadImage == nil {
+            return
+        }
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.postPhotoGallery(picFile: uploadImage!) { (userPhoto) in
+            HUD.hide()
+            if userPhoto?.status == ResponseError.SUCCESS.0 {
+                let pushVC = BiddingStatusViewController()
+                pushVC.userUuid = userPhoto?.data?.userUuid
+                pushVC.galleryUuid = userPhoto?.data?.uuid
+                pushVC.configWithObject(imageUrl: userPhoto?.data?.bigPicUrl)
+                self.navigationController?.pushViewController(pushVC, animated: true)
+            }else{
+                HUD.flash(.label(userPhoto?.msg), delay: 2)
+            }
+        }
     }
 
 }

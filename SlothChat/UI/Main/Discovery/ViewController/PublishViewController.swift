@@ -63,7 +63,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         let headerView = UIView()
         let titleLabel = UILabel()
-        titleLabel.text = "z排行"
+        titleLabel.text = "当前竞价排行"
         titleLabel.font = UIFont.systemFont(ofSize: 12)
         headerView.addSubview(titleLabel)
 
@@ -115,14 +115,13 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     //MARK: - NetWork
-    
-    func uploadPhotoTogallery(price: Int) {
+    func uploadPhotoToGallery(price: Int) {
         if uploadImage == nil {
             return
         }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPhotoGallery(picFile: uploadImage!,bidAds:bidType,price: price) { (userPhoto) in
+        engine.postPhotoGallery(picFile: uploadImage!) { (userPhoto) in
             HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("发布成功"), delay: 2, completion: { (result) in
@@ -146,28 +145,28 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
             bidType = .notParticipateAd
         }
         SGLog(message: price)
-        if  headerView.isJoin && headerView.price > 1{
-            bidType = .isParticipateAd
-            
-            let needPrice = price - 1
-            
-            let title = "当前账户余额不足，为￥" + String(price) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
-            let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
-            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-            let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-                
-            })
-            okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
-            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
-
-            alert.addAction(cancelAction)
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
-            
-            return
-        }
+//        if  headerView.isJoin && headerView.price > 1{
+//            bidType = .isParticipateAd
+//            
+//            let needPrice = headerView.price - 1
+//            
+//            let title = "当前账户余额不足，为￥" + String(price) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
+//            let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+//            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+//            let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+//                
+//            })
+//            okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+//            cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+//
+//            alert.addAction(cancelAction)
+//            alert.addAction(okAction)
+//            self.present(alert, animated: true, completion: nil)
+//            
+//            return
+//        }
         
-        uploadPhotoTogallery(price: price)
+        uploadPhotoToGallery(price: price)
     }
     
     override func backClick() {

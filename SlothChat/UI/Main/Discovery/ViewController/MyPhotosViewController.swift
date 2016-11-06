@@ -17,7 +17,8 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     let bgImgView = UIImageView.init()
     var dataSource = [UserGalleryPhoto]()
     var pageNum = 1
-
+    var discoverVC: DiscoveryViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         configCollectionView()
@@ -77,12 +78,12 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
-            UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                if avatar != nil{
-                    self.publishAdvert(image: avatar!)
-                }
+            if let actionVC = discoverVC {
+                UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+                    actionVC.uploadPhotoToGallery(uploadImage: avatar)
                 }, onCancel:nil)
+            }
+            
             return
         }
         let galleryPhoto = dataSource[indexPath.row - 1]
@@ -109,13 +110,6 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             })
         }
        
-    }
-    
-    func publishAdvert(image: UIImage) {
-        let pushVC = PublishViewController()
-        pushVC.configWithObject(image: image)
-        let nav = BaseNavigationController(rootViewController: pushVC)
-        self.present(nav, animated: true, completion: nil)
     }
     
     //MARK: - NetWork
