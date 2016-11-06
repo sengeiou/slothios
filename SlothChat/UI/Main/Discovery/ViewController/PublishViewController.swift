@@ -63,7 +63,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         let headerView = UIView()
         let titleLabel = UILabel()
-        titleLabel.text = "当前竞价排行"
+        titleLabel.text = "z排行"
         titleLabel.font = UIFont.systemFont(ofSize: 12)
         headerView.addSubview(titleLabel)
 

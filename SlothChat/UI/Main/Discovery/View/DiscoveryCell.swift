@@ -140,7 +140,9 @@ class DiscoveryCell: UITableViewCell {
             likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         }
         flagView.isHidden = !photoObj.displayAsBidAds!
-        likeUsersView.configViewWithObject(avatarList: photoObj.getLikeGallerySliceUrlList())
+        
+        let avatarList = photoObj.getLikeGallerySliceUrlList()
+        likeUsersView.configViewWithObject(avatarList: avatarList, totalCount: avatarList.count)
     }
     
     required init?(coder aDecoder: NSCoder) {

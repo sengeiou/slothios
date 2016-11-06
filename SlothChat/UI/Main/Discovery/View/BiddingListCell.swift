@@ -73,10 +73,10 @@ class BiddingListCell: UITableViewCell {
             self.rankLabel.text = String(rank)
         }
         self.nameLabel.text = rankVo.nickname
-        self.priceLabel.text =  String(rankVo.bidTotalAmount!)
+        self.priceLabel.text =  "￥" + String(rankVo.bidTotalAmount!)
         
         if rankVo.visitorMyself! == true {
-            self.backgroundColor = SGColor.SGMainColor()
+            self.backgroundColor = SGColor.SGMainColor().withAlphaComponent(0.4)
         } else {
             self.backgroundColor = SGColor.white
         }

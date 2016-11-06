@@ -28,7 +28,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         super.viewDidLoad()
         
         sentupView()
-        configNavigationRightItem()
+        setNavtionConfirm(titleStr: "发送")
         getAdsBidOrder()
     }
     
@@ -123,13 +123,15 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     
     //MARK:- Action
     
+    override func confirmClick() {
+        postAdsBidOrder()
+    }
+    
     func followClick() {
         likeGallery()
     }
     
     func deleteClick() {
-        postAdsBidOrder()
-        return
         
         if userUuid == nil || galleryUuid == nil {
             SGLog(message: "数据为空")
@@ -170,14 +172,14 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     }
     
     func getAdsBidOrder() {
-        if userUuid == nil || galleryUuid == nil {
+        if galleryUuid == nil {
             return
         }
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
 
-        engine.getAdsBidOrder(userUuid: userUuid, bidGalleryUuid: galleryUuid){ (response) in
+        engine.getAdsBidOrder(bidGalleryUuid: galleryUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.adsBidOrder = response
@@ -194,7 +196,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     }
     
     func postAdsBidOrder() {
-        if userUuid == nil || galleryUuid == nil {
+        if galleryUuid == nil {
             SGLog(message: "数据为空")
             return
         }
@@ -207,7 +209,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
-        engine.postAdsBidOrder(userUuid: userUuid!, bidGalleryUuid: galleryUuid!, amount: price){ (response) in
+        engine.postAdsBidOrder(bidGalleryUuid: galleryUuid!, amount: price){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("竞价成功"), delay: 2)

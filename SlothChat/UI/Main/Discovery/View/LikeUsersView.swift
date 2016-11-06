@@ -105,12 +105,11 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
         return cell
     }
     
-    func configViewWithObject(avatarList: [String]?) {
+    func configViewWithObject(avatarList: [String]?, totalCount: Int) {
         if avatarList != nil{
             dataSource.removeAll()
-            let count = avatarList!.count
             
-            if count <= 0 {
+            if totalCount <= 0 {
                 countLabel.text = "您要加油哦~"
                 countLabel.snp.updateConstraints { (make) in
                     make.left.equalTo(9)
@@ -118,14 +117,14 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
                 collectionView?.isHidden = true
             }else{
                 collectionView?.isHidden = false
-                
                 dataSource.append(contentsOf: avatarList!)
-                
                 collectionView?.reloadData()
                 
                 let layout = self.collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
-                countLabel.text = "等" + String(count) + "人喜欢"
+                countLabel.text = "等" + String(totalCount) + "人喜欢"
                 let width = layout.itemSize.width
+                
+                let count = avatarList!.count
                 countLabel.snp.updateConstraints { (make) in
                     make.left.equalTo((9 + Int(width)) * count + 10)
                 }
