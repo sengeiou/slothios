@@ -46,7 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         
         self.window = UIWindow.init()
-        self.changeRootViewController()
+//        self.changeRootViewController()
+        self.window?.rootViewController = ViewController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true
