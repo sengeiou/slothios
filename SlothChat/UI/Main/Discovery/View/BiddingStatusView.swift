@@ -138,6 +138,12 @@ class BiddingStatusView: BaseView {
         pickerView.dataSource = ["1","5","10","50","100","500","1000"]
     }
     
+    func refreshView(rankData: BidAdsRankVoData) {
+        price = rankData.myBidAmount!
+        
+        usersView.configViewWithObject(avatarList: rankData.getlikeGalleryAvatarList())
+    }
+    
     //MARK:- Action
     
     func configWithObject(imgUrl: String) {

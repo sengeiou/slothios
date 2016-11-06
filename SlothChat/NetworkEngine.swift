@@ -741,4 +741,57 @@ class NetworkEngine: NSObject {
             }
         }
     }
+    
+    //27.第一步发图传图成功后，广告竞价第二步，显示竞价加码页面
+    func getAdsBidOrder(userUuid: String?,bidGalleryUuid: String?,completeHandler :@escaping(_ response:AdsBidOrder?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+        
+        if  (token?.isEmpty)! || (bidGalleryUuid?.isEmpty)! || (userUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        let uuid = Global.shared.globalProfile?.uuid
+
+        
+        var URLString:String = Base_URL + API_URI.get_adsBidOrder.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: uuid!)
+        URLString = URLString.replacingOccurrences(of: "{bidGalleryUuid}", with: bidGalleryUuid!)
+        
+        Alamofire.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    //28.在显示竞价加码页面完成加码选择后，付款确认点击“发送”按钮
+    func postAdsBidOrder(userUuid: String?,bidGalleryUuid: String?,amount: Int, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        let token = Global.shared.globalLogin?.token
+        
+        if  (token?.isEmpty)! || (userUuid?.isEmpty)! ||
+            (bidGalleryUuid?.isEmpty)!{
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        var URLString:String = Base_URL + API_URI.post_adsBidOrder.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        
+        let request = HTTPRequestGenerator(withParam:[
+            "userUuid":userUuid!,
+            "bidGalleryUuid":bidGalleryUuid!,
+            "amount":String(amount),
+            "participateBidAds":"true"], URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
+            }
+        }
+    }
+
 }

@@ -96,8 +96,8 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: BiddingListCell = tableView.dequeueReusableCell(withIdentifier: "BiddingListCell", for: indexPath) as! BiddingListCell
-        let userObj = dataSource[indexPath.row]
-        cell.configCellWithObj(userObj: userObj,indexPatch: indexPath)
+//        let userObj = dataSource[indexPath.row]
+//        cell.configCellWithObj(rankVo: userObj,indexPatch: indexPath)
         return cell
     }
     

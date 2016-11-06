@@ -86,6 +86,15 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             return
         }
         let galleryPhoto = dataSource[indexPath.row - 1]
+        
+        if galleryPhoto.participateBidAds! == true {
+            let pushVC = BiddingStatusViewController()
+            pushVC.userUuid = galleryPhoto.userUuid
+            pushVC.galleryUuid = galleryPhoto.uuid
+            pushVC.configWithObject(imageUrl: galleryPhoto.bigPicUrl)
+            navigationController?.pushViewController(pushVC, animated: true)
+            return
+        }
         if galleryPhoto.bigPicUrl != nil {
             let browser = ImageScrollViewController()
             browser.galleryPhotoObj = galleryPhoto

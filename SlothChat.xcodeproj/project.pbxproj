@@ -86,6 +86,9 @@
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
 		0479C6111DCCE45C00C72DDA /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */; };
+		04814CFA1DCF2A410012030A /* AdsBidOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04814CF71DCF2A410012030A /* AdsBidOrder.swift */; };
+		04814CFB1DCF2A410012030A /* BidAdsRankVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04814CF81DCF2A410012030A /* BidAdsRankVo.swift */; };
+		04814CFC1DCF2A410012030A /* BidAdsRankVoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04814CF91DCF2A410012030A /* BidAdsRankVoData.swift */; };
 		04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */; };
 		0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */; };
 		0486BB681DBB41C900086303 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB611DBB41C900086303 /* IAPHelper.m */; };
@@ -357,6 +360,9 @@
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		04814CF71DCF2A410012030A /* AdsBidOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdsBidOrder.swift; sourceTree = "<group>"; };
+		04814CF81DCF2A410012030A /* BidAdsRankVo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdsRankVo.swift; sourceTree = "<group>"; };
+		04814CF91DCF2A410012030A /* BidAdsRankVoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdsRankVoData.swift; sourceTree = "<group>"; };
 		04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RatingViewController.xib; sourceTree = "<group>"; };
 		0486BB5B1DBB1E7700086303 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		0486BB601DBB41C900086303 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
@@ -1381,35 +1387,38 @@
 		19008B921DBE614500319B86 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19008BB11DBE935500319B86 /* Response.swift */,
-				19008BAD1DBE925800319B86 /* LoginModel.swift */,
-				19008BAE1DBE925800319B86 /* LoginUser.swift */,
-				19008BA71DBE8CE300319B86 /* UserAndProfile.swift */,
-				19008BA81DBE8CE300319B86 /* UserAndProfileData.swift */,
-				19008B9F1DBE7E4700319B86 /* SCData.swift */,
-				19008BA11DBE831200319B86 /* SMS.swift */,
+				04814CF71DCF2A410012030A /* AdsBidOrder.swift */,
+				04814CF81DCF2A410012030A /* BidAdsRankVo.swift */,
+				04814CF91DCF2A410012030A /* BidAdsRankVoData.swift */,
 				19008B991DBE75D500319B86 /* Country.swift */,
-				19008B9A1DBE75D500319B86 /* List.swift */,
-				19008BA31DBE8A6600319B86 /* UserPhoto.swift */,
-				19008BA41DBE8A6600319B86 /* UserPhotoData.swift */,
-				19008BAB1DBE8D7C00319B86 /* UserSignupModel.swift */,
-				04B499A41DBFB2F2004659BA /* ModifyUserProfile.swift */,
-				04B499A51DBFB2F2004659BA /* ModifyUserProfileData.swift */,
-				04B499A81DBFB61A004659BA /* UserProfileData.swift */,
-				04B499A91DBFB61A004659BA /* UserPhotoList.swift */,
-				04B499AA1DBFB61A004659BA /* UserProfile.swift */,
-				04B499AE1DBFB7F4004659BA /* SysConfig.swift */,
-				04B499AF1DBFB7F4004659BA /* SysConfigData.swift */,
-				04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */,
-				04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */,
-				04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */,
-				04ED104D1DC787F300EBD3C5 /* UserGallery.swift */,
-				04ED104E1DC787F300EBD3C5 /* UserGalleryData.swift */,
-				04ED104F1DC787F300EBD3C5 /* UserGalleryPhoto.swift */,
 				04ED10531DC7994900EBD3C5 /* DisplayOrder.swift */,
 				04ED10541DC7994900EBD3C5 /* DisplayOrderData.swift */,
 				04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */,
 				04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */,
+				04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */,
+				04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */,
+				04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */,
+				19008B9A1DBE75D500319B86 /* List.swift */,
+				19008BAD1DBE925800319B86 /* LoginModel.swift */,
+				19008BAE1DBE925800319B86 /* LoginUser.swift */,
+				04B499A41DBFB2F2004659BA /* ModifyUserProfile.swift */,
+				04B499A51DBFB2F2004659BA /* ModifyUserProfileData.swift */,
+				19008BB11DBE935500319B86 /* Response.swift */,
+				19008B9F1DBE7E4700319B86 /* SCData.swift */,
+				19008BA11DBE831200319B86 /* SMS.swift */,
+				04B499AE1DBFB7F4004659BA /* SysConfig.swift */,
+				04B499AF1DBFB7F4004659BA /* SysConfigData.swift */,
+				19008BA71DBE8CE300319B86 /* UserAndProfile.swift */,
+				19008BA81DBE8CE300319B86 /* UserAndProfileData.swift */,
+				04ED104D1DC787F300EBD3C5 /* UserGallery.swift */,
+				04ED104E1DC787F300EBD3C5 /* UserGalleryData.swift */,
+				04ED104F1DC787F300EBD3C5 /* UserGalleryPhoto.swift */,
+				19008BA31DBE8A6600319B86 /* UserPhoto.swift */,
+				19008BA41DBE8A6600319B86 /* UserPhotoData.swift */,
+				04B499A91DBFB61A004659BA /* UserPhotoList.swift */,
+				04B499AA1DBFB61A004659BA /* UserProfile.swift */,
+				04B499A81DBFB61A004659BA /* UserProfileData.swift */,
+				19008BAB1DBE8D7C00319B86 /* UserSignupModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1926,6 +1935,7 @@
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
 				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
+				04814CFA1DCF2A410012030A /* AdsBidOrder.swift in Sources */,
 				19273B161DA9EE1300150460 /* FirstViewController.swift in Sources */,
 				044956891DCCBAA800CBFF45 /* MJRefreshFooter.m in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
@@ -1967,6 +1977,7 @@
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
 				04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */,
 				040D46D91DC4B587005D1E8E /* PopupDialogDefaultViewController.swift in Sources */,
+				04814CFC1DCF2A410012030A /* BidAdsRankVoData.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				19008BA01DBE7E4700319B86 /* SCData.swift in Sources */,
 				04FEB7ED1DB76F13004509D1 /* UIImage+MultiFormat.m in Sources */,
@@ -1986,6 +1997,7 @@
 				040D46DE1DC4B587005D1E8E /* TransitionAnimator.swift in Sources */,
 				0486BB681DBB41C900086303 /* IAPHelper.m in Sources */,
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
+				04814CFB1DCF2A410012030A /* BidAdsRankVo.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
 				19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */,
 				04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */,

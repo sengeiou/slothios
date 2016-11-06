@@ -11,7 +11,7 @@ import Kingfisher
 
 class BiddingListCell: UITableViewCell {
     
-    let indexLabel = UILabel()
+    let rankLabel = UILabel()
     let avatarImgView = UIImageView()
     let nameLabel = UILabel()
     let priceLabel = UILabel()
@@ -28,26 +28,25 @@ class BiddingListCell: UITableViewCell {
     }
     
     func sentupView() {
-        self.contentView.addSubview(indexLabel)
+        self.contentView.addSubview(rankLabel)
         self.contentView.addSubview(avatarImgView)
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(priceLabel)
 
-        indexLabel.font = UIFont.systemFont(ofSize: 14)
-        indexLabel.textColor = SGColor.SGTextColor()
+        rankLabel.font = UIFont.systemFont(ofSize: 14)
+        rankLabel.textColor = SGColor.SGTextColor()
         
         
         avatarImgView.layer.cornerRadius = 18
         avatarImgView.layer.masksToBounds = true
         
-        indexLabel.snp.makeConstraints { (make) in
+        rankLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.width.equalTo(12)
         }
 
         avatarImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(indexLabel.snp.right).offset(10)
+            make.left.equalTo(rankLabel.snp.right).offset(10)
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.size.equalTo(CGSize.init(width: 30, height: 30))
         }
@@ -60,35 +59,45 @@ class BiddingListCell: UITableViewCell {
         
         priceLabel.font = UIFont.systemFont(ofSize: 14)
         priceLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(0)
-            make.width.equalTo(60)
+            make.right.equalTo(-8)
             make.top.bottom.equalTo(0)
         }
     }
     
-    func configCellWithObj(userObj: UserObj, indexPatch: IndexPath) {
-        let avatarUrl = URL(string: (userObj.avatarList?.first)!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-        self.nameLabel.text = userObj.name
-        self.priceLabel.text = "￥101"
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-        if highlighted {
-            self.contentView.backgroundColor = SGColor.SGMainColor()
-        }else{
-            self.contentView.backgroundColor = UIColor.white
+    func configCellWithObj(rankVo: BidAdsRankVo, indexPatch: IndexPath) {
+        if let imgUrl = rankVo.profilePicUrl {
+            let avatarUrl = URL(string: imgUrl)
+            self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        }
+        if let rank = rankVo.rank {
+            self.rankLabel.text = String(rank)
+        }
+        self.nameLabel.text = rankVo.nickname
+        self.priceLabel.text =  String(rankVo.bidTotalAmount!)
+        
+        if rankVo.visitorMyself! == true {
+            self.backgroundColor = SGColor.SGMainColor()
+        } else {
+            self.backgroundColor = SGColor.white
         }
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        if selected {
-            self.contentView.backgroundColor = SGColor.SGMainColor()
-        }else{
-            self.contentView.backgroundColor = UIColor.white
-        }
-    }
+//    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+//        super.setHighlighted(highlighted, animated: animated)
+//        if highlighted {
+//            self.contentView.backgroundColor = SGColor.SGMainColor()
+//        }else{
+//            self.contentView.backgroundColor = UIColor.white
+//        }
+//    }
+    
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        if selected {
+//            self.contentView.backgroundColor = SGColor.SGMainColor()
+//        }else{
+//            self.contentView.backgroundColor = UIColor.white
+//        }
+//    }
 
 }
