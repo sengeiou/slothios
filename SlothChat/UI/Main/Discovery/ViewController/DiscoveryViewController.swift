@@ -11,6 +11,8 @@ import PKHUD
 
 class DiscoveryViewController: BaseViewController {
 
+    let controller3 = MyPhotosViewController()
+
 //    override open var shouldAutomaticallyForwardAppearanceMethods: Bool {
 //        get {
 //            return true
@@ -41,7 +43,6 @@ class DiscoveryViewController: BaseViewController {
         controller2.displayType = .newest
         controller2.title = "最新"
         controllerArray.append(controller2)
-        let controller3 = MyPhotosViewController()
         controller3.discoverVC = self
         controller3.title = "我"
         controllerArray.append(controller3)
@@ -104,6 +105,8 @@ class DiscoveryViewController: BaseViewController {
         engine.postPhotoGallery(picFile: uploadImage!) { (userPhoto) in
             HUD.hide()
             if userPhoto?.status == ResponseError.SUCCESS.0 {
+                self.controller3.getGalleryPhoto(at: .top)
+
                 let pushVC = BiddingStatusViewController()
                 pushVC.userUuid = userPhoto?.data?.userUuid
                 pushVC.galleryUuid = userPhoto?.data?.uuid
