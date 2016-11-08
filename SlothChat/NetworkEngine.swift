@@ -94,27 +94,11 @@ class NetworkEngine: NSObject {
     }
     
     func HTTPRequestGenerator(withParam parameters:NSDictionary,URLString:String)->URLRequest {
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let values = parameters
-        
-        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
-        
-        return request
+        return HTTPRequestGenerator(withParam: parameters, method: HTTPMethod.post, URLString: URLString)
     }
     
     func HTTPRequestGenerator(withParam parameters: NSDictionary,method: HTTPMethod,URLString: String)->URLRequest {
-        var request = URLRequest(url: NSURL.init(string: URLString) as! URL)
-        request.httpMethod = method.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let values = parameters
-        
-        request.httpBody = try! JSONSerialization.data(withJSONObject: values)
-        
-        return request
+        return HTTPRequestGenerator(withParam: parameters, method: method, contentType: "application/json", URLString: URLString)
     }
     
     func HTTPRequestGenerator(withParam parameters: NSDictionary,method: HTTPMethod,contentType: String,URLString: String)->URLRequest {
@@ -341,7 +325,6 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
-        
         
         Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
             let code = response.result.value?.status
