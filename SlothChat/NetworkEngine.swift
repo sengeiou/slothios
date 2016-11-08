@@ -327,37 +327,6 @@ class NetworkEngine: NSObject {
             }
         }
     }
-    /******
-     //10.陌生人查看个人资料页面时对资料点赞
-     func putUserProfileLike(uuid:String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-     let userUuid = Global.shared.globalProfile?.userUuid
-     let token = Global.shared.globalLogin?.token
-     
-     if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-     SGLog(message: "数据为空")
-     return
-     }
-     
-     var URLString:String = self.Base_URL + API_URI.put_userProfile_like.rawValue
-     URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-     URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
-     URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-     
-     let request = HTTPRequestGenerator(withParam:[
-     "likesCount": "1",
-     ] , method: .put, URLString: URLString)
-     
-     Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-     if (response.result.value?.status) != nil &&
-     response.result.value?.status == ResponseError.ERROR_AUTH_CODE.0{
-     Global.shared.logout()
-                HUD.flash(.label("账号异常"), delay: 2)
-     NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
-     }else{
-     completeHandler(response.result.value);
-     }
-     }
-     }******/
     
     //11.查看个人设置
     func getSysConfig(completeHandler :@escaping(_ response:SysConfig?) -> Void)  -> Void {
