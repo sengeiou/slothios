@@ -18,6 +18,8 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     var dataSource = [UserGalleryPhoto]()
     var pageNum = 1
     var discoverVC: DiscoveryViewController?
+    ///临时上传图片的接口，上传成功后需要删除
+    var tmpUploadImgList = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -26,7 +28,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         collectionView?.mj_header.beginRefreshing()
     }
 
-    func configCollectionView() {
+    fileprivate func configCollectionView() {
         let frame = CGRect.zero
         let layout = UICollectionViewFlowLayout.init()
         layout.scrollDirection = .vertical
@@ -53,20 +55,39 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
     }
     
+    public func addTmpUploadImage(uploadImage: UIImage) {
+        let tmpImg = uploadImage.resizedImage(CGSize.init(width: 120, height: 120), interpolationQuality: .default)
+        if tmpImg != nil {
+            tmpUploadImgList.append(tmpImg!)
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    public func clearTmpUploadImage() {
+        tmpUploadImgList.removeAll()
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (dataSource.count + 1)
+        return (dataSource.count + tmpUploadImgList.count + 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : MyPhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath as IndexPath) as! MyPhotosCell
         
-        if indexPath.row == 0 {
+        if isAppendIndexPath(indexPath: indexPath) {
             cell.imgView.image = UIImage.init(named: "select_photoBg")
             cell.isShowFlagView(isShow: false)
             return cell
         }
+        //如果是临时的图片
+        if isImageIndexPath(indexPath: indexPath) {
+            let tmpUploadImg = tmpUploadImgList[indexPath.row - 1]
+            cell.imgView.image = tmpUploadImg
+            return cell
+        }
         
-        let galleryPhoto = dataSource[indexPath.row - 1]
+        let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
         if galleryPhoto.smallPicUrl != nil {
             let url = URL(string: galleryPhoto.smallPicUrl!)
             cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
@@ -77,16 +98,26 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if isAppendIndexPath(indexPath: indexPath) {
             if let actionVC = discoverVC {
                 UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
                     actionVC.uploadPhotoToGallery(uploadImage: avatar)
                 }, onCancel:nil)
             }
+            return
+        }
+        if isImageIndexPath(indexPath: indexPath) {
+            let tmpUploadImg = tmpUploadImgList[indexPath.row - 1]
+            let browser = ImageScrollViewController()
+            browser.disPlay(image: tmpUploadImg)
+            browser.isShowLikeButton(isShow: false)
+            browser.isShowDeleteButton(isShow: false)
+            self.present(browser, animated: true, completion: nil)
             
             return
         }
-        let galleryPhoto = dataSource[indexPath.row - 1]
+        
+        let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
         
         if galleryPhoto.participateBidAds! == true {
             let pushVC = BiddingStatusViewController()
@@ -111,6 +142,19 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         }
        
     }
+    
+    func isAppendIndexPath(indexPath: IndexPath) -> Bool {
+        return (indexPath.row == 0)
+    }
+    
+    func isImageIndexPath(indexPath: IndexPath) -> Bool {
+        if tmpUploadImgList.count > 0 &&
+            indexPath.row <= tmpUploadImgList.count {
+            return true
+        }
+        return false
+    }
+
     
     //MARK: - NetWork
     

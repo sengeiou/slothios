@@ -302,8 +302,9 @@ class NetworkEngine: NSObject {
     }
     
     //9.查看个人资料页面的文字和图片
-    func getUserProfile(userUuid: String?,likeSenderUserUuid: String?, completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
+    func getUserProfile(userUuid: String?, completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
         let token = Global.shared.globalLogin?.token
+        let likeSenderUserUuid = Global.shared.globalProfile?.uuid
 
         if (userUuid?.isEmpty)! || (likeSenderUserUuid?.isEmpty)! || (token?.isEmpty)!{
             SGLog(message: "数据为空")

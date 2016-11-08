@@ -96,14 +96,18 @@ class DiscoveryViewController: BaseViewController {
 //    }
 //    
     func uploadPhotoToGallery(uploadImage: UIImage?) {
-        if uploadImage == nil {
+        guard let uploadImage = uploadImage else {
             return
         }
         
+        controller3.addTmpUploadImage(uploadImage: uploadImage)
+        
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPhotoGallery(picFile: uploadImage!) { (userPhoto) in
+        engine.postPhotoGallery(picFile: uploadImage) { (userPhoto) in
             HUD.hide()
+            self.controller3.clearTmpUploadImage()
+            
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 self.controller3.getGalleryPhoto(at: .top)
 

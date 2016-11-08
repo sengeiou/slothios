@@ -23,6 +23,7 @@
 #import "ValuePickerView.h"
 #import "FXBlurView.h"
 #import "MJRefresh.h"
+#import "UIImage+Resize.h"
 
 #import <tingyunApp/NBSAppAgent.h>
 

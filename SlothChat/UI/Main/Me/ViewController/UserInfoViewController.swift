@@ -23,6 +23,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
 
     var isMyselfFlag = false
     
+    var bannerList = [AnyObject]()
+
     var mUserUuid: String?{
         didSet{
             if mUserUuid != nil &&
@@ -73,7 +75,6 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         let w = UIScreen.main.bounds.width
-//        let h = (w * 156.0 / 187.0)
         let h = w
 
         bannerView = SDCycleScrollView.init(frame: CGRect.init(x: 0, y: 64, width: w, height: h), delegate: self, placeholderImage: nil)
@@ -212,7 +213,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         if !isMyselfFlag{
             HUD.show(.labeledProgress(title: nil, subtitle: nil))
         }
-        engine.getUserProfile(userUuid: userUuid,likeSenderUserUuid: likeSenderUserUuid) { (profile) in
+        engine.getUserProfile(userUuid: userUuid) { (profile) in
             HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0 {
                 if (profile?.data) != nil{
@@ -223,6 +224,10 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                     }else{
                         self.toolView?.refreshLikeButtonStatus(isLike: (profile?.data?.currentVisitorLiked)!)
                     }
+                    let list = profile?.data?.getBannerAvatarList(isMyself: self.isMyselfFlag)
+                    for string in list!{
+                        self.bannerList.append(string as AnyObject)
+                    }
                     self.refreshBannerView()
                     if let tmpProfile = profile{
                         self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
@@ -230,7 +235,6 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 }else{
                     SGLog(message: "返回的数据为空")
                 }
-                
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
             }
@@ -283,38 +287,64 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func deletePhoto(at: Int) {
-
+        if at < (bannerList.count - 1) && at > 0 {
+            bannerList[at ..< at + 1] = [DefaultBannerImgName as AnyObject]
+            refreshBannerView()
+        }
+        
+        let obj = self.bannerList[at]
+        if obj is String {
+            let imgName = obj as! String
+            if imgName == DefaultBannerImgName
+                && at > ((self.mProfile?.userPhotoList?.count)! - 1){
+                SGLog(message: "越界")
+                return
+            }
+        }
+        
         let userPhoto = self.mProfile?.userPhotoList?[at]
         
         let engine = NetworkEngine()
-        
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.deleteUserPhoto(photoUuid: (userPhoto?.uuid)!) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
 
                 self.mProfile?.deleteAvatar(at: at)
-                self.refreshBannerView()
                 self.mProfile?.caheForUserProfile()
                 
+                self.bannerList.removeAll()
+                let list = self.mProfile?.getBannerAvatarList(isMyself: self.isMyselfFlag)
+                for string in list!{
+                    self.bannerList.append(string as AnyObject)
+                }
+                self.refreshBannerView()
+
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
     
-    func uploadPhoto(image: UIImage,at: Int) {
+    func uploadPhoto(uploadImage: UIImage,at: Int) {
+    
+        if at < (bannerList.count - 1) && at > 0{
+            bannerList[at ..< at + 1] = [uploadImage]
+            refreshBannerView()
+        }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postUserPhoto(image: image) { (userPhoto) in
-            HUD.hide()
+        engine.postUserPhoto(image: uploadImage) { (userPhoto) in
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
                 newPhoto.profileBigPicUrl = userPhoto?.data?.profileBigPicUrl
                 newPhoto.uuid = userPhoto?.data?.uuid
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
+                
+                self.bannerList.removeAll()
+                let list = self.mProfile?.getBannerAvatarList(isMyself: self.isMyselfFlag)
+                for string in list!{
+                    self.bannerList.append(string as AnyObject)
+                }
                 self.refreshBannerView()
 
             }else{
@@ -336,16 +366,22 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func deleteButtonClick() {
         let at = self.bannerView?.currentPage()
-        if at! > ((self.mProfile?.userPhotoList?.count)! - 1) ||
-            at! < 0{
-            SGLog(message: "越界")
-            return
+        
+        let obj = self.bannerList[at!]
+        if obj is String {
+            if (self.mProfile?.userPhotoList?.count)! <= 1{
+                HUD.flash(.label("至少要有一张照片"), delay: 2)
+                return
+            }
+            
+            let imgName = obj as! String
+            if imgName == DefaultBannerImgName
+            && at! > ((self.mProfile?.userPhotoList?.count)! - 1){
+                SGLog(message: "越界")
+                return
+            }
         }
         
-        if (self.mProfile?.userPhotoList?.count)! <= 1{
-            HUD.flash(.label("至少要有一张照片"), delay: 2)
-            return
-        }
         
         let alertController = UIAlertController(title: "您确定要删除这张图片？", message: "", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler:nil)
@@ -370,14 +406,13 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             titleStr = "替换头像"
         }
         UIAlertController.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                self.uploadPhoto(image: avatar!, at: index)
+                self.uploadPhoto(uploadImage: avatar!, at: index)
             }, onCancel:{
             }, allowsEditing: true)
     }
     
     func refreshBannerView() {
-        let imagesURLStrings = self.mProfile?.getBannerAvatarList(isMyself: isMyselfFlag)
-        bannerView?.localizationImageNamesGroup = imagesURLStrings
+        bannerView?.localizationImageNamesGroup = bannerList
     }
 }
 

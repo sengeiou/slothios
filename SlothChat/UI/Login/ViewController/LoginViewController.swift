@@ -138,7 +138,7 @@ class LoginViewController: BaseViewController {
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getUserProfile(userUuid: userUuid,likeSenderUserUuid:userUuid) { (profile) in
+        engine.getUserProfile(userUuid: userUuid) { (profile) in
             HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0 {
                 Global.shared.globalProfile = profile?.data

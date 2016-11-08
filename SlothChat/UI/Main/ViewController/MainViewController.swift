@@ -19,7 +19,6 @@ class MainViewController: UITabBarController {
         
         let meVC = UserInfoViewController()
         meVC.isMyselfFlag = true
-        meVC.mProfile = Global.shared.globalProfile
         meVC.mUserUuid = Global.shared.globalProfile?.userUuid
         
         let meNav = BaseNavigationController(rootViewController:meVC)
