@@ -84,14 +84,15 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
     func likeGallery(indexPath: IndexPath) {
         let photoObj = dataSource[indexPath.row]
         
+        photoObj.currentVisitorLiked = !photoObj.currentVisitorLiked!
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj.uuid) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                photoObj.currentVisitorLiked = !photoObj.currentVisitorLiked!
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }

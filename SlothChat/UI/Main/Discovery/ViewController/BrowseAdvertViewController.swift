@@ -145,6 +145,8 @@ class BrowseAdvertViewController: BaseViewController {
         if self.photoObj == nil {
             return
         }
+        self.photoObj?.currentVisitorLiked = !(self.photoObj?.currentVisitorLiked)!
+        self.isFollow = !self.isFollow
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
@@ -152,8 +154,7 @@ class BrowseAdvertViewController: BaseViewController {
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj?.uuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                self.photoObj?.currentVisitorLiked = true
-                self.isFollow = !self.isFollow
+                
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }

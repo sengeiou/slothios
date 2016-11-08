@@ -156,15 +156,15 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             return
         }
         
+        self.isFollow = !self.isFollow
+        self.configNavigationRightItem()
+        
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
 
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: galleryUuid) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
 //                self.photoObj?.currentVisitorLiked = true
-                self.isFollow = !self.isFollow
-                self.configNavigationRightItem()
+                
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }

@@ -265,16 +265,17 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func likeSomeBody()  {
+        
+        HUD.flash(.label("谢谢您哦~"), delay: 2)
+        self.mProfile?.currentVisitorLiked = !(self.mProfile?.currentVisitorLiked)!
+        self.toolView?.refreshLikeButtonStatus(isLike: (self.mProfile?.currentVisitorLiked)!)
+        
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let likeUuid = self.mProfile?.userUuid
         
         engine.post_likeProfile(userUuid:likeUuid) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("谢谢您哦~"), delay: 2)
-                self.mProfile?.currentVisitorLiked = !(self.mProfile?.currentVisitorLiked)!
-                self.toolView?.refreshLikeButtonStatus(isLike: (self.mProfile?.currentVisitorLiked)!)
+                
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
