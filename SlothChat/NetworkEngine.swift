@@ -179,7 +179,10 @@ class NetworkEngine: NSObject {
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
+            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7) else{
+                SGLog(message: "imageData 为空");
+                return
+            }
             
             multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
             }, to: URLString, encodingCompletion: { (result) in
@@ -219,11 +222,14 @@ class NetworkEngine: NSObject {
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let mobileData = mobile.data(using: String.Encoding.utf8)
-            let passwdData = passwd.data(using: String.Encoding.utf8)
+            guard let mobileData = mobile.data(using: String.Encoding.utf8),
+                let passwdData = passwd.data(using: String.Encoding.utf8) else{
+                    SGLog(message: "mobileData or passwdData 为空")
+                    return
+            }
             
-            multipartFormData.append(mobileData!, withName: "mobile")
-            multipartFormData.append(passwdData!, withName: "passwd")
+            multipartFormData.append(mobileData, withName: "mobile")
+            multipartFormData.append(passwdData, withName: "passwd")
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
@@ -240,21 +246,21 @@ class NetworkEngine: NSObject {
     
     //6.登出 POST
     func postAuthLogout(completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
-        let uuid = Global.shared.globalLogin?.user?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (uuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
         Alamofire.upload(multipartFormData: {(multipartFormData) in
-            let uuidData = uuid?.data(using: String.Encoding.utf8)
-            let tokenData = token?.data(using: String.Encoding.utf8)
+            guard let uuidData = uuid.data(using: String.Encoding.utf8),
+                let tokenData = token.data(using: String.Encoding.utf8) else{
+                    return
+            }
             
-            multipartFormData.append(uuidData!, withName: "uuid")
-            multipartFormData.append(tokenData!, withName: "token")
+            multipartFormData.append(uuidData, withName: "uuid")
+            multipartFormData.append(tokenData, withName: "token")
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
@@ -270,19 +276,17 @@ class NetworkEngine: NSObject {
     
     //7.修改个人资料页面的文字资料
     func postUserProfile(nickname:String,sex:String,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
-        let userUuid = Global.shared.globalProfile?.userUuid
-        let uuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (uuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.post_userProfile.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         let request = HTTPRequestGenerator(withParam:[
             "nickname": nickname,
@@ -303,19 +307,18 @@ class NetworkEngine: NSObject {
     
     //9.查看个人资料页面的文字和图片
     func getUserProfile(userUuid: String?, completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
-        let token = Global.shared.globalLogin?.token
-        let likeSenderUserUuid = Global.shared.globalProfile?.uuid
-
-        if (userUuid?.isEmpty)! || (likeSenderUserUuid?.isEmpty)! || (token?.isEmpty)!{
+        guard let token = Global.shared.globalLogin?.token,
+        let likeSenderUserUuid = Global.shared.globalProfile?.uuid,
+        let mUserUuid = userUuid else {
             SGLog(message: "数据为空")
             return
         }
         
         var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue
         
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: mUserUuid)
+        URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
 
         Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
             let code = response.result.value?.status
@@ -358,19 +361,17 @@ class NetworkEngine: NSObject {
     
     //11.查看个人设置
     func getSysConfig(completeHandler :@escaping(_ response:SysConfig?) -> Void)  -> Void {
-        var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
-        let userUuid = Global.shared.globalProfile?.userUuid
-        let uuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (uuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         
         Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
@@ -383,15 +384,13 @@ class NetworkEngine: NSObject {
     
     //12.用原有登录密码修改账户密码
     func putUpdatePwd(oldPwd: String,newPwd: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let uuid = Global.shared.globalProfile?.uuid
-        
-        if  (uuid?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.put_updatePwd.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
         
         let request = HTTPRequestGenerator(withParam:[
             "oldPwd":oldPwd,
@@ -442,19 +441,17 @@ class NetworkEngine: NSObject {
     
     //15.修改个人设置
     func putSysConfig(isAcceptSysNotify:Bool,isAcceptPrivateChat: Bool,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let userUuid = Global.shared.globalProfile?.userUuid
-        let uuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (uuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.userProfile_sysConfig.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid!)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         let request = HTTPRequestGenerator(withParam:[
             "isAcceptPrivateChat":isAcceptPrivateChat,
@@ -471,21 +468,22 @@ class NetworkEngine: NSObject {
     
     //17.用户资料页面，添加个人照片
     func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
-        let userUuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.post_userPhoto.rawValue
-        URLString = URLString.replacingOccurrences(of: "{uuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let imageData:Data = UIImageJPEGRepresentation(image, 0.7)!
+            guard let imageData:Data = UIImageJPEGRepresentation(image, 0.7) else{
+                SGLog(message: "imageData 为空");
+                return
+            }
             
             multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
             
@@ -509,18 +507,16 @@ class NetworkEngine: NSObject {
     //18.用户资料页面，删除指定的个人照片
     func deleteUserPhoto(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.userUuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.delete_userPhoto.rawValue
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: photoUuid)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         let request = HTTPRequestGenerator(withParam:["":""]
             , method: .delete, URLString: URLString)
@@ -536,19 +532,18 @@ class NetworkEngine: NSObject {
     //19.陌生人查看个人资料页面时对资料点赞
     func post_likeProfile(userUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
-        let likeSenderUserUuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)!  || (token?.isEmpty)! || (likeSenderUserUuid?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let uuid = Global.shared.globalProfile?.uuid,
+            let userUuid = userUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         let request = HTTPRequestGenerator(withParam:
-            ["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
+            ["likeSenderUserUuid":uuid], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             let code = response.result.value?.status
@@ -561,17 +556,16 @@ class NetworkEngine: NSObject {
     //20.用户查看自己的资料页面时点击（红心，XX人喜欢）按钮，查看点赞发出者头像名称列表
     func getLikeProfile(pageNum: String,pageSize: String,completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
+        
         var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             let code = response.result.value?.status
@@ -584,17 +578,15 @@ class NetworkEngine: NSObject {
     //MARK:B2.探索图片模块
     //21 探索图片空间，新添加图片 POST
     func postPhotoGallery(picFile: UIImage,completeHandler :@escaping(_ userPhoto:GalleryPhoto?) -> Void) -> Void {
-        let userUuid = Global.shared.globalProfile?.userUuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = Base_URL + API_URI.user_gallery.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         var address = GVUserDefaults.standard().locationDesc
         if address != nil {
@@ -606,8 +598,10 @@ class NetworkEngine: NSObject {
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7)!
-            
+            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 0.7) else{
+                SGLog(message: "imageData 为空");
+                return
+            }
             multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
@@ -627,16 +621,15 @@ class NetworkEngine: NSObject {
     //22.探索图片空间，分页获取某人的图片列表
     func getPhotoGallery(userUuid: String?,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:UserGallery?) -> Void)  -> Void {
         
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = userUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.user_gallery.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with:userUuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
             let code = response.result.value?.status
@@ -649,18 +642,16 @@ class NetworkEngine: NSObject {
     //23.探索图片空间，删除指定的图片
     func deletePhotoFromGallery(photoUuid: String,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
-        let userUuid = Global.shared.globalProfile?.uuid
-        let token = Global.shared.globalLogin?.token
-        
-        if (userUuid?.isEmpty)! || (token?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let uuid = Global.shared.globalProfile?.uuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = self.Base_URL + API_URI.delete_gallery.rawValue
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: photoUuid)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: uuid)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         let request = HTTPRequestGenerator(withParam:["":""]
             , method: .delete, URLString: URLString)
@@ -677,11 +668,8 @@ class NetworkEngine: NSObject {
     //24.探索图片空间，分页获取"最新Tab"或者"最热Tab"图片列表
     func getOrderGallery(likeSenderUserUuid: String?,displayType: DisplayType,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:DisplayOrder?) -> Void)  -> Void {
 
-        guard let likeSenderUserUuid = likeSenderUserUuid else {
-            SGLog(message: "数据为空")
-            return
-        }
-        guard let token = Global.shared.globalLogin?.token else {
+        guard let likeSenderUserUuid = likeSenderUserUuid,
+        let token = Global.shared.globalLogin?.token else {
             SGLog(message: "数据为空")
             return
         }
@@ -701,19 +689,18 @@ class NetworkEngine: NSObject {
     
     //25.陌生人查看探索图片时点赞POST
     func postLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let token = Global.shared.globalLogin?.token
-        
-        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)! ||
-            (likeSenderUserUuid?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let likeSenderUserUuid = likeSenderUserUuid,
+            let galleryUuid = galleryUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = Base_URL + API_URI.gallery_likeGallery.rawValue
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid)
         
-        let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid!], URLString: URLString)
+        let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             let code = response.result.value?.status
@@ -724,16 +711,16 @@ class NetworkEngine: NSObject {
     }
     //26.用户查看自己的探索图片左下方的3个点赞头像列表，查看点赞发出者头像名称列表（传分页参数分页）
     func getLikeGalleryList(likeSenderUserUuid: String?,galleryUuid: String?,pageNum: String,pageSize: String,completeHandler :@escaping(_ response:LikeProfileResult?) -> Void)  -> Void {
-        let token = Global.shared.globalLogin?.token
         
-        if  (token?.isEmpty)! || (galleryUuid?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let galleryUuid = galleryUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
         var URLString:String = Base_URL + API_URI.gallery_likeGallery.rawValue
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             let code = response.result.value?.status
@@ -745,18 +732,18 @@ class NetworkEngine: NSObject {
     
     //27.第一步发图传图成功后，广告竞价第二步，显示竞价加码页面
     func getAdsBidOrder(bidGalleryUuid: String?,completeHandler :@escaping(_ response:AdsBidOrder?) -> Void)  -> Void {
-        let token = Global.shared.globalLogin?.token
-        let userUuid = Global.shared.globalProfile?.userUuid
-
-        if  (token?.isEmpty)! || (bidGalleryUuid?.isEmpty)! || (userUuid?.isEmpty)!{
-            SGLog(message: "数据为空")
-            return
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid,
+            let bidGalleryUuid = bidGalleryUuid else {
+                SGLog(message: "数据为空")
+                return
         }
         
+        
         var URLString:String = Base_URL + API_URI.get_adsBidOrder.rawValue
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
-        URLString = URLString.replacingOccurrences(of: "{bidGalleryUuid}", with: bidGalleryUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{bidGalleryUuid}", with: bidGalleryUuid)
         
         Alamofire.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
             let code = response.result.value?.status
@@ -767,22 +754,20 @@ class NetworkEngine: NSObject {
     }
     //28.在显示竞价加码页面完成加码选择后，付款确认点击“发送”按钮
     func postAdsBidOrder(bidGalleryUuid: String?,amount: Int, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
-        let token = Global.shared.globalLogin?.token
-        let userUuid = Global.shared.globalProfile?.userUuid
-
-        if  (token?.isEmpty)! || (userUuid?.isEmpty)! ||
-            (bidGalleryUuid?.isEmpty)!{
+        guard let token = Global.shared.globalLogin?.token,
+        let userUuid = Global.shared.globalProfile?.userUuid,
+        let bidGalleryUuid = bidGalleryUuid else {
             SGLog(message: "数据为空")
             return
         }
         
         var URLString:String = Base_URL + API_URI.post_adsBidOrder.rawValue
-        URLString = URLString.replacingOccurrences(of: "{token}", with: token!)
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid!)
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         
         let request = HTTPRequestGenerator(withParam:[
-            "userUuid":userUuid!,
-            "bidGalleryUuid":bidGalleryUuid!,
+            "userUuid":userUuid,
+            "bidGalleryUuid":bidGalleryUuid,
             "amount":String(amount),
             "participateBidAds":"true"], URLString: URLString)
         
