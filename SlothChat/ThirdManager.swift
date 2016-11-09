@@ -23,7 +23,8 @@ class ThirdManager: NSObject {
     
     fileprivate class func startRongCloudIM() {
         RCIM.shared().initWithAppKey("8w7jv4qb7e8sy")
-        let token = ""
+//        let token = "11WqtSIFDg729Iat6IEfaixnj5P1WqmmscqozTd4ISYbwe9bdrgn6g3vvRXHhJOmsuqlzhfTj0UUduiuoBPkW1/Ze0P+2i2s"
+//        RCIM.shared().connect(withToken: token, success: ((userId?) -> Void)!, error: <#T##((RCConnectErrorCode) -> Void)!##((RCConnectErrorCode) -> Void)!##(RCConnectErrorCode) -> Void#>, tokenIncorrect: <#T##(() -> Void)!##(() -> Void)!##() -> Void#>)
         
 //        RCIM.shared().connectWithToken("YourTestUserToken",
 //                                           success: { (userId) -> Void in
