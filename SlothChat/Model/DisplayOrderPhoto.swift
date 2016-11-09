@@ -15,6 +15,7 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
 	var adsImpressionOrderNum : Int?
 	var bigPicUrl : String?
 	var currentVisitorLiked : Bool?
+    var displayAsBidAds : Bool?
 	var hdPicUrl : String?
 	var likeGallerySliceList : [DisplayOrderPhotoSlice]?
 	var likesCount : Int?
@@ -49,6 +50,7 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
 		adsImpressionOrderNum <- map["adsImpressionOrderNum"]
 		bigPicUrl <- map["bigPicUrl"]
 		currentVisitorLiked <- map["currentVisitorLiked"]
+        displayAsBidAds <- map["displayAsBidAds"]
 		hdPicUrl <- map["hdPicUrl"]
 		likeGallerySliceList <- map["likeGallerySliceList"]
 		likesCount <- map["likesCount"]
@@ -71,6 +73,7 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
          adsImpressionOrderNum = aDecoder.decodeObject(forKey: "adsImpressionOrderNum") as? Int
          bigPicUrl = aDecoder.decodeObject(forKey: "bigPicUrl") as? String
          currentVisitorLiked = aDecoder.decodeObject(forKey: "currentVisitorLiked") as? Bool
+         displayAsBidAds = aDecoder.decodeObject(forKey: "displayAsBidAds") as? Bool
          hdPicUrl = aDecoder.decodeObject(forKey: "hdPicUrl") as? String
          likeGallerySliceList = aDecoder.decodeObject(forKey: "likeGallerySliceList") as? [DisplayOrderPhotoSlice]
          likesCount = aDecoder.decodeObject(forKey: "likesCount") as? Int
@@ -101,6 +104,9 @@ class DisplayOrderPhoto : NSObject, NSCoding, Mappable{
 		if currentVisitorLiked != nil{
 			aCoder.encode(currentVisitorLiked, forKey: "currentVisitorLiked")
 		}
+        if displayAsBidAds != nil{
+            aCoder.encode(displayAsBidAds, forKey: "displayAsBidAds")
+        }
 		if hdPicUrl != nil{
 			aCoder.encode(hdPicUrl, forKey: "hdPicUrl")
 		}

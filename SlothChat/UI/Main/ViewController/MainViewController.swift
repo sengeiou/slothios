@@ -19,7 +19,6 @@ class MainViewController: UITabBarController {
         
         let meVC = UserInfoViewController()
         meVC.isMyselfFlag = true
-        meVC.mProfile = Global.shared.globalProfile
         meVC.mUserUuid = Global.shared.globalProfile?.userUuid
         
         let meNav = BaseNavigationController(rootViewController:meVC)
@@ -34,16 +33,19 @@ class MainViewController: UITabBarController {
         let firstbar =  self.tabBar.items![0] ;
         firstbar.image = UIImage(named: "discover-gray")?.withRenderingMode(.alwaysOriginal)
         firstbar.selectedImage = UIImage(named: "discover-champagne")?.withRenderingMode(.alwaysOriginal)
+        firstbar.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
         
         let secondbar = self.tabBar.items![1];
         
         secondbar.image = UIImage(named: "chat-gray")?.withRenderingMode(.alwaysOriginal)
         secondbar.selectedImage = UIImage(named: "chat-champagne")?.withRenderingMode(.alwaysOriginal)
-        
+        secondbar.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
+
         let thirdbar = self.tabBar.items![2];
         
         thirdbar.image = UIImage(named: "add-group-gray")?.withRenderingMode(.alwaysOriginal)
         thirdbar.selectedImage = UIImage(named: "add-group-champagne")?.withRenderingMode(.alwaysOriginal)
+        thirdbar.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
     }
     
     

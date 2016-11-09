@@ -26,7 +26,8 @@ class DiscoveryCell: UITableViewCell {
     let likeButton = UIButton(type: .custom)
     let mainImgView = UIImageView()
     let likeUsersView = LikeUsersView()
-    
+    let flagView = FlagView()
+
     var indexPath: IndexPath?
 
     var selectPassValue: DiscoveryClosureType?
@@ -53,6 +54,8 @@ class DiscoveryCell: UITableViewCell {
         self.contentView.addSubview(likeButton)
         self.contentView.addSubview(mainImgView)
         self.contentView.addSubview(likeUsersView)
+        self.mainImgView.addSubview(flagView)
+        flagView.isHidden = true
         
         self.addCellAction()
         
@@ -77,7 +80,7 @@ class DiscoveryCell: UITableViewCell {
         locationLabel.snp.makeConstraints { (make) in
             make.left.equalTo(locationImgView.snp.right).offset(10)
             make.top.equalTo(locationImgView.snp.top)
-            make.right.lessThanOrEqualTo(-80)
+            make.right.lessThanOrEqualTo(-40)
         }
         
         likeButton.snp.makeConstraints { (make) in
@@ -99,6 +102,11 @@ class DiscoveryCell: UITableViewCell {
             make.left.right.equalTo(0)
             make.top.equalTo(mainImgView.snp.bottom).offset(13)
             make.height.equalTo(30)
+        }
+        flagView.snp.makeConstraints { (make) in
+            make.top.equalTo(12)
+            make.left.equalTo(8)
+            make.size.equalTo(CGSize.init(width: 45, height: 22))
         }
     }
     
@@ -131,8 +139,10 @@ class DiscoveryCell: UITableViewCell {
         }else{
             likeButton.setImage(UIImage.init(named: "heart-hollow"), for: .normal)
         }
+        flagView.isHidden = !photoObj.displayAsBidAds!
         
-        likeUsersView.configViewWithObject(avatarList: photoObj.getLikeGallerySliceUrlList())
+        let avatarList = photoObj.getLikeGallerySliceUrlList()
+        likeUsersView.configViewWithObject(avatarList: avatarList, totalCount: avatarList.count)
     }
     
     required init?(coder aDecoder: NSCoder) {

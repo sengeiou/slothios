@@ -1,32 +1,35 @@
 //
-//  HotestViewController.swift
+//  GalleryViewController.swift
 //  SlothChat
 //
-//  Created by Fly on 16/10/22.
+//  Created by fly on 2016/11/4.
 //  Copyright © 2016年 ssloth.com. All rights reserved.
 //
 
 import UIKit
 import PKHUD
 
+enum DisplayType: String {
+    case newest = "newest"
+    case hottest = "hottest"
+}
+
 private let PageSize = 20
 
-class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    var displayType:DisplayType = .hottest
+    
     var dataSource = [DisplayOrderPhoto]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     var pageNum = 1
     
-    deinit {
-        tableView.removePullToRefresh(tableView.bottomPullToRefresh!)
-        tableView.removePullToRefresh(tableView.topPullToRefresh!)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
         setupPullToRefresh()
-        getOrderGallery(at: .top)
+        tableView.mj_header.beginRefreshing()
     }
     
     func configTableView() {
@@ -56,16 +59,16 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
         }
         let engine = NetworkEngine()
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: .hottest, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
+        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: displayType, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
             if at == .top {
-                self.tableView.endRefreshing(at: .top)
+                self.tableView.mj_header.endRefreshing()
             }else{
-                self.tableView.endRefreshing(at: .bottom)
+                self.tableView.mj_footer.endRefreshing()
             }
             
             if displayOrder?.status == ResponseError.SUCCESS.0 {
                 if let list = displayOrder?.data?.list{
-                    self.tableView.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -73,24 +76,25 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label("获取照片列表失败"), delay: 2)
+                HUD.flash(.label(displayOrder?.msg), delay: 2)
             }
         }
     }
     
     func likeGallery(indexPath: IndexPath) {
         let photoObj = dataSource[indexPath.row]
-
+        
+        photoObj.currentVisitorLiked = !photoObj.currentVisitorLiked!
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj.uuid) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                photoObj.currentVisitorLiked = true
-                self.tableView.reloadData()
+                
             }else{
-                HUD.flash(.label("点赞失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
@@ -124,7 +128,7 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {
         SGLog(message: actionType)
         SGLog(message: indexPath.row)
-
+        
         switch actionType {
         case .likeType:
             likeGallery(indexPath: indexPath)
@@ -141,12 +145,16 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
             let actionPhotoObj = dataSource[indexPath.row]
             let pushVC = LikeUsersViewController()
             pushVC.galleryUuid = actionPhotoObj.uuid
+            pushVC.likeSenderUserUuid = actionPhotoObj.userUuid
             navigationController?.pushViewController(pushVC, animated: true)
             break
         case .avatarType:
             let actionPhotoObj = dataSource[indexPath.row]
             let pushVC = UserInfoViewController()
             pushVC.mUserUuid = actionPhotoObj.userUuid
+            
+            let userUuid = Global.shared.globalProfile?.userUuid
+            pushVC.likeSenderUserUuid = userUuid
             navigationController?.pushViewController(pushVC, animated: true)
             
             break
@@ -154,16 +162,16 @@ class HotestViewController: BaseViewController,UITableViewDelegate,UITableViewDa
     }
 }
 
-private extension HotestViewController {
+private extension GalleryViewController {
     
     func setupPullToRefresh() {
-        tableView.addPullToRefresh(PullToRefresh()) { [weak self] in
-            self?.getOrderGallery(at: .top)
-            
-        }
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getOrderGallery(at: .top)
+        })
+        tableView.mj_header.isAutomaticallyChangeAlpha = true
         
-        tableView.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
-            self?.getOrderGallery(at: .bottom)
-        }
+        tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            self.getOrderGallery(at: .bottom)
+        })
     }
 }

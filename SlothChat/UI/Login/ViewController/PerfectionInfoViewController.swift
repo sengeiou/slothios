@@ -124,10 +124,10 @@ class PerfectionInfoViewController: BaseViewController {
         
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
             make.bottom.equalTo(-8)
             make.height.equalTo(44)
-            make.right.equalTo(-10)
+            make.left.lessThanOrEqualTo(80)
+            make.right.greaterThanOrEqualTo(-80)
         }
     }
     
@@ -191,8 +191,7 @@ class PerfectionInfoViewController: BaseViewController {
             HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0{
                 HUD.flash(.label("注册成功"), delay: 2)
-                let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-                DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                HUD.flash(.label("注册成功"), delay: 2, completion: { (result) in
                     _ = self.navigationController?.popToRootViewController(animated: true)
                 })
             }else{

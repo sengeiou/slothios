@@ -113,14 +113,12 @@ class RegisterViewController: BaseViewController {
         print("registerButtonClick")
         let codeStr = codeView.getInputContent()
         if (codeStr?.isEmpty)! {
-//            HUD.flash(.label("请选择国家码"), delay: 2)
             codeView.setErrorContent(error: "请选择国家码")
             return
         }
         
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-//            HUD.flash(.label("请输入手机号"), delay: 2)
             phoneView.setErrorContent(error: "请输入手机号")
             return
         }

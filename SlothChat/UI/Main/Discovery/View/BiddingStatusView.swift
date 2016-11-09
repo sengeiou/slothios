@@ -122,7 +122,7 @@ class BiddingStatusView: BaseView {
         let attributedText = NSMutableAttributedString.init(string: string1 + string2)
         
         let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGBlueColor(), range: range)
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGMainColor(), range: range)
         attributedText.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 18), range: range)
         priceLabel.attributedText = attributedText
     }
@@ -141,12 +141,15 @@ class BiddingStatusView: BaseView {
     //MARK:- Action
     
     func configWithObject(imgUrl: String) {
-        
         let avatarUrl = URL(string: imgUrl)
         self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+    }
+    
+    func refreshView(rankData: BidAdsRankVoData) {
+        price = rankData.myBidAmount!
         
-        let userObj = UserObj.defaultUserObj()
-        usersView.configViewWithObject(avatarList: userObj.avatarList)
+        let avatarList = rankData.getlikeGalleryAvatarList()
+        usersView.configViewWithObject(avatarList: avatarList, totalCount: rankData.likesCount!)
         
     }
     

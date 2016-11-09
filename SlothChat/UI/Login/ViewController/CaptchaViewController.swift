@@ -79,10 +79,10 @@ class CaptchaViewController: BaseViewController {
         
         
         confirmButton.snp.makeConstraints { (make) in
-            make.left.equalTo(10)
             make.bottom.equalTo(-10)
             make.height.equalTo(44)
-            make.right.equalTo(-10)
+            make.left.lessThanOrEqualTo(80)
+            make.right.greaterThanOrEqualTo(-80)
         }
     }
     

@@ -79,22 +79,17 @@
                        
                        switch (state) {
                            case SSDKResponseStateSuccess:{
-                               UIAlertController *alertVC = [[UIAlertController alloc] init];
-                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                                   message:nil
-                                                                                  delegate:nil
-                                                                         cancelButtonTitle:@"确定"
-                                                                         otherButtonTitles:nil];
-                               [alertView show];
+                               UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
+                               [alertVC addAction:action];
+                               [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
                                break;
                            }
                            case SSDKResponseStateFail:{
-                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                               message:[NSString stringWithFormat:@"%@",error]
-                                                                              delegate:nil
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles:nil, nil];
-                               [alert show];
+                               UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
+                               [alertVC addAction:action];
+                               [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
                                break;
                            }
                            default:

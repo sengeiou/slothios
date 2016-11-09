@@ -10,10 +10,8 @@ import UIKit
 import PKHUD
 
 class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
-    let dataSource = UserObj.getTestUserList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-
     let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 420), status: .bidding)
     
     var bidstatus: BiddingStatus = .bidding
@@ -22,12 +20,16 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var mainImgUrl: String?
     var photoObj: UserGalleryPhoto?
     
-
+    var userUuid: String?
+    var galleryUuid: String?
+    var adsBidOrder: AdsBidOrder?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sentupView()
-        configNavigationRightItem()
+        setNavtionConfirm(titleStr: "发送")
+        getAdsBidOrder()
     }
     
     func sentupView() {
@@ -49,7 +51,10 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        if let rankVos = self.adsBidOrder?.data?.bidAdsRankVos {
+            return rankVos.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -78,7 +83,11 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             }
             
             let string1 = "剩余"
-            let string2 = "3天2小时"
+            var string2 = "  "
+            if let leftTime = adsBidOrder?.data?.leftDaysHours {
+                string2 = leftTime
+            }
+            
             let attributedText = NSMutableAttributedString.init(string: string1 + string2)
             
             let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
@@ -93,8 +102,10 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: BiddingListCell = tableView.dequeueReusableCell(withIdentifier: "BiddingListCell", for: indexPath) as! BiddingListCell
-        let userObj = dataSource[indexPath.row]
-        cell.configCellWithObj(userObj: userObj,indexPatch: indexPath)
+        if let rankVos = self.adsBidOrder?.data?.bidAdsRankVos {
+            let rankVo = rankVos[indexPath.row]
+            cell.configCellWithObj(rankVo: rankVo,indexPatch: indexPath)
+        }
         return cell
     }
     
@@ -102,10 +113,8 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func configWithObject(galleryPhoto: UserGalleryPhoto) {
-        self.photoObj = galleryPhoto
-        
-        if let imgUrl = galleryPhoto.bigPicUrl {
+    func configWithObject(imageUrl: String?) {
+        if let imgUrl = imageUrl {
             self.mainImgUrl = imgUrl
             headerView.configWithObject(imgUrl: imgUrl)
         }
@@ -114,20 +123,24 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     
     //MARK:- Action
     
+    override func confirmClick() {
+        postAdsBidOrder()
+    }
+    
     func followClick() {
         likeGallery()
     }
     
     func deleteClick() {
-        if self.photoObj?.uuid == nil {
+        
+        if userUuid == nil || galleryUuid == nil {
             SGLog(message: "数据为空")
             return
         }
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let photoUuid = ""
-        engine.deletePhotoFromGallery(photoUuid: photoUuid) { (response) in
+        engine.deletePhotoFromGallery(photoUuid: galleryUuid!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("添加照片成功"), delay: 2)
@@ -136,22 +149,74 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             }
         }
     }
+    
     func likeGallery() {
-        if self.photoObj == nil {
+        if userUuid == nil || galleryUuid == nil {
+            SGLog(message: "数据为空")
+            return
+        }
+        
+        self.isFollow = !self.isFollow
+        self.configNavigationRightItem()
+        
+        let engine = NetworkEngine()
+
+        engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: galleryUuid) { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+//                self.photoObj?.currentVisitorLiked = true
+                
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func getAdsBidOrder() {
+        if galleryUuid == nil {
             return
         }
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let uuid = Global.shared.globalProfile?.uuid
-        engine.postLikeGalleryList(likeSenderUserUuid: uuid, galleryUuid: photoObj?.uuid) { (response) in
+
+        engine.getAdsBidOrder(bidGalleryUuid: galleryUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-//                self.photoObj?.currentVisitorLiked = true
-                self.isFollow = !self.isFollow
-                self.configNavigationRightItem()
+                self.adsBidOrder = response
+                
+                if let imgUrl = response?.data?.bigPicUrl{
+                    self.configWithObject(imageUrl: imgUrl)
+                }
+                self.headerView.refreshView(rankData: (response?.data)!)
+                self.tableView.reloadData()
             }else{
-                HUD.flash(.label("点赞失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func postAdsBidOrder() {
+        if galleryUuid == nil {
+            SGLog(message: "数据为空")
+            return
+        }
+        guard let oriPrice = adsBidOrder?.data?.myBidAmount else {
+            SGLog(message: "原始价格异常")
+            return
+        }
+        let price = headerView.price - oriPrice
+
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        
+        engine.postAdsBidOrder(bidGalleryUuid: galleryUuid!, amount: price){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("竞价成功"), delay: 2, completion: { (result) in
+                    _ = self.navigationController?.popViewController(animated: true)
+                })
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }

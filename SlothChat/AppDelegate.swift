@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import AwesomeCache
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
@@ -21,30 +20,40 @@ struct SGGlobalKey {
     static let SCLoginStatusKey = "SCLoginStatusKey"
 
     public static let LoginStatusDidChange = Notification.Name(rawValue: "SlothChat.LoginStatusDidChange")
-
 }
+public enum Position {
+    case top, bottom
+}
+
+public enum BidAdsType: String {
+    case isParticipateAd = "true"
+    case notParticipateAd = "false"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let manager = LocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.sharedManager().enable = true
         NSObject.registerShareSDK()
         NBSAppAgent.start(withAppID: "9618217e76524a188e49ef32475489ac")
         
+        manager.startLocationCity()
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         
         self.window = UIWindow.init()
         self.changeRootViewController()
+//        self.window?.rootViewController = ViewController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true
     }
     
     func LoginStatusDidChange() {
-        HUD.flash(.label("账号异常"), delay: 2)
         changeRootViewController()
     }
     

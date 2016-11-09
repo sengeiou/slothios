@@ -17,15 +17,18 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     let bgImgView = UIImageView.init()
     var dataSource = [UserGalleryPhoto]()
     var pageNum = 1
-
+    var discoverVC: DiscoveryViewController?
+    ///临时上传图片的接口，上传成功后需要删除
+    var tmpUploadImgList = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         configCollectionView()
         setupPullToRefresh()
-        getGalleryPhoto(at: .top)
+        collectionView?.mj_header.beginRefreshing()
     }
 
-    func configCollectionView() {
+    fileprivate func configCollectionView() {
         let frame = CGRect.zero
         let layout = UICollectionViewFlowLayout.init()
         layout.scrollDirection = .vertical
@@ -52,37 +55,78 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
     }
     
+    public func addTmpUploadImage(uploadImage: UIImage) {
+        let tmpImg = uploadImage.resizedImage(CGSize.init(width: 120, height: 120), interpolationQuality: .default)
+        if tmpImg != nil {
+            tmpUploadImgList.append(tmpImg!)
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    public func clearTmpUploadImage() {
+        tmpUploadImgList.removeAll()
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (dataSource.count + 1)
+        return (dataSource.count + tmpUploadImgList.count + 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : MyPhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath as IndexPath) as! MyPhotosCell
         
-        if indexPath.row == 0 {
+        if isAppendIndexPath(indexPath: indexPath) {
             cell.imgView.image = UIImage.init(named: "select_photoBg")
             cell.isShowFlagView(isShow: false)
             return cell
         }
+        //如果是临时的图片
+        if isImageIndexPath(indexPath: indexPath) {
+            let tmpUploadImg = tmpUploadImgList[indexPath.row - 1]
+            cell.imgView.image = tmpUploadImg
+            return cell
+        }
         
-        let galleryPhoto = dataSource[indexPath.row - 1]
+        let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
         if galleryPhoto.smallPicUrl != nil {
             let url = URL(string: galleryPhoto.smallPicUrl!)
             cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
+        cell.isShowFlagView(isShow: galleryPhoto.displayAsBidAds!)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            
-            UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                self.uploadPhoto(image: avatar!)
+        if isAppendIndexPath(indexPath: indexPath) {
+            if let actionVC = discoverVC {
+                UIAlertController.photoPicker(withTitle: nil, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
+                    actionVC.uploadPhotoToGallery(uploadImage: avatar)
                 }, onCancel:nil)
+            }
             return
         }
-        let galleryPhoto = dataSource[indexPath.row - 1]
+        if isImageIndexPath(indexPath: indexPath) {
+            let tmpUploadImg = tmpUploadImgList[indexPath.row - 1]
+            let browser = ImageScrollViewController()
+            browser.disPlay(image: tmpUploadImg)
+            browser.isShowLikeButton(isShow: false)
+            browser.isShowDeleteButton(isShow: false)
+            self.present(browser, animated: true, completion: nil)
+            
+            return
+        }
+        
+        let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
+        
+        if galleryPhoto.participateBidAds! == true {
+            let pushVC = BiddingStatusViewController()
+            pushVC.userUuid = galleryPhoto.userUuid
+            pushVC.galleryUuid = galleryPhoto.uuid
+            pushVC.configWithObject(imageUrl: galleryPhoto.bigPicUrl)
+            navigationController?.pushViewController(pushVC, animated: true)
+            return
+        }
         if galleryPhoto.bigPicUrl != nil {
             let browser = ImageScrollViewController()
             browser.galleryPhotoObj = galleryPhoto
@@ -99,27 +143,20 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
        
     }
     
-    func publishAdvert(image: UIImage) {
-        let pushVC = PublishViewController()
-        pushVC.configWithObject(image: image)
-        self.navigationController?.pushViewController(pushVC, animated: true)
+    func isAppendIndexPath(indexPath: IndexPath) -> Bool {
+        return (indexPath.row == 0)
     }
+    
+    func isImageIndexPath(indexPath: IndexPath) -> Bool {
+        if tmpUploadImgList.count > 0 &&
+            indexPath.row <= tmpUploadImgList.count {
+            return true
+        }
+        return false
+    }
+
     
     //MARK: - NetWork
-    
-    func uploadPhoto(image: UIImage) {
-        let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPhotoGallery(picFile: image) { (userPhoto) in
-            HUD.hide()
-            if userPhoto?.status == ResponseError.SUCCESS.0 {
-                self.getGalleryPhoto(at: .top)
-                HUD.flash(.label("添加照片成功"), delay: 2)
-            }else{
-                HUD.flash(.label(userPhoto?.msg), delay: 2)
-            }
-        }
-    }
     
     func getGalleryPhoto(at: Position) {
         let engine = NetworkEngine()
@@ -132,13 +169,13 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.getPhotoGallery(userUuid: userUuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (gallery) in
             if at == .top {
-                self.collectionView?.endRefreshing(at: .top)
+                self.collectionView?.mj_header.endRefreshing()
             }else{
-                self.collectionView?.endRefreshing(at: .bottom)
+                self.collectionView?.mj_footer.endRefreshing()
             }
             if gallery?.status == ResponseError.SUCCESS.0 {
                 if let list = gallery?.data?.list{
-                    self.collectionView?.bottomPullToRefresh?.refreshView.isHidden = (list.count < PageSize)
+                    self.collectionView?.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -146,7 +183,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
                     self.collectionView?.reloadData()
                 }
             }else{
-                HUD.flash(.label("获取照片列表失败"), delay: 2)
+                HUD.flash(.label(gallery?.msg), delay: 2)
             }
         }
     }
@@ -155,13 +192,14 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
 private extension MyPhotosViewController {
         
     func setupPullToRefresh() {
-        collectionView?.addPullToRefresh(PullToRefresh()) { [weak self] in
-        self?.getGalleryPhoto(at: .top)
-        }
-            
-        collectionView?.addPullToRefresh(PullToRefresh(position: .bottom)) { [weak self] in
-            self?.getGalleryPhoto(at: .bottom)
-        }
+        collectionView?.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getGalleryPhoto(at: .top)
+        })
+        collectionView?.mj_header.isAutomaticallyChangeAlpha = true
+        
+        collectionView?.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            self.getGalleryPhoto(at: .bottom)
+        })
     }
 }
 

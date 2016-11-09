@@ -98,7 +98,9 @@ class BrowseAdvertViewController: BaseViewController {
         let mainImgUrl = URL(string: (photoObj?.bigPicUrl)!)
         self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        usersListView.configViewWithObject(avatarList: photoObj?.getLikeGallerySliceUrlList())
+        if let avatarList = photoObj?.getLikeGallerySliceUrlList() {
+            usersListView.configViewWithObject(avatarList: avatarList, totalCount: (photoObj?.likesCount)!)
+        }
         
         let string1 = "这是一个广告\n\n"
         let string2 = "您在发照片时，可以通过选择是否参与f付费竞价，以赢得此广告位。\n竞价结果每周公布一次，如果您竞价成功，可获得该广告位一星期"
@@ -143,6 +145,8 @@ class BrowseAdvertViewController: BaseViewController {
         if self.photoObj == nil {
             return
         }
+        self.photoObj?.currentVisitorLiked = !(self.photoObj?.currentVisitorLiked)!
+        self.isFollow = !self.isFollow
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
@@ -150,10 +154,9 @@ class BrowseAdvertViewController: BaseViewController {
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj?.uuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                self.photoObj?.currentVisitorLiked = true
-                self.isFollow = !self.isFollow
+                
             }else{
-                HUD.flash(.label("点赞失败"), delay: 2)
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
