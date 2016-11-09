@@ -190,6 +190,7 @@
 		04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */; };
 		04EDED3B1DCB13F00068512E /* DisplayOrderPhotoSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */; };
 		04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */; };
+		04F79A0B1DD32C5200DA8BCB /* ThirdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F79A0A1DD32C5200DA8BCB /* ThirdManager.swift */; };
 		04FE6DBB1DCE3C3300AD9C96 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE6DB41DCE3C3300AD9C96 /* UIImage+Alpha.m */; };
 		04FE6DBC1DCE3C3300AD9C96 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE6DB61DCE3C3300AD9C96 /* UIImage+Resize.m */; };
 		04FE6DBD1DCE3C3300AD9C96 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE6DB81DCE3C3300AD9C96 /* UIImage+RoundedCorner.m */; };
@@ -497,6 +498,7 @@
 		04ED10551DC7994900EBD3C5 /* DisplayOrderPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrderPhoto.swift; sourceTree = "<group>"; };
 		04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayOrderPhotoSlice.swift; sourceTree = "<group>"; };
 		04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		04F79A0A1DD32C5200DA8BCB /* ThirdManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdManager.swift; sourceTree = "<group>"; };
 		04FE6DB31DCE3C3300AD9C96 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
 		04FE6DB41DCE3C3300AD9C96 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
 		04FE6DB51DCE3C3300AD9C96 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
@@ -1469,6 +1471,7 @@
 				19273B1E1DA9EE1300150460 /* LaunchScreen.storyboard */,
 				19273B211DA9EE1300150460 /* Info.plist */,
 				048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */,
+				04F79A0A1DD32C5200DA8BCB /* ThirdManager.swift */,
 			);
 			path = SlothChat;
 			sourceTree = "<group>";
@@ -1873,6 +1876,7 @@
 				04ED10501DC787F300EBD3C5 /* UserGallery.swift in Sources */,
 				04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */,
 				044956961DCCBAA800CBFF45 /* NSBundle+MJRefresh.m in Sources */,
+				04F79A0B1DD32C5200DA8BCB /* ThirdManager.swift in Sources */,
 				04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */,
 				04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */,
 				04FEB7E51DB76F13004509D1 /* SDWebImageCompat.m in Sources */,
