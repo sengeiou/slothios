@@ -9,7 +9,13 @@
 import UIKit
 
 
-class ThirdManager: NSObject {
+class ThirdManager: NSObject,RCIMUserInfoDataSource {
+    
+    override init() {
+        super.init()
+        RCIM.shared().userInfoDataSource = self
+    }
+    
     
     class func startThirdLib() {
         startNBSAppAgent()
@@ -30,6 +36,7 @@ class ThirdManager: NSObject {
         RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
 
         connectRCIM(token: token1203)
+        
     }
     
     class func connectRCIM(token: String) {
@@ -44,5 +51,16 @@ class ThirdManager: NSObject {
             print("token错误")
             
         })
+    }
+    
+    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
+        if userId == "18667931202" {
+            let user = RCUserInfo(userId: userId, name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
+            return completion(user)
+        }else if userId == "18667931203" {
+            let user = RCUserInfo(userId: userId, name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
+            return completion(user)
+        }
+        return completion(nil)
     }
 }

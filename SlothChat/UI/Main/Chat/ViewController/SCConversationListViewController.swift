@@ -14,6 +14,7 @@ class SCConversationListViewController: RCConversationListViewController {
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
         navigationItem.title = "聊"
+        
         //设置需要显示哪些类型的会话
         self.setDisplayConversationTypes([RCConversationType.ConversationType_PRIVATE.rawValue,
                                           RCConversationType.ConversationType_DISCUSSION.rawValue,
@@ -25,6 +26,24 @@ class SCConversationListViewController: RCConversationListViewController {
         self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
                                             RCConversationType.ConversationType_GROUP.rawValue])
     }
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let action = UITableViewRowAction(style: .default, title: "删除", handler: {
+            (action, indexPath) in
+            self.conversationListDataSource.remove(indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        })
+            
+        action.backgroundColor = SGColor.SGMainColor()
+        
+        return [action]
+    }
+    
+    override func willDisplayConversationTableCell(_ cell: RCConversationBaseCell!, at indexPath: IndexPath!) {
+//        let model = self.conversationListDataSource[indexPath.row]
+        
+    }
+    
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
