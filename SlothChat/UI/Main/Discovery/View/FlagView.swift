@@ -9,6 +9,8 @@
 import UIKit
 
 class FlagView: UIView {
+    
+    let label = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,14 +30,27 @@ class FlagView: UIView {
     
     fileprivate func sentupView() {
         
-        let label = UILabel()
         addSubview(label)
-        label.text = "推荐"
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 12)
         label.snp.makeConstraints { (make) in
-            make.center.equalTo(self)
+            make.centerY.equalTo(self.snp.centerY)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
         }
-        
+    }
+    
+    func setIsDisplayAsBidAds(displayAsBidAds: Bool) {
+        if displayAsBidAds {
+            self.isHidden = false
+            label.text = "推荐"
+        }
+    }
+    
+    func setIsParticipateBidAds(participateBidAds: Bool) {
+        if participateBidAds {
+            self.isHidden = false
+            label.text = "竞价中"
+        }
     }
 }

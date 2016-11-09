@@ -26,11 +26,11 @@ class MyPhotosCell: UICollectionViewCell {
         }
         
         contentView.addSubview(flagView)
-        flagView.isHidden = true
         flagView.snp.makeConstraints { (make) in
             make.top.equalTo(6)
             make.right.equalTo(-6)
-            make.size.equalTo(CGSize.init(width: 45, height: 22))
+            make.height.equalTo(22)
+//            make.size.equalTo(CGSize.init(width: 45, height: 22))
         }
     }
     
@@ -38,8 +38,14 @@ class MyPhotosCell: UICollectionViewCell {
         flagView.isHidden = !isShow
     }
     
-    func configViewObject(imgUrl: String) {
-        
+    func configCellObject(photo: UserGalleryPhoto) {
+        if photo.smallPicUrl != nil {
+            let url = URL(string: photo.smallPicUrl!)
+            imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        }
+        flagView.isHidden = true
+        flagView.setIsDisplayAsBidAds(displayAsBidAds: photo.displayAsBidAds!)
+        flagView.setIsParticipateBidAds(participateBidAds: photo.participateBidAds!)
     }
     
     required init?(coder aDecoder: NSCoder) {

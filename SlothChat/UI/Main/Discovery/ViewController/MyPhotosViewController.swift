@@ -86,13 +86,9 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             cell.imgView.image = tmpUploadImg
             return cell
         }
-        
         let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
-        if galleryPhoto.smallPicUrl != nil {
-            let url = URL(string: galleryPhoto.smallPicUrl!)
-            cell.imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-        }
-        cell.isShowFlagView(isShow: galleryPhoto.displayAsBidAds!)
+
+        cell.configCellObject(photo: galleryPhoto)
         
         return cell
     }
