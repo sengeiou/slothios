@@ -12,7 +12,7 @@ import PKHUD
 class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 420), status: .bidding)
+    let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468), status: .bidding)
     
     var bidstatus: BiddingStatus = .bidding
     var isMyself = true
@@ -23,7 +23,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var userUuid: String?
     var galleryUuid: String?
     var adsBidOrder: AdsBidOrder?
-    
+    var bidType = BidAdsType.notParticipateAd
+    var isJoin = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,21 +49,30 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
         headerView.mainImgView.isUserInteractionEnabled = true
         headerView.mainImgView.addGestureRecognizer(tap)
+        
+        headerView.setClosurePass {
+            self.isJoin = !self.isJoin
+            self.tableView.reloadData()
+        }
+        
         tableView.tableHeaderView = headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let rankVos = self.adsBidOrder?.data?.bidAdsRankVos {
-            return rankVos.count
+            return (self.isJoin ? rankVos.count : 0)
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 32
+        return (self.isJoin ? 32 : 0)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if !self.isJoin {
+            return nil
+        }
         let headerView = UIView()
         let titleLabel = UILabel()
         titleLabel.text = "当前竞价排行"
@@ -118,7 +129,10 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             self.mainImgUrl = imgUrl
             headerView.configWithObject(imgUrl: imgUrl)
         }
-       
+    }
+    
+    func configWithObject(image: UIImage?) {
+        headerView.configWithObject(image: image!)
     }
     
     //MARK:- Action

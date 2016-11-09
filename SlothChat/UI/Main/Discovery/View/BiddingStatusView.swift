@@ -21,6 +21,8 @@ class BiddingStatusView: BaseView {
     let priceView = UIView()
     let priceLabel = UILabel()
     let overweightButton = UIButton(type: .custom)
+    let selectButton = UIButton(type: .custom)
+    let contentLabel = UILabel()
 
     let timeoutLabel = UILabel()
     
@@ -33,6 +35,8 @@ class BiddingStatusView: BaseView {
           configPriceLabel()
         }
     }
+    var isJoin = false
+
     
     init(frame: CGRect,status: BiddingStatus) {
         super.init(frame: frame)
@@ -50,36 +54,73 @@ class BiddingStatusView: BaseView {
     }
     
     func sentupView() {
-        
-        addSubview(mainImgView)
-        
-        addSubview(usersView)
-        
-        let w = UIScreen.main.bounds.width
         mainImgView.contentMode = .scaleAspectFill
         mainImgView.clipsToBounds = true
+        addSubview(mainImgView)
+        addSubview(contentLabel)
+        
+        let joinView = UIView()
+        addSubview(joinView)
+        
+        let biddingLabel = UILabel()
+        biddingLabel.font = UIFont.systemFont(ofSize: 15)
+        biddingLabel.text = "是否用此图片参与广告竞价"
+        joinView.addSubview(biddingLabel)
+        
+        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .normal)
+        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .highlighted)
+        selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .selected)
+        selectButton.addTarget(self, action: #selector(selectButtonCLick), for: .touchUpInside)
+        addSubview(selectButton)
+        
+        contentLabel.numberOfLines = 0
+        contentLabel.lineBreakMode = .byCharWrapping
+        let w = UIScreen.main.bounds.width
+        contentLabel.preferredMaxLayoutWidth = w - 8 * 2
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        contentLabel.textColor = SGColor.SGTextColor()
+        contentLabel.text = "什么是广告位\n您可以支付一定金额参与图片的广告位竞价。若在截止时间您出价最高，则竞价成功。您将获得图片分享首页广告位一周时间。"
+        
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
-            make.height.equalTo(256)
-            make.height.equalTo((w * 288.0) / 375.0)
+            make.height.equalTo(300)
         }
-        usersView.snp.makeConstraints { (make) in
+        
+        joinView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(mainImgView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(mainImgView.snp.bottom).offset(18)
+            make.height.equalTo(46)
         }
-
+        
+        biddingLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(8)
+            make.centerY.equalTo(joinView.snp.centerY)
+        }
+        
+        selectButton.snp.makeConstraints { (make) in
+            make.right.equalTo(-8)
+            make.centerY.equalTo(joinView.snp.centerY)
+            make.size.equalTo(CGSize.init(width: 70, height: 40))
+        }
+        
+        contentLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(8)
+            make.right.equalTo(-8)
+            make.top.equalTo(joinView.snp.bottom).offset(44)
+        }
+        
         addSubview(priceView)
         priceView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(usersView.snp.bottom).offset(24)
-            make.height.equalTo(44)
+            make.top.equalTo(joinView.snp.bottom).offset(24)
+            make.height.equalTo(46)
         }
         configPriceView()
         configPickerView()
     }
     
     func configPriceView() {
+        priceView.isHidden = true
         
         configPriceLabel()
         priceLabel.font = UIFont.systemFont(ofSize: 14)
@@ -140,9 +181,31 @@ class BiddingStatusView: BaseView {
     
     //MARK:- Action
     
+    func selectButtonCLick() {
+        selectButton.isSelected = !selectButton.isSelected
+        priceView.isHidden = !selectButton.isSelected
+        contentLabel.isHidden = selectButton.isSelected
+        
+        isJoin = selectButton.isSelected
+        
+        if selectButton.isSelected {
+            selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .highlighted)
+        }else{
+            selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .highlighted)
+        }
+        
+        if let sp = self.selectPassValue {
+            sp()
+        }
+    }
+    
     func configWithObject(imgUrl: String) {
         let avatarUrl = URL(string: imgUrl)
         self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+    }
+    
+    func configWithObject(image: UIImage) {
+        self.mainImgView.image = image
     }
     
     func refreshView(rankData: BidAdsRankVoData) {
@@ -150,7 +213,10 @@ class BiddingStatusView: BaseView {
         
         let avatarList = rankData.getlikeGalleryAvatarList()
         usersView.configViewWithObject(avatarList: avatarList, totalCount: rankData.likesCount!)
-        
+    }
+    
+    func setClosurePass(temClosure: @escaping PublishAdvertClosureType){
+        self.selectPassValue = temClosure
     }
     
     func overweightButtonClick() {

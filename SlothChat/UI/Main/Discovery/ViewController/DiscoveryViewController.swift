@@ -100,8 +100,6 @@ class DiscoveryViewController: BaseViewController {
             return
         }
         
-        controller3.addTmpUploadImage(uploadImage: uploadImage)
-        
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.postPhotoGallery(picFile: uploadImage) { (userPhoto) in
