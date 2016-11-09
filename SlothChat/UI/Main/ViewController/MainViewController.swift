@@ -15,7 +15,8 @@ class MainViewController: UITabBarController {
         self.getSystemConfig()
         
         let discoveryNav = BaseNavigationController(rootViewController: DiscoveryViewController())
-        let chatNav = BaseNavigationController(rootViewController:ChatViewController())
+        
+        let chatNav = BaseNavigationController(rootViewController:SCConversationListViewController())
         
         let meVC = UserInfoViewController()
         meVC.isMyselfFlag = true
