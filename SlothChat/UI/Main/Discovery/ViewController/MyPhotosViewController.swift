@@ -21,11 +21,37 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
     ///临时上传图片的接口，上传成功后需要删除
     var tmpUploadImgList = [UIImage]()
     
+    var refreshUI = true
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if refreshUI {
+            refreshUI = false
+            collectionView?.mj_header.beginRefreshing()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         configCollectionView()
         setupPullToRefresh()
         collectionView?.mj_header.beginRefreshing()
+        
+        self.configNotice()
+    }
+    
+    func configNotice() {
+        NotificationCenter.default.addObserver(forName: SGGlobalKey.DiscoveryDataDidChange, object: nil, queue: OperationQueue.main, using: { (notice) in
+            if self.isMyselfShow{
+                self.collectionView?.mj_header.beginRefreshing()
+            }else{
+                self.refreshUI = true
+            }
+        })
+    }
+    
+    func isShowMyself() {
+        
     }
 
     fileprivate func configCollectionView() {

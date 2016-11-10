@@ -12,11 +12,16 @@ import PKHUD
 class DiscoveryViewController: BaseViewController {
 
     let controller3 = MyPhotosViewController()
+    var pageMenu : CAPSPageMenu?
 
 //    override open var shouldAutomaticallyForwardAppearanceMethods: Bool {
 //        get {
 //            return true
 //        }
+//    }
+    
+//    deinit {
+//        pageMenu?.removeObserver(self, forKeyPath: "currentPageIndex", context: nil)
 //    }
     
     override func viewDidLoad() {
@@ -28,7 +33,6 @@ class DiscoveryViewController: BaseViewController {
         self.sentupView()
 
     }
-    var pageMenu : CAPSPageMenu?
     
     func sentupView() {
         
@@ -68,9 +72,13 @@ class DiscoveryViewController: BaseViewController {
         self.addChildViewController(pageMenu!)
         self.view.addSubview(pageMenu!.view)
         
+//        pageMenu!.addObserver(self, forKeyPath: "currentPageIndex", options: .new, context: nil)
         pageMenu!.didMove(toParentViewController: self)
     }
     
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        SGLog(message: pageMenu!.currentPageIndex)
+//    }
     
     // MARK: - Container View Controller
 //    override func shouldAutomaticallyForwardAppearanceMethods() -> Bool {
@@ -88,13 +96,7 @@ class DiscoveryViewController: BaseViewController {
             self.uploadPhotoToGallery(uploadImage: avatar!)
             }, onCancel:nil)
     }
-//    func publishAdvert(image: UIImage) {
-//        let pushVC = PublishViewController()
-//        pushVC.configWithObject(image: image)
-//        let nav = BaseNavigationController(rootViewController: pushVC)
-//        self.present(nav, animated: true, completion: nil)
-//    }
-//    
+   
     func uploadPhotoToGallery(uploadImage: UIImage?) {
         guard let uploadImage = uploadImage else {
             return
@@ -107,7 +109,7 @@ class DiscoveryViewController: BaseViewController {
             self.controller3.clearTmpUploadImage()
             
             if userPhoto?.status == ResponseError.SUCCESS.0 {
-                self.controller3.getGalleryPhoto(at: .top)
+                NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
 
                 let pushVC = PublishViewController()
                 pushVC.userUuid = userPhoto?.data?.userUuid

@@ -214,6 +214,8 @@ class ImageScrollViewController: BaseViewController {
                 if let sp = self.actionValue {
                     sp(.deleteImg)
                 }
+                NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
+
                 HUD.flash(.label("已成功删除"), delay: 2, completion: { (result) in
                     self.dismiss(animated: true, completion: { 
                         

@@ -9,6 +9,17 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+    var isMyselfShow = false
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        isMyselfShow = true
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isMyselfShow = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
