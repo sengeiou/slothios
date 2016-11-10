@@ -10,6 +10,11 @@ import UIKit
 
 class SCConversationViewController: RCConversationViewController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        self.register(SimpleMessageCell.self, forMessageClass: SimpleMessage.self)
+    }
+    
     override func willDisplayMessageCell(_ cell: RCMessageBaseCell!, at indexPath: IndexPath!) {
         if !cell.isMember(of: RCTextMessageCell.self) {
             return
@@ -25,6 +30,7 @@ class SCConversationViewController: RCConversationViewController {
 //        //      更改字体的颜色
 //        textCell.textLabel.textColor=[UIColor redColor];
     }
+    
     
     override func didTapCellPortrait(_ userId: String!) {
         print("tap portrait \(userId)")

@@ -7,9 +7,13 @@
 //
 
 import UIKit
+//,RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate
 
 class SCConversationListViewController: RCConversationListViewController {
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func viewDidLoad() {
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
@@ -25,6 +29,9 @@ class SCConversationListViewController: RCConversationListViewController {
         //设置需要将哪些类型的会话在会话列表中聚合显示
         self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
                                             RCConversationType.ConversationType_GROUP.rawValue])
+        
+//        RCIM.shared().receiveMessageDelegate = self
+//        RCIM.shared().connectionStatusDelegate = self
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -44,6 +51,18 @@ class SCConversationListViewController: RCConversationListViewController {
         
     }
     
+    override func rcConversationListTableView(_ tableView: UITableView!, heightForRowAt indexPath: IndexPath!) -> CGFloat {
+        return 100
+    }
+    
+    override func didReceiveMessageNotification(_ notification: Notification!) {
+        
+    }
+    
+    override func rcConversationListTableView(_ tableView: UITableView!, cellForRowAt indexPath: IndexPath!) -> RCConversationBaseCell! {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleMessageCell", for: indexPath)
+        return cell as! RCConversationBaseCell
+    }
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {

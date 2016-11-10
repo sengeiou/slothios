@@ -56,6 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
         return true
     }
     
+    func configRemote(_ application: UIApplication) {
+        let settings = UIUserNotificationSettings(types: [UIUserNotificationType.badge,UIUserNotificationType.alert,UIUserNotificationType.sound], categories: nil)
+        
+        application.registerUserNotificationSettings(settings)
+        
+        application.registerForRemoteNotifications()
+    }
+    
     func LoginStatusDidChange() {
         changeRootViewController()
     }
