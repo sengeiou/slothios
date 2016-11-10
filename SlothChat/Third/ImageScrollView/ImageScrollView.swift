@@ -158,23 +158,11 @@ open class ImageScrollView: UIScrollView {
         let avatarUrl = URL(string: imageUrl)
         zoomView!.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: { (image, error, type, url) in
             if let image = image{
-//                self.zoomView?.image = image
-//                self.configureImageForSize(image.size)
                 self.display(image: image)
             }else{
                 self.display(image: UIImage.init(named: "icon")!)
-//                self.zoomView?.image = UIImage.init(named: "icon")
             }
         })
-        
-        zoomView!.isUserInteractionEnabled = true
-        addSubview(zoomView!)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ImageScrollView.doubleTapGestureRecognizer(_:)))
-        tapGesture.numberOfTapsRequired = 2
-        zoomView!.addGestureRecognizer(tapGesture)
-        
-        configureImageForSize(self.bounds.size)
     }
     
     fileprivate func configureImageForSize(_ size: CGSize) {

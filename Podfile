@@ -11,6 +11,7 @@ target 'SlothChat' do
   pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
   pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
   pod "AlamofireObjectMapper"
+  pod "RongCloudIMKit", '~> 2.7.3'
   # Pods for SlothChat
 
   target 'SlothChatTests' do

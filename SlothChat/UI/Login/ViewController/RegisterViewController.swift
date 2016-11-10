@@ -122,11 +122,23 @@ class RegisterViewController: BaseViewController {
             phoneView.setErrorContent(error: "请输入手机号")
             return
         }
+         //false
+
+        if !Validate.phoneNum(phoneStr!).isRight{
+            phoneView.setErrorContent(error: "手机号码为6到11位")
+            return
+        }
+        
         
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
 //            HUD.flash(.label("请输入密码"), delay: 2)
             passwordView.setErrorContent(error: "请输入密码")
+            return
+        }
+        
+        if !(passwordStr?.validString())!{
+            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
             return
         }
         

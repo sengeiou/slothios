@@ -20,6 +20,8 @@ struct SGGlobalKey {
     static let SCLoginStatusKey = "SCLoginStatusKey"
 
     public static let LoginStatusDidChange = Notification.Name(rawValue: "SlothChat.LoginStatusDidChange")
+    public static let DiscoveryDataDidChange = Notification.Name(rawValue: "SlothChat.DiscoveryDataDidChange")
+
 }
 public enum Position {
     case top, bottom
@@ -31,17 +33,18 @@ public enum BidAdsType: String {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
 
     var window: UIWindow?
     let manager = LocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.sharedManager().enable = true
-        NSObject.registerShareSDK()
-        NBSAppAgent.start(withAppID: "9618217e76524a188e49ef32475489ac")
         
         manager.startLocationCity()
+        
+        ThirdManager.startThirdLib()
+        RCIM.shared().userInfoDataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         
@@ -51,6 +54,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true
+    }
+    
+    func configRemote(_ application: UIApplication) {
+        let settings = UIUserNotificationSettings(types: [UIUserNotificationType.badge,UIUserNotificationType.alert,UIUserNotificationType.sound], categories: nil)
+        
+        application.registerUserNotificationSettings(settings)
+        
+        application.registerForRemoteNotifications()
     }
     
     func LoginStatusDidChange() {
@@ -68,6 +79,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             rootVC.navigationBar.isHidden = true
             self.window?.rootViewController = rootVC
         }
+    }
+    
+    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
+        if userId == "18667931202" {
+            let user = RCUserInfo(userId: userId, name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
+            return completion(user)
+        }else if userId == "18667931203" {
+            let user = RCUserInfo(userId: userId, name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
+            return completion(user)
+        }
+        return completion(nil)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

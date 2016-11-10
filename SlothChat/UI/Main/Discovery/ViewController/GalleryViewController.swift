@@ -25,13 +25,33 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     var pageNum = 1
     
+    var refreshUI = true
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if refreshUI {
+            refreshUI = false
+            tableView.mj_header.beginRefreshing()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
         setupPullToRefresh()
-        tableView.mj_header.beginRefreshing()
+        self.configNotice()
     }
     
+    func configNotice() {
+        NotificationCenter.default.addObserver(forName: SGGlobalKey.DiscoveryDataDidChange, object: nil, queue: OperationQueue.main, using: { (notice) in
+            if self.isMyselfShow{
+                self.tableView.mj_header.beginRefreshing()
+            }else{
+                self.refreshUI = true
+            }
+        })
+    }
+
     func configTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -117,12 +137,18 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let pushVC = BrowseAdvertViewController()
         let photoObj = dataSource[indexPath.row]
-        pushVC.configWithObject(photoObj: photoObj)
         
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        if  photoObj.displayAsBidAds!{
+            let pushVC = BrowseAdvertViewController()
+            pushVC.configWithObject(photoObj: photoObj)
+            self.navigationController?.pushViewController(pushVC, animated: true)
+        }else{
+            let browser = ImageScrollViewController()
+            browser.photoObj = photoObj
+            browser.disPlay(photoObj: photoObj)
+            self.present(browser, animated: true, completion: nil)
+        }
     }
     
     func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {

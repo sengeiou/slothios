@@ -209,6 +209,11 @@ class FindPasswordViewController: BaseViewController {
             return
         }
         
+        if !(password?.validString())!{
+            HUD.flash(.label("6位字母数字组合并且至少包含1个大写字母"), delay: 2)
+            return
+        }
+        
         self.changeUserPassword(verifyCode: captcha!, newPwd: password!)
     }
     

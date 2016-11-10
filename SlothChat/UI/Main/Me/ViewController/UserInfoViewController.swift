@@ -270,7 +270,6 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func likeSomeBody()  {
         
-        HUD.flash(.label("谢谢您哦~"), delay: 2)
         self.mProfile?.currentVisitorLiked = !(self.mProfile?.currentVisitorLiked)!
         self.toolView?.refreshLikeButtonStatus(isLike: (self.mProfile?.currentVisitorLiked)!)
         
@@ -398,6 +397,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func cycleScrollView(_ cycleScrollView: SDCycleScrollView!, didSelectItemAt index: Int) {
+        if isMyselfFlag == false {
+            return
+        }
         var titleStr = "选择头像"
         let avatar = (cycleScrollView.localizationImageNamesGroup[index] as! String)
         
@@ -406,9 +408,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             titleStr = "替换头像"
         }
         UIAlertController.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
-                self.uploadPhoto(uploadImage: avatar!, at: index)
-            }, onCancel:{
-            }, allowsEditing: true)
+            self.uploadPhoto(uploadImage: avatar!, at: index)
+        }, onCancel:{
+        }, allowsEditing: true)
     }
     
     func refreshBannerView() {

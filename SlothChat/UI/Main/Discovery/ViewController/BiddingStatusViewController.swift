@@ -14,7 +14,6 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     
     let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 420), status: .bidding)
     
-    var bidstatus: BiddingStatus = .bidding
     var isMyself = true
     var isFollow = false
     var mainImgUrl: String?
@@ -23,9 +22,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var userUuid: String?
     var galleryUuid: String?
     var adsBidOrder: AdsBidOrder?
-    
+
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
         
         sentupView()
         setNavtionConfirm(titleStr: "发送")
@@ -47,6 +46,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
         headerView.mainImgView.isUserInteractionEnabled = true
         headerView.mainImgView.addGestureRecognizer(tap)
+        
         tableView.tableHeaderView = headerView
     }
     
@@ -72,7 +72,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             make.left.equalTo(8)
             make.centerY.equalTo(headerView.snp.centerY)
         }
-        if bidstatus == .bidding {
+        if adsBidOrder?.data?.bidsEnd == false {
             let timeLabel = UILabel()
             timeLabel.font = UIFont.systemFont(ofSize: 12)
             headerView.addSubview(timeLabel)
@@ -94,7 +94,6 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGMainColor(), range: range)
             timeLabel.attributedText = attributedText
         }
-        
         
         return headerView
         
@@ -118,7 +117,10 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             self.mainImgUrl = imgUrl
             headerView.configWithObject(imgUrl: imgUrl)
         }
-       
+    }
+    
+    func configWithObject(image: UIImage?) {
+//        headerView.configWithObject(image: image!)
     }
     
     //MARK:- Action
@@ -216,9 +218,36 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
                     _ = self.navigationController?.popViewController(animated: true)
                 })
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                guard let code = response?.status else{
+                    return
+                }
+                if Int(code) == 301{
+                    guard let total = response?.data?.accountsBanlace,
+                        let need = response?.data?.needPayAmount  else{
+                            HUD.flash(.label(response?.msg), delay: 2)
+                            return
+                    }
+                    self.needRecharge(totalPrice: total, needPrice: need)
+                }else{
+                    HUD.flash(.label(response?.msg), delay: 2)
+                }
             }
         }
+    }
+    
+    func needRecharge(totalPrice: Int,needPrice: Int) {
+        let title = "当前账户余额不足，为￥" + String(totalPrice) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+            
+        })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func configNavigationRightItem() {

@@ -21,16 +21,16 @@ class BiddingStatusView: BaseView {
     let priceView = UIView()
     let priceLabel = UILabel()
     let overweightButton = UIButton(type: .custom)
-
+    
     let timeoutLabel = UILabel()
     
     let pickerView = ValuePickerView.init()
     
     var selectPassValue: PublishAdvertClosureType?
-    var bidstatus: BiddingStatus = .bidding
+
     var price = 1{
         didSet{
-          configPriceLabel()
+            configPriceLabel()
         }
     }
     
@@ -68,7 +68,7 @@ class BiddingStatusView: BaseView {
             make.top.equalTo(mainImgView.snp.bottom).offset(24)
             make.height.equalTo(44)
         }
-
+        
         addSubview(priceView)
         priceView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
@@ -113,7 +113,7 @@ class BiddingStatusView: BaseView {
         timeoutLabel.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
             make.top.equalTo(overweightButton.snp.bottom).offset(18)
-        }        
+        }
     }
     
     func configPriceLabel() {
