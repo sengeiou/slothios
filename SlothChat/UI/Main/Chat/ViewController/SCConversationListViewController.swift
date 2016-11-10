@@ -11,9 +11,6 @@ import UIKit
 
 class SCConversationListViewController: RCConversationListViewController {
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     override func viewDidLoad() {
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
