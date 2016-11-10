@@ -60,6 +60,8 @@
                                             }];
              }
              //end of buy product
+         }else{
+             NSLog(@"未获取到产品");
          }
      }];
 }

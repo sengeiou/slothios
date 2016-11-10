@@ -180,6 +180,8 @@
 		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
 		04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */; };
 		04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */; };
+		04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */; };
+		04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */; };
 		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
 		04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */; };
 		04ED104C1DC76E0300EBD3C5 /* LikeProfileListUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */; };
@@ -489,6 +491,8 @@
 		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
 		04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosViewController.swift; sourceTree = "<group>"; };
 		04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosCell.swift; sourceTree = "<group>"; };
+		04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponse.swift; sourceTree = "<group>"; };
+		04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponseData.swift; sourceTree = "<group>"; };
 		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
 		04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileData.swift; sourceTree = "<group>"; };
 		04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileListUser.swift; sourceTree = "<group>"; };
@@ -1397,6 +1401,8 @@
 			isa = PBXGroup;
 			children = (
 				04814CF71DCF2A410012030A /* AdsBidOrder.swift */,
+				04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */,
+				04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */,
 				04814CF81DCF2A410012030A /* BidAdsRankVo.swift */,
 				04814CF91DCF2A410012030A /* BidAdsRankVoData.swift */,
 				19008B991DBE75D500319B86 /* Country.swift */,
@@ -1887,6 +1893,7 @@
 				041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */,
 				043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */,
 				04FE6DBC1DCE3C3300AD9C96 /* UIImage+Resize.m in Sources */,
+				04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */,
 				04FEB7E71DB76F13004509D1 /* SDWebImageDownloader.m in Sources */,
 				04FEB7E31DB76F13004509D1 /* NSData+ImageContentType.m in Sources */,
 				040D46E01DC4B587005D1E8E /* UIViewController+Visibility.swift in Sources */,
@@ -1910,6 +1917,7 @@
 				040576EA1DB3353E00C55D02 /* IQBarButtonItem.swift in Sources */,
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,
 				04FEB7E61DB76F13004509D1 /* SDWebImageDecoder.m in Sources */,
+				04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */,
 				04FEB7E91DB76F13004509D1 /* SDWebImageManager.m in Sources */,
 				0449568A1DCCBAA800CBFF45 /* MJRefreshHeader.m in Sources */,
 				043C91211DBBACA400431965 /* LikeUsersCell.swift in Sources */,

@@ -109,7 +109,7 @@ class DiscoveryViewController: BaseViewController {
             if userPhoto?.status == ResponseError.SUCCESS.0 {
                 self.controller3.getGalleryPhoto(at: .top)
 
-                let pushVC = BiddingStatusViewController()
+                let pushVC = PublishViewController()
                 pushVC.userUuid = userPhoto?.data?.userUuid
                 pushVC.galleryUuid = userPhoto?.data?.uuid
                 pushVC.configWithObject(imageUrl: userPhoto?.data?.bigPicUrl)

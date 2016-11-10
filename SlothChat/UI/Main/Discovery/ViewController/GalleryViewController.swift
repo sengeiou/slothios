@@ -117,12 +117,18 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let pushVC = BrowseAdvertViewController()
         let photoObj = dataSource[indexPath.row]
-        pushVC.configWithObject(photoObj: photoObj)
         
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        if  photoObj.displayAsBidAds!{
+            let pushVC = BrowseAdvertViewController()
+            pushVC.configWithObject(photoObj: photoObj)
+            self.navigationController?.pushViewController(pushVC, animated: true)
+        }else{
+            let browser = ImageScrollViewController()
+            browser.photoObj = photoObj
+            browser.disPlay(photoObj: photoObj)
+            self.present(browser, animated: true, completion: nil)
+        }
     }
     
     func performCellAction(actionType: DiscoveryActionType, indexPath: IndexPath) {

@@ -12,9 +12,8 @@ import PKHUD
 class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-    let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 468), status: .bidding)
+    let headerView = BiddingStatusView(frame: CGRect.init(x: 0, y: 0, width: 320, height: 420), status: .bidding)
     
-    var bidstatus: BiddingStatus = .bidding
     var isMyself = true
     var isFollow = false
     var mainImgUrl: String?
@@ -23,11 +22,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     var userUuid: String?
     var galleryUuid: String?
     var adsBidOrder: AdsBidOrder?
-    var bidType = BidAdsType.notParticipateAd
-    var isJoin = false
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
         
         sentupView()
         setNavtionConfirm(titleStr: "发送")
@@ -50,29 +47,21 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         headerView.mainImgView.isUserInteractionEnabled = true
         headerView.mainImgView.addGestureRecognizer(tap)
         
-        headerView.setClosurePass {
-            self.isJoin = !self.isJoin
-            self.tableView.reloadData()
-        }
-        
         tableView.tableHeaderView = headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let rankVos = self.adsBidOrder?.data?.bidAdsRankVos {
-            return (self.isJoin ? rankVos.count : 0)
+            return rankVos.count
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (self.isJoin ? 32 : 0)
+        return 32
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !self.isJoin {
-            return nil
-        }
         let headerView = UIView()
         let titleLabel = UILabel()
         titleLabel.text = "当前竞价排行"
@@ -83,7 +72,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             make.left.equalTo(8)
             make.centerY.equalTo(headerView.snp.centerY)
         }
-        if bidstatus == .bidding {
+        if adsBidOrder?.data?.bidsEnd == false {
             let timeLabel = UILabel()
             timeLabel.font = UIFont.systemFont(ofSize: 12)
             headerView.addSubview(timeLabel)
@@ -105,7 +94,6 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGMainColor(), range: range)
             timeLabel.attributedText = attributedText
         }
-        
         
         return headerView
         
@@ -132,7 +120,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
     }
     
     func configWithObject(image: UIImage?) {
-        headerView.configWithObject(image: image!)
+//        headerView.configWithObject(image: image!)
     }
     
     //MARK:- Action
@@ -230,9 +218,36 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
                     _ = self.navigationController?.popViewController(animated: true)
                 })
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                guard let code = response?.status else{
+                    return
+                }
+                if Int(code) == 301{
+                    guard let total = response?.data?.accountsBanlace,
+                        let need = response?.data?.needPayAmount  else{
+                            HUD.flash(.label(response?.msg), delay: 2)
+                            return
+                    }
+                    self.needRecharge(totalPrice: total, needPrice: need)
+                }else{
+                    HUD.flash(.label(response?.msg), delay: 2)
+                }
             }
         }
+    }
+    
+    func needRecharge(totalPrice: Int,needPrice: Int) {
+        let title = "当前账户余额不足，为￥" + String(totalPrice) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+            
+        })
+        okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
+        cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")
+        
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func configNavigationRightItem() {
