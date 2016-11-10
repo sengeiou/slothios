@@ -104,7 +104,7 @@ class ModifyPasswordViewController: BaseViewController {
 
     func checkSubmitValid() -> Bool {
         if !oldPassordView.getSumbitValid() {
-            new2PasswordView.setErrorContent(error: "请输入原始密码")
+            oldPassordView.setErrorContent(error: "请输入原始密码")
             return false
         }
         
@@ -118,11 +118,27 @@ class ModifyPasswordViewController: BaseViewController {
             return false
         }
         
+        if !(oldPassordView.getInputContent()?.validString())!{
+            oldPassordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+            return false
+        }
+        
+        if !(new1PasswordView.getInputContent()?.validString())!{
+            new1PasswordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+            return false
+        }
+        
+        if !(new2PasswordView.getInputContent()?.validString())!{
+            new2PasswordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+            return false
+        }
+        
         if new1PasswordView.getInputContent() != new2PasswordView.getInputContent() {
             new1PasswordView.setErrorContent(error: "")
             new2PasswordView.setErrorContent(error: "两次密码不一致")
             return false
         }
+        
         oldPassordView.setErrorContent(error: nil)
         new1PasswordView.setErrorContent(error: nil)
         new2PasswordView.setErrorContent(error: nil)

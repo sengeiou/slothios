@@ -217,6 +217,11 @@ class LoginViewController: BaseViewController {
             return false
         }
         
+        if !Validate.phoneNum(phoneStr!).isRight{
+            phoneView.setErrorContent(error: "手机号码为6到11位")
+            return false
+        }
+
         let code = self.codeButton.title(for: .normal)
         if (code?.isEmpty)! {
             phoneView.setErrorContent(error: "请选择国家码")
@@ -225,6 +230,11 @@ class LoginViewController: BaseViewController {
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
             passwordView.setErrorContent(error: "请输入密码")
+            return false
+        }
+        
+        if !(passwordStr?.validString())!{
+            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
             return false
         }
         

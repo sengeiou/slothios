@@ -47,6 +47,7 @@
 		040D46E01DC4B587005D1E8E /* UIViewController+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D46CE1DC4B587005D1E8E /* UIViewController+Visibility.swift */; };
 		040D46E31DC4B67A005D1E8E /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D46E11DC4B67A005D1E8E /* RatingViewController.swift */; };
 		041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041289D51DBB729000D308C0 /* CAPSPageMenu.swift */; };
+		041701191DD4A9BF002FADFE /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041701181DD4A9BF002FADFE /* Validate.swift */; };
 		043718111DCE219E004B5684 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043718101DCE219E004B5684 /* LocationManager.swift */; };
 		043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C91181DBB8FA400431965 /* DiscoveryCell.swift */; };
 		043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911A1DBB973300431965 /* DiscoveryUserObj.swift */; };
@@ -307,6 +308,7 @@
 		040D46CE1DC4B587005D1E8E /* UIViewController+Visibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Visibility.swift"; sourceTree = "<group>"; };
 		040D46E11DC4B67A005D1E8E /* RatingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		041289D51DBB729000D308C0 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
+		041701181DD4A9BF002FADFE /* Validate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validate.swift; sourceTree = "<group>"; };
 		043718101DCE219E004B5684 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		043C91181DBB8FA400431965 /* DiscoveryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryCell.swift; sourceTree = "<group>"; };
 		043C911A1DBB973300431965 /* DiscoveryUserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryUserObj.swift; sourceTree = "<group>"; };
@@ -1175,6 +1177,7 @@
 				04AC92071DB0B02C0048A9FD /* SGColor.swift */,
 				048B0BB51DB2490A00F5A399 /* EnumDefine.swift */,
 				043718101DCE219E004B5684 /* LocationManager.swift */,
+				041701181DD4A9BF002FADFE /* Validate.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -2001,6 +2004,7 @@
 				04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */,
 				040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */,
 				04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */,
+				041701191DD4A9BF002FADFE /* Validate.swift in Sources */,
 				040D46D91DC4B587005D1E8E /* PopupDialogDefaultViewController.swift in Sources */,
 				04814CFC1DCF2A410012030A /* BidAdsRankVoData.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,

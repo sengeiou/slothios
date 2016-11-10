@@ -17,9 +17,10 @@ enum ImageActionType: Int {
 typealias ImageScrollClosureType = (_ type: ImageActionType) -> Void
 
 class ImageScrollViewController: BaseViewController {
-    private let imageScroller = ImageScrollView(frame: CGRect.init(x: 0, y: 55, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 55))
+    private let imageScroller = ImageScrollView(frame: CGRect.init(x: 0, y: 55, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 55 * 2))
     
-    private let toolBar = UIView()
+    private let topToolBar = UIView()
+    private let bottomToolBar = UIView()
     private let deleteButton = UIButton(type: .custom)
     private let likeButton = UIButton(type: .custom)
     
@@ -65,59 +66,61 @@ class ImageScrollViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sentupToolBar()
+        view.backgroundColor = UIColor.black
+        sentuptopToolBar()
         sentupView()
     }
     
-    func sentupToolBar() {
+    func sentuptopToolBar() {
         
-        view.addSubview(toolBar)
-        toolBar.snp.makeConstraints { (make) in
+        view.addSubview(topToolBar)
+        topToolBar.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
             make.height.equalTo(55)
         }
         
-        let lineView = UIView()
-        lineView.backgroundColor = SGColor.SGLineColor()
-        toolBar.addSubview(lineView)
-        lineView.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
-            make.height.equalTo(1)
-        }
-        
-        
         let closeButton = UIButton(type: .custom)
-        toolBar.addSubview(closeButton)
+        topToolBar.addSubview(closeButton)
         closeButton.snp.makeConstraints{ (make) in
-            make.left.equalTo(10)
+            make.right.equalTo(-10)
             make.size.equalTo(CGSize.init(width: 42, height: 42))
-            make.centerY.equalTo(toolBar.snp.centerY)
+            make.centerY.equalTo(topToolBar.snp.centerY)
         }
         
         closeButton.setImage(UIImage.init(named: "close"), for: .normal)
+        closeButton.tintColor = UIColor.white
         closeButton.addTarget(self, action: #selector(closeButtonClick), for: .touchUpInside)
         
         
-        toolBar.addSubview(deleteButton)
+        view.addSubview(bottomToolBar)
+        bottomToolBar.snp.makeConstraints { (make) in
+            make.left.bottom.right.equalTo(0)
+            make.height.equalTo(55)
+        }
+        
+//        let lineView = UIView()
+//        lineView.backgroundColor = SGColor.white
+//        bottomToolBar.addSubview(lineView)
+//        lineView.snp.makeConstraints { (make) in
+//            make.left.top.right.equalTo(0)
+//            make.height.equalTo(1)
+//        }
+        
+        bottomToolBar.addSubview(deleteButton)
         deleteButton.snp.makeConstraints{ (make) in
-            make.right.equalTo(-8)
-            make.size.equalTo(CGSize.init(width: 30, height: 30))
-            make.centerY.equalTo(toolBar.snp.centerY)
+            make.size.equalTo(CGSize.init(width: 32, height: 32))
+            make.center.equalTo(bottomToolBar)
         }
         
         deleteButton.setImage(UIImage.init(named: "trash-can"), for: .normal)
         deleteButton.addTarget(self, action: #selector(deleteButtonClick), for: .touchUpInside)
         
         
-        toolBar.addSubview(likeButton)
+        bottomToolBar.addSubview(likeButton)
+        
         likeButton.snp.makeConstraints{ (make) in
-            if deleteButton.isHidden{
-                make.right.equalTo(-8)
-            }else{
-                make.right.equalTo(deleteButton.snp.left).offset(-26)
-            }
             make.size.equalTo(CGSize.init(width: 32, height: 32))
-            make.centerY.equalTo(toolBar.snp.centerY)
+            make.center.equalTo(bottomToolBar)
         }
         //heart-solid
         let followImg = isFollow ? "heart-solid" : "heart-hollow"
@@ -139,8 +142,9 @@ class ImageScrollViewController: BaseViewController {
     func sentupView() {
         view.addSubview(imageScroller)
         imageScroller.snp.makeConstraints { (make) in
-            make.left.right.bottom.equalTo(0)
+            make.left.right.equalTo(0)
             make.top.equalTo(55)
+            make.bottom.equalTo(-55)
         }
     }
     
