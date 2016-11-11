@@ -16,6 +16,8 @@ class LoginViewController: BaseViewController {
     let passwordView = SingleInputView.init()
     let codeButton = UIButton(type: .custom)
     
+    var timeout = 0
+    
     public var countryName = "cn"
 
     override func viewDidLoad() {
@@ -162,7 +164,9 @@ class LoginViewController: BaseViewController {
         let code = self.codeButton.title(for: .normal)!
         
         let pushVC  = FindPasswordViewController.init()
-        pushVC.phoneNo = code + phoneStr!
+        pushVC.loginVC = self
+        pushVC.phoneNo = phoneStr!
+        pushVC.codeNo = code
         navigationController?.pushViewController(pushVC, animated: true)
     }
     
@@ -233,10 +237,10 @@ class LoginViewController: BaseViewController {
             return false
         }
         
-        if !(passwordStr?.validString())!{
-            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
-            return false
-        }
+//        if !(passwordStr?.validString())!{
+//            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+//            return false
+//        }
         
         return true
     }

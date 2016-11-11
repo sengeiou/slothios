@@ -11,15 +11,23 @@ import PKHUD
 
 class CaptchaViewController: BaseViewController {
     var timer = Timer()
-    var timeout = 0
-    
+    var registerVC: RegisterViewController?
+
     public var phoneNo:String!
+    public var codeNo:String!
     public var password:String!
     public var countryName = "cn"
 
 
     let tipLabel = UILabel.init()
     let captchaView = SingleInputView.init()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !(phoneNo?.isEmpty)! {
+            self.fireTimer()
+        }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -89,13 +97,13 @@ class CaptchaViewController: BaseViewController {
     //Mark:- Network
     
     func getPublicSMS() {
-        if timeout > 0 {
+        if registerVC!.timeout > 0 {
             return
         }
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPublicSMS(withType: "signup", toPhoneno: self.phoneNo) { (sms) in
+        engine.postPublicSMS(withType: "signup", toPhoneno: codeNo + phoneNo) { (sms) in
             HUD.hide()
             if sms?.status == ResponseError.SUCCESS.0 &&
                 !(self.phoneNo.isEmpty) {
@@ -114,7 +122,7 @@ class CaptchaViewController: BaseViewController {
             HUD.hide()
             if sms?.status == ResponseError.SUCCESS.0{
                 let pushVC  = PerfectionInfoViewController.init()
-                pushVC.phoneNo = self.phoneNo
+                pushVC.phoneNo = self.codeNo + self.phoneNo
                 pushVC.password = self.password
                 pushVC.countryName = self.countryName
                 self.navigationController?.pushViewController(pushVC, animated: true)
@@ -126,8 +134,8 @@ class CaptchaViewController: BaseViewController {
     }
     
     func update() {
-        let string1 = "已经向您的手机" + phoneNo! + "发送验证码。\n"
-        let timeStr = String(timeout)
+        let string1 = "已经向您的手机+" + codeNo + "-" + phoneNo! + "发送验证码。\n"
+        let timeStr = String(registerVC!.timeout)
         let string2 = "如果" + timeStr + "秒后未收到验证码，再次申请。"
         let range = NSRange.init(location: string1.characters.count + 2, length: timeStr.characters.count)
         
@@ -135,8 +143,9 @@ class CaptchaViewController: BaseViewController {
         attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGBlueColor(), range: range)
         tipLabel.attributedText = attributedText
         
-        timeout -= 1
-        if timeout <= 0 {
+        registerVC!.timeout -= 1
+        if registerVC!.timeout <= 0 {
+            registerVC!.timeout = 60
             let string3 = string1 + "未收到验证码，"
             let string4 = "重新申请验证码。"
             let range = NSRange.init(location: string3.characters.count, length: string4.characters.count)
@@ -150,8 +159,9 @@ class CaptchaViewController: BaseViewController {
     }
     
     func fireTimer() {
-        
-        timeout = 60
+        if registerVC!.timeout > 0 && timer.isValid {
+            return
+        }
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true);
         timer.fire()
     }
@@ -165,7 +175,7 @@ class CaptchaViewController: BaseViewController {
             return
         }
         
-        checkPublicSMS(phoneNo: self.phoneNo, verifyCode: captcha!)
+        checkPublicSMS(phoneNo: codeNo + phoneNo, verifyCode: captcha!)
         
     }
     

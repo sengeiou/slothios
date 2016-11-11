@@ -179,15 +179,13 @@ class ImageScrollViewController: BaseViewController {
         if (!isMyself && self.photoObj == nil) {
             return
         }
+        self.isFollow = !self.isFollow
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj?.uuid) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.photoObj?.currentVisitorLiked = true
-                self.isFollow = !self.isFollow
                 if let sp = self.actionValue {
                     sp(.likeImg)
                 }

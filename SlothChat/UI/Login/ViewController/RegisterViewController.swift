@@ -15,6 +15,8 @@ class RegisterViewController: BaseViewController {
     let phoneView = SingleInputView.init()
     let passwordView = SingleInputView.init()
     
+    var timeout = 0
+
     public var countryName = "cn"
     
     override func viewDidLoad() {
@@ -143,7 +145,9 @@ class RegisterViewController: BaseViewController {
         }
         
         let pushVC  = CaptchaViewController.init()
-        pushVC.phoneNo = codeStr! + phoneStr!
+        pushVC.registerVC = self
+        pushVC.phoneNo = phoneStr!
+        pushVC.codeNo = codeStr!
         pushVC.password = passwordStr!
         pushVC.countryName = countryName
         navigationController?.pushViewController(pushVC, animated: true)
