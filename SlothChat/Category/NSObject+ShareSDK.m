@@ -60,43 +60,44 @@
 
 + (void)share{
     //1、创建分享参数
-    NSArray* imageArray = @[[UIImage imageNamed:@"icon"]];
+    UIImage *shareImg = [UIImage imageNamed:@"icon"];
+    if (shareImg) {
+        
+    }
     //（注意：图片必须要在Xcode左边目录里面，名称必须要传正确，如果要分享网络图片，可以这样传iamge参数 images:@[@"http://mob.com/Assets/images/logo.png?v=20150320"]）
-    if (imageArray) {
-        
-        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-        [shareParams SSDKSetupShareParamsByText:@"悄悄地告诉你哟～～"
-                                         images:imageArray
-                                            url:[NSURL URLWithString:@"https://www.baidu.com"]
-                                          title:nil
-                                           type:SSDKContentTypeAuto];
-        
-        //2、分享（可以弹出我们的分享菜单和编辑界面）
-        [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
-                                 items:@[@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformSubTypeWechatSession),@(SSDKPlatformSubTypeWechatTimeline)]
-                           shareParams:shareParams
-                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                       
-                       switch (state) {
-                           case SSDKResponseStateSuccess:{
-                               UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
-                               [alertVC addAction:action];
-                               [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
-                               break;
-                           }
-                           case SSDKResponseStateFail:{
-                               UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
-                               UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
-                               [alertVC addAction:action];
-                               [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
-                               break;
-                           }
-                           default:
-                               break;
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKSetupShareParamsByText:@"悄悄地告诉你哟～～"
+                                     images:shareImg
+                                        url:[NSURL URLWithString:@"https://www.baidu.com"]
+                                      title:nil
+                                       type:SSDKContentTypeAuto];
+    
+    //2、分享（可以弹出我们的分享菜单和编辑界面）
+    [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
+                             items:@[@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformSubTypeWechatSession),@(SSDKPlatformSubTypeWechatTimeline)]
+                       shareParams:shareParams
+               onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                   
+                   switch (state) {
+                       case SSDKResponseStateSuccess:{
+                           UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                           UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
+                           [alertVC addAction:action];
+                           [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
+                           break;
                        }
+                       case SSDKResponseStateFail:{
+                           UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"分享失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
+                           UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleCancel handler:nil];
+                           [alertVC addAction:action];
+                           [[[[UIApplication sharedApplication] keyWindow] rootViewController] presentViewController:alertVC animated:YES completion:nil];
+                           break;
+                       }
+                       default:
+                           break;
                    }
-         ];}
+               }
+     ];
 }
 
 @end

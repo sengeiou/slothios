@@ -206,14 +206,22 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     func postAdsBidOrder() {
+        let isJoin = headerView.isJoin
+        if !isJoin {
+            _ = self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
         if galleryUuid == nil {
             SGLog(message: "数据为空")
             return
         }
+        
         guard let oriPrice = adsBidOrder?.data?.myBidAmount else {
             SGLog(message: "原始价格异常")
             return
         }
+        
         let price = headerView.price - oriPrice
         
         let engine = NetworkEngine()
