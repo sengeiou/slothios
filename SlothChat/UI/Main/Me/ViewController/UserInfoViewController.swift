@@ -274,9 +274,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.toolView?.refreshLikeButtonStatus(isLike: (self.mProfile?.currentVisitorLiked)!)
         
         let engine = NetworkEngine()
-        let likeUuid = self.mProfile?.userUuid
+        let likeUuid = self.mProfile?.uuid
         
-        engine.post_likeProfile(userUuid:likeUuid) { (response) in
+        engine.post_likeProfile(userProfileUuid: likeUuid) { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{

@@ -437,7 +437,7 @@ class NetworkEngine: NSObject {
     //17.用户资料页面，添加个人照片
     func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
         guard let token = Global.shared.globalLogin?.token,
-            let uuid = Global.shared.globalProfile?.uuid else {
+            let uuid = Global.shared.globalProfile?.userUuid else {
                 SGLog(message: "数据为空")
                 return
         }
@@ -498,20 +498,20 @@ class NetworkEngine: NSObject {
     }
     
     //19.陌生人查看个人资料页面时对资料点赞
-    func post_likeProfile(userUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func post_likeProfile(userProfileUuid: String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         
         guard let token = Global.shared.globalLogin?.token,
-            let uuid = Global.shared.globalProfile?.uuid,
-            let userUuid = userUuid else {
+            let userUuid = Global.shared.globalProfile?.userUuid,
+            let userProfileUuid = userProfileUuid else {
                 SGLog(message: "数据为空")
                 return
         }
         
         var URLString:String = self.Base_URL + API_URI.userProfile_likeProfile.rawValue
-        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: userProfileUuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         let request = HTTPRequestGenerator(withParam:
-            ["likeSenderUserUuid":uuid], URLString: URLString)
+            ["likeSenderUserUuid":userUuid], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             let code = response.result.value?.status
