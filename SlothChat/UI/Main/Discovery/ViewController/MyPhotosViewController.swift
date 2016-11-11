@@ -141,7 +141,8 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
         let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
         
-        if galleryPhoto.participateBidAds! == true {
+        if galleryPhoto.participateBidAds! == true ||
+            galleryPhoto.displayAsBidAds! == true {
             let pushVC = BiddingStatusViewController()
             pushVC.userUuid = galleryPhoto.userUuid
             pushVC.galleryUuid = galleryPhoto.uuid
