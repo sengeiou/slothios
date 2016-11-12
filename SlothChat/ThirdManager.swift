@@ -29,17 +29,24 @@ class ThirdManager: NSObject {
         RCIM.shared().initWithAppKey("8w7jv4qb7e8sy")
         _ =  ChatDataManager.shared
         _ = ChatManager.share
-        let token1202 = "11WqtSIFDg729Iat6IEfaixnj5P1WqmmscqozTd4ISYbwe9bdrgn6g3vvRXHhJOmsuqlzhfTj0UUduiuoBPkW1/Ze0P+2i2s"
-        let token1203 = "4KLwxM4JJr2D1UYxaYpb9Sxnj5P1WqmmscqozTd4ISYbwe9bdrgn6qNlwcT73VMymLgy9GP8oXkUduiuoBPkWzPsRPtDXGOw"
-
-        RCIM.shared().globalConversationAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
-        RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
-
-        connectRCIM(token: token1203)
         
+        RCIM.shared().globalConversationAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
+        RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE        
+    }
+    
+    class func testConnectRCIM() {
+        var token1202 = "11WqtSIFDg729Iat6IEfaixnj5P1WqmmscqozTd4ISYbwe9bdrgn6g3vvRXHhJOmsuqlzhfTj0UUduiuoBPkW1/Ze0P+2i2s"
+        if Global.shared.globalLogin?.user?.mobile != "18667931202" {
+            token1202 = "4KLwxM4JJr2D1UYxaYpb9Sxnj5P1WqmmscqozTd4ISYbwe9bdrgn6qNlwcT73VMymLgy9GP8oXkUduiuoBPkWzPsRPtDXGOw"
+        }        
+        connectRCIM(token: token1202)
     }
     
     class func connectRCIM(token: String) {
+        if !Global.shared.isLogin() {
+            return
+        }
+        
         RCIM.shared().connect(withToken: token, success: { (userId : String?) -> Void in
             print("登陆成功。当前登录的用户ID：\(userId)")
         }, error: { (status) -> Void in

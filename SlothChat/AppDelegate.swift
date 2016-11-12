@@ -33,7 +33,7 @@ public enum BidAdsType: String {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let manager = LocationManager()
@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
         manager.startLocationCity()
         
         ThirdManager.startThirdLib()
-        RCIM.shared().userInfoDataSource = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         
@@ -72,6 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
         let logined = Global.shared.isLogin()
         
         if logined {
+            ThirdManager.testConnectRCIM()
+            
             let rootVC = MainViewController()
             self.window?.rootViewController = rootVC
         }else{
@@ -81,17 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
             rootVC.navigationBar.isHidden = true
             self.window?.rootViewController = rootVC
         }
-    }
-    
-    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
-        if userId == "18667931202" {
-            let user = RCUserInfo(userId: userId, name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
-            return completion(user)
-        }else if userId == "18667931203" {
-            let user = RCUserInfo(userId: userId, name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
-            return completion(user)
-        }
-        return completion(nil)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

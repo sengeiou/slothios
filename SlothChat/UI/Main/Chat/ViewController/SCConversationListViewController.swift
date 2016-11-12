@@ -117,9 +117,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
             cell.configCellWithObject(model: model)
-            
+            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath)
+        let cell = UITableViewCell()
         return cell
     }
     
