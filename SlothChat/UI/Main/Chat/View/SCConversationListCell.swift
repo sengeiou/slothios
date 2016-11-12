@@ -62,7 +62,7 @@ class SCConversationListCell: RCConversationBaseCell {
         badgeView.layer.cornerRadius = 4
         badgeView.snp.makeConstraints { (make) in
             make.right.equalTo(timeLabel.snp.left).offset(-10)
-            make.top.equalTo(self.timeLabel.snp.top)
+            make.centerY.equalTo(self.timeLabel.snp.centerY)
             make.size.equalTo(CGSize.init(width: 8, height: 8))
         }
     }

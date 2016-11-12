@@ -7,55 +7,14 @@
 //
 
 import UIKit
-//,RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate
 
 class SCConversationListViewController: RCConversationListViewController,RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate {
-    /*!
-     接收消息的回调方法
-     
-     @param message     当前接收到的消息
-     @param left        还剩余的未接收的消息数，left>=0
-     
-     @discussion 如果您设置了IMKit消息监听之后，SDK在接收到消息时候会执行此方法（无论App处于前台或者后台）。
-     其中，left为还剩余的、还未接收的消息数量。比如刚上线一口气收到多条消息时，通过此方法，您可以获取到每条消息，left会依次递减直到0。
-     您可以根据left数量来优化您的App体验和性能，比如收到大量消息时等待left为0再刷新UI。
-     */
-    public func onRCIMReceive(_ message: RCMessage!, left: Int32) {
-        SGLog(message: message.content)
-//        [[RCDataManager shareManager] refreshBadgeValue];
-        
-        if left <= 0 {
-            DispatchQueue.main.async(execute: {
-                self.conversationListTableView.reloadData()
-            })
-        }
-    }
-
-    /*!
-     IMKit连接状态的的监听器
-     
-     @param status  SDK与融云服务器的连接状态
-     
-     @discussion 如果您设置了IMKit消息监听之后，当SDK与融云服务器的连接状态发生变化时，会回调此方法。
-     */
-    public func onRCIMConnectionStatusChanged(_ status: RCConnectionStatus) {
-        SGLog(message: "RCConnectionStatus" + String(status.rawValue))
-        if status == RCConnectionStatus.ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT {
-            
-            let alertController = UIAlertController(title: nil, message: "您的帐号已在别的设备上登录，\n您被迫下线！", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
-                RCIMClient.shared().disconnect(true)
-            })
-            alertController.addAction(cancelAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.conversationListTableView.reloadData()
+        DispatchQueue.main.async {
+            self.conversationListTableView.reloadData()
+        }
     }
     override func viewDidLoad() {
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
@@ -80,6 +39,46 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         RCIM.shared().connectionStatusDelegate = self
         self.setNavtionConfirm(titleStr: "我的好友")
     }
+    
+    //MARK: - RCIMReceiveMessageDelegate
+    /*!
+     接收消息的回调方法
+     
+     @param message     当前接收到的消息
+     @param left        还剩余的未接收的消息数，left>=0
+     
+     @discussion 如果您设置了IMKit消息监听之后，SDK在接收到消息时候会执行此方法（无论App处于前台或者后台）。
+     其中，left为还剩余的、还未接收的消息数量。比如刚上线一口气收到多条消息时，通过此方法，您可以获取到每条消息，left会依次递减直到0。
+     您可以根据left数量来优化您的App体验和性能，比如收到大量消息时等待left为0再刷新UI。
+     */
+    public func onRCIMReceive(_ message: RCMessage!, left: Int32) {
+        SGLog(message: message.content)
+        //        [[RCDataManager shareManager] refreshBadgeValue];
+        
+        if left <= 0 {
+            DispatchQueue.main.async(execute: {
+                self.conversationListTableView.reloadData()
+            })
+        }
+    }
+    
+    //MARK: - RCIMConnectionStatusDelegate
+    
+    public func onRCIMConnectionStatusChanged(_ status: RCConnectionStatus) {
+        SGLog(message: "RCConnectionStatus" + String(status.rawValue))
+        if status == RCConnectionStatus.ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT {
+            
+            let alertController = UIAlertController(title: nil, message: "您的帐号已在别的设备上登录，\n您被迫下线！", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "知道了", style: .cancel, handler: { (action) in
+                RCIMClient.shared().disconnect(true)
+            })
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: - TableViewDelegate TableViewDataSource
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let action = UITableViewRowAction(style: .default, title: "删除", handler: {
@@ -93,6 +92,14 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         return [action]
     }
     
+    override func rcConversationListTableView(_ tableView: UITableView!, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath!) {
+        let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
+        
+        RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
+        self.conversationListDataSource.remove(model)
+        self.conversationListTableView.reloadData()
+//        [[RCDataManager shareManager] refreshBadgeValue];
+    }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -109,15 +116,17 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         return cell
     }
     
-    override func willDisplayConversationTableCell(_ cell: RCConversationBaseCell!, at indexPath: IndexPath!) {
-//        let model = self.conversationListDataSource[indexPath.row]
+    override func willReloadTableData(_ dataSource: NSMutableArray!) -> NSMutableArray! {
         
+        for model in dataSource {
+            if let tmpModel = model as? RCConversationModel {
+                if tmpModel.conversationType == RCConversationType.ConversationType_PRIVATE{
+                    tmpModel.conversationModelType = RCConversationModelType.CONVERSATION_MODEL_TYPE_CUSTOMIZATION
+                }
+            }
+        }
+        return dataSource;
     }
-    
-    override func rcConversationListTableView(_ tableView: UITableView!, heightForRowAt indexPath: IndexPath!) -> CGFloat {
-        return 100
-    }
-    
     
     override func didReceiveMessageNotification(_ notification: Notification!) {
         
@@ -176,15 +185,29 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
+        
         guard let chat = SCConversationViewController(conversationType: model.conversationType, targetId: model.targetId) else {
             return
         }
-        chat.title = model.senderUserId
+        
+        if model.conversationType == RCConversationType.ConversationType_PRIVATE {
+            let userInfo = ChatDataManager.userInfoWidthID(model.targetId)
+            chat.title = userInfo?.name
+        }else if model.conversationType == RCConversationType.ConversationType_GROUP ||
+            model.conversationType == RCConversationType.ConversationType_DISCUSSION{
+            chat.title = model.conversationTitle;
+        }
         navigationController?.pushViewController(chat, animated: true)
     }
     
     override func didTapCellPortrait(_ model: RCConversationModel!) {
         print("tap portrait \(model.senderUserId)")
-
+        
+//        let pushVC = UserInfoViewController()
+//        pushVC.mUserUuid = model.targetId
+//        
+//        let userUuid = Global.shared.globalProfile?.userUuid
+//        pushVC.likeSenderUserUuid = userUuid
+//        navigationController?.pushViewController(pushVC, animated: true)
     }
 }
