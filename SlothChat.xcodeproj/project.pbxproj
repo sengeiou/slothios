@@ -132,7 +132,6 @@
 		048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB81DB27D0000F5A399 /* IconTitleView.swift */; };
 		048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */; };
 		048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */; };
-		048C788D1DD6EA0F0080BBCE /* NSDateTimeAgo.strings in Resources */ = {isa = PBXBuildFile; fileRef = 048C788F1DD6EA0F0080BBCE /* NSDateTimeAgo.strings */; };
 		048C78931DD6EC880080BBCE /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */; };
 		04966B391DB6586D000721BD /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B381DB6586D000721BD /* BaseObject.swift */; };
 		04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B3E1DB658C4000721BD /* SettingCell.swift */; };
@@ -446,9 +445,6 @@
 		048B0BB81DB27D0000F5A399 /* IconTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTitleView.swift; sourceTree = "<group>"; };
 		048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
 		048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeAgo.swift"; sourceTree = "<group>"; };
-		048C788E1DD6EA0F0080BBCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/NSDateTimeAgo.strings; sourceTree = "<group>"; };
-		048C78901DD6EA140080BBCE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NSDateTimeAgo.strings; sourceTree = "<group>"; };
-		048C78911DD6EA150080BBCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NSDateTimeAgo.strings"; sourceTree = "<group>"; };
 		048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		04966B381DB6586D000721BD /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		04966B3E1DB658C4000721BD /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
@@ -891,7 +887,6 @@
 				048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */,
 				0486BBB51DBB577300086303 /* NSObject+ShareSDK.h */,
 				0486BBB61DBB577300086303 /* NSObject+ShareSDK.m */,
-				048C788F1DD6EA0F0080BBCE /* NSDateTimeAgo.strings */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1722,7 +1717,6 @@
 				0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */,
 				0486BB9C1DBB53D200086303 /* read_me.txt in Resources */,
 				048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */,
-				048C788D1DD6EA0F0080BBCE /* NSDateTimeAgo.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2122,16 +2116,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		048C788F1DD6EA0F0080BBCE /* NSDateTimeAgo.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				048C788E1DD6EA0F0080BBCE /* Base */,
-				048C78901DD6EA140080BBCE /* en */,
-				048C78911DD6EA150080BBCE /* zh-Hans */,
-			);
-			name = NSDateTimeAgo.strings;
-			sourceTree = "<group>";
-		};
 		19273B191DA9EE1300150460 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

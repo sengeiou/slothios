@@ -1,13 +1,13 @@
 import Foundation
 
 func DateTimeAgoLocalizedStrings(key: String) -> String {
-    //  let bundlePath = Bundle.main.bundlePath
-    //    + "/NSDateTimeAgo.bundle"
-    //    guard let bundle = Bundle(path: bundlePath) else {
-    //        return NSLocalizedString(key, comment: "")
-    //    }
-    return NSLocalizedString(key, comment: "")
-    //    return NSLocalizedString(key, tableName: "DateTimeAgo", bundle: bundle, comment: "")
+    let bundlePath = Bundle.main.bundlePath
+        + "/NSDateTimeAgo.bundle"
+    guard let bundle = Bundle(path: bundlePath) else {
+        return NSLocalizedString(key, comment: "")
+    }
+    //    return NSLocalizedString(key, comment: "")
+    return NSLocalizedString(key, tableName: "NSDateTimeAgo", bundle: bundle, comment: "")
 }
 
 func isInTheFuture(date: Date) -> Bool {
