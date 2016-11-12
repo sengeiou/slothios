@@ -100,7 +100,6 @@
 		0486BB691DBB41C900086303 /* IAPShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB631DBB41C900086303 /* IAPShare.m */; };
 		0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB651DBB41C900086303 /* NSString+Base64.m */; };
 		0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB671DBB41C900086303 /* SFHFKeychainUtils.m */; };
-		0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486BB6D1DBB44E100086303 /* UIViewController+Purchase.m */; };
 		0486BB931DBB53D200086303 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486BB701DBB53D200086303 /* ShareSDK.framework */; };
 		0486BB941DBB53D200086303 /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486BB731DBB53D200086303 /* ShareSDKExtension.framework */; };
 		0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0486BB741DBB53D200086303 /* ShareSDKUI.bundle */; };
@@ -173,17 +172,6 @@
 		04C031311DD712FF0003B07C /* ChatGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C031301DD712FF0003B07C /* ChatGroupViewController.swift */; };
 		04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */; };
 		04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */; };
-		04D0FDC81DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */; };
-		04D0FDC91DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDBF1DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift */; };
-		04D0FDCA1DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC01DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift */; };
-		04D0FDCB1DCEF5A200D0C1D3 /* InAppReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC11DCEF5A200D0C1D3 /* InAppReceipt.swift */; };
-		04D0FDCC1DCEF5A200D0C1D3 /* InAppReceiptRefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC21DCEF5A200D0C1D3 /* InAppReceiptRefreshRequest.swift */; };
-		04D0FDCD1DCEF5A200D0C1D3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04D0FDC31DCEF5A200D0C1D3 /* Info.plist */; };
-		04D0FDCE1DCEF5A200D0C1D3 /* OS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC41DCEF5A200D0C1D3 /* OS.swift */; };
-		04D0FDCF1DCEF5A200D0C1D3 /* SKProduct+LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC51DCEF5A200D0C1D3 /* SKProduct+LocalizedPrice.swift */; };
-		04D0FDD01DCEF5A200D0C1D3 /* SwiftyStoreKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDC71DCEF5A200D0C1D3 /* SwiftyStoreKit.swift */; };
-		04D0FDD31DCEF5B000D0C1D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDD11DCEF5B000D0C1D3 /* ViewController.swift */; };
-		04D0FDD41DCEF5B000D0C1D3 /* NetworkActivityIndicatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDD21DCEF5B000D0C1D3 /* NetworkActivityIndicatorManager.swift */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
 		04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */; };
 		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
@@ -396,8 +384,6 @@
 		0486BB651DBB41C900086303 /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
 		0486BB661DBB41C900086303 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		0486BB671DBB41C900086303 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
-		0486BB6C1DBB44E100086303 /* UIViewController+Purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Purchase.h"; sourceTree = "<group>"; };
-		0486BB6D1DBB44E100086303 /* UIViewController+Purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Purchase.m"; sourceTree = "<group>"; };
 		0486BB701DBB53D200086303 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		0486BB731DBB53D200086303 /* ShareSDKExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKExtension.framework; sourceTree = "<group>"; };
 		0486BB741DBB53D200086303 /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKUI.bundle; sourceTree = "<group>"; };
@@ -493,18 +479,6 @@
 		04C031301DD712FF0003B07C /* ChatGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
 		04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhoto.swift; sourceTree = "<group>"; };
 		04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoData.swift; sourceTree = "<group>"; };
-		04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppCompleteTransactionsObserver.swift; sourceTree = "<group>"; };
-		04D0FDBF1DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProductPurchaseRequest.swift; sourceTree = "<group>"; };
-		04D0FDC01DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppProductQueryRequest.swift; sourceTree = "<group>"; };
-		04D0FDC11DCEF5A200D0C1D3 /* InAppReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppReceipt.swift; sourceTree = "<group>"; };
-		04D0FDC21DCEF5A200D0C1D3 /* InAppReceiptRefreshRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppReceiptRefreshRequest.swift; sourceTree = "<group>"; };
-		04D0FDC31DCEF5A200D0C1D3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04D0FDC41DCEF5A200D0C1D3 /* OS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OS.swift; sourceTree = "<group>"; };
-		04D0FDC51DCEF5A200D0C1D3 /* SKProduct+LocalizedPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKProduct+LocalizedPrice.swift"; sourceTree = "<group>"; };
-		04D0FDC61DCEF5A200D0C1D3 /* SwiftyStoreKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyStoreKit.h; sourceTree = "<group>"; };
-		04D0FDC71DCEF5A200D0C1D3 /* SwiftyStoreKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyStoreKit.swift; sourceTree = "<group>"; };
-		04D0FDD11DCEF5B000D0C1D3 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		04D0FDD21DCEF5B000D0C1D3 /* NetworkActivityIndicatorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityIndicatorManager.swift; sourceTree = "<group>"; };
 		04D209871DCCCC6100DDF7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		04D209881DCCCC6200DDF7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
@@ -879,8 +853,6 @@
 				04F4D6EE1DB50AAA00F89790 /* SettingViewController.swift */,
 				04966B421DB65F3E000721BD /* ModifyPasswordViewController.swift */,
 				04966B441DB665E7000721BD /* AboutUsViewController.swift */,
-				0486BB6C1DBB44E100086303 /* UIViewController+Purchase.h */,
-				0486BB6D1DBB44E100086303 /* UIViewController+Purchase.m */,
 				040D46E11DC4B67A005D1E8E /* RatingViewController.swift */,
 				04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */,
 			);
@@ -1297,33 +1269,6 @@
 			path = GVUserDefaults;
 			sourceTree = "<group>";
 		};
-		04D0FDBC1DCEF5A200D0C1D3 /* IAP */ = {
-			isa = PBXGroup;
-			children = (
-				04D0FDD11DCEF5B000D0C1D3 /* ViewController.swift */,
-				04D0FDD21DCEF5B000D0C1D3 /* NetworkActivityIndicatorManager.swift */,
-				04D0FDBD1DCEF5A200D0C1D3 /* SwiftyStoreKit */,
-			);
-			path = IAP;
-			sourceTree = "<group>";
-		};
-		04D0FDBD1DCEF5A200D0C1D3 /* SwiftyStoreKit */ = {
-			isa = PBXGroup;
-			children = (
-				04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */,
-				04D0FDBF1DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift */,
-				04D0FDC01DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift */,
-				04D0FDC11DCEF5A200D0C1D3 /* InAppReceipt.swift */,
-				04D0FDC21DCEF5A200D0C1D3 /* InAppReceiptRefreshRequest.swift */,
-				04D0FDC31DCEF5A200D0C1D3 /* Info.plist */,
-				04D0FDC41DCEF5A200D0C1D3 /* OS.swift */,
-				04D0FDC51DCEF5A200D0C1D3 /* SKProduct+LocalizedPrice.swift */,
-				04D0FDC61DCEF5A200D0C1D3 /* SwiftyStoreKit.h */,
-				04D0FDC71DCEF5A200D0C1D3 /* SwiftyStoreKit.swift */,
-			);
-			path = SwiftyStoreKit;
-			sourceTree = "<group>";
-		};
 		04E25B8A1DBB794A002B727F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1508,7 +1453,6 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
-				04D0FDBC1DCEF5A200D0C1D3 /* IAP */,
 				04B499B21DBFBEC4004659BA /* Global */,
 				19008B921DBE614500319B86 /* Model */,
 				19AA4A791DB534570001568B /* Network */,
@@ -1667,7 +1611,7 @@
 				TargetAttributes = {
 					19273B0F1DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = UFLXQ9JK9Z;
+						DevelopmentTeam = DPQ5CCJSTK;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -1722,7 +1666,6 @@
 				19273B201DA9EE1300150460 /* LaunchScreen.storyboard in Resources */,
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */,
-				04D0FDCD1DCEF5A200D0C1D3 /* Info.plist in Resources */,
 				19273B1B1DA9EE1300150460 /* Main.storyboard in Resources */,
 				0486BB9A1DBB53D200086303 /* WeiboSDK.bundle in Resources */,
 				0486BB9F1DBB53D200086303 /* ShareSDK.bundle in Resources */,
@@ -1900,10 +1843,8 @@
 				043C911F1DBBAB5800431965 /* LikeUsersViewController.swift in Sources */,
 				043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */,
 				044956951DCCBAA800CBFF45 /* MJRefreshConst.m in Sources */,
-				04D0FDCA1DCEF5A200D0C1D3 /* InAppProductQueryRequest.swift in Sources */,
 				19008B9D1DBE75D500319B86 /* List.swift in Sources */,
 				044956881DCCBAA800CBFF45 /* MJRefreshComponent.m in Sources */,
-				04D0FDCC1DCEF5A200D0C1D3 /* InAppReceiptRefreshRequest.swift in Sources */,
 				19273B181DA9EE1300150460 /* SecondViewController.swift in Sources */,
 				040576E51DB3353E00C55D02 /* IQKeyboardManagerConstants.swift in Sources */,
 				04B499B41DBFBECC004659BA /* Global.swift in Sources */,
@@ -1954,9 +1895,6 @@
 				04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */,
 				04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */,
 				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
-				04D0FDD41DCEF5B000D0C1D3 /* NetworkActivityIndicatorManager.swift in Sources */,
-				04D0FDC81DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift in Sources */,
-				04D0FDCF1DCEF5A200D0C1D3 /* SKProduct+LocalizedPrice.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
 				04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */,
 				04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */,
@@ -1982,7 +1920,6 @@
 				04EDED3B1DCB13F00068512E /* DisplayOrderPhotoSlice.swift in Sources */,
 				19008BAA1DBE8CE300319B86 /* UserAndProfileData.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
-				04D0FDCE1DCEF5A200D0C1D3 /* OS.swift in Sources */,
 				04B499A71DBFB2F2004659BA /* ModifyUserProfileData.swift in Sources */,
 				04E34BDB1DD6C71D007545F3 /* ChatDataManager.swift in Sources */,
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
@@ -2002,7 +1939,6 @@
 				04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				0449568D1DCCBAA800CBFF45 /* MJRefreshAutoStateFooter.m in Sources */,
-				04D0FDD31DCEF5B000D0C1D3 /* ViewController.swift in Sources */,
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
 				04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */,
 				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
@@ -2012,12 +1948,8 @@
 				044956891DCCBAA800CBFF45 /* MJRefreshFooter.m in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m in Sources */,
-				0486BB6E1DBB44E100086303 /* UIViewController+Purchase.m in Sources */,
-				04D0FDC91DCEF5A200D0C1D3 /* InAppProductPurchaseRequest.swift in Sources */,
-				04D0FDD01DCEF5A200D0C1D3 /* SwiftyStoreKit.swift in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
 				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,
-				04D0FDCB1DCEF5A200D0C1D3 /* InAppReceipt.swift in Sources */,
 				040D46D31DC4B587005D1E8E /* PopupDialog+Keyboard.swift in Sources */,
 				044956901DCCBAA800CBFF45 /* MJRefreshBackStateFooter.m in Sources */,
 				04ED10571DC7994900EBD3C5 /* DisplayOrderData.swift in Sources */,
@@ -2256,7 +2188,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
+				DEVELOPMENT_TEAM = DPQ5CCJSTK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2291,7 +2223,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2308,7 +2240,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
+				DEVELOPMENT_TEAM = DPQ5CCJSTK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2343,7 +2275,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

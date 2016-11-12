@@ -27,6 +27,7 @@
 
 #import <tingyunApp/NBSAppAgent.h>
 #import <RongIMKit/RongIMKit.h>
+#import "IAPShare.h"
 
 
 #endif /* SlothChat_Bridging_Header_h */
