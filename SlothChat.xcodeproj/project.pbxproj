@@ -167,6 +167,8 @@
 		04B499B41DBFBECC004659BA /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B31DBFBECC004659BA /* Global.swift */; };
 		04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B71DC106F0004659BA /* GVUserDefaults.m */; };
 		04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */; };
+		04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312C1DD702440003B07C /* ChatFriendCell.swift */; };
+		04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312E1DD702780003B07C /* ChatFriendViewController.swift */; };
 		04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */; };
 		04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */; };
 		04D0FDC81DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */; };
@@ -483,6 +485,8 @@
 		04B499B71DC106F0004659BA /* GVUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVUserDefaults.m; sourceTree = "<group>"; };
 		04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+Properties.h"; sourceTree = "<group>"; };
 		04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+Properties.m"; sourceTree = "<group>"; };
+		04C0312C1DD702440003B07C /* ChatFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendCell.swift; sourceTree = "<group>"; };
+		04C0312E1DD702780003B07C /* ChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendViewController.swift; sourceTree = "<group>"; };
 		04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhoto.swift; sourceTree = "<group>"; };
 		04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoData.swift; sourceTree = "<group>"; };
 		04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppCompleteTransactionsObserver.swift; sourceTree = "<group>"; };
@@ -794,6 +798,7 @@
 			isa = PBXGroup;
 			children = (
 				041701241DD4CD96002FADFE /* SCConversationListCell.swift */,
+				04C0312C1DD702440003B07C /* ChatFriendCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -822,6 +827,7 @@
 			children = (
 				047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */,
 				047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */,
+				04C0312E1DD702780003B07C /* ChatFriendViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1946,6 +1952,8 @@
 				04D0FDC81DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift in Sources */,
 				04D0FDCF1DCEF5A200D0C1D3 /* SKProduct+LocalizedPrice.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
+				04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */,
+				04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */,
 				04FEB7E21DB76F13004509D1 /* MKAnnotationView+WebCache.m in Sources */,
 				040576EA1DB3353E00C55D02 /* IQBarButtonItem.swift in Sources */,
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,

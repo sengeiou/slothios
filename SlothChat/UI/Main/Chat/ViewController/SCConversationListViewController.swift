@@ -40,6 +40,13 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         self.setNavtionConfirm(titleStr: "我的好友")
     }
     
+    //MARK: - Action
+    
+    override func confirmClick(){
+        let pushVC = ChatFriendViewController()
+        navigationController?.pushViewController(pushVC, animated: true)
+    }
+    
     //MARK: - RCIMReceiveMessageDelegate
     /*!
      接收消息的回调方法
