@@ -157,7 +157,6 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     
     func purchaseForProduct(price: String) {
-        
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
         if IAPShare.sharedHelper().iap == nil {
@@ -191,7 +190,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                     HUD.hide()
                     return
                 }
-                
+
                 if trans.transactionState == SKPaymentTransactionState.purchased{
                     if  let data = try? Data(contentsOf: Bundle.main.appStoreReceiptURL!) {
                         
@@ -206,7 +205,8 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                             }
                             if status == 0 {
                                 IAPShare.sharedHelper().iap.provideContent(with: trans)
-                                self.iapPurchaseSuccess(receipt: "fs53ld0249sf9428hslnr874", amount: price)
+                                let receipt = data.base64EncodedString()
+                                self.iapPurchaseSuccess(receipt: receipt, amount: price)
                                 SGLog(message: dict)
                             }else{
                                 SGLog(message: "error")

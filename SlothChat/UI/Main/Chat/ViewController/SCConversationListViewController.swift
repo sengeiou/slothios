@@ -118,6 +118,18 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         let cell = UITableViewCell()
         return cell
     }
+        
+    override func rcConversationListTableView(_ tableView: UITableView!, cellForRowAt indexPath: IndexPath!) -> RCConversationBaseCell! {
+        if self.conversationListDataSource.count > 0 && indexPath.row < self.conversationListDataSource.count {
+            let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
+            cell.configCellWithObject(model: model)
+            return cell
+        }
+        let cell = RCConversationBaseCell()
+        return cell
+    }
     
     override func willReloadTableData(_ dataSource: NSMutableArray!) -> NSMutableArray! {
         

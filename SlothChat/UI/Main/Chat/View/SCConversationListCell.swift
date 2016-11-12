@@ -84,16 +84,14 @@ class SCConversationListCell: RCConversationBaseCell {
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
         
-        if model.conversationType == RCConversationType.ConversationType_DISCUSSION {
-            contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
-             nameLabel.text = model.objectName
-            return
+        var showUserInfo = RCUserInfo()
+        
+        if let userInfo = ChatDataManager.userInfoWidthID(model.targetId)  {
+            showUserInfo = getShowUserInfo(model: model, userInfo: userInfo)
+            nameLabel.text = userInfo.name
+            let avatarUrl = URL(string: userInfo.portraitUri)
+            avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
-        guard let userInfo = ChatDataManager.userInfoWidthID(model.targetId)  else {
-            SGLog(message: "未查找到数据~~~")
-            return
-        }
-        let showUserInfo = getShowUserInfo(model: model, userInfo: userInfo)
         
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
             contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
@@ -103,11 +101,12 @@ class SCConversationListCell: RCConversationBaseCell {
             contentLabel.text = showUserInfo.name + "：[语音]"
         }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
             contentLabel.text = showUserInfo.name + "：[位置]"
+        }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+            contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
         }
         
-        nameLabel.text = userInfo.name
-        let avatarUrl = URL(string: userInfo.portraitUri)
-        avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+       
     }
     
     func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {
