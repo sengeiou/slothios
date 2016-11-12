@@ -15,6 +15,9 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
         self.syncFriendList { (userList) in
             
         }
+        self.syncGroupList { (userList) in
+            
+        }
         RCIM.shared().userInfoDataSource = self
     }
     
@@ -26,11 +29,20 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
     }
     
     func syncFriendList(completion: (([RCUserInfo]?) -> Void)!) {
+        ChatManager.shared.friendArray.removeAll()
         let user1202 = RCUserInfo(userId: "18667931202", name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
         let user1203 = RCUserInfo(userId: "18667931203", name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
         let userList = [user1202!,user1203!]
         ChatManager.shared.friendArray = userList
         completion(userList)
+    }
+    
+    func syncGroupList(completion: (([RCGroup]?) -> Void)!) {
+        ChatManager.shared.groupArray.removeAll()
+        let group = RCGroup(groupId: "1", groupName: "北美官方群", portraitUri: "http://farm2.staticflickr.com/1709/24157242566_98d0192315_m.jpg")
+        let groupList = [group!]
+        ChatManager.shared.groupArray = groupList
+        completion(groupList)
     }
     
     class func userInfoWidthID(_ userId: String) -> RCUserInfo?{
@@ -42,6 +54,20 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
         for tmpUserInfo in friendArray {
             if userId == tmpUserInfo.userId {
                 return tmpUserInfo
+            }
+        }
+        return nil
+    }
+    
+    class func groupInfoWidthID(_ groupId: String) -> RCGroup?{
+        let groupArray = ChatManager.shared.groupArray
+        
+        if groupId.isEmpty || groupArray.count <= 0 {
+            return nil
+        }
+        for tmpGroup in groupArray {
+            if groupId == tmpGroup.groupId {
+                return tmpGroup
             }
         }
         return nil
@@ -63,5 +89,29 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
     public func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
         let userInfo = ChatDataManager.userInfoWidthID(userId)
         completion(userInfo)
+    }
+    
+    public func refreshBadgeValue(){
+        DispatchQueue.main.async {
+            let unreadMsgCount = RCIMClient.shared().getUnreadCount([])
+            
+            let tmpApp = UIApplication.shared.delegate as! AppDelegate;
+            
+            let chatVC = tmpApp.window?.rootViewController?.tabBarController?.viewControllers?[1]
+            if unreadMsgCount > 0{
+                chatVC?.tabBarItem.badgeValue = nil
+            }else{
+                chatVC?.tabBarItem.badgeValue = String(unreadMsgCount)
+            }
+        }
+    }
+    
+    
+    public func isExistFriend(userId: String) -> Bool{
+        let userInfo = ChatDataManager.userInfoWidthID(userId)
+        if userInfo == nil {
+            return false
+        }
+        return true
     }
 }

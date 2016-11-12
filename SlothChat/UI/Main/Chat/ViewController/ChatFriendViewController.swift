@@ -10,16 +10,13 @@ import UIKit
 
 class ChatFriendViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = ChatManager.shared.friendArray
-    var likeSenderUserUuid: String?
-    var galleryUuid: String?
-    var isLikeMeUsers = false
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
-    var pageNum = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "我的好友"
+        self.setNavtionConfirm(titleStr: "我的群组")
         sentupView()
     }
     
@@ -55,7 +52,6 @@ class ChatFriendViewController: BaseViewController,UITableViewDelegate,UITableVi
         
     }
     
-    
     func performCellAction( indexPath: IndexPath) {
         SGLog(message: indexPath.row)
         
@@ -65,6 +61,11 @@ class ChatFriendViewController: BaseViewController,UITableViewDelegate,UITableVi
             return
         }
         navigationController?.pushViewController(chat, animated: true)
+    }
+    
+    override func confirmClick() {
+        let pushVC = ChatGroupViewController()
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
 }

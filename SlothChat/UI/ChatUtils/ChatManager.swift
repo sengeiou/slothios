@@ -11,7 +11,8 @@ import UIKit
 class ChatManager: NSObject {
     
     var friendArray = [RCUserInfo]()
-    
+    var groupArray = [RCGroup]()
+
     
     static var shared : ChatManager {
         struct Static {

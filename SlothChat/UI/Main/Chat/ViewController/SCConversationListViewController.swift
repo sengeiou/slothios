@@ -12,9 +12,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-            self.conversationListTableView.reloadData()
-        }
+        self.conversationListTableView.reloadData()
     }
     override func viewDidLoad() {
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
@@ -60,12 +58,10 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
      */
     public func onRCIMReceive(_ message: RCMessage!, left: Int32) {
         SGLog(message: message.content)
-        //        [[RCDataManager shareManager] refreshBadgeValue];
+        ChatDataManager.shared.refreshBadgeValue()
         
         if left <= 0 {
-            DispatchQueue.main.async(execute: {
-                self.conversationListTableView.reloadData()
-            })
+            self.conversationListTableView.reloadData()
         }
     }
     
@@ -90,8 +86,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let action = UITableViewRowAction(style: .default, title: "删除", handler: {
             (action, indexPath) in
-            self.conversationListDataSource.remove(indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.removeIndexPath(indexPath: indexPath)
         })
             
         action.backgroundColor = SGColor.SGMainColor()
@@ -99,14 +94,15 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         return [action]
     }
     
-    override func rcConversationListTableView(_ tableView: UITableView!, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath!) {
+    func removeIndexPath(indexPath: IndexPath) {
         let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
         
         RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
         self.conversationListDataSource.remove(model)
         self.conversationListTableView.reloadData()
-//        [[RCDataManager shareManager] refreshBadgeValue];
+        ChatDataManager.shared.refreshBadgeValue()
     }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
@@ -149,7 +145,6 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                 DispatchQueue.main.async {
                     self.refreshConversationTableView(with: customModel)
                     super.didReceiveMessageNotification(notification)
-//                    self.resetConversationListBackgroundViewIfNeeded()
                     self.notifyUpdateUnreadMessageCount()
                 }
             }else if message.conversationType == RCConversationType.ConversationType_PRIVATE {
@@ -169,25 +164,11 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         }else{
             DispatchQueue.main.async {
                 super.didReceiveMessageNotification(notification)
-                //                    self.resetConversationListBackgroundViewIfNeeded()
                 self.notifyUpdateUnreadMessageCount()
             }
         }
         
         self.refreshConversationTableViewIfNeeded()
-    }
-    
-    
-    override func rcConversationListTableView(_ tableView: UITableView!, cellForRowAt indexPath: IndexPath!) -> RCConversationBaseCell! {
-        if self.conversationListDataSource.count > 0 && indexPath.row < self.conversationListDataSource.count {
-            let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
-            cell.configCellWithObject(model: model)
-            
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath)
-        return cell as! RCConversationBaseCell
     }
     
     //重写RCConversationListViewController的onSelectedTableRow事件

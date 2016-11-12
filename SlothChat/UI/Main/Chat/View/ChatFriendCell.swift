@@ -52,4 +52,10 @@ class ChatFriendCell: UITableViewCell {
         self.nameLabel.text = userObj.name
     }
 
+    func configCellWithObj(groupObj: RCGroup) {
+        let avatarUrl = URL(string: groupObj.portraitUri)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        self.nameLabel.text = groupObj.groupName
+    }
 }

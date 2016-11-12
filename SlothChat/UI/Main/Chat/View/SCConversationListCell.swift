@@ -83,6 +83,12 @@ class SCConversationListCell: RCConversationBaseCell {
                 
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
+        
+        if model.conversationType == RCConversationType.ConversationType_DISCUSSION {
+            contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+             nameLabel.text = model.objectName
+            return
+        }
         guard let userInfo = ChatDataManager.userInfoWidthID(model.targetId)  else {
             SGLog(message: "未查找到数据~~~")
             return
@@ -92,13 +98,12 @@ class SCConversationListCell: RCConversationBaseCell {
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
             contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
         }else if model.lastestMessage.isKind(of: RCImageMessage.self){
-            contentLabel.text = "来自\"" + showUserInfo.name + "\"的图片消息，点击查看"
+            contentLabel.text = showUserInfo.name + "：[图片]"
         }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
-            contentLabel.text = "来自\"" + showUserInfo.name + "\"的语音消息，点击查看"
+            contentLabel.text = showUserInfo.name + "：[语音]"
         }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
-            contentLabel.text = "来自\"" + showUserInfo.name + "\"的位置消息，点击查看"
+            contentLabel.text = showUserInfo.name + "：[位置]"
         }
-        
         
         nameLabel.text = userInfo.name
         let avatarUrl = URL(string: userInfo.portraitUri)

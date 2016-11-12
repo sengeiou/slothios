@@ -87,6 +87,7 @@
 		044956981DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956831DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m */; };
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
+		0472E85D1DD720630065AFAB /* ChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472E85C1DD720630065AFAB /* ChatGroupCell.swift */; };
 		047450F21DD3689500E5D3A6 /* SCConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */; };
 		047450F41DD368A900E5D3A6 /* SCConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */; };
 		0479C6111DCCE45C00C72DDA /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */; };
@@ -169,6 +170,7 @@
 		04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */; };
 		04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312C1DD702440003B07C /* ChatFriendCell.swift */; };
 		04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312E1DD702780003B07C /* ChatFriendViewController.swift */; };
+		04C031311DD712FF0003B07C /* ChatGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C031301DD712FF0003B07C /* ChatGroupViewController.swift */; };
 		04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */; };
 		04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */; };
 		04D0FDC81DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */; };
@@ -377,6 +379,7 @@
 		044956841DCCBAA800CBFF45 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0472E85C1DD720630065AFAB /* ChatGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupCell.swift; sourceTree = "<group>"; };
 		047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationViewController.swift; sourceTree = "<group>"; };
 		047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationListViewController.swift; sourceTree = "<group>"; };
 		0479C6101DCCE45C00C72DDA /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
@@ -487,6 +490,7 @@
 		04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+Properties.m"; sourceTree = "<group>"; };
 		04C0312C1DD702440003B07C /* ChatFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendCell.swift; sourceTree = "<group>"; };
 		04C0312E1DD702780003B07C /* ChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendViewController.swift; sourceTree = "<group>"; };
+		04C031301DD712FF0003B07C /* ChatGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
 		04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhoto.swift; sourceTree = "<group>"; };
 		04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoData.swift; sourceTree = "<group>"; };
 		04D0FDBE1DCEF5A200D0C1D3 /* InAppCompleteTransactionsObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppCompleteTransactionsObserver.swift; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 			children = (
 				041701241DD4CD96002FADFE /* SCConversationListCell.swift */,
 				04C0312C1DD702440003B07C /* ChatFriendCell.swift */,
+				0472E85C1DD720630065AFAB /* ChatGroupCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -828,6 +833,7 @@
 				047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */,
 				047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */,
 				04C0312E1DD702780003B07C /* ChatFriendViewController.swift */,
+				04C031301DD712FF0003B07C /* ChatGroupViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1982,6 +1988,7 @@
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
 				04B499A61DBFB2F2004659BA /* ModifyUserProfile.swift in Sources */,
 				04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */,
+				0472E85D1DD720630065AFAB /* ChatGroupCell.swift in Sources */,
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				0449568F1DCCBAA800CBFF45 /* MJRefreshBackNormalFooter.m in Sources */,
@@ -2028,6 +2035,7 @@
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */,
 				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
+				04C031311DD712FF0003B07C /* ChatGroupViewController.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,
 				04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */,
