@@ -38,7 +38,7 @@ enum API_URI:String {
     case public_userPhoto = "/api/public/userPhoto"
     case public_signup = "/api/public/userAndProfile/signup"
     case auth_login = "/auth/login"
-    case auth_mobileapps_logout  = "/auth/mobileapps/logout"
+    case auth_mobileapps_logout  = "/mobileauth/logout"
     //7.修改个人资料页面的文字资料
     case post_userProfile  = "/api/user/{userUuid}/userProfile/{uuid}?token={token}"
     //8.修改个人资料页面的5张图片的显示顺序（此功能预留暂时不做）

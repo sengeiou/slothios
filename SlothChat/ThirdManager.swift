@@ -9,13 +9,11 @@
 import UIKit
 
 
-class ThirdManager: NSObject,RCIMUserInfoDataSource {
+class ThirdManager: NSObject {
     
     override init() {
         super.init()
-        RCIM.shared().userInfoDataSource = self
     }
-    
     
     class func startThirdLib() {
         startNBSAppAgent()
@@ -29,6 +27,8 @@ class ThirdManager: NSObject,RCIMUserInfoDataSource {
     
     fileprivate class func startRongCloudIM() {
         RCIM.shared().initWithAppKey("8w7jv4qb7e8sy")
+        _ =  ChatDataManager.shared
+        _ = ChatManager.share
         let token1202 = "11WqtSIFDg729Iat6IEfaixnj5P1WqmmscqozTd4ISYbwe9bdrgn6g3vvRXHhJOmsuqlzhfTj0UUduiuoBPkW1/Ze0P+2i2s"
         let token1203 = "4KLwxM4JJr2D1UYxaYpb9Sxnj5P1WqmmscqozTd4ISYbwe9bdrgn6qNlwcT73VMymLgy9GP8oXkUduiuoBPkWzPsRPtDXGOw"
 
@@ -51,16 +51,5 @@ class ThirdManager: NSObject,RCIMUserInfoDataSource {
             print("token错误")
             
         })
-    }
-    
-    func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
-        if userId == "18667931202" {
-            let user = RCUserInfo(userId: userId, name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
-            return completion(user)
-        }else if userId == "18667931203" {
-            let user = RCUserInfo(userId: userId, name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
-            return completion(user)
-        }
-        return completion(nil)
     }
 }

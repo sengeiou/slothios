@@ -75,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,RCIMUserInfoDataSource {
             let rootVC = MainViewController()
             self.window?.rootViewController = rootVC
         }else{
+            RCIMClient.shared().disconnect(true)
+
             let rootVC = BaseNavigationController.init(rootViewController: LoginViewController.init())
             rootVC.navigationBar.isHidden = true
             self.window?.rootViewController = rootVC

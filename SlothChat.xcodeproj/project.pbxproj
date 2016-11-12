@@ -131,6 +131,9 @@
 		048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB61DB27CAC00F5A399 /* BaseView.swift */; };
 		048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BB81DB27D0000F5A399 /* IconTitleView.swift */; };
 		048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */; };
+		048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */; };
+		048C788D1DD6EA0F0080BBCE /* NSDateTimeAgo.strings in Resources */ = {isa = PBXBuildFile; fileRef = 048C788F1DD6EA0F0080BBCE /* NSDateTimeAgo.strings */; };
+		048C78931DD6EC880080BBCE /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */; };
 		04966B391DB6586D000721BD /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B381DB6586D000721BD /* BaseObject.swift */; };
 		04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B3E1DB658C4000721BD /* SettingCell.swift */; };
 		04966B411DB658CF000721BD /* SettingObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B401DB658CF000721BD /* SettingObj.swift */; };
@@ -183,6 +186,8 @@
 		04D39B811DB8CE0D009FBD60 /* UserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B801DB8CE0D009FBD60 /* UserObj.swift */; };
 		04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */; };
 		04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */; };
+		04E34BD91DD6C6F8007545F3 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BD81DD6C6F7007545F3 /* ChatManager.swift */; };
+		04E34BDB1DD6C71D007545F3 /* ChatDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */; };
 		04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */; };
 		04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */; };
 		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
@@ -440,6 +445,11 @@
 		048B0BB61DB27CAC00F5A399 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		048B0BB81DB27D0000F5A399 /* IconTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTitleView.swift; sourceTree = "<group>"; };
 		048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
+		048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeAgo.swift"; sourceTree = "<group>"; };
+		048C788E1DD6EA0F0080BBCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/NSDateTimeAgo.strings; sourceTree = "<group>"; };
+		048C78901DD6EA140080BBCE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NSDateTimeAgo.strings; sourceTree = "<group>"; };
+		048C78911DD6EA150080BBCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/NSDateTimeAgo.strings"; sourceTree = "<group>"; };
+		048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		04966B381DB6586D000721BD /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		04966B3E1DB658C4000721BD /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		04966B401DB658CF000721BD /* SettingObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObj.swift; sourceTree = "<group>"; };
@@ -498,6 +508,8 @@
 		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
 		04E25B861DBB77FD002B727F /* MyPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosViewController.swift; sourceTree = "<group>"; };
 		04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosCell.swift; sourceTree = "<group>"; };
+		04E34BD81DD6C6F7007545F3 /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataManager.swift; sourceTree = "<group>"; };
 		04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponse.swift; sourceTree = "<group>"; };
 		04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponseData.swift; sourceTree = "<group>"; };
 		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
@@ -875,8 +887,11 @@
 				04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */,
 				044643571DB4F6960050F8BC /* UIViewController+Extension.swift */,
 				04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */,
+				048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */,
+				048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */,
 				0486BBB51DBB577300086303 /* NSObject+ShareSDK.h */,
 				0486BBB61DBB577300086303 /* NSObject+ShareSDK.m */,
+				048C788F1DD6EA0F0080BBCE /* NSDateTimeAgo.strings */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1149,6 +1164,7 @@
 		04AC92011DB0B02C0048A9FD /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				04E34BD71DD6C6F7007545F3 /* ChatUtils */,
 				04AC92021DB0B02C0048A9FD /* Base */,
 				04AC92041DB0B02C0048A9FD /* CustomView */,
 				04AC92061DB0B02C0048A9FD /* Global */,
@@ -1323,6 +1339,15 @@
 				040327EC1DC873F000401683 /* FlagView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04E34BD71DD6C6F7007545F3 /* ChatUtils */ = {
+			isa = PBXGroup;
+			children = (
+				04E34BD81DD6C6F7007545F3 /* ChatManager.swift */,
+				04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */,
+			);
+			path = ChatUtils;
 			sourceTree = "<group>";
 		};
 		04FE6DB11DCE3C3300AD9C96 /* UIImage-Categories */ = {
@@ -1635,7 +1660,7 @@
 				TargetAttributes = {
 					19273B0F1DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = DPQ5CCJSTK;
+						DevelopmentTeam = UFLXQ9JK9Z;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -1662,6 +1687,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 19273B071DA9EE1300150460;
 			productRefGroup = 19273B111DA9EE1300150460 /* Products */;
@@ -1682,6 +1708,7 @@
 			files = (
 				040576EF1DB3353E00C55D02 /* IQKeyboardManager.bundle in Resources */,
 				0486BB9D1DBB53D200086303 /* README.txt in Resources */,
+				048C78931DD6EC880080BBCE /* NSDateTimeAgo.bundle in Resources */,
 				044956941DCCBAA800CBFF45 /* MJRefresh.bundle in Resources */,
 				040D46CF1DC4B587005D1E8E /* .gitkeep in Resources */,
 				040D46D01DC4B587005D1E8E /* .gitkeep in Resources */,
@@ -1695,6 +1722,7 @@
 				0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */,
 				0486BB9C1DBB53D200086303 /* read_me.txt in Resources */,
 				048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */,
+				048C788D1DD6EA0F0080BBCE /* NSDateTimeAgo.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1948,6 +1976,7 @@
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
 				04D0FDCE1DCEF5A200D0C1D3 /* OS.swift in Sources */,
 				04B499A71DBFB2F2004659BA /* ModifyUserProfileData.swift in Sources */,
+				04E34BDB1DD6C71D007545F3 /* ChatDataManager.swift in Sources */,
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
 				04B499A61DBFB2F2004659BA /* ModifyUserProfile.swift in Sources */,
 				04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */,
@@ -2032,8 +2061,10 @@
 				040D46DA1DC4B587005D1E8E /* PopupDialogOverlayView.swift in Sources */,
 				040D46D21DC4B587005D1E8E /* InteractiveTransition.swift in Sources */,
 				040D46DE1DC4B587005D1E8E /* TransitionAnimator.swift in Sources */,
+				04E34BD91DD6C6F8007545F3 /* ChatManager.swift in Sources */,
 				0486BB681DBB41C900086303 /* IAPHelper.m in Sources */,
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
+				048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */,
 				04814CFB1DCF2A410012030A /* BidAdsRankVo.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
 				19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */,
@@ -2091,6 +2122,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		048C788F1DD6EA0F0080BBCE /* NSDateTimeAgo.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				048C788E1DD6EA0F0080BBCE /* Base */,
+				048C78901DD6EA140080BBCE /* en */,
+				048C78911DD6EA150080BBCE /* zh-Hans */,
+			);
+			name = NSDateTimeAgo.strings;
+			sourceTree = "<group>";
+		};
 		19273B191DA9EE1300150460 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2215,7 +2256,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DPQ5CCJSTK;
+				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2250,7 +2291,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2267,7 +2308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DPQ5CCJSTK;
+				DEVELOPMENT_TEAM = UFLXQ9JK9Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2302,7 +2343,7 @@
 					"-ObjC",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
