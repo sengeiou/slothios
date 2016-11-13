@@ -184,6 +184,7 @@
 		04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */; };
 		04E34BD91DD6C6F8007545F3 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BD81DD6C6F7007545F3 /* ChatManager.swift */; };
 		04E34BDB1DD6C71D007545F3 /* ChatDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */; };
+		04E404141DD85893007118AF /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404131DD85893007118AF /* NSObjectExtension.swift */; };
 		04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */; };
 		04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */; };
 		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
@@ -498,6 +499,7 @@
 		04E25B8C1DBB7958002B727F /* MyPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPhotosCell.swift; sourceTree = "<group>"; };
 		04E34BD81DD6C6F7007545F3 /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataManager.swift; sourceTree = "<group>"; };
+		04E404131DD85893007118AF /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponse.swift; sourceTree = "<group>"; };
 		04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponseData.swift; sourceTree = "<group>"; };
 		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
@@ -893,6 +895,7 @@
 				048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */,
 				0486BBB51DBB577300086303 /* NSObject+ShareSDK.h */,
 				0486BBB61DBB577300086303 /* NSObject+ShareSDK.m */,
+				04E404131DD85893007118AF /* NSObjectExtension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1927,6 +1930,7 @@
 				040576EA1DB3353E00C55D02 /* IQBarButtonItem.swift in Sources */,
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,
 				04FEB7E61DB76F13004509D1 /* SDWebImageDecoder.m in Sources */,
+				04E404141DD85893007118AF /* NSObjectExtension.swift in Sources */,
 				04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */,
 				04FEB7E91DB76F13004509D1 /* SDWebImageManager.m in Sources */,
 				0449568A1DCCBAA800CBFF45 /* MJRefreshHeader.m in Sources */,

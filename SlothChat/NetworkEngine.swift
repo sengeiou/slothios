@@ -119,6 +119,21 @@ class NetworkEngine: NSObject {
         return request
     }
     
+    func verificationResponse(value: NSObject?) -> Bool {
+        guard let value = value else {
+            SGLog(message: "无对象")
+            return true
+        }
+        guard let code = value.value(forKey: "status") else {
+            SGLog(message: "无status")
+            return true
+        }
+        SGLog(message: String(describing: value))
+        SGLog(message: value.allPropertyNamesAndValues())
+        
+        return self.validAuthCode(code: code as? String)
+    }
+    
     func validAuthCode(code: String?) -> Bool {
         let authCode = ResponseError.ERROR_AUTH_CODE.0
         
@@ -291,8 +306,7 @@ class NetworkEngine: NSObject {
             ], method: .put, URLString: URLString)
 
         Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -321,8 +335,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
 
         Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -343,8 +356,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -366,8 +378,7 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -384,8 +395,7 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -408,8 +418,7 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -435,8 +444,7 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -498,8 +506,7 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -522,8 +529,7 @@ class NetworkEngine: NSObject {
             ["likeSenderUserUuid":userUuid], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -544,8 +550,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -608,8 +613,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -633,8 +637,7 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -656,8 +659,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -679,8 +681,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -699,8 +700,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid)
         
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -722,8 +722,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{bidGalleryUuid}", with: bidGalleryUuid)
         
         Alamofire.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -748,8 +747,7 @@ class NetworkEngine: NSObject {
             "participateBidAds":"true"], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<BidAdResponse>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -767,8 +765,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         
         Alamofire.request(URLString).responseObject { (response:DataResponse<ChatToken>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -787,8 +784,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         
         Alamofire.request(URLString).responseObject { (response:DataResponse<ChatList>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
@@ -806,8 +802,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{officialGroupUuid}", with: officialGroupUuid)
         
         Alamofire.request(URLString).responseObject { (response:DataResponse<Response>) in
-            let code = response.result.value?.status
-            if self.validAuthCode(code: code) {
+            if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
         }
