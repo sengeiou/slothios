@@ -240,7 +240,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-            
+            self.purchaseForProduct(price: String(needPrice))
         })
         okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
         cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")

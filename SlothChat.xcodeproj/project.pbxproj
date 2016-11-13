@@ -188,6 +188,7 @@
 		04E404181DD87DCB007118AF /* SCConversationGroupExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404171DD87DCB007118AF /* SCConversationGroupExtension.swift */; };
 		04E4041A1DD88088007118AF /* SelectFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404191DD88088007118AF /* SelectFriendsViewController.swift */; };
 		04E4041C1DD882AA007118AF /* SelectFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */; };
+		04E4041E1DD8B1E5007118AF /* PurchaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */; };
 		04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */; };
 		04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */; };
 		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
@@ -506,6 +507,7 @@
 		04E404171DD87DCB007118AF /* SCConversationGroupExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationGroupExtension.swift; sourceTree = "<group>"; };
 		04E404191DD88088007118AF /* SelectFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFriendsViewController.swift; sourceTree = "<group>"; };
 		04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFriendsCell.swift; sourceTree = "<group>"; };
+		04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseExtension.swift; sourceTree = "<group>"; };
 		04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponse.swift; sourceTree = "<group>"; };
 		04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponseData.swift; sourceTree = "<group>"; };
 		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
@@ -905,6 +907,7 @@
 				0486BBB51DBB577300086303 /* NSObject+ShareSDK.h */,
 				0486BBB61DBB577300086303 /* NSObject+ShareSDK.m */,
 				04E404131DD85893007118AF /* NSObjectExtension.swift */,
+				04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2053,6 +2056,7 @@
 				048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */,
 				04814CFB1DCF2A410012030A /* BidAdsRankVo.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,
+				04E4041E1DD8B1E5007118AF /* PurchaseExtension.swift in Sources */,
 				19008BA91DBE8CE300319B86 /* UserAndProfile.swift in Sources */,
 				04ED10581DC7994900EBD3C5 /* DisplayOrderPhoto.swift in Sources */,
 				048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */,
