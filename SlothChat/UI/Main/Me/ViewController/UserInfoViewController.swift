@@ -356,6 +356,24 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     //MARK:- Action
     func chatButtonClick() {
         SGLog(message: "")
+        guard //let canTalk = Global.shared.globalProfile?.canTalk,
+              let targetId = self.mProfile?.userUuid,
+              let chatName = self.mProfile?.nickname else {
+                SGLog(message: "数据不全")
+                return
+        }
+//        if !canTalk {
+//            HUD.flash(.label("请设置第一张个人资料是能识别的真人照片~"), delay: 2)
+////            return
+//        }
+        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: targetId) else {
+            return
+        }
+//        let userInfo = ChatDataManager.userInfoWidthID(targetId)
+        chat.title = chatName
+        navigationController?.pushViewController(chat, animated: true)
+
+        
     }
     
     func likeButtonClick() {

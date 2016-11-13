@@ -83,7 +83,13 @@ enum API_URI:String {
     case get_adsBidOrder = "/api/user/{userUuid}/bidGallery/{bidGalleryUuid}/adsBidOrder?token={token}"
     //28.在显示竞价加码页面完成加码选择后，付款确认点击“发送”按钮
     case post_adsBidOrder = "/api/user/{userUuid}/adsBidOrder?token={token}"
-    
+    //B3.聊天模块
+    //29.获取聊天SDK需要的TOKEN
+    case get_chatToken = "/api/user/{userUuid}/chat/getToken?token={token}"
+    //30.获取某用户UUID的所有会话列表，待定是否需要加分页参数做分页
+    case get_chatList = "/api/user/{userUuid}/chat?token={token}"
+    //31.分页获取某用户UUID所在的，唯一官方群组的所有群成员信息
+    case get_officialGroupMember = "/api/officialGroup/{officialGroupUuid}/officialGroupMember?token={token}"
 }
 
 class NetworkEngine: NSObject {
@@ -748,5 +754,62 @@ class NetworkEngine: NSObject {
             }
         }
     }
-
+    //29.获取聊天SDK需要的TOKEN
+    func getChatToken(completeHandler :@escaping(_ response:ChatToken?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.get_chatToken.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        
+        Alamofire.request(URLString).responseObject { (response:DataResponse<ChatToken>) in
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    
+    //30.获取某用户UUID的所有会话列表，待定是否需要加分页参数做分页
+    func getChatList(completeHandler :@escaping(_ response:ChatList?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = Global.shared.globalProfile?.userUuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.get_chatList.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        
+        Alamofire.request(URLString).responseObject { (response:DataResponse<ChatList>) in
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    
+    //31.分页获取某用户UUID所在的，唯一官方群组的所有群成员信息
+    func getOfficialGroupMember(officialGroupUuid: String, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.get_officialGroupMember.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{officialGroupUuid}", with: officialGroupUuid)
+        
+        Alamofire.request(URLString).responseObject { (response:DataResponse<Response>) in
+            let code = response.result.value?.status
+            if self.validAuthCode(code: code) {
+                completeHandler(response.result.value)
+            }
+        }
+    }
 }

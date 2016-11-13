@@ -32,6 +32,15 @@ class Global: BaseObject {
             }
         }
     }
+    
+    var chatToken: String?{
+        didSet{
+            if chatToken != nil {
+                ChatTokenData.cacheForChatToken(token:chatToken!)
+            }
+        }
+    }
+    
     static var shared : Global {
         struct Static {
             static let instance : Global = Global()
@@ -43,6 +52,7 @@ class Global: BaseObject {
         globalLogin = LoginModel.ModelFromCache()
         globalProfile = UserProfileData.ProfileFromCache()
         globalSysConfig = SysConfigData.ConfigFromCache()
+        chatToken = ChatTokenData.TokenFromCache()
     }
     
     func isLogin() -> Bool {
@@ -68,5 +78,7 @@ class Global: BaseObject {
         UserProfileData.removeFromCache()
         globalSysConfig = nil
         SysConfigData.removeFromCache()
+        chatToken = nil
+        ChatTokenData.removeFromCache()
     }
 }

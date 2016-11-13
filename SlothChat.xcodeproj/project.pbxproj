@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */; };
 		040327ED1DC873F000401683 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327EC1DC873F000401683 /* FlagView.swift */; };
+		040564351DD817E500D61439 /* ChatToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564331DD817E500D61439 /* ChatToken.swift */; };
+		040564361DD817E500D61439 /* ChatTokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564341DD817E500D61439 /* ChatTokenData.swift */; };
+		0405643A1DD8189300D61439 /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564371DD8189300D61439 /* ChatList.swift */; };
+		0405643B1DD8189300D61439 /* ChatListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564381DD8189300D61439 /* ChatListData.swift */; };
+		0405643C1DD8189300D61439 /* ChatOfficialGroupVo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564391DD8189300D61439 /* ChatOfficialGroupVo.swift */; };
 		040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */; };
 		040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */; };
 		040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */; };
@@ -266,6 +271,11 @@
 
 /* Begin PBXFileReference section */
 		040327EC1DC873F000401683 /* FlagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
+		040564331DD817E500D61439 /* ChatToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatToken.swift; sourceTree = "<group>"; };
+		040564341DD817E500D61439 /* ChatTokenData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTokenData.swift; sourceTree = "<group>"; };
+		040564371DD8189300D61439 /* ChatList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		040564381DD8189300D61439 /* ChatListData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListData.swift; sourceTree = "<group>"; };
+		040564391DD8189300D61439 /* ChatOfficialGroupVo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatOfficialGroupVo.swift; sourceTree = "<group>"; };
 		040576C51DB32CB100C55D02 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		040576C91DB3353E00C55D02 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		040576CA1DB3353E00C55D02 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
@@ -648,6 +658,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0405643D1DD8189B00D61439 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				040564371DD8189300D61439 /* ChatList.swift */,
+				040564381DD8189300D61439 /* ChatListData.swift */,
+				040564391DD8189300D61439 /* ChatOfficialGroupVo.swift */,
+				040564331DD817E500D61439 /* ChatToken.swift */,
+				040564341DD817E500D61439 /* ChatTokenData.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		040576C71DB3353E00C55D02 /* IQKeyboardManagerSwift */ = {
 			isa = PBXGroup;
 			children = (
@@ -1393,6 +1415,7 @@
 				04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */,
 				04814CF81DCF2A410012030A /* BidAdsRankVo.swift */,
 				04814CF91DCF2A410012030A /* BidAdsRankVoData.swift */,
+				0405643D1DD8189B00D61439 /* Chat */,
 				19008B991DBE75D500319B86 /* Country.swift */,
 				04ED10531DC7994900EBD3C5 /* DisplayOrder.swift */,
 				04ED10541DC7994900EBD3C5 /* DisplayOrderData.swift */,
@@ -1841,6 +1864,7 @@
 				04FEB7BD1DB76EDB004509D1 /* SDCollectionViewCell.m in Sources */,
 				0449568C1DCCBAA800CBFF45 /* MJRefreshAutoNormalFooter.m in Sources */,
 				043C911F1DBBAB5800431965 /* LikeUsersViewController.swift in Sources */,
+				0405643A1DD8189300D61439 /* ChatList.swift in Sources */,
 				043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */,
 				044956951DCCBAA800CBFF45 /* MJRefreshConst.m in Sources */,
 				19008B9D1DBE75D500319B86 /* List.swift in Sources */,
@@ -1876,6 +1900,7 @@
 				04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */,
 				04FEB7BA1DB76EDB004509D1 /* TAAnimatedDotView.m in Sources */,
 				04FEB7E51DB76F13004509D1 /* SDWebImageCompat.m in Sources */,
+				0405643C1DD8189300D61439 /* ChatOfficialGroupVo.swift in Sources */,
 				041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */,
 				043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */,
 				04FE6DBC1DCE3C3300AD9C96 /* UIImage+Resize.m in Sources */,
@@ -1916,7 +1941,9 @@
 				04B1CEED1DBC42DA003482DF /* PublishViewController.swift in Sources */,
 				040D46D51DC4B587005D1E8E /* PopupDialogButton.swift in Sources */,
 				04B1CEF31DBC8B20003482DF /* PublishHeaderView.swift in Sources */,
+				040564361DD817E500D61439 /* ChatTokenData.swift in Sources */,
 				04ED10511DC787F300EBD3C5 /* UserGalleryData.swift in Sources */,
+				040564351DD817E500D61439 /* ChatToken.swift in Sources */,
 				04EDED3B1DCB13F00068512E /* DisplayOrderPhotoSlice.swift in Sources */,
 				19008BAA1DBE8CE300319B86 /* UserAndProfileData.swift in Sources */,
 				040576E21DB3353E00C55D02 /* IQUIView+Hierarchy.swift in Sources */,
@@ -1985,6 +2012,7 @@
 				04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */,
 				041701191DD4A9BF002FADFE /* Validate.swift in Sources */,
 				040D46D91DC4B587005D1E8E /* PopupDialogDefaultViewController.swift in Sources */,
+				0405643B1DD8189300D61439 /* ChatListData.swift in Sources */,
 				04814CFC1DCF2A410012030A /* BidAdsRankVoData.swift in Sources */,
 				040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */,
 				19008BA01DBE7E4700319B86 /* SCData.swift in Sources */,

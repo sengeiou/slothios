@@ -139,14 +139,27 @@ class LoginViewController: BaseViewController {
     
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.getUserProfile(userUuid: userUuid) { (profile) in
-            HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0 {
                 Global.shared.globalProfile = profile?.data
-                self.loginSystem()
+                self.getChatToken()
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
+            }
+        }
+    }
+
+    func getChatToken() {
+        let engine = NetworkEngine()
+        engine.getChatToken() { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0{
+                if let token = response?.data?.chatToken {
+                    Global.shared.chatToken = token
+                    self.loginSystem()
+                }
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }

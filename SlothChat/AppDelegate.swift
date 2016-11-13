@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 import AwesomeCache
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
@@ -19,6 +20,7 @@ struct SGGlobalKey {
     static let SCCacheName = "SCCacheName"
     static let SCLoginStatusKey = "SCLoginStatusKey"
 
+    public static let RefreshChatToken = Notification.Name(rawValue: "SlothChat.RefreshChatToken")
     public static let LoginStatusDidChange = Notification.Name(rawValue: "SlothChat.LoginStatusDidChange")
     public static let DiscoveryDataDidChange = Notification.Name(rawValue: "SlothChat.DiscoveryDataDidChange")
 
@@ -39,20 +41,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let manager = LocationManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        addNoticeObserver()
         IQKeyboardManager.sharedManager().enable = true
-        
         manager.startLocationCity()
-        
         ThirdManager.startThirdLib()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
         
         self.window = UIWindow.init()
         self.changeRootViewController()
-//        self.window?.rootViewController = ViewController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true
+    }
+    
+    func addNoticeObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginStatusDidChange), name: SGGlobalKey.LoginStatusDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshChatToken), name: SGGlobalKey.RefreshChatToken, object: nil)
     }
     
     func configRemote(_ application: UIApplication) {
@@ -71,7 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let logined = Global.shared.isLogin()
         
         if logined {
-            ThirdManager.testConnectRCIM()
+            ThirdManager.connectRCIM(token: Global.shared.chatToken)
+            _ = ChatDataManager.shared
+            _ = ChatManager.share
             
             let rootVC = MainViewController()
             self.window?.rootViewController = rootVC
@@ -81,6 +87,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let rootVC = BaseNavigationController.init(rootViewController: LoginViewController.init())
             rootVC.navigationBar.isHidden = true
             self.window?.rootViewController = rootVC
+        }
+    }
+    
+    func refreshChatToken() {
+        let engine = NetworkEngine()
+        engine.getChatToken() { (response) in
+            if response?.status == ResponseError.SUCCESS.0{
+                if let token = response?.data?.chatToken {
+                    Global.shared.chatToken = token
+                    ThirdManager.connectRCIM(token: token)
+                }
+            }
         }
     }
 

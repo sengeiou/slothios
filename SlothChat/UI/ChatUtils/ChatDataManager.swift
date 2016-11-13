@@ -18,6 +18,9 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
         self.syncGroupList { (userList) in
             
         }
+        self.syncChatList { (chatList) in
+            
+        }
         RCIM.shared().userInfoDataSource = self
     }
     
@@ -35,6 +38,15 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
         let userList = [user1202!,user1203!]
         ChatManager.shared.friendArray = userList
         completion(userList)
+    }
+    
+    func syncChatList(completion: (([RCUserInfo]?) -> Void)!) {
+        let engine = NetworkEngine()
+        engine.getChatList() { (response) in
+            if response?.status == ResponseError.SUCCESS.0{
+                
+            }
+        }
     }
     
     func syncGroupList(completion: (([RCGroup]?) -> Void)!) {
