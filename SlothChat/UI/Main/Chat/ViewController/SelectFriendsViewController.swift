@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import PKHUD
 
 class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = ChatManager.shared.friendArray
-    var selectRows = [Int]()
+    var selectRows = Set<Int>()
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -51,10 +52,11 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if selectRows.contains(indexPath.row) {
-            
+            selectRows.remove(indexPath.row)
         }else{
-            selectRows.append(indexPath.row)
+            selectRows.insert(indexPath.row)
         }
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
     func performCellAction( indexPath: IndexPath) {
@@ -73,7 +75,44 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     override func confirmClick() {
-        let pushVC = ChatGroupViewController()
-        navigationController?.pushViewController(pushVC, animated: true)
+        var idList = [String]()
+        for value in selectRows {
+            let userInfo = dataSource[value]
+            idList.append(userInfo.userId)
+        }
+        if !idList.contains(RCIM.shared().currentUserInfo.userId) {
+            idList.append(RCIM.shared().currentUserInfo.userId)
+        }
+        SGLog(message: idList)
+        createDiscussion(IDS: idList)
+    }
+    
+    func createDiscussion(IDS: [String]) {
+        
+        RCIMClient.shared().createDiscussion("树懒学习讨论组", userIdList: IDS, success:{ discussion in
+            SGLog(message: discussion?.discussionName)
+            SGLog(message: discussion?.discussionId)
+            
+            DispatchQueue.main.sync {
+                HUD.flash(.label("成功加入讨论组"), delay: 2, completion: { (result) in
+                    self.pushGroup(groupId: discussion?.discussionId)
+                })
+            }
+        }, error:{ errorCode in
+            SGLog(message: errorCode)
+            HUD.show(.labeledProgress(title: "创建讨论组失败", subtitle: nil))
+        })
+    }
+    
+    func pushGroup(groupId: String?) {
+        guard let groupId = groupId else {
+            return
+        }
+        SGLog(message: groupId)
+        
+        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_GROUP, targetId: groupId) else {
+            return
+        }
+        navigationController?.pushViewController(chat, animated: true)
     }
 }

@@ -32,8 +32,8 @@ class SelectFriendsCell: UITableViewCell {
         self.contentView.addSubview(avatarImgView)
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(flagImgView)
-        flagImgView.image = UIImage(named: "chat-gray")
-
+        configFlagView(selected: false)
+        
         avatarImgView.layer.cornerRadius = 20
         avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
@@ -60,7 +60,7 @@ class SelectFriendsCell: UITableViewCell {
     }
     
     func configFlagView(selected: Bool) {
-        if selected {
+        if !selected {
             flagImgView.image = UIImage(named: "chat-gray")
         }else{
             flagImgView.image = UIImage(named: "chat-champagne")
