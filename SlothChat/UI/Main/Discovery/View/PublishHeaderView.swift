@@ -156,6 +156,10 @@ class PublishHeaderView: BaseView {
         priceLabel.attributedText = attributedText
     }
     
+    func refreshView(rankData: BidAdsRankVoData) {
+        price = rankData.myBidAmount!
+    }
+    
     //MARK:- Action
 
     func selectButtonCLick() {

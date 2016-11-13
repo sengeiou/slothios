@@ -198,6 +198,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 if let imgUrl = response?.data?.bigPicUrl{
                     self.configWithObject(imageUrl: imgUrl)
                 }
+                self.headerView.refreshView(rankData: (response?.data)!)
                 self.tableView.reloadData()
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
