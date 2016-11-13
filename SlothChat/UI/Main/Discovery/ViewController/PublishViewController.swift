@@ -230,6 +230,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         engine.postAdsBidOrder(bidGalleryUuid: galleryUuid!, amount: price){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
+                NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
                 HUD.flash(.label("竞价成功"), delay: 2, completion: { (result) in
                     _ = self.navigationController?.popViewController(animated: true)
                 })
