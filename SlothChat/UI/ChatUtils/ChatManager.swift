@@ -32,6 +32,7 @@ class ChatManager: NSObject {
             if friend.userId == userUuid {
                 isNotExist = false
                 configUserInfo(friend: friend, userInfo: userInfo)
+                return
             }
         }
         

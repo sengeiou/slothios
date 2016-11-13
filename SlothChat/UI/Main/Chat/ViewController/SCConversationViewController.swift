@@ -20,7 +20,27 @@ class SCConversationViewController: RCConversationViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.register(SimpleMessageCell.self, forMessageClass: SimpleMessage.self)
+        
+        if self.navigationController != nil &&
+            (self.navigationController?.viewControllers.count)! > 1 {
+            self.setNavtionBack(imageStr: "go-back")
+        }
+        
+        if self.conversationType == RCConversationType.ConversationType_PRIVATE {
+            addPluginBoardView()
+        }else if self.conversationType == RCConversationType.ConversationType_GROUP{
+            configGroupInputBarControl()
+        }
+    }
+
+    override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
+        super.pluginBoardView(pluginBoardView, clickedItemWithTag: tag)
+        if tag == 201 {
+            SGLog(message: "发起群聊")
+            let tmpVC = SelectFriendsViewController()
+            let nav = BaseNavigationController(rootViewController: tmpVC)
+            present(nav, animated: true, completion: nil)
+        }
     }
     
     override func willDisplayMessageCell(_ cell: RCMessageBaseCell!, at indexPath: IndexPath!) {
