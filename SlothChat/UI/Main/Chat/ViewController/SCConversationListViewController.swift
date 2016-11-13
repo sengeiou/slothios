@@ -191,8 +191,11 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         }
         
         if model.conversationType == RCConversationType.ConversationType_PRIVATE {
-            let userInfo = ChatDataManager.userInfoWidthID(model.targetId)
-            chat.title = userInfo?.name
+            ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
+                if let userInfo = userInfo {
+                    chat.title = userInfo.name
+                }
+            }
         }else if model.conversationType == RCConversationType.ConversationType_GROUP ||
             model.conversationType == RCConversationType.ConversationType_DISCUSSION{
             chat.title = model.conversationTitle;

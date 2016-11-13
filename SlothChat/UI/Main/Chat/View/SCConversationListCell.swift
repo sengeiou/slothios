@@ -86,27 +86,26 @@ class SCConversationListCell: RCConversationBaseCell {
         
         var showUserInfo = RCUserInfo()
         
-        if let userInfo = ChatDataManager.userInfoWidthID(model.targetId)  {
-            showUserInfo = getShowUserInfo(model: model, userInfo: userInfo)
-            nameLabel.text = userInfo.name
-            let avatarUrl = URL(string: userInfo.portraitUri)
-            avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
+            if let userInfo = userInfo {
+                showUserInfo = self.getShowUserInfo(model: model, userInfo: userInfo)
+                self.nameLabel.text = userInfo.name
+                let avatarUrl = URL(string: userInfo.portraitUri)
+                self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            }
+            
+            if model.lastestMessage.isKind(of: RCTextMessage.self) {
+                self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+            }else if model.lastestMessage.isKind(of: RCImageMessage.self){
+                self.contentLabel.text = showUserInfo.name + "：[图片]"
+            }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
+                self.contentLabel.text = showUserInfo.name + "：[语音]"
+            }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
+                self.contentLabel.text = showUserInfo.name + "：[位置]"
+            }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+                self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
+            }
         }
-        
-        if model.lastestMessage.isKind(of: RCTextMessage.self) {
-            contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
-        }else if model.lastestMessage.isKind(of: RCImageMessage.self){
-            contentLabel.text = showUserInfo.name + "：[图片]"
-        }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
-            contentLabel.text = showUserInfo.name + "：[语音]"
-        }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
-            contentLabel.text = showUserInfo.name + "：[位置]"
-        }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
-            contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
-        }
-        
-        
-       
     }
     
     func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {

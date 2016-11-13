@@ -366,6 +366,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
 //            HUD.flash(.label("请设置第一张个人资料是能识别的真人照片~"), delay: 2)
 ////            return
 //        }
+        ChatManager.shared.refreshUserInfo(userInfo: self.mProfile!)
         guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: targetId) else {
             return
         }

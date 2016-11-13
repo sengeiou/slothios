@@ -9,7 +9,15 @@
 import UIKit
 
 class SCConversationViewController: RCConversationViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.sharedManager().enable = false
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.register(SimpleMessageCell.self, forMessageClass: SimpleMessage.self)

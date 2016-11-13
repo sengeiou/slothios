@@ -32,12 +32,12 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
     }
     
     func syncFriendList(completion: (([RCUserInfo]?) -> Void)!) {
-        ChatManager.shared.friendArray.removeAll()
-        let user1202 = RCUserInfo(userId: "18667931202", name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
-        let user1203 = RCUserInfo(userId: "18667931203", name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
-        let userList = [user1202!,user1203!]
-        ChatManager.shared.friendArray = userList
-        completion(userList)
+//        ChatManager.shared.friendArray.removeAll()
+//        let user1202 = RCUserInfo(userId: "18667931202", name: "1202", portrait: "https://tower.im/assets/default_avatars/path.jpg")
+//        let user1203 = RCUserInfo(userId: "18667931203", name: "1203", portrait: "https://tower.im/assets/default_avatars/jokul.jpg")
+//        let userList = [user1202!,user1203!]
+//        ChatManager.shared.friendArray = userList
+//        completion(userList)
     }
     
     func syncChatList(completion: (([RCUserInfo]?) -> Void)!) {
@@ -57,18 +57,33 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
         completion(groupList)
     }
     
-    class func userInfoWidthID(_ userId: String) -> RCUserInfo?{
+    class func userInfoWidthID(_ userUuid: String,completion: ((RCUserInfo?) -> Void)!){
         let friendArray = ChatManager.shared.friendArray
         
-        if userId.isEmpty || friendArray.count <= 0 {
-            return nil
+        if userUuid.isEmpty {
+            return
         }
+        
         for tmpUserInfo in friendArray {
-            if userId == tmpUserInfo.userId {
-                return tmpUserInfo
+            if userUuid == tmpUserInfo.userId {
+                completion(tmpUserInfo)
             }
         }
-        return nil
+        
+        let engine = NetworkEngine()
+        engine.getUserProfile(userUuid: userUuid) { (profile) in
+            if profile?.status == ResponseError.SUCCESS.0 {
+                if (profile?.data) != nil{
+                    let userInfo = RCUserInfo()
+                    userInfo.name = profile?.data?.nickname
+                    userInfo.portraitUri = profile?.data?.userPhotoList?.first?.profileBigPicUrl
+                    userInfo.userId = profile?.data?.userUuid
+                    ChatManager.shared.friendArray.append(userInfo)
+                    
+                    completion(userInfo)
+                }
+            }
+        }
     }
     
     class func groupInfoWidthID(_ groupId: String) -> RCGroup?{
@@ -99,8 +114,9 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
      在您设置了用户信息提供者之后，SDK在需要显示用户信息的时候，会调用此方法，向您请求用户信息用于显示。
      */
     public func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
-        let userInfo = ChatDataManager.userInfoWidthID(userId)
-        completion(userInfo)
+        ChatDataManager.userInfoWidthID(userId){ (userInfo) in
+            completion(userInfo)
+        }
     }
     
     public func refreshBadgeValue(){
@@ -120,10 +136,10 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
     
     
     public func isExistFriend(userId: String) -> Bool{
-        let userInfo = ChatDataManager.userInfoWidthID(userId)
-        if userInfo == nil {
-            return false
-        }
+//        let userInfo = ChatDataManager.userInfoWidthID(userId)
+//        if userInfo == nil {
+//            return false
+//        }
         return true
     }
 }
