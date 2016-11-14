@@ -41,7 +41,7 @@ class MyPhotosCell: UICollectionViewCell {
     func configCellObject(photo: UserGalleryPhoto) {
         if photo.smallPicUrl != nil {
             let url = URL(string: photo.smallPicUrl!)
-            imgView.kf.setImage(with: url, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            imgView.kf.setImage(with: url, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
         flagView.isHidden = true
         flagView.setIsDisplayAsBidAds(displayAsBidAds: photo.displayAsBidAds!)

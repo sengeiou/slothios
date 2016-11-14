@@ -55,7 +55,7 @@ class SelectFriendsCell: UITableViewCell {
     
     func configCellWithObj(userObj: RCUserInfo) {
         let avatarUrl = URL(string: userObj.portraitUri)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         self.nameLabel.text = userObj.name
     }
     
@@ -69,7 +69,7 @@ class SelectFriendsCell: UITableViewCell {
     
     func configCellWithObj(groupObj: RCGroup) {
         let avatarUrl = URL(string: groupObj.portraitUri)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         self.nameLabel.text = groupObj.groupName
     }

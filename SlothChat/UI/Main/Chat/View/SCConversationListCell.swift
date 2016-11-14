@@ -91,7 +91,7 @@ class SCConversationListCell: RCConversationBaseCell {
                 showUserInfo = self.getShowUserInfo(model: model, userInfo: userInfo)
                 self.nameLabel.text = userInfo.name
                 let avatarUrl = URL(string: userInfo.portraitUri)
-                self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+                self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
             }
             
             if model.lastestMessage.isKind(of: RCTextMessage.self) {

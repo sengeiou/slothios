@@ -128,10 +128,10 @@ class DiscoveryCell: UITableViewCell {
     
     func configCellWithObj(photoObj: DisplayOrderPhoto) {
         let avatarUrl = URL(string: photoObj.profilePicUrl!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     
         let mainImgUrl = URL(string: photoObj.bigPicUrl!)
-        self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         self.nameLabel.text = photoObj.nickname
         self.locationLabel.text = photoObj.adress

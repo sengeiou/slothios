@@ -63,7 +63,7 @@ class LikeUsersCell: UITableViewCell {
     
     func configCellWithObj(userObj: LikeProfileListUser) {
         let avatarUrl = URL(string: userObj.likeSenderProfilePicUrl!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         self.nameLabel.text = userObj.likeSenderNickname
     }

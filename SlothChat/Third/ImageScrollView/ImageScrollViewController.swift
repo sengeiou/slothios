@@ -154,7 +154,8 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func disPlay(galleryPhoto: UserGalleryPhoto) {
-        imageScroller.display(image: UIImage.init(named: "icon")!)
+        
+        imageScroller.display(image: UIImage(named: "icon")!)
         
         if let picUrl = galleryPhoto.hdPicUrl {
             imageScroller.display(imageUrl: picUrl)
