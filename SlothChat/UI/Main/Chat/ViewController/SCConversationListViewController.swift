@@ -29,8 +29,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         //设置需要将哪些类型的会话在会话列表中聚合显示
         self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
                                             RCConversationType.ConversationType_GROUP.rawValue])
+        self.conversationListTableView.register(SCChatGroupCell.self, forCellReuseIdentifier: "SCChatGroupCell")
         self.conversationListTableView.register(SCConversationListCell.self, forCellReuseIdentifier: "SCConversationListCell")
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMessageNotification(_:)), name: NSNotification.Name.RCKitDispatchMessage, object: nil)
         
         RCIM.shared().receiveMessageDelegate = self
@@ -104,31 +105,34 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
+        if model.conversationType == .ConversationType_DISCUSSION ||
+            model.conversationType == .ConversationType_GROUP{
+            return 120
+        }
         return 60
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.conversationListDataSource.count > 0 && indexPath.row < self.conversationListDataSource.count {
-            let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
-            cell.configCellWithObject(model: model)
-            return cell
+        if indexPath.row >= self.conversationListDataSource.count {
+            return UITableViewCell()
         }
-        let cell = UITableViewCell()
-        return cell
-    }
         
-    override func rcConversationListTableView(_ tableView: UITableView!, cellForRowAt indexPath: IndexPath!) -> RCConversationBaseCell! {
-        if self.conversationListDataSource.count > 0 && indexPath.row < self.conversationListDataSource.count {
-            let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
-            
+        let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
+        
+        if model.conversationType == .ConversationType_PRIVATE{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
             cell.configCellWithObject(model: model)
             return cell
         }
-        let cell = RCConversationBaseCell()
-        return cell
+        
+        if model.conversationType == .ConversationType_DISCUSSION ||
+           model.conversationType == .ConversationType_GROUP {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SCChatGroupCell", for: indexPath) as! SCChatGroupCell
+            cell.configCellWithObject(model: model)
+            return cell
+        }
+        return UITableViewCell()
     }
     
     override func willReloadTableData(_ dataSource: NSMutableArray!) -> NSMutableArray! {

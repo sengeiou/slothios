@@ -66,13 +66,6 @@ class SCConversationListCell: RCConversationBaseCell {
             make.size.equalTo(CGSize.init(width: 8, height: 8))
         }
     }
-//    -(NSString *)stringFromDate:(NSDate *)date
-//    {
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSString *destDateString = [dateFormatter stringFromDate:date];
-//    return destDateString;
-//    }
     
     func configCellWithObject(model: RCConversationModel) {
         
@@ -85,6 +78,16 @@ class SCConversationListCell: RCConversationBaseCell {
         timeLabel.text = date.timeAgo
         
         var showUserInfo = RCUserInfo()
+        if model.conversationType == .ConversationType_DISCUSSION{
+            self.nameLabel.text = "讨论组标题"
+            self.contentLabel.text = "讨论组内容"
+            return
+        }
+        if model.conversationType == .ConversationType_GROUP{
+            self.nameLabel.text = "群聊标题"
+            self.contentLabel.text = "群聊内容"
+            return
+        }
         
         ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
             if let userInfo = userInfo {
