@@ -252,7 +252,7 @@ class NetworkEngine: NSObject {
     //6.登出 POST
     func postAuthLogout(completeHandler :@escaping(_ response:Response?) -> Void) -> Void {
         guard let token = Global.shared.globalLogin?.token,
-            let uuid = Global.shared.globalProfile?.uuid else {
+            let uuid = Global.shared.globalProfile?.userUuid else {
                 SGLog(message: "数据为空")
                 return
         }

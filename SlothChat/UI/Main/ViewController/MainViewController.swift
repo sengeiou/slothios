@@ -14,7 +14,7 @@ class MainViewController: UITabBarController {
         super.viewDidLoad()
         self.getSystemConfig()
         
-        let discoveryNav = BaseNavigationController(rootViewController: SCConversationListViewController())
+        let discoveryNav = BaseNavigationController(rootViewController: DiscoveryViewController())
         
         let chatNav = BaseNavigationController(rootViewController:SCConversationListViewController())
         

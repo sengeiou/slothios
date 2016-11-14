@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SCChatGroupCell: RCConversationBaseCell {
+class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollectionViewDataSource {
 
     let nameLabel = UILabel()
     let descLabel = UILabel()
@@ -50,8 +50,8 @@ class SCChatGroupCell: RCConversationBaseCell {
         let layout = UICollectionViewFlowLayout()
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView?.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
-//        collectionView?.delegate = self;
-//        collectionView?.dataSource = self;
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
         collectionView?.backgroundColor = UIColor.white
         
         let screenWidth = UIScreen.main.bounds.width
@@ -83,6 +83,9 @@ class SCChatGroupCell: RCConversationBaseCell {
             make.right.lessThanOrEqualTo(-10)
         }
         
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+//        collectionView?.backgroundColor = SGColor.blue
+        
         collectionView?.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
@@ -92,7 +95,7 @@ class SCChatGroupCell: RCConversationBaseCell {
         
         lastUserImgView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.centerY.equalTo(self.snp.centerY)
+            make.top.equalTo((self.collectionView?.snp.bottom)!).offset(10)
             make.size.equalTo(CGSize.init(width: 48, height: 48))
         }
         
@@ -127,13 +130,14 @@ class SCChatGroupCell: RCConversationBaseCell {
     
     //MARK:- UICollectionViewDelegate,UICollectionViewDataSource
 
-//    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
-//    }
-//    
-//    
-//    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        return UICollectionViewCell()
-//    }
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        return cell
+    }
     
 }

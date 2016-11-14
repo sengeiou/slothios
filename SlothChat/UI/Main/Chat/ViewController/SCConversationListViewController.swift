@@ -36,7 +36,8 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         RCIM.shared().receiveMessageDelegate = self
         RCIM.shared().connectionStatusDelegate = self
-        self.setNavtionConfirm(titleStr: "我的好友")
+        self.conversationListTableView.tableFooterView = UIView()
+//        self.setNavtionConfirm(titleStr: "我的好友")
     }
     
     //MARK: - Action
