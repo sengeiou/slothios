@@ -156,12 +156,6 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             browser.disPlay(galleryPhoto: galleryPhoto)
             browser.isShowLikeButton(isShow: false)
             self.present(browser, animated: true, completion: nil)
-            
-            browser.setActionClosure(temClosure: { (actionType) in
-                if actionType == .deleteImg {
-                    self.getGalleryPhoto(at: .top)
-                }
-            })
         }
        
     }
@@ -178,7 +172,6 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         return false
     }
 
-    
     //MARK: - NetWork
     
     func getGalleryPhoto(at: Position) {
@@ -197,14 +190,14 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
                 self.collectionView?.mj_footer.endRefreshing()
             }
             if gallery?.status == ResponseError.SUCCESS.0 {
+                if at == .top {
+                    self.dataSource.removeAll()
+                }
                 if let list = gallery?.data?.list{
                     self.collectionView?.mj_footer?.isHidden = (list.count < PageSize)
-                    if at == .top {
-                        self.dataSource.removeAll()
-                    }
                     self.dataSource.append(contentsOf: list)
-                    self.collectionView?.reloadData()
                 }
+                self.collectionView?.reloadData()
             }else{
                 HUD.flash(.label(gallery?.msg), delay: 2)
             }
