@@ -10,7 +10,7 @@ import Foundation
 
 extension SCConversationViewController{
 
-    
+
     func addPluginBoardView() {
         self.chatSessionInputBarControl.pluginBoardView.insertItem(with: UIImage(named: "icon"), title: "和TA建群", tag: 201)
     }

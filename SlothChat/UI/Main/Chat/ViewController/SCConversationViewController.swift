@@ -29,7 +29,7 @@ class SCConversationViewController: RCConversationViewController {
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
-            configGroupInputBarControl()
+//            configGroupInputBarControl()
         }
     }
 

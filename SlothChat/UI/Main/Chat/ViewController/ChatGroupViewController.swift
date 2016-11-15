@@ -17,8 +17,14 @@ class ChatGroupViewController: BaseViewController,UITableViewDelegate,UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "我的群组"
-        self.setNavtionConfirm(titleStr: "创建讨论组")
+        self.configNavgitaionItem()
         sentupView()
+    }
+    
+    func configNavgitaionItem() {
+        let button = UIButton(type: .infoDark)
+        let barItem = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barItem
     }
     
     func sentupView() {
@@ -91,5 +97,12 @@ class ChatGroupViewController: BaseViewController,UITableViewDelegate,UITableVie
                 SGLog(message: errorCode)
                 HUD.show(.labeledProgress(title: "创建讨论组失败", subtitle: nil))
         })
+    }
+    
+    //MARK:- Action
+    
+    func itemButtonClick() {
+        let pushVC = ChatGroupInfoViewController()
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
 }

@@ -145,6 +145,11 @@
 		04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B441DB665E7000721BD /* AboutUsViewController.swift */; };
 		04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B461DB79957000721BD /* UserInfoSingleView.swift */; };
 		04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B481DB7B1D9000721BD /* SexPickView.swift */; };
+		049BAAE61DDB319B00422134 /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE41DDB319B00422134 /* CreateGroup.swift */; };
+		049BAAE71DDB319B00422134 /* CreateGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE51DDB319B00422134 /* CreateGroupData.swift */; };
+		049BAAE91DDB5E1500422134 /* ChatGroupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */; };
+		049BAAEB1DDB62B800422134 /* ChatGroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAEA1DDB62B800422134 /* ChatGroupInfoCell.swift */; };
+		049BAAED1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */; };
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
@@ -456,6 +461,11 @@
 		04966B441DB665E7000721BD /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		04966B461DB79957000721BD /* UserInfoSingleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoSingleView.swift; sourceTree = "<group>"; };
 		04966B481DB7B1D9000721BD /* SexPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SexPickView.swift; sourceTree = "<group>"; };
+		049BAAE41DDB319B00422134 /* CreateGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
+		049BAAE51DDB319B00422134 /* CreateGroupData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupData.swift; sourceTree = "<group>"; };
+		049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfoViewController.swift; sourceTree = "<group>"; };
+		049BAAEA1DDB62B800422134 /* ChatGroupInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfoCell.swift; sourceTree = "<group>"; };
+		049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfoHeaderView.swift; sourceTree = "<group>"; };
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
@@ -669,6 +679,8 @@
 				040564391DD8189300D61439 /* ChatOfficialGroupVo.swift */,
 				040564331DD817E500D61439 /* ChatToken.swift */,
 				040564341DD817E500D61439 /* ChatTokenData.swift */,
+				049BAAE41DDB319B00422134 /* CreateGroup.swift */,
+				049BAAE51DDB319B00422134 /* CreateGroupData.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -804,6 +816,8 @@
 				0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */,
 				041701241DD4CD96002FADFE /* SCConversationListCell.swift */,
 				04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */,
+				049BAAEA1DDB62B800422134 /* ChatGroupInfoCell.swift */,
+				049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -831,10 +845,11 @@
 			isa = PBXGroup;
 			children = (
 				04C0312E1DD702780003B07C /* ChatFriendViewController.swift */,
+				049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */,
 				04C031301DD712FF0003B07C /* ChatGroupViewController.swift */,
+				04E404171DD87DCB007118AF /* SCConversationGroupExtension.swift */,
 				047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */,
 				047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */,
-				04E404171DD87DCB007118AF /* SCConversationGroupExtension.swift */,
 				04E404191DD88088007118AF /* SelectFriendsViewController.swift */,
 			);
 			path = ViewController;
@@ -1883,6 +1898,7 @@
 				19008BA61DBE8A6600319B86 /* UserPhotoData.swift in Sources */,
 				04FEB7E81DB76F13004509D1 /* SDWebImageDownloaderOperation.m in Sources */,
 				04FEB7F11DB76F13004509D1 /* UIView+WebCacheOperation.m in Sources */,
+				049BAAE91DDB5E1500422134 /* ChatGroupInfoViewController.swift in Sources */,
 				19008BB01DBE925800319B86 /* LoginUser.swift in Sources */,
 				04B1CEF91DBCCFDA003482DF /* BiddingStatusViewController.swift in Sources */,
 				19008BA51DBE8A6600319B86 /* UserPhoto.swift in Sources */,
@@ -1896,6 +1912,7 @@
 				04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */,
 				044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */,
 				044956931DCCBAA800CBFF45 /* MJRefreshStateHeader.m in Sources */,
+				049BAAEB1DDB62B800422134 /* ChatGroupInfoCell.swift in Sources */,
 				04ED10501DC787F300EBD3C5 /* UserGallery.swift in Sources */,
 				04FEB7B91DB76EDB004509D1 /* TAAbstractDotView.m in Sources */,
 				044956961DCCBAA800CBFF45 /* NSBundle+MJRefresh.m in Sources */,
@@ -1922,6 +1939,7 @@
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
 				04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */,
+				049BAAE71DDB319B00422134 /* CreateGroupData.swift in Sources */,
 				04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */,
 				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
@@ -1975,6 +1993,7 @@
 				04FEB7F01DB76F13004509D1 /* UIImageView+WebCache.m in Sources */,
 				04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */,
 				04B1CEF71DBCAB96003482DF /* ValuePickerView.m in Sources */,
+				049BAAED1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift in Sources */,
 				0486BB6A1DBB41C900086303 /* NSString+Base64.m in Sources */,
 				04814CFA1DCF2A410012030A /* AdsBidOrder.swift in Sources */,
 				044956891DCCBAA800CBFF45 /* MJRefreshFooter.m in Sources */,
@@ -2054,6 +2073,7 @@
 				044956971DCCBAA800CBFF45 /* UIScrollView+MJExtension.m in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */,
+				049BAAE61DDB319B00422134 /* CreateGroup.swift in Sources */,
 				04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */,
 				04405B2F1DC46E310042BB44 /* ImageScrollViewController.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,

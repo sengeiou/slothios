@@ -1,15 +1,15 @@
 //
-//  SelectFriendsViewController.swift
+//  ChatGroupInfoViewController.swift
 //  SlothChat
 //
-//  Created by fly on 2016/11/13.
+//  Created by Fly on 16/11/15.
 //  Copyright © 2016年 ssloth.com. All rights reserved.
 //
 
 import UIKit
 import PKHUD
 
-class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = ChatManager.shared.friendArray
     var selectRows = Set<Int>()
     
@@ -17,9 +17,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "选择好友"
-        self.setNavtionBack(imageStr: "close")
-        self.setNavtionConfirm(titleStr: "完成")
+        title = "群信息"
         sentupView()
     }
     

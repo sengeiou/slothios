@@ -15,6 +15,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getChatList()
         self.conversationListTableView.reloadData()
     }
     override func viewDidLoad() {
@@ -269,5 +270,15 @@ extension SCConversationListViewController: UISearchResultsUpdating{
 //        
 //        let array = (self.conversationListDataSource as NSArray).filteredArrayUsingPredicate(searchPredicate)
 
+    }
+}
+
+extension SCConversationListViewController{
+    func getChatList() {
+        let engine = NetworkEngine()
+        
+        engine.getChatList { (list) in
+            
+        }
     }
 }
