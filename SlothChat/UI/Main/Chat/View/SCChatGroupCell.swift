@@ -48,15 +48,17 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
 
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let screenWidth = UIScreen.main.bounds.width
+        let width = (screenWidth - CGFloat(12) * 6) / 7.0
+        layout.itemSize = CGSize.init(width: width, height: width)
+        
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView?.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.backgroundColor = UIColor.white
         
-        let screenWidth = UIScreen.main.bounds.width
-        let width = (screenWidth - CGFloat(12) * 6) / 7.0
-        layout.itemSize = CGSize.init(width: width, height: width)
         contentView.addSubview(collectionView!)
         
         nameLabel.snp.makeConstraints { (make) in
@@ -84,8 +86,6 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         }
         
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-//        collectionView?.backgroundColor = SGColor.blue
-        
         collectionView?.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
