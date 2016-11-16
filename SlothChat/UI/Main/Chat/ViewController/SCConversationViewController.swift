@@ -66,12 +66,11 @@ class SCConversationViewController: RCConversationViewController {
     
     override func didTapCellPortrait(_ userId: String!) {
         print("tap portrait \(userId)")
-//        let pushVC = UserInfoViewController()
-//        pushVC.mUserUuid = model.targetId
-//        
-//        let userUuid = Global.shared.globalProfile?.userUuid
-//        pushVC.likeSenderUserUuid = userUuid
-//        navigationController?.pushViewController(pushVC, animated: true)
+        let pushVC = UserInfoViewController()
+        pushVC.mUserUuid = userId
+        let userUuid = Global.shared.globalProfile?.userUuid
+        pushVC.likeSenderUserUuid = userUuid
+        navigationController?.pushViewController(pushVC, animated: true)
     }
 }
 

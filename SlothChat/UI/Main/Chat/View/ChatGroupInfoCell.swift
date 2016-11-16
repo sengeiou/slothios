@@ -41,12 +41,17 @@ class ChatGroupInfoCell: UITableViewCell {
         
         titleLabel.text = "群成员"
         titleLabel.textColor = SGColor.SGTextColor()
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
         titleLabel.isHidden = true
-        
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+        }
+
         avatarImgView.layer.cornerRadius = 20
         avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(100)
+            make.left.equalTo(110)
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.size.equalTo(CGSize.init(width: 40, height: 40))
         }
@@ -72,7 +77,7 @@ class ChatGroupInfoCell: UITableViewCell {
     func setClosurePass(temClosure: @escaping RemoveMemberClosureType){
         self.selectPassValue = temClosure
     }
-    
+
     func configCellWithObj(userObj: ChatMemberInfo) {
         let avatarUrl = URL(string: userObj.profilePicUrl!)
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)

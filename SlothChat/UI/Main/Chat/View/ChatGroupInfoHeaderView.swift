@@ -108,6 +108,10 @@ class ChatGroupInfoInputView: UIView {
     }
     
     func sentupView() {
+        titleLabel.textColor = SGColor.SGTextColor()
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
+        textfield.font = UIFont.systemFont(ofSize: 14)
+        
         addSubview(titleLabel)
         addSubview(textfield)
         addSubview(line)
