@@ -21,6 +21,19 @@ class ChatUserGroupVo : NSObject, NSCoding, Mappable{
 	}
 	required init?(map: Map){}
 	private override init(){}
+    
+    public func getChatMemberInfo(userUuid: String?) -> ChatMemberInfo?{
+        guard let userUuid = userUuid,
+              let userGroupMemberVos = userGroupMemberVos else {
+                return nil
+        }
+        for member in userGroupMemberVos {
+            if member.userUuid == userUuid{
+                return member
+            }
+        }
+        return nil
+    }
 
 	func mapping(map: Map)
 	{

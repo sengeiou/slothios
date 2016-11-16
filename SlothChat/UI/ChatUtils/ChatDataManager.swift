@@ -67,8 +67,8 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
         for tmpUserInfo in friendArray {
             if userUuid == tmpUserInfo.userId {
                 completion(tmpUserInfo)
+                return
             }
-            return
         }
         
         let engine = NetworkEngine()

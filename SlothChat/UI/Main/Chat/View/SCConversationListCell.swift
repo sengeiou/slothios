@@ -47,7 +47,7 @@ class SCConversationListCell: RCConversationBaseCell {
             make.top.equalTo(self.avatarImgView.snp.top).offset(4)
             make.right.lessThanOrEqualTo(-60)
         }
-        
+        contentLabel.textColor = SGColor.SGTextColor()
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.avatarImgView.snp.right).offset(10)
             make.top.equalTo(self.nameLabel.snp.bottom).offset(6)
@@ -78,16 +78,6 @@ class SCConversationListCell: RCConversationBaseCell {
         timeLabel.text = date.timeAgo
         
         var showUserInfo = RCUserInfo()
-        if model.conversationType == .ConversationType_DISCUSSION{
-            self.nameLabel.text = "讨论组标题"
-            self.contentLabel.text = "讨论组内容"
-            return
-        }
-        if model.conversationType == .ConversationType_GROUP{
-            self.nameLabel.text = "群聊标题"
-            self.contentLabel.text = "群聊内容"
-            return
-        }
         
         ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
             if let userInfo = userInfo {

@@ -44,18 +44,20 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         descLabel.textColor = SGColor.SGBgGrayColor()
         badgeView.backgroundColor = SGColor.SGMainColor()
         
-        lastUserImgView.layer.cornerRadius = 24
+        lastUserImgView.layer.cornerRadius = 16
         lastUserImgView.layer.masksToBounds = true
         
 
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let screenWidth = UIScreen.main.bounds.width
-        let width = (screenWidth - CGFloat(12) * 6) / 7.0
+//        let screenWidth = UIScreen.main.bounds.width
+//        let width = (screenWidth - CGFloat(12) * 6) / 7.0
+        let width = 32
+        
         layout.itemSize = CGSize.init(width: width, height: width)
         
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView?.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
+        collectionView?.register(SCChatGroupMemberCell.self, forCellWithReuseIdentifier: "SCChatGroupMemberCell")
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.backgroundColor = UIColor.white
@@ -86,20 +88,22 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             make.right.lessThanOrEqualTo(-10)
         }
         
-        collectionView?.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
+        collectionView?.isUserInteractionEnabled = false
+        collectionView?.register(SCChatGroupMemberCell.self, forCellWithReuseIdentifier: "SCChatGroupMemberCell")
         collectionView?.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(self.descLabel.snp.bottom).offset(10)
-            make.height.equalTo(30)
+            make.height.equalTo(32)
         }
         
         lastUserImgView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo((self.collectionView?.snp.bottom)!).offset(10)
-            make.size.equalTo(CGSize.init(width: 48, height: 48))
+            make.size.equalTo(CGSize.init(width: 32, height: 32))
         }
         
+        contentLabel.textColor = SGColor.SGTextColor()
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.lastUserImgView.snp.right).offset(10)
             make.centerY.equalTo(self.lastUserImgView.snp.centerY)
@@ -107,32 +111,43 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         }
     }
     
-    public func configCellWithObject(userGroup: ChatUserGroupVo){
-        nameLabel.text = userGroup.userGroupName
-        dataSource = userGroup.userGroupMemberVos!
-        collectionView?.reloadData()
-    }
-    
-    public func configCellWithObject(model: RCConversationModel) {
+    public func configCellWithObject(userGroup: ChatUserGroupVo,model: RCConversationModel){
         
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0
         
-        nameLabel.text = model.objectName
-        
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
         
-        if model.conversationType == .ConversationType_DISCUSSION{
-            self.nameLabel.text = "讨论组标题123"
-            self.contentLabel.text = "讨论组内容123"
-            return
+        nameLabel.text = userGroup.userGroupName
+        dataSource = userGroup.userGroupMemberVos!
+        collectionView?.reloadData()
+        
+        if let member = userGroup.getChatMemberInfo(userUuid: model.senderUserId) {
+            let avatarUrl = URL(string: member.profilePicUrl!)
+            self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            
+            if model.lastestMessage.isKind(of: RCTextMessage.self) {
+                self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+            }else if model.lastestMessage.isKind(of: RCImageMessage.self){
+                self.contentLabel.text = member.nickname! + "：[图片]"
+            }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
+                self.contentLabel.text = member.nickname! + "：[语音]"
+            }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
+                self.contentLabel.text = member.nickname! + "：[位置]"
+            }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+                self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
+            }
         }
-        if model.conversationType == .ConversationType_GROUP{
-            self.nameLabel.text = "群聊标题"
-            self.contentLabel.text = "群聊内容"
-            return
+    }
+    
+    func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {
+        let myself = RCIMClient.shared().currentUserInfo
+        
+        if model.senderUserId == myself?.userId {
+            return myself!
         }
+        return userInfo
     }
     
     //MARK:- UICollectionViewDelegate,UICollectionViewDataSource
@@ -143,7 +158,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath) as! MyPhotosCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SCChatGroupMemberCell", for: indexPath) as! SCChatGroupMemberCell
         let chatUser = dataSource[indexPath.row]
         cell.configCellObject(chatUser:chatUser)
         return cell
