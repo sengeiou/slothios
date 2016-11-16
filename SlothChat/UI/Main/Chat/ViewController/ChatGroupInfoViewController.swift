@@ -91,8 +91,12 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ChatGroupInfoCell = tableView.dequeueReusableCell(withIdentifier: "ChatGroupInfoCell", for: indexPath) as! ChatGroupInfoCell
         cell.titleLabel.isHidden = (indexPath.row != 0)
+        cell.removeButton.isHidden = (indexPath.row == 0)
         let userObj = dataSource[indexPath.row]
         cell.configCellWithObj(userObj: userObj)
+        if indexPath.row == 0 {
+            cell.nameLabel.text = userObj.nickname! + " (群主)"
+        }
         cell.indexPath = indexPath
         
         cell.setClosurePass { (actionIndexPath) in
