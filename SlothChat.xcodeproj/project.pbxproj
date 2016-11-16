@@ -145,8 +145,8 @@
 		04966B451DB665E7000721BD /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B441DB665E7000721BD /* AboutUsViewController.swift */; };
 		04966B471DB79957000721BD /* UserInfoSingleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B461DB79957000721BD /* UserInfoSingleView.swift */; };
 		04966B491DB7B1D9000721BD /* SexPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B481DB7B1D9000721BD /* SexPickView.swift */; };
-		049BAAE61DDB319B00422134 /* CreateGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE41DDB319B00422134 /* CreateGroup.swift */; };
-		049BAAE71DDB319B00422134 /* CreateGroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE51DDB319B00422134 /* CreateGroupData.swift */; };
+		049BAAE61DDB319B00422134 /* GroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE41DDB319B00422134 /* GroupInfo.swift */; };
+		049BAAE71DDB319B00422134 /* GroupInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE51DDB319B00422134 /* GroupInfoData.swift */; };
 		049BAAE91DDB5E1500422134 /* ChatGroupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */; };
 		049BAAEB1DDB62B800422134 /* ChatGroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAEA1DDB62B800422134 /* ChatGroupInfoCell.swift */; };
 		049BAAED1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */; };
@@ -461,8 +461,8 @@
 		04966B441DB665E7000721BD /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		04966B461DB79957000721BD /* UserInfoSingleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoSingleView.swift; sourceTree = "<group>"; };
 		04966B481DB7B1D9000721BD /* SexPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SexPickView.swift; sourceTree = "<group>"; };
-		049BAAE41DDB319B00422134 /* CreateGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroup.swift; sourceTree = "<group>"; };
-		049BAAE51DDB319B00422134 /* CreateGroupData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupData.swift; sourceTree = "<group>"; };
+		049BAAE41DDB319B00422134 /* GroupInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInfo.swift; sourceTree = "<group>"; };
+		049BAAE51DDB319B00422134 /* GroupInfoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInfoData.swift; sourceTree = "<group>"; };
 		049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfoViewController.swift; sourceTree = "<group>"; };
 		049BAAEA1DDB62B800422134 /* ChatGroupInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfoCell.swift; sourceTree = "<group>"; };
 		049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupInfoHeaderView.swift; sourceTree = "<group>"; };
@@ -679,8 +679,8 @@
 				040564391DD8189300D61439 /* ChatOfficialGroupVo.swift */,
 				040564331DD817E500D61439 /* ChatToken.swift */,
 				040564341DD817E500D61439 /* ChatTokenData.swift */,
-				049BAAE41DDB319B00422134 /* CreateGroup.swift */,
-				049BAAE51DDB319B00422134 /* CreateGroupData.swift */,
+				049BAAE41DDB319B00422134 /* GroupInfo.swift */,
+				049BAAE51DDB319B00422134 /* GroupInfoData.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1939,7 +1939,7 @@
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
 				04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */,
-				049BAAE71DDB319B00422134 /* CreateGroupData.swift in Sources */,
+				049BAAE71DDB319B00422134 /* GroupInfoData.swift in Sources */,
 				04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */,
 				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
@@ -2073,7 +2073,7 @@
 				044956971DCCBAA800CBFF45 /* UIScrollView+MJExtension.m in Sources */,
 				04F4D6EF1DB50AAA00F89790 /* SettingViewController.swift in Sources */,
 				19008BAC1DBE8D7C00319B86 /* UserSignupModel.swift in Sources */,
-				049BAAE61DDB319B00422134 /* CreateGroup.swift in Sources */,
+				049BAAE61DDB319B00422134 /* GroupInfo.swift in Sources */,
 				04B499B11DBFB7F4004659BA /* SysConfigData.swift in Sources */,
 				04405B2F1DC46E310042BB44 /* ImageScrollViewController.swift in Sources */,
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,

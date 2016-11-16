@@ -55,7 +55,7 @@ class ChatGroupInfoCell: UITableViewCell {
         }
         removeButton.setTitle("移除", for: .normal)
         removeButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
-        
+        removeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         removeButton.snp.makeConstraints { (make) in
             make.right.equalTo(0)
             make.centerY.equalTo(self.contentView.snp.centerY)

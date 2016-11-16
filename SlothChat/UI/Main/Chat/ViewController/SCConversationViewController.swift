@@ -30,6 +30,7 @@ class SCConversationViewController: RCConversationViewController {
             addPluginBoardView()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
 //            configGroupInputBarControl()
+            configNavgitaionItem()
         }
     }
 
@@ -68,5 +69,21 @@ class SCConversationViewController: RCConversationViewController {
 //        let userUuid = Global.shared.globalProfile?.userUuid
 //        pushVC.likeSenderUserUuid = userUuid
 //        navigationController?.pushViewController(pushVC, animated: true)
+    }
+}
+
+extension SCConversationViewController{
+    func configNavgitaionItem() {
+        let button = UIButton(type: .infoDark)
+        button.addTarget(self, action: #selector(itemButtonClick), for: .touchUpInside)
+        let barItem = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = barItem
+    }
+    
+    //MARK:- Action
+    
+    func itemButtonClick() {
+        let pushVC = ChatGroupInfoViewController()
+        self.navigationController?.pushViewController(pushVC, animated: true)
     }
 }

@@ -7,14 +7,169 @@
 //
 
 import UIKit
+import PKHUD
 
 class ChatGroupInfoHeaderView: UIView {
+    let groupName = ChatGroupInfoInputView()
+    let nickName = ChatGroupInfoInputView()
     
+    var groupInfo: GroupInfoData?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sentupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func sentupView() {
+        addSubview(groupName)
+        addSubview(nickName)
+        
+        groupName.snp.makeConstraints { (make) in
+            make.left.top.right.equalTo(0)
+            make.height.equalTo(44)
+        }
+        nickName.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.top.equalTo(groupName.snp.bottom)
+            make.height.equalTo(44)
+            make.bottom.equalTo(0)
+        }
+    }
+    
+    func configWithObject(tmpGroupInfo: GroupInfoData?) {
+        guard let tmpGroupInfo = tmpGroupInfo else {
+            return
+        }
+        groupInfo = tmpGroupInfo
+        groupName.configInputView(titleStr: "群组名", contentStr: tmpGroupInfo.groupDisplayName!)
+        nickName.configInputView(titleStr: "群内名称", contentStr: tmpGroupInfo.groupDisplayName!)
+        groupName.editButton.addTarget(self, action: #selector(groupNameEditButtonClick), for: .touchUpInside)
+        nickName.editButton.addTarget(self, action: #selector(nickNameEditButtonClick), for: .touchUpInside)
 
+
+    }
     
+    func groupNameEditButtonClick() {
+        groupName.isEditing = !groupName.isEditing
+        
+        let content = groupName.getInputContent()
+        if groupName.isEditing == false &&
+            groupName.getSumbitValid() &&
+            content != groupInfo?.groupDisplayName! {
+            modifyGroupName(newName: content!)
+        }
+    }
+    
+    func nickNameEditButtonClick() {
+        
+    }
+    
+    func modifyGroupName(newName: String) {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let adminUserUuid = Global.shared.globalProfile?.userUuid
+        
+        engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupInfo?.uuid, adminUserUuid: adminUserUuid){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("修改群组名成功"), delay: 2)
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
 }
 
-//class ChatGroupInfoInputView: UIView {
-//    let titleLabel = UILabel()
-//    
-//}
+class ChatGroupInfoInputView: UIView {
+    let titleLabel = UILabel()
+    let textfield = UITextField()
+    let line = UIView()
+    
+    let editButton = UIButton()
+    
+    var isEditing = false{
+        didSet{
+            self.allowEditing(allowEdit: isEditing)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sentupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func sentupView() {
+        addSubview(titleLabel)
+        addSubview(textfield)
+        addSubview(line)
+        addSubview(editButton)
+
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self)
+            make.left.equalTo(10)
+            make.width.equalTo(80)
+        }
+        
+        textfield.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self)
+            make.left.equalTo(titleLabel.snp.right).offset(10)
+            make.right.equalTo(-70)
+        }
+        
+        line.backgroundColor = SGColor.SGLineColor()
+        line.snp.makeConstraints { (make) in
+            make.height.equalTo(1)
+            make.bottom.equalTo(0)
+            make.left.right.equalTo(textfield)
+        }
+        
+        editButton.setTitle("编辑", for: .normal)
+        editButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        editButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
+        editButton.snp.makeConstraints { (make) in
+            make.top.bottom.right.equalTo(0)
+            make.width.equalTo(60)
+        }
+    }
+    
+    func editButtonClick() {
+        self.isEditing = !self.isEditing
+    }
+    
+    func allowEditing(allowEdit: Bool) {
+        textfield.isEnabled = allowEdit
+        line.isHidden = !allowEdit
+        
+        editButton.setTitle((allowEdit ? "完成" : "编辑"), for: .normal)
+    }
+    
+    func configInputView(titleStr: String,contentStr: String) {
+        titleLabel.text = titleStr
+        textfield.text = contentStr
+    }
+    
+    func configContent(contentStr: String) {
+        textfield.text = contentStr
+    }
+    
+    func getInputContent() -> String? {
+        return textfield.text
+    }
+    
+    func getSumbitValid() -> Bool {
+        let input = getInputContent()
+        if (input?.isEmpty)! {
+            return false
+        }else{
+            return true
+        }
+    }
+}

@@ -9,7 +9,7 @@ import Foundation
 import ObjectMapper
 
 
-class CreateGroupData : NSObject, NSCoding, Mappable{
+class GroupInfoData : NSObject, NSCoding, Mappable{
 
 	var country : String?
 	var coverPicUrl : String?
@@ -20,7 +20,7 @@ class CreateGroupData : NSObject, NSCoding, Mappable{
 
 
 	class func newInstance(map: Map) -> Mappable?{
-		return CreateGroupData()
+		return GroupInfoData()
 	}
 	required init?(map: Map){}
 	private override init(){}

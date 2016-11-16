@@ -1,5 +1,5 @@
 //
-//	CreateGroup.swift
+//	GroupInfo.swift
 //
 //	Create by Fly on 15/11/2016
 //	Copyright © 2016. All rights reserved.
@@ -9,15 +9,15 @@ import Foundation
 import ObjectMapper
 
 
-class CreateGroup : NSObject, NSCoding, Mappable{
+class GroupInfo : NSObject, NSCoding, Mappable{
 
-	var data : CreateGroupData?
+	var data : GroupInfoData?
 	var msg : String?
 	var status : String?
 
 
 	class func newInstance(map: Map) -> Mappable?{
-		return CreateGroup()
+		return GroupInfo()
 	}
 	required init?(map: Map){}
 	private override init(){}
@@ -36,7 +36,7 @@ class CreateGroup : NSObject, NSCoding, Mappable{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         data = aDecoder.decodeObject(forKey: "data") as? CreateGroupData
+         data = aDecoder.decodeObject(forKey: "data") as? GroupInfoData
          msg = aDecoder.decodeObject(forKey: "msg") as? String
          status = aDecoder.decodeObject(forKey: "status") as? String
 

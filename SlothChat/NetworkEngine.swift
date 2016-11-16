@@ -98,6 +98,14 @@ enum API_URI:String {
     //case get_GroupName = "/api/userGroup/{userGroupUuid}?token={token}"
     //35.删除指定的创建用户群组
     //case delteUserGroup = "/api/userGroup/{userGroupUuid}?token={token}"
+    //36.新加成员到指定群组
+    case handle_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember?token={token}"
+    //37.修改指定群组的某个指定群成员的显示名称
+    case modify_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember/{userGroupMemberUuid}?token={token}"
+    //38.获取指定群组的所有群成员资料，需分页参数
+//    case get_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember?token={token}"
+    //39.自己退出群，或者管理员删除指定群组的某个指定群成员
+//    case delete_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember/{userGroupMemberUuid}?token={token}"
 
 }
 
@@ -818,7 +826,7 @@ class NetworkEngine: NSObject {
     }
     
     //32.创建用户群组
-    func postCreateGroup(memberUserUuidList: [String]?,groupDisplayName: String?, completeHandler :@escaping(_ response:CreateGroup?) -> Void)  -> Void {
+    func postCreateGroup(memberUserUuidList: [String]?,groupDisplayName: String?, completeHandler :@escaping(_ response:GroupInfo?) -> Void)  -> Void {
         
         guard let token = Global.shared.globalLogin?.token,
         let adminUserUuid = Global.shared.globalProfile?.userUuid,
@@ -836,7 +844,7 @@ class NetworkEngine: NSObject {
             "groupDisplayName": groupDisplayName,
             "adminUserUuid": adminUserUuid], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<CreateGroup>) in
+        Alamofire.request(request).responseObject { (response:DataResponse<GroupInfo>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
@@ -869,7 +877,7 @@ class NetworkEngine: NSObject {
         }
     }
     //34.（这次可能用不到）获取用户群组信息
-    func getUserGroup(userGroupUuid: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func getUserGroup(userGroupUuid: String?, completeHandler :@escaping(_ response:GroupInfo?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token,
               let userGroupUuid = userGroupUuid else {
             SGLog(message: "数据为空")
@@ -880,7 +888,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<Response>) in
+        Alamofire.request(URLString).responseObject { (response:DataResponse<GroupInfo>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }
@@ -906,4 +914,95 @@ class NetworkEngine: NSObject {
             }
         }
     }
+    //36.新加成员到指定群组
+    func postUserGroupMember(userGroupUuid: String?,userUuid: String?,userDisplayName: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let userUuid = userUuid,
+            let userGroupUuid = userGroupUuid ,
+            let userDisplayName = userDisplayName  else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.handle_userGroupMember.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
+        
+        let request = HTTPRequestGenerator(withParam:[
+            "userUuid" : userUuid,
+            "userGroupUuid" : userGroupUuid,
+            "userDisplayName" : userDisplayName], method: .post, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    //37.修改指定群组的某个指定群成员的显示名称
+    func putUserGroupMember(userGroupUuid: String?,userGroupMemberUuid: String?,userDisplayName: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let userGroupUuid = userGroupUuid,
+            let userDisplayName = userDisplayName,
+            let userGroupMemberUuid = userGroupMemberUuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.modify_userGroupMember.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
+        URLString = URLString.replacingOccurrences(of: "{userGroupMemberUuid}", with: userGroupMemberUuid)
+        
+        let request = HTTPRequestGenerator(withParam:
+            ["userDisplayName" : userDisplayName]
+            , method: .put, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    //38.获取指定群组的所有群成员资料，需分页参数
+    func getGroupMemberUserList(userGroupUuid: String?, completeHandler :@escaping(_ response:GroupInfo?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let userGroupUuid = userGroupUuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.handle_userGroupMember.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
+        
+        Alamofire.request(URLString).responseObject { (response:DataResponse<GroupInfo>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    //39.自己退出群，或者管理员删除指定群组的某个指定群成员
+    func deleteUserGroupMember(userGroupUuid: String?,userGroupMemberUuid: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let userGroupUuid = userGroupUuid,
+            let userGroupMemberUuid = userGroupMemberUuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.modify_userGroupMember.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
+        URLString = URLString.replacingOccurrences(of: "{userGroupMemberUuid}", with: userGroupMemberUuid)
+
+        let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }
+        }
+    }
+    
 }
