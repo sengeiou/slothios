@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import PKHUD
 
 class SCConversationListViewController: RCConversationListViewController,RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate {
 
     var search = UISearchController()
     var searchArray = [RCConversationModel]()
+    var chatList: ChatList?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -164,6 +166,10 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
            model.conversationType == .ConversationType_GROUP {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCChatGroupCell", for: indexPath) as! SCChatGroupCell
             cell.configCellWithObject(model: model)
+            if let userGroup = self.chatList?.data?.getChatUserGroupVo(groupId: model.targetId) {
+                cell.configCellWithObject(userGroup: userGroup)
+            }
+            
             return cell
         }
         return UITableViewCell()
@@ -238,6 +244,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         }else if model.conversationType == RCConversationType.ConversationType_GROUP ||
             model.conversationType == RCConversationType.ConversationType_DISCUSSION{
             chat.title = model.conversationTitle;
+            chat.groupUuid = model.targetId
         }
         navigationController?.pushViewController(chat, animated: true)
     }
@@ -277,8 +284,13 @@ extension SCConversationListViewController{
     func getChatList() {
         let engine = NetworkEngine()
         
-        engine.getChatList { (list) in
-            
+        engine.getChatList { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.chatList = response
+                self.conversationListTableView.reloadData()
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
         }
     }
 }

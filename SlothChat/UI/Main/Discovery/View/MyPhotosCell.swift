@@ -24,7 +24,7 @@ class MyPhotosCell: UICollectionViewCell {
         imgView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(2, 2, 2, 2))
         }
-        
+        flagView.isHidden = true
         contentView.addSubview(flagView)
         flagView.snp.makeConstraints { (make) in
             make.top.equalTo(6)
@@ -46,6 +46,13 @@ class MyPhotosCell: UICollectionViewCell {
         flagView.isHidden = true
         flagView.setIsDisplayAsBidAds(displayAsBidAds: photo.displayAsBidAds!)
         flagView.setIsParticipateBidAds(participateBidAds: photo.participateBidAds!)
+    }
+    
+    func configCellObject(chatUser: ChatMemberInfo) {
+        if chatUser.profilePicUrl != nil {
+            let url = URL(string: chatUser.profilePicUrl!)
+            imgView.kf.setImage(with: url, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

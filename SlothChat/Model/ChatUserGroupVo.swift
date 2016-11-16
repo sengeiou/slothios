@@ -1,5 +1,5 @@
 //
-//	ChatOfficialGroupVo.swift
+//	ChatUserGroupVo.swift
 //
 //	Create by Fly on 16/11/2016
 //	Copyright © 2016. All rights reserved.
@@ -9,26 +9,22 @@ import Foundation
 import ObjectMapper
 
 
-class ChatOfficialGroupVo : NSObject, NSCoding, Mappable{
+class ChatUserGroupVo : NSObject, NSCoding, Mappable{
 
-	var officialGroupMemberVos : [ChatMemberInfo]?
-	var topicMsg : String?
-	var topicPicUrl : String?
+	var userGroupMemberVos : [ChatMemberInfo]?
 	var userGroupName : String?
 	var userGroupUuid : String?
 
 
 	class func newInstance(map: Map) -> Mappable?{
-		return ChatOfficialGroupVo()
+		return ChatUserGroupVo()
 	}
 	required init?(map: Map){}
 	private override init(){}
 
 	func mapping(map: Map)
 	{
-		officialGroupMemberVos <- map["officialGroupMemberVos"]
-		topicMsg <- map["topicMsg"]
-		topicPicUrl <- map["topicPicUrl"]
+		userGroupMemberVos <- map["userGroupMemberVos"]
 		userGroupName <- map["userGroupName"]
 		userGroupUuid <- map["userGroupUuid"]
 		
@@ -40,9 +36,7 @@ class ChatOfficialGroupVo : NSObject, NSCoding, Mappable{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         officialGroupMemberVos = aDecoder.decodeObject(forKey: "officialGroupMemberVos") as? [ChatMemberInfo]
-         topicMsg = aDecoder.decodeObject(forKey: "topicMsg") as? String
-         topicPicUrl = aDecoder.decodeObject(forKey: "topicPicUrl") as? String
+         userGroupMemberVos = aDecoder.decodeObject(forKey: "userGroupMemberVos") as? [ChatMemberInfo]
          userGroupName = aDecoder.decodeObject(forKey: "userGroupName") as? String
          userGroupUuid = aDecoder.decodeObject(forKey: "userGroupUuid") as? String
 
@@ -54,14 +48,8 @@ class ChatOfficialGroupVo : NSObject, NSCoding, Mappable{
     */
     @objc func encode(with aCoder: NSCoder)
 	{
-		if officialGroupMemberVos != nil{
-			aCoder.encode(officialGroupMemberVos, forKey: "officialGroupMemberVos")
-		}
-		if topicMsg != nil{
-			aCoder.encode(topicMsg, forKey: "topicMsg")
-		}
-		if topicPicUrl != nil{
-			aCoder.encode(topicPicUrl, forKey: "topicPicUrl")
+		if userGroupMemberVos != nil{
+			aCoder.encode(userGroupMemberVos, forKey: "userGroupMemberVos")
 		}
 		if userGroupName != nil{
 			aCoder.encode(userGroupName, forKey: "userGroupName")

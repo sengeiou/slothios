@@ -1,5 +1,5 @@
 //
-//	ChatList.swift
+//	GroupMember.swift
 //
 //	Create by Fly on 16/11/2016
 //	Copyright © 2016. All rights reserved.
@@ -9,15 +9,15 @@ import Foundation
 import ObjectMapper
 
 
-class ChatList : NSObject, NSCoding, Mappable{
+class GroupMember : NSObject, NSCoding, Mappable{
 
-	var data : ChatListData?
+	var data : GroupMemberData?
 	var msg : String?
 	var status : String?
 
 
 	class func newInstance(map: Map) -> Mappable?{
-		return ChatList()
+		return GroupMember()
 	}
 	required init?(map: Map){}
 	private override init(){}
@@ -36,7 +36,7 @@ class ChatList : NSObject, NSCoding, Mappable{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         data = aDecoder.decodeObject(forKey: "data") as? ChatListData
+         data = aDecoder.decodeObject(forKey: "data") as? GroupMemberData
          msg = aDecoder.decodeObject(forKey: "msg") as? String
          status = aDecoder.decodeObject(forKey: "status") as? String
 

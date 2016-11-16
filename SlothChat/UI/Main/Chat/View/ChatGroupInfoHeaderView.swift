@@ -27,7 +27,8 @@ class ChatGroupInfoHeaderView: UIView {
     func sentupView() {
         addSubview(groupName)
         addSubview(nickName)
-        
+        groupName.isEditing = false
+        nickName.isEditing = false
         groupName.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
             make.height.equalTo(44)
@@ -46,7 +47,7 @@ class ChatGroupInfoHeaderView: UIView {
         }
         groupInfo = tmpGroupInfo
         groupName.configInputView(titleStr: "群组名", contentStr: tmpGroupInfo.groupDisplayName!)
-        nickName.configInputView(titleStr: "群内名称", contentStr: tmpGroupInfo.groupDisplayName!)
+        nickName.configInputView(titleStr: "我的群昵称", contentStr: tmpGroupInfo.groupDisplayName!)
         groupName.editButton.addTarget(self, action: #selector(groupNameEditButtonClick), for: .touchUpInside)
         nickName.editButton.addTarget(self, action: #selector(nickNameEditButtonClick), for: .touchUpInside)
 
@@ -115,7 +116,7 @@ class ChatGroupInfoInputView: UIView {
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             make.left.equalTo(10)
-            make.width.equalTo(80)
+            make.width.equalTo(100)
         }
         
         textfield.snp.makeConstraints { (make) in

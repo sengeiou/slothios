@@ -1,8 +1,8 @@
 //
 //	Data.swift
 //
-//	Create by Fly on 13/11/2016
-//	Copyright © 2016 guahao. All rights reserved.
+//	Create by Fly on 16/11/2016
+//	Copyright © 2016. All rights reserved.
 //	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation 
@@ -12,7 +12,7 @@ import ObjectMapper
 class ChatListData : NSObject, NSCoding, Mappable{
 
 	var chatOfficialGroupVo : ChatOfficialGroupVo?
-	var chatUserGroupVos : [AnyObject]?
+	var chatUserGroupVos : [ChatUserGroupVo]?
 	var privateChatVos : [AnyObject]?
 
 
@@ -21,6 +21,19 @@ class ChatListData : NSObject, NSCoding, Mappable{
 	}
 	required init?(map: Map){}
 	private override init(){}
+    
+    public func getChatUserGroupVo(groupId: String?) -> ChatUserGroupVo?{
+        guard let groupId = groupId,
+              let chatUserGroupVos = chatUserGroupVos else {
+              return nil
+        }
+        for group in chatUserGroupVos {
+            if group.userGroupUuid == groupId{
+                return group
+            }
+        }
+        return nil
+    }
 
 	func mapping(map: Map)
 	{
@@ -37,7 +50,7 @@ class ChatListData : NSObject, NSCoding, Mappable{
     @objc required init(coder aDecoder: NSCoder)
 	{
          chatOfficialGroupVo = aDecoder.decodeObject(forKey: "chatOfficialGroupVo") as? ChatOfficialGroupVo
-         chatUserGroupVos = aDecoder.decodeObject(forKey: "chatUserGroupVos") as? [AnyObject]
+         chatUserGroupVos = aDecoder.decodeObject(forKey: "chatUserGroupVos") as? [ChatUserGroupVo]
          privateChatVos = aDecoder.decodeObject(forKey: "privateChatVos") as? [AnyObject]
 
 	}

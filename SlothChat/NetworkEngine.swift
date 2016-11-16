@@ -139,11 +139,11 @@ class NetworkEngine: NSObject {
     func verificationResponse(value: NSObject?) -> Bool {
         guard let value = value else {
             SGLog(message: "无对象")
-            return true
+            return false
         }
         guard let code = value.value(forKey: "status") else {
             SGLog(message: "无status")
-            return true
+            return false
         }
         SGLog(message: String(describing: value))
         SGLog(message: value.allPropertyNamesAndValues())
@@ -164,11 +164,21 @@ class NetworkEngine: NSObject {
         return false
     }
     
+    func showHandleError() {
+        
+        HUD.flash(.label("操作异常"), delay: 2)
+    }
+    
+    //MARK:- B1.用户模块
     //1.注册选择国家信息列表 GET
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
-            completeHandler(response.result.value);
+            if self.verificationResponse(value: response.result.value) {
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
         }
     }
     
@@ -178,7 +188,11 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<SMS>) in
-            completeHandler(response.result.value);
+            if self.verificationResponse(value: response.result.value) {
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
         }
         
     }
@@ -190,7 +204,11 @@ class NetworkEngine: NSObject {
                                                        "verifyCode":verifyCode], URLString: URLString);
         Alamofire.request(request)
             .responseObject { (response:DataResponse<SMS>) in
-                completeHandler(response.result.value);
+                if self.verificationResponse(value: response.result.value) {
+                    completeHandler(response.result.value)
+                }else{
+                    self.showHandleError()
+                }
         }
         
     }
@@ -211,7 +229,11 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        completeHandler(response.result.value);
+                        if self.verificationResponse(value: response.result.value) {
+                            completeHandler(response.result.value)
+                        }else{
+                            self.showHandleError()
+                        }
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -234,7 +256,11 @@ class NetworkEngine: NSObject {
             ], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
-            completeHandler(response.result.value);
+            if self.verificationResponse(value: response.result.value) {
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
         }
     }
     
@@ -256,7 +282,13 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<LoginModel>) in
-                        completeHandler(response.result.value);
+                        completeHandler(response.result.value)
+
+//                        if self.verificationResponse(value: response.result.value) {
+//                            completeHandler(response.result.value)
+//                        }else{
+//                            self.showHandleError()
+//                        }
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -287,9 +319,10 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<Response>) in
-                        let code = response.result.value?.status
-                        if self.validAuthCode(code: code) {
+                        if self.verificationResponse(value: response.result.value) {
                             completeHandler(response.result.value)
+                        }else{
+                            self.showHandleError()
                         }
                     }
                 case .failure(let encodingError):
@@ -325,6 +358,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -354,6 +389,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -375,6 +412,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -397,6 +436,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -414,6 +455,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -437,6 +480,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -463,6 +508,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -492,9 +539,10 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        let code = response.result.value?.status
-                        if self.validAuthCode(code: code) {
+                        if self.verificationResponse(value: response.result.value) {
                             completeHandler(response.result.value)
+                        }else{
+                            self.showHandleError()
                         }
                     }
                 case .failure(let encodingError):
@@ -525,6 +573,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -548,6 +598,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -569,11 +621,13 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
     
-    //MARK:B2.探索图片模块
+    //MARK:-B2.探索图片模块
     //21 探索图片空间，新添加图片 POST
     func postPhotoGallery(picFile: UIImage,completeHandler :@escaping(_ userPhoto:GalleryPhoto?) -> Void) -> Void {
         guard let token = Global.shared.globalLogin?.token,
@@ -605,9 +659,10 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<GalleryPhoto>) in
-                        let code = response.result.value?.status
-                        if self.validAuthCode(code: code) {
+                        if self.verificationResponse(value: response.result.value) {
                             completeHandler(response.result.value)
+                        }else{
+                            self.showHandleError()
                         }
                     }
                 case .failure(let encodingError):
@@ -632,6 +687,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -656,6 +713,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -678,6 +737,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -700,6 +761,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -719,6 +782,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -741,6 +806,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -766,9 +833,12 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<BidAdResponse>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
+    //MARK:- B3.聊天模块
     //29.获取聊天SDK需要的TOKEN
     func getChatToken(completeHandler :@escaping(_ response:ChatToken?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token,
@@ -784,6 +854,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString).responseObject { (response:DataResponse<ChatToken>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -803,12 +875,14 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString).responseObject { (response:DataResponse<ChatList>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
     
     //31.分页获取某用户UUID所在的，唯一官方群组的所有群成员信息
-    func getOfficialGroupMember(officialGroupUuid: String, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func getOfficialGroupMember(officialGroupUuid: String, completeHandler :@escaping(_ response:OfficialGroup?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token else {
                 SGLog(message: "数据为空")
                 return
@@ -818,9 +892,11 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{officialGroupUuid}", with: officialGroupUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<Response>) in
+        Alamofire.request(URLString).responseObject { (response:DataResponse<OfficialGroup>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -847,6 +923,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<GroupInfo>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -873,6 +951,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -891,6 +971,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(URLString).responseObject { (response:DataResponse<GroupInfo>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -911,6 +993,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -936,6 +1020,8 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -961,11 +1047,13 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
     //38.获取指定群组的所有群成员资料，需分页参数
-    func getGroupMemberUserList(userGroupUuid: String?, completeHandler :@escaping(_ response:GroupInfo?) -> Void)  -> Void {
+    func getGroupMemberUserList(userGroupUuid: String?, completeHandler :@escaping(_ response:GroupMember?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token,
             let userGroupUuid = userGroupUuid else {
                 SGLog(message: "数据为空")
@@ -976,9 +1064,11 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<GroupInfo>) in
+        Alamofire.request(URLString).responseObject { (response:DataResponse<GroupMember>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
@@ -1001,8 +1091,11 @@ class NetworkEngine: NSObject {
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
             }
         }
     }
+    //40.获取指定官方群组 的所有官方群成员资料，需分页参数
     
 }

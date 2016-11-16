@@ -16,6 +16,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     let badgeView = UIView()
     
     var collectionView: UICollectionView?
+    var dataSource = [ChatMemberInfo]()
     
     let lastUserImgView = UIImageView()
     let contentLabel = UILabel()
@@ -85,7 +86,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             make.right.lessThanOrEqualTo(-10)
         }
         
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView?.register(MyPhotosCell.self, forCellWithReuseIdentifier: "MyPhotosCell")
         collectionView?.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
@@ -104,6 +105,12 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             make.centerY.equalTo(self.lastUserImgView.snp.centerY)
             make.right.lessThanOrEqualTo(-60)
         }
+    }
+    
+    public func configCellWithObject(userGroup: ChatUserGroupVo){
+        nameLabel.text = userGroup.userGroupName
+        dataSource = userGroup.userGroupMemberVos!
+        collectionView?.reloadData()
     }
     
     public func configCellWithObject(model: RCConversationModel) {
@@ -131,12 +138,14 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     //MARK:- UICollectionViewDelegate,UICollectionViewDataSource
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return dataSource.count
     }
     
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPhotosCell", for: indexPath) as! MyPhotosCell
+        let chatUser = dataSource[indexPath.row]
+        cell.configCellObject(chatUser:chatUser)
         return cell
     }
     

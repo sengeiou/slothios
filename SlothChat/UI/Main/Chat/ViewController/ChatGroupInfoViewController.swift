@@ -10,9 +10,8 @@ import UIKit
 import PKHUD
 
 class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    var dataSource = ChatManager.shared.friendArray
+    var dataSource = [ChatMemberInfo]()
     
-    var groupUuid: String?
     var groupInfo: GroupInfoData?
     
     let headerView = ChatGroupInfoHeaderView()
@@ -22,9 +21,8 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         super.viewDidLoad()
         title = "群信息"
         sentupView()
-        groupUuid = "userGroup20161115233117d328e9d934dd443f84"
-
-        getGroupInfo()
+        setNavtionBack(imageStr: "go-back")
+        getGroupMemberList()
     }
     
     func sentupView() {
@@ -43,6 +41,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         let screenWidth = UIScreen.main.bounds.size.width
         headerView.frame = CGRect.init(x: 0, y: 0, width: screenWidth, height: 88)
         tableView.tableHeaderView = headerView
+        headerView.configWithObject(tmpGroupInfo: groupInfo)
         tableView.tableFooterView = UIView()
 
         let bottomView = UIView()
@@ -60,23 +59,23 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         exitButton.addTarget(self, action:#selector(exitButtonClick), for: .touchUpInside)
         bottomView.addSubview(exitButton)
         
-        let removeButton = UIButton.init(type: .custom)
-        removeButton.setTitle("删除群", for: .normal)
-        removeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        removeButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
-        removeButton.addTarget(self, action:#selector(removeButtonClick), for: .touchUpInside)
+        let deleteButton = UIButton.init(type: .custom)
+        deleteButton.setTitle("删除群", for: .normal)
+        deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        deleteButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
+        deleteButton.addTarget(self, action:#selector(deleteButtonClick), for: .touchUpInside)
         
-        bottomView .addSubview(removeButton)
+        bottomView .addSubview(deleteButton)
         
         exitButton.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.bottom.equalTo(-10)
             make.height.equalTo(46)
-            make.right.equalTo(removeButton.snp.left)
-            make.width.equalTo(removeButton.snp.width).dividedBy(0.668)
+            make.right.equalTo(deleteButton.snp.left)
+            make.width.equalTo(deleteButton.snp.width).dividedBy(0.668)
         }
         
-        removeButton.snp.makeConstraints { (make) in
+        deleteButton.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
             make.bottom.equalTo(-10)
             make.height.equalTo(46)
@@ -84,7 +83,6 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         }
 
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -96,6 +94,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         let userObj = dataSource[indexPath.row]
         cell.configCellWithObj(userObj: userObj)
         cell.indexPath = indexPath
+        
+        cell.setClosurePass { (actionIndexPath) in
+            let actionUserObj = self.dataSource[actionIndexPath.row]
+            self.deleteUserGroupMember(memberUuid: actionUserObj.userUuid, indexPath: actionIndexPath)
+        }
         return cell
     }
     
@@ -109,38 +112,54 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     
     }
     
-    
     func exitButtonClick() {
+        let memberUuid = Global.shared.globalProfile?.userUuid
+        var row = -1
+        for i in 0..<dataSource.count {
+            let userInfo = dataSource[i]
+            if userInfo.userUuid == memberUuid {
+                row = i
+                break
+            }
+        }
+        if row < 0 {
+            SGLog(message: "不存在用户")
+            return
+        }
         
+        deleteUserGroupMember(memberUuid: memberUuid,indexPath: IndexPath(row: row, section: 0))
     }
     
-    func removeButtonClick() {
-        
+    func deleteButtonClick() {
+        deleteUserGroup()
     }
     
     //MARK:- NetWork
     
-    func getGroupInfo() {
-        guard let groupUuid = groupUuid else {
+    func getGroupMemberList() {
+        guard let groupUuid = groupInfo?.uuid else {
             SGLog(message: "groupUuid为空")
             return
         }
+        
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-
-        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
+        
+        engine.getGroupMemberUserList(userGroupUuid: groupUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                self.title = response?.data?.groupDisplayName
-                self.headerView.configWithObject(tmpGroupInfo: response?.data)
+                if let list = response?.data?.list{
+                    self.dataSource = list
+                    self.tableView.reloadData()
+                }
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
     
-    func removeGroupInfo() {
-        guard let groupUuid = groupUuid else {
+    func deleteUserGroup() {
+        guard let groupUuid = groupInfo?.uuid else {
             SGLog(message: "groupUuid为空")
             return
         }
@@ -150,6 +169,29 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         engine.deleteUserGroup(userGroupUuid: groupUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("解散群成功"), delay: 2)
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func deleteUserGroupMember(memberUuid: String?,indexPath: IndexPath?) {
+        guard let groupUuid = groupInfo?.uuid,
+              let memberUuid = memberUuid,
+              let indexPath = indexPath else {
+            SGLog(message: "groupUuid为空")
+            return
+        }
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        
+        engine.deleteUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("移除成功"), delay: 2)
+                self.dataSource.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }

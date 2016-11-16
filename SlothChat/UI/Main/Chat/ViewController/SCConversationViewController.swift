@@ -9,6 +9,9 @@
 import UIKit
 
 class SCConversationViewController: RCConversationViewController {
+    var groupUuid: String?
+    var groupInfo: GroupInfoData?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
@@ -29,8 +32,8 @@ class SCConversationViewController: RCConversationViewController {
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
-//            configGroupInputBarControl()
             configNavgitaionItem()
+            getGroupInfo()
         }
     }
 
@@ -72,18 +75,3 @@ class SCConversationViewController: RCConversationViewController {
     }
 }
 
-extension SCConversationViewController{
-    func configNavgitaionItem() {
-        let button = UIButton(type: .infoDark)
-        button.addTarget(self, action: #selector(itemButtonClick), for: .touchUpInside)
-        let barItem = UIBarButtonItem(customView: button)
-        self.navigationItem.rightBarButtonItem = barItem
-    }
-    
-    //MARK:- Action
-    
-    func itemButtonClick() {
-        let pushVC = ChatGroupInfoViewController()
-        self.navigationController?.pushViewController(pushVC, animated: true)
-    }
-}
