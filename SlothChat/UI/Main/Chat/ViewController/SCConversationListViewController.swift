@@ -172,7 +172,6 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         if model.conversationType == .ConversationType_PRIVATE{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
-            cell.configCellWithObject(model: model)
             if let privateChat = self.chatList?.data?.getPrivateChatVo(privateChatId: model.targetId) {
                 cell.configCellWithObject(privateChat: privateChat,model:model)
             }

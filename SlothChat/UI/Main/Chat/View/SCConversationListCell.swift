@@ -45,7 +45,7 @@ class SCConversationListCell: RCConversationBaseCell {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.avatarImgView.snp.right).offset(10)
             make.top.equalTo(self.avatarImgView.snp.top).offset(4)
-            make.right.lessThanOrEqualTo(-60)
+            make.right.lessThanOrEqualTo(timeLabel.snp.left).offset(-10)
         }
         contentLabel.textColor = SGColor.SGTextColor()
         contentLabel.snp.makeConstraints { (make) in
@@ -55,7 +55,7 @@ class SCConversationListCell: RCConversationBaseCell {
         }
         
         timeLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
+            make.right.equalTo(-8).priority(1000)
             make.top.equalTo(self.nameLabel.snp.top)
         }
         
@@ -77,9 +77,21 @@ class SCConversationListCell: RCConversationBaseCell {
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
         
+        
+    }
+    
+    public func configCellWithObject(privateChat: PrivateChatVo,model: RCConversationModel){
+        
+        let unreadCount = model.unreadMessageCount
+        badgeView.isHidden = unreadCount <= 0
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+        timeLabel.text = date.timeAgo
+        
+        nameLabel.text = privateChat.nickname
         var showUserInfo = RCUserInfo()
         
-        ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
+        ChatDataManager.userInfoWidthID(privateChat.userUuid!){ (userInfo) in
             if let userInfo = userInfo {
                 showUserInfo = self.getShowUserInfo(model: model, userInfo: userInfo)
                 self.nameLabel.text = userInfo.name
@@ -99,34 +111,6 @@ class SCConversationListCell: RCConversationBaseCell {
                 self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
             }
         }
-    }
-    
-    public func configCellWithObject(privateChat: PrivateChatVo,model: RCConversationModel){
-        
-        let unreadCount = model.unreadMessageCount
-        badgeView.isHidden = unreadCount <= 0
-        
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
-        
-        nameLabel.text = privateChat.nickname
-        
-//        if let member = privateChat.getChatMemberInfo(userUuid: model.senderUserId) {
-//            let avatarUrl = URL(string: member.profilePicUrl!)
-//            self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-//            
-//            if model.lastestMessage.isKind(of: RCTextMessage.self) {
-//                self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
-//            }else if model.lastestMessage.isKind(of: RCImageMessage.self){
-//                self.contentLabel.text = member.userDisplayName! + "：[图片]"
-//            }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
-//                self.contentLabel.text = member.userDisplayName! + "：[语音]"
-//            }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
-//                self.contentLabel.text = member.userDisplayName! + "：[位置]"
-//            }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
-//                self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
-//            }
-//        }
     }
     
     func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {

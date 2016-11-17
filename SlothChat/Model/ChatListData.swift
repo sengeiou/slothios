@@ -40,6 +40,7 @@ class ChatListData : NSObject, NSCoding, Mappable{
             let privateChatVos = privateChatVos else {
                 return nil
         }
+//        return privateChatVos.first
         for privateChat in privateChatVos {
             if privateChat.privateChatUuid == privateChatId{
                 return privateChat

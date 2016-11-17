@@ -68,11 +68,11 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             make.left.equalTo(10)
             make.top.equalTo(10)
             make.right.lessThanOrEqualTo(-60)
-            make.right.equalTo(timeLabel.snp.left).offset(4)
+            make.right.lessThanOrEqualTo(timeLabel.snp.left).offset(-10)
         }
         
         timeLabel.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
+            make.right.equalTo(-8).priority(1000)
             make.top.equalTo(self.nameLabel.snp.top)
         }
         
