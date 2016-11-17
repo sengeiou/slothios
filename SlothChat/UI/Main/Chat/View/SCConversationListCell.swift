@@ -101,6 +101,34 @@ class SCConversationListCell: RCConversationBaseCell {
         }
     }
     
+    public func configCellWithObject(privateChat: PrivateChatVo,model: RCConversationModel){
+        
+        let unreadCount = model.unreadMessageCount
+        badgeView.isHidden = unreadCount <= 0
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+        timeLabel.text = date.timeAgo
+        
+        nameLabel.text = privateChat.nickname
+        
+//        if let member = privateChat.getChatMemberInfo(userUuid: model.senderUserId) {
+//            let avatarUrl = URL(string: member.profilePicUrl!)
+//            self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+//            
+//            if model.lastestMessage.isKind(of: RCTextMessage.self) {
+//                self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+//            }else if model.lastestMessage.isKind(of: RCImageMessage.self){
+//                self.contentLabel.text = member.userDisplayName! + "：[图片]"
+//            }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
+//                self.contentLabel.text = member.userDisplayName! + "：[语音]"
+//            }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
+//                self.contentLabel.text = member.userDisplayName! + "：[位置]"
+//            }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+//                self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
+//            }
+//        }
+    }
+    
     func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {
         let myself = RCIMClient.shared().currentUserInfo
         

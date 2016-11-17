@@ -68,6 +68,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             make.left.equalTo(10)
             make.top.equalTo(10)
             make.right.lessThanOrEqualTo(-60)
+            make.right.equalTo(timeLabel.snp.left).offset(4)
         }
         
         timeLabel.snp.makeConstraints { (make) in

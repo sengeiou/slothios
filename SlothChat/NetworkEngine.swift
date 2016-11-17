@@ -106,6 +106,10 @@ enum API_URI:String {
 //    case get_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember?token={token}"
     //39.自己退出群，或者管理员删除指定群组的某个指定群成员
 //    case delete_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember/{userGroupMemberUuid}?token={token}"
+    //40.创建一对一私聊会话
+    case postPrivateChat = "/api/privateChat?token={token}"
+    //41.删除指定一对一私聊会话
+    case deletePrivateChat = "/api/privateChat/{uuid}?token={token}"
 
 }
 
@@ -1015,7 +1019,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:[
             "userUuid" : userUuid,
             "userGroupUuid" : userGroupUuid,
-            "userDisplayName" : userDisplayName], method: .post, URLString: URLString)
+            "userDisplayName" : userDisplayName], URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
@@ -1096,6 +1100,52 @@ class NetworkEngine: NSObject {
             }
         }
     }
-    //40.获取指定官方群组 的所有官方群成员资料，需分页参数
-    
+    //40.创建一对一私聊会话
+    func postPrivateChat(name: String?,userUuidA: String?,userUuidB: String?, completeHandler :@escaping(_ response:PrivateChat?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let name = name,
+            let userUuidA = userUuidA ,
+            let userUuidB = userUuidB  else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.postPrivateChat.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        
+        let request = HTTPRequestGenerator(withParam:[
+            "name" : name,
+            "userUuidA" : userUuidA,
+            "userUuidB" : userUuidB], URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<PrivateChat>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
+        }
+    }
+    //41.删除指定一对一私聊会话
+    func deletePrivateChat(uuid: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token,
+            let uuid = uuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        
+        var URLString:String = Base_URL + API_URI.deletePrivateChat.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
+        
+        let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
+        }
+    }
 }

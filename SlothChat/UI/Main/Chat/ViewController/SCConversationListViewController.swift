@@ -110,12 +110,25 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
     
     func removeIndexPath(indexPath: IndexPath) {
+        
+        SGLog(message: "")
         let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
         
-        RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
-        self.conversationListDataSource.remove(model)
-        self.conversationListTableView.reloadData()
-        ChatDataManager.shared.refreshBadgeValue()
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+
+        engine.deletePrivateChat(uuid: model.targetId){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0{
+                
+                RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
+                self.conversationListDataSource.remove(model)
+                self.conversationListTableView.reloadData()
+                ChatDataManager.shared.refreshBadgeValue()
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
     }
     
     //MARK: - TableViewDelegate TableViewDataSource
@@ -160,6 +173,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         if model.conversationType == .ConversationType_PRIVATE{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
             cell.configCellWithObject(model: model)
+            if let privateChat = self.chatList?.data?.getPrivateChatVo(privateChatId: model.targetId) {
+                cell.configCellWithObject(privateChat: privateChat,model:model)
+            }
             return cell
         }
         

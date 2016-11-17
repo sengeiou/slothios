@@ -11,6 +11,7 @@ import ObjectMapper
 
 class LoginModel : NSObject, NSCoding, Mappable{
 
+    var canTalk : Bool?
 	var token : String?
 	var user : LoginUser?
     
@@ -45,6 +46,7 @@ class LoginModel : NSObject, NSCoding, Mappable{
 
 	func mapping(map: Map)
 	{
+        canTalk <- map["canTalk"]
 		token <- map["token"]
 		user <- map["user"]
         status <- map["status"]
@@ -57,6 +59,7 @@ class LoginModel : NSObject, NSCoding, Mappable{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
+         canTalk = aDecoder.decodeObject(forKey: "canTalk") as? Bool
          token = aDecoder.decodeObject(forKey: "token") as? String
          user = aDecoder.decodeObject(forKey: "user") as? LoginUser
 
@@ -68,6 +71,9 @@ class LoginModel : NSObject, NSCoding, Mappable{
     */
     @objc func encode(with aCoder: NSCoder)
 	{
+        if canTalk != nil{
+            aCoder.encode(canTalk, forKey: "canTalk")
+        }
 		if token != nil{
 			aCoder.encode(token, forKey: "token")
 		}

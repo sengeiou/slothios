@@ -13,7 +13,7 @@ class ChatListData : NSObject, NSCoding, Mappable{
 
 	var chatOfficialGroupVo : ChatOfficialGroupVo?
 	var chatUserGroupVos : [ChatUserGroupVo]?
-	var privateChatVos : [AnyObject]?
+	var privateChatVos : [PrivateChatVo]?
 
 
 	class func newInstance(map: Map) -> Mappable?{
@@ -30,6 +30,19 @@ class ChatListData : NSObject, NSCoding, Mappable{
         for group in chatUserGroupVos {
             if group.userGroupUuid == groupId{
                 return group
+            }
+        }
+        return nil
+    }
+    
+    public func getPrivateChatVo(privateChatId: String?) -> PrivateChatVo?{
+        guard let privateChatId = privateChatId,
+            let privateChatVos = privateChatVos else {
+                return nil
+        }
+        for privateChat in privateChatVos {
+            if privateChat.privateChatUuid == privateChatId{
+                return privateChat
             }
         }
         return nil
@@ -51,7 +64,7 @@ class ChatListData : NSObject, NSCoding, Mappable{
 	{
          chatOfficialGroupVo = aDecoder.decodeObject(forKey: "chatOfficialGroupVo") as? ChatOfficialGroupVo
          chatUserGroupVos = aDecoder.decodeObject(forKey: "chatUserGroupVos") as? [ChatUserGroupVo]
-         privateChatVos = aDecoder.decodeObject(forKey: "privateChatVos") as? [AnyObject]
+         privateChatVos = aDecoder.decodeObject(forKey: "privateChatVos") as? [PrivateChatVo]
 
 	}
 
