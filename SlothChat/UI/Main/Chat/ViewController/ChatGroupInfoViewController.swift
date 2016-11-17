@@ -13,6 +13,8 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     var dataSource = [ChatMemberInfo]()
     
     var groupInfo: GroupInfoData?
+    var myMemberInfo: ChatMemberInfo?
+    var isGroupOwner = false
     
     let headerView = ChatGroupInfoHeaderView()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -41,7 +43,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         let screenWidth = UIScreen.main.bounds.size.width
         headerView.frame = CGRect.init(x: 0, y: 0, width: screenWidth, height: 88)
         tableView.tableHeaderView = headerView
-        headerView.configWithObject(tmpGroupInfo: groupInfo)
+        headerView.configWithObject(tmpGroupInfo: groupInfo,isGroupOwner: false,memberInfo: nil)
         tableView.tableFooterView = UIView()
 
         let bottomView = UIView()
@@ -91,7 +93,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ChatGroupInfoCell = tableView.dequeueReusableCell(withIdentifier: "ChatGroupInfoCell", for: indexPath) as! ChatGroupInfoCell
         cell.titleLabel.isHidden = (indexPath.row != 0)
-        cell.removeButton.isHidden = (indexPath.row == 0)
+        if self.isGroupOwner {
+            cell.removeButton.isHidden = (indexPath.row == 0)
+        }else{
+            cell.removeButton.isHidden = true
+        }
         let userObj = dataSource[indexPath.row]
         cell.configCellWithObj(userObj: userObj)
         if indexPath.row == 0 {
@@ -153,6 +159,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
+                    let member = list.first
+                    self.isGroupOwner = (member?.userUuid == Global.shared.globalProfile?.userUuid)
+                    self.myMemberInfo = response?.data?.getMemberInfo()
+                    self.headerView.configWithObject(tmpGroupInfo: self.groupInfo,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
+
                     self.dataSource = list
                     self.tableView.reloadData()
                 }

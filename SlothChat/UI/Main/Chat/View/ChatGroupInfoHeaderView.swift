@@ -41,17 +41,23 @@ class ChatGroupInfoHeaderView: UIView {
         }
     }
     
-    func configWithObject(tmpGroupInfo: GroupInfoData?) {
+    func configWithObject(tmpGroupInfo: GroupInfoData?,isGroupOwner: Bool,memberInfo: ChatMemberInfo?) {
         guard let tmpGroupInfo = tmpGroupInfo else {
-            return
+                return
         }
         groupInfo = tmpGroupInfo
         groupName.configInputView(titleStr: "群组名", contentStr: tmpGroupInfo.groupDisplayName!)
-        nickName.configInputView(titleStr: "我的群昵称", contentStr: tmpGroupInfo.groupDisplayName!)
+        if let memberInfo = memberInfo {
+            nickName.configInputView(titleStr: "我的群昵称", contentStr: memberInfo.nickname!)
+        }
         groupName.editButton.addTarget(self, action: #selector(groupNameEditButtonClick), for: .touchUpInside)
         nickName.editButton.addTarget(self, action: #selector(nickNameEditButtonClick), for: .touchUpInside)
-
-
+        
+        if isGroupOwner {
+            groupName.editButton.isHidden = false
+        }else{
+            groupName.editButton.isHidden = true
+        }
     }
     
     func groupNameEditButtonClick() {
@@ -66,7 +72,14 @@ class ChatGroupInfoHeaderView: UIView {
     }
     
     func nickNameEditButtonClick() {
+        nickName.isEditing = !nickName.isEditing
         
+        let content = nickName.getInputContent()
+        if nickName.isEditing == false &&
+            nickName.getSumbitValid() &&
+            content != groupInfo?.groupDisplayName! {
+            modifyUserNickName(newName: content!)
+        }
     }
     
     func modifyGroupName(newName: String) {
@@ -75,6 +88,21 @@ class ChatGroupInfoHeaderView: UIView {
         let adminUserUuid = Global.shared.globalProfile?.userUuid
         
         engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupInfo?.uuid, adminUserUuid: adminUserUuid){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("修改用户名成功"), delay: 2)
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func modifyUserNickName(newName: String) {
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let memberUuid = Global.shared.globalProfile?.userUuid
+        
+        engine.putUserGroupMember(userGroupUuid: groupInfo?.uuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("修改群组名成功"), delay: 2)
