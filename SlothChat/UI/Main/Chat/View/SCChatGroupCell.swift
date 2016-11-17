@@ -130,11 +130,11 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             if model.lastestMessage.isKind(of: RCTextMessage.self) {
                 self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
             }else if model.lastestMessage.isKind(of: RCImageMessage.self){
-                self.contentLabel.text = member.nickname! + "：[图片]"
+                self.contentLabel.text = member.userDisplayName! + "：[图片]"
             }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
-                self.contentLabel.text = member.nickname! + "：[语音]"
+                self.contentLabel.text = member.userDisplayName! + "：[语音]"
             }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
-                self.contentLabel.text = member.nickname! + "：[位置]"
+                self.contentLabel.text = member.userDisplayName! + "：[位置]"
             }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
                 self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
             }

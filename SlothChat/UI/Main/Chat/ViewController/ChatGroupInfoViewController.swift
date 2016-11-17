@@ -104,15 +104,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ChatGroupInfoCell = tableView.dequeueReusableCell(withIdentifier: "ChatGroupInfoCell", for: indexPath) as! ChatGroupInfoCell
         cell.titleLabel.isHidden = (indexPath.row != 0)
-        if self.isGroupOwner {
-            cell.removeButton.isHidden = (indexPath.row == 0)
-        }else{
-            cell.removeButton.isHidden = true
-        }
+        
         let userObj = dataSource[indexPath.row]
         cell.configCellWithObj(userObj: userObj)
-        if indexPath.row == 0 {
-            cell.nameLabel.text = userObj.nickname! + " (群主)"
+        if !self.isGroupOwner {
+            cell.removeButton.isHidden = true
         }
         cell.indexPath = indexPath
         
@@ -170,8 +166,12 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
-                    let member = list.first
-                    self.isGroupOwner = (member?.userUuid == Global.shared.globalProfile?.userUuid)
+                    for member in list{
+                        if member.isAdmin! &&
+                           member.userUuid == Global.shared.globalProfile?.userUuid{
+                            self.isGroupOwner = true
+                        }
+                    }
                     self.myMemberInfo = response?.data?.getMemberInfo()
                     self.headerView.configWithObject(tmpGroupInfo: self.groupInfo,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
                     self.addBottomView(isGroupOwner: self.isGroupOwner)

@@ -50,7 +50,7 @@ class ChatGroupInfoHeaderView: UIView {
         groupInfo = tmpGroupInfo
         groupName.configInputView(titleStr: "群组名", contentStr: tmpGroupInfo.groupDisplayName!)
         if let memberInfo = memberInfo {
-            nickName.configInputView(titleStr: "我的群昵称", contentStr: memberInfo.nickname!)
+            nickName.configInputView(titleStr: "我的群昵称", contentStr: memberInfo.userDisplayName!)
         }
         groupName.editButton.addTarget(self, action: #selector(groupNameEditButtonClick), for: .touchUpInside)
         nickName.editButton.addTarget(self, action: #selector(nickNameEditButtonClick), for: .touchUpInside)

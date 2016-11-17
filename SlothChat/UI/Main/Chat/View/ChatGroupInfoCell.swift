@@ -82,7 +82,13 @@ class ChatGroupInfoCell: UITableViewCell {
         let avatarUrl = URL(string: userObj.profilePicUrl!)
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        self.nameLabel.text = userObj.nickname
+        if userObj.isAdmin!{
+            self.nameLabel.text = userObj.userDisplayName! + " (群主)"
+            removeButton.isHidden = true
+        }else{
+            self.nameLabel.text = userObj.userDisplayName
+            removeButton.isHidden = false
+        }
     }
     
     func configCellWithObj(groupObj: RCGroup) {
