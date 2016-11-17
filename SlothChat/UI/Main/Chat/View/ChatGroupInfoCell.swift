@@ -51,7 +51,7 @@ class ChatGroupInfoCell: UITableViewCell {
         avatarImgView.layer.cornerRadius = 20
         avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(120)
+            make.left.equalTo(100)
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.size.equalTo(CGSize.init(width: 40, height: 40))
         }

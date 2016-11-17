@@ -14,7 +14,8 @@ class ChatGroupInfoHeaderView: UIView {
     let nickName = ChatGroupInfoInputView()
     
     var groupInfo: GroupInfoData?
-    
+    var myMemberInfo: ChatMemberInfo!
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         sentupView()
@@ -45,6 +46,7 @@ class ChatGroupInfoHeaderView: UIView {
         guard let tmpGroupInfo = tmpGroupInfo else {
                 return
         }
+        myMemberInfo = memberInfo
         groupInfo = tmpGroupInfo
         groupName.configInputView(titleStr: "群组名", contentStr: tmpGroupInfo.groupDisplayName!)
         if let memberInfo = memberInfo {
@@ -85,7 +87,7 @@ class ChatGroupInfoHeaderView: UIView {
     func modifyGroupName(newName: String) {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let adminUserUuid = Global.shared.globalProfile?.userUuid
+        let adminUserUuid = myMemberInfo.userProfileUuid
         
         engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupInfo?.uuid, adminUserUuid: adminUserUuid){ (response) in
             HUD.hide()
@@ -148,7 +150,7 @@ class ChatGroupInfoInputView: UIView {
         titleLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             make.left.equalTo(10)
-            make.width.equalTo(100)
+            make.width.equalTo(80)
         }
         
         textfield.snp.makeConstraints { (make) in

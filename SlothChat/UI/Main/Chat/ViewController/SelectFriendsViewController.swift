@@ -11,7 +11,10 @@ import PKHUD
 
 class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = ChatManager.shared.friendArray
-    var selectRows = Set<Int>()
+    var selectRows = Set<String>()
+    
+    var search = UISearchController()
+    var searchArray = [RCUserInfo]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -34,27 +37,52 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
+        
+        self.search = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self   //两个样例使用不同的代理
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.dimsBackgroundDuringPresentation = false
+            controller.searchBar.searchBarStyle = .prominent
+            controller.searchBar.sizeToFit()
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
+    }
+    
+    func getTableViewModel(indexPath: IndexPath) -> RCUserInfo{
+        if search.isActive {
+            return self.searchArray[indexPath.row]
+        }
+        return self.dataSource[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if search.isActive {
+            return searchArray.count
+        }
         return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SelectFriendsCell = tableView.dequeueReusableCell(withIdentifier: "SelectFriendsCell", for: indexPath) as! SelectFriendsCell
-        let userObj = dataSource[indexPath.row]
+        let userObj = getTableViewModel(indexPath: indexPath)
         cell.configCellWithObj(userObj: userObj)
-        cell.configFlagView(selected: selectRows.contains(indexPath.row))
+        cell.configFlagView(selected: selectRows.contains(userObj.userId))
         cell.indexPath = indexPath
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if selectRows.contains(indexPath.row) {
-            selectRows.remove(indexPath.row)
+        
+        let userObj = getTableViewModel(indexPath: indexPath)
+
+        if selectRows.contains(userObj.userId) {
+            selectRows.remove(userObj.userId)
         }else{
-            selectRows.insert(indexPath.row)
+            selectRows.insert(userObj.userId)
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
@@ -77,10 +105,11 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     override func confirmClick() {
         var idList = [String]()
         var groupName = ""
-        for value in selectRows {
-            let userInfo = dataSource[value]
-            idList.append(userInfo.userId)
-            groupName.append(userInfo.name)
+        for userInfo in dataSource {
+            if selectRows.contains(userInfo.userId) {
+                idList.append(userInfo.userId)
+                groupName.append(userInfo.name)
+            }
         }
         if !idList.contains(RCIM.shared().currentUserInfo.userId) {
             idList.append(RCIM.shared().currentUserInfo.userId)
@@ -121,3 +150,20 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         navigationController?.pushViewController(chat, animated: true)
     }
 }
+
+extension SelectFriendsViewController: UISearchResultsUpdating{
+    //实时进行搜索
+    func updateSearchResults(for searchController: UISearchController) {
+        self.searchArray.removeAll()
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+        for userInfo in dataSource {
+            if userInfo.name.contains(searchText) {
+                searchArray.append(userInfo)
+            }
+        }
+        self.tableView.reloadData()
+    }
+}
+
