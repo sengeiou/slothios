@@ -37,7 +37,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         tableView.register(ChatGroupInfoCell.self, forCellReuseIdentifier: "ChatGroupInfoCell")
         tableView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
-            make.bottom.equalTo(-46)
+            make.bottom.equalTo(-56)
         }
         
         let screenWidth = UIScreen.main.bounds.size.width
@@ -45,12 +45,14 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         tableView.tableHeaderView = headerView
         headerView.configWithObject(tmpGroupInfo: groupInfo,isGroupOwner: false,memberInfo: nil)
         tableView.tableFooterView = UIView()
-
+    }
+    
+    func addBottomView(isGroupOwner: Bool) {
         let bottomView = UIView()
         view.addSubview(bottomView)
         bottomView.snp.makeConstraints { (make) in
             make.left.bottom.right.equalTo(0)
-            make.height.equalTo(46)
+            make.height.equalTo(56)
         }
 
         let exitButton = UIButton.init(type: .custom)
@@ -61,29 +63,38 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         exitButton.addTarget(self, action:#selector(exitButtonClick), for: .touchUpInside)
         bottomView.addSubview(exitButton)
         
-        let deleteButton = UIButton.init(type: .custom)
-        deleteButton.setTitle("删除群", for: .normal)
-        deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        deleteButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
-        deleteButton.addTarget(self, action:#selector(deleteButtonClick), for: .touchUpInside)
-        
-        bottomView .addSubview(deleteButton)
-        
-        exitButton.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
-            make.bottom.equalTo(-10)
-            make.height.equalTo(46)
-            make.right.equalTo(deleteButton.snp.left)
-            make.width.equalTo(deleteButton.snp.width).dividedBy(0.668)
+        if isGroupOwner {
+            let deleteButton = UIButton.init(type: .custom)
+            deleteButton.setTitle("删除群", for: .normal)
+            deleteButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+            deleteButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
+            deleteButton.addTarget(self, action:#selector(deleteButtonClick), for: .touchUpInside)
+            
+            bottomView .addSubview(deleteButton)
+            
+            exitButton.snp.makeConstraints { (make) in
+                make.left.equalTo(8)
+                make.bottom.equalTo(-10)
+                make.height.equalTo(46)
+                make.right.equalTo(deleteButton.snp.left)
+                make.width.equalTo(deleteButton.snp.width).dividedBy(0.668)
+            }
+            
+            deleteButton.snp.makeConstraints { (make) in
+                make.right.equalTo(-8)
+                make.bottom.equalTo(-10)
+                make.height.equalTo(46)
+                make.right.equalTo(exitButton.snp.right)
+            }
+        }else{
+            exitButton.snp.makeConstraints { (make) in
+                make.left.lessThanOrEqualTo(80)
+                make.right.greaterThanOrEqualTo(-80)
+                make.bottom.equalTo(-10)
+                make.height.equalTo(46)
+            }
         }
         
-        deleteButton.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
-            make.bottom.equalTo(-10)
-            make.height.equalTo(46)
-            make.right.equalTo(exitButton.snp.right)
-        }
-
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,7 +118,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         
         cell.setClosurePass { (actionIndexPath) in
             let actionUserObj = self.dataSource[actionIndexPath.row]
-            self.deleteUserGroupMember(memberUuid: actionUserObj.userUuid, indexPath: actionIndexPath)
+            self.deleteUserGroupMember(memberUuid: actionUserObj.memberUuid, indexPath: actionIndexPath)
         }
         return cell
     }
@@ -123,11 +134,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func exitButtonClick() {
-        let memberUuid = Global.shared.globalProfile?.userUuid
+        let memberUuid = myMemberInfo?.memberUuid
         var row = -1
         for i in 0..<dataSource.count {
             let userInfo = dataSource[i]
-            if userInfo.userUuid == memberUuid {
+            if userInfo.memberUuid == memberUuid {
                 row = i
                 break
             }
@@ -163,7 +174,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
                     self.isGroupOwner = (member?.userUuid == Global.shared.globalProfile?.userUuid)
                     self.myMemberInfo = response?.data?.getMemberInfo()
                     self.headerView.configWithObject(tmpGroupInfo: self.groupInfo,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
-
+                    self.addBottomView(isGroupOwner: self.isGroupOwner)
                     self.dataSource = list
                     self.tableView.reloadData()
                 }
@@ -183,8 +194,13 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         
         engine.deleteUserGroup(userGroupUuid: groupUuid){ (response) in
             HUD.hide()
+            
+            
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("解散群成功"), delay: 2)
+                HUD.flash(.label("解散群成功"), delay: 2, completion: { (result) in
+                    //如果是移出的自己
+                    _ = self.navigationController?.popToRootViewController(animated: true)
+                })
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
@@ -204,7 +220,10 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         engine.deleteUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("移除成功"), delay: 2)
+                HUD.flash(.label("移除成功"), delay: 2, completion: { (result) in
+                    //如果是移出的自己
+                    _ = self.navigationController?.popToRootViewController(animated: true)
+                })
                 self.dataSource.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }else{

@@ -10,60 +10,66 @@ import ObjectMapper
 
 
 class ChatMemberInfo : NSObject, NSCoding, Mappable{
-
-	var nickname : String?
-	var profilePicUrl : String?
-	var userProfileUuid : String?
-	var userUuid : String?
-
-
-	class func newInstance(map: Map) -> Mappable?{
-		return ChatMemberInfo()
-	}
-	required init?(map: Map){}
-	private override init(){}
-
-	func mapping(map: Map)
-	{
-		nickname <- map["nickname"]
-		profilePicUrl <- map["profilePicUrl"]
-		userProfileUuid <- map["userProfileUuid"]
-		userUuid <- map["userUuid"]
-		
-	}
-
+    
+    var memberUuid : String?
+    var nickname : String?
+    var profilePicUrl : String?
+    var userProfileUuid : String?
+    var userUuid : String?
+    
+    
+    class func newInstance(map: Map) -> Mappable?{
+        return ChatMemberInfo()
+    }
+    required init?(map: Map){}
+    private override init(){}
+    
+    func mapping(map: Map)
+    {
+        memberUuid <- map["memberUuid"]
+        nickname <- map["nickname"]
+        profilePicUrl <- map["profilePicUrl"]
+        userProfileUuid <- map["userProfileUuid"]
+        userUuid <- map["userUuid"]
+        
+    }
+    
     /**
-    * NSCoding required initializer.
-    * Fills the data from the passed decoder
-    */
+     * NSCoding required initializer.
+     * Fills the data from the passed decoder
+     */
     @objc required init(coder aDecoder: NSCoder)
-	{
-         nickname = aDecoder.decodeObject(forKey: "nickname") as? String
-         profilePicUrl = aDecoder.decodeObject(forKey: "profilePicUrl") as? String
-         userProfileUuid = aDecoder.decodeObject(forKey: "userProfileUuid") as? String
-         userUuid = aDecoder.decodeObject(forKey: "userUuid") as? String
-
-	}
-
+    {
+        memberUuid = aDecoder.decodeObject(forKey: "memberUuid") as? String
+        nickname = aDecoder.decodeObject(forKey: "nickname") as? String
+        profilePicUrl = aDecoder.decodeObject(forKey: "profilePicUrl") as? String
+        userProfileUuid = aDecoder.decodeObject(forKey: "userProfileUuid") as? String
+        userUuid = aDecoder.decodeObject(forKey: "userUuid") as? String
+        
+    }
+    
     /**
-    * NSCoding required method.
-    * Encodes mode properties into the decoder
-    */
+     * NSCoding required method.
+     * Encodes mode properties into the decoder
+     */
     @objc func encode(with aCoder: NSCoder)
-	{
-		if nickname != nil{
-			aCoder.encode(nickname, forKey: "nickname")
-		}
-		if profilePicUrl != nil{
-			aCoder.encode(profilePicUrl, forKey: "profilePicUrl")
-		}
-		if userProfileUuid != nil{
-			aCoder.encode(userProfileUuid, forKey: "userProfileUuid")
-		}
-		if userUuid != nil{
-			aCoder.encode(userUuid, forKey: "userUuid")
-		}
-
-	}
-
+    {
+        if memberUuid != nil{
+            aCoder.encode(memberUuid, forKey: "memberUuid")
+        }
+        if nickname != nil{
+            aCoder.encode(nickname, forKey: "nickname")
+        }
+        if profilePicUrl != nil{
+            aCoder.encode(profilePicUrl, forKey: "profilePicUrl")
+        }
+        if userProfileUuid != nil{
+            aCoder.encode(userProfileUuid, forKey: "userProfileUuid")
+        }
+        if userUuid != nil{
+            aCoder.encode(userUuid, forKey: "userUuid")
+        }
+        
+    }
+    
 }

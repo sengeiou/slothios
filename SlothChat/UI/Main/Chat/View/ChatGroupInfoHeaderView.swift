@@ -87,12 +87,12 @@ class ChatGroupInfoHeaderView: UIView {
     func modifyGroupName(newName: String) {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let adminUserUuid = myMemberInfo.userProfileUuid
+        let adminUserUuid = Global.shared.globalProfile?.userUuid
         
         engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupInfo?.uuid, adminUserUuid: adminUserUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("修改用户名成功"), delay: 2)
+                HUD.flash(.label("修改群组名成功"), delay: 2)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
@@ -102,12 +102,12 @@ class ChatGroupInfoHeaderView: UIView {
     func modifyUserNickName(newName: String) {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        let memberUuid = Global.shared.globalProfile?.userUuid
+        let memberUuid = myMemberInfo.memberUuid
         
         engine.putUserGroupMember(userGroupUuid: groupInfo?.uuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("修改群组名成功"), delay: 2)
+                HUD.flash(.label("修改用户名成功"), delay: 2)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
