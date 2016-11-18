@@ -43,11 +43,11 @@ extension SCConversationViewController{
         fakeRecordButton.layer.cornerRadius = 4
         
         fakeRecordButton.setTitleColor(SGColor.black, for: .normal)
-        fakeRecordButton.setTitle(NSLocalizedString("hold_to_talk_title", comment: ""), for: .normal)
+        fakeRecordButton.setTitle(NSLocalizedString("n_hold_to_talk_title", comment: ""), for: .normal)
         fakeRecordButton.setTitleColor(SGColor.black, for: .selected)
-        fakeRecordButton.setTitle(NSLocalizedString("release_to_send_title", comment: ""), for: .selected)
+        fakeRecordButton.setTitle(NSLocalizedString("n_release_to_send_title", comment: ""), for: .selected)
         fakeRecordButton.setTitleColor(SGColor.black, for: .highlighted)
-        fakeRecordButton.setTitle(NSLocalizedString("release_to_send_title", comment: ""), for: .highlighted)
+        fakeRecordButton.setTitle(NSLocalizedString("n_release_to_send_title", comment: ""), for: .highlighted)
         
         fakeRecordButton.addTarget(self, action: #selector(touchDownRecordButton), for: .touchDown)
         fakeRecordButton.addTarget(self, action: #selector(touchUpInsideRecordButton), for: .touchUpInside)

@@ -1,9 +1,9 @@
 /* 
-  Localizations.strings
+  Localizable.strings
   SlothChat
 
   Created by fly on 2016/11/19.
   Copyright © 2016年 ssloth.com. All rights reserved.
 */
-"hold_to_talk_title"="按住 说话";
-"release_to_send_title"="松开 发送";
+"n_hold_to_talk_title"="Hold to talk";
+"n_release_to_send_title"="Release to send";

@@ -89,7 +89,7 @@
 		044956981DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956831DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m */; };
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
-		046563D01DDF631C009E8849 /* Localizations.strings in Resources */ = {isa = PBXBuildFile; fileRef = 046563D21DDF631C009E8849 /* Localizations.strings */; };
+		046563DA1DDF6903009E8849 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 046563DC1DDF6903009E8849 /* Localizable.strings */; };
 		0472E85D1DD720630065AFAB /* SCChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */; };
 		047450F21DD3689500E5D3A6 /* SCConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */; };
 		047450F41DD368A900E5D3A6 /* SCConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */; };
@@ -392,9 +392,10 @@
 		044956841DCCBAA800CBFF45 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		046563D11DDF631C009E8849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizations.strings; sourceTree = "<group>"; };
-		046563D31DDF631F009E8849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizations.strings; sourceTree = "<group>"; };
-		046563D41DDF6320009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizations.strings"; sourceTree = "<group>"; };
+		046563D91DDF68F0009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		046563DB1DDF6903009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		046563DD1DDF6906009E8849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		046563DE1DDF690A009E8849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCChatGroupCell.swift; sourceTree = "<group>"; };
 		047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationViewController.swift; sourceTree = "<group>"; };
 		047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationListViewController.swift; sourceTree = "<group>"; };
@@ -522,7 +523,6 @@
 		04C031301DD712FF0003B07C /* ChatGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
 		04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhoto.swift; sourceTree = "<group>"; };
 		04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoData.swift; sourceTree = "<group>"; };
-		04D209881DCCCC6200DDF7F2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
 		04D39B7E1DB8B5CC009FBD60 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		04D39B801DB8CE0D009FBD60 /* UserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObj.swift; sourceTree = "<group>"; };
@@ -1545,7 +1545,7 @@
 				19273B211DA9EE1300150460 /* Info.plist */,
 				048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */,
 				04F79A0A1DD32C5200DA8BCB /* ThirdManager.swift */,
-				046563D21DDF631C009E8849 /* Localizations.strings */,
+				046563DC1DDF6903009E8849 /* Localizable.strings */,
 			);
 			path = SlothChat;
 			sourceTree = "<group>";
@@ -1716,7 +1716,6 @@
 			knownRegions = (
 				en,
 				Base,
-				"zh-Hans",
 			);
 			mainGroup = 19273B071DA9EE1300150460;
 			productRefGroup = 19273B111DA9EE1300150460 /* Products */;
@@ -1745,7 +1744,7 @@
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */,
 				0486BB9A1DBB53D200086303 /* WeiboSDK.bundle in Resources */,
-				046563D01DDF631C009E8849 /* Localizations.strings in Resources */,
+				046563DA1DDF6903009E8849 /* Localizable.strings in Resources */,
 				0486BB9F1DBB53D200086303 /* ShareSDK.bundle in Resources */,
 				0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */,
 				0486BB9C1DBB53D200086303 /* read_me.txt in Resources */,
@@ -2165,21 +2164,21 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		046563D21DDF631C009E8849 /* Localizations.strings */ = {
+		046563DC1DDF6903009E8849 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				046563D11DDF631C009E8849 /* Base */,
-				046563D31DDF631F009E8849 /* en */,
-				046563D41DDF6320009E8849 /* zh-Hans */,
+				046563DB1DDF6903009E8849 /* zh-Hans */,
+				046563DD1DDF6906009E8849 /* en */,
+				046563DE1DDF690A009E8849 /* Base */,
 			);
-			name = Localizations.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		19273B1E1DA9EE1300150460 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				19273B1F1DA9EE1300150460 /* Base */,
-				04D209881DCCCC6200DDF7F2 /* zh-Hans */,
+				046563D91DDF68F0009E8849 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

@@ -11,7 +11,8 @@ import UIKit
 class SCConversationViewController: RCConversationViewController {
     var groupUuid: String?
     var groupInfo: GroupInfoData?
-    
+    let fakeRecordButton = UIButton(type: .custom)
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
@@ -31,9 +32,13 @@ class SCConversationViewController: RCConversationViewController {
         
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
+//            self.configGroupInputBarControl()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             configNavgitaionItem()
-            getGroupInfo()
+            getGroupInfo()//officialGroup
+            if self.targetId.hasPrefix("userGroup") {
+                self.configGroupInputBarControl()
+            }
         }
     }
 
