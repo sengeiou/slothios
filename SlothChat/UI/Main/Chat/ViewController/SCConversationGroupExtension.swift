@@ -10,8 +10,6 @@ import Foundation
 import PKHUD
 
 extension SCConversationViewController{
-    
-
 
     func addPluginBoardView() {
         if self.conversationType == .ConversationType_PRIVATE {
@@ -26,12 +24,42 @@ extension SCConversationViewController{
         self.navigationItem.rightBarButtonItem = barItem
     }
     
+    
     func configGroupInputBarControl() {
-        chatSessionInputBarControl.switchButton.isEnabled = false
-        chatSessionInputBarControl.emojiButton.isEnabled = false
-        chatSessionInputBarControl.additionalButton.setImage(UIImage(named: "icon"), for: .normal)
-        chatSessionInputBarControl.setDefaultInputType(RCChatSessionInputBarInputType.voice)
+        let control = self.chatSessionInputBarControl!
+        control.additionalButton.setImage(UIImage(named: "icon"), for: .normal)
+        control.setDefaultInputType(RCChatSessionInputBarInputType.voice)
+        
+        
+        control.recordButton.isHidden = true
+        control.inputTextView.isHidden = true
+        control.switchButton.isEnabled = false
+        control.emojiButton.isEnabled = false
+        control.emojiButton.isHidden = true
+        
+        control.addSubview(fakeRecordButton)
+        fakeRecordButton.layer.borderColor = SGColor.SGLineColor().cgColor
+        fakeRecordButton.layer.borderWidth = 0.5
+        fakeRecordButton.layer.cornerRadius = 4
+        
+        fakeRecordButton.setTitleColor(SGColor.black, for: .normal)
+        fakeRecordButton.setTitle(NSLocalizedString("hold_to_talk_title", comment: ""), for: .normal)
+        fakeRecordButton.setTitleColor(SGColor.black, for: .selected)
+        fakeRecordButton.setTitle(NSLocalizedString("release_to_send_title", comment: ""), for: .selected)
+        fakeRecordButton.setTitleColor(SGColor.black, for: .highlighted)
+        fakeRecordButton.setTitle(NSLocalizedString("release_to_send_title", comment: ""), for: .highlighted)
+        
+        fakeRecordButton.addTarget(self, action: #selector(touchDownRecordButton), for: .touchDown)
+        fakeRecordButton.addTarget(self, action: #selector(touchUpInsideRecordButton), for: .touchUpInside)
+        fakeRecordButton.addTarget(self, action: #selector(touchUpOutsideRecordButton), for: .touchUpOutside)
+        fakeRecordButton.addTarget(self, action: #selector(touchDragOutsideRecordButton), for: .touchDragExit)
+        fakeRecordButton.addTarget(self, action: #selector(touchDragInsideRecordButton), for: .touchDragEnter)
+        
+        var newFrame = control.recordButton.frame
+        newFrame.size.width = control.emojiButton.frame.maxX - control.switchButton.frame.maxX - 8
+        fakeRecordButton.frame = newFrame
     }
+    
     
     
     //MARK:- Action
@@ -41,6 +69,30 @@ extension SCConversationViewController{
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
+    func touchDownRecordButton() {
+        self.chatSessionInputBarControl.recordButton.sendActions(for: .touchDown)
+    }
+    
+    func touchUpInsideRecordButton() {
+        self.chatSessionInputBarControl.recordButton.sendActions(for: .touchUpInside)
+    }
+    
+    func touchUpOutsideRecordButton() {
+        self.chatSessionInputBarControl.recordButton.sendActions(for: .touchUpOutside)
+    }
+    
+    func touchDragOutsideRecordButton() {
+        self.chatSessionInputBarControl.recordButton.sendActions(for: .touchDragExit)
+    }
+    
+    func touchDragInsideRecordButton() {
+        self.chatSessionInputBarControl.recordButton.sendActions(for: .touchDragEnter)
+    }
+    
+    func didTouchSwitchButton(switched: Bool) {
+        self.chatSessionInputBarControl.recordButton.isHidden = true
+        self.fakeRecordButton.isHidden = !switched
+    }
     
     //MARK:- NetWork
     func getGroupInfo() {
