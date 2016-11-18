@@ -32,12 +32,12 @@ class SCConversationViewController: RCConversationViewController {
         
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
-//            self.configGroupInputBarControl()
+            configGroupInputBarControl()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             configNavgitaionItem()
             getGroupInfo()//officialGroup
             if self.targetId.hasPrefix("userGroup") {
-                self.configGroupInputBarControl()
+                configGroupInputBarControl()
             }
         }
     }

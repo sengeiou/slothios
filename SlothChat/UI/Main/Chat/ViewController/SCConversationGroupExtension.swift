@@ -48,6 +48,15 @@ extension SCConversationViewController{
         fakeRecordButton.setTitle(NSLocalizedString("n_release_to_send_title", comment: ""), for: .selected)
         fakeRecordButton.setTitleColor(SGColor.black, for: .highlighted)
         fakeRecordButton.setTitle(NSLocalizedString("n_release_to_send_title", comment: ""), for: .highlighted)
+        let bundlePath = Bundle.main.bundlePath
+            + "/RongCloud.bundle"
+        if let bundle = Bundle(path: bundlePath) {
+            let normalImg = UIImage(named: "press_for_audio", in: bundle, compatibleWith: nil)
+            let downImg = UIImage(named: "press_for_audio_down", in: bundle, compatibleWith: nil)
+            fakeRecordButton.setBackgroundImage(normalImg, for: .normal)
+            fakeRecordButton.setBackgroundImage(downImg, for: .highlighted)
+            fakeRecordButton.setBackgroundImage(downImg, for: .selected)
+        }
         
         fakeRecordButton.addTarget(self, action: #selector(touchDownRecordButton), for: .touchDown)
         fakeRecordButton.addTarget(self, action: #selector(touchUpInsideRecordButton), for: .touchUpInside)

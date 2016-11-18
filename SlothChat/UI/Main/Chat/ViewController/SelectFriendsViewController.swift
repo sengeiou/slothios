@@ -125,7 +125,8 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getOfficialGroupMember(officialGroupUuid: "officialGroup201611181441038d089f6a27ed49d68e"){ (response) in
+        engine.getOfficialGroupMember(officialGroupUuid: "officialGroup20161119005225b86ca6f51c8d49bf9e"){ (response) in
+            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.dataSource.removeAll()
                 if let list = response?.data?.list{
