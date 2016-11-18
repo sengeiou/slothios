@@ -142,8 +142,8 @@ class LoginViewController: BaseViewController {
         engine.getUserProfile(userUuid: userUuid) { (profile) in
             if profile?.status == ResponseError.SUCCESS.0 {
                 Global.shared.globalProfile = profile?.data
-                self.loginSystem()
-//                self.getChatToken()
+//                self.loginSystem()
+                self.getChatToken()
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
             }
@@ -212,7 +212,7 @@ class LoginViewController: BaseViewController {
                 Global.shared.chatToken = loginModel!.chatToken
                 self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
             }else{
-                HUD.flash(.label("登录失败"), delay: 2)
+                HUD.flash(.label(loginModel?.msg), delay: 2)
             }
         }
     }

@@ -97,7 +97,8 @@ class CaptchaViewController: BaseViewController {
     //Mark:- Network
     
     func getPublicSMS() {
-        if registerVC!.timeout > 0 {
+        if registerVC!.timeout > 0 &&
+           registerVC?.timeout != 60 {
             return
         }
         

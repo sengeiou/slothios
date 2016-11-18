@@ -16,6 +16,8 @@ class LoginModel : NSObject, NSCoding, Mappable{
     var token : String?
     var user : LoginUser?
     
+    var msg : String?
+    var status : String?
     open func caheForLoginModel() {
         let data = NSKeyedArchiver.archivedData(withRootObject: self)
         UserDefaults.standard.setValue(data, forKey: "LoginModelCacheKey")
@@ -48,7 +50,8 @@ class LoginModel : NSObject, NSCoding, Mappable{
         chatToken <- map["chatToken"]
         token <- map["token"]
         user <- map["user"]
-        
+        status <- map["status"]
+        msg <- map["msg"]
     }
     
     /**
@@ -61,7 +64,8 @@ class LoginModel : NSObject, NSCoding, Mappable{
         chatToken = aDecoder.decodeObject(forKey: "chatToken") as? String
         token = aDecoder.decodeObject(forKey: "token") as? String
         user = aDecoder.decodeObject(forKey: "user") as? LoginUser
-        
+        msg = aDecoder.decodeObject(forKey: "msg") as? String
+        status = aDecoder.decodeObject(forKey: "status") as? String
     }
     
     /**
@@ -83,6 +87,12 @@ class LoginModel : NSObject, NSCoding, Mappable{
             aCoder.encode(user, forKey: "user")
         }
         
+        if msg != nil{
+            aCoder.encode(msg, forKey: "msg")
+        }
+        if status != nil{
+            aCoder.encode(status, forKey: "status")
+        }
     }
     
 }

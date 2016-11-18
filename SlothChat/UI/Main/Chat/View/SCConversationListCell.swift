@@ -89,7 +89,6 @@ class SCConversationListCell: RCConversationBaseCell {
         timeLabel.text = date.timeAgo
         
         nameLabel.text = privateChat.nickname
-        var showUserInfo = RCUserInfo()
         self.nameLabel.text = privateChat.nickname
         let avatarUrl = URL(string: privateChat.profilePicUrl!)
         

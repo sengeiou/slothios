@@ -161,7 +161,8 @@ class FindPasswordViewController: BaseViewController {
     //MARK:- NetWork
     
     func getPublicSMS() {
-        if loginVC!.timeout > 0 {
+        if loginVC!.timeout > 0 &&
+           loginVC?.timeout != 60{
             return
         }
         
