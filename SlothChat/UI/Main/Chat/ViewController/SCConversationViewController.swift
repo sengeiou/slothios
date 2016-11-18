@@ -32,11 +32,11 @@ class SCConversationViewController: RCConversationViewController {
         
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
-            configGroupInputBarControl()
+//            configGroupInputBarControl()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             configNavgitaionItem()
-            getGroupInfo()//officialGroup
-            if self.targetId.hasPrefix("userGroup") {
+            getGroupInfo()//
+            if self.targetId.hasPrefix("officialGroup") {
                 configGroupInputBarControl()
             }
         }
@@ -46,9 +46,7 @@ class SCConversationViewController: RCConversationViewController {
         super.pluginBoardView(pluginBoardView, clickedItemWithTag: tag)
         if tag == 201 {
             SGLog(message: "发起群聊")
-            let tmpVC = SelectFriendsViewController()
-            let nav = BaseNavigationController(rootViewController: tmpVC)
-            present(nav, animated: true, completion: nil)
+            presentSelectFriendsVC()
         }
     }
     

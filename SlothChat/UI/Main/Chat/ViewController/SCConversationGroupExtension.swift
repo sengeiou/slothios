@@ -24,19 +24,27 @@ extension SCConversationViewController{
         self.navigationItem.rightBarButtonItem = barItem
     }
     
+    func presentSelectFriendsVC() {
+        let tmpVC = SelectFriendsViewController()
+        let nav = BaseNavigationController(rootViewController: tmpVC)
+        present(nav, animated: true, completion: nil)
+    }
+    
     
     func configGroupInputBarControl() {
         let control = self.chatSessionInputBarControl!
         control.additionalButton.setImage(UIImage(named: "icon"), for: .normal)
-        control.setDefaultInputType(RCChatSessionInputBarInputType.voice)
-        
-        
+        control.inputTextView.text = ""
         control.recordButton.isHidden = true
         control.inputTextView.isHidden = true
+//        control.inputTextView.isEnabled = false
         control.switchButton.isEnabled = false
         control.emojiButton.isEnabled = false
         control.emojiButton.isHidden = true
-        
+        control.additionalButton.removeTarget(nil, action: nil, for: .allEvents)
+        control.additionalButton.addTarget(self, action: #selector(presentSelectFriendsVC), for: .touchUpInside)
+        control.setDefaultInputType(RCChatSessionInputBarInputType.voice)
+
         control.addSubview(fakeRecordButton)
         fakeRecordButton.layer.borderColor = SGColor.SGLineColor().cgColor
         fakeRecordButton.layer.borderWidth = 0.5
