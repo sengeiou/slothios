@@ -308,4 +308,18 @@ extension SCConversationListViewController{
             }
         }
     }
+    
+    func convertModel(chatList: ChatList?) {
+//        var chatOfficialGroupVo : ChatOfficialGroupVo?
+//        var chatUserGroupVos : [ChatUserGroupVo]?
+//        var privateChatVos : [PrivateChatVo]?
+        guard let _ = chatList?.data?.chatOfficialGroupVo,
+              let _ = chatList?.data?.chatUserGroupVos,
+              let _ = chatList?.data?.privateChatVos else {
+            return
+        }
+        
+        self.conversationListTableView.reloadData()
+
+    }
 }

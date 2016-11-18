@@ -358,7 +358,6 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         SGLog(message: "")
         guard let canTalk = Global.shared.globalLogin?.canTalk,
               let myProfile = Global.shared.globalProfile,
-              let targetId = self.mProfile?.userUuid,
               let otherProfile = self.mProfile else {
                 SGLog(message: "数据不全")
                 return
