@@ -67,32 +67,41 @@ class SCConversationListCell: RCConversationBaseCell {
         }
     }
     
-    func configCellWithObject(model: RCConversationModel) {
+    public func configCellWithModel(model: RCConversationModel){
+        ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
+            if let userInfo = userInfo {
+                self.nameLabel.text = userInfo.name
+                let avatarUrl = URL(string: userInfo.portraitUri)
+                self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            }
+        }
+        configWithModel(model: model)
+    }
+    func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {
+        let myself = RCIMClient.shared().currentUserInfo
         
-        let unreadCount = model.unreadMessageCount
-        badgeView.isHidden = unreadCount <= 0
-        
-        nameLabel.text = model.objectName
-                
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
-        
-        
+        if model.senderUserId == myself?.userId {
+            return myself!
+        }
+        return userInfo
     }
     
     public func configCellWithObject(privateChat: PrivateChatVo,model: RCConversationModel){
-        
-        let unreadCount = model.unreadMessageCount
-        badgeView.isHidden = unreadCount <= 0
-        
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
         
         nameLabel.text = privateChat.nickname
         self.nameLabel.text = privateChat.nickname
         let avatarUrl = URL(string: privateChat.profilePicUrl!)
         
         self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        configWithModel(model: model)
+    }
+    
+    func configWithModel(model: RCConversationModel) {
+        let unreadCount = model.unreadMessageCount
+        badgeView.isHidden = unreadCount <= 0
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+        timeLabel.text = date.timeAgo
         
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
             self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?

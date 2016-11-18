@@ -174,6 +174,8 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCConversationListCell", for: indexPath) as! SCConversationListCell
             if let privateChat = self.chatList?.data?.getPrivateChatVo(privateChatId: model.targetId) {
                 cell.configCellWithObject(privateChat: privateChat,model:model)
+            }else{
+                cell.configCellWithModel(model:model)
             }
             return cell
         }
@@ -250,14 +252,19 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             return
         }
         
-        if model.conversationType == RCConversationType.ConversationType_PRIVATE {
-            ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
-                if let userInfo = userInfo {
-                    chat.title = userInfo.name
+        if model.conversationType == .ConversationType_PRIVATE {
+            let model = getTableViewModel(indexPath: indexPath)
+            if let privateChat = self.chatList?.data?.getPrivateChatVo(privateChatId: model.targetId) {
+                chat.title = privateChat.nickname
+            }else{
+                ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
+                    if let userInfo = userInfo {
+                        chat.title = userInfo.name
+                    }
                 }
             }
-        }else if model.conversationType == RCConversationType.ConversationType_GROUP ||
-            model.conversationType == RCConversationType.ConversationType_DISCUSSION{
+        }else if model.conversationType == .ConversationType_GROUP ||
+            model.conversationType == .ConversationType_DISCUSSION{
             chat.title = model.conversationTitle;
             chat.groupUuid = model.targetId
         }

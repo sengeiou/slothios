@@ -88,7 +88,7 @@ enum API_URI:String {
     case get_chatToken = "/api/user/{userUuid}/chat/getToken?token={token}"
     //30.获取某用户UUID的所有会话列表，待定是否需要加分页参数做分页
     case get_chatList = "/api/user/{userUuid}/chat?token={token}"
-    //31.分页获取某用户UUID所在的，唯一官方群组的所有群成员信息
+    //31.获取指定官方群组 的所有官方群成员资料，需分页参数
     case get_officialGroupMember = "/api/officialGroup/{officialGroupUuid}/officialGroupMember?token={token}"
     //32.创建用户群组
     case post_createGroup = "/api/userGroup?token={token}"
@@ -885,7 +885,7 @@ class NetworkEngine: NSObject {
         }
     }
     
-    //31.分页获取某用户UUID所在的，唯一官方群组的所有群成员信息
+    //31.获取指定官方群组 的所有官方群成员资料，需分页参数
     func getOfficialGroupMember(officialGroupUuid: String, completeHandler :@escaping(_ response:OfficialGroup?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token else {
                 SGLog(message: "数据为空")

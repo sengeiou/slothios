@@ -10,11 +10,12 @@ import UIKit
 import PKHUD
 
 class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    var dataSource = ChatManager.shared.friendArray
+    var dataSource = [ChatMemberInfo]()
+    
     var selectRows = Set<String>()
     
     var search = UISearchController()
-    var searchArray = [RCUserInfo]()
+    var searchArray = [ChatMemberInfo]()
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -24,6 +25,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         self.setNavtionBack(imageStr: "close")
         self.setNavtionConfirm(titleStr: "完成")
         sentupView()
+        getOfficialGroupMember()
     }
     
     func sentupView() {
@@ -51,7 +53,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         })()
     }
     
-    func getTableViewModel(indexPath: IndexPath) -> RCUserInfo{
+    func getTableViewModel(indexPath: IndexPath) -> ChatMemberInfo{
         if search.isActive {
             return self.searchArray[indexPath.row]
         }
@@ -67,9 +69,9 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SelectFriendsCell = tableView.dequeueReusableCell(withIdentifier: "SelectFriendsCell", for: indexPath) as! SelectFriendsCell
-        let userObj = getTableViewModel(indexPath: indexPath)
-        cell.configCellWithObj(userObj: userObj)
-        cell.configFlagView(selected: selectRows.contains(userObj.userId))
+        let memberInfo = getTableViewModel(indexPath: indexPath)
+        cell.configCellWithObj(memberInfo: memberInfo)
+        cell.configFlagView(selected: selectRows.contains(memberInfo.memberUuid!))
         cell.indexPath = indexPath
         return cell
     }
@@ -79,10 +81,10 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         
         let userObj = getTableViewModel(indexPath: indexPath)
 
-        if selectRows.contains(userObj.userId) {
-            selectRows.remove(userObj.userId)
+        if selectRows.contains(userObj.memberUuid!) {
+            selectRows.remove(userObj.memberUuid!)
         }else{
-            selectRows.insert(userObj.userId)
+            selectRows.insert(userObj.memberUuid!)
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
@@ -92,7 +94,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         
         let userObj = dataSource[indexPath.row]
         
-        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: userObj.userId) else {
+        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: userObj.memberUuid) else {
             return
         }
         navigationController?.pushViewController(chat, animated: true)
@@ -106,9 +108,9 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         var idList = [String]()
         var groupName = ""
         for userInfo in dataSource {
-            if selectRows.contains(userInfo.userId) {
-                idList.append(userInfo.userId)
-                groupName.append(userInfo.name)
+            if selectRows.contains(userInfo.memberUuid!) {
+                idList.append(userInfo.memberUuid!)
+                groupName.append(userInfo.userDisplayName!)
             }
         }
         if !idList.contains(RCIM.shared().currentUserInfo.userId) {
@@ -116,21 +118,39 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
             groupName.append(RCIM.shared().currentUserInfo.name)
         }
         SGLog(message: idList)
-        createDiscussion(IDS: idList, groupName: groupName)
+        createPrivateGroup(IDS: idList, groupName: groupName)
     }
     
-    func createDiscussion(IDS: [String], groupName: String) {
+    func getOfficialGroupMember() {
+        
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.getOfficialGroupMember(officialGroupUuid: "officialGroup201611181441038d089f6a27ed49d68e"){ (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.dataSource.removeAll()
+                if let list = response?.data?.list{
+                    self.dataSource.append(contentsOf: list)
+                    self.tableView.reloadData()
+                }
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func createPrivateGroup(IDS: [String], groupName: String) {
         
         if IDS.count <= 0 {
             HUD.flash(.label("请先选择好友"), delay: 2)
             return
         }
         let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
         engine.postCreateGroup(memberUserUuidList: IDS, groupDisplayName: groupName) { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("创建群组成功"), delay: 2 , completion: { (result) in
-                    self.pushGroup(groupId: response?.data?.uuid)
+                    self.pushGroupViewController(group: response?.data)
                 })
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
@@ -138,8 +158,10 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         }
     }
     
-    func pushGroup(groupId: String?) {
-        guard let groupId = groupId else {
+    func pushGroupViewController(group: GroupInfoData?) {
+        guard let group = group,
+              let groupId = group.uuid,
+              let groupName = group.groupDisplayName else {
             return
         }
         SGLog(message: groupId)
@@ -147,6 +169,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_GROUP, targetId: groupId) else {
             return
         }
+        chat.title = groupName
         navigationController?.pushViewController(chat, animated: true)
     }
 }
@@ -159,7 +182,7 @@ extension SelectFriendsViewController: UISearchResultsUpdating{
             return
         }
         for userInfo in dataSource {
-            if userInfo.name.contains(searchText) {
+            if (userInfo.userDisplayName?.contains(searchText))! {
                 searchArray.append(userInfo)
             }
         }

@@ -59,6 +59,12 @@ class SelectFriendsCell: UITableViewCell {
         self.nameLabel.text = userObj.name
     }
     
+    func configCellWithObj(memberInfo: ChatMemberInfo) {
+        let avatarUrl = URL(string: memberInfo.profilePicUrl!)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.nameLabel.text = memberInfo.userDisplayName
+    }
+    
     func configFlagView(selected: Bool) {
         if !selected {
             flagImgView.image = UIImage(named: "chat-gray")
@@ -73,5 +79,6 @@ class SelectFriendsCell: UITableViewCell {
         
         self.nameLabel.text = groupObj.groupName
     }
+    
 
 }
