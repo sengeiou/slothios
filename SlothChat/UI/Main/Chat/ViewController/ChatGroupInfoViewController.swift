@@ -127,8 +127,14 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let userObj = dataSource[indexPath.row]
+        
+        let userUuidA = Global.shared.globalProfile?.userUuid
+        let userUuidB = userObj.userUuid
+        
+        self.postPrivateChat(nameA: Global.shared.globalProfile?.nickname, nameB: userObj.userDisplayName, userUuidA: userUuidA, userUuidB: userUuidB)
     }
-    
     
     //MARK:- Action
     override func confirmClick() {

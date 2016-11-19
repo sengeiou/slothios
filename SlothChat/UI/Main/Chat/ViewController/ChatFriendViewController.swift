@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatFriendViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class SelectChatFriendViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = ChatManager.shared.friendArray
     
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -56,11 +56,11 @@ class ChatFriendViewController: BaseViewController,UITableViewDelegate,UITableVi
         SGLog(message: indexPath.row)
         
         let userObj = dataSource[indexPath.row]
-
-        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: userObj.userId) else {
-            return
-        }
-        navigationController?.pushViewController(chat, animated: true)
+        
+        let userUuidA = Global.shared.globalProfile?.userUuid
+        let userUuidB = userObj.userId
+        
+        self.postPrivateChat(nameA: Global.shared.globalProfile?.nickname, nameB: userObj.name, userUuidA: userUuidA, userUuidB: userUuidB)
     }
     
     override func confirmClick() {

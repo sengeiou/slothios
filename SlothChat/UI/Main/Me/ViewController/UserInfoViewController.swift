@@ -357,36 +357,16 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     //MARK:- Action
     func chatButtonClick() {
         SGLog(message: "")
-        guard let canTalk = Global.shared.globalLogin?.canTalk,
-              let myProfile = Global.shared.globalProfile,
+        guard let myProfile = Global.shared.globalProfile,
               let otherProfile = self.mProfile else {
                 SGLog(message: "数据不全")
                 return
         }
-        if !canTalk {
-            HUD.flash(.label("请设置第一张个人资料是能识别的真人照片~"), delay: 2)
-//            return
-        }
-        let name = myProfile.nickname! + "," + otherProfile.nickname!
+        
         let userUuidA = myProfile.userUuid
         let userUuidB = otherProfile.userUuid
-        let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
-        engine.postPrivateChat(name: name, userUuidA: userUuidA, userUuidB: userUuidB){ (response) in
-            HUD.hide()
-            if response?.status == ResponseError.SUCCESS.0{
-                ChatManager.shared.refreshUserInfo(userInfo: self.mProfile!)
-                
-                guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: response?.data?.uuid) else {
-                    return
-                }
-                chat.title = response?.data?.name
-                self.navigationController?.pushViewController(chat, animated: true)
-            }else{
-                HUD.flash(.label(response?.msg), delay: 2)
-            }
-        }
+        self.postPrivateChat(nameA: Global.shared.globalProfile?.nickname, nameB: otherProfile.nickname, userUuidA: userUuidA, userUuidB: userUuidB)
     }
     
     func likeButtonClick() {

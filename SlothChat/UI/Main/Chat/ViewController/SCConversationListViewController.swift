@@ -162,7 +162,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         if model.conversationType == .ConversationType_DISCUSSION ||
             model.conversationType == .ConversationType_GROUP{
-            return 120
+            return 128
         }
         return 60
     }

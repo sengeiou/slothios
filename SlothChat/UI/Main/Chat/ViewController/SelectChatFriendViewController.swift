@@ -96,10 +96,10 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         
         let userObj = dataSource[indexPath.row]
         
-        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: userObj.memberUuid) else {
-            return
-        }
-        navigationController?.pushViewController(chat, animated: true)
+        let userUuidA = Global.shared.globalProfile?.userUuid
+        let userUuidB = userObj.userUuid
+        
+        self.postPrivateChat(nameA: Global.shared.globalProfile?.nickname, nameB: userObj.userDisplayName, userUuidA: userUuidA, userUuidB: userUuidB)
     }
     
     override func backClick() {
