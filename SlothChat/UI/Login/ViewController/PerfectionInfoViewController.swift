@@ -58,6 +58,7 @@ class PerfectionInfoViewController: BaseViewController {
         avatarButton.addTarget(self, action:#selector(avatarButtonClick), for: .touchUpInside)
         avatarButton.setImage(UIImage.init(named: "camera-gray"), for: .normal)
         avatarButton.setBackgroundImage(UIImage.init(named: "litmatrix"), for: .normal)
+        avatarButton.contentMode = .scaleAspectFit
         view.addSubview(avatarButton)
         
         nickNameView.configInputView(titleStr: "昵称:", contentStr: "")
