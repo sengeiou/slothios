@@ -39,14 +39,14 @@ extension SCConversationViewController{
         control.inputTextView.text = ""
         control.recordButton.isHidden = true
         control.inputTextView.isHidden = true
-//        control.inputTextView.isEnabled = false
+        //        control.inputTextView.isEnabled = false
         control.switchButton.isEnabled = false
         control.emojiButton.isEnabled = false
         control.emojiButton.isHidden = true
         control.additionalButton.removeTarget(nil, action: nil, for: .allEvents)
         control.additionalButton.addTarget(self, action: #selector(presentSelectFriendsVC), for: .touchUpInside)
         control.setDefaultInputType(RCChatSessionInputBarInputType.voice)
-
+        
         control.addSubview(fakeRecordButton)
         fakeRecordButton.layer.borderColor = SGColor.SGLineColor().cgColor
         fakeRecordButton.layer.borderWidth = 0.5
@@ -79,14 +79,12 @@ extension SCConversationViewController{
         fakeRecordButton.frame = newFrame
     }
     
-    
-    
     //MARK:- Action
     func itemButtonClick() {
         let pushVC = ChatGroupInfoViewController()
-        pushVC.groupInfo = self.groupInfo
+        pushVC.groupName = self.title
         pushVC.groupUuid = self.groupUuid
-
+        
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     
@@ -117,22 +115,23 @@ extension SCConversationViewController{
     
     //MARK:- NetWork
     func getGroupInfo() {
-
-        guard let groupUuid = groupUuid else {
-            SGLog(message: "groupUuid为空")
-            return
-        }
-        let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
-        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
-            HUD.hide()
-            if response?.status == ResponseError.SUCCESS.0 {
-                self.title = response?.data?.groupDisplayName
-                self.groupInfo = response?.data
-            }else{
-                HUD.flash(.label(response?.msg), delay: 2)
-            }
-        }
+//        guard let groupUuid = groupUuid else {
+//            SGLog(message: "groupUuid为空")
+//            return
+//        }
+//        let engine = NetworkEngine()
+//        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+//        
+//        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
+//            HUD.hide()
+//            if response?.status == ResponseError.SUCCESS.0 {
+//                if let group = response?.data{
+//                    self.title = group.groupDisplayName
+//                }
+//            }else{
+//                HUD.flash(.label(response?.msg), delay: 2)
+//            }
+//        }
     }
 }

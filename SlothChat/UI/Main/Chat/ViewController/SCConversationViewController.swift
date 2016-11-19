@@ -10,7 +10,6 @@ import UIKit
 
 class SCConversationViewController: RCConversationViewController {
     var groupUuid: String?
-    var groupInfo: GroupInfoData?
     let fakeRecordButton = UIButton(type: .custom)
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +34,7 @@ class SCConversationViewController: RCConversationViewController {
 //            configGroupInputBarControl()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             configNavgitaionItem()
-            getGroupInfo()
+//            getGroupInfo()
             if self.targetId.hasPrefix("officialGroup") {
                 //官方群只能语音聊天
                 configGroupInputBarControl()

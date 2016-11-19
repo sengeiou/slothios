@@ -10,10 +10,12 @@ import UIKit
 import PKHUD
 
 class ChatGroupInfoHeaderView: UIView {
-    let groupName = ChatGroupInfoInputView()
+    let groupNameView = ChatGroupInfoInputView()
     let nickName = ChatGroupInfoInputView()
     
-    var groupInfo: GroupInfoData?
+    var groupName: String?
+    var groupUuid: String?
+
     var myMemberInfo: ChatMemberInfo!
 
     override init(frame: CGRect) {
@@ -26,49 +28,49 @@ class ChatGroupInfoHeaderView: UIView {
     }
     
     func sentupView() {
-        addSubview(groupName)
+        addSubview(groupNameView)
         addSubview(nickName)
-        groupName.isEditing = false
+        groupNameView.isEditing = false
         nickName.isEditing = false
-        groupName.snp.makeConstraints { (make) in
+        groupNameView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
             make.height.equalTo(44)
         }
         nickName.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(groupName.snp.bottom)
+            make.top.equalTo(groupNameView.snp.bottom)
             make.height.equalTo(44)
             make.bottom.equalTo(0)
         }
     }
     
-    func configWithObject(tmpGroupInfo: GroupInfoData?,isGroupOwner: Bool,memberInfo: ChatMemberInfo?) {
-        guard let tmpGroupInfo = tmpGroupInfo else {
+    func configWithObject(tmpGroupName: String?,isGroupOwner: Bool,memberInfo: ChatMemberInfo?) {
+        guard let groupName = tmpGroupName else {
                 return
         }
         myMemberInfo = memberInfo
-        groupInfo = tmpGroupInfo
-        groupName.configInputView(titleStr: "群组名", contentStr: tmpGroupInfo.groupDisplayName!)
+        self.groupName = groupName
+        groupNameView.configInputView(titleStr: "群组名", contentStr: groupName)
         if let memberInfo = memberInfo {
             nickName.configInputView(titleStr: "我的群昵称", contentStr: memberInfo.userDisplayName!)
         }
-        groupName.editButton.addTarget(self, action: #selector(groupNameEditButtonClick), for: .touchUpInside)
+        groupNameView.editButton.addTarget(self, action: #selector(groupNameEditButtonClick), for: .touchUpInside)
         nickName.editButton.addTarget(self, action: #selector(nickNameEditButtonClick), for: .touchUpInside)
         
         if isGroupOwner {
-            groupName.editButton.isHidden = false
+            groupNameView.editButton.isHidden = false
         }else{
-            groupName.editButton.isHidden = true
+            groupNameView.editButton.isHidden = true
         }
     }
     
     func groupNameEditButtonClick() {
-        groupName.isEditing = !groupName.isEditing
+        groupNameView.isEditing = !groupNameView.isEditing
         
-        let content = groupName.getInputContent()
-        if groupName.isEditing == false &&
-            groupName.getSumbitValid() &&
-            content != groupInfo?.groupDisplayName! {
+        let content = groupNameView.getInputContent()
+        if groupNameView.isEditing == false &&
+            groupNameView.getSumbitValid() &&
+            content != self.groupName! {
             modifyGroupName(newName: content!)
         }
     }
@@ -78,8 +80,7 @@ class ChatGroupInfoHeaderView: UIView {
         
         let content = nickName.getInputContent()
         if nickName.isEditing == false &&
-            nickName.getSumbitValid() &&
-            content != groupInfo?.groupDisplayName! {
+            nickName.getSumbitValid() {
             modifyUserNickName(newName: content!)
         }
     }
@@ -89,7 +90,7 @@ class ChatGroupInfoHeaderView: UIView {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let adminUserUuid = Global.shared.globalProfile?.userUuid
         
-        engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupInfo?.uuid, adminUserUuid: adminUserUuid){ (response) in
+        engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupUuid, adminUserUuid: adminUserUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("修改群组名成功"), delay: 2)
@@ -104,7 +105,7 @@ class ChatGroupInfoHeaderView: UIView {
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let memberUuid = myMemberInfo.memberUuid
         
-        engine.putUserGroupMember(userGroupUuid: groupInfo?.uuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
+        engine.putUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("修改用户名成功"), delay: 2)

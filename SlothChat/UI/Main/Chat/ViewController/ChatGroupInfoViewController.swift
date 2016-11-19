@@ -12,7 +12,7 @@ import PKHUD
 class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
     var groupUuid: String?
-    var groupInfo: GroupInfoData?
+    var groupName: String?
     var myMemberInfo: ChatMemberInfo?
     var isGroupOwner = false
     
@@ -46,8 +46,10 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         
         let screenWidth = UIScreen.main.bounds.size.width
         headerView.frame = CGRect.init(x: 0, y: 0, width: screenWidth, height: 88)
+        headerView.groupUuid = groupUuid
+        headerView.groupName = groupName
         tableView.tableHeaderView = headerView
-        headerView.configWithObject(tmpGroupInfo: groupInfo,isGroupOwner: false,memberInfo: nil)
+        headerView.configWithObject(tmpGroupName: groupName,isGroupOwner: false,memberInfo: nil)
         tableView.tableFooterView = UIView()
     }
     
@@ -162,7 +164,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
                 self.isGroupOwner = true
             }
         }
-        self.headerView.configWithObject(tmpGroupInfo: self.groupInfo,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
+        self.headerView.configWithObject(tmpGroupName: self.groupName,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
         self.addBottomView(isGroupOwner: self.isGroupOwner)
         self.dataSource = list
         self.tableView.reloadData()
@@ -212,7 +214,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func deleteUserGroup() {
-        guard let groupUuid = groupInfo?.uuid else {
+        guard let groupUuid = groupUuid else {
             SGLog(message: "groupUuid为空")
             return
         }
@@ -235,7 +237,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func deleteUserGroupMember(memberUuid: String?,indexPath: IndexPath?) {
-        guard let groupUuid = groupInfo?.uuid,
+        guard let groupUuid = groupUuid,
               let memberUuid = memberUuid,
               let indexPath = indexPath else {
             SGLog(message: "groupUuid为空")

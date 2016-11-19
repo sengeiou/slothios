@@ -271,19 +271,12 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         }
         
         if model.conversationType == .ConversationType_PRIVATE {
-            let model = getTableViewModel(indexPath: indexPath)
-            if let privateChat = self.chatList?.data?.getPrivateChatVo(privateChatId: model.targetId) {
-                chat.title = privateChat.nickname
-            }else{
-                ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
-                    if let userInfo = userInfo {
-                        chat.title = userInfo.name
-                    }
-                }
-            }
+            let cell = self.conversationListTableView.cellForRow(at: indexPath) as! SCConversationListCell
+            chat.title = cell.nameLabel.text;
         }else if model.conversationType == .ConversationType_GROUP ||
             model.conversationType == .ConversationType_DISCUSSION{
-            chat.title = model.conversationTitle;
+            let cell = self.conversationListTableView.cellForRow(at: indexPath) as! SCChatGroupCell
+            chat.title = cell.nameLabel.text;
             chat.groupUuid = model.targetId
         }
         navigationController?.pushViewController(chat, animated: true)
