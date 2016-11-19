@@ -193,8 +193,16 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         if model.conversationType == .ConversationType_DISCUSSION ||
            model.conversationType == .ConversationType_GROUP {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCChatGroupCell", for: indexPath) as! SCChatGroupCell
-            if let userGroup = self.chatList?.data?.getChatUserGroupVo(groupId: model.targetId) {
-                cell.configCellWithObject(userGroup: userGroup,model:model)
+            if let group = self.chatList?.data?.getChatUserGroupVo(groupId: model.targetId) {
+                if group.isKind(of: ChatUserGroupVo.self) {
+                    let userGroup = group as! ChatUserGroupVo
+                    cell.configCellWithObject(userGroup: userGroup,model:model)
+                }else if group.isKind(of: ChatOfficialGroupVo.self){
+                    let officialGroup = group as! ChatOfficialGroupVo
+                    cell.configCellWithObject(officialGroup: officialGroup,model:model)
+                }else{                    
+                    cell.configCellObject(model:model)
+                }
             }
             
             return cell

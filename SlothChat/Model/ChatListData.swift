@@ -22,10 +22,13 @@ class ChatListData : NSObject, NSCoding, Mappable{
 	required init?(map: Map){}
 	private override init(){}
     
-    public func getChatUserGroupVo(groupId: String?) -> ChatUserGroupVo?{
+    public func getChatUserGroupVo(groupId: String?) -> AnyObject?{
         guard let groupId = groupId,
               let chatUserGroupVos = chatUserGroupVos else {
               return nil
+        }
+        if groupId == chatOfficialGroupVo?.officialGroupUuid {
+            return chatOfficialGroupVo
         }
         for group in chatUserGroupVos {
             if group.userGroupUuid == groupId{
@@ -40,7 +43,6 @@ class ChatListData : NSObject, NSCoding, Mappable{
             let privateChatVos = privateChatVos else {
                 return nil
         }
-//        return privateChatVos.first
         for privateChat in privateChatVos {
             if privateChat.privateChatUuid == privateChatId{
                 return privateChat

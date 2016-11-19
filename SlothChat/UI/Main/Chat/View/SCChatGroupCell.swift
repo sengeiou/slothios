@@ -111,44 +111,59 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         }
     }
     
+    public func configCellWithObject(officialGroup: ChatOfficialGroupVo,model: RCConversationModel){
+        
+        nameLabel.text = officialGroup.officialGroupName
+        dataSource = officialGroup.officialGroupMemberVos!
+        collectionView?.reloadData()
+        
+        configCellObject(model: model)
+        if let member = officialGroup.getChatMemberInfo(userUuid: model.senderUserId) {
+            configCellObject(member: member)
+        }
+    }
+    
     public func configCellWithObject(userGroup: ChatUserGroupVo,model: RCConversationModel){
         
+        nameLabel.text = userGroup.userGroupName
+        dataSource = userGroup.userGroupMemberVos!
+        collectionView?.reloadData()
+        configCellObject(model: model)
+
+        if let member = userGroup.getChatMemberInfo(userUuid: model.senderUserId) {
+            configCellObject(member: member)
+        }
+        
+    }
+    
+    func configCellObject(member: ChatMemberInfo) {
+        
+        let avatarUrl = URL(string: member.profilePicUrl!)
+        self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        if model.lastestMessage.isKind(of: RCTextMessage.self) {
+            self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+        }else if model.lastestMessage.isKind(of: RCImageMessage.self){
+            self.contentLabel.text = member.userDisplayName! + "：[图片]"
+        }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
+            self.contentLabel.text = member.userDisplayName! + "：[语音]"
+        }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
+            self.contentLabel.text = member.userDisplayName! + "：[位置]"
+        }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+            self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
+        }
+    }
+    
+    
+    func configCellObject(model: RCConversationModel){
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0
         
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
-        
-        nameLabel.text = userGroup.userGroupName
-        dataSource = userGroup.userGroupMemberVos!
-        collectionView?.reloadData()
-        
-        if let member = userGroup.getChatMemberInfo(userUuid: model.senderUserId) {
-            let avatarUrl = URL(string: member.profilePicUrl!)
-            self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-            
-            if model.lastestMessage.isKind(of: RCTextMessage.self) {
-                self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
-            }else if model.lastestMessage.isKind(of: RCImageMessage.self){
-                self.contentLabel.text = member.userDisplayName! + "：[图片]"
-            }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
-                self.contentLabel.text = member.userDisplayName! + "：[语音]"
-            }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
-                self.contentLabel.text = member.userDisplayName! + "：[位置]"
-            }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
-                self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
-            }
-        }
     }
     
-    func getShowUserInfo(model: RCConversationModel, userInfo: RCUserInfo) -> RCUserInfo {
-        let myself = RCIMClient.shared().currentUserInfo
-        
-        if model.senderUserId == myself?.userId {
-            return myself!
-        }
-        return userInfo
-    }
+    
     
     //MARK:- UICollectionViewDelegate,UICollectionViewDataSource
 

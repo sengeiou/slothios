@@ -35,8 +35,9 @@ class SCConversationViewController: RCConversationViewController {
 //            configGroupInputBarControl()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             configNavgitaionItem()
-            getGroupInfo()//
+            getGroupInfo()
             if self.targetId.hasPrefix("officialGroup") {
+                //官方群只能语音聊天
                 configGroupInputBarControl()
             }
         }
