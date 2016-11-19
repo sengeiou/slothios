@@ -16,7 +16,7 @@ class CaptchaViewController: BaseViewController {
     public var phoneNo:String!
     public var codeNo:String!
     public var password:String!
-    public var countryName = "cn"
+    public var countryName = "CN"
 
 
     let tipLabel = UILabel.init()

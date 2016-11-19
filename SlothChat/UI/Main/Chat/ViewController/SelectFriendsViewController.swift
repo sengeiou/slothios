@@ -11,6 +11,8 @@ import PKHUD
 
 class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
+    var dependVC: UIViewController?
+    var officialGroupUuid: String?
     
     var selectRows = Set<String>()
     
@@ -122,10 +124,13 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func getOfficialGroupMember() {
-        
+        guard let officialGroupUuid = officialGroupUuid else {
+            SGLog(message: "officialGroupUuid 为空")
+            return
+        }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getOfficialGroupMember(officialGroupUuid: "officialGroup20161119005225b86ca6f51c8d49bf9e"){ (response) in
+        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.dataSource.removeAll()
@@ -171,7 +176,13 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
             return
         }
         chat.title = groupName
-        navigationController?.pushViewController(chat, animated: true)
+        if let dependVC = dependVC {
+            dismiss(animated: true, completion: { 
+                dependVC.navigationController?.pushViewController(chat, animated: true)
+            })
+        }else{
+            navigationController?.pushViewController(chat, animated: true)
+        }
     }
 }
 

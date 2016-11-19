@@ -25,6 +25,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
         navigationItem.title = "聊"
+        setNavtionConfirm(imageStr: "chat-champagne")
         
         self.search = ({
             let controller = UISearchController(searchResultsController: nil)
@@ -56,14 +57,23 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         RCIM.shared().receiveMessageDelegate = self
         RCIM.shared().connectionStatusDelegate = self
         self.conversationListTableView.tableFooterView = UIView()
-//        self.setNavtionConfirm(titleStr: "我的好友")
     }
     
     //MARK: - Action
     
     override func confirmClick(){
-        let pushVC = ChatFriendViewController()
-        navigationController?.pushViewController(pushVC, animated: true)
+        
+        guard let groupId = self.chatList?.data?.chatOfficialGroupVo?.officialGroupUuid else {
+            SGLog(message: "officialGroupUuid")
+            return
+        }
+        
+        let tmpVC = SelectFriendsViewController()
+        tmpVC.dependVC = self
+        
+        tmpVC.officialGroupUuid = groupId
+        let nav = BaseNavigationController(rootViewController: tmpVC)
+        present(nav, animated: true, completion: nil)
     }
     
     //MARK: - RCIMReceiveMessageDelegate

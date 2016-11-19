@@ -26,6 +26,8 @@ extension SCConversationViewController{
     
     func presentSelectFriendsVC() {
         let tmpVC = SelectFriendsViewController()
+        tmpVC.dependVC = self
+        tmpVC.officialGroupUuid = self.targetId
         let nav = BaseNavigationController(rootViewController: tmpVC)
         present(nav, animated: true, completion: nil)
     }

@@ -18,7 +18,7 @@ class LoginViewController: BaseViewController {
     
     var timeout = 0
     
-    public var countryName = "cn"
+    public var countryName = "CN"
 
     override func viewDidLoad() {
         super.viewDidLoad()
