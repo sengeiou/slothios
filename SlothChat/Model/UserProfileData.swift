@@ -83,7 +83,7 @@ class UserProfileData : NSObject, NSCoding, Mappable{
     }
     
     func deleteAvatar(at: Int) {
-        if at <= 0 || at > (self.userPhotoList?.count)!  {
+        if at < 0 || at >= (self.userPhotoList?.count)!  {
             SGLog(message: "page出错" + String(at))
             return
         }
