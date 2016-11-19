@@ -11,7 +11,7 @@ import PKHUD
 
 class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
-    
+    var groupUuid: String?
     var groupInfo: GroupInfoData?
     var myMemberInfo: ChatMemberInfo?
     var isGroupOwner = false
@@ -24,7 +24,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         title = "群信息"
         sentupView()
         setNavtionBack(imageStr: "go-back")
-        getGroupMemberList()
+        if (groupUuid?.hasPrefix("officialGroup"))! {
+            getOfficialGroupMember()
+        }else{
+            getGroupMemberList()
+        }
     }
     
     func sentupView() {
@@ -151,10 +155,22 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         deleteUserGroup()
     }
     
-    //MARK:- NetWork
+    func handleResponse(list: [ChatMemberInfo]) {
+        for member in list{
+            if member.isAdmin! &&
+                member.userUuid == Global.shared.globalProfile?.userUuid{
+                self.isGroupOwner = true
+            }
+        }
+        self.headerView.configWithObject(tmpGroupInfo: self.groupInfo,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
+        self.addBottomView(isGroupOwner: self.isGroupOwner)
+        self.dataSource = list
+        self.tableView.reloadData()
+    }
     
+    //MARK:- NetWork
     func getGroupMemberList() {
-        guard let groupUuid = groupInfo?.uuid else {
+        guard let groupUuid = groupUuid else {
             SGLog(message: "groupUuid为空")
             return
         }
@@ -166,17 +182,28 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
-                    for member in list{
-                        if member.isAdmin! &&
-                           member.userUuid == Global.shared.globalProfile?.userUuid{
-                            self.isGroupOwner = true
-                        }
-                    }
                     self.myMemberInfo = response?.data?.getMemberInfo()
-                    self.headerView.configWithObject(tmpGroupInfo: self.groupInfo,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
-                    self.addBottomView(isGroupOwner: self.isGroupOwner)
-                    self.dataSource = list
-                    self.tableView.reloadData()
+                    self.handleResponse(list: list)
+                }
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    func getOfficialGroupMember() {
+        guard let officialGroupUuid = groupUuid else {
+            SGLog(message: "officialGroupUuid 为空")
+            return
+        }
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                if let list = response?.data?.list{
+                    self.myMemberInfo = response?.data?.getMemberInfo()
+                    self.handleResponse(list: list)
                 }
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)

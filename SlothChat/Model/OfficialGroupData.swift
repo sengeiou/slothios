@@ -37,6 +37,19 @@ class OfficialGroupData : NSObject, NSCoding, Mappable{
 	}
 	required init?(map: Map){}
 	private override init(){}
+    
+    func getMemberInfo() -> ChatMemberInfo? {
+        guard let memberId = Global.shared.globalProfile?.userUuid,
+            let list = list else {
+                return nil
+        }
+        for member in list {
+            if member.userUuid == memberId{
+                return member
+            }
+        }
+        return nil
+    }
 
 	func mapping(map: Map)
 	{

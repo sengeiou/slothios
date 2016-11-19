@@ -85,6 +85,8 @@ extension SCConversationViewController{
     func itemButtonClick() {
         let pushVC = ChatGroupInfoViewController()
         pushVC.groupInfo = self.groupInfo
+        pushVC.groupUuid = self.groupUuid
+
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     

@@ -117,9 +117,10 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         dataSource = officialGroup.officialGroupMemberVos!
         collectionView?.reloadData()
         
-        configCellObject(model: model)
         if let member = officialGroup.getChatMemberInfo(userUuid: model.senderUserId) {
-            configCellObject(member: member)
+            configCellObject(model: model, member: member)
+        }else{
+            configCellObject(model: model)
         }
     }
     
@@ -128,15 +129,16 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         nameLabel.text = userGroup.userGroupName
         dataSource = userGroup.userGroupMemberVos!
         collectionView?.reloadData()
-        configCellObject(model: model)
-
-        if let member = userGroup.getChatMemberInfo(userUuid: model.senderUserId) {
-            configCellObject(member: member)
-        }
         
+        if let member = userGroup.getChatMemberInfo(userUuid: model.senderUserId) {
+            configCellObject(model: model, member: member)
+        }else{
+            configCellObject(model: model)
+        }
     }
     
-    func configCellObject(member: ChatMemberInfo) {
+    func configCellObject(model: RCConversationModel,member: ChatMemberInfo) {
+        configCellObject(model: model)
         
         let avatarUrl = URL(string: member.profilePicUrl!)
         self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
