@@ -117,9 +117,10 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         }
         if !idList.contains(RCIM.shared().currentUserInfo.userId) {
             idList.append(RCIM.shared().currentUserInfo.userId)
-            groupName.append(RCIM.shared().currentUserInfo.name)
+            groupName.append((Global.shared.globalProfile?.nickname)!)
         }
         SGLog(message: idList)
+        SGLog(message: groupName)
         createPrivateGroup(IDS: idList, groupName: groupName)
     }
     
