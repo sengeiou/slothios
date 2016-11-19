@@ -8,6 +8,10 @@
 import Foundation 
 import ObjectMapper
 
+class ChatTarget: NSObject {
+    var targetId: String?
+    var targetName: String?
+}
 
 class ChatListData : NSObject, NSCoding, Mappable{
 
@@ -47,6 +51,33 @@ class ChatListData : NSObject, NSCoding, Mappable{
             if privateChat.privateChatUuid == privateChatId{
                 return privateChat
             }
+        }
+        return nil
+    }
+    
+    public func getTargetModel(targetId: String?) -> ChatTarget?{
+        if let privateChat = getPrivateChatVo(privateChatId: targetId) {
+            let target = ChatTarget()
+            target.targetId = privateChat.userUuid
+            target.targetName = privateChat.nickname
+            return target
+        }
+        
+        if let group = getChatUserGroupVo(groupId: targetId) {
+            if group.isKind(of: ChatUserGroupVo.self) {
+                let userGroup = group as! ChatUserGroupVo
+                let target = ChatTarget()
+                target.targetId = userGroup.userGroupUuid
+                target.targetName = userGroup.userGroupName
+                return target
+                
+            }else if group.isKind(of: ChatOfficialGroupVo.self){
+                let officialGroup = group as! ChatOfficialGroupVo
+                let target = ChatTarget()
+                target.targetId = officialGroup.officialGroupUuid
+                target.targetName = officialGroup.officialGroupName
+                return target
+            }            
         }
         return nil
     }

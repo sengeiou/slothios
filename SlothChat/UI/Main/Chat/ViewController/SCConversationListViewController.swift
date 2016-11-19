@@ -264,20 +264,24 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
+        
+        let tmpModel = getTableViewModel(indexPath: indexPath)
         search.isActive = false
+        
+        guard let target = self.chatList?.data?.getTargetModel(targetId: tmpModel.targetId) else {
+            return
+        }
 
-        guard let chat = SCConversationViewController(conversationType: model.conversationType, targetId: model.targetId) else {
+        guard let chat = SCConversationViewController(conversationType: tmpModel.conversationType, targetId: tmpModel.targetId) else {
             return
         }
         
-        if model.conversationType == .ConversationType_PRIVATE {
-            let cell = self.conversationListTableView.cellForRow(at: indexPath) as! SCConversationListCell
-            chat.title = cell.nameLabel.text;
+        if tmpModel.conversationType == .ConversationType_PRIVATE {
+            chat.title = target.targetName
         }else if model.conversationType == .ConversationType_GROUP ||
             model.conversationType == .ConversationType_DISCUSSION{
-            let cell = self.conversationListTableView.cellForRow(at: indexPath) as! SCChatGroupCell
-            chat.title = cell.nameLabel.text;
-            chat.groupUuid = model.targetId
+            chat.title = target.targetName
+            chat.groupUuid = tmpModel.targetId
         }
         navigationController?.pushViewController(chat, animated: true)
     }
@@ -299,17 +303,23 @@ extension SCConversationListViewController: UISearchResultsUpdating{
     func updateSearchResults(for searchController: UISearchController) {
         //RCConversationModel
         self.searchArray.removeAll()
-        if !(searchController.searchBar.text?.isEmpty)! {
-            let model = self.conversationListDataSource.lastObject
-            self.searchArray.append(model as! RCConversationModel)
+        guard let searchText = searchController.searchBar.text else {
+            return
         }
-
+        SGLog(message: searchText)
+        
+        for tmpModel in self.conversationListDataSource {
+            let model = tmpModel as! RCConversationModel
+            var title = ""
+            if let target = self.chatList?.data?.getTargetModel(targetId: model.targetId) {
+                title = target.targetName!
+            }
+            if title.contains(searchText) {
+                searchArray.append(model)
+            }
+        }
+        
         self.conversationListTableView.reloadData()
-//
-//        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
-//        
-//        let array = (self.conversationListDataSource as NSArray).filteredArrayUsingPredicate(searchPredicate)
-
     }
 }
 
