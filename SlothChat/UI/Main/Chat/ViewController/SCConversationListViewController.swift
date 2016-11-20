@@ -264,6 +264,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
+        self.conversationListTableView.deselectRow(at: indexPath, animated: true)
         
         let tmpModel = getTableViewModel(indexPath: indexPath)
         search.isActive = false
@@ -282,6 +283,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             model.conversationType == .ConversationType_DISCUSSION{
             chat.title = target.targetName
             chat.groupUuid = tmpModel.targetId
+            if tmpModel.targetId.hasPrefix("officialGroup") {
+                chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
+            }
         }
         navigationController?.pushViewController(chat, animated: true)
     }

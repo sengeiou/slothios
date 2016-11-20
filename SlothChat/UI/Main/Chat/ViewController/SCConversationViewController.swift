@@ -10,16 +10,21 @@ import UIKit
 
 class SCConversationViewController: RCConversationViewController {
     var groupUuid: String?
+    var officialGroup: ChatOfficialGroupVo?
+    var officialHeaderView: OfficialGroupHeaderView?
+
     let fakeRecordButton = UIButton(type: .custom)
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +43,7 @@ class SCConversationViewController: RCConversationViewController {
             if self.targetId.hasPrefix("officialGroup") {
                 //官方群只能语音聊天
                 configGroupInputBarControl()
+                sentupTipMessageView(group: officialGroup)
             }
         }
         checkOverdueMessage()

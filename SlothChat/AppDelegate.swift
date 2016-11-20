@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().enable = true
         manager.startLocationCity()
         ThirdManager.startThirdLib()
+        configRemote(application)
         
         self.window = UIWindow.init()
         self.changeRootViewController()
@@ -60,11 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func configRemote(_ application: UIApplication) {
-        let settings = UIUserNotificationSettings(types: [UIUserNotificationType.badge,UIUserNotificationType.alert,UIUserNotificationType.sound], categories: nil)
-        
-        application.registerUserNotificationSettings(settings)
-        
-        application.registerForRemoteNotifications()
+        //推送处理1
+        if #available(iOS 8.0, *) {
+            //注册推送,用于iOS8以上系统
+            application.registerUserNotificationSettings(
+                UIUserNotificationSettings(types:[.alert, .badge, .sound], categories: nil))
+        } else {
+            //注册推送,用于iOS8以下系统
+            application.registerForRemoteNotifications(matching: [.badge, .alert, .sound])
+        }
     }
     
     func LoginStatusDidChange() {
@@ -100,6 +105,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+    }
+    
+    //推送处理2
+    @available(iOS 8.0, *)
+    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
+        //注册推送,用于iOS8以上系统
+        application.registerForRemoteNotifications()
+    }
+    
+    //推送处理3
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        var rcDevicetoken = deviceToken.description
+        rcDevicetoken = rcDevicetoken.replacingOccurrences(of: "<", with: "")
+        rcDevicetoken = rcDevicetoken.replacingOccurrences(of: ">", with: "")
+        rcDevicetoken = rcDevicetoken.replacingOccurrences(of: " ", with: "")
+        
+        RCIMClient.shared().setDeviceToken(rcDevicetoken)
+    }
+    
+    //推送处理4
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        //远程推送的userInfo内容格式请参考官网文档
+        //http://www.rongcloud.cn/docs/ios.html#App_接收的消息推送格式
+    }
+    
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        //本地通知
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
