@@ -16,7 +16,7 @@ class ChatGroupInfoHeaderView: UIView {
     var groupName: String?
     var groupUuid: String?
 
-    var myMemberInfo: ChatMemberInfo!
+    var myMemberInfo: ChatMemberInfo?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,6 +101,10 @@ class ChatGroupInfoHeaderView: UIView {
     }
     
     func modifyUserNickName(newName: String) {
+        guard let myMemberInfo = myMemberInfo else {
+            SGLog(message: "myMemberInfo 为空")
+            return
+        }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let memberUuid = myMemberInfo.memberUuid

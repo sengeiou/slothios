@@ -73,7 +73,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         let cell: SelectFriendsCell = tableView.dequeueReusableCell(withIdentifier: "SelectFriendsCell", for: indexPath) as! SelectFriendsCell
         let memberInfo = getTableViewModel(indexPath: indexPath)
         cell.configCellWithObj(memberInfo: memberInfo)
-        cell.configFlagView(selected: selectRows.contains(memberInfo.memberUuid!))
+        cell.configFlagView(selected: selectRows.contains(memberInfo.userUuid!))
         cell.indexPath = indexPath
         return cell
     }
@@ -83,10 +83,10 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         
         let userObj = getTableViewModel(indexPath: indexPath)
 
-        if selectRows.contains(userObj.memberUuid!) {
-            selectRows.remove(userObj.memberUuid!)
+        if selectRows.contains(userObj.userUuid!) {
+            selectRows.remove(userObj.userUuid!)
         }else{
-            selectRows.insert(userObj.memberUuid!)
+            selectRows.insert(userObj.userUuid!)
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
@@ -110,8 +110,8 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         var idList = [String]()
         var groupName = ""
         for userInfo in dataSource {
-            if selectRows.contains(userInfo.memberUuid!) {
-                idList.append(userInfo.memberUuid!)
+            if selectRows.contains(userInfo.userUuid!) {
+                idList.append(userInfo.userUuid!)
                 groupName.append(userInfo.userDisplayName!)
             }
         }
@@ -149,6 +149,10 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
         
         if IDS.count <= 0 {
             HUD.flash(.label("请先选择好友"), delay: 2)
+            return
+        }
+        if IDS.count <= 3 {
+            HUD.flash(.label("包括自己在内最少需要3个成员才能新建一个聊天组"), delay: 2)
             return
         }
         let engine = NetworkEngine()

@@ -40,8 +40,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         view.addSubview(tableView)
         tableView.register(ChatGroupInfoCell.self, forCellReuseIdentifier: "ChatGroupInfoCell")
         tableView.snp.makeConstraints { (make) in
-            make.left.top.right.equalTo(0)
-            make.bottom.equalTo(-56)
+            make.edges.equalTo(UIEdgeInsets.zero)
         }
         
         let screenWidth = UIScreen.main.bounds.size.width
@@ -54,6 +53,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func addBottomView(isGroupOwner: Bool) {
+        tableView.snp.remakeConstraints{ (make) in
+            make.left.top.right.equalTo(0)
+            make.bottom.equalTo(-56)
+        }
+        
         let bottomView = UIView()
         view.addSubview(bottomView)
         bottomView.snp.makeConstraints { (make) in
@@ -138,7 +142,6 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     
     //MARK:- Action
     override func confirmClick() {
-    
     }
     
     func exitButtonClick() {
@@ -171,7 +174,9 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             }
         }
         self.headerView.configWithObject(tmpGroupName: self.groupName,isGroupOwner: self.isGroupOwner,memberInfo: self.myMemberInfo)
-        self.addBottomView(isGroupOwner: self.isGroupOwner)
+        if !(self.groupUuid?.hasPrefix("officialGroup"))!{
+            self.addBottomView(isGroupOwner: self.isGroupOwner)
+        }
         self.dataSource = list
         self.tableView.reloadData()
     }

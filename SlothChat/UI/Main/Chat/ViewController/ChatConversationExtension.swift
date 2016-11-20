@@ -10,6 +10,29 @@ import Foundation
 import PKHUD
 
 extension SCConversationViewController{
+    
+    func checkOverdueMessage() {
+        //RCMessageModel
+        var messageIds = [String]()
+        for tmpModel in conversationDataRepository {
+            
+            let model = tmpModel as! RCMessageModel
+            
+            if model.userInfo == nil {
+                continue
+            }
+            let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))            
+            if receivedDate.isToday() {
+                SGLog(message: "今天的消息")
+            }else{
+                messageIds.append(String(model.messageId))
+            }
+        }
+        SGLog(message: messageIds)
+        if messageIds.count > 0 {
+           RCIMClient.shared().deleteMessages(messageIds)
+        }
+    }
 
     func addPluginBoardView() {
         if self.conversationType == .ConversationType_PRIVATE {

@@ -60,6 +60,19 @@ extension Date{
         return String(nowYear - oldYear)
     }
     
+    func isToday() -> Bool{
+        let cal = NSCalendar.current
+        let units: Set<Calendar.Component> = [.hour, .day, .month, .year]
+        var components = cal.dateComponents(units, from: Date())
+        
+        let today = cal.date(from: components)
+        components = cal.dateComponents(units, from: self)
+        let otherDate = cal.date(from: components)
+        
+        let result = today?.compare(otherDate!)
+        return (result == .orderedSame)
+    }
+    
     func toConstellationString() -> String {
         guard let calendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian) else {
             return ""

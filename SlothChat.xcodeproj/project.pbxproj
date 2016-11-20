@@ -199,7 +199,7 @@
 		04E34BD91DD6C6F8007545F3 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BD81DD6C6F7007545F3 /* ChatManager.swift */; };
 		04E34BDB1DD6C71D007545F3 /* ChatDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */; };
 		04E404141DD85893007118AF /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404131DD85893007118AF /* NSObjectExtension.swift */; };
-		04E404181DD87DCB007118AF /* ChatGroupExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404171DD87DCB007118AF /* ChatGroupExtension.swift */; };
+		04E404181DD87DCB007118AF /* ChatConversationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404171DD87DCB007118AF /* ChatConversationExtension.swift */; };
 		04E4041A1DD88088007118AF /* SelectChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404191DD88088007118AF /* SelectChatFriendViewController.swift */; };
 		04E4041C1DD882AA007118AF /* SelectFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */; };
 		04E4041E1DD8B1E5007118AF /* PurchaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */; };
@@ -533,7 +533,7 @@
 		04E34BD81DD6C6F7007545F3 /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataManager.swift; sourceTree = "<group>"; };
 		04E404131DD85893007118AF /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
-		04E404171DD87DCB007118AF /* ChatGroupExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupExtension.swift; sourceTree = "<group>"; };
+		04E404171DD87DCB007118AF /* ChatConversationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConversationExtension.swift; sourceTree = "<group>"; };
 		04E404191DD88088007118AF /* SelectChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChatFriendViewController.swift; sourceTree = "<group>"; };
 		04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFriendsCell.swift; sourceTree = "<group>"; };
 		04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseExtension.swift; sourceTree = "<group>"; };
@@ -880,9 +880,9 @@
 		044643471DB4F03E0050F8BC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				04E404171DD87DCB007118AF /* ChatConversationExtension.swift */,
 				044B79EC1DE0B10B00490272 /* ChatExtension.swift */,
 				04C0312E1DD702780003B07C /* ChatFriendViewController.swift */,
-				04E404171DD87DCB007118AF /* ChatGroupExtension.swift */,
 				049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */,
 				04C031301DD712FF0003B07C /* ChatGroupViewController.swift */,
 				047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */,
@@ -1972,7 +1972,7 @@
 				044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */,
 				040576E91DB3353E00C55D02 /* IQTextView.swift in Sources */,
 				04FEB7EF1DB76F13004509D1 /* UIImageView+HighlightedWebCache.m in Sources */,
-				04E404181DD87DCB007118AF /* ChatGroupExtension.swift in Sources */,
+				04E404181DD87DCB007118AF /* ChatConversationExtension.swift in Sources */,
 				04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */,
 				19273B141DA9EE1300150460 /* AppDelegate.swift in Sources */,
 				04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */,

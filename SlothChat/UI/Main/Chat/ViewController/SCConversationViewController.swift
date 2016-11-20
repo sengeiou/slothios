@@ -40,6 +40,7 @@ class SCConversationViewController: RCConversationViewController {
                 configGroupInputBarControl()
             }
         }
+        checkOverdueMessage()
     }
 
     override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
