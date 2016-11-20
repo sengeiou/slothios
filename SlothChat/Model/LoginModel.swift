@@ -11,12 +11,13 @@ import ObjectMapper
 
 class LoginModel : NSObject, NSCoding, Mappable{
 
-	var token : String?
-	var user : LoginUser?
+    var canTalk : Bool?
+    var chatToken : String?
+    var token : String?
+    var user : LoginUser?
     
     var msg : String?
     var status : String?
-
     open func caheForLoginModel() {
         let data = NSKeyedArchiver.archivedData(withRootObject: self)
         UserDefaults.standard.setValue(data, forKey: "LoginModelCacheKey")
@@ -37,44 +38,61 @@ class LoginModel : NSObject, NSCoding, Mappable{
         return nil
     }
     
-	class func newInstance(map: Map) -> Mappable?{
-		return LoginModel()
-	}
-	required init?(map: Map){}
-	private override init(){}
-
-	func mapping(map: Map)
-	{
-		token <- map["token"]
-		user <- map["user"]
+    class func newInstance(map: Map) -> Mappable?{
+        return LoginModel()
+    }
+    required init?(map: Map){}
+    private override init(){}
+    
+    func mapping(map: Map)
+    {
+        canTalk <- map["canTalk"]
+        chatToken <- map["chatToken"]
+        token <- map["token"]
+        user <- map["user"]
         status <- map["status"]
         msg <- map["msg"]
-	}
-
+    }
+    
     /**
-    * NSCoding required initializer.
-    * Fills the data from the passed decoder
-    */
+     * NSCoding required initializer.
+     * Fills the data from the passed decoder
+     */
     @objc required init(coder aDecoder: NSCoder)
-	{
-         token = aDecoder.decodeObject(forKey: "token") as? String
-         user = aDecoder.decodeObject(forKey: "user") as? LoginUser
-
-	}
-
+    {
+        canTalk = aDecoder.decodeObject(forKey: "canTalk") as? Bool
+        chatToken = aDecoder.decodeObject(forKey: "chatToken") as? String
+        token = aDecoder.decodeObject(forKey: "token") as? String
+        user = aDecoder.decodeObject(forKey: "user") as? LoginUser
+        msg = aDecoder.decodeObject(forKey: "msg") as? String
+        status = aDecoder.decodeObject(forKey: "status") as? String
+    }
+    
     /**
-    * NSCoding required method.
-    * Encodes mode properties into the decoder
-    */
+     * NSCoding required method.
+     * Encodes mode properties into the decoder
+     */
     @objc func encode(with aCoder: NSCoder)
-	{
-		if token != nil{
-			aCoder.encode(token, forKey: "token")
-		}
-		if user != nil{
-			aCoder.encode(user, forKey: "user")
-		}
-
-	}
-
+    {
+        if canTalk != nil{
+            aCoder.encode(canTalk, forKey: "canTalk")
+        }
+        if chatToken != nil{
+            aCoder.encode(chatToken, forKey: "chatToken")
+        }
+        if token != nil{
+            aCoder.encode(token, forKey: "token")
+        }
+        if user != nil{
+            aCoder.encode(user, forKey: "user")
+        }
+        
+        if msg != nil{
+            aCoder.encode(msg, forKey: "msg")
+        }
+        if status != nil{
+            aCoder.encode(status, forKey: "status")
+        }
+    }
+    
 }

@@ -16,7 +16,9 @@ class LoginViewController: BaseViewController {
     let passwordView = SingleInputView.init()
     let codeButton = UIButton(type: .custom)
     
-    public var countryName = "cn"
+    var timeout = 0
+    
+    public var countryName = "CN"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,14 +139,28 @@ class LoginViewController: BaseViewController {
     
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.getUserProfile(userUuid: userUuid) { (profile) in
-            HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0 {
                 Global.shared.globalProfile = profile?.data
-                self.loginSystem()
+//                self.loginSystem()
+                self.getChatToken()
             }else{
                 HUD.flash(.label(profile?.msg), delay: 2)
+            }
+        }
+    }
+
+    func getChatToken() {
+        let engine = NetworkEngine()
+        engine.getChatToken() { (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0{
+                if let token = response?.data?.chatToken {
+                    Global.shared.chatToken = token
+                    self.loginSystem()
+                }
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
@@ -162,7 +178,9 @@ class LoginViewController: BaseViewController {
         let code = self.codeButton.title(for: .normal)!
         
         let pushVC  = FindPasswordViewController.init()
-        pushVC.phoneNo = code + phoneStr!
+        pushVC.loginVC = self
+        pushVC.phoneNo = phoneStr!
+        pushVC.codeNo = code
         navigationController?.pushViewController(pushVC, animated: true)
     }
     
@@ -191,7 +209,7 @@ class LoginViewController: BaseViewController {
                 if (loginModel!.user?.username) != nil{
                     NBSAppAgent.setCustomerData((loginModel!.user?.username)!, forKey: "LoginUserName")
                 }
-
+                Global.shared.chatToken = loginModel!.chatToken
                 self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
             }else{
                 HUD.flash(.label(loginModel?.msg), delay: 2)
@@ -233,10 +251,10 @@ class LoginViewController: BaseViewController {
             return false
         }
         
-        if !(passwordStr?.validString())!{
-            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
-            return false
-        }
+//        if !(passwordStr?.validString())!{
+//            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+//            return false
+//        }
         
         return true
     }

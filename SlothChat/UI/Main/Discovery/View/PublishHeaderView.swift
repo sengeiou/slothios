@@ -156,6 +156,10 @@ class PublishHeaderView: BaseView {
         priceLabel.attributedText = attributedText
     }
     
+    func refreshView(rankData: BidAdsRankVoData) {
+        price = rankData.myBidAmount!
+    }
+    
     //MARK:- Action
 
     func selectButtonCLick() {
@@ -182,7 +186,7 @@ class PublishHeaderView: BaseView {
     
     func configWithObject(imageUrl: String) {
         let avatarUrl = URL(string: imageUrl)
-        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     }
     
     func overweightButtonClick() {

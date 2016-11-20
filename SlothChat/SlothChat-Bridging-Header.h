@@ -18,7 +18,6 @@
 #import "GVUserDefaults.h"
 #import "GVUserDefaults+Properties.h"
 
-#import "UIViewController+Purchase.h"
 #import "NSObject+ShareSDK.h"
 #import "ValuePickerView.h"
 #import "FXBlurView.h"
@@ -27,6 +26,7 @@
 
 #import <tingyunApp/NBSAppAgent.h>
 #import <RongIMKit/RongIMKit.h>
+#import "IAPShare.h"
 
 
 #endif /* SlothChat_Bridging_Header_h */

@@ -142,7 +142,7 @@ class BiddingStatusView: BaseView {
     
     func configWithObject(imgUrl: String) {
         let avatarUrl = URL(string: imgUrl)
-        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
     }
     
     func refreshView(rankData: BidAdsRankVoData) {

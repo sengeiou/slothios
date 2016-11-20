@@ -81,7 +81,7 @@ class UserInfoView: BaseView {
             make.left.right.equalTo(0)
             make.top.equalTo(hauntView.snp.bottom)
             make.height.equalTo(34).priority(250)
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(-60)
         }
         
         let editImgView = UIImageView()

@@ -15,7 +15,9 @@ class RegisterViewController: BaseViewController {
     let phoneView = SingleInputView.init()
     let passwordView = SingleInputView.init()
     
-    public var countryName = "cn"
+    var timeout = 0
+
+    public var countryName = "CN"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,14 +80,14 @@ class RegisterViewController: BaseViewController {
         
         let registerButton = UIButton.init(type: .custom)
         registerButton.layer.cornerRadius = 23
-        registerButton.setTitle("注册", for: .normal)
+        registerButton.setTitle("注册账号", for: .normal)
         registerButton.backgroundColor = SGColor.SGMainColor()
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
         view.addSubview(registerButton)
         
         let loginButton = UIButton.init(type: .custom)
-        loginButton.setTitle("登录", for: .normal)
+        loginButton.setTitle("返回登录", for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         loginButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
         loginButton.addTarget(self, action:#selector(loginButtonClick), for: .touchUpInside)
@@ -143,7 +145,9 @@ class RegisterViewController: BaseViewController {
         }
         
         let pushVC  = CaptchaViewController.init()
-        pushVC.phoneNo = codeStr! + phoneStr!
+        pushVC.registerVC = self
+        pushVC.phoneNo = phoneStr!
+        pushVC.codeNo = codeStr!
         pushVC.password = passwordStr!
         pushVC.countryName = countryName
         navigationController?.pushViewController(pushVC, animated: true)

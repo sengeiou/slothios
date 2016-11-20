@@ -9,10 +9,46 @@
 import UIKit
 
 class SCConversationViewController: RCConversationViewController {
+    var groupUuid: String?
+    let fakeRecordButton = UIButton(type: .custom)
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.sharedManager().enable = false
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.sharedManager().enable = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.register(SimpleMessageCell.self, forMessageClass: SimpleMessage.self)
+        
+        if self.navigationController != nil &&
+            (self.navigationController?.viewControllers.count)! > 1 {
+            self.setNavtionBack(imageStr: "go-back")
+        }
+        
+        if self.conversationType == RCConversationType.ConversationType_PRIVATE {
+            addPluginBoardView()
+//            configGroupInputBarControl()
+        }else if self.conversationType == RCConversationType.ConversationType_GROUP{
+            configNavgitaionItem()
+//            getGroupInfo()
+            if self.targetId.hasPrefix("officialGroup") {
+                //官方群只能语音聊天
+                configGroupInputBarControl()
+            }
+        }
+        checkOverdueMessage()
+    }
+
+    override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
+        super.pluginBoardView(pluginBoardView, clickedItemWithTag: tag)
+        if tag == 201 {
+            SGLog(message: "发起群聊")
+            presentSelectFriendsVC()
+        }
     }
     
     override func willDisplayMessageCell(_ cell: RCMessageBaseCell!, at indexPath: IndexPath!) {
@@ -34,5 +70,11 @@ class SCConversationViewController: RCConversationViewController {
     
     override func didTapCellPortrait(_ userId: String!) {
         print("tap portrait \(userId)")
+        let pushVC = UserInfoViewController()
+        pushVC.mUserUuid = userId
+        let userUuid = Global.shared.globalProfile?.userUuid
+        pushVC.likeSenderUserUuid = userUuid
+        navigationController?.pushViewController(pushVC, animated: true)
     }
 }
+

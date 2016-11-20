@@ -17,7 +17,7 @@ class AboutUsViewController: BaseViewController {
     }
     
     func sentupView() {
-        let imageView = UIImageView.init(image: UIImage.init(named: "icon"))
+        let imageView = UIImageView.init(image: UIImage(named: "icon"))
         view.addSubview(imageView)
 //        [[NSBundle mainBundle]                                                       \
 //            objectForInfoDictionaryKey:@"CFBundleShortVersionString"]

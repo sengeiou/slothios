@@ -184,6 +184,8 @@ typedef enum {
 
 - (NSInteger)currentPage;
 
+- (void)scrollToIndex:(int)targetIndex;
+
 - (void)pause;
 
 - (void)play;

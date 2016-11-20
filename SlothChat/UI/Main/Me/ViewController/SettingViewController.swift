@@ -14,7 +14,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     let dataSource = SettingObj.getSettingList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "设置"
@@ -30,7 +30,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         
         let screenWidth = UIScreen.main.bounds.size.width
-
+        
         let footerView = UIView(frame: CGRect.init(x: 0, y: 0, width: screenWidth, height: 100))
         let exitButton = UIButton(type: .custom)
         exitButton.layer.cornerRadius = 22
@@ -64,7 +64,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         cell.selectButton.isHidden = !(indexPath.row == 1 || indexPath.row == 2)
         return cell
-
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -101,7 +101,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 return
             }
             if let price = price{
-                self.purchase(forProduct: Int(price)!)
+                self.purchaseForProduct(price: price)
             }
         }
         buttonTwo.titleColor = SGColor.SGMainColor()
@@ -117,10 +117,10 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.logout()
         })
         okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
-
+        
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -129,7 +129,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     func logout() {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-
+        
         engine.postAuthLogout() { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
@@ -140,6 +140,4 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             }
         }
     }
-
-
 }

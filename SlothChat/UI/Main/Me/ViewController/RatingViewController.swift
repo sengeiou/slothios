@@ -29,6 +29,7 @@ class RatingViewController: UIViewController {
         textField.leftViewMode = .always
         textField.font = UIFont.systemFont(ofSize: 14)
         textField.layer.borderWidth = 1.0
+        textField.placeholder = "请输入充值金额"
         textField.layer.borderColor = SGColor.SGLineColor().cgColor
         textField.setValue(SGColor.SGLineColor(), forKeyPath: "_placeholderLabel.textColor")
     }

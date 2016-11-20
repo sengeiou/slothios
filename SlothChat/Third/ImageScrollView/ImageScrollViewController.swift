@@ -9,13 +9,6 @@
 import UIKit
 import PKHUD
 
-enum ImageActionType: Int {
-    case likeImg
-    case deleteImg
-}
-
-typealias ImageScrollClosureType = (_ type: ImageActionType) -> Void
-
 class ImageScrollViewController: BaseViewController {
     private let imageScroller = ImageScrollView(frame: CGRect.init(x: 0, y: 55, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 55 * 2))
     
@@ -23,8 +16,6 @@ class ImageScrollViewController: BaseViewController {
     private let bottomToolBar = UIView()
     private let deleteButton = UIButton(type: .custom)
     private let likeButton = UIButton(type: .custom)
-    
-    var actionValue: ImageScrollClosureType?
     
     var isFollow = false{
         didSet{
@@ -148,11 +139,6 @@ class ImageScrollViewController: BaseViewController {
         }
     }
     
-    
-    func setActionClosure(temClosure: @escaping ImageScrollClosureType){
-        self.actionValue = temClosure
-    }
-    
     func disPlay(imageUrl: String) {
         imageScroller.display(imageUrl: imageUrl)
     }
@@ -168,6 +154,9 @@ class ImageScrollViewController: BaseViewController {
     }
     
     func disPlay(galleryPhoto: UserGalleryPhoto) {
+        
+        imageScroller.display(image: UIImage(named: "icon")!)
+        
         if let picUrl = galleryPhoto.hdPicUrl {
             imageScroller.display(imageUrl: picUrl)
         }
@@ -179,18 +168,14 @@ class ImageScrollViewController: BaseViewController {
         if (!isMyself && self.photoObj == nil) {
             return
         }
+        self.isFollow = !self.isFollow
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj?.uuid) { (response) in
-            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.photoObj?.currentVisitorLiked = true
-                self.isFollow = !self.isFollow
-                if let sp = self.actionValue {
-                    sp(.likeImg)
-                }
+                NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
@@ -215,15 +200,10 @@ class ImageScrollViewController: BaseViewController {
         engine.deletePhotoFromGallery(photoUuid: photoUuid) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                if let sp = self.actionValue {
-                    sp(.deleteImg)
-                }
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
 
                 HUD.flash(.label("已成功删除"), delay: 2, completion: { (result) in
-                    self.dismiss(animated: true, completion: { 
-                        
-                    })
+                    self.dismiss(animated: true, completion: nil)
                 })
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)

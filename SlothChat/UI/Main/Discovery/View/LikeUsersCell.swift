@@ -38,7 +38,7 @@ class LikeUsersCell: UITableViewCell {
         self.contentView.addSubview(nameLabel)
         self.contentView.addSubview(browseButton)
         
-        avatarImgView.layer.cornerRadius = 18
+        avatarImgView.layer.cornerRadius = 20
         avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(8)
@@ -63,7 +63,7 @@ class LikeUsersCell: UITableViewCell {
     
     func configCellWithObj(userObj: LikeProfileListUser) {
         let avatarUrl = URL(string: userObj.likeSenderProfilePicUrl!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage.init(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         self.nameLabel.text = userObj.likeSenderNickname
     }

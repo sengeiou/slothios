@@ -274,9 +274,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.toolView?.refreshLikeButtonStatus(isLike: (self.mProfile?.currentVisitorLiked)!)
         
         let engine = NetworkEngine()
-        let likeUuid = self.mProfile?.userUuid
+        let likeUuid = self.mProfile?.uuid
         
-        engine.post_likeProfile(userUuid:likeUuid) { (response) in
+        engine.post_likeProfile(userProfileUuid: likeUuid) { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{
@@ -316,7 +316,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                     self.bannerList.append(string as AnyObject)
                 }
                 self.refreshBannerView()
-
+                self.bannerView?.scroll(to: Int32((self.mProfile!.userPhotoList?.count)!) - 1)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
@@ -345,6 +345,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                     self.bannerList.append(string as AnyObject)
                 }
                 self.refreshBannerView()
+                self.bannerView?.scroll(to: Int32((self.mProfile!.userPhotoList?.count)!) - 1)
 
             }else{
                 HUD.flash(.label(userPhoto?.msg), delay: 2)
@@ -356,6 +357,16 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     //MARK:- Action
     func chatButtonClick() {
         SGLog(message: "")
+        guard let myProfile = Global.shared.globalProfile,
+              let otherProfile = self.mProfile else {
+                SGLog(message: "数据不全")
+                return
+        }
+        
+        let userUuidA = myProfile.userUuid
+        let userUuidB = otherProfile.userUuid
+        
+        self.postPrivateChat(nameA: Global.shared.globalProfile?.nickname, nameB: otherProfile.nickname, userUuidA: userUuidA, userUuidB: userUuidB)
     }
     
     func likeButtonClick() {
@@ -400,12 +411,13 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         if isMyselfFlag == false {
             return
         }
-        var titleStr = "选择头像"
+        let titleStr = "选择头像"
         let avatar = (cycleScrollView.localizationImageNamesGroup[index] as! String)
         
         if avatar.hasPrefix("http://") ||
             avatar.hasPrefix("https://") {
-            titleStr = "替换头像"
+//            titleStr = "替换头像"
+            return
         }
         UIAlertController.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in
             self.uploadPhoto(uploadImage: avatar!, at: index)

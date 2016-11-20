@@ -15,7 +15,7 @@ class PerfectionInfoViewController: BaseViewController {
     
     public var phoneNo:String!
     public var password:String!
-    public var countryName = "cn"
+    public var countryName = "CN"
 
     let avatarButton = UIButton.init(type: .custom)
 
@@ -58,6 +58,7 @@ class PerfectionInfoViewController: BaseViewController {
         avatarButton.addTarget(self, action:#selector(avatarButtonClick), for: .touchUpInside)
         avatarButton.setImage(UIImage.init(named: "camera-gray"), for: .normal)
         avatarButton.setBackgroundImage(UIImage.init(named: "litmatrix"), for: .normal)
+        avatarButton.contentMode = .scaleAspectFit
         view.addSubview(avatarButton)
         
         nickNameView.configInputView(titleStr: "昵称:", contentStr: "")
@@ -190,7 +191,9 @@ class PerfectionInfoViewController: BaseViewController {
         engine.postPublicUserAndProfileSignup(withSignpModel: user) { (profile) in
             HUD.hide()
             if profile?.status == ResponseError.SUCCESS.0{
-                HUD.flash(.label("注册成功"), delay: 2)
+//                GVUserDefaults.standard().lastLoginPhone = self.phoneNo
+//                GVUserDefaults.standard().lastLoginCountry = self.countryName
+                
                 HUD.flash(.label("注册成功"), delay: 2, completion: { (result) in
                     _ = self.navigationController?.popToRootViewController(animated: true)
                 })

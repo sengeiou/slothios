@@ -22,7 +22,7 @@ class IconTitleView: UIView {
     
     
     func sentupView() {
-        let iconImgView = UIImageView.init(image: UIImage.init(named: "icon"))
+        let iconImgView = UIImageView.init(image: UIImage(named: "icon"))
         addSubview(iconImgView)
         
         titleLabel.text = "树懒"
