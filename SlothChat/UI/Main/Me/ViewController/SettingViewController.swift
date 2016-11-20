@@ -134,6 +134,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
                 Global.shared.logout()
+                RCIM.shared().disconnect(false)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)

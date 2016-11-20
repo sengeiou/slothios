@@ -32,11 +32,7 @@ extension UIViewController{
             if response?.status == ResponseError.SUCCESS.0{
                 self.pushChatViewController(targetId: response?.data?.uuid, title: response?.data?.name)
             }else{
-                if response?.status == ResponseError.ALREADY_EXIST.0{
-                    self.pushChatViewController(targetId: userUuidB, title: nameB)
-                }else{
-                    HUD.flash(.label(response?.msg), delay: 2)
-                }
+                HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
