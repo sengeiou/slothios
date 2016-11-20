@@ -10,6 +10,9 @@ import UIKit
 
 class SCConversationViewController: RCConversationViewController {
     var groupUuid: String?
+    var officialGroup: ChatOfficialGroupVo?
+    var officialHeaderView: OfficialGroupHeaderView?
+
     let fakeRecordButton = UIButton(type: .custom)
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +41,7 @@ class SCConversationViewController: RCConversationViewController {
             if self.targetId.hasPrefix("officialGroup") {
                 //官方群只能语音聊天
                 configGroupInputBarControl()
+                sentupTipMessageView(group: officialGroup)
             }
         }
         checkOverdueMessage()

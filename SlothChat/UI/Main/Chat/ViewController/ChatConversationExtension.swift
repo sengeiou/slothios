@@ -11,29 +11,67 @@ import PKHUD
 
 extension SCConversationViewController{
     
+    func sentupTipMessageView(group: ChatOfficialGroupVo?) {
+        if officialGroup != nil {
+            conversationMessageCollectionView.register(OfficialGroupHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "OfficialGroupHeaderView")
+            
+            conversationMessageCollectionView.reloadData()
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if officialGroup == nil {
+            return CGSize.zero
+        }
+        
+//        let height = officialGroup?.topicMsg!.size
+        return CGSize(width: 375, height: 44)
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var v = OfficialGroupHeaderView()
+        
+        if officialGroup == nil {
+            return v
+        }
+        if kind == UICollectionElementKindSectionHeader{
+            v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "OfficialGroupHeaderView", for: indexPath) as! OfficialGroupHeaderView
+            v.configViewWithObject(group: self.officialGroup)
+            return v
+        }
+        return v
+    }
+    
     func checkOverdueMessage() {
         //RCMessageModel
-        var messageIds = [String]()
+        var messageIds = [CLong]()
         for tmpModel in conversationDataRepository {
             
             let model = tmpModel as! RCMessageModel
             
-            if model.userInfo == nil {
-                continue
-            }
-            let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))            
+            let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
             if receivedDate.isToday() {
                 SGLog(message: "今天的消息")
             }else{
-                messageIds.append(String(model.messageId))
+                messageIds.append(model.messageId)
             }
         }
         SGLog(message: messageIds)
         if messageIds.count > 0 {
-           RCIMClient.shared().deleteMessages(messageIds)
+            RCIMClient.shared().deleteMessages(messageIds)
+            self.conversationMessageCollectionView.reloadData()
         }
     }
-
+    
+    func deleteMessage(after: Double, messageIds: [String]) {
+        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(after * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            RCIMClient.shared().deleteMessages(messageIds)
+            self.conversationMessageCollectionView.reloadData()
+        })
+    }
+    
     func addPluginBoardView() {
         if self.conversationType == .ConversationType_PRIVATE {
             self.chatSessionInputBarControl.pluginBoardView.insertItem(with: UIImage(named: "icon"), title: "和TA建群", tag: 201)
@@ -139,22 +177,22 @@ extension SCConversationViewController{
     //MARK:- NetWork
     func getGroupInfo() {
         
-//        guard let groupUuid = groupUuid else {
-//            SGLog(message: "groupUuid为空")
-//            return
-//        }
-//        let engine = NetworkEngine()
-//        HUD.show(.labeledProgress(title: nil, subtitle: nil))
-//        
-//        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
-//            HUD.hide()
-//            if response?.status == ResponseError.SUCCESS.0 {
-//                if let group = response?.data{
-//                    self.title = group.groupDisplayName
-//                }
-//            }else{
-//                HUD.flash(.label(response?.msg), delay: 2)
-//            }
-//        }
+        //        guard let groupUuid = groupUuid else {
+        //            SGLog(message: "groupUuid为空")
+        //            return
+        //        }
+        //        let engine = NetworkEngine()
+        //        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        //
+        //        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
+        //            HUD.hide()
+        //            if response?.status == ResponseError.SUCCESS.0 {
+        //                if let group = response?.data{
+        //                    self.title = group.groupDisplayName
+        //                }
+        //            }else{
+        //                HUD.flash(.label(response?.msg), delay: 2)
+        //            }
+        //        }
     }
 }

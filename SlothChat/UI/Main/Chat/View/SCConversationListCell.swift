@@ -102,16 +102,19 @@ class SCConversationListCell: RCConversationBaseCell {
         
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
-        
-        if model.lastestMessage.isKind(of: RCTextMessage.self) {
+        guard let lastMessage = model.lastestMessage else {
+            self.contentLabel.text = " "
+            return
+        }
+        if lastMessage.isKind(of: RCTextMessage.self) {
             self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
-        }else if model.lastestMessage.isKind(of: RCImageMessage.self){
+        }else if lastMessage.isKind(of: RCImageMessage.self){
             self.contentLabel.text = "[图片]"
-        }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
+        }else if lastMessage.isKind(of: RCVoiceMessage.self){
             self.contentLabel.text = "[语音]"
-        }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
+        }else if lastMessage.isKind(of: RCLocationMessage.self){
             self.contentLabel.text = "[位置]"
-        }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+        }else if lastMessage.isKind(of: RCDiscussionNotificationMessage.self){
             self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
         }
     }

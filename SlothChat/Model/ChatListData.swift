@@ -48,7 +48,8 @@ class ChatListData : NSObject, NSCoding, Mappable{
                 return nil
         }
         for privateChat in privateChatVos {
-            if privateChat.privateChatUuid == privateChatId{
+            if privateChat.userUuid == privateChatId ||
+               privateChat.privateChatUuid == privateChatId{
                 return privateChat
             }
         }

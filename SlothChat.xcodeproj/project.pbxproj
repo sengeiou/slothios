@@ -137,6 +137,7 @@
 		048B0BBB1DB311DB00F5A399 /* CaptchaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */; };
 		048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */; };
 		048C78931DD6EC880080BBCE /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */; };
+		0492DB4B1DE18C9F000F2E5F /* OfficialGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492DB4A1DE18C9F000F2E5F /* OfficialGroupHeaderView.swift */; };
 		04966B391DB6586D000721BD /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B381DB6586D000721BD /* BaseObject.swift */; };
 		04966B3F1DB658C4000721BD /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B3E1DB658C4000721BD /* SettingCell.swift */; };
 		04966B411DB658CF000721BD /* SettingObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04966B401DB658CF000721BD /* SettingObj.swift */; };
@@ -468,6 +469,7 @@
 		048B0BBA1DB311DB00F5A399 /* CaptchaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptchaViewController.swift; sourceTree = "<group>"; };
 		048C78871DD6D8910080BBCE /* NSDate+TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeAgo.swift"; sourceTree = "<group>"; };
 		048C78921DD6EC880080BBCE /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		0492DB4A1DE18C9F000F2E5F /* OfficialGroupHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfficialGroupHeaderView.swift; sourceTree = "<group>"; };
 		04966B381DB6586D000721BD /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		04966B3E1DB658C4000721BD /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		04966B401DB658CF000721BD /* SettingObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingObj.swift; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				049BAAEA1DDB62B800422134 /* ChatGroupInfoCell.swift */,
 				049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */,
 				049BAB061DDCB70D00422134 /* SCChatGroupMemberCell.swift */,
+				0492DB4A1DE18C9F000F2E5F /* OfficialGroupHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2068,6 +2071,7 @@
 				04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */,
 				043718111DCE219E004B5684 /* LocationManager.swift in Sources */,
 				044956871DCCBAA800CBFF45 /* MJRefreshBackFooter.m in Sources */,
+				0492DB4B1DE18C9F000F2E5F /* OfficialGroupHeaderView.swift in Sources */,
 				040D46DF1DC4B587005D1E8E /* UIView+Animations.swift in Sources */,
 				040D46D71DC4B587005D1E8E /* PopupDialogDefaultButtons.swift in Sources */,
 				040576E71DB3353E00C55D02 /* IQKeyboardManager.swift in Sources */,
