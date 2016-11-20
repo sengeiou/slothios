@@ -71,7 +71,7 @@
     self.finishBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.finishBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.finishBtn addTarget:self action:@selector(finishBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.finishBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [self.finishBtn setTitle:NSLocalizedString(@"完成", nil) forState:UIControlStateNormal];
     UIColor *titleColor = [UIColor colorWithRed:204/255.0 green:150/255.0 blue:109/255.0 alpha:1.0];
     [self.finishBtn setTitleColor:titleColor forState:UIControlStateNormal];
     [self.controllerToolBar addSubview:self.finishBtn];
@@ -81,7 +81,7 @@
     self.cancelBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.cancelBtn addTarget:self action:@selector(canceBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [self.cancelBtn setTitle:NSLocalizedString(@"取消", nil) forState:UIControlStateNormal];
     titleColor = [UIColor blackColor];
 
     [self.cancelBtn setTitleColor:titleColor forState:UIControlStateNormal];
