@@ -39,9 +39,9 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         contentView.addSubview(contentLabel)
         
         nameLabel.font = UIFont.systemFont(ofSize: 16)
-        nameLabel.textColor = SGColor.SGTextColor()
+        nameLabel.textColor = SGColor.black
         descLabel.font = UIFont.systemFont(ofSize: 14)
-        descLabel.textColor = SGColor.SGBgGrayColor()
+        descLabel.textColor = SGColor.SGTextColor()
         badgeView.backgroundColor = SGColor.SGMainColor()
         
         lastUserImgView.layer.cornerRadius = 16
@@ -93,7 +93,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         collectionView?.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.top.equalTo(self.descLabel.snp.bottom).offset(10)
+            make.top.equalTo(self.descLabel.snp.bottom).offset(16)
             make.height.equalTo(44)
         }
         
@@ -114,6 +114,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     public func configCellWithObject(officialGroup: ChatOfficialGroupVo,model: RCConversationModel){
         
         nameLabel.text = officialGroup.officialGroupName
+        descLabel.text = officialGroup.topicMsg
         dataSource = officialGroup.officialGroupMemberVos!
         collectionView?.reloadData()
         
