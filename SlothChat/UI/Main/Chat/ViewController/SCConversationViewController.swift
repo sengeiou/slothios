@@ -43,6 +43,8 @@ class SCConversationViewController: RCConversationViewController {
                 //官方群只能语音聊天
                 configGroupInputBarControl()
                 sentupTipMessageView(group: officialGroup)
+            }else{
+                configGroupNotice()
             }
         }
         checkOverdueMessage()

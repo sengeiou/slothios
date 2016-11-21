@@ -94,6 +94,7 @@ class ChatGroupInfoHeaderView: UIView {
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("修改群组名成功"), delay: 2)
+                NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewUserGroupName":newName])
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }

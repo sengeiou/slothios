@@ -113,6 +113,7 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             if selectRows.contains(userInfo.userUuid!) {
                 idList.append(userInfo.userUuid!)
                 groupName.append(userInfo.userDisplayName!)
+                groupName.append("、")
             }
         }
         if !idList.contains(RCIM.shared().currentUserInfo.userId) {

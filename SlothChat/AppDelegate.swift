@@ -23,8 +23,8 @@ struct SGGlobalKey {
     public static let RefreshChatToken = Notification.Name(rawValue: "SlothChat.RefreshChatToken")
     public static let LoginStatusDidChange = Notification.Name(rawValue: "SlothChat.LoginStatusDidChange")
     public static let DiscoveryDataDidChange = Notification.Name(rawValue: "SlothChat.DiscoveryDataDidChange")
-
 }
+
 public enum Position {
     case top, bottom
 }

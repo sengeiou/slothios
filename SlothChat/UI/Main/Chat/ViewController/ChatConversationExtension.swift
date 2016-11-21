@@ -9,6 +9,11 @@
 import Foundation
 import PKHUD
 
+struct SGChatGroupKey {    
+    public static let UserGroupNameDidChange = Notification.Name(rawValue: "SlothChat.UserGroupNameDidChange")
+}
+
+
 extension SCConversationViewController{
     
     func sentupTipMessageView(group: ChatOfficialGroupVo?) {
@@ -93,6 +98,19 @@ extension SCConversationViewController{
         present(nav, animated: true, completion: nil)
     }
     
+    func configGroupNotice() {
+//        NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewGroupName":newName])
+        NotificationCenter.default.addObserver(self, selector: #selector(self.groupNameDidChange(_:)), name: SGChatGroupKey.UserGroupNameDidChange, object: nil)
+    }
+    
+    func groupNameDidChange(_ notice: Notification?) {
+        guard let notice = notice,
+              let userInfo = notice.userInfo else {
+            return
+        }
+        
+        self.title = userInfo["NewUserGroupName"] as! String?
+    }
     
     func configGroupInputBarControl() {
         let control = self.chatSessionInputBarControl!
