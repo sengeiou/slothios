@@ -9,7 +9,6 @@
 import UIKit
 
 class SCConversationViewController: RCConversationViewController {
-    var groupUuid: String?
     var officialGroup: ChatOfficialGroupVo?
     var officialHeaderView: OfficialGroupHeaderView?
 

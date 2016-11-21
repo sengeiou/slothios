@@ -234,7 +234,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         
         engine.deleteUserGroup(userGroupUuid: groupUuid){ (response) in
             HUD.hide()
-            
+            RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
             
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("解散群成功"), delay: 2, completion: { (result) in

@@ -11,7 +11,7 @@ import PKHUD
 
 
 class SCConversationListViewController: RCConversationListViewController,RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate {
-
+    
     var search = UISearchController()
     var searchArray = [RCConversationModel]()
     var chatList: ChatList?
@@ -51,7 +51,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                                             RCConversationType.ConversationType_GROUP.rawValue])
         self.conversationListTableView.register(SCChatGroupCell.self, forCellReuseIdentifier: "SCChatGroupCell")
         self.conversationListTableView.register(SCConversationListCell.self, forCellReuseIdentifier: "SCConversationListCell")
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveMessageNotification(_:)), name: NSNotification.Name.RCKitDispatchMessage, object: nil)
         
         RCIM.shared().receiveMessageDelegate = self
@@ -68,7 +68,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             return
         }
         
-        let tmpVC = SelectFriendsViewController()
+        let tmpVC = SelectChatFriendsViewController()
         tmpVC.dependVC = self
         
         tmpVC.officialGroupUuid = groupId
@@ -123,26 +123,40 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         SGLog(message: "")
         let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
-        
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-
-        engine.deletePrivateChat(uuid: model.targetId){ (response) in
-            HUD.hide()
-            if response?.status == ResponseError.SUCCESS.0{
-                
-                RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
-                self.conversationListDataSource.remove(model)
-                self.conversationListTableView.reloadData()
-                ChatDataManager.shared.refreshBadgeValue()
-            }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+        
+        if model.conversationType == .ConversationType_PRIVATE{
+            engine.deletePrivateChat(uuid: model.targetId){ (response) in
+                HUD.hide()
+                if response?.status == ResponseError.SUCCESS.0{
+                    self.doneDeleteChat(model:model,indexPath:indexPath)
+                }else{
+                    HUD.flash(.label(response?.msg), delay: 2)
+                }
+            }
+        } else {
+            engine.deleteUserGroup(userGroupUuid: model.targetId){ (response) in
+                HUD.hide()
+                if response?.status == ResponseError.SUCCESS.0 {
+                    self.doneDeleteChat(model:model,indexPath:indexPath)
+                }else{
+                    HUD.flash(.label(response?.msg), delay: 2)
+                }
             }
         }
     }
     
+    func doneDeleteChat(model: RCConversationModel, indexPath: IndexPath) {
+        RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
+        self.conversationListDataSource.remove(model)
+        self.conversationListTableView.reloadData()
+        ChatDataManager.shared.refreshBadgeValue()
+    }
+    
+    
     //MARK: - TableViewDelegate TableViewDataSource
-
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if search.isActive {
             return nil
@@ -152,7 +166,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             (action, indexPath) in
             self.removeIndexPath(indexPath: indexPath)
         })
-            
+        
         action.backgroundColor = SGColor.SGMainColor()
         return [action]
     }
@@ -191,7 +205,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         }
         
         if model.conversationType == .ConversationType_DISCUSSION ||
-           model.conversationType == .ConversationType_GROUP {
+            model.conversationType == .ConversationType_GROUP {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SCChatGroupCell", for: indexPath) as! SCChatGroupCell
             if let group = self.chatList?.data?.getChatUserGroupVo(groupId: model.targetId) {
                 if group.isKind(of: ChatUserGroupVo.self) {
@@ -200,7 +214,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                 }else if group.isKind(of: ChatOfficialGroupVo.self){
                     let officialGroup = group as! ChatOfficialGroupVo
                     cell.configCellWithObject(officialGroup: officialGroup,model:model)
-                }else{                    
+                }else{
                     cell.configCellObject(model:model)
                 }
             }
@@ -272,7 +286,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         guard let target = self.chatList?.data?.getTargetModel(targetId: tmpModel.targetId) else {
             return
         }
-
+        
         guard let chat = SCConversationViewController(conversationType: tmpModel.conversationType, targetId: tmpModel.targetId) else {
             return
         }
@@ -282,7 +296,6 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         }else if model.conversationType == .ConversationType_GROUP ||
             model.conversationType == .ConversationType_DISCUSSION{
             chat.title = target.targetName
-            chat.groupUuid = tmpModel.targetId
             if tmpModel.targetId.hasPrefix("officialGroup") {
                 chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
             }
@@ -293,12 +306,12 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     override func didTapCellPortrait(_ model: RCConversationModel!) {
         print("tap portrait \(model.senderUserId)")
         
-//        let pushVC = UserInfoViewController()
-//        pushVC.mUserUuid = model.targetId
-//        
-//        let userUuid = Global.shared.globalProfile?.userUuid
-//        pushVC.likeSenderUserUuid = userUuid
-//        navigationController?.pushViewController(pushVC, animated: true)
+        //        let pushVC = UserInfoViewController()
+        //        pushVC.mUserUuid = model.targetId
+        //
+        //        let userUuid = Global.shared.globalProfile?.userUuid
+        //        pushVC.likeSenderUserUuid = userUuid
+        //        navigationController?.pushViewController(pushVC, animated: true)
     }
 }
 
@@ -342,16 +355,16 @@ extension SCConversationListViewController{
     }
     
     func convertModel(chatList: ChatList?) {
-//        var chatOfficialGroupVo : ChatOfficialGroupVo?
-//        var chatUserGroupVos : [ChatUserGroupVo]?
-//        var privateChatVos : [PrivateChatVo]?
+        //        var chatOfficialGroupVo : ChatOfficialGroupVo?
+        //        var chatUserGroupVos : [ChatUserGroupVo]?
+        //        var privateChatVos : [PrivateChatVo]?
         guard let _ = chatList?.data?.chatOfficialGroupVo,
-              let _ = chatList?.data?.chatUserGroupVos,
-              let _ = chatList?.data?.privateChatVos else {
-            return
+            let _ = chatList?.data?.chatUserGroupVos,
+            let _ = chatList?.data?.privateChatVos else {
+                return
         }
         
         self.conversationListTableView.reloadData()
-
+        
     }
 }

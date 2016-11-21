@@ -86,7 +86,7 @@ extension SCConversationViewController{
     }
     
     func presentSelectFriendsVC() {
-        let tmpVC = SelectFriendsViewController()
+        let tmpVC = SelectChatFriendsViewController()
         tmpVC.dependVC = self
         tmpVC.officialGroupUuid = self.targetId
         let nav = BaseNavigationController(rootViewController: tmpVC)
@@ -144,7 +144,7 @@ extension SCConversationViewController{
     func itemButtonClick() {
         let pushVC = ChatGroupInfoViewController()
         pushVC.groupName = self.title
-        pushVC.groupUuid = self.groupUuid
+        pushVC.groupUuid = self.targetId
         
         self.navigationController?.pushViewController(pushVC, animated: true)
     }

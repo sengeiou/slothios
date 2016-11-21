@@ -1,5 +1,5 @@
 //
-//  SelectFriendsViewController.swift
+//  SelectChatFriendsViewController.swift
 //  SlothChat
 //
 //  Created by fly on 2016/11/13.
@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
     var dependVC: UIViewController?
     var officialGroupUuid: String?
@@ -191,7 +191,7 @@ class SelectFriendsViewController: UIViewController,UITableViewDelegate,UITableV
     }
 }
 
-extension SelectFriendsViewController: UISearchResultsUpdating{
+extension SelectChatFriendsViewController: UISearchResultsUpdating{
     //实时进行搜索
     func updateSearchResults(for searchController: UISearchController) {
         self.searchArray.removeAll()
