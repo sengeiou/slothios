@@ -161,7 +161,10 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         if search.isActive {
             return nil
         }
-        
+        let model = getTableViewModel(indexPath: indexPath)
+        if model.targetId.hasPrefix("officialGroup"){
+            return nil
+        }
         let action = UITableViewRowAction(style: .default, title: "删除", handler: {
             (action, indexPath) in
             self.removeIndexPath(indexPath: indexPath)
