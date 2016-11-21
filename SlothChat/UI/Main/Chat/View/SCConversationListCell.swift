@@ -49,7 +49,7 @@ class SCConversationListCell: RCConversationBaseCell {
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.avatarImgView.snp.right).offset(18)
             make.top.equalTo(self.avatarImgView.snp.top).offset(10)
-            make.right.equalTo(-64)
+            make.right.equalTo(-100)
         }
         contentLabel.textColor = SGColor.SGTextColor()
         contentLabel.snp.makeConstraints { (make) in
