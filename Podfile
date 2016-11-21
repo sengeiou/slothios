@@ -11,7 +11,7 @@ target 'SlothChat' do
   pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
   pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
   pod "AlamofireObjectMapper"
-  pod "RongCloudIMKit", '~> 2.7.3'
+  pod "RongCloudIMKit"
   # Pods for SlothChat
 
   target 'SlothChatTests' do
@@ -24,4 +24,12 @@ target 'SlothChat' do
     # Pods for testing
   end
 
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
 end

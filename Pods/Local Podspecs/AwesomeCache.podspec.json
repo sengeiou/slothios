@@ -1,6 +1,6 @@
 {
   "name": "AwesomeCache",
-  "version": "4.0",
+  "version": "5.0",
   "summary": "Delightful on-disk cache (written in Swift)",
   "description": "Delightful on-disk cache (written in Swift). Backed by NSCache for maximum performance and support for expiry of single objects.",
   "homepage": "https://github.com/aschuch/AwesomeCache",
@@ -19,7 +19,7 @@
   },
   "source": {
     "git": "https://github.com/aschuch/AwesomeCache.git",
-    "tag": "4.0"
+    "tag": "5.0"
   },
   "requires_arc": true,
   "source_files": [
