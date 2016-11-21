@@ -18,6 +18,13 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "设置"
+        sentupView()
+        getSystemConfig()
+        
+    }
+    
+    func sentupView() {
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
@@ -125,6 +132,22 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     }
     
     //MARK:- Network
+    
+    func getSystemConfig()  {
+        let engine = NetworkEngine()
+        engine.getSysConfig { (config) in
+            if config?.status == ResponseError.SUCCESS.0 {
+                Global.shared.globalSysConfig = config?.data
+                let settingObj = self.dataSource[3]
+                if let banlace = config?.data?.banlace {
+                    settingObj.titleStr = "账户余额：￥" + String(banlace)
+                }
+                self.tableView.reloadData()
+            }else{
+                SGLog(message: "获取系统配置失败")
+            }
+        }
+    }
     
     func logout() {
         let engine = NetworkEngine()

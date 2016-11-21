@@ -36,7 +36,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
         tableView.separatorStyle = .none
-        tableView.rowHeight = 75
+        tableView.rowHeight = 58
         view.addSubview(tableView)
         tableView.register(ChatGroupInfoCell.self, forCellReuseIdentifier: "ChatGroupInfoCell")
         tableView.snp.makeConstraints { (make) in
@@ -124,7 +124,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         
         cell.setClosurePass { (actionIndexPath) in
             let actionUserObj = self.dataSource[actionIndexPath.row]
-            self.deleteUserGroupMember(memberUuid: actionUserObj.memberUuid, indexPath: actionIndexPath)
+            self.deleteUserGroupMember(member: actionUserObj, indexPath: actionIndexPath)
         }
         return cell
     }
@@ -145,11 +145,14 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     }
     
     func exitButtonClick() {
+        var member = myMemberInfo
         let memberUuid = myMemberInfo?.memberUuid
+        
         var row = -1
         for i in 0..<dataSource.count {
             let userInfo = dataSource[i]
             if userInfo.memberUuid == memberUuid {
+                member = userInfo
                 row = i
                 break
             }
@@ -159,7 +162,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             return
         }
         
-        deleteUserGroupMember(memberUuid: memberUuid,indexPath: IndexPath(row: row, section: 0))
+        deleteUserGroupMember(member: member,indexPath: IndexPath(row: row, section: 0))
     }
     
     func deleteButtonClick() {
@@ -235,7 +238,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         engine.deleteUserGroup(userGroupUuid: groupUuid){ (response) in
             HUD.hide()
             RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
-            
+
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("解散群成功"), delay: 2, completion: { (result) in
                     //如果是移出的自己
@@ -247,9 +250,10 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         }
     }
     
-    func deleteUserGroupMember(memberUuid: String?,indexPath: IndexPath?) {
+    func deleteUserGroupMember(member: ChatMemberInfo?,indexPath: IndexPath?) {
         guard let groupUuid = groupUuid,
-              let memberUuid = memberUuid,
+              let member = member,
+              let memberUuid = member.memberUuid,
               let indexPath = indexPath else {
             SGLog(message: "groupUuid为空")
             return
@@ -260,6 +264,9 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         engine.deleteUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
+                if member.isAdmin!{
+                    RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
+                }
                 HUD.flash(.label("移除成功"), delay: 2, completion: { (result) in
                     //如果是移出的自己
                     _ = self.navigationController?.popToRootViewController(animated: true)

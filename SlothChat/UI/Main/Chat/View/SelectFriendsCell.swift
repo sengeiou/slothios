@@ -34,12 +34,12 @@ class SelectFriendsCell: UITableViewCell {
         self.contentView.addSubview(flagImgView)
         configFlagView(selected: false)
         
-        avatarImgView.layer.cornerRadius = 20
+        avatarImgView.layer.cornerRadius = 21
         avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(8)
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 40, height: 40))
+            make.size.equalTo(CGSize.init(width: 42, height: 42))
         }
         flagImgView.snp.makeConstraints { (make) in
             make.right.equalTo(-8)
@@ -48,8 +48,9 @@ class SelectFriendsCell: UITableViewCell {
         }
         nameLabel.font = UIFont.systemFont(ofSize: 15)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(avatarImgView.snp.right).offset(18)
+            make.left.equalTo(avatarImgView.snp.right).offset(16)
             make.centerY.equalTo(self.contentView.snp.centerY)
+            make.right.lessThanOrEqualTo(-60)
         }
     }
     
@@ -67,9 +68,9 @@ class SelectFriendsCell: UITableViewCell {
     
     func configFlagView(selected: Bool) {
         if !selected {
-            flagImgView.image = UIImage(named: "chat-gray")
+            flagImgView.image = UIImage(named: "unSelect")
         }else{
-            flagImgView.image = UIImage(named: "chat-champagne")
+            flagImgView.image = UIImage(named: "selected")
         }
     }
     

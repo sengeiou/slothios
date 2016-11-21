@@ -38,9 +38,9 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         contentView.addSubview(lastUserImgView)
         contentView.addSubview(contentLabel)
         
-        nameLabel.font = UIFont.systemFont(ofSize: 14)
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
         nameLabel.textColor = SGColor.SGTextColor()
-        descLabel.font = UIFont.systemFont(ofSize: 12)
+        descLabel.font = UIFont.systemFont(ofSize: 14)
         descLabel.textColor = SGColor.SGBgGrayColor()
         badgeView.backgroundColor = SGColor.SGMainColor()
         
@@ -52,7 +52,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         layout.scrollDirection = .horizontal
 //        let screenWidth = UIScreen.main.bounds.width
 //        let width = (screenWidth - CGFloat(12) * 6) / 7.0
-        let width = 32
+        let width = 42
         
         layout.itemSize = CGSize.init(width: width, height: width)
         
@@ -66,7 +66,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.top.equalTo(10)
+            make.top.equalTo(18)
             make.right.equalTo(-100)
         }
         
@@ -84,7 +84,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         descLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(10)
+            make.top.equalTo(self.nameLabel.snp.bottom).offset(12)
             make.right.lessThanOrEqualTo(-10)
         }
         
@@ -94,7 +94,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.equalTo(self.descLabel.snp.bottom).offset(10)
-            make.height.equalTo(32)
+            make.height.equalTo(44)
         }
         
         lastUserImgView.snp.makeConstraints { (make) in
@@ -105,7 +105,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         contentLabel.textColor = SGColor.SGTextColor()
         contentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.lastUserImgView.snp.right).offset(10)
+            make.left.equalTo(self.lastUserImgView.snp.right).offset(12)
             make.centerY.equalTo(self.lastUserImgView.snp.centerY)
             make.right.lessThanOrEqualTo(-60)
         }

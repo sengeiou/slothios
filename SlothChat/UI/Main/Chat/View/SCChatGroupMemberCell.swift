@@ -21,11 +21,11 @@ class SCChatGroupMemberCell: UICollectionViewCell {
         imgView.frame = self.bounds
         contentView.addSubview(imgView)
         
-        imgView.layer.cornerRadius = 16
+        imgView.layer.cornerRadius = 21
         imgView.layer.masksToBounds = true
         imgView.snp.makeConstraints { (make) in
             make.center.equalTo(self.contentView)
-            make.size.equalTo(CGSize.init(width: 32, height: 32))
+            make.size.equalTo(CGSize.init(width: 42, height: 42))
         }
     }
     

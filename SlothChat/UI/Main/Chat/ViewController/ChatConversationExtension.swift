@@ -79,7 +79,7 @@ extension SCConversationViewController{
     
     func addPluginBoardView() {
         if self.conversationType == .ConversationType_PRIVATE {
-            self.chatSessionInputBarControl.pluginBoardView.insertItem(with: UIImage(named: "icon"), title: "和TA建群", tag: 201)
+            self.chatSessionInputBarControl.pluginBoardView.insertItem(with: UIImage(named: "AddGroup"), title: "和TA建群", tag: 201)
         }
     }
     
@@ -114,7 +114,7 @@ extension SCConversationViewController{
     
     func configGroupInputBarControl() {
         let control = self.chatSessionInputBarControl!
-        control.additionalButton.setImage(UIImage(named: "icon"), for: .normal)
+        control.additionalButton.setImage(UIImage(named: "AddGroup"), for: .normal)
         control.inputTextView.text = ""
         control.recordButton.isHidden = true
         control.inputTextView.isHidden = true

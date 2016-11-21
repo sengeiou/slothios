@@ -48,16 +48,16 @@ class ChatGroupInfoCell: UITableViewCell {
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
 
-        avatarImgView.layer.cornerRadius = 20
+        avatarImgView.layer.cornerRadius = 21
         avatarImgView.layer.masksToBounds = true
         avatarImgView.snp.makeConstraints { (make) in
-            make.left.equalTo(100)
+            make.left.equalTo(124)
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 40, height: 40))
+            make.size.equalTo(CGSize.init(width: 42, height: 42))
         }
         nameLabel.font = UIFont.systemFont(ofSize: 15)
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(avatarImgView.snp.right).offset(18)
+            make.left.equalTo(avatarImgView.snp.right).offset(20)
             make.right.lessThanOrEqualTo(-68)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }

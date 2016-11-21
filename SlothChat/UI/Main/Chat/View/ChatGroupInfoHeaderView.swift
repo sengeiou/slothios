@@ -161,7 +161,7 @@ class ChatGroupInfoInputView: UIView {
         
         textfield.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.left.equalTo(titleLabel.snp.right).offset(10)
+            make.left.equalTo(124)
             make.right.equalTo(-70)
         }
         

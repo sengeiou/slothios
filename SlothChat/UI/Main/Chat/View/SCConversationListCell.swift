@@ -31,26 +31,30 @@ class SCConversationListCell: RCConversationBaseCell {
         contentView.addSubview(contentLabel)
         contentView.addSubview(badgeView)
         
+        nameLabel.font = UIFont.systemFont(ofSize: 16)
+        contentLabel.font = UIFont.systemFont(ofSize: 14)
+        timeLabel.font = UIFont.systemFont(ofSize: 12)
+
         badgeView.backgroundColor = SGColor.SGMainColor()
 
-        avatarImgView.layer.cornerRadius = 24
+        avatarImgView.layer.cornerRadius = 30
         avatarImgView.layer.masksToBounds = true
         
         avatarImgView.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.centerY.equalTo(self.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 48, height: 48))
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
         
         nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.avatarImgView.snp.right).offset(10)
-            make.top.equalTo(self.avatarImgView.snp.top).offset(4)
-            make.right.equalTo(-100)
+            make.left.equalTo(self.avatarImgView.snp.right).offset(18)
+            make.top.equalTo(self.avatarImgView.snp.top).offset(10)
+            make.right.equalTo(-64)
         }
         contentLabel.textColor = SGColor.SGTextColor()
         contentLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(self.avatarImgView.snp.right).offset(10)
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(6)
+            make.left.equalTo(self.avatarImgView.snp.right).offset(18)
+            make.top.equalTo(self.nameLabel.snp.bottom).offset(18)
             make.right.lessThanOrEqualTo(-60)
         }
         
@@ -61,7 +65,7 @@ class SCConversationListCell: RCConversationBaseCell {
         
         badgeView.layer.cornerRadius = 4
         badgeView.snp.makeConstraints { (make) in
-            make.right.equalTo(timeLabel.snp.left).offset(-10)
+            make.right.equalTo(timeLabel.snp.left).offset(-14)
             make.centerY.equalTo(self.timeLabel.snp.centerY)
             make.size.equalTo(CGSize.init(width: 8, height: 8))
         }

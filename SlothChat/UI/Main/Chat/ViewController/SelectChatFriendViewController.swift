@@ -49,6 +49,7 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.searchBarStyle = .prominent
             controller.searchBar.sizeToFit()
+            controller.searchBar.placeholder = "搜索"
             self.tableView.tableHeaderView = controller.searchBar
             
             return controller

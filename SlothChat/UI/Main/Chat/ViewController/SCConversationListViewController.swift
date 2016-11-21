@@ -25,7 +25,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
         navigationItem.title = "聊"
-        setNavtionConfirm(imageStr: "chat-champagne")
+        setNavtionConfirm(imageStr: "AddGroup")
         
         self.search = ({
             let controller = UISearchController(searchResultsController: nil)
@@ -34,6 +34,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.searchBarStyle = .prominent
             controller.searchBar.sizeToFit()
+            controller.searchBar.placeholder = "搜索个人/群"
             self.conversationListTableView.tableHeaderView = controller.searchBar
             
             return controller
@@ -179,9 +180,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         if model.conversationType == .ConversationType_DISCUSSION ||
             model.conversationType == .ConversationType_GROUP{
-            return 128
+            return 184
         }
-        return 60
+        return 106
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
