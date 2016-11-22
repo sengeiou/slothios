@@ -64,8 +64,11 @@ class BrowseAdvertViewController: BaseViewController {
         contentLabel.textColor = SGColor.SGTextColor()
         
         mainImgView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
+        var tap = UITapGestureRecognizer.init(target: self, action: #selector(tapMainImgView))
         mainImgView.addGestureRecognizer(tap)
+        
+        tap = UITapGestureRecognizer.init(target: self, action: #selector(likeUsersClick))
+        usersListView.addGestureRecognizer(tap)
         
         mainImgView.snp.makeConstraints { (make) in
             make.left.top.right.equalTo(0)
@@ -137,6 +140,13 @@ class BrowseAdvertViewController: BaseViewController {
         browser.isShowDeleteButton(isShow: false)
         self.present(browser, animated: true, completion: nil)
         
+    }
+    
+    func likeUsersClick()  {
+        let pushVC = LikeUsersViewController()
+        pushVC.galleryUuid = photoObj?.uuid
+        pushVC.likeSenderUserUuid = photoObj?.userUuid
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
     //MARK:- NetWork
