@@ -223,12 +223,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
                     return
                 }
                 if Int(code) == 301{
-                    guard let total = response?.data?.accountsBanlace,
-                        let need = response?.data?.needPayAmount  else{
-                            HUD.flash(.label(response?.msg), delay: 2)
-                            return
-                    }
-                    self.needRecharge(totalPrice: total, needPrice: need)
+                    self.needRecharge(data: response?.data)
                 }else{
                     HUD.flash(.label(response?.msg), delay: 2)
                 }
@@ -236,7 +231,12 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         }
     }
     
-    func needRecharge(totalPrice: Int,needPrice: Int) {
+    func needRecharge(data: BidAdResponseData?) {
+        guard let totalPrice = data?.accountsBanlace,
+              let needPrice = data?.needPayAmount  else{
+                SGLog(message: "数据为空")
+                return
+        }
         let title = "当前账户余额不足，为￥" + String(totalPrice) + "，需要再充值￥" + String(needPrice) + "，可以吗？"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)

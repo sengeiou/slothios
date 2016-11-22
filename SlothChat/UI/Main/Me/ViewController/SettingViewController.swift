@@ -11,6 +11,8 @@ import AwesomeCache
 import PKHUD
 
 class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+    let pickerView = ValuePickerView.init()
+
     let dataSource = SettingObj.getSettingList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -19,6 +21,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
         title = "设置"
         sentupView()
+        configPickerView()
         getSystemConfig()
         
     }
@@ -52,6 +55,16 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             make.height.equalTo(44)
         }
         tableView.tableFooterView = footerView
+    }
+    
+    func configPickerView() {
+        pickerView.pickerTitle = "充值金额"
+        let completionBlock: (String?) -> Void = {(_ value: String?) in
+            SGLog(message: value)
+            self.purchaseForProduct(price: value, productID: "com.ssloth.animal.recharge")
+        }
+        pickerView.valueDidSelect = completionBlock
+        pickerView.dataSource = ["1","5","10","50","100","500","1000"]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,27 +106,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //Mark:- Action
     
     func charge() {
-        self.showCustomDialog()
-    }
-    
-    func showCustomDialog() {
-        let ratingVC = RatingViewController(nibName: "RatingViewController", bundle: nil)
-        let popup = PopupDialog(viewController: ratingVC, buttonAlignment: .horizontal, transitionStyle: .bounceDown, gestureDismissal: true)
-        let buttonOne = CancelButton(title: "取消") {
-        }
-        buttonOne.titleColor = SGColor.black
-        let buttonTwo = DefaultButton(title: "确定") {
-            let price = ratingVC.textField.text
-            if (price?.isEmpty)!{
-                return
-            }
-            if let price = price{
-                self.purchaseForProduct(price: price, productID: "com.ssloth.animal.recharge")
-            }
-        }
-        buttonTwo.titleColor = SGColor.SGMainColor()
-        popup.addButtons([buttonOne, buttonTwo])
-        present(popup, animated: true, completion: nil)
+        pickerView.show()
     }
     
     func exitButtonClick() {
