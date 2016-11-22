@@ -107,10 +107,10 @@ enum API_URI:String {
     //39.自己退出群，或者管理员删除指定群组的某个指定群成员
 //    case delete_userGroupMember = "/api/userGroup/{userGroupUuid}/userGroupMember/{userGroupMemberUuid}?token={token}"
     //40.创建一对一私聊会话
-    case postPrivateChat = "/api/privateChat?token={token}"
+    case post_privateChat = "/api/privateChat?token={token}"
     //41.删除指定一对一私聊会话
-    case deletePrivateChat = "/api/privateChat/{uuid}?token={token}"
-
+    case delete_privateChat = "/api/privateChat/{uuid}?token={token}"
+    case put_officialGroupMemberName = "/api/officialGroup/{officialGroupUuid}/officialGroupMember/{officialGroupMemberUuid}?token={token}"
 }
 
 class NetworkEngine: NSObject {
@@ -1110,7 +1110,7 @@ class NetworkEngine: NSObject {
                 return
         }
         
-        var URLString:String = Base_URL + API_URI.postPrivateChat.rawValue
+        var URLString:String = Base_URL + API_URI.post_privateChat.rawValue
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         let request = HTTPRequestGenerator(withParam:[
@@ -1134,11 +1134,38 @@ class NetworkEngine: NSObject {
                 return
         }
         
-        var URLString:String = Base_URL + API_URI.deletePrivateChat.rawValue
+        var URLString:String = Base_URL + API_URI.delete_privateChat.rawValue
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
         
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
+        
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
+        }
+    }
+    
+    //42.修改指定官方群组的某个指定官方群成员的显示名称，目前只允许自己修改自己
+    func putOfficialGroupMemberName(userDisplayName: String?,officialGroupUuid: String?,officialGroupMemberUuid: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        
+        guard let token = Global.shared.globalLogin?.token,
+            let userDisplayName = userDisplayName,
+            let officialGroupUuid = officialGroupUuid,
+            let officialGroupMemberUuid = officialGroupMemberUuid else {
+                SGLog(message: "数据为空")
+                return
+        }
+        var URLString:String = Base_URL + API_URI.put_officialGroupMemberName.rawValue
+        URLString = URLString.replacingOccurrences(of: "{token}", with: token)
+        URLString = URLString.replacingOccurrences(of: "{officialGroupUuid}", with: officialGroupUuid)
+        URLString = URLString.replacingOccurrences(of: "{officialGroupMemberUuid}", with: officialGroupMemberUuid)
+
+        let request = HTTPRequestGenerator(withParam:[
+            "userDisplayName": userDisplayName], method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){

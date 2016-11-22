@@ -100,8 +100,16 @@ class ChatGroupInfoHeaderView: UIView {
             }
         }
     }
-    
+        
     func modifyUserNickName(newName: String) {
+        if (groupUuid?.hasPrefix("officialGroup"))! {
+            modifyOfficialGroupMemberName(newName: newName)
+        }else{
+            modifyUserGroupMemberName(newName: newName)
+        }
+    }
+    
+    func modifyUserGroupMemberName(newName: String) {
         guard let myMemberInfo = myMemberInfo else {
             SGLog(message: "myMemberInfo 为空")
             return
@@ -111,6 +119,26 @@ class ChatGroupInfoHeaderView: UIView {
         let memberUuid = myMemberInfo.memberUuid
         
         engine.putUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
+            HUD.hide()
+            if response?.status == ResponseError.SUCCESS.0 {
+                HUD.flash(.label("修改用户名成功"), delay: 2)
+            }else{
+                HUD.flash(.label(response?.msg), delay: 2)
+            }
+        }
+    }
+    
+    
+    func modifyOfficialGroupMemberName(newName: String) {
+        guard let myMemberInfo = myMemberInfo else {
+            SGLog(message: "myMemberInfo 为空")
+            return
+        }
+        let engine = NetworkEngine()
+        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        let memberUuid = myMemberInfo.memberUuid
+        
+        engine.putOfficialGroupMemberName(userDisplayName: newName, officialGroupUuid: groupUuid, officialGroupMemberUuid: memberUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 HUD.flash(.label("修改用户名成功"), delay: 2)
