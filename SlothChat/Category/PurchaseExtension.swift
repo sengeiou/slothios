@@ -10,6 +10,10 @@ import UIKit
 import PKHUD
 import Foundation
 
+struct SGIAPPurchaseKey {
+    public static let IAPPurchaseSuccess = Notification.Name(rawValue: "SlothChat.IAPPurchaseSuccess")
+}
+
 extension UIViewController{
     
     func purchaseForProduct(price: String?,productID: String?) {
@@ -27,13 +31,12 @@ extension UIViewController{
         
         IAPShare.sharedHelper().iap.requestProducts { (request, response) in
             guard let products = IAPShare.sharedHelper().iap.products else {
-                HUD.hide()
+                HUD.flash(.label("获取产品失败，请重试"), delay: 2)
                 return
             }
             
             if products.count <= 0 {
-                SGLog(message: "未获取到产品")
-                HUD.hide()
+                HUD.flash(.label("未获取到产品"), delay: 2)
                 return
             }
             
@@ -41,13 +44,13 @@ extension UIViewController{
             
             IAPShare.sharedHelper().iap.buyProduct(product as! SKProduct!, onCompletion: { (trans) in
                 guard let trans = trans else {
-                    HUD.hide()
+                    HUD.flash(.label("充值失败，请重试"), delay: 2)
                     return
                 }
                 if (trans.error != nil ||
                     trans.transactionState == SKPaymentTransactionState.failed) {
-                    SGLog(message: "error")
-                    HUD.hide()
+                    SGLog(message: trans.error?.localizedDescription)
+                    HUD.flash(.label(trans.error?.localizedDescription), delay: 2)
                     return
                 }
                 
@@ -55,7 +58,6 @@ extension UIViewController{
                     if  let data = try? Data(contentsOf: Bundle.main.appStoreReceiptURL!) {
                         
                         IAPShare.sharedHelper().iap.checkReceipt(data, onCompletion: { (response, error) in
-                            
                             HUD.hide()
                             
                             let rec = IAPShare.toJSON(response!)
@@ -69,7 +71,8 @@ extension UIViewController{
                                 self.iapPurchaseSuccess(receipt: receipt, amount: price)
                                 SGLog(message: dict)
                             }else{
-                                SGLog(message: "error")
+                                SGLog(message: error?.localizedDescription)
+                                HUD.flash(.label("校验失败，请重试"), delay: 2)
                             }
                         })
                     }
@@ -85,6 +88,13 @@ extension UIViewController{
         engine.postCharge(appPayReceipt: receipt, amount: amount) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
+                if let amount = Int(amount),
+                    let banlace = Global.shared.globalSysConfig?.banlace  {
+                    let newBanlace = banlace + amount
+                    Global.shared.globalSysConfig?.banlace = newBanlace
+                }
+                NotificationCenter.default.post(name: SGIAPPurchaseKey.IAPPurchaseSuccess, object: nil)
+
                 HUD.flash(.label("充值成功"), delay: 2)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)

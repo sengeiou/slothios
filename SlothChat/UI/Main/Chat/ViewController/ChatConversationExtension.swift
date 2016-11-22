@@ -13,7 +13,6 @@ struct SGChatGroupKey {
     public static let UserGroupNameDidChange = Notification.Name(rawValue: "SlothChat.UserGroupNameDidChange")
 }
 
-
 extension SCConversationViewController{
     
     func sentupTipMessageView(group: ChatOfficialGroupVo?) {

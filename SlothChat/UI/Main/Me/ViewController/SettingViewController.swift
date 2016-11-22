@@ -24,8 +24,21 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         configPickerView()
         getSystemConfig()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(iAPPurchaseSuccess(_:)), name: SGIAPPurchaseKey.IAPPurchaseSuccess, object: nil)
+
     }
     
+    func iAPPurchaseSuccess(_ notice: Notification?) {
+        
+        let settingObj = self.dataSource[3]
+        if let banlace = Global.shared.globalSysConfig?.banlace {
+            settingObj.titleStr = "账户余额：￥" + String(banlace)
+        }
+        self.tableView.reloadData()
+        
+    }
+    
+
     func sentupView() {
 
         tableView.delegate = self
@@ -61,7 +74,10 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         pickerView.pickerTitle = "充值金额"
         let completionBlock: (String?) -> Void = {(_ value: String?) in
             SGLog(message: value)
-            self.purchaseForProduct(price: value, productID: "com.ssloth.animal.recharge")
+            guard let price = value?.components(separatedBy: "/").first else {
+                return
+            }
+            self.purchaseForProduct(price: price, productID: "com.ssloth.animal.recharge")
         }
         pickerView.valueDidSelect = completionBlock
         pickerView.dataSource = ["1","5","10","50","100","500","1000"]
