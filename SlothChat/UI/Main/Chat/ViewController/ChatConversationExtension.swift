@@ -34,11 +34,11 @@ extension SCConversationViewController{
     
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var v = OfficialGroupHeaderView()
         
         if officialGroup == nil {
-            return v
+            return UICollectionReusableView()
         }
+        var v = OfficialGroupHeaderView()
         if kind == UICollectionElementKindSectionHeader{
             v = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "OfficialGroupHeaderView", for: indexPath) as! OfficialGroupHeaderView
             v.configViewWithObject(group: self.officialGroup)
@@ -98,7 +98,6 @@ extension SCConversationViewController{
     }
     
     func configGroupNotice() {
-//        NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewGroupName":newName])
         NotificationCenter.default.addObserver(self, selector: #selector(self.groupNameDidChange(_:)), name: SGChatGroupKey.UserGroupNameDidChange, object: nil)
     }
     
