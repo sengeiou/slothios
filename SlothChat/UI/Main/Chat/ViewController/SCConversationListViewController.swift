@@ -295,15 +295,13 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             return
         }
         
-        if tmpModel.conversationType == .ConversationType_PRIVATE {
-            chat.title = target.targetName
-        }else if model.conversationType == .ConversationType_GROUP ||
-            model.conversationType == .ConversationType_DISCUSSION{
-            chat.title = target.targetName
-            if tmpModel.targetId.hasPrefix("officialGroup") {
-                chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
-            }
+        if tmpModel.targetId.hasPrefix("officialGroup") {
+            chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
         }
+        
+        chat.title = target.targetName
+        chat.officialGroupUuid = self.chatList?.data?.chatOfficialGroupVo?.officialGroupUuid
+        chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
         navigationController?.pushViewController(chat, animated: true)
     }
     

@@ -92,7 +92,7 @@ extension SCConversationViewController{
     func presentSelectFriendsVC() {
         let tmpVC = SelectChatFriendsViewController()
         tmpVC.dependVC = self
-        tmpVC.officialGroupUuid = self.targetId
+        tmpVC.officialGroupUuid = self.officialGroupUuid
         let nav = BaseNavigationController(rootViewController: tmpVC)
         present(nav, animated: true, completion: nil)
     }
