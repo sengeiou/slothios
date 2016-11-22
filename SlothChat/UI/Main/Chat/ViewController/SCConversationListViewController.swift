@@ -14,7 +14,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     var search = UISearchController()
     var searchArray = [RCConversationModel]()
-    var chatList: ChatList?
+    var chatList = ChatList.ModelFromCache()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -301,7 +301,6 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         chat.title = target.targetName
         chat.officialGroupUuid = self.chatList?.data?.chatOfficialGroupVo?.officialGroupUuid
-        chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
         navigationController?.pushViewController(chat, animated: true)
     }
     
@@ -349,24 +348,11 @@ extension SCConversationListViewController{
         engine.getChatList { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
                 self.chatList = response
+                self.chatList?.caheForModel()
                 self.conversationListTableView.reloadData()
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
         }
-    }
-    
-    func convertModel(chatList: ChatList?) {
-        //        var chatOfficialGroupVo : ChatOfficialGroupVo?
-        //        var chatUserGroupVos : [ChatUserGroupVo]?
-        //        var privateChatVos : [PrivateChatVo]?
-        guard let _ = chatList?.data?.chatOfficialGroupVo,
-            let _ = chatList?.data?.chatUserGroupVos,
-            let _ = chatList?.data?.privateChatVos else {
-                return
-        }
-        
-        self.conversationListTableView.reloadData()
-        
     }
 }

@@ -15,6 +15,25 @@ class ChatList : NSObject, NSCoding, Mappable{
 	var msg : String?
 	var status : String?
 
+    open func caheForModel() {
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.setValue(data, forKey: "ChatListCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func removeFromCache(){
+        UserDefaults.standard.removeObject(forKey: "ChatListCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func ModelFromCache() -> ChatList? {
+        let data = UserDefaults.standard.value(forKey: "ChatListCacheKey")
+        if data != nil {
+            let user = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)  as! ChatList?
+            return user
+        }
+        return nil
+    }
 
 	class func newInstance(map: Map) -> Mappable?{
 		return ChatList()
