@@ -886,7 +886,7 @@ class NetworkEngine: NSObject {
     }
     
     //31.获取指定官方群组 的所有官方群成员资料，需分页参数
-    func getOfficialGroupMember(officialGroupUuid: String, completeHandler :@escaping(_ response:OfficialGroup?) -> Void)  -> Void {
+    func getOfficialGroupMember(officialGroupUuid: String,pageNum: String,pageSize: String, completeHandler :@escaping(_ response:OfficialGroup?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token else {
                 SGLog(message: "数据为空")
                 return
@@ -896,7 +896,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{officialGroupUuid}", with: officialGroupUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<OfficialGroup>) in
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<OfficialGroup>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1057,7 +1057,7 @@ class NetworkEngine: NSObject {
         }
     }
     //38.获取指定群组的所有群成员资料，需分页参数
-    func getGroupMemberUserList(userGroupUuid: String?, completeHandler :@escaping(_ response:GroupMember?) -> Void)  -> Void {
+    func getGroupMemberUserList(userGroupUuid: String?,pageNum: String,pageSize: String, completeHandler :@escaping(_ response:GroupMember?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token,
             let userGroupUuid = userGroupUuid else {
                 SGLog(message: "数据为空")
@@ -1068,7 +1068,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<GroupMember>) in
+        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<GroupMember>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{

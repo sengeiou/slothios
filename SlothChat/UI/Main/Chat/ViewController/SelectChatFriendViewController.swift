@@ -9,11 +9,14 @@
 import UIKit
 import PKHUD
 
+private let PageSize = 20
+
 class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
     var dependVC: UIViewController?
     var officialGroupUuid: String?
     
+    var pageNum = 1
     var selectRows = Set<String>()
     
     var search = UISearchController()
@@ -27,7 +30,8 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
         self.setNavtionBack(imageStr: "close")
         self.setNavtionConfirm(titleStr: "完成")
         sentupView()
-        getOfficialGroupMember()
+        setupPullToRefresh()
+        getOfficialGroupMember(at: .top)
     }
     
     func sentupView() {
@@ -126,18 +130,25 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
         createPrivateGroup(IDS: idList, groupName: groupName)
     }
     
-    func getOfficialGroupMember() {
+    func getOfficialGroupMember(at: Position) {
         guard let officialGroupUuid = officialGroupUuid else {
             SGLog(message: "officialGroupUuid 为空")
             return
         }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid){ (response) in
+        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
             HUD.hide()
+            if at == .top {
+                self.tableView.mj_header.endRefreshing()
+            }else{
+                self.tableView.mj_footer.endRefreshing()
+            }
             if response?.status == ResponseError.SUCCESS.0 {
-                self.dataSource.removeAll()
                 if let list = response?.data?.list{
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
                     self.dataSource.append(contentsOf: list)
                     self.tableView.reloadData()
                 }
@@ -206,6 +217,20 @@ extension SelectChatFriendsViewController: UISearchResultsUpdating{
             }
         }
         self.tableView.reloadData()
+    }
+}
+
+private extension SelectChatFriendsViewController {
+    
+    func setupPullToRefresh() {
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getOfficialGroupMember(at: .top)
+        })
+        tableView.mj_header.isAutomaticallyChangeAlpha = true
+        
+        tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            self.getOfficialGroupMember(at: .bottom)
+        })
     }
 }
 

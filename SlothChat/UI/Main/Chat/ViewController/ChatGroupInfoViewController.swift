@@ -9,13 +9,16 @@
 import UIKit
 import PKHUD
 
+private let PageSize = 20
+
 class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
     var groupUuid: String?
     var groupName: String?
     var myMemberInfo: ChatMemberInfo?
     var isGroupOwner = false
-    
+    var pageNum = 1
+
     let headerView = ChatGroupInfoHeaderView()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
     
@@ -23,12 +26,9 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         super.viewDidLoad()
         title = "群信息"
         sentupView()
+        setupPullToRefresh()
         setNavtionBack(imageStr: "go-back")
-        if (groupUuid?.hasPrefix("officialGroup"))! {
-            getOfficialGroupMember()
-        }else{
-            getGroupMemberList()
-        }
+        getMemberList(at: .top)
     }
     
     func sentupView() {
@@ -169,6 +169,21 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         deleteUserGroup()
     }
     
+    
+    func getMemberList(at: Position) {
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
+        if (groupUuid?.hasPrefix("officialGroup"))! {
+            getOfficialGroupMember(at: at)
+        }else{
+            getUserGroupMemberList(at: at)
+        }
+    }
+    
+    
     func handleResponse(list: [ChatMemberInfo]) {
         for member in list{
             if member.isAdmin! &&
@@ -180,12 +195,12 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         if !(self.groupUuid?.hasPrefix("officialGroup"))!{
             self.addBottomView(isGroupOwner: self.isGroupOwner)
         }
-        self.dataSource = list
+        self.dataSource.append(contentsOf: list)
         self.tableView.reloadData()
     }
     
     //MARK:- NetWork
-    func getGroupMemberList() {
+    func getUserGroupMemberList(at: Position) {
         guard let groupUuid = groupUuid else {
             SGLog(message: "groupUuid为空")
             return
@@ -194,11 +209,22 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
-        engine.getGroupMemberUserList(userGroupUuid: groupUuid){ (response) in
+        engine.getGroupMemberUserList(userGroupUuid: groupUuid, pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
             HUD.hide()
+            if at == .top {
+                self.tableView.mj_header.endRefreshing()
+            }else{
+                self.tableView.mj_footer.endRefreshing()
+            }
+            
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
-                    self.myMemberInfo = response?.data?.getMemberInfo()
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
+                    if self.pageNum == 1{
+                        self.myMemberInfo = response?.data?.getMemberInfo()
+                    }
                     self.handleResponse(list: list)
                 }
             }else{
@@ -207,18 +233,28 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         }
     }
     
-    func getOfficialGroupMember() {
+    func getOfficialGroupMember(at: Position) {
         guard let officialGroupUuid = groupUuid else {
             SGLog(message: "officialGroupUuid 为空")
             return
         }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid){ (response) in
+        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
             HUD.hide()
+            if at == .top {
+                self.tableView.mj_header.endRefreshing()
+            }else{
+                self.tableView.mj_footer.endRefreshing()
+            }
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
-                    self.myMemberInfo = response?.data?.getMemberInfo()
+                    if at == .top {
+                        self.dataSource.removeAll()
+                    }
+                    if self.pageNum == 1{
+                        self.myMemberInfo = response?.data?.getMemberInfo()
+                    }
                     self.handleResponse(list: list)
                 }
             }else{
@@ -277,5 +313,19 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
                 HUD.flash(.label(response?.msg), delay: 2)
             }
         }
+    }
+}
+
+private extension ChatGroupInfoViewController {
+    
+    func setupPullToRefresh() {
+        tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            self.getMemberList(at: .top)
+        })
+        tableView.mj_header.isAutomaticallyChangeAlpha = true
+        
+        tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            self.getMemberList(at: .bottom)
+        })
     }
 }
