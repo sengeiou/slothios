@@ -17,9 +17,11 @@ class UserProfileData : NSObject, NSCoding, Mappable{
     var age : Int?
     var area : String?
     var birthdate : String?
+    var canTalk : Bool?
     var commonCities : String?
     var constellation : String?
     var currentVisitorLiked : Bool?
+    var isAcceptPrivateChat : Bool?
     var likesCount : Int?
     var nickname : String?
     var sex : String?
@@ -102,9 +104,11 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         age <- map["age"]
         area <- map["area"]
         birthdate <- map["birthdate"]
+        canTalk <- map["canTalk"]
         commonCities <- map["commonCities"]
         constellation <- map["constellation"]
         currentVisitorLiked <- map["currentVisitorLiked"]
+        isAcceptPrivateChat <- map["isAcceptPrivateChat"]
         likesCount <- map["likesCount"]
         nickname <- map["nickname"]
         sex <- map["sex"]
@@ -124,9 +128,11 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         age = aDecoder.decodeObject(forKey: "age") as? Int
         area = aDecoder.decodeObject(forKey: "area") as? String
         birthdate = aDecoder.decodeObject(forKey: "birthdate") as? String
+        canTalk = aDecoder.decodeObject(forKey: "canTalk") as? Bool
         commonCities = aDecoder.decodeObject(forKey: "commonCities") as? String
         constellation = aDecoder.decodeObject(forKey: "constellation") as? String
         currentVisitorLiked = aDecoder.decodeObject(forKey: "currentVisitorLiked") as? Bool
+        isAcceptPrivateChat = aDecoder.decodeObject(forKey: "isAcceptPrivateChat") as? Bool
         likesCount = aDecoder.decodeObject(forKey: "likesCount") as? Int
         nickname = aDecoder.decodeObject(forKey: "nickname") as? String
         sex = aDecoder.decodeObject(forKey: "sex") as? String
@@ -152,6 +158,9 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         if birthdate != nil{
             aCoder.encode(birthdate, forKey: "birthdate")
         }
+        if canTalk != nil{
+            aCoder.encode(canTalk, forKey: "canTalk")
+        }
         if commonCities != nil{
             aCoder.encode(commonCities, forKey: "commonCities")
         }
@@ -160,6 +169,9 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         }
         if currentVisitorLiked != nil{
             aCoder.encode(currentVisitorLiked, forKey: "currentVisitorLiked")
+        }
+        if isAcceptPrivateChat != nil{
+            aCoder.encode(isAcceptPrivateChat, forKey: "isAcceptPrivateChat")
         }
         if likesCount != nil{
             aCoder.encode(likesCount, forKey: "likesCount")
@@ -184,5 +196,5 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         }
         
     }
-
+    
 }

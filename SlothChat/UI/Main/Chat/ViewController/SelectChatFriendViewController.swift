@@ -153,7 +153,7 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             HUD.flash(.label("请先选择好友"), delay: 2)
             return
         }
-        if IDS.count <= 3 {
+        if IDS.count < 3 {
             HUD.flash(.label("包括自己在内最少需要3个成员才能新建一个聊天组"), delay: 2)
             return
         }

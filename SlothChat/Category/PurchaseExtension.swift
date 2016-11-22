@@ -12,11 +12,15 @@ import Foundation
 
 extension UIViewController{
     
-    func purchaseForProduct(price: String) {
+    func purchaseForProduct(price: String?,productID: String?) {
+        guard let price = price,
+              let productID = productID else{
+                return
+        }
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
         if IAPShare.sharedHelper().iap == nil {
-            let set = Set(arrayLiteral: "com.ssloth.animal.recharge")
+            let set = Set(arrayLiteral: productID)
             IAPShare.sharedHelper().iap = IAPHelper(productIdentifiers: set)
         }
         IAPShare.sharedHelper().iap.production = false

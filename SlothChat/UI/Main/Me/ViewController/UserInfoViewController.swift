@@ -358,9 +358,21 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func chatButtonClick() {
         SGLog(message: "")
         guard let myProfile = Global.shared.globalProfile,
-              let otherProfile = self.mProfile else {
+              let canTalk = Global.shared.globalLogin?.canTalk,
+              let otherProfile = self.mProfile,
+              let isAcceptPrivateChat =  otherProfile.isAcceptPrivateChat else {
                 SGLog(message: "数据不全")
                 return
+        }
+        
+        if !canTalk {
+            HUD.flash(.label("请设置您的个人资料第一张是真人照片~"), delay: 2)
+//            return
+        }
+        
+        if !isAcceptPrivateChat {
+            HUD.flash(.label("对方未开启一对一私聊"), delay: 2)
+            return
         }
         
         let userUuidA = myProfile.userUuid

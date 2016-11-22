@@ -108,7 +108,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 return
             }
             if let price = price{
-                self.purchaseForProduct(price: price)
+                self.purchaseForProduct(price: price, productID: "com.ssloth.animal.recharge")
             }
         }
         buttonTwo.titleColor = SGColor.SGMainColor()
