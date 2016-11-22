@@ -48,8 +48,8 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                                           RCConversationType.ConversationType_APPSERVICE.rawValue,
                                           RCConversationType.ConversationType_SYSTEM.rawValue])
         //设置需要将哪些类型的会话在会话列表中聚合显示
-        self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
-                                            RCConversationType.ConversationType_GROUP.rawValue])
+//        self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
+//                                            RCConversationType.ConversationType_GROUP.rawValue])
         self.conversationListTableView.register(SCChatGroupCell.self, forCellReuseIdentifier: "SCChatGroupCell")
         self.conversationListTableView.register(SCConversationListCell.self, forCellReuseIdentifier: "SCConversationListCell")
         
