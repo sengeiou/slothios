@@ -128,6 +128,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     public func configCellWithObject(userGroup: ChatUserGroupVo,model: RCConversationModel){
         
         nameLabel.text = userGroup.userGroupName
+        descLabel.text = ""
         dataSource = userGroup.userGroupMemberVos!
         collectionView?.reloadData()
         
