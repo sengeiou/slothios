@@ -32,8 +32,8 @@ class SettingCell: UITableViewCell {
             make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
-        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .normal)
-        selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .selected)
+        selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .normal)
+        selectButton.setBackgroundImage(UIImage.init(named: "button-yes"), for: .selected)
         selectButton.addTarget(self, action: #selector(selectButtonCLick), for: .touchUpInside)
         selectButton.snp.makeConstraints { (make) in
             make.right.equalTo(-8)

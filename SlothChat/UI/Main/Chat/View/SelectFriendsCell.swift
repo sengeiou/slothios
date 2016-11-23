@@ -68,9 +68,9 @@ class SelectFriendsCell: UITableViewCell {
     
     func configFlagView(selected: Bool) {
         if !selected {
-            flagImgView.image = UIImage(named: "unSelect")
+            flagImgView.image = UIImage(named: "button-uncheck")
         }else{
-            flagImgView.image = UIImage(named: "selected")
+            flagImgView.image = UIImage(named: "button-checked")
         }
     }
     

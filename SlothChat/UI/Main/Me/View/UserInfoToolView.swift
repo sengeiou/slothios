@@ -24,9 +24,9 @@ class UserInfoToolView: BaseView {
     
     fileprivate func sentupView() {
 //        likeButton.backgroundColor = SGColor.SGRedColor()
-        likeButton.setBackgroundImage(UIImage.init(named: "follow_button"), for: .normal)
+        likeButton.setBackgroundImage(UIImage.init(named: "button-profile-unliked"), for: .normal)
 //        chatButton.backgroundColor = SGColor.SGMainColor()
-        chatButton.setBackgroundImage(UIImage.init(named: "chat_button"), for: .normal)
+        chatButton.setBackgroundImage(UIImage.init(named: "button-profile-send message"), for: .normal)
         addSubview(chatButton)
         addSubview(likeButton)
         
@@ -46,9 +46,9 @@ class UserInfoToolView: BaseView {
     
     func refreshLikeButtonStatus(isLike: Bool) {
         if isLike {
-            likeButton.backgroundColor = UIColor.red
+            likeButton.setBackgroundImage(UIImage.init(named: "button-profile-liked"), for: .normal)
         }else{
-            likeButton.backgroundColor = UIColor.clear
+            likeButton.setBackgroundImage(UIImage.init(named: "button-profile-unliked"), for: .normal)
         }
     }
 }

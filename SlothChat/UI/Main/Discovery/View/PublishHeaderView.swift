@@ -53,9 +53,9 @@ class PublishHeaderView: BaseView {
         biddingLabel.text = "是否用此图片参与广告竞价"
         joinView.addSubview(biddingLabel)
         
-        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .normal)
-        selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .highlighted)
-        selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .selected)
+        selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .normal)
+        selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .highlighted)
+        selectButton.setBackgroundImage(UIImage.init(named: "button-yes"), for: .selected)
         selectButton.addTarget(self, action: #selector(selectButtonCLick), for: .touchUpInside)
         addSubview(selectButton)
         
@@ -170,9 +170,9 @@ class PublishHeaderView: BaseView {
         isJoin = selectButton.isSelected
         
         if selectButton.isSelected {
-            selectButton.setBackgroundImage(UIImage.init(named: "selyes"), for: .highlighted)
+            selectButton.setBackgroundImage(UIImage.init(named: "button-yes"), for: .highlighted)
         }else{
-            selectButton.setBackgroundImage(UIImage.init(named: "selno"), for: .highlighted)
+            selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .highlighted)
         }
         
         if let sp = self.selectPassValue {
