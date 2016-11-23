@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let rootVC = MainViewController()
             self.window?.rootViewController = rootVC
+            ChatDataManager.shared.refreshBadgeValue()
         }else{
             RCIMClient.shared().disconnect(true)
 

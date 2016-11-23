@@ -19,6 +19,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getChatList()
+        ChatDataManager.shared.refreshBadgeValue()
         self.conversationListTableView.reloadData()
     }
     override func viewDidLoad() {

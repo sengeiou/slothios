@@ -122,16 +122,19 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
     
     public func refreshBadgeValue(){
         DispatchQueue.main.async {
-            let unreadMsgCount = RCIMClient.shared().getUnreadCount([])
+            let types = [RCConversationType.ConversationType_PRIVATE.rawValue,
+                         RCConversationType.ConversationType_DISCUSSION.rawValue,
+                         RCConversationType.ConversationType_GROUP.rawValue,
+                         RCConversationType.ConversationType_CHATROOM.rawValue]
+            let unreadMsgCount = RCIMClient.shared().getUnreadCount(types)
             
             let tmpApp = UIApplication.shared.delegate as! AppDelegate;
-            
-            let chatVC = tmpApp.window?.rootViewController?.tabBarController?.viewControllers?[1]
-            if unreadMsgCount > 0{
-                chatVC?.tabBarItem.badgeValue = nil
-            }else{
-                chatVC?.tabBarItem.badgeValue = String(unreadMsgCount)
+            if let mainVC = tmpApp.window?.rootViewController as? UITabBarController{
+                let chatNav = mainVC.viewControllers?[1]
+                
+                chatNav?.showTabBadgePoint = (unreadMsgCount > 0)
             }
+
         }
     }
     

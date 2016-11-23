@@ -89,6 +89,7 @@
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044B79ED1DE0B10B00490272 /* ChatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B79EC1DE0B10B00490272 /* ChatExtension.swift */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
+		04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */; };
 		046563DA1DDF6903009E8849 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 046563DC1DDF6903009E8849 /* Localizable.strings */; };
 		0472E85D1DD720630065AFAB /* SCChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */; };
 		047450F21DD3689500E5D3A6 /* SCConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */; };
@@ -392,6 +393,8 @@
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044B79EC1DE0B10B00490272 /* ChatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExtension.swift; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		04649C711DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LxTabBadgePoint.h"; sourceTree = "<group>"; };
+		04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LxTabBadgePoint.m"; sourceTree = "<group>"; };
 		046563D91DDF68F0009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		046563DB1DDF6903009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		046563DD1DDF6906009E8849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -1051,6 +1054,15 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		04649C701DE5728900F80DC7 /* LxTabBadgePoint */ = {
+			isa = PBXGroup;
+			children = (
+				04649C711DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.h */,
+				04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */,
+			);
+			path = LxTabBadgePoint;
+			sourceTree = "<group>";
+		};
 		0486BB5F1DBB41C900086303 /* IAPHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1160,6 +1172,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04649C701DE5728900F80DC7 /* LxTabBadgePoint */,
 				044956571DCCBAA800CBFF45 /* MJRefresh */,
 				040D46B91DC4B586005D1E8E /* PopupDialog */,
 				04405B221DC46BB70042BB44 /* ImageScrollView */,
@@ -2022,6 +2035,7 @@
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
 				048B0BB31DB2473E00F5A399 /* MIDatePicker.swift in Sources */,
 				0449568F1DCCBAA800CBFF45 /* MJRefreshBackNormalFooter.m in Sources */,
+				04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
 				04ED10521DC787F300EBD3C5 /* UserGalleryPhoto.swift in Sources */,
