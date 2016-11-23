@@ -78,7 +78,7 @@ extension SCConversationViewController{
     
     func addPluginBoardView() {
         if self.conversationType == .ConversationType_PRIVATE {
-            self.chatSessionInputBarControl.pluginBoardView.insertItem(with: UIImage(named: "AddGroup"), title: "和TA建群", tag: 201)
+            self.chatSessionInputBarControl.pluginBoardView.insertItem(with: UIImage(named: "actionbar_group_icon"), title: "和TA建群", tag: 201)
         }
     }
     

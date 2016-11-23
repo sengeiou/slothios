@@ -26,8 +26,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
         navigationItem.title = "聊"
-        setNavtionConfirm(imageStr: "AddGroup")
-        
+        setNavtionConfirm(imageStr: "button-group")
+        self.navigationItem.rightBarButtonItem?.tintColor = SGColor.SGMainColor()
+
         self.search = ({
             let controller = UISearchController(searchResultsController: nil)
             controller.searchResultsUpdater = self   //两个样例使用不同的代理

@@ -44,8 +44,8 @@ class MainViewController: UITabBarController {
 
         let thirdbar = self.tabBar.items![2];
         
-        thirdbar.image = UIImage(named: "add-group-gray")?.withRenderingMode(.alwaysOriginal)
-        thirdbar.selectedImage = UIImage(named: "add-group-champagne")?.withRenderingMode(.alwaysOriginal)
+        thirdbar.image = UIImage(named: "me-gray")?.withRenderingMode(.alwaysOriginal)
+        thirdbar.selectedImage = UIImage(named: "me-champagne")?.withRenderingMode(.alwaysOriginal)
         thirdbar.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
     }
     
