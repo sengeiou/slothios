@@ -31,7 +31,7 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
         self.setNavtionConfirm(titleStr: "完成")
         sentupView()
         setupPullToRefresh()
-        getOfficialGroupMember(at: .top)
+        tableView.mj_header.beginRefreshing()
     }
     
     func sentupView() {
@@ -135,6 +135,11 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             SGLog(message: "officialGroupUuid 为空")
             return
         }
+        if at == .top {
+            pageNum = 1
+        }else{
+            pageNum += 1
+        }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
@@ -144,8 +149,10 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             }else{
                 self.tableView.mj_footer.endRefreshing()
             }
+
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
                     }

@@ -28,7 +28,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         sentupView()
         setupPullToRefresh()
         setNavtionBack(imageStr: "go-back")
-        getMemberList(at: .top)
+        tableView.mj_header.beginRefreshing()
     }
     
     func sentupView() {
@@ -219,6 +219,8 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
+
                     if at == .top {
                         self.dataSource.removeAll()
                     }
@@ -249,6 +251,8 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             }
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
+                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
+
                     if at == .top {
                         self.dataSource.removeAll()
                     }
