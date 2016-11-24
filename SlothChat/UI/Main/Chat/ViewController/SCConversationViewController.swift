@@ -73,6 +73,16 @@ class SCConversationViewController: RCConversationViewController {
 //        textCell.textLabel.textColor=[UIColor redColor];
     }
     
+    override func rcConversationCollectionView(_ collectionView: UICollectionView!, cellForItemAt indexPath: IndexPath!) -> RCMessageBaseCell! {
+        let cell = super.rcConversationCollectionView(collectionView, cellForItemAt: indexPath)
+        return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
+        return cell
+    }
+    
     
     override func didTapCellPortrait(_ userId: String!) {
         print("tap portrait \(userId)")

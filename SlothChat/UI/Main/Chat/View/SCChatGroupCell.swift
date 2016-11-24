@@ -172,14 +172,19 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     //MARK:- UICollectionViewDelegate,UICollectionViewDataSource
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSource.count + 1
     }
     
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SCChatGroupMemberCell", for: indexPath) as! SCChatGroupMemberCell
-        let chatUser = dataSource[indexPath.row]
-        cell.configCellObject(chatUser:chatUser)
+        if indexPath.row < dataSource.count {
+            let chatUser = dataSource[indexPath.row]
+            cell.configCellObject(chatUser:chatUser)
+        }else{
+            cell.imgView.image = UIImage(named: "icon-etcetera")
+        }
+
         return cell
     }
     
