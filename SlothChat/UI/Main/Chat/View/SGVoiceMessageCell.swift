@@ -31,4 +31,9 @@ class SGVoiceMessageCell: RCVoiceMessageCell {
             make.left.equalTo(self.bubbleBackgroundView.snp.right).offset(18)
         }
     }
+    
+    override func playVoice() {
+        super.playVoice()
+        clockImgView.isHidden = true
+    }
 }

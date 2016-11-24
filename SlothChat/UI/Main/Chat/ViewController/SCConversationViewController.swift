@@ -49,13 +49,8 @@ class SCConversationViewController: RCConversationViewController {
         checkOverdueMessage()
         
         self.register(SGVoiceMessageCell.self, forMessageClass: RCVoiceMessage.self)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.stopVoicePlayer(_:)), name: NSNotification.Name(rawValue: kNotificationStopVoicePlayer), object: nil)
     }
     
-    func stopVoicePlayer(_ notice: Notification?) {
-        SGLog(message: notice)
-        
-    }
     override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
         super.pluginBoardView(pluginBoardView, clickedItemWithTag: tag)
         if tag == 201 {
