@@ -30,7 +30,9 @@ class BiddingStatusView: BaseView {
 
     var addPrice = 1{
         didSet{
-            configPriceLabel()
+            DispatchQueue.main.async {
+                self.configPriceLabel()
+            }
         }
     }
     

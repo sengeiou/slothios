@@ -16,6 +16,9 @@ class BidAdResponseData : NSObject, NSCoding, Mappable{
     var bidProductId : String?
 	var isPaid : Bool?
 	var needPayAmount : Int?
+    var itunesChargeAmount : Int?
+    var itunesChargeProductUuid : String?
+
 
 
 	class func newInstance(map: Map) -> Mappable?{
@@ -31,7 +34,8 @@ class BidAdResponseData : NSObject, NSCoding, Mappable{
         bidProductId <- map["bidProductId"]
 		isPaid <- map["isPaid"]
 		needPayAmount <- map["needPayAmount"]
-		
+        itunesChargeAmount <- map["itunesChargeAmount"]
+        itunesChargeProductUuid <- map["itunesChargeProductUuid"]
 	}
 
     /**
@@ -45,7 +49,8 @@ class BidAdResponseData : NSObject, NSCoding, Mappable{
          bidProductId = aDecoder.decodeObject(forKey: "bidProductId") as? String
          isPaid = aDecoder.decodeObject(forKey: "isPaid") as? Bool
          needPayAmount = aDecoder.decodeObject(forKey: "needPayAmount") as? Int
-
+         itunesChargeAmount = aDecoder.decodeObject(forKey: "itunesChargeAmount") as? Int
+         itunesChargeProductUuid = aDecoder.decodeObject(forKey: "itunesChargeProductUuid") as? String
 	}
 
     /**
@@ -69,7 +74,12 @@ class BidAdResponseData : NSObject, NSCoding, Mappable{
 		if needPayAmount != nil{
 			aCoder.encode(needPayAmount, forKey: "needPayAmount")
 		}
-
+        if itunesChargeAmount != nil{
+            aCoder.encode(itunesChargeAmount, forKey: "itunesChargeAmount")
+        }
+        if itunesChargeProductUuid != nil{
+            aCoder.encode(itunesChargeProductUuid, forKey: "itunesChargeProductUuid")
+        }
 	}
 
 }

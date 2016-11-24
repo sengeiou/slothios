@@ -250,7 +250,8 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func needRecharge(data: BidAdResponseData?) {
         guard let totalPrice = data?.accountsBanlace,
-            let needPrice = data?.needPayAmount  else{
+              let needPrice = data?.itunesChargeAmount,
+              let productUuid = data?.itunesChargeProductUuid else{
                 SGLog(message: "数据为空")
                 return
         }
@@ -258,7 +259,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         let alert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "确定", style: .default, handler: { (action) in
-            self.purchaseForProduct(price: String(needPrice), productID: "com.ssloth.animal.recharge")
+            self.purchaseForProduct(price: String(needPrice), productID: productUuid)
         })
         okAction.setValue(SGColor.SGMainColor(), forKey: "_titleTextColor")
         cancelAction.setValue(UIColor.black, forKey: "_titleTextColor")

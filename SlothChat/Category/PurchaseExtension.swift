@@ -22,11 +22,12 @@ extension UIViewController{
                 return
         }
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        
+
         if IAPShare.sharedHelper().iap == nil {
-            let set = Set(arrayLiteral: productID)
-            IAPShare.sharedHelper().iap = IAPHelper(productIdentifiers: set)
+            IAPShare.sharedHelper().iap = IAPHelper()
         }
+        let set = Set(arrayLiteral: productID)
+        IAPShare.sharedHelper().iap.productIdentifiers = set
         IAPShare.sharedHelper().iap.production = false
         
         IAPShare.sharedHelper().iap.requestProducts { (request, response) in
