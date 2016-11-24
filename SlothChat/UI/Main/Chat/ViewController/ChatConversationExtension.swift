@@ -51,14 +51,15 @@ extension SCConversationViewController{
         //RCMessageModel
         var messageIds = [CLong]()
         for tmpModel in conversationDataRepository {
-            
-            let model = tmpModel as! RCMessageModel
-            
-            let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-            if receivedDate.isToday() {
-                SGLog(message: "今天的消息")
-            }else{
-                messageIds.append(model.messageId)
+            if let model = tmpModel as? RCMessageModel {
+                let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+                if receivedDate.isToday() ||
+                    model.receivedStatus == .ReceivedStatus_UNREAD{
+                    SGLog(message: "今天的消息,或者未读的消息" + String(model.messageId))
+                }else{
+                    messageIds.append(model.messageId)
+                }
+                
             }
         }
         SGLog(message: messageIds)

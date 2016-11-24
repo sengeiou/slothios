@@ -47,8 +47,15 @@ class SCConversationViewController: RCConversationViewController {
             }
         }
         checkOverdueMessage()
+        
+        self.register(SGVoiceMessageCell.self, forMessageClass: RCVoiceMessage.self)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.stopVoicePlayer(_:)), name: NSNotification.Name(rawValue: kNotificationStopVoicePlayer), object: nil)
     }
-
+    
+    func stopVoicePlayer(_ notice: Notification?) {
+        SGLog(message: notice)
+        
+    }
     override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
         super.pluginBoardView(pluginBoardView, clickedItemWithTag: tag)
         if tag == 201 {
@@ -67,25 +74,29 @@ class SCConversationViewController: RCConversationViewController {
         if textCell.messageDirection == .MessageDirection_SEND {
             textCell.textLabel.textColor = SGColor.SGMainColor();
         }
-//        UIImage *image=textCell.bubbleBackgroundView.image;
-//        textCell.bubbleBackgroundView.image=[textCell.bubbleBackgroundView.image resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height * 0.8, image.size.width * 0.8,image.size.height * 0.2, image.size.width * 0.2)];
-//        //      更改字体的颜色
-//        textCell.textLabel.textColor=[UIColor redColor];
-    }
-    
-    override func rcConversationCollectionView(_ collectionView: UICollectionView!, cellForItemAt indexPath: IndexPath!) -> RCMessageBaseCell! {
-        let cell = super.rcConversationCollectionView(collectionView, cellForItemAt: indexPath)
-        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
+        if !cell.isMember(of: SGVoiceMessageCell.self) {
+            return cell
+        }
+        
+        let voiceCell = cell as! SGVoiceMessageCell
+        
+        //如果是自己发的，或者是已经听过的语音隐藏图标显示
+        if voiceCell.messageDirection == .MessageDirection_SEND ||
+            voiceCell.model.receivedStatus == .ReceivedStatus_LISTENED {
+            voiceCell.clockImgView.isHidden = true
+        }else{
+            voiceCell.clockImgView.isHidden = false
+        }
         return cell
     }
     
     
     override func didTapCellPortrait(_ userId: String!) {
-        print("tap portrait \(userId)")
+
         let pushVC = UserInfoViewController()
         pushVC.mUserUuid = userId
         let userUuid = Global.shared.globalProfile?.userUuid

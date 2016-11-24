@@ -89,6 +89,7 @@
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044B79ED1DE0B10B00490272 /* ChatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B79EC1DE0B10B00490272 /* ChatExtension.swift */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
+		0454F8EB1DE6C4C600E7034F /* SGVoiceMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */; };
 		04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */; };
 		046563DA1DDF6903009E8849 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 046563DC1DDF6903009E8849 /* Localizable.strings */; };
 		0472E85D1DD720630065AFAB /* SCChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */; };
@@ -393,6 +394,7 @@
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044B79EC1DE0B10B00490272 /* ChatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExtension.swift; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGVoiceMessageCell.swift; sourceTree = "<group>"; };
 		04649C711DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LxTabBadgePoint.h"; sourceTree = "<group>"; };
 		04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LxTabBadgePoint.m"; sourceTree = "<group>"; };
 		046563D91DDF68F0009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 				049BAAEC1DDB65AF00422134 /* ChatGroupInfoHeaderView.swift */,
 				049BAB061DDCB70D00422134 /* SCChatGroupMemberCell.swift */,
 				0492DB4A1DE18C9F000F2E5F /* OfficialGroupHeaderView.swift */,
+				0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2042,6 +2045,7 @@
 				04EE6B171DDE1ACC005648F1 /* PrivateChatVo.swift in Sources */,
 				04FE6DBB1DCE3C3300AD9C96 /* UIImage+Alpha.m in Sources */,
 				04B499AB1DBFB61A004659BA /* UserProfileData.swift in Sources */,
+				0454F8EB1DE6C4C600E7034F /* SGVoiceMessageCell.swift in Sources */,
 				049BAB041DDCB44600422134 /* GroupMember.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */,
