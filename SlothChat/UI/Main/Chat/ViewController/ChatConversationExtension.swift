@@ -110,6 +110,12 @@ extension SCConversationViewController{
         self.title = userInfo["NewUserGroupName"] as! String?
     }
     
+    func configNormalInputBarControl() {
+        let control = self.chatSessionInputBarControl!
+        control.inputTextView.layer.cornerRadius = 16
+        control.inputTextView.layer.masksToBounds = true
+    }
+    
     func configGroupInputBarControl() {
         let control = self.chatSessionInputBarControl!
         control.additionalButton.setImage(UIImage(named: "AddGroup"), for: .normal)

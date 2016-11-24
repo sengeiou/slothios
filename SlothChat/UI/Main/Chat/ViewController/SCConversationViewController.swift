@@ -33,13 +33,11 @@ class SCConversationViewController: RCConversationViewController {
             (self.navigationController?.viewControllers.count)! > 1 {
             self.setNavtionBack(imageStr: "go-back")
         }
-        
+        configNormalInputBarControl()
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
-//            configGroupInputBarControl()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             configNavgitaionItem()
-//            getGroupInfo()
             if self.targetId.hasPrefix("officialGroup") {
                 //官方群只能语音聊天
                 configGroupInputBarControl()
