@@ -223,7 +223,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
             return
         }
         
-        let price = headerView.price - oriPrice
+        let price = headerView.addPrice - oriPrice
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))

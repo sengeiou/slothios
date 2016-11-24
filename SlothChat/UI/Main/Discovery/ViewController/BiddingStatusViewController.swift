@@ -206,7 +206,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             SGLog(message: "原始价格异常")
             return
         }
-        let price = headerView.price - oriPrice
+        let price = headerView.addPrice - oriPrice
 
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))

@@ -22,9 +22,20 @@ class PublishHeaderView: BaseView {
     let pickerView = ValuePickerView.init()
     
     var selectPassValue: PublishAdvertClosureType?
-    var price = 1{
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var addPrice = 1{
         didSet{
             configPriceLabel()
+        }
+    }
+    
+    var originalPrice = 1{
+        didSet{
+            addPrice = originalPrice
         }
     }
     
@@ -33,10 +44,6 @@ class PublishHeaderView: BaseView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         sentupView()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func sentupView() {
@@ -138,8 +145,7 @@ class PublishHeaderView: BaseView {
         pickerView.pickerTitle = "加码金额"
         let completionBlock: (String?) -> Void = {(_ value: String?) in
             SGLog(message: value)
-            
-            self.price += Int(value!.components(separatedBy: "/").first!)!
+            self.addPrice = self.originalPrice +  Int(value!.components(separatedBy: "/").first!)!
         }
         pickerView.valueDidSelect = completionBlock
         pickerView.dataSource = ["1","5","10","50","100","500","1000"]
@@ -147,7 +153,7 @@ class PublishHeaderView: BaseView {
     
     func configPriceLabel() {
         let string1 = "当前竞价额    "
-        let string2 = "￥" + String(price)
+        let string2 = "￥" + String(addPrice)
         let attributedText = NSMutableAttributedString.init(string: string1 + string2)
         
         let range = NSRange.init(location: string1.characters.count, length: string2.characters.count)
@@ -157,7 +163,7 @@ class PublishHeaderView: BaseView {
     }
     
     func refreshView(rankData: BidAdsRankVoData) {
-        price = rankData.myBidAmount!
+        self.originalPrice = rankData.myBidAmount!
     }
     
     //MARK:- Action
