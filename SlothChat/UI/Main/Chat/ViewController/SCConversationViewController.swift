@@ -59,18 +59,6 @@ class SCConversationViewController: RCConversationViewController {
         }
     }
     
-    override func willDisplayMessageCell(_ cell: RCMessageBaseCell!, at indexPath: IndexPath!) {
-        if !cell.isMember(of: RCTextMessageCell.self) {
-            return
-        }
-        
-        let textCell = cell as! RCTextMessageCell
-        
-        if textCell.messageDirection == .MessageDirection_SEND {
-            textCell.textLabel.textColor = SGColor.SGMainColor();
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath)
         if !cell.isMember(of: SGVoiceMessageCell.self) {

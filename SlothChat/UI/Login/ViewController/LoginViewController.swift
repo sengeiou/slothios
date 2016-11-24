@@ -77,7 +77,7 @@ class LoginViewController: BaseViewController {
         
         forgetButton.snp.makeConstraints { (make) in
             make.left.equalTo(100)
-            make.top.equalTo(passwordView.snp.bottom)
+            make.top.equalTo(passwordView.snp.bottom).offset(12)
             make.size.equalTo(CGSize.init(width: 88, height: 38))
         }
         
