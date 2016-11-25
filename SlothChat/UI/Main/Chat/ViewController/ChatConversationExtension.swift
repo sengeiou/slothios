@@ -48,18 +48,24 @@ extension SCConversationViewController{
     }
     
     func checkOverdueMessage() {
+        if self.targetId.hasPrefix("userGroup") {
+           return
+        }
         //RCMessageModel
         var messageIds = [CLong]()
         for tmpModel in conversationDataRepository {
             if let model = tmpModel as? RCMessageModel {
-                let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-                if receivedDate.isToday() ||
-                    model.receivedStatus == .ReceivedStatus_UNREAD{
-                    SGLog(message: "今天的消息,或者未读的消息" + String(model.messageId))
-                }else{
+//                let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+//                if receivedDate.isToday() ||
+//                    model.receivedStatus == .ReceivedStatus_UNREAD{
+//                    SGLog(message: "今天的消息,或者未读的消息" + String(model.messageId))
+//                }else{
+//                    messageIds.append(model.messageId)
+//                }
+                if model.receivedStatus == .ReceivedStatus_READ {
                     messageIds.append(model.messageId)
                 }
-                
+
             }
         }
         SGLog(message: messageIds)
