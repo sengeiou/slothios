@@ -51,7 +51,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         super.viewDidLoad()            
         setupView()
         if isMyselfFlag{
-            self.setNavtionConfirm(titleStr: "设置")
+            configRightBarButtonItem()
         }
         deleteButton.isHidden = !isMyselfFlag
     }
@@ -61,6 +61,34 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
 
         let pushVC = SettingViewController.init()
         self.navigationController?.pushViewController(pushVC, animated: true)
+    }
+    
+    func configRightBarButtonItem() {
+        let barView = UIView(frame: CGRect.init(x: 0, y: 0, width: 64, height: 44))
+        let imgView = UIImageView.init(image: UIImage(named: "icon_setting"))
+        imgView.tintColor = UIColor.blue
+        let titleLbl = UILabel()
+        titleLbl.text = "设置"
+        barView.addSubview(imgView)
+        barView.addSubview(titleLbl)
+        imgView.snp.makeConstraints({ (make) in
+            make.left.equalTo(0)
+            make.centerY.equalTo(barView.snp.centerY)
+            make.size.equalTo(CGSize.init(width: 20, height: 20))
+        })
+        titleLbl.snp.makeConstraints({ (make) in
+            make.left.equalTo(imgView.snp.right).offset(8)
+            make.centerY.equalTo(barView.snp.centerY)
+        })
+        let button = UIButton(type: .custom)
+        barView.addSubview(button)
+        button.addTarget(self, action: #selector(confirmClick), for: .touchUpInside)
+        button.snp.makeConstraints({ (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        })
+        
+        let barItem = UIBarButtonItem.init(customView: barView)
+        self.navigationItem.rightBarButtonItem = barItem
     }
     
     func setupView() {
