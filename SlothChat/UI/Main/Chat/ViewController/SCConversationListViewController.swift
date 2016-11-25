@@ -27,7 +27,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         super.viewDidLoad()
         navigationItem.title = "聊"
         setNavtionConfirm(imageStr: "button-group")
-        self.navigationItem.rightBarButtonItem?.tintColor = SGColor.SGMainColor()
+        navigationItem.rightBarButtonItem?.tintColor = SGColor.black
 
         self.search = ({
             let controller = UISearchController(searchResultsController: nil)

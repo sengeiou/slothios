@@ -97,7 +97,7 @@ class BiddingStatusView: BaseView {
         
         overweightButton.setTitle("加码", for: .normal)
         overweightButton.setTitleColor(UIColor.white, for: .normal)
-        overweightButton.backgroundColor = SGColor.SGMainColor()
+        overweightButton.backgroundColor = SGColor.SGMainColor().withAlphaComponent(0.7)
         overweightButton.layer.cornerRadius = 23
         priceView.addSubview(overweightButton)
         

@@ -346,8 +346,11 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 }
                 self.refreshBannerView()
                 self.bannerView?.scroll(to: Int32((self.mProfile!.userPhotoList?.count)!) - 1)
-
             }else{
+                if userPhoto?.status == ResponseError.PROFILE_PIC_NOT_VERIFIED.0{
+                    self.bannerList[at ..< at + 1] = [DefaultBannerImgName as AnyObject]
+                    self.refreshBannerView()
+                }
                 HUD.flash(.label(userPhoto?.msg), delay: 2)
             }
         }
@@ -424,11 +427,30 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             return
         }
         let titleStr = "选择头像"
+        let obj = cycleScrollView.localizationImageNamesGroup[index]  as AnyObject
+        
+        if obj.isMember(of: UIImage.self) {
+            let browser = ImageScrollViewController()
+            browser.disPlay(image: obj as! UIImage)
+            browser.isShowLikeButton(isShow: false)
+            browser.isShowDeleteButton(isShow: false)
+            self.present(browser, animated: true, completion: nil)
+            return
+        }
+        
+//        if obj.isMember(of: String.self) {
+//            return
+//        }
+        
         let avatar = (cycleScrollView.localizationImageNamesGroup[index] as! String)
         
         if avatar.hasPrefix("http://") ||
             avatar.hasPrefix("https://") {
-//            titleStr = "替换头像"
+            let browser = ImageScrollViewController()
+            browser.disPlay(imageUrl: avatar)
+            self.present(browser, animated: true, completion: nil)
+            browser.isShowLikeButton(isShow: false)
+            browser.isShowDeleteButton(isShow: false)
             return
         }
         UIAlertController.photoPicker(withTitle: titleStr, showIn: self.view, presentVC: self, onPhotoPicked: { (avatar) in

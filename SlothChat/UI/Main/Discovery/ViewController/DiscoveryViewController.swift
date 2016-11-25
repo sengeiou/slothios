@@ -28,7 +28,7 @@ class DiscoveryViewController: BaseViewController {
         super.viewDidLoad()
         navigationItem.title = "探"
         setNavtionConfirm(imageStr: "camera-champagne")
-        self.navigationItem.rightBarButtonItem?.tintColor = SGColor.SGMainColor()
+        navigationItem.rightBarButtonItem?.tintColor = SGColor.black
 
         self.sentupView()
 

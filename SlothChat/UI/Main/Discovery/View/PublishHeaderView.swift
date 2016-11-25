@@ -62,6 +62,7 @@ class PublishHeaderView: BaseView {
         biddingLabel.text = "是否用此图片参与广告竞价"
         joinView.addSubview(biddingLabel)
         
+        selectButton.alpha = 0.7
         selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .normal)
         selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .highlighted)
         selectButton.setBackgroundImage(UIImage.init(named: "button-yes"), for: .selected)
@@ -126,7 +127,7 @@ class PublishHeaderView: BaseView {
 
         overweightButton.setTitle("加码", for: .normal)
         overweightButton.setTitleColor(UIColor.white, for: .normal)
-        overweightButton.backgroundColor = SGColor.SGMainColor()
+        overweightButton.backgroundColor = SGColor.SGMainColor().withAlphaComponent(0.7)
         overweightButton.layer.cornerRadius = 23
         overweightButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         priceView.addSubview(overweightButton)

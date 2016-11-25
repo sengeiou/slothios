@@ -32,6 +32,7 @@ class SettingCell: UITableViewCell {
             make.right.equalTo(-10)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
+        selectButton.alpha = 0.7
         selectButton.setBackgroundImage(UIImage.init(named: "button-no"), for: .normal)
         selectButton.setBackgroundImage(UIImage.init(named: "button-yes"), for: .selected)
         selectButton.addTarget(self, action: #selector(selectButtonCLick), for: .touchUpInside)
