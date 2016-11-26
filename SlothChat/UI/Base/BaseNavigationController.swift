@@ -14,8 +14,10 @@ class BaseNavigationController: UINavigationController,UIGestureRecognizerDelega
         super.viewDidLoad()
         self.interactivePopGestureRecognizer?.delegate = self
         UINavigationBar.appearance().tintColor = UIColor.black
-        let image = self.colorToImage(color: SGColor.SGMainColor().withAlphaComponent(0.7))
-        self.navigationBar.setBackgroundImage(image, for: .default)
+        UINavigationBar.appearance().barTintColor = SGColor.SGNavBarTintColor()
+//        let image = self.colorToImage(color: SGColor.SGMainColor().withAlphaComponent(0.7))
+//        self.navigationBar.setBackgroundImage(image, for: .default)
+        
 //        self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: SGColor.white]
     }
     

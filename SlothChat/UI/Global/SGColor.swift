@@ -16,6 +16,12 @@ class SGColor: UIColor {
         return UIColor.init(red: 204/255.0, green: 150/255.0, blue: 109/255.0, alpha: 1.0)
     }
     /**
+     主题色:#cc966d
+     */
+    class func SGNavBarTintColor() -> UIColor {
+        return UIColor.init(red: 204/255.0, green: 150/255.0, blue: 109/255.0, alpha: 0.7)
+    }
+    /**
      背景灰色:#efeff4
      */
     class func SGBgGrayColor() -> UIColor {

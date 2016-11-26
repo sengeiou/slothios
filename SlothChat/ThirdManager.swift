@@ -29,7 +29,8 @@ class ThirdManager: NSObject {
         RCIM.shared().initWithAppKey("8w7jv4qb7e8sy")
         RCIM.shared().enableMessageRecall = true
         RCIM.shared().globalConversationAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
-        RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE        
+        RCIM.shared().globalMessageAvatarStyle = RCUserAvatarStyle.USER_AVATAR_CYCLE
+        RCIM.shared().globalNavigationBarTintColor = SGColor.black
     }
     
     class func connectRCIM(token: String?) {

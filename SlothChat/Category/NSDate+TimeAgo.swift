@@ -43,7 +43,7 @@ public extension Date {
             return stringFromFormat(format: "%%d %@hours ago", withValue: hours)
         } else if hours < 24 * 7 {
             let formatter = DateFormatter()
-            formatter.dateFormat = String(format: "EEEE '%@' HH:mm", DateTimeAgoLocalizedStrings(key: "at"))
+            formatter.dateFormat = "EEEE HH:mm"
             return formatter.string(from: self)
         } else {
             let formatter = DateFormatter()
