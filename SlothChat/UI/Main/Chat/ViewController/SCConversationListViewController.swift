@@ -160,6 +160,14 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     //MARK: - TableViewDelegate TableViewDataSource
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        let model = getTableViewModel(indexPath: indexPath)
+        if model.targetId.hasPrefix("officialGroup"){
+            return .none
+        }
+        return .delete
+    }
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if search.isActive {
             return nil
