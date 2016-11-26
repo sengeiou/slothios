@@ -170,7 +170,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
                     }
                 }
             }else{
-                self.configCellWithObject(lastUserAvatarUrl: userInfo?.portraitUri!, lastUserName: userInfo?.name, model: model)
+                self.configCellWithObject(lastUserAvatarUrl: (userInfo?.portraitUri!)!, lastUserName: (userInfo?.name)!, model: model)
             }
         }
     }
