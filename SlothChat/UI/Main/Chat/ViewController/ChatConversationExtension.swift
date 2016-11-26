@@ -65,7 +65,7 @@ extension SCConversationViewController{
                 if model.receivedStatus == .ReceivedStatus_READ {
                     messageIds.append(model.messageId)
                 }
-                messageIds.append(model.messageId)
+//                messageIds.append(model.messageId)
 
             }
         }
