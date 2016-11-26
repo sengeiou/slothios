@@ -47,7 +47,7 @@ public extension Date {
             return formatter.string(from: self)
         } else {
             let formatter = DateFormatter()
-            formatter.dateFormat = String(format: "d MMM '%@' HH:mm", DateTimeAgoLocalizedStrings(key: "at"))
+            formatter.dateFormat = "d MMM HH:mm"
             return formatter.string(from: self)
         }
     }
