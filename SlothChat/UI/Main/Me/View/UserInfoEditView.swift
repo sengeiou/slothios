@@ -185,7 +185,7 @@ class UserInfoEditView: BaseView {
             HUD.flash(.label("学校长度不能超过50个字符"), delay: 2)
             return
         }
-        let personalProfile = universityView.getInputContent()!
+        let personalProfile = personalProfileView.getInputContent()!
         if personalProfile.characters.count >= 100 {
             HUD.flash(.label("简介长度不能超过100个字符"), delay: 2)
             return

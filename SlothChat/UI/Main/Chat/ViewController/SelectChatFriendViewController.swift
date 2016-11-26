@@ -9,7 +9,7 @@
 import UIKit
 import PKHUD
 
-private let PageSize = 20
+private let PageSize = 5000
 
 class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
