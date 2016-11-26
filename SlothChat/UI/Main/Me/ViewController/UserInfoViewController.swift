@@ -400,7 +400,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         
         if !canTalk {
             HUD.flash(.label("请设置您的个人资料第一张是真人照片~"), delay: 2)
-//            return
+            return
         }
         
         if !isAcceptPrivateChat {

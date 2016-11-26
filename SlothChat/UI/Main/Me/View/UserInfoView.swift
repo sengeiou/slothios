@@ -40,11 +40,11 @@ class UserInfoView: BaseView {
         addSubview(ageInfoLabel)
         
         universityView.titleLabel.textColor = SGColor.SGTextColor()
-        universityView.configInputView(titleStr: "所在地:", contentStr: "")
+        universityView.configInputView(titleStr: "学校:", contentStr: "")
         addSubview(universityView)
         
         personalProfileView.titleLabel.textColor = SGColor.SGTextColor()
-        personalProfileView.configInputView(titleStr: "经常出没:", contentStr: "")
+        personalProfileView.configInputView(titleStr: "简介:", contentStr: "")
         addSubview(personalProfileView)
         
         nameLabel.snp.makeConstraints { (make) in

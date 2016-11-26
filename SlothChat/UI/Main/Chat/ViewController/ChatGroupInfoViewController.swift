@@ -137,7 +137,13 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         let userUuidA = Global.shared.globalProfile?.userUuid
         let userUuidB = userObj.userUuid
         
-        self.postPrivateChat(nameA: Global.shared.globalProfile?.nickname, nameB: userObj.userDisplayName, userUuidA: userUuidA, userUuidB: userUuidB)
+        let pushVC = UserInfoViewController()
+        
+        pushVC.mUserUuid = userUuidB
+        pushVC.likeSenderUserUuid = userUuidA
+        pushVC.isMyselfFlag = false
+        self.navigationController?.pushViewController(pushVC, animated: true)
+        
     }
     
     //MARK:- Action
