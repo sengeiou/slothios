@@ -150,7 +150,11 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
-            self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+            if let content = model.lastestMessage.value(forKey: "content") as! String? {
+                self.contentLabel.text = content
+            }else{
+                self.contentLabel.text = "[已销毁]"
+            }
         }else if model.lastestMessage.isKind(of: RCImageMessage.self){
             self.contentLabel.text = member.userDisplayName! + "：[图片]"
         }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){

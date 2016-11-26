@@ -111,7 +111,11 @@ class SCConversationListCell: RCConversationBaseCell {
             return
         }
         if lastMessage.isKind(of: RCTextMessage.self) {
-            self.contentLabel.text = model.lastestMessage.value(forKey: "content") as! String?
+            if let content = model.lastestMessage.value(forKey: "content") as! String? {
+                self.contentLabel.text = content
+            }else{
+                self.contentLabel.text = "[已销毁]"
+            }
         }else if lastMessage.isKind(of: RCImageMessage.self){
             self.contentLabel.text = "[图片]"
         }else if lastMessage.isKind(of: RCVoiceMessage.self){
