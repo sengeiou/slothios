@@ -121,6 +121,8 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         if let member = officialGroup.getChatMemberInfo(userUuid: model.senderUserId) {
             configCellObject(model: model, member: member)
         }else{
+            self.lastUserImgView.image = nil
+            self.contentLabel.text = ""
             configCellObject(model: model)
         }
     }
@@ -135,6 +137,8 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         if let member = userGroup.getChatMemberInfo(userUuid: model.senderUserId) {
             configCellObject(model: model, member: member)
         }else{
+            self.lastUserImgView.image = nil
+            self.contentLabel.text = ""
             configCellObject(model: model)
         }
     }
