@@ -372,11 +372,8 @@ class NetworkEngine: NSObject {
     func getUserProfile(userUuid: String?, completeHandler :@escaping(_ response:UserProfile?) -> Void)  -> Void {
         var likeUuid: String?
         
-        if Global.shared.globalProfile != nil {
-            likeUuid = Global.shared.globalProfile?.uuid
-        }else{
-            likeUuid = Global.shared.globalLogin?.user?.uuid
-        }
+        likeUuid = Global.shared.globalLogin?.user?.uuid
+
         guard let token = Global.shared.globalLogin?.token,
               let likeSenderUserUuid = likeUuid,
               let userUuid = userUuid else {
