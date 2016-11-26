@@ -90,7 +90,7 @@ class LoginViewController: BaseViewController {
         view.addSubview(loginButton)
         
         let registerButton = UIButton.init(type: .custom)
-        registerButton.setTitle("注册", for: .normal)
+        registerButton.setTitle("去注册", for: .normal)
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         registerButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
@@ -114,11 +114,11 @@ class LoginViewController: BaseViewController {
     }
     
     func configPhoneInputView(inputView : SingleInputView) {
-        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 48, height: 44))
+        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 54, height: 44))
         codeButton.frame = leftView.bounds
         let codeStr = GVUserDefaults.standard().lastLoginCountry
         if codeStr != nil{
-            codeButton.setTitle(codeStr, for: .normal)
+            codeButton.setTitle(codeStr!, for: .normal)
         }else{
             codeButton.setTitle("86", for: .normal)
         }
@@ -127,7 +127,7 @@ class LoginViewController: BaseViewController {
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
         leftView.addSubview(codeButton)
         
-        let line = UIView.init(frame: CGRect.init(x: 44, y: 6, width: 1, height: 32))
+        let line = UIView.init(frame: CGRect.init(x: 48, y: 6, width: 1, height: 32))
         line.backgroundColor = SGColor.SGLineColor()
         leftView.addSubview(line)
         

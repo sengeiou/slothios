@@ -14,7 +14,8 @@ class RegisterViewController: BaseViewController {
     let codeView = SingleInputView.init(type : .button)
     let phoneView = SingleInputView.init()
     let passwordView = SingleInputView.init()
-    
+    let codeButton = UIButton(type: .custom)
+
     var timeout = 0
 
     public var countryName = "CN"
@@ -34,23 +35,17 @@ class RegisterViewController: BaseViewController {
             make.top.equalTo(100)
             make.size.equalTo(CGSize.init(width: 184, height: 55))
         }
-       
-        codeView.setClosurePass {
-            self.pushCountryCode()
+        
+        var phoneStr = GVUserDefaults.standard().lastLoginPhone
+        if phoneStr == nil{
+            phoneStr = ""
         }
-        
-        codeView.titleLabel.font = UIFont.systemFont(ofSize: 17)
-        codeView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
-        codeView.setInputTextfieldLeftMagin(left: 106)
-        codeView.configInputView(titleStr: "国家区号:", contentStr: "86")
-        view.addSubview(codeView)
-        
+        phoneView.setInputTextfieldLeftMagin(left: 106)
         phoneView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         phoneView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
-        phoneView.setInputTextfieldLeftMagin(left: 106)
-        phoneView.configInputView(titleStr: "手机号:", contentStr: "")
+        phoneView.configInputView(titleStr: "手机号:", contentStr: phoneStr!)
+        configPhoneInputView(inputView: phoneView)
         phoneView.inputTextfield.keyboardType = .numberPad
-
         view.addSubview(phoneView)
         
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
@@ -59,16 +54,10 @@ class RegisterViewController: BaseViewController {
         passwordView.configInputView(titleStr: "密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         view.addSubview(passwordView)
-
-        codeView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.top.equalTo(iconView.snp.bottom).offset(88)
-            make.height.equalTo(60)
-        }
         
         phoneView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(codeView.snp.bottom).offset(19)
+            make.top.equalTo(iconView.snp.bottom).offset(88)
             make.height.equalTo(60)
         }
         
@@ -80,7 +69,7 @@ class RegisterViewController: BaseViewController {
         
         let registerButton = UIButton.init(type: .custom)
         registerButton.layer.cornerRadius = 23
-        registerButton.setTitle("注册账号", for: .normal)
+        registerButton.setTitle("注册", for: .normal)
         registerButton.backgroundColor = SGColor.SGMainColor()
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
@@ -110,45 +99,75 @@ class RegisterViewController: BaseViewController {
         }
     }
     
-    //MARK:- Action
-    func registerButtonClick() {
-        print("registerButtonClick")
-        let codeStr = codeView.getInputContent()
-        if (codeStr?.isEmpty)! {
-            codeView.setErrorContent(error: "请选择国家码")
-            return
+    func configPhoneInputView(inputView : SingleInputView) {
+        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 54, height: 44))
+        codeButton.frame = leftView.bounds
+        let codeStr = GVUserDefaults.standard().lastLoginCountry
+        if codeStr != nil{
+            codeButton.setTitle(codeStr, for: .normal)
+        }else{
+            codeButton.setTitle("86", for: .normal)
         }
+        codeButton.setTitleColor(UIColor.black, for: .normal)
+        codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
+        leftView.addSubview(codeButton)
         
+        let line = UIView.init(frame: CGRect.init(x: 44, y: 6, width: 1, height: 32))
+        line.backgroundColor = SGColor.SGLineColor()
+        leftView.addSubview(line)
+        
+        inputView.inputTextfield.leftView = leftView
+        inputView.inputTextfield.leftViewMode = .always
+    }
+    
+    func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
             phoneView.setErrorContent(error: "请输入手机号")
-            return
+            return false
         }
-         //false
-
+        
         if !Validate.phoneNum(phoneStr!).isRight{
             phoneView.setErrorContent(error: "手机号码为6到11位")
-            return
+            return false
         }
         
-        
+        let code = self.codeButton.title(for: .normal)
+        if (code?.isEmpty)! {
+            phoneView.setErrorContent(error: "请选择国家码")
+            return false
+        }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-//            HUD.flash(.label("请输入密码"), delay: 2)
             passwordView.setErrorContent(error: "请输入密码")
+            return false
+        }
+        
+        //        if !(passwordStr?.validString())!{
+        //            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+        //            return false
+        //        }
+        
+        return true
+    }
+    
+    //MARK:- Action
+    func registerButtonClick() {
+        print("registerButtonClick")
+        if !checkDataValid(){
             return
         }
         
-        if !(passwordStr?.validString())!{
-            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
-            return
-        }
+        let phoneStr = phoneView.getInputContent()!
+        let codeStr = self.codeButton.title(for: .normal)!
+        let passwordStr = passwordView.getInputContent()!
         
         let pushVC  = CaptchaViewController.init()
         pushVC.registerVC = self
-        pushVC.phoneNo = phoneStr!
-        pushVC.codeNo = codeStr!
-        pushVC.password = passwordStr!
+        pushVC.phoneNo = phoneStr
+        pushVC.codeNo = codeStr
+        pushVC.password = passwordStr
         pushVC.countryName = countryName
         navigationController?.pushViewController(pushVC, animated: true)
         
@@ -170,15 +189,14 @@ class RegisterViewController: BaseViewController {
             let pushVC  = LoginViewController.init()
             navigationController?.pushViewController(pushVC, animated: true)
         }
-        
     }
     
-    func pushCountryCode() {
+    func codeButtonClick() {
         let pushVC  = CountryCodeViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
         pushVC.setClosurePass { (tmpCountry) in
             self.countryName = tmpCountry.name!
-            self.codeView.configContent(contentStr: tmpCountry.telPrefix!)
+            self.codeButton.setTitle(tmpCountry.telPrefix, for: .normal)
         }
     }
     

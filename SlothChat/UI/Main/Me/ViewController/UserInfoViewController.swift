@@ -51,7 +51,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         super.viewDidLoad()            
         setupView()
         if isMyselfFlag{
-            configRightBarButtonItem()
+            self.setNavtionConfirm(imageStr: "icon_setting")
         }
         deleteButton.isHidden = !isMyselfFlag
     }
@@ -64,6 +64,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func configRightBarButtonItem() {
+        
         let barView = UIView(frame: CGRect.init(x: 0, y: 0, width: 64, height: 44))
         let imgView = UIImageView.init(image: UIImage(named: "icon_setting"))
         imgView.tintColor = UIColor.blue
@@ -258,6 +259,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                     }
                     self.refreshBannerView()
                     if let tmpProfile = profile{
+                        self.title = profile?.data?.nickname
                         self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
                     }
                 }else{
