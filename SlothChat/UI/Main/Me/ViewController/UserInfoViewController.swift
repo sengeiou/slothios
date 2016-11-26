@@ -274,7 +274,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func updateProfile(editProfile: UserProfileData)  {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, area: editProfile.area!, commonCities: editProfile.commonCities!, university: editProfile.university!) { (userProfile) in
+        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (userProfile) in
             HUD.hide()
             self.container.snp.remakeConstraints { (make) in
                 make.edges.equalTo(self.scrollView)

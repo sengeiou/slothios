@@ -15,9 +15,8 @@ class UserInfoView: BaseView {
     let sexImgView = UIImageView()
     let ageInfoLabel = UILabel()
     
-    let locationView = UserInfoSingleView()
-    let hauntView = UserInfoSingleView()
-    let schoolView = UserInfoSingleView()
+    let universityView = UserInfoSingleView()
+    let personalProfileView = UserInfoSingleView()
     let editView = UIView()
     
     var userObj: UserProfileData?
@@ -40,17 +39,13 @@ class UserInfoView: BaseView {
         ageInfoLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(ageInfoLabel)
         
-        locationView.titleLabel.textColor = SGColor.SGTextColor()
-        locationView.configInputView(titleStr: "所在地:", contentStr: "")
-        addSubview(locationView)
+        universityView.titleLabel.textColor = SGColor.SGTextColor()
+        universityView.configInputView(titleStr: "所在地:", contentStr: "")
+        addSubview(universityView)
         
-        hauntView.titleLabel.textColor = SGColor.SGTextColor()
-        hauntView.configInputView(titleStr: "经常出没:", contentStr: "")
-        addSubview(hauntView)
-        
-        schoolView.titleLabel.textColor = SGColor.SGTextColor()
-        schoolView.configInputView(titleStr: "学校:", contentStr: "")
-        addSubview(schoolView)
+        personalProfileView.titleLabel.textColor = SGColor.SGTextColor()
+        personalProfileView.configInputView(titleStr: "经常出没:", contentStr: "")
+        addSubview(personalProfileView)
         
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(8)
@@ -67,19 +62,14 @@ class UserInfoView: BaseView {
             make.top.equalTo(nameLabel.snp.bottom).offset(14)
         }
         
-        locationView.snp.makeConstraints { (make) in
+        universityView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(ageInfoLabel.snp.bottom).offset(24)
             make.height.equalTo(34).priority(250)
         }
-        hauntView.snp.makeConstraints { (make) in
+        personalProfileView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(locationView.snp.bottom)
-            make.height.equalTo(34).priority(250)
-        }
-        schoolView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.top.equalTo(hauntView.snp.bottom)
+            make.top.equalTo(universityView.snp.bottom)
             make.height.equalTo(34).priority(250)
             make.bottom.equalTo(-60)
         }
@@ -133,9 +123,8 @@ class UserInfoView: BaseView {
         let constellation = birthday?.toConstellationString()
         ageInfoLabel.text = age! + "，" + constellation!
         
-        locationView.configContent(contentStr: userObj.area!)
-        hauntView.configContent(contentStr: userObj.commonCities!)
-        schoolView.configContent(contentStr: userObj.university!)
+        universityView.configContent(contentStr: userObj.university!)
+        personalProfileView.configContent(contentStr: userObj.personalProfile!)
     }
     
     func setUserEntity(isMyself: Bool) {

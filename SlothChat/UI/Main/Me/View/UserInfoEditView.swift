@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 typealias DoneUserInfoType = (_ userObj: UserProfileData) -> Void
 
@@ -15,9 +16,8 @@ class UserInfoEditView: BaseView {
     let nameView = SingleInputView()
     let sexView = SingleInputView()
     let birthdayView = SingleInputView(type: .button)
-    let locationView = SingleInputView()
-    let hauntView = SingleInputView()
-    let schoolView = SingleInputView()
+    let universityView = UserInfoTextView()
+    let personalProfileView = UserInfoTextView()
     
     let sexPickView = SexPickView()
     
@@ -63,17 +63,13 @@ class UserInfoEditView: BaseView {
         birthdayView.configInputView(titleStr: "生日:", contentStr: "")
         addSubview(birthdayView)
         
-        locationView.setInputTextfieldLeftMagin(left: 80)
-        locationView.configInputView(titleStr: "所在地:", contentStr: "")
-        addSubview(locationView)
+        universityView.setInputTextfieldLeftMagin(left: 80)
+        universityView.configInputView(titleStr: "学校:", contentStr: "")
+        addSubview(universityView)
         
-        hauntView.setInputTextfieldLeftMagin(left: 80)
-        hauntView.configInputView(titleStr: "经常出没:", contentStr: "")
-        addSubview(hauntView)
-        
-        schoolView.setInputTextfieldLeftMagin(left: 80)
-        schoolView.configInputView(titleStr: "学校:", contentStr: "")
-        addSubview(schoolView)
+        personalProfileView.setInputTextfieldLeftMagin(left: 80)
+        personalProfileView.configInputView(titleStr: "简介:", contentStr: "")
+        addSubview(personalProfileView)
         
         nameView.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -106,27 +102,20 @@ class UserInfoEditView: BaseView {
             make.height.equalTo(nameView.snp.height)
         }
         
-        locationView.snp.makeConstraints { (make) in
+        universityView.snp.makeConstraints { (make) in
             make.top.equalTo(birthdayView.snp.bottom).offset(12)
             
             make.left.equalTo(nameView.snp.left)
             make.right.equalTo(nameView.snp.right)
-            make.height.equalTo(nameView.snp.height)
+            make.height.equalTo(66)
         }
         
-        hauntView.snp.makeConstraints { (make) in
-            make.top.equalTo(locationView.snp.bottom).offset(12)
+        personalProfileView.snp.makeConstraints { (make) in
+            make.top.equalTo(universityView.snp.bottom).offset(12)
 
             make.left.equalTo(nameView.snp.left)
             make.right.equalTo(nameView.snp.right)
-            make.height.equalTo(nameView.snp.height)
-        }
-        schoolView.snp.makeConstraints { (make) in
-            make.top.equalTo(hauntView.snp.bottom).offset(12)
-
-            make.left.equalTo(nameView.snp.left)
-            make.right.equalTo(nameView.snp.right)
-            make.height.equalTo(nameView.snp.height)
+            make.height.equalTo(132)
             make.bottom.equalTo(0)
         }
         
@@ -167,9 +156,8 @@ class UserInfoEditView: BaseView {
         sexPickView.selectSexView(isMale: isMale)
         
         birthdayView.configContent(contentStr: userObj.birthdate!)
-        locationView.configContent(contentStr: userObj.area!)
-        hauntView.configContent(contentStr: userObj.commonCities!)
-        schoolView.configContent(contentStr: userObj.university!)
+        universityView.configContent(contentStr: userObj.university!)
+        personalProfileView.configContent(contentStr: userObj.personalProfile!)
         
         if self.userObj != nil {
             datePicker.config.startDate = self.userObj?.birthdate!.toYMDDate()
@@ -192,9 +180,18 @@ class UserInfoEditView: BaseView {
         }else{
             self.userObj?.sex = SGGenderType.female.rawValue
         }
-        self.userObj?.area = locationView.getInputContent()!
-        self.userObj?.commonCities = hauntView.getInputContent()!
-        self.userObj?.university = schoolView.getInputContent()!
+        let university = universityView.getInputContent()!
+        if university.characters.count >= 50 {
+            HUD.flash(.label("学校长度不能超过50个字符"), delay: 2)
+            return
+        }
+        let personalProfile = universityView.getInputContent()!
+        if personalProfile.characters.count >= 100 {
+            HUD.flash(.label("简介长度不能超过100个字符"), delay: 2)
+            return
+        }
+        self.userObj?.university = university
+        self.userObj?.personalProfile = personalProfile
 
         if let sp = self.editUserInfoValue {
             sp(self.userObj!)

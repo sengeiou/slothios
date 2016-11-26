@@ -338,7 +338,7 @@ class NetworkEngine: NSObject {
     }
     
     //7.修改个人资料页面的文字资料
-    func postUserProfile(nickname:String,sex:String,birthdate:String,area:String,commonCities:String,university:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
+    func postUserProfile(nickname:String,sex:String,birthdate:String,university:String,personalProfile:String,completeHandler :@escaping(_ response:ModifyUserProfile?) -> Void) -> Void {
         guard let token = Global.shared.globalLogin?.token,
             let userUuid = Global.shared.globalProfile?.userUuid,
             let uuid = Global.shared.globalProfile?.uuid else {
@@ -355,9 +355,8 @@ class NetworkEngine: NSObject {
             "nickname": nickname,
             "sex": sex,
             "birthdate":birthdate,
-            "area": area,
-            "commonCities": commonCities,
             "university": university,
+            "personalProfile": personalProfile,
             ], method: .put, URLString: URLString)
 
         Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in

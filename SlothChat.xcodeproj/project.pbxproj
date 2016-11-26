@@ -51,6 +51,7 @@
 		041289D61DBB729000D308C0 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041289D51DBB729000D308C0 /* CAPSPageMenu.swift */; };
 		041701191DD4A9BF002FADFE /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041701181DD4A9BF002FADFE /* Validate.swift */; };
 		041701251DD4CD96002FADFE /* SCConversationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041701241DD4CD96002FADFE /* SCConversationListCell.swift */; };
+		041D59251DE93F1800D03637 /* UserInfoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D59241DE93F1800D03637 /* UserInfoTextView.swift */; };
 		043718111DCE219E004B5684 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043718101DCE219E004B5684 /* LocationManager.swift */; };
 		043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C91181DBB8FA400431965 /* DiscoveryCell.swift */; };
 		043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911A1DBB973300431965 /* DiscoveryUserObj.swift */; };
@@ -336,6 +337,7 @@
 		041289D51DBB729000D308C0 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		041701181DD4A9BF002FADFE /* Validate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validate.swift; sourceTree = "<group>"; };
 		041701241DD4CD96002FADFE /* SCConversationListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationListCell.swift; sourceTree = "<group>"; };
+		041D59241DE93F1800D03637 /* UserInfoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoTextView.swift; sourceTree = "<group>"; };
 		043718101DCE219E004B5684 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		043C91181DBB8FA400431965 /* DiscoveryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryCell.swift; sourceTree = "<group>"; };
 		043C911A1DBB973300431965 /* DiscoveryUserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryUserObj.swift; sourceTree = "<group>"; };
@@ -1233,6 +1235,7 @@
 				04FEB7F91DB77FE2004509D1 /* LikeShareView.swift */,
 				04966B461DB79957000721BD /* UserInfoSingleView.swift */,
 				04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */,
+				041D59241DE93F1800D03637 /* UserInfoTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2077,6 +2080,7 @@
 				04FEB7EE1DB76F13004509D1 /* UIImage+WebP.m in Sources */,
 				19008BAF1DBE925800319B86 /* LoginModel.swift in Sources */,
 				0486BB6B1DBB41C900086303 /* SFHFKeychainUtils.m in Sources */,
+				041D59251DE93F1800D03637 /* UserInfoTextView.swift in Sources */,
 				047450F21DD3689500E5D3A6 /* SCConversationViewController.swift in Sources */,
 				19008B9C1DBE75D500319B86 /* Country.swift in Sources */,
 				04FEB7FA1DB77FE2004509D1 /* LikeShareView.swift in Sources */,

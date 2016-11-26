@@ -15,10 +15,9 @@ let DefaultBannerImgName = "user_photoBg"
 class UserProfileData : NSObject, NSCoding, Mappable{
 
     var age : Int?
-    var area : String?
     var birthdate : String?
     var canTalk : Bool?
-    var commonCities : String?
+    var personalProfile : String?
     var constellation : String?
     var currentVisitorLiked : Bool?
     var isAcceptPrivateChat : Bool?
@@ -102,10 +101,9 @@ class UserProfileData : NSObject, NSCoding, Mappable{
     func mapping(map: Map)
     {
         age <- map["age"]
-        area <- map["area"]
         birthdate <- map["birthdate"]
         canTalk <- map["canTalk"]
-        commonCities <- map["commonCities"]
+        personalProfile <- map["personalProfile"]
         constellation <- map["constellation"]
         currentVisitorLiked <- map["currentVisitorLiked"]
         isAcceptPrivateChat <- map["isAcceptPrivateChat"]
@@ -126,10 +124,9 @@ class UserProfileData : NSObject, NSCoding, Mappable{
     @objc required init(coder aDecoder: NSCoder)
     {
         age = aDecoder.decodeObject(forKey: "age") as? Int
-        area = aDecoder.decodeObject(forKey: "area") as? String
         birthdate = aDecoder.decodeObject(forKey: "birthdate") as? String
         canTalk = aDecoder.decodeObject(forKey: "canTalk") as? Bool
-        commonCities = aDecoder.decodeObject(forKey: "commonCities") as? String
+        personalProfile = aDecoder.decodeObject(forKey: "personalProfile") as? String
         constellation = aDecoder.decodeObject(forKey: "constellation") as? String
         currentVisitorLiked = aDecoder.decodeObject(forKey: "currentVisitorLiked") as? Bool
         isAcceptPrivateChat = aDecoder.decodeObject(forKey: "isAcceptPrivateChat") as? Bool
@@ -152,17 +149,14 @@ class UserProfileData : NSObject, NSCoding, Mappable{
         if age != nil{
             aCoder.encode(age, forKey: "age")
         }
-        if area != nil{
-            aCoder.encode(area, forKey: "area")
-        }
         if birthdate != nil{
             aCoder.encode(birthdate, forKey: "birthdate")
         }
         if canTalk != nil{
             aCoder.encode(canTalk, forKey: "canTalk")
         }
-        if commonCities != nil{
-            aCoder.encode(commonCities, forKey: "commonCities")
+        if personalProfile != nil{
+            aCoder.encode(personalProfile, forKey: "personalProfile")
         }
         if constellation != nil{
             aCoder.encode(constellation, forKey: "constellation")

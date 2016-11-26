@@ -57,7 +57,7 @@ class SingleInputView: UIView {
         
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
-            make.bottom.equalTo(0)
+            make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(95)
         }
         errorLabel.font = UIFont.systemFont(ofSize: 11)
