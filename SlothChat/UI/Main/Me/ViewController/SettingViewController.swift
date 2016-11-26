@@ -15,7 +15,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
 
     let dataSource = SettingObj.getSettingList()
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
-    
+    var itunesCharge = ItunesCharge.ModelFromCache()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         sentupView()
         configPickerView()
         getSystemConfig()
+        if self.itunesCharge == nil {
+            getItunesChargeList()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(iAPPurchaseSuccess(_:)), name: SGIAPPurchaseKey.IAPPurchaseSuccess, object: nil)
 
@@ -74,13 +77,18 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         pickerView.pickerTitle = "充值金额"
         let completionBlock: (String?) -> Void = {(_ value: String?) in
             SGLog(message: value)
-            guard let price = value?.components(separatedBy: "/").first else {
+            guard let price = value?.components(separatedBy: "/").first,
+                  let index = Int((value?.components(separatedBy: "/").last)!),
+                  let productID = self.itunesCharge?.getItunesChargeProductUuid(index: index - 1) else {
                 return
             }
-            self.purchaseForProduct(price: price, productID: "com.ssloth.animal.recharge")
+
+            self.purchaseForProduct(price: price, productID: productID)
         }
         pickerView.valueDidSelect = completionBlock
-        pickerView.dataSource = ["1","5","10","50","100","500","1000"]
+        if self.itunesCharge != nil {
+            self.pickerView.dataSource = itunesCharge!.getItunesChargeAmountList()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -122,7 +130,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     //Mark:- Action
     
     func charge() {
-        pickerView.show()
+        if self.itunesCharge != nil {
+            pickerView.show()
+        }
     }
     
     func exitButtonClick() {
@@ -157,6 +167,20 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             }
         }
     }
+    
+    func getItunesChargeList()  {
+        let engine = NetworkEngine()
+        engine.getItunesChargeList { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.itunesCharge = response
+                response?.caheForModel()
+                self.pickerView.dataSource = response?.getItunesChargeAmountList()
+            }else{
+                SGLog(message: "获取充值可选的价格列表失败")
+            }
+        }
+    }
+
     
     func logout() {
         let engine = NetworkEngine()

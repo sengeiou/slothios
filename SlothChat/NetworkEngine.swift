@@ -57,7 +57,9 @@ enum API_URI:String {
     //14.账户APPLE STORE充值
     case post_charge = "/api/user/{userUuid}/accounts/charge?token={token}"
     //15.修改个人设置
-    //    case userProfile_sysConfig = "/api/user/{userUuid}/userProfile/{uuid}/sysConfig?token={token}"
+    //case userProfile_sysConfig = "/api/user/{userUuid}/userProfile/{uuid}/sysConfig?token={token}"
+    //16.APPLE STORE充值可选的价格列表
+    case get_itunesChargeList = "/api/public/product/itunesChargeList"
     //17.用户资料页面，添加个人照片
     case post_userPhoto = "/api/user/{uuid}/userPhoto?token={token}"
     //18.用户资料页面，删除指定的个人照片
@@ -507,6 +509,20 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            if self.verificationResponse(value: response.result.value){
+                completeHandler(response.result.value)
+            }else{
+                self.showHandleError()
+            }
+        }
+    }
+    
+    //16.APPLE STORE充值可选的价格列表
+    func getItunesChargeList(completeHandler :@escaping(_ response:ItunesCharge?) -> Void)  -> Void {
+        
+        let URLString:String = self.Base_URL + API_URI.get_itunesChargeList.rawValue
+        
+        Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<ItunesCharge>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{

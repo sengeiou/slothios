@@ -52,6 +52,8 @@
 		041701191DD4A9BF002FADFE /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041701181DD4A9BF002FADFE /* Validate.swift */; };
 		041701251DD4CD96002FADFE /* SCConversationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041701241DD4CD96002FADFE /* SCConversationListCell.swift */; };
 		041D59251DE93F1800D03637 /* UserInfoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D59241DE93F1800D03637 /* UserInfoTextView.swift */; };
+		041D59281DE983AD00D03637 /* ItunesCharge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D59261DE983AD00D03637 /* ItunesCharge.swift */; };
+		041D59291DE983AD00D03637 /* ItunesChargeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D59271DE983AD00D03637 /* ItunesChargeData.swift */; };
 		043718111DCE219E004B5684 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043718101DCE219E004B5684 /* LocationManager.swift */; };
 		043C91191DBB8FA400431965 /* DiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C91181DBB8FA400431965 /* DiscoveryCell.swift */; };
 		043C911B1DBB973300431965 /* DiscoveryUserObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043C911A1DBB973300431965 /* DiscoveryUserObj.swift */; };
@@ -338,6 +340,8 @@
 		041701181DD4A9BF002FADFE /* Validate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validate.swift; sourceTree = "<group>"; };
 		041701241DD4CD96002FADFE /* SCConversationListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationListCell.swift; sourceTree = "<group>"; };
 		041D59241DE93F1800D03637 /* UserInfoTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoTextView.swift; sourceTree = "<group>"; };
+		041D59261DE983AD00D03637 /* ItunesCharge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesCharge.swift; sourceTree = "<group>"; };
+		041D59271DE983AD00D03637 /* ItunesChargeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesChargeData.swift; sourceTree = "<group>"; };
 		043718101DCE219E004B5684 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		043C91181DBB8FA400431965 /* DiscoveryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryCell.swift; sourceTree = "<group>"; };
 		043C911A1DBB973300431965 /* DiscoveryUserObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryUserObj.swift; sourceTree = "<group>"; };
@@ -1501,6 +1505,8 @@
 				04EDED3A1DCB13F00068512E /* DisplayOrderPhotoSlice.swift */,
 				04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */,
 				04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */,
+				041D59261DE983AD00D03637 /* ItunesCharge.swift */,
+				041D59271DE983AD00D03637 /* ItunesChargeData.swift */,
 				04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */,
 				04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */,
 				04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */,
@@ -2036,6 +2042,7 @@
 				04FEB7BF1DB76EDB004509D1 /* UIView+SDExtension.m in Sources */,
 				049BAAF41DDCA28C00422134 /* OfficialGroup.swift in Sources */,
 				04B499A61DBFB2F2004659BA /* ModifyUserProfile.swift in Sources */,
+				041D59281DE983AD00D03637 /* ItunesCharge.swift in Sources */,
 				04E25B871DBB77FD002B727F /* MyPhotosViewController.swift in Sources */,
 				0472E85D1DD720630065AFAB /* SCChatGroupCell.swift in Sources */,
 				04B385A91DB4AB4E00A8C116 /* MainViewController.swift in Sources */,
@@ -2044,6 +2051,7 @@
 				04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */,
 				04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */,
 				040576C61DB32CB100C55D02 /* FindPasswordViewController.swift in Sources */,
+				041D59291DE983AD00D03637 /* ItunesChargeData.swift in Sources */,
 				04ED10521DC787F300EBD3C5 /* UserGalleryPhoto.swift in Sources */,
 				04EE6B171DDE1ACC005648F1 /* PrivateChatVo.swift in Sources */,
 				04FE6DBB1DCE3C3300AD9C96 /* UIImage+Alpha.m in Sources */,
