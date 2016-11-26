@@ -310,13 +310,15 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         engine.deleteUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                if member.isAdmin!{
+                
+                if member.isAdmin! || self.dataSource.count <= 3{
                     RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
+                    HUD.flash(.label("移除成功"), delay: 2, completion: { (result) in
+                        _ = self.navigationController?.popToRootViewController(animated: true)
+                    })
+                }else{
+                    HUD.flash(.label("移除成功"), delay: 2)
                 }
-                HUD.flash(.label("移除成功"), delay: 2, completion: { (result) in
-                    //如果是移出的自己
-                    _ = self.navigationController?.popToRootViewController(animated: true)
-                })
                 self.dataSource.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }else{

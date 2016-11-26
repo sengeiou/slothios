@@ -30,8 +30,9 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
         self.setNavtionBack(imageStr: "close")
         self.setNavtionConfirm(titleStr: "完成")
         sentupView()
-        setupPullToRefresh()
-        tableView.mj_header.beginRefreshing()
+        getOfficialGroupMember(at: .top)
+//        setupPullToRefresh()
+//        tableView.mj_header.beginRefreshing()
     }
     
     func sentupView() {
@@ -135,27 +136,27 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             SGLog(message: "officialGroupUuid 为空")
             return
         }
-        if at == .top {
-            pageNum = 1
-        }else{
-            pageNum += 1
-        }
+//        if at == .top {
+//            pageNum = 1
+//        }else{
+//            pageNum += 1
+//        }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
+        engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(0), pageSize: String(0)){ (response) in
             HUD.hide()
-            if at == .top {
-                self.tableView.mj_header.endRefreshing()
-            }else{
-                self.tableView.mj_footer.endRefreshing()
-            }
+//            if at == .top {
+//                self.tableView.mj_header.endRefreshing()
+//            }else{
+//                self.tableView.mj_footer.endRefreshing()
+//            }
 
             if response?.status == ResponseError.SUCCESS.0 {
                 if let list = response?.data?.list{
-                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
-                    if at == .top {
-                        self.dataSource.removeAll()
-                    }
+//                    self.tableView.mj_footer?.isHidden = (list.count < PageSize)
+//                    if at == .top {
+//                        self.dataSource.removeAll()
+//                    }
                     self.dataSource.append(contentsOf: list)
                     self.tableView.reloadData()
                 }

@@ -8,11 +8,17 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class OfficialGroupHeaderView: UICollectionReusableView {
-    let imgView = UIImageView()
-    let title = UILabel()
+    let flagImgView = UIImageView()
+    let topicImgView = UIImageView()
+    let flagLabel = UILabel()
+    let topicTitle = UILabel()
     let expand = UIButton(type: .custom)
+    
+    var top1: ConstraintMakerFinalizable?
+    var top2: ConstraintMakerFinalizable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,32 +30,35 @@ class OfficialGroupHeaderView: UICollectionReusableView {
     }
     
     func sentupView() {
-        addSubview(imgView)
-        addSubview(title)
+        addSubview(flagImgView)
+        addSubview(topicImgView)
+        addSubview(topicTitle)
         let line = UIView()
         line.backgroundColor = SGColor.SGLineColor()
         addSubview(line)
         
-        let flag = UILabel()
-        flag.text = "请注意：本群只能发语音，每条语音30'后自动销毁。"
-        flag.font = UIFont.systemFont(ofSize: 12)
-        flag.textColor = SGColor.SGTextColor()
-        addSubview(flag)
+        flagImgView.image = UIImage(named: "icon_setting")
+        topicImgView.isHidden = true
+
+        flagLabel.text = "请注意：本群只能发语音，每条语音30'后自动销毁。"
+        flagLabel.font = UIFont.systemFont(ofSize: 12)
+        flagLabel.textColor = SGColor.SGTextColor()
+        addSubview(flagLabel)
         
         addSubview(expand)
         expand.setImage(UIImage(named: "go-back"), for: .normal)
         expand.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi * 3 / 2)
         expand.addTarget(self, action: #selector(expandClick), for: .touchUpInside)
         
-        imgView.snp.makeConstraints { (make) in
+        flagImgView.snp.makeConstraints { (make) in
             make.left.top.equalTo(8)
-            make.size.equalTo(CGSize.init(width: 24, height: 24))
+            make.size.equalTo(CGSize.init(width: 24, height: 23))
         }
         
-        title.snp.makeConstraints { (make) in
+        topicTitle.snp.makeConstraints { (make) in
             make.top.equalTo(8)
             make.right.equalTo(-32)
-            make.left.equalTo(imgView.snp.right).offset(4)
+            make.left.equalTo(flagImgView.snp.right).offset(4)
         }
         
         expand.snp.makeConstraints { (make) in
@@ -57,29 +66,47 @@ class OfficialGroupHeaderView: UICollectionReusableView {
             make.right.equalTo(-8)
             make.size.equalTo(CGSize.init(width: 24, height: 24))
         }
-        
+
         line.snp.makeConstraints { (make) in
-            make.top.equalTo(title.snp.bottom).offset(8)
+            self.top1 = make.top.equalTo(topicTitle.snp.bottom).offset(8)
+            self.top2 = make.top.equalTo(topicImgView.snp.bottom).offset(8)
+            self.top2!.constraint.deactivate()
+            
             make.left.right.equalTo(0)
             make.height.equalTo(1)
         }
         
-        flag.snp.makeConstraints { (make) in
+        flagLabel.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(8)
             make.centerX.equalTo(self.snp.centerX)
+        }
+        
+        topicImgView.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(topicTitle.snp.bottom).offset(10)
+            make.height.equalTo(240)
         }
     }
     
     func expandClick() {
         
-        if title.numberOfLines == 0 {
-            title.numberOfLines = 1
-            title.lineBreakMode = .byTruncatingTail
+        if topicTitle.numberOfLines == 0 {
+            topicTitle.numberOfLines = 1
+            topicTitle.lineBreakMode = .byTruncatingTail
             expand.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi * 3 / 2)
+            topicImgView.isHidden = true
+            flagLabel.isHidden = false
+            self.top1!.constraint.activate()
+            self.top2!.constraint.deactivate()
         }else{
-            title.numberOfLines = 0
-            title.lineBreakMode = .byCharWrapping
+            topicTitle.numberOfLines = 0
+            topicTitle.lineBreakMode = .byCharWrapping
             expand.transform = CGAffineTransform.init(rotationAngle: CGFloat.pi / 2)
+            topicImgView.isHidden = false
+            flagLabel.isHidden = true
+            self.top2!.constraint.activate()
+            self.top1!.constraint.deactivate()
         }
     }
     
@@ -89,7 +116,7 @@ class OfficialGroupHeaderView: UICollectionReusableView {
                 return
         }
         let avatarUrl = URL(string: topicPicUrl)
-        imgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-        title.text = group.topicMsg
+        topicImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        topicTitle.text = group.topicMsg
     }
 }
