@@ -70,7 +70,6 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
                 return
             }
         }
-        
         let engine = NetworkEngine()
         engine.getUserProfile(userUuid: userUuid) { (profile) in
             if profile?.status == ResponseError.SUCCESS.0 {
@@ -80,7 +79,8 @@ class ChatDataManager: NSObject,RCIMUserInfoDataSource {
                     userInfo.portraitUri = profile?.data?.userPhotoList?.first?.profileBigPicUrl
                     userInfo.userId = profile?.data?.userUuid
                     ChatManager.shared.friendArray.append(userInfo)
-                    
+                    RCIM.shared().refreshUserInfoCache(userInfo, withUserId: userUuid)
+
                     completion(userInfo)
                 }
             }

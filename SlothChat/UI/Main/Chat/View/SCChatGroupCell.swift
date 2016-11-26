@@ -111,6 +111,43 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         }
     }
     
+    public func configCellWithConversationModel(model: RCConversationModel){
+        ChatDataManager.userInfoWidthID(model.targetId){ (userInfo) in
+            if let userInfo = userInfo {
+                self.contentLabel.text = userInfo.name
+                let avatarUrl = URL(string: userInfo.portraitUri)
+                self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            }
+        }
+    }
+    
+    public func configCellWithObject(lastUserAvatarUrl: String, lastUserName: String,model: RCConversationModel){
+        let avatarUrl = URL(string: lastUserAvatarUrl)
+        self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        
+        let unreadCount = model.unreadMessageCount
+        badgeView.isHidden = unreadCount <= 0
+        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+        timeLabel.text = date.timeAgo
+        
+        if model.lastestMessage.isKind(of: RCTextMessage.self) {
+            if let content = model.lastestMessage.value(forKey: "content") as! String? {
+                self.contentLabel.text = content
+            }else{
+                self.contentLabel.text = "[已销毁]"
+            }
+        }else if model.lastestMessage.isKind(of: RCImageMessage.self){
+            self.contentLabel.text = lastUserName + "：[图片]"
+        }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
+            self.contentLabel.text = lastUserName + "：[语音]"
+        }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
+            self.contentLabel.text = lastUserName + "：[位置]"
+        }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
+            self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
+        }
+    }
+    
     public func configCellWithObject(officialGroup: ChatOfficialGroupVo,model: RCConversationModel){
         
         nameLabel.text = officialGroup.officialGroupName
@@ -119,11 +156,22 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         collectionView?.reloadData()
         
         if let member = officialGroup.getChatMemberInfo(userUuid: model.senderUserId) {
-            configCellObject(model: model, member: member)
+            configCellWithObject(lastUserAvatarUrl: member.profilePicUrl!, lastUserName: member.userDisplayName!, model: model)
         }else{
-            self.lastUserImgView.image = nil
-            self.contentLabel.text = ""
-            configCellObject(model: model)
+            
+            let userInfo = RCIM.shared().getUserInfoCache(model.senderUserId)
+            
+            if userInfo == nil {
+                ChatDataManager.userInfoWidthID(model.senderUserId){ (userInfo) in
+                    if let userInfo = userInfo {
+                        self.configCellWithObject(lastUserAvatarUrl: userInfo.portraitUri!, lastUserName: userInfo.name!, model: model)
+                    }else{
+                        self.configCellWithObject(lastUserAvatarUrl: "", lastUserName: "", model: model)
+                    }
+                }
+            }else{
+                self.configCellWithObject(lastUserAvatarUrl: userInfo?.portraitUri!, lastUserName: userInfo?.name, model: model)
+            }
         }
     }
     
@@ -148,6 +196,12 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         let avatarUrl = URL(string: member.profilePicUrl!)
         self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        let unreadCount = model.unreadMessageCount
+        badgeView.isHidden = unreadCount <= 0
+        
+        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+        timeLabel.text = date.timeAgo
         
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
             if let content = model.lastestMessage.value(forKey: "content") as! String? {
