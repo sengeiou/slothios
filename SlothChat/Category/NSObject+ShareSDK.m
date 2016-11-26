@@ -66,9 +66,9 @@
     }
     //（注意：图片必须要在Xcode左边目录里面，名称必须要传正确，如果要分享网络图片，可以这样传iamge参数 images:@[@"http://mob.com/Assets/images/logo.png?v=20150320"]）
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    [shareParams SSDKSetupShareParamsByText:@"悄悄地告诉你哟～～"
+    [shareParams SSDKSetupShareParamsByText:@""
                                      images:shareImg
-                                        url:[NSURL URLWithString:@"https://www.baidu.com"]
+                                        url:[NSURL URLWithString:@"http://www.ssloth.com"]
                                       title:nil
                                        type:SSDKContentTypeAuto];
     

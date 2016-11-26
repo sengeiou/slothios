@@ -146,7 +146,7 @@ class DiscoveryCell: UITableViewCell {
 //        flagView.setIsParticipateBidAds(participateBidAds: photoObj.participateBidAds!)
         
         let avatarList = photoObj.getLikeGallerySliceUrlList()
-        likeUsersView.configViewWithObject(avatarList: avatarList, totalCount: avatarList.count)
+        likeUsersView.configViewWithObject(avatarList: avatarList, totalCount: photoObj.likesCount!)
     }
     
     required init?(coder aDecoder: NSCoder) {

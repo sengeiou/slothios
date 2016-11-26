@@ -259,7 +259,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                     }
                     self.refreshBannerView()
                     if let tmpProfile = profile{
-                        self.title = profile?.data?.nickname
+                        self.navigationItem.title = profile?.data?.nickname
                         self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
                     }
                 }else{
