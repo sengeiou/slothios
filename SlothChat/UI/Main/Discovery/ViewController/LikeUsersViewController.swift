@@ -156,7 +156,6 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         pushVC.mUserUuid = userObj.likeSenderUserUuid
         let userUuid = Global.shared.globalProfile?.userUuid
         pushVC.likeSenderUserUuid = userUuid
-        pushVC.isMyselfFlag = false
         self.navigationController?.pushViewController(pushVC, animated: true)
     }
     

@@ -141,9 +141,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         
         pushVC.mUserUuid = userUuidB
         pushVC.likeSenderUserUuid = userUuidA
-        pushVC.isMyselfFlag = false
         self.navigationController?.pushViewController(pushVC, animated: true)
-        
     }
     
     //MARK:- Action

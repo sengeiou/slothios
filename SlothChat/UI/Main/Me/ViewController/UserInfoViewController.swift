@@ -389,6 +389,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     //MARK:- Action
     func chatButtonClick() {
+        
         SGLog(message: "")
         guard let myProfile = Global.shared.globalProfile,
               let canTalk = Global.shared.globalLogin?.canTalk,
@@ -396,6 +397,11 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
               let isAcceptPrivateChat =  otherProfile.isAcceptPrivateChat else {
                 SGLog(message: "数据不全")
                 return
+        }
+        
+        if otherProfile.userUuid == myProfile.userUuid {
+            HUD.flash(.label("自己不能和自己聊天哦~"), delay: 2)
+            return
         }
         
         if !canTalk {
