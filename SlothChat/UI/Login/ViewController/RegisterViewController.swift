@@ -80,23 +80,25 @@ class RegisterViewController: BaseViewController {
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         loginButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
         loginButton.addTarget(self, action:#selector(loginButtonClick), for: .touchUpInside)
-        
+        loginButton.layer.borderColor = SGColor.SGMainColor().cgColor
+        loginButton.layer.borderWidth = 1.0
+        loginButton.layer.cornerRadius = 23
         view.addSubview(loginButton)
         
         registerButton.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
-            make.bottom.equalTo(-10)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
             make.height.equalTo(46)
-            make.right.equalTo(loginButton.snp.left)
-            make.width.equalTo(loginButton.snp.width).dividedBy(0.668)
+            make.bottom.equalTo(registerButton.snp.top).offset(-10)
         }
         
         loginButton.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
-            make.bottom.equalTo(-10)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
             make.height.equalTo(46)
-            make.right.equalTo(registerButton.snp.right)
+            make.bottom.equalTo(-16)
         }
+        
     }
     
     func configPhoneInputView(inputView : SingleInputView) {

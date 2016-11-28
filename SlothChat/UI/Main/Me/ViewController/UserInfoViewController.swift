@@ -52,6 +52,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         setupView()
         if isMyselfFlag{
             self.setNavtionConfirm(imageStr: "icon_setting")
+//            self.navigationItem.rightBarButtonItem?.tintColor = SGColor.red
         }
         deleteButton.isHidden = !isMyselfFlag
     }

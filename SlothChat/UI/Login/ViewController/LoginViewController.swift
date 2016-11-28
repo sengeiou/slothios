@@ -94,22 +94,24 @@ class LoginViewController: BaseViewController {
         registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         registerButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
         registerButton.addTarget(self, action:#selector(registerButtonClick), for: .touchUpInside)
-        
+        registerButton.layer.borderColor = SGColor.SGMainColor().cgColor
+        registerButton.layer.borderWidth = 1.0
+        registerButton.layer.cornerRadius = 23
+
         view.addSubview(registerButton)
         
         loginButton.snp.makeConstraints { (make) in
-            make.left.equalTo(8)
-            make.bottom.equalTo(-10)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
             make.height.equalTo(46)
-            make.right.equalTo(registerButton.snp.left)
-            make.width.equalTo(registerButton.snp.width).dividedBy(0.668)
+            make.bottom.equalTo(registerButton.snp.top).offset(-10)
         }
         
         registerButton.snp.makeConstraints { (make) in
-            make.right.equalTo(-8)
-            make.bottom.equalTo(-10)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
             make.height.equalTo(46)
-            make.right.equalTo(loginButton.snp.right)
+            make.bottom.equalTo(-16)
         }
     }
     
