@@ -172,11 +172,19 @@ extension SCConversationViewController{
     
     //MARK:- Action
     func itemButtonClick() {
-        let pushVC = ChatGroupInfoViewController()
-        pushVC.groupName = self.title
-        pushVC.groupUuid = self.targetId
-        
-        self.navigationController?.pushViewController(pushVC, animated: true)
+        if self.conversationType == .ConversationType_PRIVATE {
+            let pushVC = UserInfoViewController()
+            pushVC.mUserUuid = self.privateUserUuid
+            pushVC.likeSenderUserUuid = Global.shared.globalProfile?.userUuid
+            
+            self.navigationController?.pushViewController(pushVC, animated: true)
+        }else if self.conversationType == .ConversationType_GROUP{
+            let pushVC = ChatGroupInfoViewController()
+            pushVC.groupName = self.title
+            pushVC.groupUuid = self.targetId
+            
+            self.navigationController?.pushViewController(pushVC, animated: true)
+        }
     }
     
     func touchDownRecordButton() {

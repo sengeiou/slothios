@@ -30,18 +30,19 @@ extension UIViewController{
         engine.postPrivateChat(name: nameB, userUuidA: userUuidA, userUuidB: userUuidB){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
-                self.pushChatViewController(targetId: response?.data?.uuid, title: response?.data?.name)
+                self.pushChatViewController(targetId: response?.data?.uuid,userUuid: userUuidB, title: response?.data?.name)
             }else{
                 HUD.flash(.label(response?.msg), delay: 2)
             }
         }
     }
     
-    func pushChatViewController(targetId: String?,title: String?) {
+    func pushChatViewController(targetId: String?,userUuid: String?,title: String?) {
         guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: targetId) else {
             return
         }
         chat.title = title
+        chat.privateUserUuid = userUuid
         self.navigationController?.pushViewController(chat, animated: true)
     }
 }

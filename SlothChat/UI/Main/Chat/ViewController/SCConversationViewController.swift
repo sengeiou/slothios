@@ -12,6 +12,7 @@ class SCConversationViewController: RCConversationViewController {
     var officialGroupUuid: String?
     var officialGroup: ChatOfficialGroupVo?
     var officialHeaderView: OfficialGroupHeaderView?
+    var privateUserUuid: String?
 
     let fakeRecordButton = UIButton(type: .custom)
 
@@ -34,10 +35,11 @@ class SCConversationViewController: RCConversationViewController {
             self.setNavtionBack(imageStr: "go-back")
         }
         configNormalInputBarControl()
+        configNavgitaionItem()
+
         if self.conversationType == RCConversationType.ConversationType_PRIVATE {
             addPluginBoardView()
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
-            configNavgitaionItem()
             if self.targetId.hasPrefix("officialGroup") {
                 //官方群只能语音聊天
                 configGroupInputBarControl()

@@ -307,6 +307,8 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         
         if tmpModel.targetId.hasPrefix("officialGroup") {
             chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
+        }else if tmpModel.targetId.hasPrefix("privateChatGroup") {
+            chat.privateUserUuid = target.targetId
         }
         
         chat.title = target.targetName

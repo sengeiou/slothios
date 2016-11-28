@@ -15,6 +15,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
     var dataSource = [ChatMemberInfo]()
     var groupUuid: String?
     var groupName: String?
+    
     var myMemberInfo: ChatMemberInfo?
     var isGroupOwner = false
     var pageNum = 1

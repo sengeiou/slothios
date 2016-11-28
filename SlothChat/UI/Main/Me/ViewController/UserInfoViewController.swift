@@ -390,6 +390,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     //MARK:- Action
     func chatButtonClick() {
         
+        
+        
+        
         SGLog(message: "")
         guard let myProfile = Global.shared.globalProfile,
               let canTalk = Global.shared.globalLogin?.canTalk,
@@ -397,6 +400,20 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
               let isAcceptPrivateChat =  otherProfile.isAcceptPrivateChat else {
                 SGLog(message: "数据不全")
                 return
+        }
+        
+        if let viewControllers = navigationController?.viewControllers{
+            for VC in viewControllers {
+                if VC.isKind(of: SCConversationViewController.self) {
+                    let chatVC = VC as! SCConversationViewController
+                    if chatVC.conversationType == .ConversationType_PRIVATE &&
+                        chatVC.privateUserUuid == otherProfile.userUuid {
+                        _ = navigationController?.popToViewController(chatVC, animated: true)
+                        SGLog(message: "已有该用户的聊天记录")
+                        return
+                    }
+                }
+            }
         }
         
         if otherProfile.userUuid == myProfile.userUuid {
