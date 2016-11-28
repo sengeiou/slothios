@@ -33,7 +33,7 @@ class RegisterViewController: BaseViewController {
         iconView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
-            make.size.equalTo(CGSize.init(width: 184, height: 55))
+            make.size.equalTo(CGSize.init(width: 55, height: 55))
         }
         
         var phoneStr = GVUserDefaults.standard().lastLoginPhone

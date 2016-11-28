@@ -25,10 +25,10 @@ class IconTitleView: UIView {
         let iconImgView = UIImageView.init(image: UIImage(named: "icon"))
         addSubview(iconImgView)
         
-        titleLabel.text = "树懒"
-        titleLabel.font = UIFont.systemFont(ofSize: 36)
-        titleLabel.textColor = SGColor.SGMainColor()
-        addSubview(titleLabel)
+//        titleLabel.text = "树懒"
+//        titleLabel.font = UIFont.systemFont(ofSize: 36)
+//        titleLabel.textColor = SGColor.SGMainColor()
+//        addSubview(titleLabel)
         
         iconImgView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
@@ -36,10 +36,10 @@ class IconTitleView: UIView {
             make.height.equalTo(self.snp.height)
             make.width.equalTo(self.snp.height)
         }
-        titleLabel.snp.makeConstraints  { (make) in
-            make.right.equalTo(0)
-            make.centerY.equalTo(iconImgView.snp.centerY)
-        }
+//        titleLabel.snp.makeConstraints  { (make) in
+//            make.right.equalTo(0)
+//            make.centerY.equalTo(iconImgView.snp.centerY)
+//        }
     }
     
 }

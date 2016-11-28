@@ -48,7 +48,7 @@ class PerfectionInfoViewController: BaseViewController {
         iconView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(40)
-            make.size.equalTo(CGSize.init(width: 134, height: 42))
+            make.size.equalTo(CGSize.init(width: 42, height: 42))
         }
         
         let avatarLabel = UILabel.init()

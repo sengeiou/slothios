@@ -60,7 +60,7 @@ class FindPasswordViewController: BaseViewController {
         iconView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
             make.top.equalTo(100)
-            make.size.equalTo(CGSize.init(width: 184, height: 55))
+            make.size.equalTo(CGSize.init(width: 55, height: 55))
         }
         
         tipLabel.numberOfLines = 0
@@ -86,14 +86,14 @@ class FindPasswordViewController: BaseViewController {
         
         captchaView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(tipLabel.snp.bottom).offset(50)
+            make.top.equalTo(tipLabel.snp.bottom).offset(36)
             make.height.equalTo(44)
         }
         
         passwordView.titleLabel.font = UIFont.systemFont(ofSize: 17)
         passwordView.inputTextfield.font = UIFont.systemFont(ofSize: 17)
         passwordView.setInputTextfieldLeftMagin(left: 106)
-        passwordView.configInputView(titleStr: "密码:", contentStr: "")
+        passwordView.configInputView(titleStr: "新密码:", contentStr: "")
         passwordView.inputTextfield.isSecureTextEntry = true
         container.addSubview(passwordView)
         

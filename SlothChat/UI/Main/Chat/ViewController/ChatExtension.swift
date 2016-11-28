@@ -12,7 +12,7 @@ import PKHUD
 extension UIViewController{
     func postPrivateChat(nameA: String?,nameB: String?,userUuidA: String?,userUuidB:String?) {
         SGLog(message: "")
-        guard let nameA = nameA,
+        guard let _ = nameA,
             let nameB = nameB,
             let userUuidA = userUuidA,
             let userUuidB = userUuidB,
@@ -27,7 +27,7 @@ extension UIViewController{
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
-        engine.postPrivateChat(name: nameA + "," + nameB, userUuidA: userUuidA, userUuidB: userUuidB){ (response) in
+        engine.postPrivateChat(name: nameB, userUuidA: userUuidA, userUuidB: userUuidB){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
                 self.pushChatViewController(targetId: response?.data?.uuid, title: response?.data?.name)
