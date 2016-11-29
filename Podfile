@@ -12,6 +12,7 @@ target 'SlothChat' do
   pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
   pod "AlamofireObjectMapper"
   pod "RongCloudIMKit"
+  pod "CSNotificationView"
   # Pods for SlothChat
 
   target 'SlothChatTests' do

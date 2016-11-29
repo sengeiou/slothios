@@ -23,5 +23,6 @@
 #import "NSObject+MKBlockAdditions.h"
 #import "UIViewController+LxTabBadgePoint.h"
 #import "UIAlertController+MKBlockAdditions.h"
+#import <CSNotificationView/CSNotificationView.h>
 
 #endif /* SlothChat_Bridging_Header_h */
