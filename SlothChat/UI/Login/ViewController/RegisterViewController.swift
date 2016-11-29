@@ -102,7 +102,7 @@ class RegisterViewController: BaseViewController {
     }
     
     func configPhoneInputView(inputView : SingleInputView) {
-        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 54, height: 44))
+        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 60, height: 44))
         codeButton.frame = leftView.bounds
         let codeStr = GVUserDefaults.standard().lastLoginCountry
         if codeStr != nil{
