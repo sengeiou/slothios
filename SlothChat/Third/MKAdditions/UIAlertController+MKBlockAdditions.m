@@ -101,7 +101,8 @@ static BOOL isAllowsEditing = YES;
             newSize.width *= [UIScreen mainScreen].scale;
             newSize.height *= [UIScreen mainScreen].scale;
 
-            editedImage = [editedImage resizedImage:newSize interpolationQuality:kCGInterpolationDefault];
+            editedImage = [editedImage resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:newSize interpolationQuality:kCGInterpolationDefault];
+            
         }
         _photoPickedBlock(editedImage);
     }];
