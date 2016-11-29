@@ -116,7 +116,7 @@ class OfficialGroupHeaderView: UICollectionReusableView {
                 return
         }
         let avatarUrl = URL(string: topicPicUrl)
-        topicImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        topicImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "placeHolder_offical.jpg"), options: nil, progressBlock: nil, completionHandler: nil)
         topicTitle.text = group.topicMsg
     }
 }

@@ -94,7 +94,6 @@
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
 		0454F8EB1DE6C4C600E7034F /* SGVoiceMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */; };
 		04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */; };
-		046563DA1DDF6903009E8849 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 046563DC1DDF6903009E8849 /* Localizable.strings */; };
 		0472E85D1DD720630065AFAB /* SCChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */; };
 		047450F21DD3689500E5D3A6 /* SCConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */; };
 		047450F41DD368A900E5D3A6 /* SCConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */; };
@@ -210,6 +209,10 @@
 		04E4041E1DD8B1E5007118AF /* PurchaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */; };
 		04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */; };
 		04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */; };
+		04E85FEC1DED5F8800AE7DC5 /* LaunchScreen.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04E85FE71DED5F8800AE7DC5 /* LaunchScreen.strings */; };
+		04E85FED1DED5F8800AE7DC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04E85FE91DED5F8800AE7DC5 /* Localizable.strings */; };
+		04E85FF01DED5FAA00AE7DC5 /* placeHolder_image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04E85FEE1DED5FAA00AE7DC5 /* placeHolder_image1.jpg */; };
+		04E85FF11DED5FAA00AE7DC5 /* placeHolder_offical.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04E85FEF1DED5FAA00AE7DC5 /* placeHolder_offical.jpg */; };
 		04ED104A1DC76E0300EBD3C5 /* LikeProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */; };
 		04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */; };
 		04ED104C1DC76E0300EBD3C5 /* LikeProfileListUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */; };
@@ -404,9 +407,6 @@
 		04649C711DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LxTabBadgePoint.h"; sourceTree = "<group>"; };
 		04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LxTabBadgePoint.m"; sourceTree = "<group>"; };
 		046563D91DDF68F0009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		046563DB1DDF6903009E8849 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		046563DD1DDF6906009E8849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		046563DE1DDF690A009E8849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCChatGroupCell.swift; sourceTree = "<group>"; };
 		047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationViewController.swift; sourceTree = "<group>"; };
 		047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationListViewController.swift; sourceTree = "<group>"; };
@@ -468,7 +468,6 @@
 		048B0BAA1DB241AD00F5A399 /* NSObject+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKBlockAdditions.m"; sourceTree = "<group>"; };
 		048B0BAB1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+MKBlockAdditions.h"; sourceTree = "<group>"; };
 		048B0BAC1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+MKBlockAdditions.m"; sourceTree = "<group>"; };
-		048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SlothChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		048B0BB11DB2473E00F5A399 /* MIDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIDatePicker.swift; sourceTree = "<group>"; };
 		048B0BB21DB2473E00F5A399 /* MIDatePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIDatePicker.xib; sourceTree = "<group>"; };
 		048B0BB51DB2490A00F5A399 /* EnumDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumDefine.swift; sourceTree = "<group>"; };
@@ -530,7 +529,6 @@
 		04B499B71DC106F0004659BA /* GVUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVUserDefaults.m; sourceTree = "<group>"; };
 		04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+Properties.h"; sourceTree = "<group>"; };
 		04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+Properties.m"; sourceTree = "<group>"; };
-		04B5091F1DE1BA010061E687 /* SlothChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SlothChat.entitlements; sourceTree = "<group>"; };
 		04C0312C1DD702440003B07C /* ChatFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendCell.swift; sourceTree = "<group>"; };
 		04C0312E1DD702780003B07C /* ChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendViewController.swift; sourceTree = "<group>"; };
 		04C031301DD712FF0003B07C /* ChatGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
@@ -550,6 +548,13 @@
 		04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseExtension.swift; sourceTree = "<group>"; };
 		04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponse.swift; sourceTree = "<group>"; };
 		04E4BC8D1DD413D100EBD66B /* BidAdResponseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponseData.swift; sourceTree = "<group>"; };
+		04E85FE51DED5F8800AE7DC5 /* SlothChat-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SlothChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		04E85FE81DED5F8800AE7DC5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		04E85FEA1DED5F8800AE7DC5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		04E85FEB1DED5F8800AE7DC5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		04E85FEE1DED5FAA00AE7DC5 /* placeHolder_image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeHolder_image1.jpg; sourceTree = "<group>"; };
+		04E85FEF1DED5FAA00AE7DC5 /* placeHolder_offical.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeHolder_offical.jpg; sourceTree = "<group>"; };
+		04E85FF21DED5FFD00AE7DC5 /* SlothChat.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SlothChat.entitlements; sourceTree = "<group>"; };
 		04ED10471DC76E0300EBD3C5 /* LikeProfileResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileResult.swift; sourceTree = "<group>"; };
 		04ED10481DC76E0300EBD3C5 /* LikeProfileData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileData.swift; sourceTree = "<group>"; };
 		04ED10491DC76E0300EBD3C5 /* LikeProfileListUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeProfileListUser.swift; sourceTree = "<group>"; };
@@ -1406,6 +1411,18 @@
 			path = ChatUtils;
 			sourceTree = "<group>";
 		};
+		04E85FE41DED5F8800AE7DC5 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				04E85FEE1DED5FAA00AE7DC5 /* placeHolder_image1.jpg */,
+				04E85FEF1DED5FAA00AE7DC5 /* placeHolder_offical.jpg */,
+				04E85FE51DED5F8800AE7DC5 /* SlothChat-Bridging-Header.h */,
+				04E85FE71DED5F8800AE7DC5 /* LaunchScreen.strings */,
+				04E85FE91DED5F8800AE7DC5 /* Localizable.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		04FE6DB11DCE3C3300AD9C96 /* UIImage-Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1560,20 +1577,19 @@
 		19273B121DA9EE1300150460 /* SlothChat */ = {
 			isa = PBXGroup;
 			children = (
-				04B5091F1DE1BA010061E687 /* SlothChat.entitlements */,
-				04B499B21DBFBEC4004659BA /* Global */,
-				19008B921DBE614500319B86 /* Model */,
-				19AA4A791DB534570001568B /* Network */,
-				044643561DB4F60F0050F8BC /* Category */,
-				048B0BA61DB241A400F5A399 /* Third */,
-				04AC92011DB0B02C0048A9FD /* UI */,
 				19273B131DA9EE1300150460 /* AppDelegate.swift */,
 				19273B1C1DA9EE1300150460 /* Assets.xcassets */,
-				19273B1E1DA9EE1300150460 /* LaunchScreen.storyboard */,
+				044643561DB4F60F0050F8BC /* Category */,
+				04B499B21DBFBEC4004659BA /* Global */,
 				19273B211DA9EE1300150460 /* Info.plist */,
-				048B0BAF1DB2422500F5A399 /* SlothChat-Bridging-Header.h */,
+				19273B1E1DA9EE1300150460 /* LaunchScreen.storyboard */,
+				19008B921DBE614500319B86 /* Model */,
+				19AA4A791DB534570001568B /* Network */,
+				04E85FE41DED5F8800AE7DC5 /* Resource */,
+				04E85FF21DED5FFD00AE7DC5 /* SlothChat.entitlements */,
+				048B0BA61DB241A400F5A399 /* Third */,
 				04F79A0A1DD32C5200DA8BCB /* ThirdManager.swift */,
-				046563DC1DDF6903009E8849 /* Localizable.strings */,
+				04AC92011DB0B02C0048A9FD /* UI */,
 			);
 			path = SlothChat;
 			sourceTree = "<group>";
@@ -1747,6 +1763,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 19273B071DA9EE1300150460;
 			productRefGroup = 19273B111DA9EE1300150460 /* Products */;
@@ -1775,10 +1793,13 @@
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */,
 				0486BB9A1DBB53D200086303 /* WeiboSDK.bundle in Resources */,
-				046563DA1DDF6903009E8849 /* Localizable.strings in Resources */,
+				04E85FF01DED5FAA00AE7DC5 /* placeHolder_image1.jpg in Resources */,
 				0486BB9F1DBB53D200086303 /* ShareSDK.bundle in Resources */,
 				0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */,
 				0486BB9C1DBB53D200086303 /* read_me.txt in Resources */,
+				04E85FED1DED5F8800AE7DC5 /* Localizable.strings in Resources */,
+				04E85FEC1DED5F8800AE7DC5 /* LaunchScreen.strings in Resources */,
+				04E85FF11DED5FAA00AE7DC5 /* placeHolder_offical.jpg in Resources */,
 				048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2201,12 +2222,19 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		046563DC1DDF6903009E8849 /* Localizable.strings */ = {
+		04E85FE71DED5F8800AE7DC5 /* LaunchScreen.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				046563DB1DDF6903009E8849 /* zh-Hans */,
-				046563DD1DDF6906009E8849 /* en */,
-				046563DE1DDF690A009E8849 /* Base */,
+				04E85FE81DED5F8800AE7DC5 /* zh-Hans */,
+			);
+			name = LaunchScreen.strings;
+			sourceTree = "<group>";
+		};
+		04E85FE91DED5F8800AE7DC5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04E85FEA1DED5F8800AE7DC5 /* zh-Hans */,
+				04E85FEB1DED5F8800AE7DC5 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2366,7 +2394,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/Resource/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -2419,7 +2447,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/SlothChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/Resource/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
