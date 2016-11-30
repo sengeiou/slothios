@@ -184,7 +184,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -198,7 +198,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
         
@@ -266,7 +266,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -365,7 +365,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -393,7 +393,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -416,7 +416,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -440,7 +440,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -459,7 +459,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -484,7 +484,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -512,7 +512,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -526,7 +526,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -591,7 +591,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -616,7 +616,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -639,7 +639,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -705,7 +705,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -731,7 +731,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -755,7 +755,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -779,7 +779,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -800,7 +800,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -824,7 +824,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -851,7 +851,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -872,7 +872,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -893,7 +893,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -913,7 +913,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -941,7 +941,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -969,7 +969,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -989,7 +989,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1011,7 +1011,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1038,7 +1038,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1065,7 +1065,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1085,7 +1085,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1109,7 +1109,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1135,7 +1135,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1157,7 +1157,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
@@ -1184,7 +1184,7 @@ class NetworkEngine: NSObject {
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
-                self.showHandleError()
+                completeHandler(response.result.value)
             }
         }
     }
