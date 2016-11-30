@@ -157,7 +157,7 @@ class RegisterViewController: BaseViewController {
         }
         
         let phoneStr = phoneView.getInputContent()!
-        let codeStr = self.codeButton.title(for: .normal)!
+        let codeStr = self.countryCode
         let passwordStr = passwordView.getInputContent()!
         
         let pushVC  = CaptchaViewController.init()
