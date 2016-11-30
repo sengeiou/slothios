@@ -96,7 +96,7 @@ class SettingCell: UITableViewCell {
                 Global.shared.globalSysConfig?.cacheForSysConfig()
                 
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                UIViewController.showCurrentViewControllerNotificationError(message: response?.msg)
             }
         }
     }

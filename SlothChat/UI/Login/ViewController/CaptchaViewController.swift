@@ -104,14 +104,14 @@ class CaptchaViewController: BaseViewController {
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPublicSMS(withType: "signup", toPhoneno: codeNo + phoneNo) { (sms) in
+        engine.postPublicSMS(withType: "signup", toPhoneno: codeNo + phoneNo) { (response) in
             HUD.hide()
-            if sms?.status == ResponseError.SUCCESS.0 &&
+            if response?.status == ResponseError.SUCCESS.0 &&
                 !(self.phoneNo.isEmpty) {
                 self.fireTimer()
             }else{
                 self.update()
-                HUD.flash(.label(sms?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -119,16 +119,16 @@ class CaptchaViewController: BaseViewController {
     func checkPublicSMS(phoneNo: String,verifyCode: String) {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPublicSMSCheck(WithPhoneNumber: phoneNo,verifyCode:verifyCode) { (sms) in
+        engine.postPublicSMSCheck(WithPhoneNumber: phoneNo,verifyCode:verifyCode) { (response) in
             HUD.hide()
-            if sms?.status == ResponseError.SUCCESS.0{
+            if response?.status == ResponseError.SUCCESS.0{
                 let pushVC  = PerfectionInfoViewController.init()
                 pushVC.phoneNo = self.codeNo + self.phoneNo
                 pushVC.password = self.password
                 pushVC.countryName = self.countryName
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }else{
-                HUD.flash(.label(sms?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
             
         }
@@ -172,7 +172,7 @@ class CaptchaViewController: BaseViewController {
         print("confirmButtonClick")
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
-            HUD.flash(.label("请输入验证码"), delay: 2)
+            self.showNotificationError(message: "请输入验证码")
             return
         }
         

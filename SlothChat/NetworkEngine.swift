@@ -166,14 +166,14 @@ class NetworkEngine: NSObject {
         }
         
         Global.shared.logout()
-        HUD.flash(.label("账号异常"), delay: 2)
+        
+        UIViewController.showCurrentViewControllerNotificationError(message: "账号异常")
         NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
         return false
     }
     
     func showHandleError() {
-        
-        HUD.flash(.label("操作异常"), delay: 2)
+        UIViewController.showCurrentViewControllerNotificationError(message: "操作异常")
     }
     
     //MARK:- B1.用户模块

@@ -145,9 +145,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         engine.deletePhotoFromGallery(photoUuid: galleryUuid!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("添加照片成功"), delay: 2)
+                self.showNotificationError(message: "添加照片成功")
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -168,7 +168,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
 //                self.photoObj?.currentVisitorLiked = true
                 
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -192,7 +192,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
                 self.headerView.refreshView(rankData: (response?.data)!)
                 self.tableView.reloadData()
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -215,9 +215,8 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
-                HUD.flash(.label("竞价成功"), delay: 2, completion: { (result) in
-                    _ = self.navigationController?.popViewController(animated: true)
-                })
+                self.showNotificationSuccess(message: "竞价成功")
+                _ = self.navigationController?.popViewController(animated: true)
             }else{
                 guard let code = response?.status else{
                     return
@@ -225,7 +224,7 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
                 if Int(code) == 301{
                     self.needRecharge(data: response?.data)
                 }else{
-                    HUD.flash(.label(response?.msg), delay: 2)
+                    self.showNotificationError(message: response?.msg)
                 }
             }
         }

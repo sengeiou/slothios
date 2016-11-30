@@ -21,8 +21,8 @@ extension UIViewController{
                 return
         }
         if !canTalk {
-            HUD.flash(.label("请设置第一张个人资料是能识别的真人照片~"), delay: 2)
-            //return
+            self.showNotificationError(message: "请设置第一张个人资料是能识别的真人照片~")
+            return
         }
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
@@ -32,7 +32,7 @@ extension UIViewController{
             if response?.status == ResponseError.SUCCESS.0{
                 self.pushChatViewController(targetId: response?.data?.uuid,userUuid: userUuidB, title: response?.data?.name)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

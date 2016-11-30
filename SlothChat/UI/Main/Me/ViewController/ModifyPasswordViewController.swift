@@ -85,7 +85,7 @@ class ModifyPasswordViewController: BaseViewController {
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showAlertView(message: "修改密码成功")
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -104,44 +104,39 @@ class ModifyPasswordViewController: BaseViewController {
 
     func checkSubmitValid() -> Bool {
         if !oldPassordView.getSumbitValid() {
-            oldPassordView.setErrorContent(error: "请输入原始密码")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入原始密码", duration: 2)
             return false
         }
         
         if !new1PasswordView.getSumbitValid() {
-            new1PasswordView.setErrorContent(error: "请输入新密码")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入新密码", duration: 2)
             return false
         }
         
         if !new2PasswordView.getSumbitValid() {
-            new2PasswordView.setErrorContent(error: "请输入新密码")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入新密码", duration: 2)
             return false
         }
         
         if !(oldPassordView.getInputContent()?.validString())!{
-            oldPassordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "旧密码需要6位字母数字组合并且至少包含1个大写字母", duration: 2)
             return false
         }
         
         if !(new1PasswordView.getInputContent()?.validString())!{
-            new1PasswordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "新密码需要6位字母数字组合并且至少包含1个大写字母", duration: 2)
             return false
         }
         
         if !(new2PasswordView.getInputContent()?.validString())!{
-            new2PasswordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "新密码需要6位字母数字组合并且至少包含1个大写字母", duration: 2)
             return false
         }
         
         if new1PasswordView.getInputContent() != new2PasswordView.getInputContent() {
-            new1PasswordView.setErrorContent(error: "")
-            new2PasswordView.setErrorContent(error: "两次密码不一致")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "两次密码不一致", duration: 2)
             return false
         }
-        
-        oldPassordView.setErrorContent(error: nil)
-        new1PasswordView.setErrorContent(error: nil)
-        new2PasswordView.setErrorContent(error: nil)
 
         return true
     }

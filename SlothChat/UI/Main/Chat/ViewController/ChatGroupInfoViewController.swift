@@ -235,7 +235,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
                     self.handleResponse(list: list)
                 }
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -267,7 +267,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
                     self.handleResponse(list: list)
                 }
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -285,12 +285,11 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
 
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("解散群成功"), delay: 2, completion: { (result) in
-                    //如果是移出的自己
-                    _ = self.navigationController?.popToRootViewController(animated: true)
-                })
+                self.showNotificationSuccess(message: "解散群成功")
+                _ = self.navigationController?.popToRootViewController(animated: true)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
+                
             }
         }
     }
@@ -312,16 +311,14 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
                 
                 if member.isAdmin! || self.dataSource.count <= 3{
                     RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
-                    HUD.flash(.label("移除成功"), delay: 2, completion: { (result) in
-                        _ = self.navigationController?.popToRootViewController(animated: true)
-                    })
-                }else{
-                    HUD.flash(.label("移除成功"), delay: 2)
+                    _ = self.navigationController?.popToRootViewController(animated: true)
                 }
+                self.showNotificationSuccess(message: "移除成功")
+
                 self.dataSource.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

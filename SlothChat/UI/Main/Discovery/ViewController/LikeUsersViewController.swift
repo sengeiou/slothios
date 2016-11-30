@@ -52,15 +52,15 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         
         let engine = NetworkEngine()
 
-        engine.getLikeGalleryList(likeSenderUserUuid: likeSenderUserUuid, galleryUuid: galleryUuid!, pageNum: String(pageNum), pageSize: String(PageSize)) { (profileResult) in
+        engine.getLikeGalleryList(likeSenderUserUuid: likeSenderUserUuid, galleryUuid: galleryUuid!, pageNum: String(pageNum), pageSize: String(PageSize)) { (response) in
 
             if at == .top {
                 self.tableView.mj_header.endRefreshing()
             }else{
                 self.tableView.mj_footer.endRefreshing()
             }
-            if profileResult?.status == ResponseError.SUCCESS.0 {
-                if let list = profileResult?.data?.list{
+            if response?.status == ResponseError.SUCCESS.0 {
+                if let list = response?.data?.list{
                     
                     self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
@@ -70,7 +70,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label(profileResult?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -87,14 +87,14 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
         
         let engine = NetworkEngine()
 //        let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getLikeProfile(pageNum: String(pageNum), pageSize: String(PageSize)) {  (likeResult) in
+        engine.getLikeProfile(pageNum: String(pageNum), pageSize: String(PageSize)) {  (response) in
             if at == .top {
                 self.tableView.mj_header.endRefreshing()
             }else{
                 self.tableView.mj_footer.endRefreshing()
             }
-            if likeResult?.status == ResponseError.SUCCESS.0 {
-                if let list = likeResult?.data?.list{
+            if response?.status == ResponseError.SUCCESS.0 {
+                if let list = response?.data?.list{
                     self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
@@ -103,7 +103,7 @@ class LikeUsersViewController: BaseViewController,UITableViewDelegate,UITableVie
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label(likeResult?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

@@ -243,31 +243,32 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         if !isMyselfFlag{
             HUD.show(.labeledProgress(title: nil, subtitle: nil))
         }
-        engine.getUserProfile(userUuid: userUuid) { (profile) in
+        engine.getUserProfile(userUuid: userUuid) { (response) in
             HUD.hide()
-            if profile?.status == ResponseError.SUCCESS.0 {
-                if (profile?.data) != nil{
-                    self.mProfile = profile?.data
+            if response?.status == ResponseError.SUCCESS.0 {
+                if (response?.data) != nil{
+                    self.mProfile = response?.data
                     if self.isMyselfFlag{
-                        Global.shared.globalProfile = profile?.data
-                        self.shareView?.configLikeLabel(count: (profile?.data?.likesCount)!)
+                        Global.shared.globalProfile = response?.data
+                        self.shareView?.configLikeLabel(count: (response?.data?.likesCount)!)
                     }else{
-                        self.toolView?.refreshLikeButtonStatus(isLike: (profile?.data?.currentVisitorLiked)!)
+                        self.toolView?.refreshLikeButtonStatus(isLike: (response?.data?.currentVisitorLiked)!)
                     }
-                    let list = profile?.data?.getBannerAvatarList(isMyself: self.isMyselfFlag)
+                    let list = response?.data?.getBannerAvatarList(isMyself: self.isMyselfFlag)
                     for string in list!{
                         self.bannerList.append(string as AnyObject)
                     }
                     self.refreshBannerView()
-                    if let tmpProfile = profile{
-                        self.navigationItem.title = profile?.data?.nickname
+                    if let tmpProfile = response{
+                        self.navigationItem.title = response?.data?.nickname
                         self.infoView.configViewWihObject(userObj: (tmpProfile.data)!)
                     }
                 }else{
                     SGLog(message: "返回的数据为空")
                 }
             }else{
-                HUD.flash(.label(profile?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
+
             }
         }
     }
@@ -275,7 +276,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func updateProfile(editProfile: UserProfileData)  {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (userProfile) in
+        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (response) in
             HUD.hide()
             self.container.snp.remakeConstraints { (make) in
                 make.edges.equalTo(self.scrollView)
@@ -283,7 +284,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 make.bottom.equalTo(self.infoView.snp.bottom).offset(10)
             }
             
-            if userProfile?.status == ResponseError.SUCCESS.0 {
+            if response?.status == ResponseError.SUCCESS.0 {
                 self.mProfile = editProfile
                 editProfile.caheForUserProfile()
                 if self.mProfile != nil {
@@ -294,7 +295,8 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 self.shareView?.isHidden = false
                 
             }else{
-                HUD.flash(.label(userProfile?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
+
             }
         }
     }
@@ -311,7 +313,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -349,7 +351,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 self.refreshBannerView()
                 self.bannerView?.scroll(to: Int32((self.mProfile!.userPhotoList?.count)!) - 1)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -362,11 +364,11 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         let engine = NetworkEngine()
-        engine.postUserPhoto(image: uploadImage) { (userPhoto) in
-            if userPhoto?.status == ResponseError.SUCCESS.0 {
+        engine.postUserPhoto(image: uploadImage) { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
                 let newPhoto = UserPhotoList.init()
-                newPhoto.profileBigPicUrl = userPhoto?.data?.profileBigPicUrl
-                newPhoto.uuid = userPhoto?.data?.uuid
+                newPhoto.profileBigPicUrl = response?.data?.profileBigPicUrl
+                newPhoto.uuid = response?.data?.uuid
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
                 
@@ -378,11 +380,12 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 self.refreshBannerView()
                 self.bannerView?.scroll(to: Int32((self.mProfile!.userPhotoList?.count)!) - 1)
             }else{
-                if userPhoto?.status == ResponseError.PROFILE_PIC_NOT_VERIFIED.0{
+                if response?.status == ResponseError.PROFILE_PIC_NOT_VERIFIED.0{
                     self.bannerList[at ..< at + 1] = [DefaultBannerImgName as AnyObject]
                     self.refreshBannerView()
                 }
-                HUD.flash(.label(userPhoto?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
+
             }
         }
     }
@@ -418,17 +421,18 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         if otherProfile.userUuid == myProfile.userUuid {
-            HUD.flash(.label("自己不能和自己聊天哦~"), delay: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "不能和自己聊天哦~", duration: 2)
+
             return
         }
         
         if !canTalk {
-            HUD.flash(.label("请设置您的个人资料第一张是真人照片~"), delay: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请设置您的个人资料第一张是真人照片~", duration: 2)
             return
         }
         
         if !isAcceptPrivateChat {
-            HUD.flash(.label("对方未开启一对一私聊"), delay: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "对方未开启一对一私聊", duration: 2)
             return
         }
         
@@ -449,7 +453,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         let obj = self.bannerList[at!]
         if obj is String {
             if (self.mProfile?.userPhotoList?.count)! <= 1{
-                HUD.flash(.label("至少要有一张照片"), delay: 2)
+                self.showNotificationError(message: "至少要保留一张照片哦~")
                 return
             }
             

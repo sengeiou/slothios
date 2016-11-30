@@ -141,13 +141,13 @@ class LoginViewController: BaseViewController {
     
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
-        engine.getUserProfile(userUuid: userUuid) { (profile) in
-            if profile?.status == ResponseError.SUCCESS.0 {
-                Global.shared.globalProfile = profile?.data
+        engine.getUserProfile(userUuid: userUuid) { (response) in
+            if response?.status == ResponseError.SUCCESS.0 {
+                Global.shared.globalProfile = response?.data
 //                self.loginSystem()
                 self.getChatToken()
             }else{
-                HUD.flash(.label(profile?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -162,7 +162,7 @@ class LoginViewController: BaseViewController {
                     self.loginSystem()
                 }
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -173,7 +173,7 @@ class LoginViewController: BaseViewController {
         print("forgetButtonClick")
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            phoneView.setErrorContent(error: "请输入手机号")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入手机号", duration: 2)
             return
         }
         
@@ -197,24 +197,24 @@ class LoginViewController: BaseViewController {
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (loginModel) in
+        engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (response) in
             HUD.hide()
-            if  loginModel != nil &&
-                loginModel?.token != nil{
+            if  response != nil &&
+                response?.token != nil{
                 GVUserDefaults.standard().lastLoginPhone = phoneStr
                 GVUserDefaults.standard().lastLoginCountry = codeStr
-                Global.shared.globalLogin = loginModel!
+                Global.shared.globalLogin = response!
                 
-                if (loginModel!.user?.uuid) != nil{
-                    NBSAppAgent.setCustomerData((loginModel!.user?.uuid)!, forKey: "LoginUserUuid")
+                if (response!.user?.uuid) != nil{
+                    NBSAppAgent.setCustomerData((response!.user?.uuid)!, forKey: "LoginUserUuid")
                 }
-                if (loginModel!.user?.username) != nil{
-                    NBSAppAgent.setCustomerData((loginModel!.user?.username)!, forKey: "LoginUserName")
+                if (response!.user?.username) != nil{
+                    NBSAppAgent.setCustomerData((response!.user?.username)!, forKey: "LoginUserName")
                 }
-                Global.shared.chatToken = loginModel!.chatToken
-                self.getUserProfile(userUuid: (loginModel!.user?.uuid)!)
+                Global.shared.chatToken = response!.chatToken
+                self.getUserProfile(userUuid: (response!.user?.uuid)!)
             }else{
-                HUD.flash(.label(loginModel?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -233,30 +233,25 @@ class LoginViewController: BaseViewController {
     func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            CSNotificationView.show(in: self, tintColor: SGColor.lightGray, image: nil, message: "请输入手机号", duration: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入手机号", duration: 2)
             return false
         }
         
         if !Validate.phoneNum(phoneStr!).isRight{
-            CSNotificationView.show(in: self, tintColor: SGColor.lightGray, image: nil, message: "手机号码为6到11位", duration: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "手机号码为6到11位", duration: 2)
             return false
         }
 
         let code = self.codeButton.title(for: .normal)
         if (code?.isEmpty)! {
-            CSNotificationView.show(in: self, tintColor: SGColor.lightGray, image: nil, message: "请选择国家码", duration: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请选择国家码", duration: 2)
             return false
         }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            CSNotificationView.show(in: self, tintColor: SGColor.lightGray, image: nil, message: "请输入密码", duration: 2)
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入密码", duration: 2)
             return false
         }
-        
-//        if !(passwordStr?.validString())!{
-//            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
-//            return false
-//        }
         
         return true
     }

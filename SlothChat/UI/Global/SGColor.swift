@@ -51,4 +51,8 @@ class SGColor: UIColor {
     class func SGTextColor() -> UIColor {
         return UIColor.init(red: 142/255.0, green: 142/255.0, blue: 147/255.0, alpha: 1.0)
     }
+    
+    class func SGNoticeErrorColor() -> UIColor {
+        return UIColor.lightGray
+    }
 }

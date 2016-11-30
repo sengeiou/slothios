@@ -104,20 +104,20 @@ class DiscoveryViewController: BaseViewController {
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPhotoGallery(picFile: uploadImage) { (userPhoto) in
+        engine.postPhotoGallery(picFile: uploadImage) { (response) in
             HUD.hide()
             self.controller3.clearTmpUploadImage()
             
-            if userPhoto?.status == ResponseError.SUCCESS.0 {
+            if response?.status == ResponseError.SUCCESS.0 {
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
 
                 let pushVC = PublishViewController()
-                pushVC.userUuid = userPhoto?.data?.userUuid
-                pushVC.galleryUuid = userPhoto?.data?.uuid
-                pushVC.configWithObject(imageUrl: userPhoto?.data?.bigPicUrl)
+                pushVC.userUuid = response?.data?.userUuid
+                pushVC.galleryUuid = response?.data?.uuid
+                pushVC.configWithObject(imageUrl: response?.data?.bigPicUrl)
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }else{
-                HUD.flash(.label(userPhoto?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

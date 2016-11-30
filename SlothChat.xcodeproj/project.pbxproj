@@ -163,6 +163,7 @@
 		049BAB041DDCB44600422134 /* GroupMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAB011DDCB44600422134 /* GroupMember.swift */; };
 		049BAB051DDCB44600422134 /* GroupMemberData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAB021DDCB44600422134 /* GroupMemberData.swift */; };
 		049BAB071DDCB70D00422134 /* SCChatGroupMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049BAB061DDCB70D00422134 /* SCChatGroupMemberCell.swift */; };
+		04A26C001DEEA58600946F24 /* SelectChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A26BFF1DEEA58600946F24 /* SelectChatFriendViewController.swift */; };
 		04AC920B1DB0B02C0048A9FD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92031DB0B02C0048A9FD /* BaseViewController.swift */; };
 		04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92051DB0B02C0048A9FD /* SingleInputView.swift */; };
 		04AC920D1DB0B02C0048A9FD /* SGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92071DB0B02C0048A9FD /* SGColor.swift */; };
@@ -191,8 +192,6 @@
 		04B499B81DC106F0004659BA /* GVUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499B71DC106F0004659BA /* GVUserDefaults.m */; };
 		04B499BB1DC10723004659BA /* GVUserDefaults+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */; };
 		04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312C1DD702440003B07C /* ChatFriendCell.swift */; };
-		04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312E1DD702780003B07C /* ChatFriendViewController.swift */; };
-		04C031311DD712FF0003B07C /* ChatGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C031301DD712FF0003B07C /* ChatGroupViewController.swift */; };
 		04C2330B1DEE651A0027C3B3 /* CSLayerStealingBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C232FE1DEE651A0027C3B3 /* CSLayerStealingBlurView.m */; };
 		04C2330C1DEE651A0027C3B3 /* CSNativeBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C233001DEE651A0027C3B3 /* CSNativeBlurView.m */; };
 		04C2330D1DEE651A0027C3B3 /* CSNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C233021DEE651A0027C3B3 /* CSNotificationView.m */; };
@@ -213,7 +212,6 @@
 		04E34BDB1DD6C71D007545F3 /* ChatDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */; };
 		04E404141DD85893007118AF /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404131DD85893007118AF /* NSObjectExtension.swift */; };
 		04E404181DD87DCB007118AF /* ChatConversationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404171DD87DCB007118AF /* ChatConversationExtension.swift */; };
-		04E4041A1DD88088007118AF /* SelectChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E404191DD88088007118AF /* SelectChatFriendViewController.swift */; };
 		04E4041C1DD882AA007118AF /* SelectFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */; };
 		04E4041E1DD8B1E5007118AF /* PurchaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */; };
 		04E4BC8E1DD413D100EBD66B /* BidAdResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */; };
@@ -508,6 +506,7 @@
 		049BAB011DDCB44600422134 /* GroupMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMember.swift; sourceTree = "<group>"; };
 		049BAB021DDCB44600422134 /* GroupMemberData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupMemberData.swift; sourceTree = "<group>"; };
 		049BAB061DDCB70D00422134 /* SCChatGroupMemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCChatGroupMemberCell.swift; sourceTree = "<group>"; };
+		04A26BFF1DEEA58600946F24 /* SelectChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChatFriendViewController.swift; sourceTree = "<group>"; };
 		04AC92031DB0B02C0048A9FD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		04AC92051DB0B02C0048A9FD /* SingleInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleInputView.swift; sourceTree = "<group>"; };
 		04AC92071DB0B02C0048A9FD /* SGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGColor.swift; sourceTree = "<group>"; };
@@ -539,8 +538,6 @@
 		04B499B91DC10723004659BA /* GVUserDefaults+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GVUserDefaults+Properties.h"; sourceTree = "<group>"; };
 		04B499BA1DC10723004659BA /* GVUserDefaults+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GVUserDefaults+Properties.m"; sourceTree = "<group>"; };
 		04C0312C1DD702440003B07C /* ChatFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendCell.swift; sourceTree = "<group>"; };
-		04C0312E1DD702780003B07C /* ChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendViewController.swift; sourceTree = "<group>"; };
-		04C031301DD712FF0003B07C /* ChatGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
 		04C232FD1DEE651A0027C3B3 /* CSLayerStealingBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLayerStealingBlurView.h; sourceTree = "<group>"; };
 		04C232FE1DEE651A0027C3B3 /* CSLayerStealingBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLayerStealingBlurView.m; sourceTree = "<group>"; };
 		04C232FF1DEE651A0027C3B3 /* CSNativeBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNativeBlurView.h; sourceTree = "<group>"; };
@@ -565,7 +562,6 @@
 		04E34BDA1DD6C71D007545F3 /* ChatDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataManager.swift; sourceTree = "<group>"; };
 		04E404131DD85893007118AF /* NSObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
 		04E404171DD87DCB007118AF /* ChatConversationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConversationExtension.swift; sourceTree = "<group>"; };
-		04E404191DD88088007118AF /* SelectChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectChatFriendViewController.swift; sourceTree = "<group>"; };
 		04E4041B1DD882AA007118AF /* SelectFriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFriendsCell.swift; sourceTree = "<group>"; };
 		04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseExtension.swift; sourceTree = "<group>"; };
 		04E4BC8C1DD413D100EBD66B /* BidAdResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BidAdResponse.swift; sourceTree = "<group>"; };
@@ -918,14 +914,12 @@
 		044643471DB4F03E0050F8BC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				04A26BFF1DEEA58600946F24 /* SelectChatFriendViewController.swift */,
 				04E404171DD87DCB007118AF /* ChatConversationExtension.swift */,
 				044B79EC1DE0B10B00490272 /* ChatExtension.swift */,
-				04C0312E1DD702780003B07C /* ChatFriendViewController.swift */,
 				049BAAE81DDB5E1500422134 /* ChatGroupInfoViewController.swift */,
-				04C031301DD712FF0003B07C /* ChatGroupViewController.swift */,
 				047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */,
 				047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */,
-				04E404191DD88088007118AF /* SelectChatFriendViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2087,7 +2081,6 @@
 				04966B411DB658CF000721BD /* SettingObj.swift in Sources */,
 				0486BB5C1DBB1E7700086303 /* BaseNavigationController.swift in Sources */,
 				04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */,
-				04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */,
 				04FEB7E21DB76F13004509D1 /* MKAnnotationView+WebCache.m in Sources */,
 				040576EA1DB3353E00C55D02 /* IQBarButtonItem.swift in Sources */,
 				040576E01DB3353E00C55D02 /* IQUIScrollView+Additions.swift in Sources */,
@@ -2153,12 +2146,12 @@
 				04814CFA1DCF2A410012030A /* AdsBidOrder.swift in Sources */,
 				044956891DCCBAA800CBFF45 /* MJRefreshFooter.m in Sources */,
 				04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */,
-				04E4041A1DD88088007118AF /* SelectChatFriendViewController.swift in Sources */,
 				048B0BAE1DB241AD00F5A399 /* UIAlertController+MKBlockAdditions.m in Sources */,
 				044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */,
 				04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */,
 				040D46D31DC4B587005D1E8E /* PopupDialog+Keyboard.swift in Sources */,
 				044956901DCCBAA800CBFF45 /* MJRefreshBackStateFooter.m in Sources */,
+				04A26C001DEEA58600946F24 /* SelectChatFriendViewController.swift in Sources */,
 				04ED10571DC7994900EBD3C5 /* DisplayOrderData.swift in Sources */,
 				048B0BA51DB2243700F5A399 /* PerfectionInfoViewController.swift in Sources */,
 				040576E41DB3353E00C55D02 /* IQUIWindow+Hierarchy.swift in Sources */,
@@ -2175,7 +2168,6 @@
 				04AC920C1DB0B02C0048A9FD /* SingleInputView.swift in Sources */,
 				04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */,
 				19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */,
-				04C031311DD712FF0003B07C /* ChatGroupViewController.swift in Sources */,
 				04AC92181DB0B6DE0048A9FD /* CountryCodeViewController.swift in Sources */,
 				04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */,
 				04B1CEFB1DBCD097003482DF /* BiddingStatusView.swift in Sources */,

@@ -193,7 +193,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
                 RCIM.shared().disconnect(false)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

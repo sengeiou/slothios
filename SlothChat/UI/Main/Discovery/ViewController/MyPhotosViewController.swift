@@ -183,23 +183,23 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         }
         
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getPhotoGallery(userUuid: userUuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (gallery) in
+        engine.getPhotoGallery(userUuid: userUuid, pageNum: String(pageNum), pageSize: String(PageSize)) { (response) in
             if at == .top {
                 self.collectionView?.mj_header.endRefreshing()
             }else{
                 self.collectionView?.mj_footer.endRefreshing()
             }
-            if gallery?.status == ResponseError.SUCCESS.0 {
+            if response?.status == ResponseError.SUCCESS.0 {
                 if at == .top {
                     self.dataSource.removeAll()
                 }
-                if let list = gallery?.data?.list{
+                if let list = response?.data?.list{
                     self.collectionView?.mj_footer?.isHidden = (list.count < PageSize)
                     self.dataSource.append(contentsOf: list)
                 }
                 self.collectionView?.reloadData()
             }else{
-                HUD.flash(.label(gallery?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

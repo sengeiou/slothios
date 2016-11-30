@@ -164,9 +164,9 @@
                 _textLabel.numberOfLines = 2;
                 _textLabel.minimumScaleFactor = 0.6;
                 _textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                
+                _textLabel.textAlignment = NSTextAlignmentCenter;
                 UIFontDescriptor* textLabelFontDescriptor = [UIFontDescriptor preferredFontDescriptorWithTextStyle:UIFontTextStyleBody];
-                _textLabel.font = [UIFont fontWithDescriptor:textLabelFontDescriptor size:17.0f];
+                _textLabel.font = [UIFont fontWithDescriptor:textLabelFontDescriptor size:14.0f];
                 _textLabel.adjustsFontSizeToFitWidth = YES;
                 
                 [self addSubview:_textLabel];

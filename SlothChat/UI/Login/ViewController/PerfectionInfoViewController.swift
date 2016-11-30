@@ -157,21 +157,20 @@ class PerfectionInfoViewController: BaseViewController {
         print("registerButtonClick")
         
         if self.selectedAvatar == nil {
-            HUD.flash(.label("请选择头像"), delay: 2)
+            self.showNotificationError(message: "请选择头像")
             return
         }
         let nickName = nickNameView.getInputContent()
         if (nickName?.isEmpty)! {
-            HUD.flash(.label("请输入昵称"), delay: 2)
+            self.showNotificationError(message: "请输入昵称")
             return
         }
         
         let birthday = birthdayView.getInputContent()
         if (birthday?.isEmpty)! {
-            HUD.flash(.label("请选择生日"), delay: 2)
+            self.showNotificationError(message: "请选择生日")
             return
         }
-        print("注册信息齐全")
         let user = UserSignupModel()
         if self.userPhoto != nil{
             user.userPhotoUuid = self.userPhoto!.uuid!
@@ -188,17 +187,15 @@ class PerfectionInfoViewController: BaseViewController {
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPublicUserAndProfileSignup(withSignpModel: user) { (profile) in
+        engine.postPublicUserAndProfileSignup(withSignpModel: user) { (response) in
             HUD.hide()
-            if profile?.status == ResponseError.SUCCESS.0{
+            if response?.status == ResponseError.SUCCESS.0{
 //                GVUserDefaults.standard().lastLoginPhone = self.phoneNo
 //                GVUserDefaults.standard().lastLoginCountry = self.countryName
-                
-                HUD.flash(.label("注册成功"), delay: 2, completion: { (result) in
-                    _ = self.navigationController?.popToRootViewController(animated: true)
-                })
+                self.showNotificationSuccess(message: "注册成功")
+                _ = self.navigationController?.popToRootViewController(animated: true)
             }else{
-                HUD.flash(.label(profile?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
         
@@ -223,14 +220,14 @@ class PerfectionInfoViewController: BaseViewController {
 
             let engine = NetworkEngine()
             HUD.show(.labeledProgress(title: nil, subtitle: nil))
-            engine.postPicFile(picFile: avatar!) { (userPhoto) in
+            engine.postPicFile(picFile: avatar!) { (response) in
                 HUD.hide()
-                if userPhoto?.status == ResponseError.SUCCESS.0{
+                if response?.status == ResponseError.SUCCESS.0{
                     self.selectedAvatar = avatar
-                    self.userPhoto = userPhoto?.data
+                    self.userPhoto = response?.data
                     self.avatarButton.setImage(avatar, for: .normal)
                 }else{
-                    HUD.flash(.label(userPhoto?.msg), delay: 2)
+                    self.showNotificationError(message: response?.msg)
                 }
             }
             }, onCancel: nil, allowsEditing: true)

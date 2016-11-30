@@ -32,12 +32,12 @@ extension UIViewController{
         
         IAPShare.sharedHelper().iap.requestProducts { (request, response) in
             guard let products = IAPShare.sharedHelper().iap.products else {
-                HUD.flash(.label("获取产品失败，请重试"), delay: 2)
+                self.showNotificationError(message: "获取产品失败，请重试")
                 return
             }
             
             if products.count <= 0 {
-                HUD.flash(.label("未获取到产品"), delay: 2)
+                self.showNotificationError(message: "未获取到产品")
                 return
             }
             
@@ -45,13 +45,13 @@ extension UIViewController{
             
             IAPShare.sharedHelper().iap.buyProduct(product as! SKProduct!, onCompletion: { (trans) in
                 guard let trans = trans else {
-                    HUD.flash(.label("充值失败，请重试"), delay: 2)
+                    self.showNotificationError(message: "充值失败，请重试")
                     return
                 }
                 if (trans.error != nil ||
                     trans.transactionState == SKPaymentTransactionState.failed) {
                     SGLog(message: trans.error?.localizedDescription)
-                    HUD.flash(.label(trans.error?.localizedDescription), delay: 2)
+                    self.showNotificationError(message: trans.error?.localizedDescription)
                     return
                 }
                 
@@ -73,7 +73,7 @@ extension UIViewController{
                                 SGLog(message: dict)
                             }else{
                                 SGLog(message: error?.localizedDescription)
-                                HUD.flash(.label("校验失败，请重试"), delay: 2)
+                                self.showNotificationError(message: "校验失败，请重试")
                             }
                         })
                     }
@@ -95,10 +95,9 @@ extension UIViewController{
                     Global.shared.globalSysConfig?.banlace = newBanlace
                 }
                 NotificationCenter.default.post(name: SGIAPPurchaseKey.IAPPurchaseSuccess, object: nil)
-
-                HUD.flash(.label("充值成功"), delay: 2)
+                self.showNotificationSuccess(message: "充值成功")
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

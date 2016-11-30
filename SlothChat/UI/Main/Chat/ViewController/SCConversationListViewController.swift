@@ -135,7 +135,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                 if response?.status == ResponseError.SUCCESS.0{
                     self.doneDeleteChat(model:model,indexPath:indexPath)
                 }else{
-                    HUD.flash(.label(response?.msg), delay: 2)
+                    self.showNotificationError(message: response?.msg)
                 }
             }
         } else {
@@ -144,7 +144,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                 if response?.status == ResponseError.SUCCESS.0 {
                     self.doneDeleteChat(model:model,indexPath:indexPath)
                 }else{
-                    HUD.flash(.label(response?.msg), delay: 2)
+                    self.showNotificationError(message: response?.msg)
                 }
             }
         }
@@ -363,7 +363,7 @@ extension SCConversationListViewController{
                 self.chatList?.caheForModel()
                 self.conversationListTableView.reloadData()
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

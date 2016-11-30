@@ -182,12 +182,12 @@ class UserInfoEditView: BaseView {
         }
         let university = universityView.getInputContent()!
         if university.characters.count >= 50 {
-            HUD.flash(.label("学校长度不能超过50个字符"), delay: 2)
+            UIViewController.showCurrentViewControllerNotificationError(message: "学校长度不能超过50个字符")
             return
         }
         let personalProfile = personalProfileView.getInputContent()!
         if personalProfile.characters.count >= 100 {
-            HUD.flash(.label("简介长度不能超过100个字符"), delay: 2)
+            UIViewController.showCurrentViewControllerNotificationError(message: "简介长度不能超过100个字符")
             return
         }
         self.userObj?.university = university

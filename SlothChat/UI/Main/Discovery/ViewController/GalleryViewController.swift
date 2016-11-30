@@ -79,15 +79,15 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         let engine = NetworkEngine()
         let userUuid = Global.shared.globalProfile?.userUuid
-        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: displayType, pageNum: String(pageNum), pageSize: String(PageSize)) { (displayOrder) in
+        engine.getOrderGallery(likeSenderUserUuid: userUuid, displayType: displayType, pageNum: String(pageNum), pageSize: String(PageSize)) { (response) in
             if at == .top {
                 self.tableView.mj_header.endRefreshing()
             }else{
                 self.tableView.mj_footer.endRefreshing()
             }
             
-            if displayOrder?.status == ResponseError.SUCCESS.0 {
-                if let list = displayOrder?.data?.list{
+            if response?.status == ResponseError.SUCCESS.0 {
+                if let list = response?.data?.list{
                     self.tableView.mj_footer?.isHidden = (list.count < PageSize)
                     if at == .top {
                         self.dataSource.removeAll()
@@ -96,7 +96,7 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label(displayOrder?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -114,7 +114,7 @@ class GalleryViewController: BaseViewController,UITableViewDelegate,UITableViewD
             if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

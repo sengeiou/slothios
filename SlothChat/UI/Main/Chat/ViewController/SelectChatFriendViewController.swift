@@ -161,7 +161,7 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
                     self.tableView.reloadData()
                 }
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -169,11 +169,11 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
     func createPrivateGroup(IDS: [String], groupName: String) {
         
         if IDS.count <= 0 {
-            HUD.flash(.label("请先选择好友"), delay: 2)
+            self.showNotificationError(message: "请先选择好友")
             return
         }
         if IDS.count < 3 {
-            HUD.flash(.label("包括自己在内最少需要3个成员才能新建一个聊天组"), delay: 2)
+            self.showNotificationError(message: "包括自己在内最少需要3个成员才能新建一个聊天组")
             return
         }
         let engine = NetworkEngine()
@@ -181,11 +181,10 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
         
         engine.postCreateGroup(memberUserUuidList: IDS, groupDisplayName: groupName) { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("创建群组成功"), delay: 2 , completion: { (result) in
-                    self.pushGroupViewController(group: response?.data)
-                })
+                self.showNotificationSuccess(message: "创建群组成功")
+                self.pushGroupViewController(group: response?.data)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

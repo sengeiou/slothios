@@ -168,14 +168,14 @@ class FindPasswordViewController: BaseViewController {
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPublicSMS(withType: "signup", toPhoneno: codeNo! + phoneNo!) { (sms) in
+        engine.postPublicSMS(withType: "signup", toPhoneno: codeNo! + phoneNo!) { (response) in
             HUD.hide()
-            if sms?.status == ResponseError.SUCCESS.0 &&
+            if response?.status == ResponseError.SUCCESS.0 &&
                 !((self.phoneNo?.isEmpty)!) {
                 self.fireTimer()
             }else{
                 self.update()
-                HUD.flash(.label(sms?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -193,7 +193,7 @@ class FindPasswordViewController: BaseViewController {
                     _ = self.navigationController?.popToRootViewController(animated: true)
                 })
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -203,17 +203,17 @@ class FindPasswordViewController: BaseViewController {
         print("confirmButtonClick")
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
-            HUD.flash(.label("请输入验证码"), delay: 2)
+            self.showNotificationError(message: "请输入验证码")
             return
         }
         let password = passwordView.getInputContent()
         if (password?.isEmpty)! {
-            HUD.flash(.label("请输入验证码"), delay: 2)
+            self.showNotificationError(message: "请输入验证码")
             return
         }
         
         if !(password?.validString())!{
-            HUD.flash(.label("6位字母数字组合并且至少包含1个大写字母"), delay: 2)
+            self.showNotificationError(message: "6位字母数字组合并且至少包含1个大写字母")
             return
         }
         

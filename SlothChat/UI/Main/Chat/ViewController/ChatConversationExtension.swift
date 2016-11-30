@@ -229,7 +229,11 @@ extension SCConversationViewController{
         //                    self.title = group.groupDisplayName
         //                }
         //            }else{
-        //                HUD.flash(.label(response?.msg), delay: 2)
+        //                if response?.msg != nil {
+//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: response?.msg, duration: 2)
+//                }else{
+//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "系统异常", duration: 2)
+//                }
         //            }
         //        }
     }

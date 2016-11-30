@@ -93,10 +93,15 @@ class ChatGroupInfoHeaderView: UIView {
         engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupUuid, adminUserUuid: adminUserUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("修改群组名成功"), delay: 2)
+//                self.showNotificationError(message: "修改群组名成功")
                 NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewUserGroupName":newName])
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                
+//                if response?.msg != nil {
+//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: response?.msg, duration: 2)
+//                }else{
+//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "系统异常", duration: 2)
+//                }
             }
         }
     }
@@ -121,9 +126,13 @@ class ChatGroupInfoHeaderView: UIView {
         engine.putUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("修改用户名成功"), delay: 2)
+//                 self.showNotificationSuccess(message: "修改用户名成功")
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+//                if response?.msg != nil {
+//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: response?.msg, duration: 2)
+//                }else{
+//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "系统异常", duration: 2)
+//                }
             }
         }
     }
@@ -141,9 +150,9 @@ class ChatGroupInfoHeaderView: UIView {
         engine.putOfficialGroupMemberName(userDisplayName: newName, officialGroupUuid: groupUuid, officialGroupMemberUuid: memberUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-                HUD.flash(.label("修改用户名成功"), delay: 2)
+                UIViewController.showCurrentViewControllerNotificationError(message: "修改用户名成功")
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                UIViewController.showCurrentViewControllerNotificationError(message: response?.msg)
             }
         }
     }

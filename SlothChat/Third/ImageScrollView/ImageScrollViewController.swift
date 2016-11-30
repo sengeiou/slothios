@@ -177,7 +177,7 @@ class ImageScrollViewController: BaseViewController {
                 self.photoObj?.currentVisitorLiked = true
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -201,12 +201,10 @@ class ImageScrollViewController: BaseViewController {
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
-
-                HUD.flash(.label("已成功删除"), delay: 2, completion: { (result) in
-                    self.dismiss(animated: true, completion: nil)
-                })
+                self.showNotificationSuccess(message: "已成功删除")
+                self.dismiss(animated: true, completion: nil)
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }

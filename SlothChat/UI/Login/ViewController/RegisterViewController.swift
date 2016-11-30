@@ -126,31 +126,25 @@ class RegisterViewController: BaseViewController {
     func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            phoneView.setErrorContent(error: "请输入手机号")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入手机号", duration: 2)
             return false
         }
         
         if !Validate.phoneNum(phoneStr!).isRight{
-            phoneView.setErrorContent(error: "手机号码为6到11位")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "手机号码为6到11位", duration: 2)
             return false
         }
         
         let code = self.codeButton.title(for: .normal)
         if (code?.isEmpty)! {
-            phoneView.setErrorContent(error: "请选择国家码")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请选择国家码", duration: 2)
             return false
         }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            passwordView.setErrorContent(error: "请输入密码")
+            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入密码", duration: 2)
             return false
         }
-        
-        //        if !(passwordStr?.validString())!{
-        //            passwordView.setErrorContent(error: "6位字母数字组合并且至少包含1个大写字母")
-        //            return false
-        //        }
-        
         return true
     }
     

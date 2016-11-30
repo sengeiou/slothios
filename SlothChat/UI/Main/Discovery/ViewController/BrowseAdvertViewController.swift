@@ -166,7 +166,7 @@ class BrowseAdvertViewController: BaseViewController {
             if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{
-                HUD.flash(.label(response?.msg), delay: 2)
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
