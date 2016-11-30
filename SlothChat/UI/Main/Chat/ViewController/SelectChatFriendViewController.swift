@@ -180,6 +180,7 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         
         engine.postCreateGroup(memberUserUuidList: IDS, groupDisplayName: groupName) { (response) in
+            HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showNotificationSuccess(message: "创建群组成功")
                 self.pushGroupViewController(group: response?.data)
