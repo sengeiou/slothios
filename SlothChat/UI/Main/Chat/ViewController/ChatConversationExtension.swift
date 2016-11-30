@@ -53,20 +53,24 @@ extension SCConversationViewController{
         }
         //RCMessageModel
         var messageIds = [CLong]()
+        let overdueTime = Date().timeIntervalSince1970 - 30 * 60
+        
         for tmpModel in conversationDataRepository {
             if let model = tmpModel as? RCMessageModel {
-//                let receivedDate = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-//                if receivedDate.isToday() ||
-//                    model.receivedStatus == .ReceivedStatus_UNREAD{
-//                    SGLog(message: "今天的消息,或者未读的消息" + String(model.messageId))
-//                }else{
-//                    messageIds.append(model.messageId)
-//                }
+                
+                if self.targetId.hasPrefix("officialGroup") {
+                    if self.targetId.hasPrefix("officialGroup")  &&
+                        model.receivedStatus == .ReceivedStatus_UNREAD &&
+                        TimeInterval(model.receivedTime / 1000) > overdueTime{
+                        messageIds.append(model.messageId)
+                    }else if model.objectName == "RC:InfoNtf"{
+                        messageIds.append(model.messageId)
+                    }
+                }
+                
                 if model.receivedStatus == .ReceivedStatus_READ {
                     messageIds.append(model.messageId)
                 }
-//                messageIds.append(model.messageId)
-
             }
         }
         SGLog(message: messageIds)

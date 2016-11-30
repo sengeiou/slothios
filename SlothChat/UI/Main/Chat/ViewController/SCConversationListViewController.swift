@@ -292,6 +292,10 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     //重写RCConversationListViewController的onSelectedTableRow事件
     override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
+        if self.chatList?.status != ResponseError.SUCCESS.0 {
+            self.showNotificationError(message: self.chatList?.msg)
+            return
+        }
         self.conversationListTableView.deselectRow(at: indexPath, animated: true)
         
         let tmpModel = getTableViewModel(indexPath: indexPath)
@@ -358,9 +362,9 @@ extension SCConversationListViewController{
         let engine = NetworkEngine()
         
         engine.getChatList { (response) in
+            self.chatList = response
+            self.chatList?.caheForModel()
             if response?.status == ResponseError.SUCCESS.0 {
-                self.chatList = response
-                self.chatList?.caheForModel()
                 self.conversationListTableView.reloadData()
             }else{
                 self.showNotificationError(message: response?.msg)
