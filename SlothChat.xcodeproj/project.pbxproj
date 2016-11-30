@@ -193,6 +193,15 @@
 		04C0312D1DD702440003B07C /* ChatFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312C1DD702440003B07C /* ChatFriendCell.swift */; };
 		04C0312F1DD702780003B07C /* ChatFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C0312E1DD702780003B07C /* ChatFriendViewController.swift */; };
 		04C031311DD712FF0003B07C /* ChatGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C031301DD712FF0003B07C /* ChatGroupViewController.swift */; };
+		04C2330B1DEE651A0027C3B3 /* CSLayerStealingBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C232FE1DEE651A0027C3B3 /* CSLayerStealingBlurView.m */; };
+		04C2330C1DEE651A0027C3B3 /* CSNativeBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C233001DEE651A0027C3B3 /* CSNativeBlurView.m */; };
+		04C2330D1DEE651A0027C3B3 /* CSNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C233021DEE651A0027C3B3 /* CSNotificationView.m */; };
+		04C2330E1DEE651A0027C3B3 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C233051DEE651A0027C3B3 /* checkmark.png */; };
+		04C2330F1DEE651A0027C3B3 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C233061DEE651A0027C3B3 /* checkmark@2x.png */; };
+		04C233101DEE651A0027C3B3 /* checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C233071DEE651A0027C3B3 /* checkmark@3x.png */; };
+		04C233111DEE651A0027C3B3 /* exclamationMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C233081DEE651A0027C3B3 /* exclamationMark.png */; };
+		04C233121DEE651A0027C3B3 /* exclamationMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C233091DEE651A0027C3B3 /* exclamationMark@2x.png */; };
+		04C233131DEE651A0027C3B3 /* exclamationMark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C2330A1DEE651A0027C3B3 /* exclamationMark@3x.png */; };
 		04C5051D1DCF775E00E0341F /* GalleryPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */; };
 		04C5051E1DCF775E00E0341F /* GalleryPhotoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */; };
 		04D39B7D1DB8A89F009FBD60 /* UserInfoToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */; };
@@ -532,6 +541,19 @@
 		04C0312C1DD702440003B07C /* ChatFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendCell.swift; sourceTree = "<group>"; };
 		04C0312E1DD702780003B07C /* ChatFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatFriendViewController.swift; sourceTree = "<group>"; };
 		04C031301DD712FF0003B07C /* ChatGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatGroupViewController.swift; sourceTree = "<group>"; };
+		04C232FD1DEE651A0027C3B3 /* CSLayerStealingBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLayerStealingBlurView.h; sourceTree = "<group>"; };
+		04C232FE1DEE651A0027C3B3 /* CSLayerStealingBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLayerStealingBlurView.m; sourceTree = "<group>"; };
+		04C232FF1DEE651A0027C3B3 /* CSNativeBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNativeBlurView.h; sourceTree = "<group>"; };
+		04C233001DEE651A0027C3B3 /* CSNativeBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNativeBlurView.m; sourceTree = "<group>"; };
+		04C233011DEE651A0027C3B3 /* CSNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNotificationView.h; sourceTree = "<group>"; };
+		04C233021DEE651A0027C3B3 /* CSNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNotificationView.m; sourceTree = "<group>"; };
+		04C233031DEE651A0027C3B3 /* CSNotificationView_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNotificationView_Private.h; sourceTree = "<group>"; };
+		04C233051DEE651A0027C3B3 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		04C233061DEE651A0027C3B3 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
+		04C233071DEE651A0027C3B3 /* checkmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@3x.png"; sourceTree = "<group>"; };
+		04C233081DEE651A0027C3B3 /* exclamationMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exclamationMark.png; sourceTree = "<group>"; };
+		04C233091DEE651A0027C3B3 /* exclamationMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exclamationMark@2x.png"; sourceTree = "<group>"; };
+		04C2330A1DEE651A0027C3B3 /* exclamationMark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exclamationMark@3x.png"; sourceTree = "<group>"; };
 		04C5051B1DCF775E00E0341F /* GalleryPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhoto.swift; sourceTree = "<group>"; };
 		04C5051C1DCF775E00E0341F /* GalleryPhotoData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoData.swift; sourceTree = "<group>"; };
 		04D39B7C1DB8A89F009FBD60 /* UserInfoToolView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoToolView.swift; sourceTree = "<group>"; };
@@ -1186,6 +1208,7 @@
 		048B0BA61DB241A400F5A399 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				04C232FC1DEE651A0027C3B3 /* CSNotificationView */,
 				04649C701DE5728900F80DC7 /* LxTabBadgePoint */,
 				044956571DCCBAA800CBFF45 /* MJRefresh */,
 				040D46B91DC4B586005D1E8E /* PopupDialog */,
@@ -1376,6 +1399,34 @@
 				04B499B71DC106F0004659BA /* GVUserDefaults.m */,
 			);
 			path = GVUserDefaults;
+			sourceTree = "<group>";
+		};
+		04C232FC1DEE651A0027C3B3 /* CSNotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				04C232FD1DEE651A0027C3B3 /* CSLayerStealingBlurView.h */,
+				04C232FE1DEE651A0027C3B3 /* CSLayerStealingBlurView.m */,
+				04C232FF1DEE651A0027C3B3 /* CSNativeBlurView.h */,
+				04C233001DEE651A0027C3B3 /* CSNativeBlurView.m */,
+				04C233011DEE651A0027C3B3 /* CSNotificationView.h */,
+				04C233021DEE651A0027C3B3 /* CSNotificationView.m */,
+				04C233031DEE651A0027C3B3 /* CSNotificationView_Private.h */,
+				04C233041DEE651A0027C3B3 /* Resources */,
+			);
+			path = CSNotificationView;
+			sourceTree = "<group>";
+		};
+		04C233041DEE651A0027C3B3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				04C233051DEE651A0027C3B3 /* checkmark.png */,
+				04C233061DEE651A0027C3B3 /* checkmark@2x.png */,
+				04C233071DEE651A0027C3B3 /* checkmark@3x.png */,
+				04C233081DEE651A0027C3B3 /* exclamationMark.png */,
+				04C233091DEE651A0027C3B3 /* exclamationMark@2x.png */,
+				04C2330A1DEE651A0027C3B3 /* exclamationMark@3x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		04E25B8A1DBB794A002B727F /* Model */ = {
@@ -1783,24 +1834,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C233111DEE651A0027C3B3 /* exclamationMark.png in Resources */,
 				040576EF1DB3353E00C55D02 /* IQKeyboardManager.bundle in Resources */,
 				0486BB9D1DBB53D200086303 /* README.txt in Resources */,
 				048C78931DD6EC880080BBCE /* NSDateTimeAgo.bundle in Resources */,
 				044956941DCCBAA800CBFF45 /* MJRefresh.bundle in Resources */,
+				04C233101DEE651A0027C3B3 /* checkmark@3x.png in Resources */,
 				040D46CF1DC4B587005D1E8E /* .gitkeep in Resources */,
 				040D46D01DC4B587005D1E8E /* .gitkeep in Resources */,
 				19273B201DA9EE1300150460 /* LaunchScreen.storyboard in Resources */,
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */,
 				0486BB9A1DBB53D200086303 /* WeiboSDK.bundle in Resources */,
+				04C233131DEE651A0027C3B3 /* exclamationMark@3x.png in Resources */,
 				04E85FF01DED5FAA00AE7DC5 /* placeHolder_image1.jpg in Resources */,
 				0486BB9F1DBB53D200086303 /* ShareSDK.bundle in Resources */,
 				0486BB951DBB53D200086303 /* ShareSDKUI.bundle in Resources */,
 				0486BB9C1DBB53D200086303 /* read_me.txt in Resources */,
+				04C2330F1DEE651A0027C3B3 /* checkmark@2x.png in Resources */,
 				04E85FED1DED5F8800AE7DC5 /* Localizable.strings in Resources */,
 				04E85FEC1DED5F8800AE7DC5 /* LaunchScreen.strings in Resources */,
+				04C233121DEE651A0027C3B3 /* exclamationMark@2x.png in Resources */,
 				04E85FF11DED5FAA00AE7DC5 /* placeHolder_offical.jpg in Resources */,
 				048B0BB41DB2473E00F5A399 /* MIDatePicker.xib in Resources */,
+				04C2330E1DEE651A0027C3B3 /* checkmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2037,6 +2094,7 @@
 				04FEB7E61DB76F13004509D1 /* SDWebImageDecoder.m in Sources */,
 				04E404141DD85893007118AF /* NSObjectExtension.swift in Sources */,
 				04E4BC8F1DD413D100EBD66B /* BidAdResponseData.swift in Sources */,
+				04C2330C1DEE651A0027C3B3 /* CSNativeBlurView.m in Sources */,
 				04FEB7E91DB76F13004509D1 /* SDWebImageManager.m in Sources */,
 				0449568A1DCCBAA800CBFF45 /* MJRefreshHeader.m in Sources */,
 				043C91211DBBACA400431965 /* LikeUsersCell.swift in Sources */,
@@ -2081,6 +2139,7 @@
 				049BAB041DDCB44600422134 /* GroupMember.swift in Sources */,
 				04966B391DB6586D000721BD /* BaseObject.swift in Sources */,
 				04ED104B1DC76E0300EBD3C5 /* LikeProfileData.swift in Sources */,
+				04C2330B1DEE651A0027C3B3 /* CSLayerStealingBlurView.m in Sources */,
 				04B499B01DBFB7F4004659BA /* SysConfig.swift in Sources */,
 				04FEB7F81DB77BC3004509D1 /* UserInfoEditView.swift in Sources */,
 				0449568D1DCCBAA800CBFF45 /* MJRefreshAutoStateFooter.m in Sources */,
@@ -2182,6 +2241,7 @@
 				04FEB7BC1DB76EDB004509D1 /* TAPageControl.m in Sources */,
 				048B0BB91DB27D0000F5A399 /* IconTitleView.swift in Sources */,
 				04B499AD1DBFB61A004659BA /* UserProfile.swift in Sources */,
+				04C2330D1DEE651A0027C3B3 /* CSNotificationView.m in Sources */,
 				048B0BB71DB27CAC00F5A399 /* BaseView.swift in Sources */,
 				04E25B8D1DBB7958002B727F /* MyPhotosCell.swift in Sources */,
 				044956861DCCBAA800CBFF45 /* MJRefreshAutoFooter.m in Sources */,
