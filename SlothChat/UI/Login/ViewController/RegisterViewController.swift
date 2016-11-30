@@ -89,7 +89,7 @@ class RegisterViewController: BaseViewController {
             make.left.equalTo(80)
             make.right.equalTo(-80)
             make.height.equalTo(46)
-            make.bottom.equalTo(registerButton.snp.top).offset(-10)
+            make.bottom.equalTo(loginButton.snp.top).offset(-10)
         }
         
         loginButton.snp.makeConstraints { (make) in
