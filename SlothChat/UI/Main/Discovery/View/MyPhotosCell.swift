@@ -21,6 +21,7 @@ class MyPhotosCell: UICollectionViewCell {
         self.clipsToBounds = true
         imgView.frame = self.bounds
         contentView.addSubview(imgView)
+        imgView.contentMode = .scaleAspectFill
         imgView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(2, 2, 2, 2))
         }

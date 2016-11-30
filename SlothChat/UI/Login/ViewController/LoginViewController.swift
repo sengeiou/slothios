@@ -19,6 +19,7 @@ class LoginViewController: BaseViewController {
     var timeout = 0
     
     public var countryName = "CN"
+    public var countryCode = "86"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,20 +117,20 @@ class LoginViewController: BaseViewController {
     }
     
     func configPhoneInputView(inputView : SingleInputView) {
-        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 60, height: 44))
+        let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 64, height: 44))
         codeButton.frame = leftView.bounds
         let codeStr = GVUserDefaults.standard().lastLoginCountry
         if codeStr != nil{
-            codeButton.setTitle(codeStr!, for: .normal)
+            codeButton.setTitle("+" + codeStr!, for: .normal)
         }else{
-            codeButton.setTitle("86", for: .normal)
+            codeButton.setTitle("+86", for: .normal)
         }
-        codeButton.setTitleColor(UIColor.black, for: .normal)
+        codeButton.setTitleColor(SGColor.SGBlueColor(), for: .normal)
         codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
         leftView.addSubview(codeButton)
         
-        let line = UIView.init(frame: CGRect.init(x: 48, y: 6, width: 1, height: 32))
+        let line = UIView.init(frame: CGRect.init(x: 52, y: 6, width: 1, height: 32))
         line.backgroundColor = SGColor.SGLineColor()
         leftView.addSubview(line)
         
@@ -192,7 +193,7 @@ class LoginViewController: BaseViewController {
             return
         }
         let phoneStr = phoneView.getInputContent()!
-        let codeStr = self.codeButton.title(for: .normal)!
+        let codeStr = self.countryCode
         let passwordStr = passwordView.getInputContent()!
         
         let engine = NetworkEngine()
@@ -242,8 +243,8 @@ class LoginViewController: BaseViewController {
             return false
         }
 
-        let code = self.codeButton.title(for: .normal)
-        if (code?.isEmpty)! {
+        let code = self.countryCode
+        if (code.isEmpty) {
             CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请选择国家码", duration: 2)
             return false
         }
@@ -267,7 +268,8 @@ class LoginViewController: BaseViewController {
         navigationController?.pushViewController(pushVC, animated: true)
         pushVC.setClosurePass { (tmpCountry) in
             self.countryName = tmpCountry.name!
-            self.codeButton.setTitle(tmpCountry.telPrefix, for: .normal)
+            self.countryCode = tmpCountry.telPrefix!
+            self.codeButton.setTitle("+" + tmpCountry.telPrefix!, for: .normal)
         }
     }
     

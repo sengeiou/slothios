@@ -226,7 +226,7 @@ class NetworkEngine: NSObject {
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 0.9) else{
+            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
                 SGLog(message: "imageData 为空");
                 return
             }
@@ -545,7 +545,7 @@ class NetworkEngine: NSObject {
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            guard let imageData:Data = UIImageJPEGRepresentation(image, 0.9) else{
+            guard let imageData:Data = UIImageJPEGRepresentation(image, 1.0) else{
                 SGLog(message: "imageData 为空");
                 return
             }
@@ -667,7 +667,7 @@ class NetworkEngine: NSObject {
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 0.9) else{
+            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
                 SGLog(message: "imageData 为空");
                 return
             }
