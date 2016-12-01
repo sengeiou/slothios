@@ -95,6 +95,7 @@
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
 		0454F8EB1DE6C4C600E7034F /* SGVoiceMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */; };
 		04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */; };
+		046E37A41DF0321200736186 /* LimitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E37A31DF0321200736186 /* LimitExtensions.swift */; };
 		0472E85D1DD720630065AFAB /* SCChatGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */; };
 		047450F21DD3689500E5D3A6 /* SCConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */; };
 		047450F41DD368A900E5D3A6 /* SCConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */; };
@@ -416,6 +417,7 @@
 		0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGVoiceMessageCell.swift; sourceTree = "<group>"; };
 		04649C711DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LxTabBadgePoint.h"; sourceTree = "<group>"; };
 		04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LxTabBadgePoint.m"; sourceTree = "<group>"; };
+		046E37A31DF0321200736186 /* LimitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimitExtensions.swift; sourceTree = "<group>"; };
 		0472E85C1DD720630065AFAB /* SCChatGroupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCChatGroupCell.swift; sourceTree = "<group>"; };
 		047450F11DD3689500E5D3A6 /* SCConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationViewController.swift; sourceTree = "<group>"; };
 		047450F31DD368A900E5D3A6 /* SCConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCConversationListViewController.swift; sourceTree = "<group>"; };
@@ -983,6 +985,7 @@
 				0486BBB61DBB577300086303 /* NSObject+ShareSDK.m */,
 				04E404131DD85893007118AF /* NSObjectExtension.swift */,
 				04E4041D1DD8B1E5007118AF /* PurchaseExtension.swift */,
+				046E37A31DF0321200736186 /* LimitExtensions.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2205,6 +2208,7 @@
 				04E34BD91DD6C6F8007545F3 /* ChatManager.swift in Sources */,
 				0486BB681DBB41C900086303 /* IAPHelper.m in Sources */,
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
+				046E37A41DF0321200736186 /* LimitExtensions.swift in Sources */,
 				048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */,
 				04814CFB1DCF2A410012030A /* BidAdsRankVo.swift in Sources */,
 				04FEB7EA1DB76F13004509D1 /* SDWebImagePrefetcher.m in Sources */,

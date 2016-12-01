@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserInfoTextView: UIView {
+class UserInfoTextView: UIView,UITextViewDelegate {
     
     let titleLabel = UILabel.init()
     
@@ -34,6 +34,7 @@ class UserInfoTextView: UIView {
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         addSubview(titleLabel)
         
+        textView.delegate = self
         textView.font = UIFont.systemFont(ofSize: 14)
         addSubview(textView)
         
@@ -97,5 +98,10 @@ class UserInfoTextView: UIView {
         }else{
             return true
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        return true
     }
 }
