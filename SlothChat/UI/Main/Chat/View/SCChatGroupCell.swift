@@ -67,7 +67,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.top.equalTo(18)
-            make.right.equalTo(-140)
+            make.right.equalTo(-144)
         }
         
         timeLabel.snp.makeConstraints { (make) in
