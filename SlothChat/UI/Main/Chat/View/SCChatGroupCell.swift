@@ -121,9 +121,17 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         }
     }
     
-    public func configCellWithObject(lastUserAvatarUrl: String, lastUserName: String,model: RCConversationModel){
-        let avatarUrl = URL(string: lastUserAvatarUrl)
-        self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+    public func configCellWithObject(lastUserAvatarUrl: String?, lastUserName: String?,model: RCConversationModel){
+        if let lastUserAvatarUrl = lastUserAvatarUrl {
+            let avatarUrl = URL(string: lastUserAvatarUrl)
+            self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        }else{
+            self.lastUserImgView.image = UIImage(named: "icon")
+        }
+        var userName = lastUserName
+        if lastUserName == nil {
+            userName = ""
+        }
         
         
         let unreadCount = model.unreadMessageCount
@@ -138,11 +146,11 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
                 self.contentLabel.text = "[已销毁]"
             }
         }else if model.lastestMessage.isKind(of: RCImageMessage.self){
-            self.contentLabel.text = lastUserName + "：[图片]"
+            self.contentLabel.text = userName! + "：[图片]"
         }else if model.lastestMessage.isKind(of: RCVoiceMessage.self){
-            self.contentLabel.text = lastUserName + "：[语音]"
+            self.contentLabel.text = userName! + "：[语音]"
         }else if model.lastestMessage.isKind(of: RCLocationMessage.self){
-            self.contentLabel.text = lastUserName + "：[位置]"
+            self.contentLabel.text = userName! + "：[位置]"
         }else if model.lastestMessage.isKind(of: RCDiscussionNotificationMessage.self){
             self.contentLabel.text = model.lastestMessage.value(forKey: "extension") as! String?
         }
@@ -164,13 +172,13 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             if userInfo == nil {
                 ChatDataManager.userInfoWidthID(model.senderUserId){ (userInfo) in
                     if let userInfo = userInfo {
-                        self.configCellWithObject(lastUserAvatarUrl: userInfo.portraitUri!, lastUserName: userInfo.name!, model: model)
+                        self.configCellWithObject(lastUserAvatarUrl: userInfo.portraitUri, lastUserName: userInfo.name, model: model)
                     }else{
                         self.configCellWithObject(lastUserAvatarUrl: "", lastUserName: "", model: model)
                     }
                 }
             }else{
-                self.configCellWithObject(lastUserAvatarUrl: (userInfo?.portraitUri!)!, lastUserName: (userInfo?.name)!, model: model)
+                self.configCellWithObject(lastUserAvatarUrl: userInfo?.portraitUri, lastUserName: (userInfo?.name)!, model: model)
             }
         }
     }

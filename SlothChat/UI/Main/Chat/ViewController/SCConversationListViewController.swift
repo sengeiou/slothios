@@ -23,7 +23,6 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         self.conversationListTableView.reloadData()
     }
     override func viewDidLoad() {
-        //重写显示相关的接口，必须先调用super，否则会屏蔽SDK默认的处理
         super.viewDidLoad()
         navigationItem.title = "聊"
         setNavtionConfirm(imageStr: "button-group")
@@ -31,7 +30,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
 
         self.search = ({
             let controller = UISearchController(searchResultsController: nil)
-            controller.searchResultsUpdater = self   //两个样例使用不同的代理
+            controller.searchResultsUpdater = self
             controller.hidesNavigationBarDuringPresentation = false
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.searchBarStyle = .prominent
@@ -365,10 +364,33 @@ extension SCConversationListViewController{
             self.chatList = response
             self.chatList?.caheForModel()
             if response?.status == ResponseError.SUCCESS.0 {
-                self.conversationListTableView.reloadData()
+                self.refreshInvalidData(listData: response?.data)
             }else{
                 self.showNotificationError(message: response?.msg)
             }
         }
+    }
+    
+    func refreshInvalidData(listData: ChatListData?) {
+        guard let listData = listData else {
+            SGLog(message: "无效的数据源")
+            return
+        }
+        var invalidModels = [RCConversationModel]()
+        
+        for tmpModel in self.conversationListDataSource {
+            let model = tmpModel as! RCConversationModel
+            let target = listData.getTargetModel(targetId: model.targetId)
+            if target == nil {
+                invalidModels.append(model)
+                SGLog(message: model.targetId)
+            }
+        }
+        
+        for model in invalidModels {
+            RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
+            self.conversationListDataSource.remove(model)
+        }
+        self.conversationListTableView.reloadData()
     }
 }
