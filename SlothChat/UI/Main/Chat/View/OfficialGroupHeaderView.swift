@@ -51,8 +51,8 @@ class OfficialGroupHeaderView: UICollectionReusableView {
         expand.addTarget(self, action: #selector(expandClick), for: .touchUpInside)
         
         flagImgView.snp.makeConstraints { (make) in
-            make.left.top.equalTo(8)
-            make.size.equalTo(CGSize.init(width: 24, height: 23))
+            make.left.top.equalTo(10)
+            make.size.equalTo(CGSize.init(width: 20, height: 19))
         }
         
         topicTitle.snp.makeConstraints { (make) in
@@ -62,9 +62,8 @@ class OfficialGroupHeaderView: UICollectionReusableView {
         }
         
         expand.snp.makeConstraints { (make) in
-            make.top.equalTo(8)
-            make.right.equalTo(-8)
-            make.size.equalTo(CGSize.init(width: 24, height: 24))
+            make.top.right.equalTo(0)
+            make.size.equalTo(CGSize.init(width: 40, height: 40))
         }
 
         line.snp.makeConstraints { (make) in
