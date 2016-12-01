@@ -19,10 +19,19 @@ class RegisterViewController: BaseViewController {
     var timeout = 0
 
     public var countryName = "CN"
-    public var countryCode = "86"
+    public var countryCode = "86"{
+        didSet{
+            codeButton.setTitle("+" + countryCode, for: .normal)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
+            let lastCountryCode = GVUserDefaults.standard().lastCountryCode {
+            countryName = lastCountryName
+            countryCode = lastCountryCode
+        }
         sentupViews()
     }
 
@@ -105,12 +114,6 @@ class RegisterViewController: BaseViewController {
     func configPhoneInputView(inputView : SingleInputView) {
         let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 64, height: 44))
         codeButton.frame = leftView.bounds
-        let codeStr = GVUserDefaults.standard().lastLoginCountry
-        if codeStr != nil{
-            codeButton.setTitle("+" + codeStr!, for: .normal)
-        }else{
-            codeButton.setTitle("+86", for: .normal)
-        }
         codeButton.setTitleColor(SGColor.SGBlueColor(), for: .normal)
         codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
@@ -166,6 +169,7 @@ class RegisterViewController: BaseViewController {
         pushVC.codeNo = codeStr
         pushVC.password = passwordStr
         pushVC.countryName = countryName
+        pushVC.countryCode = countryCode
         navigationController?.pushViewController(pushVC, animated: true)
         
     }
@@ -193,7 +197,7 @@ class RegisterViewController: BaseViewController {
         navigationController?.pushViewController(pushVC, animated: true)
         pushVC.setClosurePass { (tmpCountry) in
             self.countryName = tmpCountry.name!
-            self.codeButton.setTitle("+" + tmpCountry.telPrefix!, for: .normal)
+            self.countryCode = tmpCountry.telPrefix!
         }
     }
     

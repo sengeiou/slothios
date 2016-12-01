@@ -12,7 +12,8 @@
 
 @property (nonatomic, copy  ) NSString       *deviceToken;
 @property (nonatomic, copy  ) NSString       *lastLoginPhone;
-@property (nonatomic, copy  ) NSString       *lastLoginCountry;
+@property (nonatomic, copy  ) NSString       *lastCountryName;
+@property (nonatomic, copy  ) NSString       *lastCountryCode;
 @property (nonatomic, copy  ) NSString       *lastAppVersion;
 @property (nonatomic, copy  ) NSString       *locationDesc;
 

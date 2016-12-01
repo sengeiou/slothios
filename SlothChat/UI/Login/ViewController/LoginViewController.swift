@@ -19,10 +19,32 @@ class LoginViewController: BaseViewController {
     var timeout = 0
     
     public var countryName = "CN"
-    public var countryCode = "86"
+    public var countryCode = "86"{
+        didSet{
+            codeButton.setTitle("+" + countryCode, for: .normal)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
+            let lastCountryCode = GVUserDefaults.standard().lastCountryCode,
+            let lastLoginPhone = GVUserDefaults.standard().lastLoginPhone{
+            countryName = lastCountryName
+            countryCode = lastCountryCode
+            phoneView.configContent(contentStr: lastLoginPhone)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
+           let lastCountryCode = GVUserDefaults.standard().lastCountryCode {
+            countryName = lastCountryName
+            countryCode = lastCountryCode
+        }else{
+            getCountryCodeList()
+        }
         sentupViews()
     }
     
@@ -119,12 +141,6 @@ class LoginViewController: BaseViewController {
     func configPhoneInputView(inputView : SingleInputView) {
         let leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 64, height: 44))
         codeButton.frame = leftView.bounds
-        let codeStr = GVUserDefaults.standard().lastLoginCountry
-        if codeStr != nil{
-            codeButton.setTitle("+" + codeStr!, for: .normal)
-        }else{
-            codeButton.setTitle("+86", for: .normal)
-        }
         codeButton.setTitleColor(SGColor.SGBlueColor(), for: .normal)
         codeButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         codeButton.addTarget(self, action:#selector(codeButtonClick), for: .touchUpInside)
@@ -168,6 +184,27 @@ class LoginViewController: BaseViewController {
         }
     }
     
+    func getCountryCodeList() {
+        let engine = NetworkEngine()
+        engine.getPublicCountry(withName: "") { (response) in
+            if response?.status == ResponseError.SUCCESS.0,
+               let list = response?.data?.list {
+                response?.caheForCountryCode()
+                let regionCode = Locale.current.regionCode
+                for obj in list{
+                    if obj.name == regionCode{
+                        GVUserDefaults.standard().lastCountryName = obj.name
+                        GVUserDefaults.standard().lastCountryCode = obj.telPrefix
+                        self.countryName = obj.name!
+                        self.countryCode = obj.telPrefix!
+                        SGLog(message: obj.display)
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
     //MARK:- Action
     
     func forgetButtonClick() {
@@ -178,7 +215,7 @@ class LoginViewController: BaseViewController {
             return
         }
         
-        let code = self.codeButton.title(for: .normal)!
+        let code = self.countryCode
         
         let pushVC  = FindPasswordViewController.init()
         pushVC.loginVC = self
@@ -203,7 +240,7 @@ class LoginViewController: BaseViewController {
             if  response != nil &&
                 response?.token != nil{
                 GVUserDefaults.standard().lastLoginPhone = phoneStr
-                GVUserDefaults.standard().lastLoginCountry = codeStr
+                GVUserDefaults.standard().lastCountryCode = codeStr
                 Global.shared.globalLogin = response!
                 
                 if (response!.user?.uuid) != nil{
@@ -269,7 +306,6 @@ class LoginViewController: BaseViewController {
         pushVC.setClosurePass { (tmpCountry) in
             self.countryName = tmpCountry.name!
             self.countryCode = tmpCountry.telPrefix!
-            self.codeButton.setTitle("+" + tmpCountry.telPrefix!, for: .normal)
         }
     }
     

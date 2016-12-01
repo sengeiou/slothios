@@ -12,8 +12,8 @@
 
 @dynamic deviceToken;
 @dynamic lastLoginPhone;
-@dynamic lastLoginCountry;
 @dynamic lastAppVersion;
 @dynamic locationDesc;
-
+@dynamic lastCountryCode;
+@dynamic lastCountryName;
 @end

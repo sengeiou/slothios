@@ -63,16 +63,22 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     func getCountryCodeList() {
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.getPublicCountry(withName: "") { (countryObj) in
+        engine.getPublicCountry(withName: "") { (response) in
             HUD.hide()
-            let list = countryObj?.data?.list
-            let result = self.splitCountryList(countryList: list!)
-            self.countryList.removeAll()
-            self.countryList = result.countryList
-
-            self.initialList.removeAll()
-            self.initialList = result.initialList
-            self.tableView.reloadData()
+            if response?.status == ResponseError.SUCCESS.0 {
+                if let list = response?.data?.list{
+                    response?.caheForCountryCode()
+                    let result = self.splitCountryList(countryList: list)
+                    self.countryList.removeAll()
+                    self.countryList = result.countryList
+                    
+                    self.initialList.removeAll()
+                    self.initialList = result.initialList
+                    self.tableView.reloadData()
+                }
+            }else{
+                self.showNotificationError(message: response?.msg)
+            }
         }
     }
     

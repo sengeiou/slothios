@@ -13,9 +13,10 @@ import AwesomeCache
 
 class PerfectionInfoViewController: BaseViewController {
     
-    public var phoneNo:String!
-    public var password:String!
-    public var countryName = "CN"
+    public var phoneNo: String!
+    public var password: String!
+    public var countryName: String!
+    public var countryCode: String!
 
     let avatarButton = UIButton.init(type: .custom)
 
@@ -178,7 +179,7 @@ class PerfectionInfoViewController: BaseViewController {
         }else{
             user.userPhotoUuid = "dc2c96ae5165404e86197a4fd734d20c"
         }
-        user.mobile = self.phoneNo
+        user.mobile = self.countryCode + self.phoneNo
         user.passwd = self.password
         user.country = self.countryName
         user.nickname = nickName!
@@ -190,8 +191,9 @@ class PerfectionInfoViewController: BaseViewController {
         engine.postPublicUserAndProfileSignup(withSignpModel: user) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
-//                GVUserDefaults.standard().lastLoginPhone = self.phoneNo
-//                GVUserDefaults.standard().lastLoginCountry = self.countryName
+                GVUserDefaults.standard().lastLoginPhone = self.phoneNo
+                GVUserDefaults.standard().lastCountryName = self.countryName
+                GVUserDefaults.standard().lastCountryCode = self.countryCode
                 self.showNotificationSuccess(message: "注册成功")
                 _ = self.navigationController?.popToRootViewController(animated: true)
             }else{

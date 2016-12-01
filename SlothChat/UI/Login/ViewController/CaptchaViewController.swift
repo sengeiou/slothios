@@ -13,10 +13,11 @@ class CaptchaViewController: BaseViewController {
     var timer = Timer()
     var registerVC: RegisterViewController?
 
-    public var phoneNo:String!
-    public var codeNo:String!
-    public var password:String!
-    public var countryName = "CN"
+    public var phoneNo: String!
+    public var codeNo: String!
+    public var password: String!
+    public var countryName: String!
+    public var countryCode: String!
 
 
     let tipLabel = UILabel.init()
@@ -123,9 +124,10 @@ class CaptchaViewController: BaseViewController {
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0{
                 let pushVC  = PerfectionInfoViewController.init()
-                pushVC.phoneNo = self.codeNo + self.phoneNo
+                pushVC.phoneNo = self.phoneNo
                 pushVC.password = self.password
                 pushVC.countryName = self.countryName
+                pushVC.countryCode = self.countryCode
                 self.navigationController?.pushViewController(pushVC, animated: true)
             }else{
                 self.showNotificationError(message: response?.msg)

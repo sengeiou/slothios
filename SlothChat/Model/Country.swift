@@ -15,7 +15,26 @@ class Country : NSObject, NSCoding, Mappable{
 	var msg : String?
 	var status : String?
 
-
+    open func caheForCountryCode() {
+        let data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.setValue(data, forKey: "CountryCodeCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func removeFromCache(){
+        UserDefaults.standard.removeObject(forKey: "CountryCodeCacheKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    open class func ModelFromCache() -> Country? {
+        let data = UserDefaults.standard.value(forKey: "CountryCodeCacheKey")
+        if data != nil {
+            let user = NSKeyedUnarchiver.unarchiveObject(with: data as! Data)  as! Country?
+            return user
+        }
+        return nil
+    }
+    
 	class func newInstance(map: Map) -> Mappable?{
 		return Country()
 	}

@@ -172,7 +172,6 @@
 		04AC92191DB0B6DE0048A9FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */; };
 		04AC921A1DB0B6DE0048A9FD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */; };
 		04AC921C1DB0B6F50048A9FD /* CountryCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */; };
-		04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */; };
 		04B1CEEB1DBC3428003482DF /* BrowseAdvertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEA1DBC3428003482DF /* BrowseAdvertViewController.swift */; };
 		04B1CEED1DBC42DA003482DF /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEC1DBC42DA003482DF /* PublishViewController.swift */; };
 		04B1CEEF1DBC45F9003482DF /* BiddingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */; };
@@ -517,7 +516,6 @@
 		04AC92161DB0B6DE0048A9FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		04AC92171DB0B6DE0048A9FD /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		04AC921B1DB0B6F50048A9FD /* CountryCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeCell.swift; sourceTree = "<group>"; };
-		04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryCodeObj.swift; sourceTree = "<group>"; };
 		04B1CEEA1DBC3428003482DF /* BrowseAdvertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseAdvertViewController.swift; sourceTree = "<group>"; };
 		04B1CEEC1DBC42DA003482DF /* PublishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
 		04B1CEEE1DBC45F9003482DF /* BiddingListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiddingListView.swift; sourceTree = "<group>"; };
@@ -1324,7 +1322,6 @@
 		04AC92121DB0B6DE0048A9FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04AC921D1DB0B9C30048A9FD /* CountryCodeObj.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2198,7 +2195,6 @@
 				040D46DD1DC4B587005D1E8E /* TransitionAnimations.swift in Sources */,
 				0486BB691DBB41C900086303 /* IAPShare.m in Sources */,
 				04EE6B151DDE142E005648F1 /* PrivateChatData.swift in Sources */,
-				04AC921E1DB0B9C30048A9FD /* CountryCodeObj.swift in Sources */,
 				0449568B1DCCBAA800CBFF45 /* MJRefreshAutoGifFooter.m in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
 				041701251DD4CD96002FADFE /* SCConversationListCell.swift in Sources */,
