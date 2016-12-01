@@ -68,7 +68,7 @@ class SingleInputView: UIView {
             make.top.equalTo(0)
         }
 
-        
+        inputTextfield.clearButtonMode = .whileEditing
         inputTextfield.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
 //            make.top.equalTo(errorLabel.snp.bottom)
