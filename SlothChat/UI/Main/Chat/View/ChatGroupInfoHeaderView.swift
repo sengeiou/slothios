@@ -86,6 +86,11 @@ class ChatGroupInfoHeaderView: UIView {
     }
     
     func modifyGroupName(newName: String) {
+        if newName.characters.count >= 20 {
+            UIViewController.showCurrentViewControllerNotificationError(message: "群组长度不能超过20个字符")
+            return
+        }
+        
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
         let adminUserUuid = Global.shared.globalProfile?.userUuid
@@ -107,6 +112,10 @@ class ChatGroupInfoHeaderView: UIView {
     }
         
     func modifyUserNickName(newName: String) {
+        if newName.characters.count >= 20 {
+            UIViewController.showCurrentViewControllerNotificationError(message: "用户昵称长度不能超过20个字符")
+            return
+        }
         if (groupUuid?.hasPrefix("officialGroup"))! {
             modifyOfficialGroupMemberName(newName: newName)
         }else{

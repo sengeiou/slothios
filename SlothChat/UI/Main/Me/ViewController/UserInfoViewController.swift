@@ -393,10 +393,6 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     //MARK:- Action
     func chatButtonClick() {
-        
-        
-        
-        
         SGLog(message: "")
         guard let myProfile = Global.shared.globalProfile,
               let canTalk = Global.shared.globalLogin?.canTalk,
