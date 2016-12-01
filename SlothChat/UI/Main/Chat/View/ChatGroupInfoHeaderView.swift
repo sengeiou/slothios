@@ -158,7 +158,7 @@ class ChatGroupInfoHeaderView: UIView {
     }
 }
 
-class ChatGroupInfoInputView: UIView {
+class ChatGroupInfoInputView: UIView,UITextFieldDelegate {
     let titleLabel = UILabel()
     let textfield = UITextField()
     let line = UIView()
@@ -184,6 +184,7 @@ class ChatGroupInfoInputView: UIView {
         titleLabel.textColor = SGColor.SGTextColor()
         titleLabel.font = UIFont.systemFont(ofSize: 14)
         textfield.font = UIFont.systemFont(ofSize: 14)
+        textfield.delegate = self
         
         addSubview(titleLabel)
         addSubview(textfield)
@@ -249,5 +250,10 @@ class ChatGroupInfoInputView: UIView {
         }else{
             return true
         }
+    }
+    //MARK:- UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

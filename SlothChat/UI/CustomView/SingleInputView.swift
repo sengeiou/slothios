@@ -15,7 +15,7 @@ enum InputType {
 }
 typealias SelectClosureType = () -> Void
 
-class SingleInputView: UIView {
+class SingleInputView: UIView,UITextFieldDelegate {
 
     let titleLabel = UILabel.init()
     let errorLabel = UILabel.init()
@@ -67,7 +67,7 @@ class SingleInputView: UIView {
             make.left.equalTo(titleLabel.snp.right).offset(10)
             make.top.equalTo(0)
         }
-
+        inputTextfield.delegate = self
         inputTextfield.clearButtonMode = .whileEditing
         inputTextfield.snp.makeConstraints { (make) in
             make.left.equalTo(titleLabel.snp.right)
@@ -168,6 +168,12 @@ class SingleInputView: UIView {
                 self.inputTextfield.backgroundColor = UIColor.white
             })
         }
+    }
+    
+    //MARK:- UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
 }

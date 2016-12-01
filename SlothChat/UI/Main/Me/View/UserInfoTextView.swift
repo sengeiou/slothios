@@ -14,7 +14,7 @@ class UserInfoTextView: UIView,UITextViewDelegate {
     
     let textView = UITextView.init()
     let line = UIView.init()
-    
+    var newlineCount = 1
     
     override init(frame: CGRect ){
         super.init(frame: frame)
@@ -101,7 +101,18 @@ class UserInfoTextView: UIView,UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+        if text == "\n" {
+            let rangs = textView.text.findOccurencesOf(text: "\n")
+            if rangs.count + 1 == newlineCount {
+                textView.resignFirstResponder()
+            }
+        }
         return true
+    }
+}
+
+extension String {
+    func findOccurencesOf(text:String) -> [NSRange] {
+        return !text.isEmpty ? try! NSRegularExpression(pattern: text, options: []).matches(in: self, options: [], range: NSRange(0..<characters.count)).map{ $0.range } : []
     }
 }

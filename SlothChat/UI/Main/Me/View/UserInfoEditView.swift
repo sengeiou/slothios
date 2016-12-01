@@ -67,6 +67,7 @@ class UserInfoEditView: BaseView {
         universityView.configInputView(titleStr: "学校:", contentStr: "")
         addSubview(universityView)
         
+        personalProfileView.newlineCount = 3
         personalProfileView.setInputTextfieldLeftMagin(left: 80)
         personalProfileView.configInputView(titleStr: "简介:", contentStr: "")
         addSubview(personalProfileView)
@@ -173,13 +174,12 @@ class UserInfoEditView: BaseView {
     func confirmButtonClick() {
         print("confirmButtonClick")
         self.endEditing(true)
-        
-        self.userObj?.nickname = nameView.getInputContent()!
-        if sexPickView.isMalePick {
-            self.userObj?.sex = SGGenderType.male.rawValue
-        }else{
-            self.userObj?.sex = SGGenderType.female.rawValue
+        let nickname = nameView.getInputContent()!
+        if nickname.characters.count >= 20 {
+            UIViewController.showCurrentViewControllerNotificationError(message: "用户的昵称长度不能超过20个字符")
+            return
         }
+        
         let university = universityView.getInputContent()!
         if university.characters.count >= 50 {
             UIViewController.showCurrentViewControllerNotificationError(message: "学校长度不能超过50个字符")
@@ -189,6 +189,12 @@ class UserInfoEditView: BaseView {
         if personalProfile.characters.count >= 100 {
             UIViewController.showCurrentViewControllerNotificationError(message: "简介长度不能超过100个字符")
             return
+        }
+        self.userObj?.nickname = nickname
+        if sexPickView.isMalePick {
+            self.userObj?.sex = SGGenderType.male.rawValue
+        }else{
+            self.userObj?.sex = SGGenderType.female.rawValue
         }
         self.userObj?.university = university
         self.userObj?.personalProfile = personalProfile
