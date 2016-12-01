@@ -25,16 +25,16 @@ class LoginViewController: BaseViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
-            let lastCountryCode = GVUserDefaults.standard().lastCountryCode,
-            let lastLoginPhone = GVUserDefaults.standard().lastLoginPhone{
-            countryName = lastCountryName
-            countryCode = lastCountryCode
-            phoneView.configContent(contentStr: lastLoginPhone)
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
+//            let lastCountryCode = GVUserDefaults.standard().lastCountryCode,
+//            let lastLoginPhone = GVUserDefaults.standard().lastLoginPhone{
+//            countryName = lastCountryName
+//            countryCode = lastCountryCode
+//            phoneView.configContent(contentStr: lastLoginPhone)
+//        }
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
