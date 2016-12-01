@@ -99,7 +99,7 @@ class BrowseAdvertViewController: BaseViewController {
         self.photoObj = photoObj
         
         let mainImgUrl = URL(string: (photoObj?.bigPicUrl)!)
-        self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage(named: "placeHolder_image1.jpg"), options: nil, progressBlock: nil, completionHandler: nil)
         
         if let avatarList = photoObj?.getLikeGallerySliceUrlList() {
             usersListView.configViewWithObject(avatarList: avatarList, totalCount: (photoObj?.likesCount)!)
