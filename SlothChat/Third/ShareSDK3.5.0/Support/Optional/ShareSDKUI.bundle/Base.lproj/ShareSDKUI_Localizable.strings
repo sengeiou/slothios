@@ -7,7 +7,7 @@
  */
 
 "ShareType_0" = "未知";
-"ShareType_1" = "";
+"ShareType_1" = "新浪";
 "ShareType_2" = "腾讯微博";
 "ShareType_5" = "豆瓣";
 "ShareType_6" = "QQ空间";
@@ -26,8 +26,8 @@
 "ShareType_19" = "短信";
 "ShareType_20" = "打印";
 "ShareType_21" = "拷贝";
-"ShareType_22" = "";
-"ShareType_23" = "";
+"ShareType_22" = "微信";
+"ShareType_23" = "朋友圈";
 "ShareType_24" = "QQ";
 "ShareType_25" = "Instapaper";
 "ShareType_26" = "Pocket";

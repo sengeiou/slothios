@@ -7,7 +7,7 @@
 */
 
 "ShareType_0" = "Unknown";
-"ShareType_1" = "";
+"ShareType_1" = "Sina";
 "ShareType_2" = "Tencent Weibo";
 "ShareType_5" = "Douban";
 "ShareType_6" = "QZone";
@@ -26,8 +26,8 @@
 "ShareType_19" = "SMS";
 "ShareType_20" = "Print";
 "ShareType_21" = "Copy";
-"ShareType_22" = "";
-"ShareType_23" = "";
+"ShareType_22" = "Vx";
+"ShareType_23" = "Circle";
 "ShareType_24" = "QQ";
 "ShareType_25" = "Instapaper";
 "ShareType_26" = "Pocket";
