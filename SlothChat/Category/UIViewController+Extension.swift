@@ -65,7 +65,7 @@ extension UIViewController{
     
     class func showNotification(message: String, viewController: UIViewController) {
         let noteView =  CSNotificationView(parentViewController: viewController, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message)
-        noteView?.setNoteAlpha(0.6)
+        noteView?.setNoteAlpha(0.7)
         noteView?.setVisible(true, animated: true, completion: {
             let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {

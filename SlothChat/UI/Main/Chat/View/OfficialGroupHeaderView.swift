@@ -39,7 +39,9 @@ class OfficialGroupHeaderView: UICollectionReusableView {
         
         flagImgView.image = UIImage(named: "icon_officialFlag")
         topicImgView.isHidden = true
-
+        topicImgView.contentMode = .scaleAspectFill
+        topicImgView.clipsToBounds = true
+        
         flagLabel.text = "请注意：本群只能发语音，每条语音30'后自动销毁。"
         flagLabel.font = UIFont.systemFont(ofSize: 12)
         flagLabel.textColor = SGColor.SGTextColor()

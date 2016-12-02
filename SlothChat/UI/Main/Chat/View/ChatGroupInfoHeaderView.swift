@@ -98,7 +98,7 @@ class ChatGroupInfoHeaderView: UIView {
         engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupUuid, adminUserUuid: adminUserUuid){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-//                self.showNotificationError(message: "修改群组名成功")
+                UIViewController.showCurrentViewControllerNotificationError(message: "修改群组名成功")
                 NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewUserGroupName":newName])
             }else{
                 UIViewController.showCurrentViewControllerNotificationError(message: response?.msg)
@@ -130,7 +130,7 @@ class ChatGroupInfoHeaderView: UIView {
         engine.putUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 {
-//                 self.showNotificationSuccess(message: "修改用户名成功")
+                UIViewController.showCurrentViewControllerNotificationError(message: "修改用户名成功")
             }else{
                 UIViewController.showCurrentViewControllerNotificationError(message: response?.msg)
             }
