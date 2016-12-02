@@ -63,17 +63,24 @@ extension UIViewController{
         UIViewController.showNotification(message: message, viewController: self)
     }
     
-    class func showNotification(message: String, viewController: UIViewController) {
-        let noteView =  CSNotificationView(parentViewController: viewController, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message)
+    func showNotificationProgress(message: String?) -> CSNotificationView {
+        guard let message = message else {
+            let noteView =  CSNotificationView(parentViewController: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "操作成功!")
+            noteView?.setNoteAlpha(0.7)
+            noteView?.isShowingActivity = true
+            noteView?.setVisible(true, animated: true, completion: nil)
+            return noteView!
+        }
+        let noteView =  CSNotificationView(parentViewController: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message)
         noteView?.setNoteAlpha(0.7)
-        noteView?.setVisible(true, animated: true, completion: {
-            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
-                noteView?.setVisible(false, animated: true, completion: {
-                })
-            })
-        })
+        noteView?.isShowingActivity = true
+        noteView?.setVisible(true, animated: true, completion: nil)
+        return noteView!
+    }
+    
+    func hiddenNotificationProgress(noteView: CSNotificationView) {
         
+        noteView.setVisible(false, animated: false, completion: nil)
     }
     
     class func showCurrentViewControllerNotificationError(message: String?) {
@@ -102,6 +109,19 @@ extension UIViewController{
         }else if (rootVC?.isKind(of: UIViewController.self))! {
             showNotification(message: tmpMessage, viewController: rootVC!)
         }
+    }
+    
+    class func showNotification(message: String, viewController: UIViewController) {
+        let noteView =  CSNotificationView(parentViewController: viewController, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message)
+        noteView?.setNoteAlpha(0.7)
+        noteView?.setVisible(true, animated: true, completion: {
+            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                noteView?.setVisible(false, animated: true, completion: {
+                })
+            })
+        })
+        
     }
     
     func backClick() {
