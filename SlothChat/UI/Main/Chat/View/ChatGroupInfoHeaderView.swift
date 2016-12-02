@@ -101,12 +101,7 @@ class ChatGroupInfoHeaderView: UIView {
 //                self.showNotificationError(message: "修改群组名成功")
                 NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewUserGroupName":newName])
             }else{
-                
-//                if response?.msg != nil {
-//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: response?.msg, duration: 2)
-//                }else{
-//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "系统异常", duration: 2)
-//                }
+                UIViewController.showCurrentViewControllerNotificationError(message: response?.msg)
             }
         }
     }
@@ -137,11 +132,7 @@ class ChatGroupInfoHeaderView: UIView {
             if response?.status == ResponseError.SUCCESS.0 {
 //                 self.showNotificationSuccess(message: "修改用户名成功")
             }else{
-//                if response?.msg != nil {
-//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: response?.msg, duration: 2)
-//                }else{
-//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "系统异常", duration: 2)
-//                }
+                UIViewController.showCurrentViewControllerNotificationError(message: response?.msg)
             }
         }
     }

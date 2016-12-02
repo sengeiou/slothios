@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-static CGFloat const kCSNotificationViewHeight = 50.0f;
-static CGFloat const kCSNotificationViewSymbolViewSidelength = 44.0f;
+static CGFloat const kCSNotificationViewHeight = 36.0f;
+static CGFloat const kCSNotificationViewSymbolViewSidelength = 22.0f;
 static NSTimeInterval const kCSNotificationViewDefaultShowDuration = 2.0;
 
 typedef NS_ENUM(NSInteger, CSNotificationViewStyle) {
@@ -79,6 +79,8 @@ typedef void(^CSVoidBlock)();
  * Convenience method to dismiss with a(nother) predefined style and / or message.
  */
 - (void)dismissWithStyle:(CSNotificationViewStyle)style message:(NSString*)message duration:(NSTimeInterval)duration animated:(BOOL)animated;
+
+- (void)setNoteViewAlpha:(CGFloat)alpha;
 
 @property (readonly, nonatomic, getter = isShowing) BOOL visible;
 

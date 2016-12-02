@@ -104,37 +104,37 @@ class ModifyPasswordViewController: BaseViewController {
 
     func checkSubmitValid() -> Bool {
         if !oldPassordView.getSumbitValid() {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入原始密码", duration: 2)
+            showNotificationError(message: "请输入原始密码")
             return false
         }
         
         if !new1PasswordView.getSumbitValid() {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入新密码", duration: 2)
+            showNotificationError(message: "请输入新密码")
             return false
         }
         
         if !new2PasswordView.getSumbitValid() {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入新密码", duration: 2)
+            showNotificationError(message: "请输入新密码")
             return false
         }
         
         if !(oldPassordView.getInputContent()?.validString())!{
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "旧密码需要6位字母数字组合并且至少包含1个大写字母", duration: 2)
+            showNotificationError(message: "旧密码需要6位字母数字组合并且至少包含1个大写字母")
             return false
         }
         
         if !(new1PasswordView.getInputContent()?.validString())!{
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "新密码需要6位字母数字组合并且至少包含1个大写字母", duration: 2)
+            showNotificationError(message: "新密码需要6位字母数字组合并且至少包含1个大写字母")
             return false
         }
         
         if !(new2PasswordView.getInputContent()?.validString())!{
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "新密码需要6位字母数字组合并且至少包含1个大写字母", duration: 2)
+            showNotificationError(message: "新密码需要6位字母数字组合并且至少包含1个大写字母")
             return false
         }
         
         if new1PasswordView.getInputContent() != new2PasswordView.getInputContent() {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "两次密码不一致", duration: 2)
+            showNotificationError(message: "两次密码不一致")
             return false
         }
 

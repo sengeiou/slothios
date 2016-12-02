@@ -211,7 +211,7 @@ class LoginViewController: BaseViewController {
         print("forgetButtonClick")
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入手机号", duration: 2)
+            showNotificationError(message: "请输入手机号")
             return
         }
         
@@ -271,23 +271,23 @@ class LoginViewController: BaseViewController {
     func checkDataValid() -> Bool {
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入手机号", duration: 2)
+            showNotificationError(message: "请输入手机号")
             return false
         }
         
         if !Validate.phoneNum(phoneStr!).isRight{
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "手机号码为6到11位", duration: 2)
+            showNotificationError(message: "手机号码为6到11位")
             return false
         }
 
         let code = self.countryCode
         if (code.isEmpty) {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请选择国家码", duration: 2)
+            showNotificationError(message: "请选择国家码")
             return false
         }
         let passwordStr = passwordView.getInputContent()
         if (passwordStr?.isEmpty)! {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请输入密码", duration: 2)
+            showNotificationError(message: "请输入密码")
             return false
         }
         

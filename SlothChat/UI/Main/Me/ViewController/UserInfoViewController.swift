@@ -417,18 +417,18 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         if otherProfile.userUuid == myProfile.userUuid {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "不能和自己聊天哦~", duration: 2)
+            showNotificationError(message: "不能和自己聊天哦~")
 
             return
         }
         
         if !canTalk {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "请设置您的个人资料第一张是真人照片~", duration: 2)
+            showNotificationError(message: "请设置您的个人资料第一张是真人照片~")
             return
         }
         
         if !isAcceptPrivateChat {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "对方未开启一对一私聊", duration: 2)
+            showNotificationError(message: "对方未开启一对一私聊~")
             return
         }
         

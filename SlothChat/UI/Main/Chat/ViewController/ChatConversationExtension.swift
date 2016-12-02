@@ -219,26 +219,22 @@ extension SCConversationViewController{
     //MARK:- NetWork
     func getGroupInfo() {
         
-        //        guard let groupUuid = groupUuid else {
-        //            SGLog(message: "groupUuid为空")
-        //            return
-        //        }
-        //        let engine = NetworkEngine()
-        //        HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        //
-        //        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
-        //            HUD.hide()
-        //            if response?.status == ResponseError.SUCCESS.0 {
-        //                if let group = response?.data{
-        //                    self.title = group.groupDisplayName
-        //                }
-        //            }else{
-        //                if response?.msg != nil {
-//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: response?.msg, duration: 2)
-//                }else{
-//                    CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "系统异常", duration: 2)
+//        guard let groupUuid = groupUuid else {
+//            SGLog(message: "groupUuid为空")
+//            return
+//        }
+//        let engine = NetworkEngine()
+//        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+//        
+//        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
+//            HUD.hide()
+//            if response?.status == ResponseError.SUCCESS.0 {
+//                if let group = response?.data{
+//                    self.title = group.groupDisplayName
 //                }
-        //            }
-        //        }
+//            }else{
+//                showNotificationError(message: response?.msg)
+//            }
+//        }
     }
 }

@@ -117,7 +117,6 @@
                 //Use layer stealing
                 self.blurView = [[CSLayerStealingBlurView alloc] initWithFrame:CGRectZero];
             }
-            
             self.blurView.userInteractionEnabled = NO;
             self.blurView.translatesAutoresizingMaskIntoConstraints = NO;
             self.blurView.clipsToBounds = NO;
@@ -375,6 +374,11 @@
             [weakself setVisible:NO animated:animated completion:nil];
         });
     }];
+}
+
+- (void)setNoteViewAlpha:(CGFloat)alpha{
+    self.alpha = alpha;
+    self.blurView.alpha = alpha;
 }
 
 #pragma mark - frame calculation

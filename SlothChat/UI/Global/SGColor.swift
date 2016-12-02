@@ -53,6 +53,6 @@ class SGColor: UIColor {
     }
     
     class func SGNoticeErrorColor() -> UIColor {
-        return UIColor.lightGray
+        return UIColor.lightGray.withAlphaComponent(0.6)
     }
 }

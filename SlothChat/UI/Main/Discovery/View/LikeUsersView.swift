@@ -110,7 +110,7 @@ class LikeUsersView: BaseView,UICollectionViewDelegate,UICollectionViewDataSourc
             dataSource.removeAll()
             
             if totalCount <= 0 {
-                countLabel.text = "您要加油哦~"
+                countLabel.text = " "
                 countLabel.snp.updateConstraints { (make) in
                     make.left.equalTo(9)
                 }

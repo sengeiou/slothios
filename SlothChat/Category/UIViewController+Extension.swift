@@ -49,21 +49,38 @@ extension UIViewController{
     
     func showNotificationError(message: String?) {
         guard let message = message else {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "操作失败~", duration: 2)
+            UIViewController.showNotification(message: "操作失败~", viewController: self)
             return
         }
-        CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message, duration: 2)
+        UIViewController.showNotification(message: message, viewController: self)
     }
     
     func showNotificationSuccess(message: String?) {
         guard let message = message else {
-            CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "操作成功!", duration: 2)
+            UIViewController.showNotification(message: "操作成功!", viewController: self)
             return
         }
-        CSNotificationView.show(in: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message, duration: 2)
+        UIViewController.showNotification(message: message, viewController: self)
+    }
+    
+    class func showNotification(message: String, viewController: UIViewController) {
+        let noteView =  CSNotificationView(parentViewController: viewController, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message)
+        noteView?.setNoteAlpha(0.6)
+        noteView?.setVisible(true, animated: true, completion: {
+            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                noteView?.setVisible(false, animated: true, completion: {
+                })
+            })
+        })
+        
     }
     
     class func showCurrentViewControllerNotificationError(message: String?) {
+        var tmpMessage = "操作失败"
+        if message != nil {
+            tmpMessage = message!
+        }
         let tmpApp = UIApplication.shared.delegate as! AppDelegate;
         let rootVC = tmpApp.window?.rootViewController
         if (rootVC?.isKind(of: UITabBarController.self))! {
@@ -72,18 +89,18 @@ extension UIViewController{
             if (selectedNav?.isKind(of: UINavigationController.self))! {
                 let nav = selectedNav as! UINavigationController
                 let activityVC = nav.viewControllers.last
-                CSNotificationView.show(in: activityVC, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message, duration: 2)
+                showNotification(message: tmpMessage, viewController: activityVC!)
             }else if (selectedNav?.isKind(of: UIViewController.self))! {
-                CSNotificationView.show(in: selectedNav, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message, duration: 2)
+                showNotification(message: tmpMessage, viewController: selectedNav!)
             }
 
         }else if (rootVC?.isKind(of: UINavigationController.self))! {
             let nav = rootVC as! UINavigationController
             let activityVC = nav.viewControllers.last
-            CSNotificationView.show(in: activityVC, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message, duration: 2)
+            showNotification(message: tmpMessage, viewController: activityVC!)
             
         }else if (rootVC?.isKind(of: UIViewController.self))! {
-            CSNotificationView.show(in: rootVC, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message, duration: 2)
+            showNotification(message: tmpMessage, viewController: rootVC!)
         }
     }
     
