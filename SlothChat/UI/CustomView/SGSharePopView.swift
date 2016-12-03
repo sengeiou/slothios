@@ -47,17 +47,17 @@ class SGSharePopView: UIView {
         sinaButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(-24)
             make.centerX.equalTo(self).offset(-88)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
         weichatButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(-24)
             make.centerX.equalTo(self)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
         timeLineButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(-24)
             make.centerX.equalTo(self).offset(88)
-            make.size.equalTo(CGSize.init(width: 44, height: 44))
+            make.size.equalTo(CGSize.init(width: 60, height: 60))
         }
         
         sinaButton.addTarget(self, action: #selector(sinaButtonClick), for: .touchUpInside)
