@@ -168,7 +168,7 @@ class FindPasswordViewController: BaseViewController {
         
         let engine = NetworkEngine()
         HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        engine.postPublicSMS(withType: "signup", toPhoneno: codeNo! + phoneNo!) { (response) in
+        engine.postPublicSMS(withType: "resetPwd", toPhoneno: codeNo! + phoneNo!) { (response) in
             HUD.hide()
             if response?.status == ResponseError.SUCCESS.0 &&
                 !((self.phoneNo?.isEmpty)!) {

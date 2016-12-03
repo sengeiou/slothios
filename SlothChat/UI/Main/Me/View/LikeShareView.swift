@@ -15,6 +15,7 @@ class LikeShareView: BaseView {
     let imgView = UIImageView()
     let likeLabel = UILabel()
     let shareButton = UIButton(type: .custom)
+    let sharePopView = SGSharePopView()
     
     var actionInfoValue:LikeUserListType?
 
@@ -64,6 +65,15 @@ class LikeShareView: BaseView {
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(likeUserTap))
         likeLabel.isUserInteractionEnabled = true
         likeLabel.addGestureRecognizer(tap2)
+        
+        let tmpApp = UIApplication.shared.delegate as! AppDelegate;
+        if let rootVC = tmpApp.window?.rootViewController{
+            rootVC.view.addSubview(sharePopView)
+            sharePopView.isHidden = true
+            sharePopView.snp.makeConstraints({ (make) in
+                make.edges.equalTo(UIEdgeInsets.zero)
+            })
+        }
     }
     
     func configLikeLabel(count: Int) {
@@ -83,8 +93,7 @@ class LikeShareView: BaseView {
     
     func shareButtonClick() {
         SGLog(message: "")
-        
-        NSObject.share()
+        sharePopView.isHidden = false
     }
     
 }

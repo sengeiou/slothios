@@ -68,6 +68,7 @@
 		04405B2D1DC46CD50042BB44 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04405B2C1DC46CD50042BB44 /* ImageScrollView.swift */; };
 		04405B2F1DC46E310042BB44 /* ImageScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04405B2E1DC46E310042BB44 /* ImageScrollViewController.swift */; };
 		04405B311DC480B40042BB44 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04405B301DC480B40042BB44 /* AssetsLibrary.framework */; };
+		0444FFF21DF2C26F005809B3 /* SGSharePopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444FFF11DF2C26F005809B3 /* SGSharePopView.swift */; };
 		044643531DB4F0660050F8BC /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643521DB4F0660050F8BC /* DiscoveryViewController.swift */; };
 		044643551DB4F06D0050F8BC /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643541DB4F06D0050F8BC /* UserInfoViewController.swift */; };
 		044643581DB4F6960050F8BC /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044643571DB4F6960050F8BC /* UIViewController+Extension.swift */; };
@@ -369,6 +370,7 @@
 		04405B2C1DC46CD50042BB44 /* ImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		04405B2E1DC46E310042BB44 /* ImageScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollViewController.swift; sourceTree = "<group>"; };
 		04405B301DC480B40042BB44 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		0444FFF11DF2C26F005809B3 /* SGSharePopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGSharePopView.swift; sourceTree = "<group>"; };
 		044643521DB4F0660050F8BC /* DiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		044643541DB4F06D0050F8BC /* UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		044643571DB4F6960050F8BC /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -1297,6 +1299,7 @@
 				04AC92051DB0B02C0048A9FD /* SingleInputView.swift */,
 				048B0BB81DB27D0000F5A399 /* IconTitleView.swift */,
 				04966B481DB7B1D9000721BD /* SexPickView.swift */,
+				0444FFF11DF2C26F005809B3 /* SGSharePopView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -2090,6 +2093,7 @@
 				0449568A1DCCBAA800CBFF45 /* MJRefreshHeader.m in Sources */,
 				043C91211DBBACA400431965 /* LikeUsersCell.swift in Sources */,
 				044956981DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m in Sources */,
+				0444FFF21DF2C26F005809B3 /* SGSharePopView.swift in Sources */,
 				04E4041C1DD882AA007118AF /* SelectFriendsCell.swift in Sources */,
 				04FEB7F61DB77BB8004509D1 /* UserInfoView.swift in Sources */,
 				19008BB21DBE935500319B86 /* Response.swift in Sources */,

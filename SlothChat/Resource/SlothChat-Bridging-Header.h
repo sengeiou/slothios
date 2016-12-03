@@ -18,6 +18,7 @@
 #import "NSObject+ShareSDK.h"
 #import "SDCycleScrollView.h"
 #import "CSNotificationView.h"
+#import <ShareSDK/ShareSDK.h>
 #import <RongIMKit/RongIMKit.h>
 #import <tingyunApp/NBSAppAgent.h>
 #import "GVUserDefaults+Properties.h"
