@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import AwesomeCache
 
 
@@ -187,9 +186,9 @@ class PerfectionInfoViewController: BaseViewController {
         user.birthdate = birthday!
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.postPublicUserAndProfileSignup(withSignpModel: user) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 GVUserDefaults.standard().lastLoginPhone = self.phoneNo
                 GVUserDefaults.standard().lastCountryName = self.countryName
@@ -221,9 +220,9 @@ class PerfectionInfoViewController: BaseViewController {
             self.selectedAvatar = avatar
 
             let engine = NetworkEngine()
-            HUD.show(.labeledProgress(title: nil, subtitle: nil))
+            self.showNotificationProgress()
             engine.postPicFile(picFile: avatar!) { (response) in
-                HUD.hide()
+                self.hiddenNotificationProgress(animated: false)
                 if response?.status == ResponseError.SUCCESS.0{
                     self.selectedAvatar = avatar
                     self.userPhoto = response?.data

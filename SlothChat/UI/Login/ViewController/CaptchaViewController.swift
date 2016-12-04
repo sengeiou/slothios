@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class CaptchaViewController: BaseViewController {
     var timer = Timer()
@@ -104,9 +103,9 @@ class CaptchaViewController: BaseViewController {
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.postPublicSMS(withType: "signup", toPhoneno: codeNo + phoneNo) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 &&
                 !(self.phoneNo.isEmpty) {
                 self.fireTimer()
@@ -119,9 +118,9 @@ class CaptchaViewController: BaseViewController {
     
     func checkPublicSMS(phoneNo: String,verifyCode: String) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.postPublicSMSCheck(WithPhoneNumber: phoneNo,verifyCode:verifyCode) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 let pushVC  = PerfectionInfoViewController.init()
                 pushVC.phoneNo = self.phoneNo

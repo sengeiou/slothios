@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PKHUD
 
 struct SGChatGroupKey {    
     public static let UserGroupNameDidChange = Notification.Name(rawValue: "SlothChat.UserGroupNameDidChange")
@@ -224,10 +223,10 @@ extension SCConversationViewController{
 //            return
 //        }
 //        let engine = NetworkEngine()
-//        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+//        self.showNotificationProgress()
 //        
 //        engine.getUserGroup(userGroupUuid: groupUuid){ (response) in
-//            HUD.hide()
+//            self.hiddenNotificationProgress(animated: false)
 //            if response?.status == ResponseError.SUCCESS.0 {
 //                if let group = response?.data{
 //                    self.title = group.groupDisplayName

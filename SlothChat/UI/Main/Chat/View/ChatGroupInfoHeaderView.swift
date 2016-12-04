@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import PKHUD
 
 class ChatGroupInfoHeaderView: UIView {
     let groupNameView = ChatGroupInfoInputView()
     let nickName = ChatGroupInfoInputView()
-    
+    var dependVC: ChatGroupInfoViewController!
     var groupName: String?
     var groupUuid: String?
 
@@ -92,11 +91,11 @@ class ChatGroupInfoHeaderView: UIView {
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.dependVC.showNotificationProgress()
         let adminUserUuid = Global.shared.globalProfile?.userUuid
         
         engine.putUserGroup(groupDisplayName: newName, userGroupUuid: groupUuid, adminUserUuid: adminUserUuid){ (response) in
-            HUD.hide()
+            self.dependVC.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 UIViewController.showCurrentViewControllerNotificationError(message: "修改群组名成功")
                 NotificationCenter.default.post(name: SGChatGroupKey.UserGroupNameDidChange, object: nil, userInfo: ["NewUserGroupName":newName])
@@ -124,11 +123,11 @@ class ChatGroupInfoHeaderView: UIView {
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.dependVC.showNotificationProgress()
         let memberUuid = myMemberInfo.memberUuid
         
         engine.putUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid, userDisplayName: newName){ (response) in
-            HUD.hide()
+            self.dependVC.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 UIViewController.showCurrentViewControllerNotificationError(message: "修改用户名成功")
             }else{
@@ -144,11 +143,11 @@ class ChatGroupInfoHeaderView: UIView {
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.dependVC.showNotificationProgress()
         let memberUuid = myMemberInfo.memberUuid
         
         engine.putOfficialGroupMemberName(userDisplayName: newName, officialGroupUuid: groupUuid, officialGroupMemberUuid: memberUuid){ (response) in
-            HUD.hide()
+            self.dependVC.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 UIViewController.showCurrentViewControllerNotificationError(message: "修改用户名成功")
             }else{

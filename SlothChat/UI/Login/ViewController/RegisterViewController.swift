@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import PKHUD
 
 class RegisterViewController: BaseViewController {
     let codeView = SingleInputView.init(type : .button)

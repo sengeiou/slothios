@@ -11,6 +11,7 @@ import UIKit
 class BaseViewController: UIViewController {
     
     var isMyselfShow = false
+    var noteView: CSNotificationView?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -19,6 +20,9 @@ class BaseViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         isMyselfShow = false
+        if let noteView = noteView{
+            self.hiddenNotificationProgress(noteView: noteView, animated: true)
+        }
     }
 
     override func viewDidLoad() {
@@ -43,5 +47,13 @@ class BaseViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
+    func showNotificationProgress() {
+        self.noteView =  self.showNotificationProgress(message: nil)
+    }
+    func hiddenNotificationProgress(animated: Bool) {
+        if let noteView = self.noteView{
+            self.hiddenNotificationProgress(noteView: noteView, animated: animated)
+        }
+    }
 }

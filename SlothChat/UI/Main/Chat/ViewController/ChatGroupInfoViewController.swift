@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import PKHUD
 
 private let PageSize = 20
 
-class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ChatGroupInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
     var groupUuid: String?
     var groupName: String?
@@ -48,6 +47,7 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         headerView.frame = CGRect.init(x: 0, y: 0, width: screenWidth, height: 88)
         headerView.groupUuid = groupUuid
         headerView.groupName = groupName
+        headerView.dependVC = self
         tableView.tableHeaderView = headerView
         headerView.configWithObject(tmpGroupName: groupName,isGroupOwner: false,memberInfo: nil)
         tableView.tableFooterView = UIView()
@@ -212,10 +212,10 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
-        
+        self.showNotificationProgress()
+//        let noteView = self.showNotificationProgress(message: nil)
         engine.getGroupMemberUserList(userGroupUuid: groupUuid, pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if at == .top {
                 self.tableView.mj_header.endRefreshing()
             }else{
@@ -246,9 +246,9 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(pageNum), pageSize: String(PageSize)){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if at == .top {
                 self.tableView.mj_header.endRefreshing()
             }else{
@@ -278,10 +278,10 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.deleteUserGroup(userGroupUuid: groupUuid){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             RCIMClient.shared().remove(.ConversationType_GROUP, targetId: groupUuid)
 
             if response?.status == ResponseError.SUCCESS.0 {
@@ -303,10 +303,10 @@ class ChatGroupInfoViewController: UIViewController,UITableViewDelegate,UITableV
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.deleteUserGroupMember(userGroupUuid: groupUuid, userGroupMemberUuid: memberUuid){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 
                 if member.isAdmin! || self.dataSource.count <= 3{

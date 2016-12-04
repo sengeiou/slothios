@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 
 class SCConversationListViewController: RCConversationListViewController,RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate {
@@ -15,7 +14,8 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     var search = UISearchController()
     var searchArray = [RCConversationModel]()
     var chatList = ChatList.ModelFromCache()
-    
+    var noteView: CSNotificationView?
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getChatList()
@@ -126,11 +126,11 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         SGLog(message: "")
         let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         if model.conversationType == .ConversationType_PRIVATE{
             engine.deletePrivateChat(uuid: model.targetId){ (response) in
-                HUD.hide()
+                self.hiddenNotificationProgress(animated: false)
                 if response?.status == ResponseError.SUCCESS.0{
                     self.doneDeleteChat(model:model,indexPath:indexPath)
                 }else{
@@ -139,7 +139,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             }
         } else {
             engine.deleteUserGroup(userGroupUuid: model.targetId){ (response) in
-                HUD.hide()
+                self.hiddenNotificationProgress(animated: false)
                 if response?.status == ResponseError.SUCCESS.0 {
                     self.doneDeleteChat(model:model,indexPath:indexPath)
                 }else{
@@ -353,6 +353,14 @@ extension SCConversationListViewController: UISearchResultsUpdating{
         }
         
         self.conversationListTableView.reloadData()
+    }
+    func showNotificationProgress() {
+        self.noteView =  self.showNotificationProgress(message: nil)
+    }
+    func hiddenNotificationProgress(animated: Bool) {
+        if let noteView = self.noteView{
+            self.hiddenNotificationProgress(noteView: noteView, animated: animated)
+        }
     }
 }
 

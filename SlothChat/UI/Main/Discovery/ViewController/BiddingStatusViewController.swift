@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let tableView = UITableView(frame: CGRect.zero, style: .plain)
@@ -141,9 +140,9 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.deletePhotoFromGallery(photoUuid: galleryUuid!) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showNotificationError(message: "添加照片成功")
             }else{
@@ -179,10 +178,10 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
 
         engine.getAdsBidOrder(bidGalleryUuid: galleryUuid){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 self.adsBidOrder = response
                 
@@ -209,10 +208,10 @@ class BiddingStatusViewController:  BaseViewController,UITableViewDelegate,UITab
         let price = headerView.addPrice - oriPrice
 
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.postAdsBidOrder(bidGalleryUuid: galleryUuid!, amount: price){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
                 self.showNotificationSuccess(message: "竞价成功")

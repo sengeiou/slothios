@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class DiscoveryViewController: BaseViewController {
 
@@ -103,9 +102,9 @@ class DiscoveryViewController: BaseViewController {
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.postPhotoGallery(picFile: uploadImage) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             self.controller3.clearTmpUploadImage()
             
             if response?.status == ResponseError.SUCCESS.0 {

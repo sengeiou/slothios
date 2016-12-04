@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 enum DisplayType: String {
     case newest = "newest"

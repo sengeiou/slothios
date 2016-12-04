@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import PKHUD
 
 private let PageSize = 5000
 
-class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class SelectChatFriendsViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     var dataSource = [ChatMemberInfo]()
     var dependVC: UIViewController?
     var officialGroupUuid: String?
@@ -142,9 +141,9 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
 //            pageNum += 1
 //        }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.getOfficialGroupMember(officialGroupUuid: officialGroupUuid,pageNum: String(0), pageSize: String(0)){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
 //            if at == .top {
 //                self.tableView.mj_header.endRefreshing()
 //            }else{
@@ -177,10 +176,10 @@ class SelectChatFriendsViewController: UIViewController,UITableViewDelegate,UITa
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.postCreateGroup(memberUserUuidList: IDS, groupDisplayName: groupName) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showNotificationSuccess(message: "创建群组成功")
                 self.pushGroupViewController(group: response?.data)

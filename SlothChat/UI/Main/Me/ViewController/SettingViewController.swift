@@ -8,7 +8,6 @@
 
 import UIKit
 import AwesomeCache
-import PKHUD
 
 class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
     let pickerView = ValuePickerView.init()
@@ -184,10 +183,10 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     func logout() {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.postAuthLogout() { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 Global.shared.logout()
                 RCIM.shared().disconnect(false)

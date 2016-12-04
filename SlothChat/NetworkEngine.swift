@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import Alamofire
 import AlamofireObjectMapper
 

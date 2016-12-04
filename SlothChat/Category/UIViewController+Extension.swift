@@ -64,23 +64,21 @@ extension UIViewController{
     }
     
     func showNotificationProgress(message: String?) -> CSNotificationView {
-        guard let message = message else {
-            let noteView =  CSNotificationView(parentViewController: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: "操作成功!")
-            noteView?.setNoteAlpha(0.7)
-            noteView?.isShowingActivity = true
-            noteView?.setVisible(true, animated: true, completion: nil)
-            return noteView!
+        var tmpMessage = message
+        if message == nil {
+            tmpMessage = "正在处理中..."
         }
-        let noteView =  CSNotificationView(parentViewController: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: message)
+        self.view.isUserInteractionEnabled = false
+        let noteView =  CSNotificationView(parentViewController: self, tintColor: SGColor.SGNoticeErrorColor(), image: nil, message: tmpMessage)
         noteView?.setNoteAlpha(0.7)
         noteView?.isShowingActivity = true
         noteView?.setVisible(true, animated: true, completion: nil)
         return noteView!
     }
     
-    func hiddenNotificationProgress(noteView: CSNotificationView) {
-        
-        noteView.setVisible(false, animated: false, completion: nil)
+    func hiddenNotificationProgress(noteView: CSNotificationView, animated: Bool) {
+        self.view.isUserInteractionEnabled = true
+        noteView.setVisible(false, animated: animated, completion: nil)
     }
     
     class func showCurrentViewControllerNotificationError(message: String?) {

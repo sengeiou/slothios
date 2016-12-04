@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import Kingfisher
 
 class BrowseAdvertViewController: BaseViewController {
@@ -159,10 +158,10 @@ class BrowseAdvertViewController: BaseViewController {
         self.isFollow = !self.isFollow
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         let userUuid = Global.shared.globalProfile?.userUuid
         engine.postLikeGalleryList(likeSenderUserUuid: userUuid, galleryUuid: photoObj?.uuid) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 
             }else{

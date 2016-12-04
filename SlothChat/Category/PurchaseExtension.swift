@@ -7,21 +7,20 @@
 //
 
 import UIKit
-import PKHUD
 import Foundation
 
 struct SGIAPPurchaseKey {
     public static let IAPPurchaseSuccess = Notification.Name(rawValue: "SlothChat.IAPPurchaseSuccess")
 }
 
-extension UIViewController{
+extension BaseViewController{
     
     func purchaseForProduct(price: String?,productID: String?) {
         guard let price = price,
               let productID = productID else{
                 return
         }
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
 
         if IAPShare.sharedHelper().iap == nil {
             IAPShare.sharedHelper().iap = IAPHelper()
@@ -59,7 +58,7 @@ extension UIViewController{
                     if  let data = try? Data(contentsOf: Bundle.main.appStoreReceiptURL!) {
                         
                         IAPShare.sharedHelper().iap.checkReceipt(data, onCompletion: { (response, error) in
-                            HUD.hide()
+                            self.hiddenNotificationProgress(animated: false)
                             
                             let rec = IAPShare.toJSON(response!)
                             let dict: [String: Any] = rec as! [String : Any]
@@ -84,10 +83,10 @@ extension UIViewController{
 
     func iapPurchaseSuccess(receipt: String, amount: String) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.postCharge(appPayReceipt: receipt, amount: amount) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 if let amount = Int(amount),
                     let banlace = Global.shared.globalSysConfig?.banlace  {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import Kingfisher
 
 private let PageSize = 20

@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import PKHUD
 
-extension UIViewController{
+extension BaseViewController{
     func postPrivateChat(nameA: String?,nameB: String?,userUuidA: String?,userUuidB:String?) {
         SGLog(message: "")
         guard let _ = nameA,
@@ -25,10 +24,10 @@ extension UIViewController{
             return
         }
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         
         engine.postPrivateChat(name: nameB, userUuidA: userUuidA, userUuidB: userUuidB){ (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 self.pushChatViewController(targetId: response?.data?.uuid,userUuid: userUuidB, title: response?.data?.name)
             }else{

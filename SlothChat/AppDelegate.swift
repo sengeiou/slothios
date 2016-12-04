@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import AwesomeCache
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){

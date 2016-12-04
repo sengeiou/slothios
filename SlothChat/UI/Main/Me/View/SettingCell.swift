@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class SettingCell: UITableViewCell {
 
@@ -15,6 +14,7 @@ class SettingCell: UITableViewCell {
     let contentLabel = UILabel()
     let selectButton = UIButton(type: .custom)
     let arrowImgView = UIImageView()
+    var dependVC: SettingViewController!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?)
     {
@@ -73,7 +73,7 @@ class SettingCell: UITableViewCell {
     
     func modifySystemConfig(isSelect:Bool,isSysNotify:Bool) {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.dependVC.showNotificationProgress()
         
         var sysNotify = Global.shared.globalSysConfig?.acceptSysNotify
         var privateChat = Global.shared.globalSysConfig?.acceptPrivateChat
@@ -85,7 +85,7 @@ class SettingCell: UITableViewCell {
         }
         
         engine.putSysConfig(isAcceptSysNotify: sysNotify!, isAcceptPrivateChat: privateChat!) { (response) in
-            HUD.hide()
+            self.dependVC.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 self.selectButton.isSelected = isSelect
                 if isSysNotify {

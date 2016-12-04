@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     var isEdited = false
@@ -241,10 +240,10 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     func getUserProfile(userUuid: String) {
         let engine = NetworkEngine()
         if !isMyselfFlag{
-            HUD.show(.labeledProgress(title: nil, subtitle: nil))
+            self.showNotificationProgress()
         }
         engine.getUserProfile(userUuid: userUuid) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 if (response?.data) != nil{
                     self.mProfile = response?.data
@@ -275,9 +274,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func updateProfile(editProfile: UserProfileData)  {
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             self.container.snp.remakeConstraints { (make) in
                 make.edges.equalTo(self.scrollView)
                 make.width.equalTo(self.scrollView)
@@ -367,7 +366,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         let noteView = showNotificationProgress(message: "请稍等~我们正在识别你哟")
         
         engine.postUserPhoto(image: uploadImage) { (response) in
-            self.hiddenNotificationProgress(noteView: noteView)
+            self.hiddenNotificationProgress(noteView: noteView,animated: false)
             
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showNotificationSuccess(message: "嘻嘻~ 可以啦~")

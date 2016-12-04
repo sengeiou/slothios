@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 
 class ImageScrollViewController: BaseViewController {
     private let imageScroller = ImageScrollView(frame: CGRect.init(x: 0, y: 55, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 55 * 2))
@@ -196,9 +195,9 @@ class ImageScrollViewController: BaseViewController {
         }
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.deletePhotoFromGallery(photoUuid: photoUuid) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 NotificationCenter.default.post(name: SGGlobalKey.DiscoveryDataDidChange, object: nil)
                 self.showNotificationSuccess(message: "已成功删除")

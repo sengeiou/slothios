@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PKHUD
 import AwesomeCache
 
 class LoginViewController: BaseViewController {
@@ -172,7 +171,7 @@ class LoginViewController: BaseViewController {
     func getChatToken() {
         let engine = NetworkEngine()
         engine.getChatToken() { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 if let token = response?.data?.chatToken {
                     Global.shared.chatToken = token
@@ -234,9 +233,9 @@ class LoginViewController: BaseViewController {
         let passwordStr = passwordView.getInputContent()!
         
         let engine = NetworkEngine()
-        HUD.show(.labeledProgress(title: nil, subtitle: nil))
+        self.showNotificationProgress()
         engine.postAuthLogin(withMobile: codeStr + phoneStr, passwd: passwordStr) { (response) in
-            HUD.hide()
+            self.hiddenNotificationProgress(animated: false)
             if  response != nil &&
                 response?.token != nil{
                 GVUserDefaults.standard().lastLoginPhone = phoneStr
