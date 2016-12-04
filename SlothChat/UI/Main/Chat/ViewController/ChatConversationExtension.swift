@@ -104,6 +104,9 @@ extension SCConversationViewController{
         let tmpVC = SelectChatFriendsViewController()
         tmpVC.dependVC = self
         tmpVC.officialGroupUuid = self.officialGroupUuid
+        if self.privateUserUuid != nil {
+            tmpVC.selectRows.insert(self.privateUserUuid!)
+        }
         let nav = BaseNavigationController(rootViewController: tmpVC)
         present(nav, animated: true, completion: nil)
     }
