@@ -21,6 +21,9 @@ struct ResponseError {
     static let ALREADY_EXIST = ("207", "不能重复创建相同记录")
     static let WEAK_NEW_PWD = ("208", "不安全的弱密码，请输入同时包含数字和字母的组合，并至少含有一个大写字母")
     static let USER_NOT_EXIST = ("209", "该手机号注册的用户不存在")
+    static let USER_DID_REGISTER = ("216", "注册过的啦~直接去登陆咯!")
+    static let USER_NOT_REGISTER = ("217", "别逗了了~快去注册吧~")
+
     static let NO_PRIVELLEGE = ("300", "权限错误")
     static let NOT_ENOUGH_MONEY = ("301", "账户余下额度不足，请充值")
     static let PROFILE_FIRSTPIC_NOT_VERIFIED = ("302", "个人资料第一张头像未通过真人认证")

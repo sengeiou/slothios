@@ -110,8 +110,14 @@ class CaptchaViewController: BaseViewController {
                 !(self.phoneNo.isEmpty) {
                 self.fireTimer()
             }else{
-                self.update()
-                self.showNotificationError(message: response?.msg)
+                if response?.status == ResponseError.USER_NOT_REGISTER.0 ||
+                   response?.status == ResponseError.USER_DID_REGISTER.0{
+                    let popVC = self.navigationController?.popViewController(animated: true)
+                    popVC?.showNotificationError(message: response?.msg)
+                }else{
+                    self.update()
+                    self.showNotificationError(message: response?.msg)
+                }
             }
         }
     }

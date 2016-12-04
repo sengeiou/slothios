@@ -173,8 +173,14 @@ class FindPasswordViewController: BaseViewController {
                 !((self.phoneNo?.isEmpty)!) {
                 self.fireTimer()
             }else{
-                self.update()
-                self.showNotificationError(message: response?.msg)
+                if response?.status == ResponseError.USER_NOT_REGISTER.0 ||
+                   response?.status == ResponseError.USER_DID_REGISTER.0 {
+                    let _ = self.navigationController?.popViewController(animated: true)
+                    self.loginVC?.showNotificationError(message: response?.msg)
+                }else{
+                    self.update()
+                    self.showNotificationError(message: response?.msg)
+                }
             }
         }
     }
