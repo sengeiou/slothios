@@ -372,7 +372,8 @@ extension SCConversationListViewController{
             self.chatList = response
             self.chatList?.caheForModel()
             if response?.status == ResponseError.SUCCESS.0 {
-                self.refreshInvalidData(listData: response?.data)
+//                self.refreshInvalidData(listData: response?.data)
+                self.conversationListTableView.reloadData()
             }else{
                 self.showNotificationError(message: response?.msg)
             }
