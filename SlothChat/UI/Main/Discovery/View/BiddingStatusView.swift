@@ -143,7 +143,7 @@ class BiddingStatusView: BaseView {
             self.addPrice = self.originalPrice +  Int(value!.components(separatedBy: "/").first!)!
         }
         pickerView.valueDidSelect = completionBlock
-        pickerView.dataSource = ["1","5","10","50","100","500","1000"]
+        pickerView.dataSource = ["1","6","12","50","108","518","1048","5898"]
     }
     
     //MARK:- Action
