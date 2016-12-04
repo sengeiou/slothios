@@ -253,6 +253,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                     }else{
                         self.toolView?.refreshLikeButtonStatus(isLike: (response?.data?.currentVisitorLiked)!)
                     }
+                    self.bannerList.removeAll()
                     let list = response?.data?.getBannerAvatarList(isMyself: self.isMyselfFlag)
                     for string in list!{
                         self.bannerList.append(string as AnyObject)
