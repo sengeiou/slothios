@@ -189,6 +189,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 Global.shared.logout()
+                ItunesCharge.removeFromCache()
                 RCIM.shared().disconnect(false)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{
