@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         manager.startLocationCity()
         ThirdManager.startThirdLib()
         configRemote(application)
+        ItunesCharge.removeFromCache()
         
         self.window = UIWindow.init()
         self.changeRootViewController()
