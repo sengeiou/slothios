@@ -57,7 +57,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     override func confirmClick() {
-        print("confirmClick")
+        SGLog(message: "confirmClick")
 
         let pushVC = SettingViewController.init()
         self.navigationController?.pushViewController(pushVC, animated: true)

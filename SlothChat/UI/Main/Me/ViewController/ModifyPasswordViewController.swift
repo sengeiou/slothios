@@ -91,7 +91,7 @@ class ModifyPasswordViewController: BaseViewController {
     
     //MARK:- Action
     func confirmButtonClick() {
-        print("confirmButtonClick")
+        SGLog(message: "confirmButtonClick")
         if !checkSubmitValid() {
             return
         }

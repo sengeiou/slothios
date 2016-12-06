@@ -320,7 +320,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
     
     override func didTapCellPortrait(_ model: RCConversationModel!) {
-        print("tap portrait \(model.senderUserId)")
+        SGLog(message: "tap portrait \(model.senderUserId)")
         
         //        let pushVC = UserInfoViewController()
         //        pushVC.mUserUuid = model.targetId

@@ -171,8 +171,8 @@ class CountryCodeViewController: BaseViewController,UITableViewDelegate,UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print(indexPath.section);
-        print(indexPath.row);
+        SGLog(message: indexPath.section);
+        SGLog(message: indexPath.row);
         let rowList = countryList[indexPath.section]
         let obj = rowList[indexPath.row]
         

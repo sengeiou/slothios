@@ -154,7 +154,7 @@ class PerfectionInfoViewController: BaseViewController {
     
     //MARK:- Action
     func registerButtonClick() {
-        print("registerButtonClick")
+        SGLog(message: "registerButtonClick")
         
         if self.selectedAvatar == nil {
             self.showNotificationError(message: "请选择头像")
@@ -209,7 +209,7 @@ class PerfectionInfoViewController: BaseViewController {
             cache[SGGlobalKey.SCLoginStatusKey] = true.description as NSString?
             NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
         } catch _ {
-            print("Something went wrong :(")
+            SGLog(message: "Something went wrong :(")
         }
     }
     
