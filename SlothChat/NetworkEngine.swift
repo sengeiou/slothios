@@ -120,9 +120,12 @@ enum API_URI:String {
 
 class NetworkEngine: NSObject {
     let Base_URL:String = "http://api.ssloth.com"
+    var alamofireManager:SessionManager = Alamofire.SessionManager()
     
     override init() {
-        
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForResource = 8 // seconds
+        self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
     }
     
     func HTTPRequestGenerator(withParam parameters:NSDictionary,URLString:String)->URLRequest {
@@ -182,7 +185,8 @@ class NetworkEngine: NSObject {
     //1.注册选择国家信息列表 GET
     func getPublicCountry(withName name:String,completeHandler :@escaping(_ countryObj:Country?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
-        Alamofire.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
+        
+        alamofireManager.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
@@ -196,7 +200,7 @@ class NetworkEngine: NSObject {
         let URLString:String = Base_URL + API_URI.public_sms.rawValue
         let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<SMS>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<SMS>) in
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
@@ -211,7 +215,7 @@ class NetworkEngine: NSObject {
         let URLString:String = Base_URL + API_URI.public_sms_check.rawValue
         let request = HTTPRequestGenerator(withParam: ["toPhoneno":toPhoneno,
                                                        "verifyCode":verifyCode], URLString: URLString);
-        Alamofire.request(request)
+        alamofireManager.request(request)
             .responseObject { (response:DataResponse<SMS>) in
                 if self.verificationResponse(value: response.result.value) {
                     completeHandler(response.result.value)
@@ -226,7 +230,7 @@ class NetworkEngine: NSObject {
     func postPicFile(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
         
-        Alamofire.upload(multipartFormData: {(multipartFormData) in
+        alamofireManager.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
                 SGLog(message: "imageData 为空");
@@ -264,7 +268,7 @@ class NetworkEngine: NSObject {
             "birthdate":signup.birthdate,
             ], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
@@ -292,7 +296,8 @@ class NetworkEngine: NSObject {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<LoginModel>) in
                         completeHandler(response.result.value)
-
+                        
+                        
 //                        if self.verificationResponse(value: response.result.value) {
 //                            completeHandler(response.result.value)
 //                        }else{
@@ -316,7 +321,7 @@ class NetworkEngine: NSObject {
         }
         
         let URLString:String = self.Base_URL + API_URI.auth_mobileapps_logout.rawValue
-        Alamofire.upload(multipartFormData: {(multipartFormData) in
+        alamofireManager.upload(multipartFormData: {(multipartFormData) in
             guard let uuidData = uuid.data(using: String.Encoding.utf8),
                 let tokenData = token.data(using: String.Encoding.utf8) else{
                     return
@@ -363,7 +368,7 @@ class NetworkEngine: NSObject {
             "personalProfile": personalProfile,
             ], method: .put, URLString: URLString)
 
-        Alamofire.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -391,7 +396,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
 
-        Alamofire.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
+        alamofireManager.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -414,7 +419,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
+        alamofireManager.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -438,7 +443,7 @@ class NetworkEngine: NSObject {
             "newPwd":newPwd,]
             , method: .put, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -457,7 +462,7 @@ class NetworkEngine: NSObject {
             "smsChangeNewPwd":smsChangeNewPwd,]
             , URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -482,7 +487,7 @@ class NetworkEngine: NSObject {
             "amount":amount,]
             , URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -510,7 +515,7 @@ class NetworkEngine: NSObject {
             "isAcceptSysNotify":isAcceptSysNotify]
             , method: .put, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -519,12 +524,12 @@ class NetworkEngine: NSObject {
         }
     }
     
-    //16.APPLE STORE充值可选的价格列表
+    //MARK:16.APPLE STORE充值可选的价格列表
     func getItunesChargeList(completeHandler :@escaping(_ response:ItunesCharge?) -> Void)  -> Void {
         
         let URLString:String = self.Base_URL + API_URI.get_itunesChargeList.rawValue
         
-        Alamofire.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<ItunesCharge>) in
+        alamofireManager.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<ItunesCharge>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -533,7 +538,7 @@ class NetworkEngine: NSObject {
         }
     }
     
-    //17.用户资料页面，添加个人照片
+    //MARK:17.用户资料页面，添加个人照片
     func postUserPhoto(image: UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void{
         guard let token = Global.shared.globalLogin?.token,
             let uuid = Global.shared.globalProfile?.userUuid else {
@@ -545,7 +550,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        Alamofire.upload(multipartFormData: {(multipartFormData) in
+        self.alamofireManager.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let imageData:Data = UIImageJPEGRepresentation(image, 1.0) else{
                 SGLog(message: "imageData 为空");
@@ -589,7 +594,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["":""]
             , method: .delete, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -614,7 +619,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:
             ["likeSenderUserUuid":userUuid], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -637,7 +642,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userProfileUuid}", with: uuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
+        alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -661,13 +666,13 @@ class NetworkEngine: NSObject {
         
         var address = GVUserDefaults.standard().locationDesc
         if address != nil {
-            address = address?.addingPercentEscapes(using: .utf8)
+            address = address?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             URLString = URLString.appending("&adress=" + address!)
         }else{
             URLString = URLString.appending("&adress=")
         }
         
-        Alamofire.upload(multipartFormData: {(multipartFormData) in
+        alamofireManager.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
                 SGLog(message: "imageData 为空");
@@ -703,7 +708,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with:userUuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
+        alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<UserGallery>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -729,7 +734,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["":""]
             , method: .delete, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -753,7 +758,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
         
-        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
+        alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -777,7 +782,7 @@ class NetworkEngine: NSObject {
         
         let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -798,7 +803,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid)
         
-        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
+        alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -822,7 +827,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         URLString = URLString.replacingOccurrences(of: "{bidGalleryUuid}", with: bidGalleryUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
+        alamofireManager.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -849,7 +854,7 @@ class NetworkEngine: NSObject {
             "amount":String(amount),
             "participateBidAds":"true"], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<BidAdResponse>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<BidAdResponse>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -870,7 +875,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<ChatToken>) in
+        alamofireManager.request(URLString).responseObject { (response:DataResponse<ChatToken>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -891,7 +896,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<ChatList>) in
+        alamofireManager.request(URLString).responseObject { (response:DataResponse<ChatList>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -911,7 +916,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{officialGroupUuid}", with: officialGroupUuid)
         
-        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<OfficialGroup>) in
+        alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<OfficialGroup>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -939,7 +944,7 @@ class NetworkEngine: NSObject {
             "groupDisplayName": groupDisplayName,
             "adminUserUuid": adminUserUuid], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<GroupInfo>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<GroupInfo>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -967,7 +972,7 @@ class NetworkEngine: NSObject {
             "adminUserUuid": adminUserUuid,
             "userGroupUuid": userGroupUuid], method: .put, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -987,7 +992,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
         
-        Alamofire.request(URLString).responseObject { (response:DataResponse<GroupInfo>) in
+        alamofireManager.request(URLString).responseObject { (response:DataResponse<GroupInfo>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1009,7 +1014,7 @@ class NetworkEngine: NSObject {
         
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1036,7 +1041,7 @@ class NetworkEngine: NSObject {
             "userGroupUuid" : userGroupUuid,
             "userDisplayName" : userDisplayName], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1063,7 +1068,7 @@ class NetworkEngine: NSObject {
             ["userDisplayName" : userDisplayName]
             , method: .put, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1083,7 +1088,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userGroupUuid}", with: userGroupUuid)
         
-        Alamofire.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<GroupMember>) in
+        alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<GroupMember>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1107,7 +1112,7 @@ class NetworkEngine: NSObject {
 
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1133,7 +1138,7 @@ class NetworkEngine: NSObject {
             "userUuidA" : userUuidA,
             "userUuidB" : userUuidB], URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<PrivateChat>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<PrivateChat>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1155,7 +1160,7 @@ class NetworkEngine: NSObject {
         
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
@@ -1182,7 +1187,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:[
             "userDisplayName": userDisplayName], method: .put, URLString: URLString)
         
-        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+        alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
