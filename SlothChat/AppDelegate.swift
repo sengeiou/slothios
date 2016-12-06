@@ -46,13 +46,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         manager.startLocationCity()
         ThirdManager.startThirdLib()
         configRemote(application)
-        ItunesCharge.removeFromCache()
+        appDefaultConfig()
         
         self.window = UIWindow.init()
         self.changeRootViewController()
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()
         return true
+    }
+    
+    func appDefaultConfig() {
+        ItunesCharge.removeFromCache()
+        
+        if (GVUserDefaults.standard().value(forKey: "networkType") == nil) {
+            #if DEBUG
+                GVUserDefaults.standard().networkType = .develop
+            #else
+                GVUserDefaults.standard().networkType = .onLine
+            #endif
+        }
     }
     
     func addNoticeObserver() {

@@ -16,4 +16,6 @@
 @dynamic locationDesc;
 @dynamic lastCountryCode;
 @dynamic lastCountryName;
+@dynamic networkType;
+
 @end

@@ -119,10 +119,21 @@ enum API_URI:String {
 }
 
 class NetworkEngine: NSObject {
-    let Base_URL:String = "http://api.ssloth.com"
+    let Base_URL:String = NetworkEngine.getBaseURL()
     
     override init() {
         
+    }
+    
+    class func getBaseURL() -> String {
+        #if DEBUG
+            if GVUserDefaults.standard().networkType == .develop {
+                return "http://api.ssloth.com"
+            }
+            return "http://api.ssloth.com"
+        #else
+            return "http://api.ssloth.com"
+        #endif
     }
     
     func HTTPRequestGenerator(withParam parameters:NSDictionary,URLString:String)->URLRequest {
