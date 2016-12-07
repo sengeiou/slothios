@@ -136,7 +136,7 @@ class UserInfoView: BaseView {
     }
     
     func editButtonClick() {
-        print("editButtonClick")
+        SGLog(message: "editButtonClick")
         if let sp = self.editUserInfoValue {
             sp()
         }

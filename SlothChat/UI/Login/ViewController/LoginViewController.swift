@@ -212,7 +212,7 @@ class LoginViewController: BaseViewController {
     //MARK:- Action
     
     func forgetButtonClick() {
-        print("forgetButtonClick")
+        SGLog(message: "forgetButtonClick")
         let phoneStr = phoneView.getInputContent()
         if (phoneStr?.isEmpty)! {
             showNotificationError(message: "请输入手机号")
@@ -229,7 +229,9 @@ class LoginViewController: BaseViewController {
     }
     
     func loginButtonClick() {
-        //print("loginButtonClick")
+
+        SGLog(message: "loginButtonClick")
+
         if !checkDataValid(){
             return
         }
@@ -268,7 +270,7 @@ class LoginViewController: BaseViewController {
             cache[SGGlobalKey.SCLoginStatusKey] = true.description as NSString?
             NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
         } catch _ {
-            print("Something went wrong :(")
+            SGLog(message: "Something went wrong :(")
         }
     }
     
@@ -299,7 +301,7 @@ class LoginViewController: BaseViewController {
     }
     
     func registerButtonClick() {
-        print("registerButtonClick")
+        SGLog(message: "registerButtonClick")
         let pushVC  = RegisterViewController.init()
         navigationController?.pushViewController(pushVC, animated: true)
     }

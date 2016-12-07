@@ -91,6 +91,7 @@
 		044956981DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956831DCCBAA800CBFF45 /* UIScrollView+MJRefresh.m */; };
 		044956991DCCBAA800CBFF45 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */; };
 		044B79ED1DE0B10B00490272 /* ChatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B79EC1DE0B10B00490272 /* ChatExtension.swift */; };
+		044CB2051DF6B661005EA61F /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044CB2041DF6B661005EA61F /* DebugViewController.swift */; };
 		044DEC691DBE08C00067B1EF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044DEC681DBE08C00067B1EF /* StoreKit.framework */; };
 		0454F8EB1DE6C4C600E7034F /* SGVoiceMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */; };
 		04649C731DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 04649C721DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.m */; };
@@ -413,6 +414,7 @@
 		044956841DCCBAA800CBFF45 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		044956851DCCBAA800CBFF45 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		044B79EC1DE0B10B00490272 /* ChatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExtension.swift; sourceTree = "<group>"; };
+		044CB2041DF6B661005EA61F /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		044DEC681DBE08C00067B1EF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0454F8EA1DE6C4C600E7034F /* SGVoiceMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGVoiceMessageCell.swift; sourceTree = "<group>"; };
 		04649C711DE5728900F80DC7 /* UIViewController+LxTabBadgePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LxTabBadgePoint.h"; sourceTree = "<group>"; };
@@ -967,6 +969,7 @@
 				04966B441DB665E7000721BD /* AboutUsViewController.swift */,
 				040D46E11DC4B67A005D1E8E /* RatingViewController.swift */,
 				04865FDB1DC4C4BC004D9B06 /* RatingViewController.xib */,
+				044CB2041DF6B661005EA61F /* DebugViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2199,6 +2202,7 @@
 				0486BB691DBB41C900086303 /* IAPShare.m in Sources */,
 				04EE6B151DDE142E005648F1 /* PrivateChatData.swift in Sources */,
 				0449568B1DCCBAA800CBFF45 /* MJRefreshAutoGifFooter.m in Sources */,
+				044CB2051DF6B661005EA61F /* DebugViewController.swift in Sources */,
 				040576DF1DB3353E00C55D02 /* IQNSArray+Sort.swift in Sources */,
 				041701251DD4CD96002FADFE /* SCConversationListCell.swift in Sources */,
 				040D46DA1DC4B587005D1E8E /* PopupDialogOverlayView.swift in Sources */,
@@ -2432,7 +2436,7 @@
 					"\"SwiftyJSON\"",
 					"-ObjC",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3953a06e-1e3a-4858-a6f6-9e5a53b0fa41";

@@ -27,6 +27,9 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(iAPPurchaseSuccess(_:)), name: SGIAPPurchaseKey.IAPPurchaseSuccess, object: nil)
+        #if DEBUG
+            setNavtionConfirm(titleStr: "Debug")
+        #endif
 
     }
     
@@ -128,6 +131,11 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
     
     //Mark:- Action
     
+    override func confirmClick() {
+        let pushVC = DebugViewController()
+        navigationController?.pushViewController(pushVC, animated: true)
+    }
+    
     func charge() {
         if self.itunesCharge != nil {
             pickerView.show()
@@ -189,6 +197,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 Global.shared.logout()
+                ItunesCharge.removeFromCache()
                 RCIM.shared().disconnect(false)
                 NotificationCenter.default.post(name: SGGlobalKey.LoginStatusDidChange, object: nil)
             }else{

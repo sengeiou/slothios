@@ -67,8 +67,8 @@ class LikeShareView: BaseView {
         likeLabel.addGestureRecognizer(tap2)
         
         let tmpApp = UIApplication.shared.delegate as! AppDelegate;
-        if let rootVC = tmpApp.window?.rootViewController{
-            rootVC.view.addSubview(sharePopView)
+        if let window = tmpApp.window{
+            window.addSubview(sharePopView)
             sharePopView.isHidden = true
             sharePopView.snp.makeConstraints({ (make) in
                 make.edges.equalTo(UIEdgeInsets.zero)

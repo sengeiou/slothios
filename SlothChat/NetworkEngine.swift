@@ -119,13 +119,24 @@ enum API_URI:String {
 }
 
 class NetworkEngine: NSObject {
-    let Base_URL:String = "http://api.ssloth.com"
     var alamofireManager:SessionManager = Alamofire.SessionManager()
-    
+    let Base_URL:String = NetworkEngine.getBaseURL()
+
     override init() {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForResource = 8 // seconds
         self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
+    }
+    
+    class func getBaseURL() -> String {
+        #if DEBUG
+            if GVUserDefaults.standard().networkType == .develop {
+                return "http://api.ssloth.com"
+            }
+            return "http://api.ssloth.com"
+        #else
+            return "http://api.ssloth.com"
+        #endif
     }
     
     func HTTPRequestGenerator(withParam parameters:NSDictionary,URLString:String)->URLRequest {
@@ -277,7 +288,7 @@ class NetworkEngine: NSObject {
         }
     }
     
-    //5.登录 POST
+    //MARK:5.登录 POST
     func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
         
@@ -295,7 +306,14 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<LoginModel>) in
-                        completeHandler(response.result.value)
+                        if (response.response?.statusCode == 200) || (response.response?.statusCode == 201) {
+                            completeHandler(response.result.value)
+                        }
+                        else {
+                            completeHandler(nil);
+                        }
+                        
+                        //SGLog(message: response.response?.statusCode)
                         
                         
 //                        if self.verificationResponse(value: response.result.value) {
@@ -563,15 +581,17 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if self.verificationResponse(value: response.result.value) {
+                        if (response.response?.statusCode == 200) || (response.response?.statusCode == 201) {
                             completeHandler(response.result.value)
-                        }else{
+                        } else {
+                            completeHandler(nil);
                             self.showHandleError()
                         }
                     }
                 case .failure(let encodingError):
                     print("error")
                     print(encodingError)
+                    completeHandler(nil);
                 }
         })
         

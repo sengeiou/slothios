@@ -105,7 +105,7 @@ class SingleInputView: UIView,UITextFieldDelegate {
                 make.height.equalTo(1)
             }
         default:
-            print("")
+            SGLog(message: "")
         }
     }
     

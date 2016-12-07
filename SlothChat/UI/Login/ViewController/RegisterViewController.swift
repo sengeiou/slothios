@@ -153,7 +153,7 @@ class RegisterViewController: BaseViewController {
     
     //MARK:- Action
     func registerButtonClick() {
-        print("registerButtonClick")
+        SGLog(message: "registerButtonClick")
         if !checkDataValid(){
             return
         }
@@ -174,7 +174,7 @@ class RegisterViewController: BaseViewController {
     }
     
     func loginButtonClick() {
-        print("loginButtonClick")
+        SGLog(message: "loginButtonClick")
         var loginVC : UIViewController?
         let arrayOfVCs = navigationController?.viewControllers
         

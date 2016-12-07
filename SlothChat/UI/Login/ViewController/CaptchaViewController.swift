@@ -176,7 +176,8 @@ class CaptchaViewController: BaseViewController {
     
     //MARK:- Action
     func confirmButtonClick() {
-        print("confirmButtonClick")
+        SGLog(message: "confirmButtonClick")
+        
         let captcha = captchaView.getInputContent()
         if (captcha?.isEmpty)! {
             self.showNotificationError(message: "请输入验证码")

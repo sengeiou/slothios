@@ -171,7 +171,7 @@ class UserInfoEditView: BaseView {
     }
     
     func confirmButtonClick() {
-        print("confirmButtonClick")
+        SGLog(message: "confirmButtonClick")
         self.endEditing(true)
         let nickname = nameView.getInputContent()!
         if nickname.characters.count >= 20 {
