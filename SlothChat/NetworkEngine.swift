@@ -131,7 +131,7 @@ class NetworkEngine: NSObject {
     class func getBaseURL() -> String {
         #if DEBUG
             if GVUserDefaults.standard().networkType == .develop {
-                return "http://api.ssloth.com"
+                return "http://testapi.ssloth.com"
             }
             return "http://api.ssloth.com"
         #else
