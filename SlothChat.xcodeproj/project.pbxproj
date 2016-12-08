@@ -29,8 +29,6 @@
 		040576ED1DB3353E00C55D02 /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576DB1DB3353E00C55D02 /* IQToolbar.swift */; };
 		040576EE1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040576DC1DB3353E00C55D02 /* IQUIView+IQKeyboardToolbar.swift */; };
 		040576EF1DB3353E00C55D02 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 040576DE1DB3353E00C55D02 /* IQKeyboardManager.bundle */; };
-		040D46CF1DC4B587005D1E8E /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 040D46BB1DC4B586005D1E8E /* .gitkeep */; };
-		040D46D01DC4B587005D1E8E /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 040D46BD1DC4B586005D1E8E /* .gitkeep */; };
 		040D46D11DC4B587005D1E8E /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040D46BF1DC4B587005D1E8E /* FXBlurView.m */; };
 		040D46D21DC4B587005D1E8E /* InteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D46C01DC4B587005D1E8E /* InteractiveTransition.swift */; };
 		040D46D31DC4B587005D1E8E /* PopupDialog+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040D46C11DC4B587005D1E8E /* PopupDialog+Keyboard.swift */; };
@@ -1778,19 +1776,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = ssloth.com;
 				TargetAttributes = {
 					19273B0F1DA9EE1300150460 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = DPQ5CCJSTK;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1840,8 +1838,6 @@
 				048C78931DD6EC880080BBCE /* NSDateTimeAgo.bundle in Resources */,
 				044956941DCCBAA800CBFF45 /* MJRefresh.bundle in Resources */,
 				04C233101DEE651A0027C3B3 /* checkmark@3x.png in Resources */,
-				040D46CF1DC4B587005D1E8E /* .gitkeep in Resources */,
-				040D46D01DC4B587005D1E8E /* .gitkeep in Resources */,
 				19273B201DA9EE1300150460 /* LaunchScreen.storyboard in Resources */,
 				19273B1D1DA9EE1300150460 /* Assets.xcassets in Resources */,
 				04865FDC1DC4C4BC004D9B06 /* RatingViewController.xib in Resources */,
@@ -2345,7 +2341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2390,7 +2386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2404,7 +2400,6 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SlothChat/SlothChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DPQ5CCJSTK;
@@ -2444,8 +2439,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3953a06e-1e3a-4858-a6f6-9e5a53b0fa41";
+				PROVISIONING_PROFILE_SPECIFIER = dev_animalChat;
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/Resource/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -2457,9 +2452,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SlothChat/SlothChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = DPQ5CCJSTK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2497,8 +2491,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3f395d41-c8a8-49e7-8353-4e1b2603b486";
+				PROVISIONING_PROFILE_SPECIFIER = dis_animalChat;
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/Resource/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

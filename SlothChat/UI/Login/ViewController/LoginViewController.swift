@@ -135,6 +135,11 @@ class LoginViewController: BaseViewController {
             make.height.equalTo(46)
             make.bottom.equalTo(-16)
         }
+        
+        #if DEBUG
+        self.phoneView.inputTextfield.text = "189120"
+        self.passwordView.inputTextfield.text = "A123456"
+        #endif  
     }
     
     func configPhoneInputView(inputView : SingleInputView) {
@@ -224,7 +229,9 @@ class LoginViewController: BaseViewController {
     }
     
     func loginButtonClick() {
+
         SGLog(message: "loginButtonClick")
+
         if !checkDataValid(){
             return
         }

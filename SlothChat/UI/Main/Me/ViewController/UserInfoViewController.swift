@@ -368,13 +368,19 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         
         engine.postUserPhoto(image: uploadImage) { (response) in
             self.hiddenNotificationProgress(noteView: noteView,animated: false)
-            
+            guard response != nil else {
+                self.bannerList[at ..< at + 1] = [DefaultBannerImgName as AnyObject]
+                self.refreshBannerView()
+                return
+            }
             if response?.status == ResponseError.SUCCESS.0 {
+                
                 self.showNotificationSuccess(message: "嘻嘻~ 可以啦~")
                 Global.shared.globalLogin?.canTalk = true
                 let newPhoto = UserPhotoList.init()
                 newPhoto.profileBigPicUrl = response?.data?.profileBigPicUrl
                 newPhoto.uuid = response?.data?.uuid
+                
                 self.mProfile?.setNewAvatar(newAvatar: newPhoto, at: at)
                 self.mProfile?.caheForUserProfile()
                 
@@ -385,7 +391,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 }
                 self.refreshBannerView()
                 self.bannerView?.scroll(to: Int32((self.mProfile!.userPhotoList?.count)!) - 1)
-            }else{
+            } else {
                 self.showNotificationSuccess(message: "认证失败!你的照 没脸呢~")
                 if response?.status == ResponseError.PROFILE_PIC_NOT_VERIFIED.0{
                     self.bannerList[at ..< at + 1] = [DefaultBannerImgName as AnyObject]
