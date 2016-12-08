@@ -77,6 +77,13 @@ extension BaseViewController{
                                 let receipt = data.base64EncodedString()
                                 self.iapPurchaseSuccess(receipt: receipt, amount: price)
                                 SGLog(message: dict)
+//                                let receiptDict: [String: Any] = (dict["receipt"] as? Dictionary)!
+//                                let inAppList:[[String: Any]] = (receiptDict["in_app"] as? Array)!
+//                                let firstDict = inAppList.first
+//                                let transactionId: String = firstDict!["transaction_id"] as! String
+//                                
+//                                SGLog(message: transactionId)
+
                             }else{
                                 SGLog(message: error?.localizedDescription)
                                 self.showNotificationError(message: "校验失败，请重试")
