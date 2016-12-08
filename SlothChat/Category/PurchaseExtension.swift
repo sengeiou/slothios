@@ -21,23 +21,27 @@ extension BaseViewController{
                 return
         }
         self.showNotificationProgress()
+        
+        let set = Set(arrayLiteral: productID)
 
         if IAPShare.sharedHelper().iap == nil {
-            IAPShare.sharedHelper().iap = IAPHelper()
+            IAPShare.sharedHelper().iap = IAPHelper(productIdentifiers: set)
+        }else{
+            IAPShare.sharedHelper().iap.productIdentifiers = set;
         }
 //        IAPShare.sharedHelper().iap.handleFinishTransaction()
         
-        let set = Set(arrayLiteral: productID)
-        IAPShare.sharedHelper().iap.productIdentifiers = set
         IAPShare.sharedHelper().iap.production = false
         
         IAPShare.sharedHelper().iap.requestProducts { (request, response) in
             guard let products = IAPShare.sharedHelper().iap.products else {
+                self.hiddenNotificationProgress(animated: false)
                 self.showNotificationError(message: "获取产品失败，请重试")
                 return
             }
             
             if products.count <= 0 {
+                self.hiddenNotificationProgress(animated: false)
                 self.showNotificationError(message: "未获取到产品")
                 return
             }
@@ -46,12 +50,14 @@ extension BaseViewController{
             
             IAPShare.sharedHelper().iap.buyProduct(product as! SKProduct!, onCompletion: { (trans) in
                 guard let trans = trans else {
+                    self.hiddenNotificationProgress(animated: false)
                     self.showNotificationError(message: "充值失败，请重试")
                     return
                 }
                 if (trans.error != nil ||
                     trans.transactionState == SKPaymentTransactionState.failed) {
                     SGLog(message: trans.error?.localizedDescription)
+                    self.hiddenNotificationProgress(animated: false)
                     self.showNotificationError(message: trans.error?.localizedDescription)
                     return
                 }
