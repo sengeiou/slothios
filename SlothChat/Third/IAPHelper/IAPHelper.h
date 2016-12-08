@@ -45,4 +45,6 @@ typedef void (^resoreProductsCompleteResponseBlock) (SKPaymentQueue* payment,NSE
 
 - (void)clearSavedPurchasedProducts;
 - (void)clearSavedPurchasedProductByID:(NSString*)productIdentifier;
+- (void)handleFinishTransaction;
+
 @end

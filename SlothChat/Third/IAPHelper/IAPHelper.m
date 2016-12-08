@@ -367,4 +367,14 @@
     }
 }
 
+- (void)handleFinishTransaction{
+    NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+    for (SKPaymentTransaction* transaction in transactions) {
+        if (transaction.transactionState == SKPaymentTransactionStatePurchased){
+//            [self completeTransaction:transaction];
+            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+        }
+    }
+}
+
 @end

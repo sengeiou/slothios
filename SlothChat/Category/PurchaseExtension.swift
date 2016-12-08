@@ -25,6 +25,8 @@ extension BaseViewController{
         if IAPShare.sharedHelper().iap == nil {
             IAPShare.sharedHelper().iap = IAPHelper()
         }
+//        IAPShare.sharedHelper().iap.handleFinishTransaction()
+        
         let set = Set(arrayLiteral: productID)
         IAPShare.sharedHelper().iap.productIdentifiers = set
         IAPShare.sharedHelper().iap.production = false
@@ -56,7 +58,6 @@ extension BaseViewController{
                 
                 if trans.transactionState == SKPaymentTransactionState.purchased{
                     if  let data = try? Data(contentsOf: Bundle.main.appStoreReceiptURL!) {
-                        
                         IAPShare.sharedHelper().iap.checkReceipt(data, onCompletion: { (response, error) in
                             self.hiddenNotificationProgress(animated: false)
                             
