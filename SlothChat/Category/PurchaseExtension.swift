@@ -75,14 +75,17 @@ extension BaseViewController{
                             if status == 0 {
                                 IAPShare.sharedHelper().iap.provideContent(with: trans)
                                 let receipt = data.base64EncodedString()
-                                self.iapPurchaseSuccess(receipt: receipt, amount: price)
+                                
+//                                self.iapPurchaseSuccess(receipt: receipt, amount: price)
+                                
                                 SGLog(message: dict)
-//                                let receiptDict: [String: Any] = (dict["receipt"] as? Dictionary)!
-//                                let inAppList:[[String: Any]] = (receiptDict["in_app"] as? Array)!
-//                                let firstDict = inAppList.first
-//                                let transactionId: String = firstDict!["transaction_id"] as! String
-//                                
-//                                SGLog(message: transactionId)
+                                let receiptDict: [String: Any] = (dict["receipt"] as? Dictionary)!
+                                let inAppList:[[String: Any]] = (receiptDict["in_app"] as? Array)!
+                                let firstDict = inAppList.first
+                                let transactionId: String = firstDict!["transaction_id"] as! String
+                                
+                                SGLog(message: transactionId)
+                                self.iapPurchaseSuccess(receipt: receipt,productId:productID,transactionId:transactionId,amount: price)
 
                             }else{
                                 SGLog(message: error?.localizedDescription)
@@ -95,11 +98,11 @@ extension BaseViewController{
         }
     }
 
-    func iapPurchaseSuccess(receipt: String, amount: String) {
+    func iapPurchaseSuccess(receipt: String, productId: String?, transactionId: String?,amount: String) {
         let engine = NetworkEngine()
         self.showNotificationProgress()
         
-        engine.postCharge(appPayReceipt: receipt, amount: amount) { (response) in
+        engine.postCharge(appPayReceipt: receipt, productId: productId, transactionId: transactionId) { (response) in
             self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0{
                 if let amount = Int(amount),

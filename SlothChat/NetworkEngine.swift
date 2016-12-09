@@ -490,9 +490,11 @@ class NetworkEngine: NSObject {
     }
     
     //14.账户APPLE STORE充值
-    func postCharge(appPayReceipt: String,amount: String, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+    func postCharge(appPayReceipt: String, productId: String?, transactionId: String?, completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         guard let token = Global.shared.globalLogin?.token,
-            let userUuid = Global.shared.globalProfile?.userUuid else {
+            let userUuid = Global.shared.globalProfile?.userUuid,
+            let productId = productId,
+            let transactionId = transactionId else {
                 SGLog(message: "数据为空")
                 return
         }
@@ -502,7 +504,8 @@ class NetworkEngine: NSObject {
 
         let request = HTTPRequestGenerator(withParam:[
             "appPayReceipt":appPayReceipt,
-            "amount":amount,]
+            "productId":productId,
+            "transactionId":transactionId,]
             , URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
