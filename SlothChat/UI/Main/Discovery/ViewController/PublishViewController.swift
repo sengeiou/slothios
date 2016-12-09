@@ -224,7 +224,7 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         
         let price = headerView.addPrice - oriPrice
         if price <= 0 {
-            self.showNotificationError(message: "请选择有效果的价格")
+//            self.showNotificationError(message: "请选择有效果的价格")
         }
         
         let engine = NetworkEngine()
