@@ -109,6 +109,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
             cell.selectionStyle = .none
         }
         cell.selectButton.isHidden = !(indexPath.row == 1 || indexPath.row == 2)
+        cell.dependVC = self    
         return cell
         
     }

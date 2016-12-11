@@ -125,7 +125,7 @@ class NetworkEngine: NSObject {
 
     override init() {
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForResource = 8 // seconds
+        configuration.timeoutIntervalForResource = 10 // seconds
         self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
     }
     

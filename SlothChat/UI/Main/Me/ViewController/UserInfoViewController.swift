@@ -278,6 +278,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         self.showNotificationProgress()
         engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (response) in
             self.hiddenNotificationProgress(animated: false)
+            if response == nil {
+                return
+            }
             self.container.snp.remakeConstraints { (make) in
                 make.edges.equalTo(self.scrollView)
                 make.width.equalTo(self.scrollView)
