@@ -32,6 +32,7 @@ struct ResponseError {
     static let OPER_TIMEOUT = ("401", "网络超时")
     static let DBE = ("402", "数据库异常错误")
     static let FAILURE = ("500", "未知的系统异常")
+   
 }
 
 enum API_URI:String {
@@ -198,10 +199,15 @@ class NetworkEngine: NSObject {
         let URLString:String = Base_URL + API_URI.public_coutry.rawValue
         
         alamofireManager.request(URLString, parameters: ["name":name]).responseObject { (response:DataResponse<Country>) in
-            if self.verificationResponse(value: response.result.value) {
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value) {
+                    completeHandler(response.result.value)
+                } else {
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError()
             }
         }
     }
@@ -212,6 +218,7 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<SMS>) in
+            
             if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
@@ -228,9 +235,14 @@ class NetworkEngine: NSObject {
                                                        "verifyCode":verifyCode], URLString: URLString);
         alamofireManager.request(request)
             .responseObject { (response:DataResponse<SMS>) in
-                if self.verificationResponse(value: response.result.value) {
-                    completeHandler(response.result.value)
-                }else{
+                if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                    if self.verificationResponse(value: response.result.value) {
+                        completeHandler(response.result.value)
+                    }else{
+                        self.showHandleError()
+                    }
+                }
+                else {
                     self.showHandleError()
                 }
         }
@@ -253,10 +265,12 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if self.verificationResponse(value: response.result.value) {
-                            completeHandler(response.result.value)
-                        }else{
-                            self.showHandleError()
+                        if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                            if self.verificationResponse(value: response.result.value) {
+                                completeHandler(response.result.value)
+                            }else{
+                                self.showHandleError()
+                            }
                         }
                     }
                 case .failure(let encodingError):
@@ -280,10 +294,15 @@ class NetworkEngine: NSObject {
             ], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<UserAndProfile>) in
-            if self.verificationResponse(value: response.result.value) {
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if self.responseStatusCodeIsOK(urlResponse: response.response) {
+                if self.verificationResponse(value: response.result.value) {
+                    completeHandler(response.result.value)
+                }else{
+                    self.showHandleError()
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -306,7 +325,7 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<LoginModel>) in
-                        if (response.response?.statusCode == 200) || (response.response?.statusCode == 201) {
+                        if self.responseStatusCodeIsOK(urlResponse: response.response) {
                             completeHandler(response.result.value)
                         }
                         else {
@@ -314,13 +333,6 @@ class NetworkEngine: NSObject {
                         }
                         
                         //SGLog(message: response.response?.statusCode)
-                        
-                        
-//                        if self.verificationResponse(value: response.result.value) {
-//                            completeHandler(response.result.value)
-//                        }else{
-//                            self.showHandleError()
-//                        }
                     }
                 case .failure(let encodingError):
                     print("error")
@@ -351,10 +363,15 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<Response>) in
-                        if self.verificationResponse(value: response.result.value) {
-                            completeHandler(response.result.value)
-                        }else{
-                            self.showHandleError()
+                        if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                            if self.verificationResponse(value: response.result.value) {
+                                completeHandler(response.result.value)
+                            }else{
+                                self.showHandleError()
+                            }
+                        }
+                        else {
+                            self.showHandleError();
                         }
                     }
                 case .failure(let encodingError):
@@ -387,10 +404,15 @@ class NetworkEngine: NSObject {
             ], method: .put, URLString: URLString)
 
         alamofireManager.request(request).responseObject { (response:DataResponse<ModifyUserProfile>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -415,10 +437,15 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
 
         alamofireManager.request(URLString, parameters: nil).responseObject { (response:DataResponse<UserProfile>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -438,10 +465,15 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
         alamofireManager.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<SysConfig>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -462,10 +494,15 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                } else {
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -481,10 +518,15 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                
             }
         }
     }
@@ -509,11 +551,17 @@ class NetworkEngine: NSObject {
             , URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
             }
+            else {
+                self.showHandleError();
+            }
+            
         }
     }
     
@@ -537,10 +585,15 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError()
             }
         }
     }
@@ -551,10 +604,16 @@ class NetworkEngine: NSObject {
         let URLString:String = self.Base_URL + API_URI.get_itunesChargeList.rawValue
         
         alamofireManager.request(URLString, parameters: ["":""]).responseObject { (response:DataResponse<ItunesCharge>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            }
+            }
+            else {
+                self.showHandleError()
             }
         }
     }
@@ -618,10 +677,15 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -643,10 +707,16 @@ class NetworkEngine: NSObject {
             ["likeSenderUserUuid":userUuid], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+               if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            } 
+            }
+            else {
+                self.showHandleError()
             }
         }
     }
@@ -706,10 +776,15 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<GalleryPhoto>) in
-                        if self.verificationResponse(value: response.result.value) {
-                            completeHandler(response.result.value)
-                        }else{
-                            self.showHandleError()
+                        if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                            if self.verificationResponse(value: response.result.value) {
+                                completeHandler(response.result.value)
+                            }else{
+                                self.showHandleError()
+                            }
+                        }
+                        else {
+                            self.showHandleError();
                         }
                     }
                 case .failure(let encodingError):
@@ -758,10 +833,16 @@ class NetworkEngine: NSObject {
             , method: .delete, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -782,10 +863,16 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{displayOrder}", with: displayType.rawValue)
         
         alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<DisplayOrder>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -806,10 +893,16 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["likeSenderUserUuid":likeSenderUserUuid], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -827,10 +920,16 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{galleryUuid}", with: galleryUuid)
         
         alamofireManager.request(URLString, parameters:["pageNum":pageNum,"pageSize":pageSize]).responseObject { (response:DataResponse<LikeProfileResult>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -851,10 +950,16 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{bidGalleryUuid}", with: bidGalleryUuid)
         
         alamofireManager.request(URLString).responseObject { (response:DataResponse<AdsBidOrder>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -878,10 +983,16 @@ class NetworkEngine: NSObject {
             "participateBidAds":"true"], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<BidAdResponse>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
-                completeHandler(response.result.value)
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
+                    completeHandler(response.result.value)
+                }else{
+                    completeHandler(response.result.value)
+                }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -968,10 +1079,16 @@ class NetworkEngine: NSObject {
             "adminUserUuid": adminUserUuid], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<GroupInfo>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -996,10 +1113,16 @@ class NetworkEngine: NSObject {
             "userGroupUuid": userGroupUuid], method: .put, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+               if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            } 
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1038,10 +1161,16 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+               if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            } 
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1065,10 +1194,16 @@ class NetworkEngine: NSObject {
             "userDisplayName" : userDisplayName], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1092,10 +1227,16 @@ class NetworkEngine: NSObject {
             , method: .put, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+               if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            } 
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1136,10 +1277,16 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1162,10 +1309,16 @@ class NetworkEngine: NSObject {
             "userUuidB" : userUuidB], URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<PrivateChat>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1184,10 +1337,16 @@ class NetworkEngine: NSObject {
         let request = HTTPRequestGenerator(withParam:["" : ""], method: .delete, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
+            }
+            }
+            else {
+                self.showHandleError();
             }
         }
     }
@@ -1211,11 +1370,27 @@ class NetworkEngine: NSObject {
             "userDisplayName": userDisplayName], method: .put, URLString: URLString)
         
         alamofireManager.request(request).responseObject { (response:DataResponse<Response>) in
-            if self.verificationResponse(value: response.result.value){
-                completeHandler(response.result.value)
-            }else{
+            
+            if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
+                if self.responseStatusCodeIsOK(urlResponse: response.response) {
                 completeHandler(response.result.value)
             }
+            else {
+                completeHandler(nil);
+            }
+            }
+            else {
+                self.showHandleError();
+            }
+        }
+    }
+    
+    func responseStatusCodeIsOK(urlResponse response:HTTPURLResponse?) -> Bool {
+        if (response?.statusCode == 200) || (response?.statusCode == 201) {
+            return true
+        }
+        else {
+            return false
         }
     }
 }

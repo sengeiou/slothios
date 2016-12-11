@@ -18,6 +18,9 @@ case "${TARGETED_DEVICE_FAMILY}" in
   2)
     TARGET_DEVICE_ARGS="--target-device ipad"
     ;;
+  3)
+    TARGET_DEVICE_ARGS="--target-device tv"
+    ;;
   *)
     TARGET_DEVICE_ARGS="--target-device mac"
     ;;
@@ -74,18 +77,18 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/RongCloud.bundle"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/en.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/zh-Hans.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/Emoji.plist"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/RCConfig.plist"
+  install_resource "RongCloudIM/RongCloudIM/RongCloud.bundle"
+  install_resource "RongCloudIM/RongCloudIM/en.lproj"
+  install_resource "RongCloudIM/RongCloudIM/zh-Hans.lproj"
+  install_resource "RongCloudIM/RongCloudIM/Emoji.plist"
+  install_resource "RongCloudIM/RongCloudIM/RCConfig.plist"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/RongCloud.bundle"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/en.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/zh-Hans.lproj"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/Emoji.plist"
-  install_resource "RongCloudIMKit/Rong_Cloud_iOS_IMKit_SDK_v2_7_3_stable/RCConfig.plist"
+  install_resource "RongCloudIM/RongCloudIM/RongCloud.bundle"
+  install_resource "RongCloudIM/RongCloudIM/en.lproj"
+  install_resource "RongCloudIM/RongCloudIM/zh-Hans.lproj"
+  install_resource "RongCloudIM/RongCloudIM/Emoji.plist"
+  install_resource "RongCloudIM/RongCloudIM/RCConfig.plist"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
