@@ -1788,7 +1788,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2400,8 +2400,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SlothChat/SlothChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = DPQ5CCJSTK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2439,8 +2440,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3953a06e-1e3a-4858-a6f6-9e5a53b0fa41";
-				PROVISIONING_PROFILE_SPECIFIER = dev_animalChat;
+				PROVISIONING_PROFILE = "e5e00a7c-fd12-4222-9bff-52d3e8809a38";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.ssloth.animalChat";
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/Resource/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -2452,6 +2453,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SlothChat/SlothChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = DPQ5CCJSTK;
@@ -2491,8 +2493,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ssloth.animalChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3f395d41-c8a8-49e7-8353-4e1b2603b486";
-				PROVISIONING_PROFILE_SPECIFIER = dis_animalChat;
+				PROVISIONING_PROFILE = "84aecdf8-d14d-4f25-ad1d-448cfc9b80f7";
+				PROVISIONING_PROFILE_SPECIFIER = sslothChat_Store;
 				SWIFT_OBJC_BRIDGING_HEADER = "SlothChat/Resource/SlothChat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
