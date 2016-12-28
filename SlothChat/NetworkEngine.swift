@@ -117,6 +117,7 @@ enum API_URI:String {
     //41.删除指定一对一私聊会话
     case delete_privateChat = "/api/privateChat/{uuid}?token={token}"
     case put_officialGroupMemberName = "/api/officialGroup/{officialGroupUuid}/officialGroupMember/{officialGroupMemberUuid}?token={token}"
+    case report_abuse = "/api/user/reportAbuse?token="
 }
 
 class NetworkEngine: NSObject {
@@ -1382,6 +1383,23 @@ class NetworkEngine: NSObject {
             else {
                 self.showHandleError();
             }
+        }
+    }
+    //MARK:举报
+    func reportAbuse(userUuid:String!,galleryUuid:String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        guard let token = Global.shared.globalLogin?.token else {
+            
+            return;
+        }
+        
+        let URLString:String = Base_URL + API_URI.report_abuse.rawValue + token;
+        let request = HTTPRequestGenerator(withParam: [
+                                                       "userUuid":userUuid,
+                                                       "galleryUuid":((galleryUuid?.lengthOfBytes(using: .utf8))! > 0 ? galleryUuid! : ""),
+                                                       "reporterUserUuid":(Global.shared.globalLogin?.user?.uuid)! as String
+                                                       ], URLString: URLString);
+        Alamofire.request(request).responseObject { (response:DataResponse<Response>) in
+            
         }
     }
     

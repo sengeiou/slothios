@@ -53,43 +53,36 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             self.setNavtionConfirm(imageStr: "icon_setting")
 //            self.navigationItem.rightBarButtonItem?.tintColor = SGColor.red
         }
+        else {
+            self.setNavtionConfirm(imageStr: "blockUser")
+        }
         deleteButton.isHidden = !isMyselfFlag
     }
     
     override func confirmClick() {
         SGLog(message: "confirmClick")
+        if isMyselfFlag {
+            let pushVC = SettingViewController.init()
+            self.navigationController?.pushViewController(pushVC, animated: true)
 
-        let pushVC = SettingViewController.init()
-        self.navigationController?.pushViewController(pushVC, animated: true)
-    }
-    
-    func configRightBarButtonItem() {
-        
-        let barView = UIView(frame: CGRect.init(x: 0, y: 0, width: 64, height: 44))
-        let imgView = UIImageView.init(image: UIImage(named: "icon_setting"))
-        imgView.tintColor = UIColor.blue
-        let titleLbl = UILabel()
-        titleLbl.text = "设置"
-        barView.addSubview(imgView)
-        barView.addSubview(titleLbl)
-        imgView.snp.makeConstraints({ (make) in
-            make.left.equalTo(0)
-            make.centerY.equalTo(barView.snp.centerY)
-            make.size.equalTo(CGSize.init(width: 20, height: 20))
-        })
-        titleLbl.snp.makeConstraints({ (make) in
-            make.left.equalTo(imgView.snp.right).offset(8)
-            make.centerY.equalTo(barView.snp.centerY)
-        })
-        let button = UIButton(type: .custom)
-        barView.addSubview(button)
-        button.addTarget(self, action: #selector(confirmClick), for: .touchUpInside)
-        button.snp.makeConstraints({ (make) in
-            make.edges.equalTo(UIEdgeInsets.zero)
-        })
-        
-        let barItem = UIBarButtonItem.init(customView: barView)
-        self.navigationItem.rightBarButtonItem = barItem
+        }
+        else {
+            let reportActionSheet:UIAlertController = UIAlertController.init(title: "提示", message: "举报这个人并拉黑?", preferredStyle: .actionSheet);
+            let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (UIAlertAction) in
+                
+            }
+            reportActionSheet.addAction(cancelAction);
+            
+            let reportAction = UIAlertAction.init(title: "举报", style: .destructive) { (UIAlertAction) in
+                let engine = NetworkEngine()
+                engine.reportAbuse(userUuid: self.mUserUuid, galleryUuid: nil) { (response) in
+                    
+                }
+            }
+            reportActionSheet.addAction(reportAction);
+            
+            self.present(reportActionSheet, animated: true, completion: nil)
+        }
     }
     
     func setupView() {

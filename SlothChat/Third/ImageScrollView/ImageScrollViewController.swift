@@ -81,6 +81,16 @@ class ImageScrollViewController: BaseViewController {
         closeButton.tintColor = UIColor.white
         closeButton.addTarget(self, action: #selector(closeButtonClick), for: .touchUpInside)
         
+        let reportButton = UIButton(type: .custom)
+        topToolBar.addSubview(reportButton)
+        reportButton.snp.makeConstraints { (make) in
+            make.right.equalTo(closeButton.snp.left).offset(-10)
+            make.size.equalTo(closeButton)
+            make.centerY.equalTo(closeButton.snp.centerY);
+        }
+        reportButton.setImage(UIImage.init(named: "report"), for: .normal);
+        reportButton.tintColor = UIColor.white;
+        reportButton.addTarget(self, action: #selector(reportImage), for: .touchUpInside)
         
         view.addSubview(bottomToolBar)
         bottomToolBar.snp.makeConstraints { (make) in
@@ -222,6 +232,24 @@ class ImageScrollViewController: BaseViewController {
         likeGallery()
     }
     
+    func reportImage() -> Void {
+        let reportActionSheet:UIAlertController = UIAlertController.init(title: "提示", message: "举报图片?", preferredStyle: .actionSheet);
+        let cancelAction = UIAlertAction.init(title: "取消", style: .cancel) { (UIAlertAction) in
+            
+        }
+        reportActionSheet.addAction(cancelAction);
+        
+        let reportAction = UIAlertAction.init(title: "举报", style: .destructive) { (UIAlertAction) in
+            let engine = NetworkEngine()
+            engine.reportAbuse(userUuid: self.photoObj?.uuid, galleryUuid: self.photoObj?.uuid) { (response) in
+                
+            }
+        }
+        reportActionSheet.addAction(reportAction);
+        
+        self.present(reportActionSheet, animated: true, completion: nil)
+    }
+    
     fileprivate func refreshLikeButton() {
         let followImg = isFollow ? "heart-solid" : "heart-hollow"
         likeButton.setImage(UIImage.init(named: followImg), for: .normal)
@@ -231,3 +259,4 @@ class ImageScrollViewController: BaseViewController {
         return true
     }
 }
+
