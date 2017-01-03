@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 open class ImageScrollView: UIScrollView {
     
@@ -156,13 +156,14 @@ open class ImageScrollView: UIScrollView {
         
         zoomView = UIImageView(frame: self.bounds)
         let avatarUrl = URL(string: imageUrl)
-        zoomView!.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: { (image, error, type, url) in
+        
+        zoomView!.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"), options: [SDWebImageOptions.lowPriority]) { (image, error, cacheType, url) in
             if let image = image{
                 self.display(image: image)
             }else{
                 self.display(image: UIImage(named: "icon")!)
             }
-        })
+        }
     }
     
     fileprivate func configureImageForSize(_ size: CGSize) {

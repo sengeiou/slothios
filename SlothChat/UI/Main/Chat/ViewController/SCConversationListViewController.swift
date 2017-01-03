@@ -268,6 +268,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
             }else if message.conversationType == RCConversationType.ConversationType_PRIVATE {
                 let receivedConversation = RCIMClient.shared().getConversation(message.conversationType, targetId: message.targetId)
                 let customModel = RCConversationModel.init(RCConversationModelType.CONVERSATION_MODEL_TYPE_CUSTOMIZATION, conversation: receivedConversation, extend: nil)
+                
                 DispatchQueue.main.async {
                     self.refreshConversationTableView(with: customModel)
                     self.notifyUpdateUnreadMessageCount()

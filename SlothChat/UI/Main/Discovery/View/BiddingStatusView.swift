@@ -150,7 +150,7 @@ class BiddingStatusView: BaseView {
     
     func configWithObject(imgUrl: String) {
         let avatarUrl = URL(string: imgUrl)
-        self.mainImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "placeHolder_image1.jpg"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.mainImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "placeHolder_image1.jpg"))
     }
     
     func refreshView(rankData: BidAdsRankVoData) {

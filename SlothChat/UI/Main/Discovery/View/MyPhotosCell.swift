@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class MyPhotosCell: UICollectionViewCell {
     let imgView = UIImageView.init()
@@ -42,7 +43,7 @@ class MyPhotosCell: UICollectionViewCell {
     func configCellObject(photo: UserGalleryPhoto) {
         if photo.smallPicUrl != nil {
             let url = URL(string: photo.smallPicUrl!)
-            imgView.kf.setImage(with: url, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            imgView.sd_setImage(with: url, placeholderImage: UIImage(named: "icon"))
         }
         flagView.isHidden = true
         flagView.setIsDisplayAsBidAds(displayAsBidAds: photo.displayAsBidAds!)
@@ -52,7 +53,7 @@ class MyPhotosCell: UICollectionViewCell {
     func configCellObject(chatUser: ChatMemberInfo) {
         if chatUser.profilePicUrl != nil {
             let url = URL(string: chatUser.profilePicUrl!)
-            imgView.kf.setImage(with: url, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            imgView.sd_setImage(with: url, placeholderImage: UIImage(named: "icon"))
         }
     }
     

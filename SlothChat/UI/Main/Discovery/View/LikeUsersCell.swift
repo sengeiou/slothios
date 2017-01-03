@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 typealias LikeUserClosureType = (_ indexPatch: IndexPath) -> Void
 
@@ -63,8 +63,8 @@ class LikeUsersCell: UITableViewCell {
     
     func configCellWithObj(userObj: LikeProfileListUser) {
         let avatarUrl = URL(string: userObj.likeSenderProfilePicUrl!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         self.nameLabel.text = userObj.likeSenderNickname
     }
     

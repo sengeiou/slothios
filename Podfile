@@ -6,12 +6,12 @@ target 'SlothChat' do
   use_frameworks!
   pod "Alamofire"
   pod "SwiftyJSON"
-  pod "Kingfisher"
   pod "SnapKit"
   pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
   pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
   pod "AlamofireObjectMapper"
   pod "RongCloudIM/IMKit"
+  pod "SDWebImage"
   # Pods for SlothChat
 
   target 'SlothChatTests' do

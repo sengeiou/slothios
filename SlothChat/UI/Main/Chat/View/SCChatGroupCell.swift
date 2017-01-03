@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollectionViewDataSource {
 
@@ -116,7 +117,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             if let userInfo = userInfo {
                 self.contentLabel.text = userInfo.name
                 let avatarUrl = URL(string: userInfo.portraitUri)
-                self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+                self.lastUserImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
             }
         }
     }
@@ -124,7 +125,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
     public func configCellWithObject(lastUserAvatarUrl: String?, lastUserName: String?,model: RCConversationModel){
         if let lastUserAvatarUrl = lastUserAvatarUrl {
             let avatarUrl = URL(string: lastUserAvatarUrl)
-            self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            self.lastUserImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         }else{
             self.lastUserImgView.image = UIImage(named: "icon")
         }
@@ -203,7 +204,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         configCellObject(model: model)
         
         let avatarUrl = URL(string: member.profilePicUrl!)
-        self.lastUserImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.lastUserImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0

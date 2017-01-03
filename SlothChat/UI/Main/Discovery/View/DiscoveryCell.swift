@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 enum DiscoveryActionType: Int {
     case likeType
@@ -128,10 +128,12 @@ class DiscoveryCell: UITableViewCell {
     
     func configCellWithObj(photoObj: DisplayOrderPhoto) {
         let avatarUrl = URL(string: photoObj.profilePicUrl!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
     
         let mainImgUrl = URL(string: photoObj.bigPicUrl!)
-        self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage(named: "placeHolder_image1.jpg"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        self.mainImgView.sd_setImage(with: mainImgUrl, placeholderImage: UIImage(named: "placeHolder_image1.jpg"))
         
         self.nameLabel.text = photoObj.nickname
         self.locationLabel.text = photoObj.adress

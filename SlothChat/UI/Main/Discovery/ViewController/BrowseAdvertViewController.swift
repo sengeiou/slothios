@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class BrowseAdvertViewController: BaseViewController {
     let scrollView = UIScrollView()
@@ -98,7 +98,8 @@ class BrowseAdvertViewController: BaseViewController {
         self.photoObj = photoObj
         
         let mainImgUrl = URL(string: (photoObj?.bigPicUrl)!)
-        self.mainImgView.kf.setImage(with: mainImgUrl, placeholder: UIImage(named: "placeHolder_image1.jpg"), options: nil, progressBlock: nil, completionHandler: nil)
+        
+        self.mainImgView.sd_setImage(with: mainImgUrl, placeholderImage: UIImage(named: "placeHolder_image1.jpg"))
         
         if let avatarList = photoObj?.getLikeGallerySliceUrlList() {
             usersListView.configViewWithObject(avatarList: avatarList, totalCount: (photoObj?.likesCount)!)

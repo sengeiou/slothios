@@ -47,15 +47,14 @@ class ChatFriendCell: UITableViewCell {
     
     func configCellWithObj(userObj: RCUserInfo) {
         let avatarUrl = URL(string: userObj.portraitUri)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
-        
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         self.nameLabel.text = userObj.name
     }
 
     func configCellWithObj(groupObj: RCGroup) {
         let avatarUrl = URL(string: groupObj.portraitUri)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         self.nameLabel.text = groupObj.groupName
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 typealias RemoveMemberClosureType = (_ indexPatch: IndexPath) -> Void
 
@@ -80,8 +81,8 @@ class ChatGroupInfoCell: UITableViewCell {
 
     func configCellWithObj(userObj: ChatMemberInfo) {
         let avatarUrl = URL(string: userObj.profilePicUrl!)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         if userObj.isAdmin!{
             self.nameLabel.text = userObj.userDisplayName! + " (群主)"
             removeButton.isHidden = true
@@ -93,8 +94,8 @@ class ChatGroupInfoCell: UITableViewCell {
     
     func configCellWithObj(groupObj: RCGroup) {
         let avatarUrl = URL(string: groupObj.portraitUri)
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
         
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         self.nameLabel.text = groupObj.groupName
     }
     

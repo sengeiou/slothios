@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class BiddingListCell: UITableViewCell {
     
@@ -67,7 +67,7 @@ class BiddingListCell: UITableViewCell {
     func configCellWithObj(rankVo: BidAdsRankVo, indexPatch: IndexPath) {
         if let imgUrl = rankVo.profilePicUrl {
             let avatarUrl = URL(string: imgUrl)
-            self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+            self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         }
         if let rank = rankVo.rank {
             self.rankLabel.text = String(rank)

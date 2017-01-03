@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Kingfisher.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,27 +62,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>03E0C87F12A0F0683B98D6D9B3DD0278</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>23F3087DEEABF71935C7D17A71D22D36</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>382C8B2275463DC09EAFAA0740C4F86C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5A40076A925C4343446BD0E525C4041F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>60B39CA4E652BC0D85732B0441F8A9E6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>62554CE4B9596B2E6CD83B287427A5A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>706E2064F8862D75A924A701A8CAB85D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C4944FEC314D1A66588651D006273ADE</key>
+		<key>D4695AD57F0A030C0F3367E66717D06C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D4695AD57F0A030C0F3367E66717D06C</key>
+		<key>D514A6275B570E17E2529747221E18E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 import SnapKit
 
 class OfficialGroupHeaderView: UICollectionReusableView {
@@ -117,7 +116,7 @@ class OfficialGroupHeaderView: UICollectionReusableView {
                 return
         }
         let avatarUrl = URL(string: topicPicUrl)
-        topicImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "placeHolder_offical.jpg"), options: nil, progressBlock: nil, completionHandler: nil)
+        topicImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "placeHolder_offical.jpg"))
         topicTitle.text = group.topicMsg
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+import SDWebImage
 
 class SCConversationListCell: RCConversationBaseCell {
     
@@ -76,7 +76,7 @@ class SCConversationListCell: RCConversationBaseCell {
             if let userInfo = userInfo {
                 self.nameLabel.text = userInfo.name
                 let avatarUrl = URL(string: userInfo.portraitUri)
-                self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+                self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
             }
         }
         configWithModel(model: model)
@@ -96,7 +96,7 @@ class SCConversationListCell: RCConversationBaseCell {
         self.nameLabel.text = privateChat.nickname
         let avatarUrl = URL(string: privateChat.profilePicUrl!)
         
-        self.avatarImgView.kf.setImage(with: avatarUrl, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        self.avatarImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "icon"))
         configWithModel(model: model)
     }
     

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 private let PageSize = 20
 

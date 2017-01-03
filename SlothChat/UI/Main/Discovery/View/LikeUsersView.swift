@@ -30,7 +30,7 @@ class LikeUserCell: UICollectionViewCell {
     
     func configViewWithObject(imgUrl: String) {
         let url = URL(string: imgUrl)
-        imgView.kf.setImage(with: url, placeholder: UIImage(named: "icon"), options: nil, progressBlock: nil, completionHandler: nil)
+        imgView.sd_setImage(with: url, placeholderImage: UIImage(named: "icon"))
     }
     
     required init?(coder aDecoder: NSCoder) {
