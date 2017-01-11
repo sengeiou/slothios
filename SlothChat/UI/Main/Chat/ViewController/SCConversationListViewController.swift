@@ -202,6 +202,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if indexPath.row >= self.conversationListDataSource.count {
             return UITableViewCell()
         }
@@ -267,7 +268,9 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                 }
             }else if message.conversationType == RCConversationType.ConversationType_PRIVATE {
                 let receivedConversation = RCIMClient.shared().getConversation(message.conversationType, targetId: message.targetId)
-                let customModel = RCConversationModel.init(RCConversationModelType.CONVERSATION_MODEL_TYPE_CUSTOMIZATION, conversation: receivedConversation, extend: nil)
+                //let customModel = RCConversationModel.init(RCConversationModelType.CONVERSATION_MODEL_TYPE_CUSTOMIZATION, conversation: receivedConversation, extend: nil)
+                let customModel = RCConversationModel.init(conversation: receivedConversation, extend: nil);
+                customModel?.conversationModelType = RCConversationModelType.CONVERSATION_MODEL_TYPE_CUSTOMIZATION;
                 
                 DispatchQueue.main.async {
                     self.refreshConversationTableView(with: customModel)
@@ -374,6 +377,7 @@ extension SCConversationListViewController{
             self.chatList?.caheForModel()
             if response?.status == ResponseError.SUCCESS.0 {
 //                self.refreshInvalidData(listData: response?.data)
+                
                 self.conversationListTableView.reloadData()
             }else{
                 self.showNotificationError(message: response?.msg)

@@ -10,8 +10,15 @@ import ObjectMapper
 
 
 class LoginModel : NSObject, NSCoding, Mappable{
-
-    var canTalk : Bool?
+    var _canTalk: Bool = true
+    var canTalk : Bool? {
+        set(newValue) {
+            _canTalk = newValue!;
+        }
+        get {
+            return true;
+        }
+    }
     var chatToken : String?
     var token : String?
     var user : LoginUser?
@@ -60,7 +67,7 @@ class LoginModel : NSObject, NSCoding, Mappable{
      */
     @objc required init(coder aDecoder: NSCoder)
     {
-        canTalk = aDecoder.decodeObject(forKey: "canTalk") as? Bool
+//        canTalk = aDecoder.decodeObject(forKey: "canTalk") as? Bool
         chatToken = aDecoder.decodeObject(forKey: "chatToken") as? String
         token = aDecoder.decodeObject(forKey: "token") as? String
         user = aDecoder.decodeObject(forKey: "user") as? LoginUser
@@ -74,9 +81,9 @@ class LoginModel : NSObject, NSCoding, Mappable{
      */
     @objc func encode(with aCoder: NSCoder)
     {
-        if canTalk != nil{
-            aCoder.encode(canTalk, forKey: "canTalk")
-        }
+//        if canTalk != nil{
+//            aCoder.encode(canTalk, forKey: "canTalk")
+//        }
         if chatToken != nil{
             aCoder.encode(chatToken, forKey: "chatToken")
         }
