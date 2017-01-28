@@ -12,6 +12,7 @@ target 'SlothChat' do
   pod "AlamofireObjectMapper"
   pod "RongCloudIM/IMKit"
   pod "SDWebImage"
+  
   # Pods for SlothChat
 
   target 'SlothChatTests' do

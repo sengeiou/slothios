@@ -175,10 +175,10 @@ class SelectChatFriendsViewController: BaseViewController,UITableViewDelegate,UI
             self.showNotificationError(message: "包括自己在内最少需要3个成员才能新建一个聊天组")
             return
         }
-        let engine = NetworkEngine()
+        
         self.showNotificationProgress()
         
-        engine.postCreateGroup(memberUserUuidList: IDS, groupDisplayName: groupName) { (response) in
+        NetworkEngine().postCreateGroup(memberUserUuidList: IDS, groupDisplayName: groupName) { (response) in
             self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 {
                 self.showNotificationSuccess(message: "创建群组成功")

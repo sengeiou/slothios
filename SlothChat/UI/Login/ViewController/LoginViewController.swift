@@ -137,8 +137,8 @@ class LoginViewController: BaseViewController {
         }
         
         #if DEBUG
-        self.phoneView.inputTextfield.text = "189120"
-        self.passwordView.inputTextfield.text = "A123456"
+        self.phoneView.inputTextfield.text = "18667931203"
+        self.passwordView.inputTextfield.text = "111111"
         #endif  
     }
     

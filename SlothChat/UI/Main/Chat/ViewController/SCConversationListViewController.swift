@@ -22,6 +22,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         ChatDataManager.shared.refreshBadgeValue()
         self.conversationListTableView.reloadData()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "聊"
@@ -187,8 +188,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let model = getTableViewModel(indexPath: indexPath)
         
-        if model.conversationType == .ConversationType_DISCUSSION ||
-            model.conversationType == .ConversationType_GROUP{
+        if model.conversationType == .ConversationType_DISCUSSION || model.conversationType == .ConversationType_GROUP {
             return 184
         }
         return 106
@@ -202,7 +202,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        SGLog(message: "cakjdlkf;aldkf")
         if indexPath.row >= self.conversationListDataSource.count {
             return UITableViewCell()
         }
@@ -225,7 +225,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                 if group.isKind(of: ChatUserGroupVo.self) {
                     let userGroup = group as! ChatUserGroupVo
                     cell.configCellWithObject(userGroup: userGroup,model:model)
-                }else if group.isKind(of: ChatOfficialGroupVo.self){
+                } else if group.isKind(of: ChatOfficialGroupVo.self) {
                     let officialGroup = group as! ChatOfficialGroupVo
                     cell.configCellWithObject(officialGroup: officialGroup,model:model)
                 }else{
@@ -266,7 +266,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                     super.didReceiveMessageNotification(notification)
                     self.notifyUpdateUnreadMessageCount()
                 }
-            }else if message.conversationType == RCConversationType.ConversationType_PRIVATE {
+            } else if message.conversationType == RCConversationType.ConversationType_PRIVATE {
                 let receivedConversation = RCIMClient.shared().getConversation(message.conversationType, targetId: message.targetId)
                 //let customModel = RCConversationModel.init(RCConversationModelType.CONVERSATION_MODEL_TYPE_CUSTOMIZATION, conversation: receivedConversation, extend: nil)
                 let customModel = RCConversationModel.init(conversation: receivedConversation, extend: nil);
@@ -283,7 +283,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                     }
                 }
             }
-        }else{
+        } else{
             DispatchQueue.main.async {
                 super.didReceiveMessageNotification(notification)
                 self.notifyUpdateUnreadMessageCount()
@@ -335,7 +335,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
 }
 
-extension SCConversationListViewController: UISearchResultsUpdating{
+extension SCConversationListViewController: UISearchResultsUpdating {
     //实时进行搜索
     func updateSearchResults(for searchController: UISearchController) {
         //RCConversationModel
@@ -368,19 +368,23 @@ extension SCConversationListViewController: UISearchResultsUpdating{
     }
 }
 
-extension SCConversationListViewController{
+extension SCConversationListViewController {
     func getChatList() {
-        let engine = NetworkEngine()
         
-        engine.getChatList { (response) in
+        NetworkEngine().getChatList { (response) in
             self.chatList = response
             self.chatList?.caheForModel()
+            //self.chatList?.data?.chatUserGroupVos
+            //self.chatList?.data?.chatOfficialGroupVo
+            //self.chatList?.data?.privateChatVos
+            
             if response?.status == ResponseError.SUCCESS.0 {
 //                self.refreshInvalidData(listData: response?.data)
                 
                 self.conversationListTableView.reloadData()
-            }else{
+            } else {
                 self.showNotificationError(message: response?.msg)
+                
             }
         }
     }

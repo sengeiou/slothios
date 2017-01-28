@@ -101,14 +101,14 @@
 
 #pragma mark - Input Bar
 /*!
- 获取会话界面的plugin board item信息。
+ 获取会话页面的plugin board item信息。
  
  @param conversationType  会话类型
  @param targetId          targetId
  
  @return plugin board item信息列表。
  
- @discussion 当进入到会话界面时，SDK需要注册扩展面部区域的item。
+ @discussion 当进入到会话页面时，SDK需要注册扩展面部区域的item。
  */
 - (NSArray<RCExtensionPluginItemInfo *> *)getPluginBoardItemInfoList:(RCConversationType)conversationType
                                                     targetId:(NSString *)targetId;
@@ -166,6 +166,19 @@
                      inInputBar:(RCChatSessionInputBarControl *)inputBarControl;
 
 
+/*!
+ 是否需要显示表情加号按钮
+
+ @param inputBarControl  输入工具栏
+ */
+- (BOOL)isEmoticonAddButtonEnabled:(RCChatSessionInputBarControl *)inputBarControl;
+
+/*!
+ 是否需要显示表情设置按钮
+ 
+ @param inputBarControl  输入工具栏
+ */
+- (BOOL)isEmoticonSettingButtonEnabled:(RCChatSessionInputBarControl *)inputBarControl;
 ///*!
 // 点击加号面板中按钮的回调
 // 
@@ -176,4 +189,14 @@
 //- (void)pluginBoard:(RCPluginBoardView *)pluginBoardView
 // clickedItemWithTag:(NSInteger)tag
 //         inInputBar:(RCChatSessionInputBarControl *)inputBarControl;
+
+/*!
+ 是否正在使用声音通道
+ */
+- (BOOL)isAudioHolding;
+
+/*!
+ 是否正在使用摄像头
+ */
+- (BOOL)isCameraHolding;
 @end

@@ -163,15 +163,12 @@ class NetworkEngine: NSObject {
     
     func verificationResponse(value: NSObject?) -> Bool {
         guard let value = value else {
-            SGLog(message: "无对象")
             return false
         }
         guard let code = value.value(forKey: "status") else {
-            SGLog(message: "无status")
+            
             return false
         }
-        SGLog(message: String(describing: value))
-        SGLog(message: value.allPropertyNamesAndValues())
         
         return self.validAuthCode(code: code as? String)
     }
@@ -1030,7 +1027,7 @@ class NetworkEngine: NSObject {
         var URLString:String = Base_URL + API_URI.get_chatList.rawValue
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
-        
+        SGLog(message: "call");
         alamofireManager.request(URLString).responseObject { (response:DataResponse<ChatList>) in
             if self.verificationResponse(value: response.result.value){
                 completeHandler(response.result.value)
@@ -1082,7 +1079,7 @@ class NetworkEngine: NSObject {
         alamofireManager.request(request).responseObject { (response:DataResponse<GroupInfo>) in
             
             if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
-                if self.verificationResponse(value: response.result.value){
+                if self.verificationResponse(value: response.result.value) {
                 completeHandler(response.result.value)
             }else{
                 completeHandler(response.result.value)
