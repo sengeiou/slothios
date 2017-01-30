@@ -21,6 +21,11 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         self.getChatList()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "聊"
@@ -58,7 +63,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         RCIM.shared().connectionStatusDelegate = self
         self.conversationListTableView.tableFooterView = UIView()
         
-        
+        //self.getChatList()
     }
     
     //MARK: - Action
@@ -375,19 +380,14 @@ extension SCConversationListViewController: UISearchResultsUpdating {
 
 extension SCConversationListViewController {
     func getChatList() {
-        if self.chatList != nil {
-            return;
-        }
-        else {
-            NetworkEngine().getChatList { (response) in
-                self.chatList = response
-                self.chatList?.caheForModel()
-                
-                if response?.status == ResponseError.SUCCESS.0 {
-                    self.convertToConversationModel();
-                } else {
-                    self.showNotificationError(message: response?.msg)
-                }
+        NetworkEngine().getChatList { (response) in
+            self.chatList = response
+            self.chatList?.caheForModel()
+            
+            if response?.status == ResponseError.SUCCESS.0 {
+                self.convertToConversationModel();
+            } else {
+                self.showNotificationError(message: response?.msg)
             }
         }
     }
@@ -407,14 +407,20 @@ extension SCConversationListViewController {
             model.targetId = chatUserGroupVo.userGroupUuid;
             model.conversationType = .ConversationType_GROUP;
             model.conversationTitle = chatUserGroupVo.userGroupName;
-            self.conversationListDataSource.add(model)
+            var isThere:Bool = false;
+            
             for conversation in conversationList as! [RCConversation] {
                 if conversation.targetId == model.targetId {
-                    self.conversationListDataSource.remove(model);
+                    isThere = true;
                 }
             }
             
-            //self.refreshConversationTableView(with: model);
+            if isThere {
+                //self.refreshConversationTableView(with: model);
+            }
+            else {
+                self.conversationListDataSource.add(model)
+            }
             
         }
         
@@ -424,7 +430,20 @@ extension SCConversationListViewController {
             model.conversationType = .ConversationType_PRIVATE;
             model.conversationTitle = privateChat.nickname;
             self.conversationListDataSource.add(model);
-            //self.refreshConversationTableView(with: model);
+            
+            var isThere:Bool = false;
+            for conversation in conversationList as! [RCConversation] {
+                if conversation.targetId == model.targetId {
+                    isThere = true;
+                }
+            }
+            
+            if isThere {
+                //self.refreshConversationTableView(with: model);
+            }
+            else {
+                self.conversationListDataSource.add(model)
+            }
         }
         
         let chatOfficialGroup:ChatOfficialGroupVo = (self.chatList?.data?.chatOfficialGroupVo)!;
@@ -435,7 +454,7 @@ extension SCConversationListViewController {
         
         self.conversationListDataSource.insert(model, at: 0);
         
-        SGLog(message: self.conversationListDataSource.count);
+        
         for view:UIView in self.conversationListTableView.subviews {
             
             if view.isKind(of: UIImageView.self) {
