@@ -56,6 +56,8 @@ class ChatListData : NSObject, NSCoding, Mappable{
     }
     
     public func getTargetModel(targetId: String?) -> ChatTarget?{
+        SGLog(message: targetId);
+        
         if let privateChat = getPrivateChatVo(privateChatId: targetId) {
             let target = ChatTarget()
             target.targetId = privateChat.userUuid

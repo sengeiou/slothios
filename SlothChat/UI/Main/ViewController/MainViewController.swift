@@ -35,7 +35,7 @@ class MainViewController: UITabBarController {
         firstbar.image = UIImage(named: "discover-gray")?.withRenderingMode(.alwaysOriginal)
         firstbar.selectedImage = UIImage(named: "discover-champagne")?.withRenderingMode(.alwaysOriginal)
         firstbar.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0)
-        
+    
         let secondbar = self.tabBar.items![1];
         
         secondbar.image = UIImage(named: "chat-gray")?.withRenderingMode(.alwaysOriginal)
@@ -63,3 +63,4 @@ class MainViewController: UITabBarController {
         }
     }
 }
+

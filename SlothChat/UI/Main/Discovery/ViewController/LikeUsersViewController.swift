@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 private let PageSize = 20
 

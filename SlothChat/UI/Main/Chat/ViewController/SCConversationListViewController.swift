@@ -19,8 +19,6 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getChatList()
-        ChatDataManager.shared.refreshBadgeValue()
-        self.conversationListTableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -50,8 +48,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                                           RCConversationType.ConversationType_APPSERVICE.rawValue,
                                           RCConversationType.ConversationType_SYSTEM.rawValue])
         //设置需要将哪些类型的会话在会话列表中聚合显示
-//        self.setCollectionConversationType([RCConversationType.ConversationType_DISCUSSION.rawValue,
-//                                            RCConversationType.ConversationType_GROUP.rawValue])
+        
         self.conversationListTableView.register(SCChatGroupCell.self, forCellReuseIdentifier: "SCChatGroupCell")
         self.conversationListTableView.register(SCConversationListCell.self, forCellReuseIdentifier: "SCConversationListCell")
         
@@ -60,6 +57,8 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         RCIM.shared().receiveMessageDelegate = self
         RCIM.shared().connectionStatusDelegate = self
         self.conversationListTableView.tableFooterView = UIView()
+        
+        
     }
     
     //MARK: - Action
@@ -124,13 +123,16 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     
     func removeIndexPath(indexPath: IndexPath) {
         
-        SGLog(message: "")
         let model = self.conversationListDataSource[indexPath.row] as! RCConversationModel
+        
         let engine = NetworkEngine()
         self.showNotificationProgress()
         
         if model.conversationType == .ConversationType_PRIVATE{
+            
             engine.deletePrivateChat(uuid: model.targetId){ (response) in
+                SGLog(message: "deleted")
+                
                 self.hiddenNotificationProgress(animated: false)
                 if response?.status == ResponseError.SUCCESS.0{
                     self.doneDeleteChat(model:model,indexPath:indexPath)
@@ -202,7 +204,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        SGLog(message: "cakjdlkf;aldkf")
+        
         if indexPath.row >= self.conversationListDataSource.count {
             return UITableViewCell()
         }
@@ -226,6 +228,7 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
                     let userGroup = group as! ChatUserGroupVo
                     cell.configCellWithObject(userGroup: userGroup,model:model)
                 } else if group.isKind(of: ChatOfficialGroupVo.self) {
+                    
                     let officialGroup = group as! ChatOfficialGroupVo
                     cell.configCellWithObject(officialGroup: officialGroup,model:model)
                 }else{
@@ -302,9 +305,11 @@ class SCConversationListViewController: RCConversationListViewController,RCIMRec
         self.conversationListTableView.deselectRow(at: indexPath, animated: true)
         
         let tmpModel = getTableViewModel(indexPath: indexPath)
+        
         search.isActive = false
         
         guard let target = self.chatList?.data?.getTargetModel(targetId: tmpModel.targetId) else {
+            
             return
         }
         
@@ -370,23 +375,75 @@ extension SCConversationListViewController: UISearchResultsUpdating {
 
 extension SCConversationListViewController {
     func getChatList() {
-        
-        NetworkEngine().getChatList { (response) in
-            self.chatList = response
-            self.chatList?.caheForModel()
-            //self.chatList?.data?.chatUserGroupVos
-            //self.chatList?.data?.chatOfficialGroupVo
-            //self.chatList?.data?.privateChatVos
-            
-            if response?.status == ResponseError.SUCCESS.0 {
-//                self.refreshInvalidData(listData: response?.data)
+        if self.chatList != nil {
+            return;
+        }
+        else {
+            NetworkEngine().getChatList { (response) in
+                self.chatList = response
+                self.chatList?.caheForModel()
                 
-                self.conversationListTableView.reloadData()
-            } else {
-                self.showNotificationError(message: response?.msg)
-                
+                if response?.status == ResponseError.SUCCESS.0 {
+                    self.convertToConversationModel();
+                } else {
+                    self.showNotificationError(message: response?.msg)
+                }
             }
         }
+    }
+    
+    func convertToConversationModel() {
+        let conversationList:Array = RCIMClient.shared().getConversationList([
+            RCConversationType.ConversationType_PRIVATE.rawValue,
+            RCConversationType.ConversationType_DISCUSSION.rawValue,
+            RCConversationType.ConversationType_CHATROOM.rawValue,
+            RCConversationType.ConversationType_GROUP.rawValue,
+            RCConversationType.ConversationType_APPSERVICE.rawValue,
+            RCConversationType.ConversationType_SYSTEM.rawValue
+            ])
+        
+        for chatUserGroupVo:ChatUserGroupVo in (self.chatList?.data?.chatUserGroupVos)! as [ChatUserGroupVo] {
+            let model:RCConversationModel = RCConversationModel.init();
+            model.targetId = chatUserGroupVo.userGroupUuid;
+            model.conversationType = .ConversationType_GROUP;
+            model.conversationTitle = chatUserGroupVo.userGroupName;
+            self.conversationListDataSource.add(model)
+            for conversation in conversationList as! [RCConversation] {
+                if conversation.targetId == model.targetId {
+                    self.conversationListDataSource.remove(model);
+                }
+            }
+            
+            //self.refreshConversationTableView(with: model);
+            
+        }
+        
+        for privateChat:PrivateChatVo in (self.chatList?.data?.privateChatVos)! as [PrivateChatVo] {
+            let model:RCConversationModel = RCConversationModel.init();
+            model.targetId = privateChat.privateChatUuid;
+            model.conversationType = .ConversationType_PRIVATE;
+            model.conversationTitle = privateChat.nickname;
+            self.conversationListDataSource.add(model);
+            //self.refreshConversationTableView(with: model);
+        }
+        
+        let chatOfficialGroup:ChatOfficialGroupVo = (self.chatList?.data?.chatOfficialGroupVo)!;
+        let model:RCConversationModel = RCConversationModel.init();
+        model.targetId = chatOfficialGroup.officialGroupUuid;
+        model.conversationType = .ConversationType_GROUP;
+        model.conversationTitle = chatOfficialGroup.officialGroupName;
+        
+        self.conversationListDataSource.insert(model, at: 0);
+        
+        SGLog(message: self.conversationListDataSource.count);
+        for view:UIView in self.conversationListTableView.subviews {
+            
+            if view.isKind(of: UIImageView.self) {
+                view.removeFromSuperview();
+            }
+        }
+        ChatDataManager.shared.refreshBadgeValue();
+        self.conversationListTableView.reloadData();
     }
     
     func refreshInvalidData(listData: ChatListData?) {
@@ -412,3 +469,4 @@ extension SCConversationListViewController {
         self.conversationListTableView.reloadData()
     }
 }
+

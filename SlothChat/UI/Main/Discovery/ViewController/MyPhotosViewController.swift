@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import MJRefresh
+    
 private let PageSize = 20
 
 class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UICollectionViewDataSource {

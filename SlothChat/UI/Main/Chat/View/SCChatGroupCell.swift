@@ -171,6 +171,9 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
             let userInfo = RCIM.shared().getUserInfoCache(model.senderUserId)
             
             if userInfo == nil {
+                if model.senderUserId == nil {
+                    return;
+                }
                 ChatDataManager.userInfoWidthID(model.senderUserId){ (userInfo) in
                     if let userInfo = userInfo {
                         self.configCellWithObject(lastUserAvatarUrl: userInfo.portraitUri, lastUserName: userInfo.name, model: model)

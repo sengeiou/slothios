@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MJRefresh
 private let PageSize = 20
 
 class ChatGroupInfoViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {

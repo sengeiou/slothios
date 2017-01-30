@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 2.0)
   - AwesomeCache (5.0)
+  - MJRefresh (3.1.12)
   - ObjectMapper (2.2.2)
   - PKHUD (3.2.1)
   - RongCloudIM/IMKit (2.8.5):
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
   - AwesomeCache (from `https://github.com/aschuch/AwesomeCache.git`)
+  - MJRefresh
   - PKHUD (from `https://github.com/toyship/PKHUD.git`)
   - RongCloudIM/IMKit
   - SDWebImage
@@ -43,6 +45,7 @@ SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireObjectMapper: 842d2eed43a4d0593ff0110d54ac86a170c4519c
   AwesomeCache: c4a73e97b03901ea46084902b61cd5902a54dd88
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   ObjectMapper: 9e385c2295bcc4e16eabbcfc85db801442bba545
   PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
   RongCloudIM: c38f0afbcb417e735afafbb011ba53c9dd5a9cf2
@@ -50,6 +53,6 @@ SPEC CHECKSUMS:
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 20e8df5b9ca401df2a0851a76ef13929383e20e4
+PODFILE CHECKSUM: de25e4b80be1e96f111079b7985bf5f6d93a41bd
 
-COCOAPODS: 1.2.0.beta.3
+COCOAPODS: 1.2.0.rc.1

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     var isEdited = false

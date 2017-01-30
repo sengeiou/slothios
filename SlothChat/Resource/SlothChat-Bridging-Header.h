@@ -10,7 +10,7 @@
 #define SlothChat_Bridging_Header_h
 
 #import "IAPShare.h"
-#import "MJRefresh.h"
+#import <MJRefresh/MJRefresh.h>
 #import "FXBlurView.h"
 #import "UIImage+Resize.h"
 #import "ValuePickerView.h"
