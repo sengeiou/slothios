@@ -429,7 +429,6 @@ extension SCConversationListViewController {
             model.targetId = privateChat.privateChatUuid;
             model.conversationType = .ConversationType_PRIVATE;
             model.conversationTitle = privateChat.nickname;
-            self.conversationListDataSource.add(model);
             
             var isThere:Bool = false;
             for conversation in conversationList as! [RCConversation] {
