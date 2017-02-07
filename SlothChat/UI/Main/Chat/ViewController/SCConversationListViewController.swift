@@ -451,7 +451,18 @@ extension SCConversationListViewController {
         model.conversationType = .ConversationType_GROUP;
         model.conversationTitle = chatOfficialGroup.officialGroupName;
         
-        self.conversationListDataSource.insert(model, at: 0);
+        var isThere:Bool = false;
+        for conversation in conversationList as! [RCConversation] {
+            if conversation.targetId == model.targetId {
+                isThere = true;
+            }
+        }
+        if isThere {
+        }
+        else {
+            self.conversationListDataSource.insert(model, at: 0);
+        }
+        
         
         
         for view:UIView in self.conversationListTableView.subviews {

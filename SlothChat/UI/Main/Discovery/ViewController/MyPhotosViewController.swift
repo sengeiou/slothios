@@ -130,6 +130,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         if isImageIndexPath(indexPath: indexPath) {
             let tmpUploadImg = tmpUploadImgList[indexPath.row - 1]
             let browser = ImageScrollViewController()
+            
             browser.disPlay(image: tmpUploadImg)
             browser.isShowLikeButton(isShow: false)
             browser.isShowDeleteButton(isShow: false)

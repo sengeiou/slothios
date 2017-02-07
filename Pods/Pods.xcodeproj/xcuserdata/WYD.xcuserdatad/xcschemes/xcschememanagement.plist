@@ -64,25 +64,40 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Timberjack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1BCB4D3C5F6925DE870612B04FE81FE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29EF34CFB30A63C5795F43FF4E253A72</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4F853CFD77B288D8FD424B7266A575A5</key>
+		<key>530AA49448F512DBC003526B24FEB406</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5E317D8617388BEEB9DCF233D3042933</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>62554CE4B9596B2E6CD83B287427A5A5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7ABE35DBA6E1E021CD9334C80D5309E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,22 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>DD2CE819FB77EA00748A561618654CE6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>ED95C2E7E6003D8C80A2BCEFA3803CCB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F0440E5E545624B345485AC2BEF9237C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F464C51507202225BC613D59CC6A626A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

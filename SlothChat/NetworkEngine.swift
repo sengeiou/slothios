@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import Timberjack
 
 struct ResponseError {
     static let SUCCESS = ("100", "成功")
@@ -119,15 +120,32 @@ enum API_URI:String {
     case put_officialGroupMemberName = "/api/officialGroup/{officialGroupUuid}/officialGroupMember/{officialGroupMemberUuid}?token={token}"
     case report_abuse = "/api/user/reportAbuse?token="
 }
-
+ 
+ 
+class HTTPManager: Alamofire.SessionManager {
+    static let sharedManager: HTTPManager = {
+        
+        let configuration = Timberjack.defaultSessionConfiguration()
+        let manager = HTTPManager(configuration: configuration)
+        return manager
+    }()
+ }
+ 
 class NetworkEngine: NSObject {
+    
     var alamofireManager:SessionManager = Alamofire.SessionManager()
     let Base_URL:String = NetworkEngine.getBaseURL()
 
     override init() {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForResource = 10 // seconds
-        self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
+        #if DEBUG
+            let configuration = Timberjack.defaultSessionConfiguration()
+            configuration.timeoutIntervalForRequest = 10; //10秒超时
+            self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
+        #else
+            let configuration = URLSessionConfiguration.default
+            configuration.timeoutIntervalForRequest = 10; //10秒超时
+            self.alamofireManager = Alamofire.SessionManager(configuration: configuration)
+        #endif
     }
     
     class func getBaseURL() -> String {
@@ -251,29 +269,28 @@ class NetworkEngine: NSObject {
     func postPicFile(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
         
-        alamofireManager.upload(multipartFormData: {(multipartFormData) in
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
                 SGLog(message: "imageData 为空");
                 return
             }
-            
             multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
-                            if self.verificationResponse(value: response.result.value) {
-                                completeHandler(response.result.value)
-                            }else{
-                                self.showHandleError()
-                            }
+                        if self.verificationResponse(value: response.result.value) {
+                            completeHandler(response.result.value)
+                        } else {
+                            completeHandler(nil)
+                            self.showHandleError()
                         }
                     }
                 case .failure(let encodingError):
                     print("error")
                     print(encodingError)
+                    completeHandler(nil)
                 }
         })
     }
@@ -309,7 +326,7 @@ class NetworkEngine: NSObject {
     func postAuthLogin(withMobile mobile:String, passwd:String,completeHandler :@escaping(_ loginModel:LoginModel?) -> Void) -> Void {
         let URLString:String = self.Base_URL + API_URI.auth_login.rawValue
         
-        Alamofire.upload(multipartFormData: {(multipartFormData) in
+        self.alamofireManager.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let mobileData = mobile.data(using: String.Encoding.utf8),
                 let passwdData = passwd.data(using: String.Encoding.utf8) else{
@@ -628,7 +645,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{uuid}", with: uuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        self.alamofireManager.upload(multipartFormData: {(multipartFormData) in
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let imageData:Data = UIImageJPEGRepresentation(image, 1.0) else{
                 SGLog(message: "imageData 为空");
@@ -763,7 +780,7 @@ class NetworkEngine: NSObject {
             URLString = URLString.appending("&adress=")
         }
         
-        alamofireManager.upload(multipartFormData: {(multipartFormData) in
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
             guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
                 SGLog(message: "imageData 为空");
@@ -1384,6 +1401,7 @@ class NetworkEngine: NSObject {
     }
     //MARK:举报
     func reportAbuse(userUuid:String!,galleryUuid:String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
+        SGLog(message: "userUuid \(userUuid)")
         guard let token = Global.shared.globalLogin?.token else {
             
             return;
@@ -1409,3 +1427,4 @@ class NetworkEngine: NSObject {
         }
     }
 }
+ 

@@ -13,6 +13,7 @@ target 'SlothChat' do
   pod "RongCloudIM/IMKit"
   pod "SDWebImage"
   pod 'MJRefresh'
+  pod "Timberjack", :git => 'https://github.com/andysmart/Timberjack'
   # Pods for SlothChat
 
   target 'SlothChatTests' do

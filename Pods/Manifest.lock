@@ -15,6 +15,7 @@ PODS:
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.1.2)
   - SwiftyJSON (3.1.4)
+  - Timberjack (0.0.3)
 
 DEPENDENCIES:
   - Alamofire
@@ -26,12 +27,15 @@ DEPENDENCIES:
   - SDWebImage
   - SnapKit
   - SwiftyJSON
+  - Timberjack (from `https://github.com/andysmart/Timberjack`)
 
 EXTERNAL SOURCES:
   AwesomeCache:
     :git: https://github.com/aschuch/AwesomeCache.git
   PKHUD:
     :git: https://github.com/toyship/PKHUD.git
+  Timberjack:
+    :git: https://github.com/andysmart/Timberjack
 
 CHECKOUT OPTIONS:
   AwesomeCache:
@@ -40,6 +44,9 @@ CHECKOUT OPTIONS:
   PKHUD:
     :commit: 28fb970b41d63134e962f9da766b96670c0f55f0
     :git: https://github.com/toyship/PKHUD.git
+  Timberjack:
+    :commit: 303b398d5ead5d5fc4dbf86a476b09a856dda4ec
+    :git: https://github.com/andysmart/Timberjack
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
@@ -52,7 +59,8 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  Timberjack: 20de84a2c135134de6821d1ea90cd57709567e2d
 
-PODFILE CHECKSUM: de25e4b80be1e96f111079b7985bf5f6d93a41bd
+PODFILE CHECKSUM: 2a8bd1d88be6a4903a38d87ae8dd9fc9fec3dd1b
 
-COCOAPODS: 1.2.0.rc.1
+COCOAPODS: 1.2.0

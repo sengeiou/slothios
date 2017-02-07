@@ -223,11 +223,11 @@ class PerfectionInfoViewController: BaseViewController {
             self.showNotificationProgress()
             engine.postPicFile(picFile: avatar!) { (response) in
                 self.hiddenNotificationProgress(animated: false)
-                if response?.status == ResponseError.SUCCESS.0{
+                if response?.status == ResponseError.SUCCESS.0 {
                     self.selectedAvatar = avatar
                     self.userPhoto = response?.data
                     self.avatarButton.setImage(avatar, for: .normal)
-                }else{
+                } else {
                     self.showNotificationError(message: response?.msg)
                 }
             }
