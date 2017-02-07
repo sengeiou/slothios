@@ -16,13 +16,8 @@ class ThirdManager: NSObject {
     }
     
     class func startThirdLib() {
-        startNBSAppAgent()
+        
         startRongCloudIM()
-        NSObject.registerShareSDK()
-    }
-    
-    fileprivate class func startNBSAppAgent() {
-        NBSAppAgent.start(withAppID: "9618217e76524a188e49ef32475489ac")
     }
     
     fileprivate class func startRongCloudIM() {

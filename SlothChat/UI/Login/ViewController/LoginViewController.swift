@@ -250,10 +250,10 @@ class LoginViewController: BaseViewController {
                 Global.shared.globalLogin = response!
                 
                 if (response!.user?.uuid) != nil{
-                    NBSAppAgent.setCustomerData((response!.user?.uuid)!, forKey: "LoginUserUuid")
+                    
                 }
                 if (response!.user?.username) != nil{
-                    NBSAppAgent.setCustomerData((response!.user?.username)!, forKey: "LoginUserName")
+                    
                 }
                 Global.shared.chatToken = response!.chatToken
                 self.getUserProfile(userUuid: (response!.user?.uuid)!)

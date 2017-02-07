@@ -8,6 +8,7 @@
 
 import UIKit
 import AwesomeCache
+import MonkeyKing
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
     #if DEBUG
@@ -38,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let manager = LocationManager()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -65,6 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 GVUserDefaults.standard().networkType = .onLine
             #endif
         }
+        
+//MARK:社交注册
+        MonkeyKing.registerAccount(.weChat(appID: Configs.Wechat.appID, appKey: Configs.Wechat.appKey));
+        MonkeyKing.registerAccount(.weibo(appID: Configs.Weibo.appKey, appKey: Configs.Weibo.appSecert, redirectURL: Configs.Weibo.redirectUri))
     }
     
     func addNoticeObserver() {
@@ -94,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if logined {
             ThirdManager.connectRCIM(token: Global.shared.chatToken)
             _ = ChatDataManager.shared
-            _ = ChatManager.share
+            _ = ChatManager.shared
             
             let rootVC = MainViewController()
             self.window?.rootViewController = rootVC
@@ -147,7 +153,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         //本地通知
     }
-
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        if MonkeyKing.handleOpenURL(url) {
+            return true
+        }
+        
+        return false
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

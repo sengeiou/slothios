@@ -7,8 +7,27 @@
 //
 
 import UIKit
+import MonkeyKing
+
+struct Configs {
+    
+    struct Weibo {
+        static let appKey = "1691968029";
+        static let appSecert = "ff5b34a6a684d4ca4d86a1eedc12c428";
+        static let redirectUri = "http://api.ssloth.com/api/oauth/call";
+    }
+    
+    struct Wechat {
+        static let appID = "wxcd1578b764c4f37b";
+        static let appKey = "2205c89b80bbe3a85e1c9f712362e519";
+    }
+    
+}
 
 class SGSharePopView: UIView {
+    
+    
+    var accessToken: String?
     
     override init(frame: CGRect ){
         super.init(frame: frame)
@@ -73,40 +92,53 @@ class SGSharePopView: UIView {
     //MARK:- Action
     
     func sinaButtonClick() {
-        let shareParames = getShareParams()
         
-        ShareSDK.share(SSDKPlatformType.typeSinaWeibo, parameters: shareParames) { (state : SSDKResponseState, nil, entity : SSDKContentEntity?, error :Error?) in
-            self.handleShareResult(state: state, error: error)
+        let weiboAccount = MonkeyKing.Account.weibo(appID: Configs.Weibo.appKey, appKey: Configs.Weibo.appSecert, redirectURL: Configs.Weibo.redirectUri);
+        if !weiboAccount.isAppInstalled {
+            MonkeyKing.oauth(for: .weibo) { [weak self] (info, response, error) in
+                
+                if let accessToken = info?["access_token"] as? String {
+                    self?.accessToken = accessToken
+                    self?.shareToWeibo();
+                }
+            }
+        }
+        else {
+            self.shareToWeibo();
+        }
+        
+    }
+    
+    func shareToWeibo() {
+        let message = MonkeyKing.Message.weibo(.default(info: (title: "树懒", description: "树懒：https://itunes.apple.com/us/app/sloth/id1175415914", thumbnail: nil, media: .url(URL(string: "https://itunes.apple.com/us/app/sloth/id1175415914")!)),accessToken: self.accessToken));
+        MonkeyKing.deliver(message) { success in
+            self.handleShareResult(state: success);
         }
     }
     
     func weichatButtonClick() {
-        let shareParames = getShareParams()
-        
-        ShareSDK.share(SSDKPlatformType.subTypeWechatSession, parameters: shareParames) { (state : SSDKResponseState, nil, entity : SSDKContentEntity?, error :Error?) in
-            self.handleShareResult(state: state, error: error)
+        let message = MonkeyKing.Message.weChat(.session(info: (title: "树懒", description: "树懒：https://itunes.apple.com/us/app/sloth/id1175415914", thumbnail: nil, media: .url(URL(string: "https://itunes.apple.com/us/app/sloth/id1175415914")!))));
+        MonkeyKing.deliver(message) { success in
+            self.handleShareResult(state: success);
         }
     }
     
     func timeLineButtonClick() {
-        let shareParames = getShareParams()
-        
-        ShareSDK.share(SSDKPlatformType.subTypeWechatTimeline, parameters: shareParames) { (state : SSDKResponseState, nil, entity : SSDKContentEntity?, error :Error?) in
-            self.handleShareResult(state: state, error: error)
+       let message = MonkeyKing.Message.weChat(.timeline(info: (title: "树懒", description: "树懒：https://itunes.apple.com/us/app/sloth/id1175415914", thumbnail: nil, media: .url(URL(string: "https://itunes.apple.com/us/app/sloth/id1175415914")!))));
+        MonkeyKing.deliver(message) { success in
+            self.handleShareResult(state: success);
         }
     }
     
-    func handleShareResult(state: SSDKResponseState,error :Error?) {
-        switch state {
-        case .success:
+    
+    func handleShareResult(state: Bool) {
+        if state {
             showAlertView(message: "分享成功")
             dismiss()
-        case .fail:
-            showAlertView(message: "授权失败,错误描述:\(error)")
-        case .cancel:
-            showAlertView(message: "操作取消")
-        default:
-            break
+        }
+        else {
+            showAlertView(message: "分享未成功")
+            dismiss()
         }
     }
     
@@ -120,7 +152,7 @@ class SGSharePopView: UIView {
             rootVC.present(alertController, animated: true, completion: nil)
         }
     }
-    
+    /*
     func getShareParams() -> NSMutableDictionary {
         
         let shareParames = NSMutableDictionary()
@@ -131,5 +163,5 @@ class SGSharePopView: UIView {
                                           type : SSDKContentType.auto)
         return shareParames
     }
-
+ */
 }
