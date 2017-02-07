@@ -1,1 +1,0 @@
-Run "touch tmp/restart.txt" to restart Passenger. (This doesn't work if you stared Fir using rackup.)

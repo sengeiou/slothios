@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MonkeyKing.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,12 +77,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1BCB4D3C5F6925DE870612B04FE81FE4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>29EF34CFB30A63C5795F43FF4E253A72</key>
+		<key>05EB0B5E2F39B224EE4D193E7DF55AF3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,12 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>530AA49448F512DBC003526B24FEB406</key>
+		<key>34A758282C6B4E55A6A42BFF1F767521</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E317D8617388BEEB9DCF233D3042933</key>
+		<key>43D25554EB6AFFD0F49619E96548D527</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,6 +112,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A1BB6F14AB7A9126311682ECE903D846</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ACB976B61B6C56BFE4E3E3DAB53C235A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D4695AD57F0A030C0F3367E66717D06C</key>
 		<dict>
 			<key>primary</key>
@@ -122,12 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DD2CE819FB77EA00748A561618654CE6</key>
+		<key>E14A62900910444707A5504D25EC98DC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E14A62900910444707A5504D25EC98DC</key>
+		<key>E71B23A8B416D3AE09447908D8542D2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

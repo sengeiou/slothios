@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */; };
 		040327ED1DC873F000401683 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040327EC1DC873F000401683 /* FlagView.swift */; };
 		040564351DD817E500D61439 /* ChatToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564331DD817E500D61439 /* ChatToken.swift */; };
 		040564361DD817E500D61439 /* ChatTokenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040564341DD817E500D61439 /* ChatTokenData.swift */; };
@@ -245,8 +244,9 @@
 		19273B2B1DA9EE1300150460 /* SlothChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B2A1DA9EE1300150460 /* SlothChatTests.swift */; };
 		19273B361DA9EE1300150460 /* SlothChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B351DA9EE1300150460 /* SlothChatUITests.swift */; };
 		19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */; };
-		BDB5146AE1A2FB0938FA652B /* Pods_SlothChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8551761BBE9788DFCE101E /* Pods_SlothChatUITests.framework */; };
-		E1CB22759AC5EC8B12D8F81F /* Pods_SlothChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E8BA903E786F1B2AE3654BE /* Pods_SlothChat.framework */; };
+		BAB3D4811E424183494A47E4 /* Pods_SlothChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D565AF445B608F5AEB572CC3 /* Pods_SlothChat.framework */; };
+		BBF54D6467E2B2036D6CC260 /* Pods_SlothChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E500CABE9547F2599547A45B /* Pods_SlothChatUITests.framework */; };
+		C6DC359C3B886E335F70602E /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE74679FCD222414B05D87E /* Pods_SlothChatTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -562,15 +562,15 @@
 		19273B351DA9EE1300150460 /* SlothChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothChatUITests.swift; sourceTree = "<group>"; };
 		19273B371DA9EE1300150460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
-		1D8A2E6627D0E4BDA2A35328 /* Pods-SlothChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E8BA903E786F1B2AE3654BE /* Pods_SlothChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33DA91F226A2C2524F375C5F /* Pods-SlothChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat.release.xcconfig"; sourceTree = "<group>"; };
-		8A8551761BBE9788DFCE101E /* Pods_SlothChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9DB8E50078C2DE24FC01CA78 /* Pods-SlothChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat.debug.xcconfig"; sourceTree = "<group>"; };
-		A571A929A355EE5CEA6572E0 /* Pods-SlothChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests.debug.xcconfig"; sourceTree = "<group>"; };
-		AECFBF747C190B20D6535506 /* Pods-SlothChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests.release.xcconfig"; sourceTree = "<group>"; };
-		C03DD0E064FB3EBBC9D36E43 /* Pods-SlothChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7CE5B93268F22206CDB54C5E /* Pods-SlothChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat.debug.xcconfig"; sourceTree = "<group>"; };
+		833EC7638C3327113002345A /* Pods-SlothChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8710AE05873CE6BAC5AF0DDC /* Pods-SlothChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8E5656DA00A3C597F858986D /* Pods-SlothChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AA0A2796C81F7B60D7239F84 /* Pods-SlothChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat.release.xcconfig"; sourceTree = "<group>"; };
+		AAE74679FCD222414B05D87E /* Pods_SlothChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B96560ADDF680C7FC6D460BD /* Pods-SlothChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests.release.xcconfig"; sourceTree = "<group>"; };
+		D565AF445B608F5AEB572CC3 /* Pods_SlothChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E500CABE9547F2599547A45B /* Pods_SlothChatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlothChatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -592,7 +592,6 @@
 				0486BBA81DBB541800086303 /* JavaScriptCore.framework in Frameworks */,
 				0486BBA61DBB540B00086303 /* libstdc++.tbd in Frameworks */,
 				0486BBA21DBB53F900086303 /* libicucore.tbd in Frameworks */,
-				E1CB22759AC5EC8B12D8F81F /* Pods_SlothChat.framework in Frameworks */,
 				0486BB931DBB53D200086303 /* ShareSDK.framework in Frameworks */,
 				0486BB9B1DBB53D200086303 /* libWeChatSDK.a in Frameworks */,
 				0486BB941DBB53D200086303 /* ShareSDKExtension.framework in Frameworks */,
@@ -602,6 +601,7 @@
 				0486BBA01DBB53D200086303 /* ShareSDKConnector.framework in Frameworks */,
 				0486BB981DBB53D200086303 /* WechatConnector.framework in Frameworks */,
 				0486BB971DBB53D200086303 /* SinaWeiboConnector.framework in Frameworks */,
+				BAB3D4811E424183494A47E4 /* Pods_SlothChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,7 +609,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02A4AA8A21BDDA353470068D /* Pods_SlothChatTests.framework in Frameworks */,
+				C6DC359C3B886E335F70602E /* Pods_SlothChatTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,7 +617,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDB5146AE1A2FB0938FA652B /* Pods_SlothChatUITests.framework in Frameworks */,
+				BBF54D6467E2B2036D6CC260 /* Pods_SlothChatUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1308,6 +1308,19 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		1608AA01980F040C42D48E3E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CE5B93268F22206CDB54C5E /* Pods-SlothChat.debug.xcconfig */,
+				AA0A2796C81F7B60D7239F84 /* Pods-SlothChat.release.xcconfig */,
+				833EC7638C3327113002345A /* Pods-SlothChatTests.debug.xcconfig */,
+				B96560ADDF680C7FC6D460BD /* Pods-SlothChatTests.release.xcconfig */,
+				8710AE05873CE6BAC5AF0DDC /* Pods-SlothChatUITests.debug.xcconfig */,
+				8E5656DA00A3C597F858986D /* Pods-SlothChatUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		19008B921DBE614500319B86 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1361,8 +1374,8 @@
 				19273B291DA9EE1300150460 /* SlothChatTests */,
 				19273B341DA9EE1300150460 /* SlothChatUITests */,
 				19273B111DA9EE1300150460 /* Products */,
-				758FD716B6EC2B00B2FE486B /* Pods */,
 				EABF46E165501AE099B412D8 /* Frameworks */,
+				1608AA01980F040C42D48E3E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1422,19 +1435,6 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
-		758FD716B6EC2B00B2FE486B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9DB8E50078C2DE24FC01CA78 /* Pods-SlothChat.debug.xcconfig */,
-				33DA91F226A2C2524F375C5F /* Pods-SlothChat.release.xcconfig */,
-				A571A929A355EE5CEA6572E0 /* Pods-SlothChatTests.debug.xcconfig */,
-				AECFBF747C190B20D6535506 /* Pods-SlothChatTests.release.xcconfig */,
-				1D8A2E6627D0E4BDA2A35328 /* Pods-SlothChatUITests.debug.xcconfig */,
-				C03DD0E064FB3EBBC9D36E43 /* Pods-SlothChatUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		EABF46E165501AE099B412D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1451,9 +1451,9 @@
 				0486BBA51DBB540B00086303 /* libstdc++.tbd */,
 				0486BBA31DBB540300086303 /* libz.tbd */,
 				0486BBA11DBB53F900086303 /* libicucore.tbd */,
-				2E8BA903E786F1B2AE3654BE /* Pods_SlothChat.framework */,
-				29DCB412A309B36839BD845D /* Pods_SlothChatTests.framework */,
-				8A8551761BBE9788DFCE101E /* Pods_SlothChatUITests.framework */,
+				D565AF445B608F5AEB572CC3 /* Pods_SlothChat.framework */,
+				AAE74679FCD222414B05D87E /* Pods_SlothChatTests.framework */,
+				E500CABE9547F2599547A45B /* Pods_SlothChatUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1465,12 +1465,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19273B3A1DA9EE1300150460 /* Build configuration list for PBXNativeTarget "SlothChat" */;
 			buildPhases = (
-				BB1CBE6C4722CFF1C8A00DAC /* [CP] Check Pods Manifest.lock */,
+				D8AB076330133BB4F2CA6439 /* [CP] Check Pods Manifest.lock */,
 				19273B0C1DA9EE1300150460 /* Sources */,
 				19273B0D1DA9EE1300150460 /* Frameworks */,
 				19273B0E1DA9EE1300150460 /* Resources */,
-				766A4990CB538F2873FE6CAB /* [CP] Embed Pods Frameworks */,
-				E13BB85FF224D6C99CA36C07 /* [CP] Copy Pods Resources */,
+				426AD4B66BBEDC741FA90F69 /* [CP] Embed Pods Frameworks */,
+				3FDF8E4953D158A696E9DF17 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1485,12 +1485,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19273B3D1DA9EE1300150460 /* Build configuration list for PBXNativeTarget "SlothChatTests" */;
 			buildPhases = (
-				5525B4C6CBE4AEBAFB713001 /* [CP] Check Pods Manifest.lock */,
+				9CB4DD5BF8995E564717E28E /* [CP] Check Pods Manifest.lock */,
 				19273B221DA9EE1300150460 /* Sources */,
 				19273B231DA9EE1300150460 /* Frameworks */,
 				19273B241DA9EE1300150460 /* Resources */,
-				0C7D3F92F247DAFAAAEFD284 /* [CP] Embed Pods Frameworks */,
-				8B032E10DC49ED6E3E4CC69F /* [CP] Copy Pods Resources */,
+				4F42428D82D042069E8293C7 /* [CP] Embed Pods Frameworks */,
+				8C2C48449CEF76A0BD56CEAB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1506,12 +1506,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19273B401DA9EE1300150460 /* Build configuration list for PBXNativeTarget "SlothChatUITests" */;
 			buildPhases = (
-				F8A9F3C651668873BDCD2CE3 /* [CP] Check Pods Manifest.lock */,
+				F8EDB893475464C85F3A956B /* [CP] Check Pods Manifest.lock */,
 				19273B2D1DA9EE1300150460 /* Sources */,
 				19273B2E1DA9EE1300150460 /* Frameworks */,
 				19273B2F1DA9EE1300150460 /* Resources */,
-				A3F570DCFEA4281E80BB2918 /* [CP] Embed Pods Frameworks */,
-				CD46108465D776B6C8C8EADD /* [CP] Copy Pods Resources */,
+				A6EC02BDF7694F5F436817F7 /* [CP] Embed Pods Frameworks */,
+				D9AC26F001272703D5E723F0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1625,112 +1625,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0C7D3F92F247DAFAAAEFD284 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5525B4C6CBE4AEBAFB713001 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		766A4990CB538F2873FE6CAB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B032E10DC49ED6E3E4CC69F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A3F570DCFEA4281E80BB2918 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BB1CBE6C4722CFF1C8A00DAC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CD46108465D776B6C8C8EADD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E13BB85FF224D6C99CA36C07 /* [CP] Copy Pods Resources */ = {
+		3FDF8E4953D158A696E9DF17 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1745,7 +1640,112 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F8A9F3C651668873BDCD2CE3 /* [CP] Check Pods Manifest.lock */ = {
+		426AD4B66BBEDC741FA90F69 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F42428D82D042069E8293C7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C2C48449CEF76A0BD56CEAB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CB4DD5BF8995E564717E28E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A6EC02BDF7694F5F436817F7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8AB076330133BB4F2CA6439 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D9AC26F001272703D5E723F0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8EDB893475464C85F3A956B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2114,16 +2114,16 @@
 		};
 		19273B3B1DA9EE1300150460 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DB8E50078C2DE24FC01CA78 /* Pods-SlothChat.debug.xcconfig */;
+			baseConfigurationReference = 7CE5B93268F22206CDB54C5E /* Pods-SlothChat.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = SlothChat/SlothChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -2166,16 +2166,16 @@
 		};
 		19273B3C1DA9EE1300150460 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33DA91F226A2C2524F375C5F /* Pods-SlothChat.release.xcconfig */;
+			baseConfigurationReference = AA0A2796C81F7B60D7239F84 /* Pods-SlothChat.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = SlothChat/SlothChat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lifeng Zhang (B99JY9VCYC)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SlothChat/Third/ShareSDK3.5.0",
@@ -2218,7 +2218,7 @@
 		};
 		19273B3E1DA9EE1300150460 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A571A929A355EE5CEA6572E0 /* Pods-SlothChatTests.debug.xcconfig */;
+			baseConfigurationReference = 833EC7638C3327113002345A /* Pods-SlothChatTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2233,7 +2233,7 @@
 		};
 		19273B3F1DA9EE1300150460 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AECFBF747C190B20D6535506 /* Pods-SlothChatTests.release.xcconfig */;
+			baseConfigurationReference = B96560ADDF680C7FC6D460BD /* Pods-SlothChatTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2248,7 +2248,7 @@
 		};
 		19273B411DA9EE1300150460 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D8A2E6627D0E4BDA2A35328 /* Pods-SlothChatUITests.debug.xcconfig */;
+			baseConfigurationReference = 8710AE05873CE6BAC5AF0DDC /* Pods-SlothChatUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SlothChatUITests/Info.plist;
@@ -2262,7 +2262,7 @@
 		};
 		19273B421DA9EE1300150460 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C03DD0E064FB3EBBC9D36E43 /* Pods-SlothChatUITests.release.xcconfig */;
+			baseConfigurationReference = 8E5656DA00A3C597F858986D /* Pods-SlothChatUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = SlothChatUITests/Info.plist;
