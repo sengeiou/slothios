@@ -40,6 +40,7 @@ class BrowseAdvertViewController: BaseViewController {
     
     func sentupView() {
         view.addSubview(scrollView)
+        
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }

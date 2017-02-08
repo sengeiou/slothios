@@ -241,8 +241,15 @@ class ImageScrollViewController: BaseViewController {
         
         let reportAction = UIAlertAction.init(title: "举报", style: .destructive) { (UIAlertAction) in
             SGLog(message: "photoObj: \(self.photoObj)")
-            NetworkEngine().reportAbuse(userUuid: self.galleryPhotoObj?.userUuid, galleryUuid: self.galleryPhotoObj?.uuid) { (response) in
-                
+            if self.photoObj == nil {
+                NetworkEngine().reportAbuse(userUuid: self.galleryPhotoObj?.userUuid, galleryUuid: self.galleryPhotoObj?.uuid) { (response) in
+                    
+                }
+            }
+            else {
+                NetworkEngine().reportAbuse(userUuid: self.photoObj?.userUuid, galleryUuid: self.photoObj?.uuid) { (response) in
+                    
+                }
             }
         }
         reportActionSheet.addAction(reportAction);

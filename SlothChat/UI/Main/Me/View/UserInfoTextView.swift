@@ -78,7 +78,7 @@ class UserInfoTextView: UIView,UITextViewDelegate {
     }
     
     func configContent(contentStr: String) {
-        textView.text = contentStr
+        textView.text = contentStr;
     }
     
     func setInputTextfieldLeftMagin(left: Float) {

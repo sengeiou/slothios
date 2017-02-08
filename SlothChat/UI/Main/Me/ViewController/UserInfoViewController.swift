@@ -75,8 +75,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
             reportActionSheet.addAction(cancelAction);
             
             let reportAction = UIAlertAction.init(title: "举报", style: .destructive) { (UIAlertAction) in
-                let engine = NetworkEngine()
-                engine.reportAbuse(userUuid: self.mUserUuid, galleryUuid: nil) { (response) in
+                NetworkEngine().reportAbuse(userUuid: self.mUserUuid, galleryUuid: nil) { (response) in
                     
                 }
             }
@@ -88,6 +87,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     
     func setupView() {
         view.addSubview(scrollView)
+        self.scrollView.alwaysBounceVertical = true;
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
@@ -143,7 +143,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
                 make.top.equalTo(bannerView!.snp.bottom)
                 make.height.equalTo(52)
             })
-        } else{
+        } else {
             toolView = UserInfoToolView()
             toolView?.chatButton.addTarget(self, action:#selector(chatButtonClick), for: .touchUpInside)
             toolView?.likeButton.addTarget(self, action:#selector(likeButtonClick), for: .touchUpInside)
@@ -181,7 +181,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         }
         
         container.snp.makeConstraints { (make) in
-            make.bottom.equalTo(infoView.snp.bottom).offset(10)
+            make.bottom.equalTo(self.infoView.snp.bottom).offset(10)
         }
     }
     
@@ -227,6 +227,7 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
         editView?.setDoneUserInfoValue(temClosure: { (_ editUserObj) in
             self.updateProfile(editProfile: editUserObj)
         })
+        
     }
     
     //MARK:- Network
@@ -268,9 +269,9 @@ class UserInfoViewController: BaseViewController,SDCycleScrollViewDelegate {
     }
     
     func updateProfile(editProfile: UserProfileData)  {
-        let engine = NetworkEngine()
+        
         self.showNotificationProgress()
-        engine.postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (response) in
+        NetworkEngine().postUserProfile(nickname: editProfile.nickname!, sex: editProfile.sex!, birthdate: editProfile.birthdate!, university: editProfile.university!, personalProfile: editProfile.personalProfile!) { (response) in
             self.hiddenNotificationProgress(animated: false)
             if response == nil {
                 return

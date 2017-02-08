@@ -1048,8 +1048,8 @@
 				04C232FE1DEE651A0027C3B3 /* CSLayerStealingBlurView.m */,
 				04C232FF1DEE651A0027C3B3 /* CSNativeBlurView.h */,
 				04C233001DEE651A0027C3B3 /* CSNativeBlurView.m */,
-				04C233011DEE651A0027C3B3 /* CSNotificationView.h */,
 				04C233021DEE651A0027C3B3 /* CSNotificationView.m */,
+				04C233011DEE651A0027C3B3 /* CSNotificationView.h */,
 				04C233031DEE651A0027C3B3 /* CSNotificationView_Private.h */,
 				04C233041DEE651A0027C3B3 /* Resources */,
 			);

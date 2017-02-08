@@ -658,7 +658,7 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<UserPhoto>) in
-                        if (response.response?.statusCode == 200) || (response.response?.statusCode == 201) {
+                        if self.verificationResponse(value: response.result.value) {
                             completeHandler(response.result.value)
                         } else {
                             completeHandler(nil);
@@ -791,15 +791,10 @@ class NetworkEngine: NSObject {
                 switch result {
                 case .success(let upload, _, _):
                     upload.responseObject { (response:DataResponse<GalleryPhoto>) in
-                        if (self.responseStatusCodeIsOK(urlResponse: response.response)) {
-                            if self.verificationResponse(value: response.result.value) {
-                                completeHandler(response.result.value)
-                            }else{
-                                self.showHandleError()
-                            }
-                        }
-                        else {
-                            self.showHandleError();
+                        if self.verificationResponse(value: response.result.value) {
+                            completeHandler(response.result.value)
+                        }else{
+                            self.showHandleError()
                         }
                     }
                 case .failure(let encodingError):
