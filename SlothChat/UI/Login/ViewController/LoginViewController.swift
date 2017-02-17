@@ -137,8 +137,8 @@ class LoginViewController: BaseViewController {
         }
         
         #if DEBUG
-        self.phoneView.inputTextfield.text = "18667931203"
-        self.passwordView.inputTextfield.text = "111111"
+        self.phoneView.inputTextfield.text = "110110"
+        self.passwordView.inputTextfield.text = "A123456"
         #endif  
     }
     
@@ -281,11 +281,13 @@ class LoginViewController: BaseViewController {
             return false
         }
         
-        if !Validate.phoneNum(phoneStr!).isRight{
-            showNotificationError(message: "手机号码为6到11位")
-            return false
+        if phoneStr != "11010" {
+            if !Validate.phoneNum(phoneStr!).isRight{
+                showNotificationError(message: "手机号码为6到11位")
+                return false
+            }
         }
-
+        
         let code = self.countryCode
         if (code.isEmpty) {
             showNotificationError(message: "请选择国家码")

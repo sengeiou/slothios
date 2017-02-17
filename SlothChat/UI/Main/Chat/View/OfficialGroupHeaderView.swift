@@ -115,6 +115,8 @@ class OfficialGroupHeaderView: UICollectionReusableView {
             let topicPicUrl = group.topicPicUrl else {
                 return
         }
+        SGLog(message: topicPicUrl)
+        
         let avatarUrl = URL(string: topicPicUrl)
         topicImgView.sd_setImage(with: avatarUrl, placeholderImage: UIImage(named: "placeHolder_offical.jpg"))
         topicTitle.text = group.topicMsg

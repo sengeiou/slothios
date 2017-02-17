@@ -141,8 +141,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
         
         let galleryPhoto = dataSource[indexPath.row - tmpUploadImgList.count - 1]
         
-        if galleryPhoto.participateBidAds! == true ||
-            galleryPhoto.displayAsBidAds! == true {
+        if galleryPhoto.participateBidAds! == true {
             let pushVC = BiddingStatusViewController()
             pushVC.userUuid = galleryPhoto.userUuid
             pushVC.galleryUuid = galleryPhoto.uuid
@@ -150,7 +149,7 @@ class MyPhotosViewController: BaseViewController,UICollectionViewDelegate,UIColl
             navigationController?.pushViewController(pushVC, animated: true)
             return
         }
-        if galleryPhoto.bigPicUrl != nil {
+        else if galleryPhoto.bigPicUrl != nil {
             let browser = ImageScrollViewController()
             browser.galleryPhotoObj = galleryPhoto
             browser.disPlay(galleryPhoto: galleryPhoto)
