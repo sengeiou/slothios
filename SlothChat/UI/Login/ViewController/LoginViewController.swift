@@ -10,7 +10,7 @@ import UIKit
 import AwesomeCache
 
 class LoginViewController: BaseViewController {
-
+    
     let phoneView = SingleInputView.init()
     let passwordView = SingleInputView.init()
     let codeButton = UIButton(type: .custom)
@@ -24,21 +24,21 @@ class LoginViewController: BaseViewController {
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
-//            let lastCountryCode = GVUserDefaults.standard().lastCountryCode,
-//            let lastLoginPhone = GVUserDefaults.standard().lastLoginPhone{
-//            countryName = lastCountryName
-//            countryCode = lastCountryCode
-//            phoneView.configContent(contentStr: lastLoginPhone)
-//        }
-//    }
-
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    //        if let lastCountryName = GVUserDefaults.standard().lastCountryName,
+    //            let lastCountryCode = GVUserDefaults.standard().lastCountryCode,
+    //            let lastLoginPhone = GVUserDefaults.standard().lastLoginPhone{
+    //            countryName = lastCountryName
+    //            countryCode = lastCountryCode
+    //            phoneView.configContent(contentStr: lastLoginPhone)
+    //        }
+    //    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let lastCountryName = GVUserDefaults.standard().lastCountryName,
-           let lastCountryCode = GVUserDefaults.standard().lastCountryCode {
+            let lastCountryCode = GVUserDefaults.standard().lastCountryCode {
             countryName = lastCountryName
             countryCode = lastCountryCode
         }else{
@@ -119,7 +119,7 @@ class LoginViewController: BaseViewController {
         registerButton.layer.borderColor = SGColor.SGMainColor().cgColor
         registerButton.layer.borderWidth = 1.0
         registerButton.layer.cornerRadius = 23
-
+        
         view.addSubview(registerButton)
         
         loginButton.snp.makeConstraints { (make) in
@@ -137,9 +137,9 @@ class LoginViewController: BaseViewController {
         }
         
         #if DEBUG
-        self.phoneView.inputTextfield.text = "110110"
-        self.passwordView.inputTextfield.text = "A123456"
-        #endif  
+            self.phoneView.inputTextfield.text = "110110"
+            self.passwordView.inputTextfield.text = "A123456"
+        #endif
     }
     
     func configPhoneInputView(inputView : SingleInputView) {
@@ -165,14 +165,14 @@ class LoginViewController: BaseViewController {
         engine.getUserProfile(userUuid: userUuid) { (response) in
             if response?.status == ResponseError.SUCCESS.0 {
                 Global.shared.globalProfile = response?.data
-//                self.loginSystem()
+                //                self.loginSystem()
                 self.getChatToken()
             }else{
                 self.showNotificationError(message: response?.msg)
             }
         }
     }
-
+    
     func getChatToken() {
         let engine = NetworkEngine()
         engine.getChatToken() { (response) in
@@ -192,7 +192,7 @@ class LoginViewController: BaseViewController {
         let engine = NetworkEngine()
         engine.getPublicCountry(withName: "") { (response) in
             if response?.status == ResponseError.SUCCESS.0,
-               let list = response?.data?.list {
+                let list = response?.data?.list {
                 response?.caheForCountryCode()
                 let regionCode = Locale.current.regionCode
                 for obj in list{
@@ -229,9 +229,9 @@ class LoginViewController: BaseViewController {
     }
     
     func loginButtonClick() {
-
+        
         SGLog(message: "loginButtonClick")
-
+        
         if !checkDataValid(){
             return
         }
@@ -321,5 +321,5 @@ class LoginViewController: BaseViewController {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
-
+    
 }

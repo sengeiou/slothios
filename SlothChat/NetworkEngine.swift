@@ -265,7 +265,7 @@ class NetworkEngine: NSObject {
         
     }
     
-    //4.1.注册初始化用户头像 POST
+    //MARK:4.1.注册初始化用户头像 POST
     func postPicFile(picFile:UIImage,completeHandler :@escaping(_ userPhoto:UserPhoto?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_userPhoto.rawValue
         
@@ -314,10 +314,12 @@ class NetworkEngine: NSObject {
                     completeHandler(response.result.value)
                 }else{
                     self.showHandleError()
+                    completeHandler(response.result.value)
                 }
             }
             else {
                 self.showHandleError();
+                completeHandler(nil);
             }
         }
     }
@@ -760,7 +762,7 @@ class NetworkEngine: NSObject {
     }
     
     //MARK:-B2.探索图片模块
-    //21 探索图片空间，新添加图片 POST
+    //MARK: 21 探索图片空间，新添加图片 POST
     func postPhotoGallery(picFile: UIImage,completeHandler :@escaping(_ userPhoto:GalleryPhoto?) -> Void) -> Void {
         guard let token = Global.shared.globalLogin?.token,
             let userUuid = Global.shared.globalProfile?.userUuid else {
@@ -795,11 +797,13 @@ class NetworkEngine: NSObject {
                             completeHandler(response.result.value)
                         }else{
                             self.showHandleError()
+                            completeHandler(response.result.value);
                         }
                     }
                 case .failure(let encodingError):
                     print("error")
                     print(encodingError)
+                    completeHandler(nil)
                 }
         })
     }

@@ -380,6 +380,7 @@ extension SCConversationListViewController: UISearchResultsUpdating {
 
 extension SCConversationListViewController {
     func getChatList() {
+        
         NetworkEngine().getChatList { (response) in
             self.chatList = response
             self.chatList?.caheForModel()
