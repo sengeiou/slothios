@@ -166,6 +166,12 @@ class PerfectionInfoViewController: BaseViewController {
             return
         }
         
+        if nickName!.characters.count > 12 {
+            self.showNotificationError(message: "昵称请在12个字以内")
+            return;
+        }
+        
+        
         let birthday = birthdayView.getInputContent()
         if (birthday?.isEmpty)! {
             self.showNotificationError(message: "请选择生日")

@@ -86,12 +86,37 @@ class CaptchaViewController: BaseViewController {
         view.addSubview(confirmButton)
         
         
+//        confirmButton.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-10)
+//            make.height.equalTo(44)
+//            make.left.lessThanOrEqualTo(80)
+//            make.right.greaterThanOrEqualTo(-80)
+//        }
+        
+        let loginButton = UIButton.init(type: .custom)
+        loginButton.setTitle("返回", for: .normal)
+        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        loginButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
+        loginButton.addTarget(self, action:#selector(loginButtonClick), for: .touchUpInside)
+        loginButton.layer.borderColor = SGColor.SGMainColor().cgColor
+        loginButton.layer.borderWidth = 1.0
+        loginButton.layer.cornerRadius = 23
+        view.addSubview(loginButton)
+        
         confirmButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-10)
-            make.height.equalTo(44)
-            make.left.lessThanOrEqualTo(80)
-            make.right.greaterThanOrEqualTo(-80)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
+            make.height.equalTo(46)
+            make.bottom.equalTo(loginButton.snp.top).offset(-10)
         }
+        
+        loginButton.snp.makeConstraints { (make) in
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
+            make.height.equalTo(46)
+            make.bottom.equalTo(-16)
+        }
+
     }
     
     //Mark:- Network
@@ -188,4 +213,7 @@ class CaptchaViewController: BaseViewController {
         
     }
     
+    func loginButtonClick() {
+        _ = navigationController?.popViewController(animated: true)
+    }
 }

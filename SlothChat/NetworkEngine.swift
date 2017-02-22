@@ -1402,14 +1402,18 @@ class NetworkEngine: NSObject {
     func reportAbuse(userUuid:String!,galleryUuid:String?,completeHandler :@escaping(_ response:Response?) -> Void)  -> Void {
         SGLog(message: "userUuid \(userUuid)")
         guard let token = Global.shared.globalLogin?.token else {
-            
+            return;
+        }
+        guard let _ = userUuid else {
             return;
         }
         
         let URLString:String = Base_URL + API_URI.report_abuse.rawValue + token;
+        
+        
         let request = HTTPRequestGenerator(withParam: [
                                                        "userUuid":userUuid,
-                                                       "galleryUuid":((galleryUuid?.lengthOfBytes(using: .utf8))! > 0 ? galleryUuid! : ""),
+                                                       "galleryUuid":(galleryUuid != nil) ? galleryUuid! : "",
                                                        "reporterUserUuid":(Global.shared.globalLogin?.user?.uuid)! as String
                                                        ], URLString: URLString);
         Alamofire.request(request).responseObject { (response:DataResponse<Response>) in

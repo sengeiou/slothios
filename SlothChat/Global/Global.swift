@@ -82,3 +82,12 @@ class Global: BaseObject {
         ChatTokenData.removeFromCache()
     }
 }
+
+struct GlobalData {
+    struct ConversationListConst {
+        static let conversationGroupCellHeight:CGFloat = 184;
+        static let conversationPrivateCellHeight:CGFloat = 106;
+    }
+    
+    
+}

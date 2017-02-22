@@ -81,6 +81,7 @@ class ImageScrollViewController: BaseViewController {
         closeButton.tintColor = UIColor.white
         closeButton.addTarget(self, action: #selector(closeButtonClick), for: .touchUpInside)
         
+        
         let reportButton = UIButton(type: .custom)
         topToolBar.addSubview(reportButton)
         reportButton.snp.makeConstraints { (make) in

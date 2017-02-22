@@ -228,6 +228,7 @@
 		19273B2B1DA9EE1300150460 /* SlothChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B2A1DA9EE1300150460 /* SlothChatTests.swift */; };
 		19273B361DA9EE1300150460 /* SlothChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19273B351DA9EE1300150460 /* SlothChatUITests.swift */; };
 		19AA4A7B1DB5346F0001568B /* NetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */; };
+		19FB47091E59E7B300CBDB52 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19FB47081E59E7B300CBDB52 /* ConversationListViewController.swift */; };
 		BAB3D4811E424183494A47E4 /* Pods_SlothChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D565AF445B608F5AEB572CC3 /* Pods_SlothChat.framework */; };
 		BBF54D6467E2B2036D6CC260 /* Pods_SlothChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E500CABE9547F2599547A45B /* Pods_SlothChatUITests.framework */; };
 		C6DC359C3B886E335F70602E /* Pods_SlothChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE74679FCD222414B05D87E /* Pods_SlothChatTests.framework */; };
@@ -515,6 +516,7 @@
 		19273B351DA9EE1300150460 /* SlothChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlothChatUITests.swift; sourceTree = "<group>"; };
 		19273B371DA9EE1300150460 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19AA4A7A1DB5346F0001568B /* NetworkEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkEngine.swift; sourceTree = "<group>"; };
+		19FB47081E59E7B300CBDB52 /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		7CE5B93268F22206CDB54C5E /* Pods-SlothChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChat/Pods-SlothChat.debug.xcconfig"; sourceTree = "<group>"; };
 		833EC7638C3327113002345A /* Pods-SlothChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatTests/Pods-SlothChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8710AE05873CE6BAC5AF0DDC /* Pods-SlothChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlothChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlothChatUITests/Pods-SlothChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 		044643471DB4F03E0050F8BC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				19FB47081E59E7B300CBDB52 /* ConversationListViewController.swift */,
 				04A26BFF1DEEA58600946F24 /* SelectChatFriendViewController.swift */,
 				04E404171DD87DCB007118AF /* ChatConversationExtension.swift */,
 				044B79EC1DE0B10B00490272 /* ChatExtension.swift */,
@@ -1775,6 +1778,7 @@
 				049BAB071DDCB70D00422134 /* SCChatGroupMemberCell.swift in Sources */,
 				04E34BD91DD6C6F8007545F3 /* ChatManager.swift in Sources */,
 				0486BB681DBB41C900086303 /* IAPHelper.m in Sources */,
+				19FB47091E59E7B300CBDB52 /* ConversationListViewController.swift in Sources */,
 				04D39B7F1DB8B5CC009FBD60 /* DateUtil.swift in Sources */,
 				046E37A41DF0321200736186 /* LimitExtensions.swift in Sources */,
 				048C78881DD6D8910080BBCE /* NSDate+TimeAgo.swift in Sources */,
