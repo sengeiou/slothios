@@ -231,8 +231,8 @@ class NetworkEngine: NSObject {
     //2.获取短信验证码 POST
     func postPublicSMS(withType type:String, toPhoneno:String, completeHandler :@escaping(_ smsObj:SMS?) -> Void) -> Void {
         let URLString:String = Base_URL + API_URI.public_sms.rawValue
-        let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
-        
+        //let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], URLString: URLString)
+        let request = HTTPRequestGenerator(withParam: ["type":type,"toPhoneno":toPhoneno], method: .post, URLString: URLString);
         alamofireManager.request(request).responseObject { (response:DataResponse<SMS>) in
             
             if self.verificationResponse(value: response.result.value) {

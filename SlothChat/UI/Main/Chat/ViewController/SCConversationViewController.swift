@@ -30,6 +30,7 @@ class SCConversationViewController: RCConversationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         if self.navigationController != nil &&
             (self.navigationController?.viewControllers.count)! > 1 {
             self.setNavtionBack(imageStr: "go-back")
@@ -51,6 +52,8 @@ class SCConversationViewController: RCConversationViewController {
         checkOverdueMessage()
         
         self.register(SGVoiceMessageCell.self, forMessageClass: RCVoiceMessage.self)
+        
+        
     }
     
     override func pluginBoardView(_ pluginBoardView: RCPluginBoardView!, clickedItemWithTag tag: Int) {
@@ -89,4 +92,5 @@ class SCConversationViewController: RCConversationViewController {
         navigationController?.pushViewController(pushVC, animated: true)
     }
 }
+
 

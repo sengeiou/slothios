@@ -14,7 +14,7 @@ class LoginViewController: BaseViewController {
     let phoneView = SingleInputView.init()
     let passwordView = SingleInputView.init()
     let codeButton = UIButton(type: .custom)
-    
+    fileprivate var findpasswordVC:FindPasswordViewController? = nil;
     var timeout = 0
     
     public var countryName = "CN"
@@ -142,8 +142,8 @@ class LoginViewController: BaseViewController {
             //self.phoneView.inputTextfield.text = "18667931203" //"110110" //18667931203
             //self.passwordView.inputTextfield.text = "111111" //"A123456" //111111
             
-            self.phoneView.inputTextfield.text = "189120"
-            self.passwordView.inputTextfield.text = "A123456"
+            self.phoneView.inputTextfield.text = "18667931203"
+            self.passwordView.inputTextfield.text = "111111"
         #endif
     }
     
@@ -226,11 +226,14 @@ class LoginViewController: BaseViewController {
         
         let code = self.countryCode
         
-        let pushVC  = FindPasswordViewController.init()
-        pushVC.loginVC = self
-        pushVC.phoneNo = phoneStr!
-        pushVC.codeNo = code
-        navigationController?.pushViewController(pushVC, animated: true)
+        self.findpasswordVC = nil;
+        self.findpasswordVC = FindPasswordViewController.init();
+        
+        self.findpasswordVC!.loginVC = self
+        self.findpasswordVC!.phoneNo = phoneStr!
+        self.findpasswordVC!.codeNo = code
+        SGLog(message: (self.findpasswordVC))
+        navigationController?.pushViewController(self.findpasswordVC!, animated: true)
     }
     
     func loginButtonClick() {

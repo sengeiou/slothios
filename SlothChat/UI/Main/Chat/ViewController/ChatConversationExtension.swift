@@ -180,6 +180,9 @@ extension SCConversationViewController{
     func itemButtonClick() {
         if self.conversationType == .ConversationType_PRIVATE {
             let pushVC = UserInfoViewController()
+            
+            SGLog(message: self.privateUserUuid);
+            
             pushVC.mUserUuid = self.privateUserUuid
             pushVC.likeSenderUserUuid = Global.shared.globalProfile?.userUuid
             

@@ -10,7 +10,7 @@ import UIKit
 import AwesomeCache
 
 class FindPasswordViewController: BaseViewController {
-    var timer = Timer()
+    fileprivate var timer:Timer?;
     var loginVC: LoginViewController?
     
     var phoneNo:String?
@@ -20,25 +20,32 @@ class FindPasswordViewController: BaseViewController {
     let captchaView = SingleInputView.init()
     let passwordView = SingleInputView.init()
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if !(phoneNo?.isEmpty)! {
-            self.fireTimer()
+            //self.fireTimer()
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if timer.isValid {
-            timer.invalidate()
+        if self.timer != nil {
+            if timer!.isValid {
+                timer!.invalidate()
+            }
         }
+        
+        self.loginVC = nil;
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         sentupViews()
         getPublicSMS()
     }
+    
     
     func sentupViews() {
         let scrollView = UIScrollView()
@@ -115,11 +122,35 @@ class FindPasswordViewController: BaseViewController {
         view.addSubview(confirmButton)
         
         
+//        confirmButton.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-8)
+//            make.height.equalTo(44)
+//            make.left.lessThanOrEqualTo(80)
+//            make.right.greaterThanOrEqualTo(-80)
+//        }
+        
+        let loginButton = UIButton.init(type: .custom)
+        loginButton.setTitle("返回", for: .normal)
+        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        loginButton.setTitleColor(SGColor.SGMainColor(), for: .normal)
+        loginButton.addTarget(self, action:#selector(loginButtonClick), for: .touchUpInside)
+        loginButton.layer.borderColor = SGColor.SGMainColor().cgColor
+        loginButton.layer.borderWidth = 1.0
+        loginButton.layer.cornerRadius = 23
+        view.addSubview(loginButton)
+        
         confirmButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-8)
-            make.height.equalTo(44)
-            make.left.lessThanOrEqualTo(80)
-            make.right.greaterThanOrEqualTo(-80)
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
+            make.height.equalTo(46)
+            make.bottom.equalTo(loginButton.snp.top).offset(-10)
+        }
+        
+        loginButton.snp.makeConstraints { (make) in
+            make.left.equalTo(80)
+            make.right.equalTo(-80)
+            make.height.equalTo(46)
+            make.bottom.equalTo(-16)
         }
     }
     
@@ -144,17 +175,20 @@ class FindPasswordViewController: BaseViewController {
             attributedText.addAttribute(NSForegroundColorAttributeName, value: SGColor.SGBlueColor(), range: range)
             tipLabel.attributedText = attributedText
             
-            timer.invalidate()
+            if self.timer != nil {
+                self.timer!.invalidate()
+            }
+            
         }
     }
     
     func fireTimer() {
-        if loginVC!.timeout > 0 && timer.isValid {
+        if loginVC!.timeout > 0 && (self.timer?.isValid)! {
             return
         }
 //        loginVC!.timeout = 60
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(update), userInfo: nil, repeats: true);
-        timer.fire()
+        timer!.fire()
     }
     
     //MARK:- NetWork
@@ -165,9 +199,8 @@ class FindPasswordViewController: BaseViewController {
             return
         }
         
-        let engine = NetworkEngine()
         self.showNotificationProgress()
-        engine.postPublicSMS(withType: "resetPwd", toPhoneno: codeNo! + phoneNo!) { (response) in
+        NetworkEngine().postPublicSMS(withType: "resetPwd", toPhoneno: codeNo! + phoneNo!) { (response) in
             self.hiddenNotificationProgress(animated: false)
             if response?.status == ResponseError.SUCCESS.0 &&
                 !((self.phoneNo?.isEmpty)!) {
@@ -225,5 +258,8 @@ class FindPasswordViewController: BaseViewController {
         self.changeUserPassword(verifyCode: captcha!, newPwd: password!)
     }
     
+    func loginButtonClick() -> Void {
+        _ = self.navigationController?.popViewController(animated: true);
+    }
 }
 

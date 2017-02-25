@@ -136,7 +136,9 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         
         let unreadCount = model.unreadMessageCount
+        
         badgeView.isHidden = unreadCount <= 0
+        
         let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
         timeLabel.text = date.timeAgo
         
@@ -164,9 +166,12 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         dataSource = officialGroup.officialGroupMemberVos!
         collectionView?.reloadData()
         
+        let unreadCount = model.unreadMessageCount
+        badgeView.isHidden = unreadCount <= 0
+        
         if let member = officialGroup.getChatMemberInfo(userUuid: model.senderUserId) {
             configCellWithObject(lastUserAvatarUrl: member.profilePicUrl!, lastUserName: member.userDisplayName!, model: model)
-        }else{
+        }else {
             
             let userInfo = RCIM.shared().getUserInfoCache(model.senderUserId)
             
@@ -185,6 +190,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
                 self.configCellWithObject(lastUserAvatarUrl: userInfo?.portraitUri, lastUserName: (userInfo?.name)!, model: model)
             }
         }
+        
     }
     
     public func configCellWithObject(userGroup: ChatUserGroupVo,model: RCConversationModel){

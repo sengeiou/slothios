@@ -223,10 +223,11 @@ extension ConversationListViewController: UITableViewDelegate,UITableViewDataSou
         
         let tmpModel = getTableViewModel(indexPath: indexPath)
         
+        SGLog(message: tmpModel.targetId);
+        
         search.isActive = false
         
         guard let target = self.chatList?.data?.getTargetModel(targetId: tmpModel.targetId) else {
-            
             return
         }
         
@@ -236,8 +237,11 @@ extension ConversationListViewController: UITableViewDelegate,UITableViewDataSou
         
         if tmpModel.targetId.hasPrefix("officialGroup") {
             chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
+            
         }else if tmpModel.targetId.hasPrefix("privateChatGroup") {
-            chat.privateUserUuid = target.targetId
+            
+            chat.privateUserUuid = target.privateUserUuid
+            SGLog(message: chat.privateUserUuid)
         }
         
         chat.title = target.targetName
@@ -375,7 +379,11 @@ extension ConversationListViewController {
             
             var isThere:Bool = false;
             for conversation in conversationList as! [RCConversation] {
-                if conversation.targetId == model.targetId {
+                SGLog(message: conversation.targetId);
+                SGLog(message: privateChat.userUuid);
+                
+                if conversation.targetId == privateChat.privateChatUuid {
+                    
                     isThere = true;
                 }
             }
@@ -393,12 +401,7 @@ extension ConversationListViewController {
         model.conversationType = .ConversationType_GROUP;
         model.conversationTitle = chatOfficialGroup.officialGroupName;
         
-        for conversation in conversationList as! [RCConversation] {
-            if conversation.targetId == model.targetId {
-                let model:RCConversationModel = RCConversationModel.init(conversation: conversation, extend: nil)
-                self.conversationListDataSource.remove(model);
-            }
-        }
+       
         self.conversationListDataSource.insert(model, at: 0);
         
         ChatDataManager.shared.refreshBadgeValue();
