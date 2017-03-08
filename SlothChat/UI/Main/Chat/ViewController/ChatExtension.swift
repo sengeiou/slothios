@@ -37,7 +37,7 @@ extension BaseViewController{
     }
     
     func pushChatViewController(targetId: String?,userUuid: String?,title: String?) {
-        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: targetId) else {
+        guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: userUuid) else {
             return
         }
         chat.title = title

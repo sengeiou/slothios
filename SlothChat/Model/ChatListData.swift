@@ -49,7 +49,7 @@ class ChatListData : NSObject, NSCoding, Mappable{
                 return nil
         }
         for privateChat in privateChatVos {
-            if privateChat.privateChatUuid == privateChatId {
+            if (privateChat.privateChatUuid == privateChatId) || (privateChat.userUuid == privateChatId) {
                 return privateChat
             }
         }
@@ -64,6 +64,8 @@ class ChatListData : NSObject, NSCoding, Mappable{
             target.targetId = privateChat.privateChatUuid
             target.targetName = privateChat.nickname
             target.privateUserUuid = privateChat.userUuid;
+            
+            
             return target
         }
         

@@ -137,14 +137,28 @@ class LoginViewController: BaseViewController {
         }
         
         #if DEBUG
-            //self.phoneView.inputTextfield.text = "110110"
-            //self.passwordView.inputTextfield.text = "A123456"
+            //86110110 1b44584edc7747078cf192a5357cc5d6
+            #if (arch(i386) || arch(x86_64)) && os(iOS)
+                //let DEVICE_IS_SIMULATOR = true
+                self.phoneView.inputTextfield.text = "189120"
+                //self.phoneView.inputTextfield.text = "18611386481"
+                self.passwordView.inputTextfield.text = "A123456"
+                //self.passwordView.inputTextfield.text = "12345678"
+            #else
+                //let DEVICE_IS_SIMULATOR = false
+                self.phoneView.inputTextfield.text = "110110"
+                self.passwordView.inputTextfield.text = "A123456"
+                //self.phoneView.inputTextfield.text = "189120"
+                //self.phoneView.inputTextfield.text = "18611386481"
+                //self.passwordView.inputTextfield.text = "A123456"
+                //self.passwordView.inputTextfield.text = "12345678"
+            #endif
+           
             //self.phoneView.inputTextfield.text = "18667931203" //"110110" //18667931203
             //self.passwordView.inputTextfield.text = "111111" //"A123456" //111111
-            
-            self.phoneView.inputTextfield.text = "18667931203"
-            self.passwordView.inputTextfield.text = "111111"
         #endif
+        
+        
     }
     
     func configPhoneInputView(inputView : SingleInputView) {

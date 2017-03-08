@@ -32,6 +32,9 @@ class SettingObj: BaseObject {
         let about = SettingObj()
         about.titleStr = "关于我们"
         
-        return [password,privateChat,notify,balance,about]
+        let eula = SettingObj();
+        eula.titleStr = "最终用户许可协议"
+        
+        return [password,privateChat,notify,balance,about,eula]
     }
 }

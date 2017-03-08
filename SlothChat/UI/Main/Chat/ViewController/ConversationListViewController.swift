@@ -103,13 +103,16 @@ extension ConversationListViewController: RCIMReceiveMessageDelegate,RCIMConnect
     func onRCIMReceive(_ message: RCMessage!, left: Int32) {
         
         if left <= 0 {
-            if message.conversationType == .ConversationType_PRIVATE {
-                self.convertToConversationModel();
-            }
-            else if message.conversationType == .ConversationType_GROUP {
-            }
-            else {
-                self.convertToConversationModel();
+//            if message.conversationType == .ConversationType_PRIVATE {
+//                self.convertToConversationModel();
+//            }
+//            else {
+//                self.getChatList {
+//                    
+//                }
+//            }
+            self.getChatList {
+                
             }
         }
     }
@@ -227,8 +230,22 @@ extension ConversationListViewController: UITableViewDelegate,UITableViewDataSou
         
         search.isActive = false
         
-        guard let target = self.chatList?.data?.getTargetModel(targetId: tmpModel.targetId) else {
-            return
+        var target:ChatTarget? = self.chatList?.data?.getTargetModel(targetId: tmpModel.targetId)
+        if target == nil {
+            target = ChatTarget(targetId:tmpModel.targetId, targetName: "", privateUserUuid: tmpModel.targetId);
+            ChatDataManager.userInfoWidthID(tmpModel.targetId){ (userInfo) in
+                target?.targetName = userInfo?.name;
+                DispatchQueue.main.async {
+                    guard let chat = SCConversationViewController(conversationType: RCConversationType.ConversationType_PRIVATE, targetId: tmpModel.targetId) else {
+                        return
+                    }
+                    chat.privateUserUuid = target?.privateUserUuid
+                    chat.title = target?.targetName
+                    chat.officialGroupUuid = self.chatList?.data?.chatOfficialGroupVo?.officialGroupUuid
+                    self.navigationController?.pushViewController(chat, animated: true)
+                }
+            }
+            return;
         }
         
         guard let chat = SCConversationViewController(conversationType: tmpModel.conversationType, targetId: tmpModel.targetId) else {
@@ -239,12 +256,10 @@ extension ConversationListViewController: UITableViewDelegate,UITableViewDataSou
             chat.officialGroup = self.chatList?.data?.chatOfficialGroupVo
             
         }else if tmpModel.targetId.hasPrefix("privateChatGroup") {
-            
-            chat.privateUserUuid = target.privateUserUuid
-            SGLog(message: chat.privateUserUuid)
+            chat.privateUserUuid = target?.privateUserUuid
         }
         
-        chat.title = target.targetName
+        chat.title = target?.targetName
         chat.officialGroupUuid = self.chatList?.data?.chatOfficialGroupVo?.officialGroupUuid
         navigationController?.pushViewController(chat, animated: true)
         
@@ -291,7 +306,8 @@ extension ConversationListViewController: UITableViewDelegate,UITableViewDataSou
     func doneDeleteChat(model: RCConversationModel, indexPath: IndexPath) {
         RCIMClient.shared().remove(model.conversationType, targetId: model.targetId)
         self.conversationListDataSource.remove(model)
-        self.conversationListTableView.reloadData()
+        self.conversationListTableView.deleteRows(at: [indexPath], with: .automatic);
+        //self.conversationListTableView.reloadData()
         ChatDataManager.shared.refreshBadgeValue()
     }
 }
@@ -359,6 +375,7 @@ extension ConversationListViewController {
         for conversation in conversationList as! [RCConversation] {
             let model:RCConversationModel = RCConversationModel.init(conversation: conversation, extend: nil);
             if model.conversationType != .ConversationType_GROUP {
+                
                 self.conversationListDataSource.add(model);
             }
         }
@@ -379,16 +396,13 @@ extension ConversationListViewController {
             
             var isThere:Bool = false;
             for conversation in conversationList as! [RCConversation] {
-                SGLog(message: conversation.targetId);
-                SGLog(message: privateChat.userUuid);
-                
-                if conversation.targetId == privateChat.privateChatUuid {
-                    
+                if (conversation.targetId == privateChat.privateChatUuid) || (conversation.targetId == privateChat.userUuid) {
                     isThere = true;
                 }
             }
             
             if isThere {
+                
             }
             else {
                 self.conversationListDataSource.add(model)

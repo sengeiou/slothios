@@ -101,7 +101,7 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         let cell : SettingCell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingCell
         let settingObj = dataSource[indexPath.row]
         cell.configCellWithObj(settingObj: settingObj)
-        if indexPath.row == 0 || indexPath.row == 4 {
+        if indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 5 {
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .default
         }else{
@@ -123,6 +123,11 @@ class SettingViewController: BaseViewController,UITableViewDelegate,UITableViewD
         }else if indexPath.row == 3{
             charge()
             return
+        }
+        else if indexPath.row == 5 {
+            let web = WebViewController();
+            self.navigationController?.pushViewController(web, animated: true);
+            return;
         }
         
         if let pushVC = pushVC {
