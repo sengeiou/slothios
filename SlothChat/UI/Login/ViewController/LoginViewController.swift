@@ -141,6 +141,7 @@ class LoginViewController: BaseViewController {
             #if (arch(i386) || arch(x86_64)) && os(iOS)
                 //let DEVICE_IS_SIMULATOR = true
                 self.phoneView.inputTextfield.text = "189120"
+                //self.phoneView.inputTextfield.text = "110110"
                 //self.phoneView.inputTextfield.text = "18611386481"
                 self.passwordView.inputTextfield.text = "A123456"
                 //self.passwordView.inputTextfield.text = "12345678"

@@ -15,6 +15,7 @@ use_frameworks!
   pod 'MJRefresh'
   pod "Timberjack", :git => 'https://github.com/andysmart/Timberjack'
   pod 'MonkeyKing'
+  pod 'R.swift'
   # Pods for SlothChat
 
   target 'SlothChatTests' do

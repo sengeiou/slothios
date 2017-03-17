@@ -442,14 +442,21 @@ class NetworkEngine: NSObject {
 
         guard let token = Global.shared.globalLogin?.token,
               let likeSenderUserUuid = likeUuid,
-              let userUuid = userUuid else {
+              let userUUID = userUuid else {
             SGLog(message: "数据为空")
+//                let message:String = "token = \(Global.shared.globalLogin?.token),likeSenderUserUuid = \(likeUuid),userUuid = \(userUuid)"
+//                let alertController: UIAlertController = UIAlertController.init(title: "错误", message: message, preferredStyle: .alert)
+//                let action:UIAlertAction = UIAlertAction.init(title: "返回", style: .default, handler: { (action) in
+//                    
+//                })
+//                alertController.addAction(action);
+//                UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
             return
         }
         
         var URLString:String = self.Base_URL + API_URI.get_userProfile.rawValue
         
-        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
+        URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUUID)
         URLString = URLString.replacingOccurrences(of: "{likeSenderUserUuid}", with: likeSenderUserUuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
 

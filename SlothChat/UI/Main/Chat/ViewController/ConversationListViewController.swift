@@ -258,7 +258,7 @@ extension ConversationListViewController: UITableViewDelegate,UITableViewDataSou
         }else if tmpModel.targetId.hasPrefix("privateChatGroup") {
             chat.privateUserUuid = target?.privateUserUuid
         }
-        
+        chat.privateUserUuid = target?.privateUserUuid
         chat.title = target?.targetName
         chat.officialGroupUuid = self.chatList?.data?.chatOfficialGroupVo?.officialGroupUuid
         navigationController?.pushViewController(chat, animated: true)

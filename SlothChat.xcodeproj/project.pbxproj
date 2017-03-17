@@ -1328,6 +1328,7 @@
 				19273B0E1DA9EE1300150460 /* Resources */,
 				426AD4B66BBEDC741FA90F69 /* [CP] Embed Pods Frameworks */,
 				3FDF8E4953D158A696E9DF17 /* [CP] Copy Pods Resources */,
+				19806EEB1E7C375900BD3C34 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1478,6 +1479,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		19806EEB1E7C375900BD3C34 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
 		3FDF8E4953D158A696E9DF17 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
