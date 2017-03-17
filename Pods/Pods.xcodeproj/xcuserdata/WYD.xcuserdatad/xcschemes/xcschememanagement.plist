@@ -79,14 +79,14 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XCGLogger.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>279225D45DBDF4A09B4E955D763C9FD3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>2F5622F3B18DF497981AB58C6D1FC72F</key>
 		<dict>
 			<key>primary</key>
@@ -97,7 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>472B11E4F884DDF6068C03182D7004BC</key>
+		<key>3C783AA3E6581DC6AD950FDEC9761BF4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5F426E4EB31B53C4CD7D5D13FD13B2AE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7A4AB17A7BA1431B155A475379200A85</key>
+		<key>80F69ECE85F40B5E0E9897C1807B18A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,12 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C901BC12159B1526C1390DA702F89984</key>
+		<key>98431FB39128ECCC2BE570E863FA863B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D18D16B4F324735AD8AA8A46AB6627AF</key>
+		<key>9E0C69675DE54C801DFDF53CEAA9CADD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +147,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D86FE473D4CC59E5CFBCA2D5F2A1583D</key>
+		<key>D96C977E49A3C35FB977C81C3030D894</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,6 +158,11 @@
 			<true/>
 		</dict>
 		<key>ED95C2E7E6003D8C80A2BCEFA3803CCB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F08DCF839A8672A1D08384D9282B4EC7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -4,18 +4,19 @@
 target 'SlothChat' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 use_frameworks!
-  pod "Alamofire"
-  pod "SwiftyJSON"
-  pod "SnapKit"
-  pod "PKHUD", :git => 'https://github.com/toyship/PKHUD.git'
-  pod "AwesomeCache", :git => 'https://github.com/aschuch/AwesomeCache.git'
-  pod "AlamofireObjectMapper"
-  pod "RongCloudIM/IMKit"
-  pod "SDWebImage"
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+  pod 'SnapKit'
+  pod 'PKHUD', :git => 'https://github.com/toyship/PKHUD.git'
+  pod 'AwesomeCache', :git => 'https://github.com/aschuch/AwesomeCache.git'
+  pod 'AlamofireObjectMapper'
+  pod 'RongCloudIM/IMKit'
+  pod 'SDWebImage'
   pod 'MJRefresh'
-  pod "Timberjack", :git => 'https://github.com/andysmart/Timberjack'
+  pod 'Timberjack', :git => 'https://github.com/andysmart/Timberjack'
   pod 'MonkeyKing'
   pod 'R.swift'
+  pod 'XCGLogger', '~> 4.0.0'
   # Pods for SlothChat
 
   target 'SlothChatTests' do

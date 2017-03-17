@@ -20,6 +20,9 @@ PODS:
   - SnapKit (3.1.2)
   - SwiftyJSON (3.1.4)
   - Timberjack (0.0.3)
+  - XCGLogger (4.0.0):
+    - XCGLogger/Core (= 4.0.0)
+  - XCGLogger/Core (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -34,6 +37,7 @@ DEPENDENCIES:
   - SnapKit
   - SwiftyJSON
   - Timberjack (from `https://github.com/andysmart/Timberjack`)
+  - XCGLogger (~> 4.0.0)
 
 EXTERNAL SOURCES:
   AwesomeCache:
@@ -69,7 +73,8 @@ SPEC CHECKSUMS:
   SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Timberjack: 20de84a2c135134de6821d1ea90cd57709567e2d
+  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: ca364a5a7969593492b213e62df2fc60ab91e6a1
+PODFILE CHECKSUM: a101f5c5cb70cde84a2db2cc23534939618dde02
 
 COCOAPODS: 1.2.0
