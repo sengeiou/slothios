@@ -28,7 +28,8 @@ class PublishViewController: BaseViewController,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
         
         sentupView()
-        setNavtionConfirm(titleStr: "发送")
+        setNavtionConfirm(titleStr: "竞价")
+        setNavtionBack(titleStr: "发布")
         getAdsBidOrder()
     }
     
