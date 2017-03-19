@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import Timberjack
-
+import XCGLogger
 struct ResponseError {
     static let SUCCESS = ("100", "成功")
     static let ERROR_AUTH_CODE = ("201", "token授权码错误")
@@ -781,21 +781,23 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        var address = GVUserDefaults.standard().locationDesc
+        let address:String = GVUserDefaults.standard().locationDesc
+        /*
         if address != nil {
-            address = address?.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            address = address?.urlEncode
             URLString = URLString.appending("&adress=" + address!)
         }else{
             URLString = URLString.appending("&adress=")
-        }
+        } */
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             // code
-            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 1.0) else{
+            guard let imageData:Data = UIImageJPEGRepresentation(picFile, 0.6) else {
                 SGLog(message: "imageData 为空");
                 return
             }
             multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
+            multipartFormData.append(address.data(using: .utf8)!, withName: "adress");
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):
@@ -1437,4 +1439,16 @@ class NetworkEngine: NSObject {
         }
     }
 }
+ 
+ extension String {
+    // url encode
+    var urlEncode:String? {
+        let allowedCharacterSet = (CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[] ").inverted)
+        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)
+    }
+    // url decode
+    var urlDecode :String? {
+        return self.removingPercentEncoding
+    }
+ }
  

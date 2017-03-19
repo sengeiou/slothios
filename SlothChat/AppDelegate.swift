@@ -9,11 +9,13 @@
 import UIKit
 import AwesomeCache
 import MonkeyKing
+import XCGLogger
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
     #if DEBUG
         print("\(fileName as NSString)\nmethodName:\(methodName)\nLine:\(lineNumber)\nLog:\(message)");
     #endif
+    
 }
 
 struct SGGlobalKey {

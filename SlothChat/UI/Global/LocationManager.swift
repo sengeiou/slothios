@@ -15,14 +15,12 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     let manager = CLLocationManager()
     
     func startLocationCity() {
-        let authorizationStatus = CLLocationManager.authorizationStatus()
         
-        if (authorizationStatus == CLAuthorizationStatus.notDetermined){
+        if self.requestAuthorization() {
             manager.requestWhenInUseAuthorization()
-        } else {
-            manager.startUpdatingLocation()
-            manager.desiredAccuracy = kCLLocationAccuracyKilometer
+            manager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
             manager.delegate = self
+            manager.requestLocation();
             manager.startUpdatingLocation()
         }
     }
@@ -34,8 +32,8 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
         if location == nil {
             return
         }
-        manager.stopUpdatingHeading()
-        manager.stopUpdatingLocation()
+        
+        SGLog(message: location)
         
         CLGeocoder().reverseGeocodeLocation(location!, completionHandler:
             {(placemarks, error) in
@@ -70,10 +68,44 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
                     GVUserDefaults.standard().locationDesc = Name
                 }
         })
+        
+        manager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        SGLog(message: error.localizedDescription)
+        SGLog(message: error)
+    }
+    
+    func requestAuthorization() -> Bool {
+        let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        let appDelegate: AppDelegate? = (UIApplication.shared.delegate as? AppDelegate)
+        
+        // If the status is denied or only granted for when in use, display an alert
+        if status == .denied {
+            var title: String
+            title = "无法定位"
+            let message: String = "定位已关闭,请在设置-隐私里打开"
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: {(_ action: UIAlertAction) -> Void in
+            })
+            alert.addAction(cancelAction)
+            let settingAction = UIAlertAction(title: "设置", style: .default, handler: {(_ action: UIAlertAction) -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
+                    let settingsURL = URL(string: UIApplicationOpenSettingsURLString)
+                    UIApplication.shared.openURL(settingsURL!)
+                })
+            })
+            alert.addAction(settingAction)
+            let vc: UIViewController? = appDelegate?.window?.rootViewController
+            vc?.present(alert, animated: true, completion: { _ in })
+        }
+        if status == .denied {
+            
+            return false
+        }
+        else {
+            return true
+        }
     }
     
 }
