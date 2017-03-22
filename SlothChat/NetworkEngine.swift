@@ -781,7 +781,7 @@ class NetworkEngine: NSObject {
         URLString = URLString.replacingOccurrences(of: "{userUuid}", with: userUuid)
         URLString = URLString.replacingOccurrences(of: "{token}", with: token)
         
-        let address:String = GVUserDefaults.standard().locationDesc
+        let address:String? = GVUserDefaults.standard().locationDesc
         /*
         if address != nil {
             address = address?.urlEncode
@@ -797,7 +797,14 @@ class NetworkEngine: NSObject {
                 return
             }
             multipartFormData.append(imageData, withName: "picFile", fileName: "picFile", mimeType: "image/jpeg");
-            multipartFormData.append(address.data(using: .utf8)!, withName: "adress");
+            
+            if let _ = address {
+                multipartFormData.append(address!.data(using: .utf8)!, withName: "adress");
+            }
+            else {
+                multipartFormData.append("".data(using: .utf8)!, withName: "adress");
+            }
+            
             }, to: URLString, encodingCompletion: { (result) in
                 switch result {
                 case .success(let upload, _, _):

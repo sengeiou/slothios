@@ -103,9 +103,14 @@ class SCConversationListCell: RCConversationBaseCell {
     func configWithModel(model: RCConversationModel) {
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0
+        if model.receivedTime == 0 {
+            timeLabel.text = "已销毁"
+        }
+        else {
+            let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+            timeLabel.text = date.timeAgo
+        }
         
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
         guard let lastMessage = model.lastestMessage else {
             self.contentLabel.text = " "
             return

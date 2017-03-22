@@ -139,9 +139,14 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         badgeView.isHidden = unreadCount <= 0
         
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
-        
+        if model.receivedTime == 0 {
+            
+            timeLabel.text = "已销毁";
+        }
+        else {
+            let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+            timeLabel.text = date.timeAgo
+        }
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
             if let content = model.lastestMessage.value(forKey: "content") as! String? {
                 self.contentLabel.text = content
@@ -218,8 +223,13 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0
         
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
+        if model.receivedTime == 0 {
+            timeLabel.text = "已销毁"
+        }
+        else {
+            let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+            timeLabel.text = date.timeAgo
+        }
         
         if model.lastestMessage.isKind(of: RCTextMessage.self) {
             if let content = model.lastestMessage.value(forKey: "content") as! String? {
@@ -243,8 +253,13 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0
         
-        let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
-        timeLabel.text = date.timeAgo
+        if model.receivedTime == 0 {
+            timeLabel.text = "已销毁"
+        }
+        else {
+            let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
+            timeLabel.text = date.timeAgo
+        }
     }
     
     
