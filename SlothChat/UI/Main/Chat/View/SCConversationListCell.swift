@@ -104,7 +104,7 @@ class SCConversationListCell: RCConversationBaseCell {
         let unreadCount = model.unreadMessageCount
         badgeView.isHidden = unreadCount <= 0
         if model.receivedTime == 0 {
-            timeLabel.text = "已销毁"
+            timeLabel.text = ""
         }
         else {
             let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))

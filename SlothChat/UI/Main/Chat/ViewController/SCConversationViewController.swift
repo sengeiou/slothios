@@ -43,7 +43,7 @@ class SCConversationViewController: RCConversationViewController {
         }else if self.conversationType == RCConversationType.ConversationType_GROUP{
             if self.targetId.hasPrefix("officialGroup") {
                 //官方群只能语音聊天
-                configGroupInputBarControl()
+                //configGroupInputBarControl()
                 sentupTipMessageView(group: officialGroup)
             }else{
                 configGroupNotice()

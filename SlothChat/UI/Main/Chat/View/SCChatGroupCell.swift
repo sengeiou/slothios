@@ -141,7 +141,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         
         if model.receivedTime == 0 {
             
-            timeLabel.text = "已销毁";
+            timeLabel.text = "";
         }
         else {
             let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
@@ -224,7 +224,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         badgeView.isHidden = unreadCount <= 0
         
         if model.receivedTime == 0 {
-            timeLabel.text = "已销毁"
+            timeLabel.text = ""
         }
         else {
             let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
@@ -254,7 +254,7 @@ class SCChatGroupCell: RCConversationBaseCell,UICollectionViewDelegate,UICollect
         badgeView.isHidden = unreadCount <= 0
         
         if model.receivedTime == 0 {
-            timeLabel.text = "已销毁"
+            timeLabel.text = ""
         }
         else {
             let date = Date(timeIntervalSince1970: TimeInterval(model.receivedTime / 1000))
