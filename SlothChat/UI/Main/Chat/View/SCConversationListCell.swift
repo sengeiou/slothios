@@ -112,7 +112,7 @@ class SCConversationListCell: RCConversationBaseCell {
         }
         
         guard let lastMessage = model.lastestMessage else {
-            self.contentLabel.text = " "
+            self.contentLabel.text = "[已销毁]"
             return
         }
         if lastMessage.isKind(of: RCTextMessage.self) {

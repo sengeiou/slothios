@@ -82,6 +82,7 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
         
         // If the status is denied or only granted for when in use, display an alert
         if status == .denied {
+            GVUserDefaults.standard().locationDesc = "";
             var title: String
             title = "无法定位"
             let message: String = "定位已关闭,请在设置-隐私里打开"
@@ -99,8 +100,8 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
             let vc: UIViewController? = appDelegate?.window?.rootViewController
             vc?.present(alert, animated: true, completion: { _ in })
         }
-        if status == .denied {
-            
+        if status == .restricted {
+            GVUserDefaults.standard().locationDesc = "";
             return false
         }
         else {

@@ -41,7 +41,7 @@ class OfficialGroupHeaderView: UICollectionReusableView {
         topicImgView.contentMode = .scaleAspectFill
         topicImgView.clipsToBounds = true
         
-        flagLabel.text = "请注意：本群只能发语音，每条语音30'后自动销毁。"
+        flagLabel.text = "广告辱骂等行为，将直接导致封号诶！"
         flagLabel.font = UIFont.systemFont(ofSize: 12)
         flagLabel.textColor = SGColor.SGTextColor()
         addSubview(flagLabel)

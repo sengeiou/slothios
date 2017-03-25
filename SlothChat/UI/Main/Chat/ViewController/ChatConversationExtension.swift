@@ -47,7 +47,7 @@ extension SCConversationViewController{
     }
     
     func checkOverdueMessage() {
-        if self.targetId.hasPrefix("userGroup") {
+        if self.targetId.hasPrefix("userGroup") || self.targetId.hasPrefix("officialGroup") {
            return
         }
         //RCMessageModel

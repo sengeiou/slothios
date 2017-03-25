@@ -34,7 +34,7 @@ class SCConversationViewController: RCConversationViewController {
         if self.navigationController != nil &&
             (self.navigationController?.viewControllers.count)! > 1 {
             self.setNavtionBack(imageStr: "go-back")
-        }
+        } 
         configNormalInputBarControl()
         configNavgitaionItem()
 
