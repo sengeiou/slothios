@@ -26,6 +26,7 @@ open class MonkeyKing: NSObject {
     fileprivate var deliverCompletionHandler: DeliverCompletionHandler?
     fileprivate var oauthCompletionHandler: OAuthCompletionHandler?
     fileprivate var payCompletionHandler: PayCompletionHandler?
+    fileprivate var customAlipayOrderScheme: String?
 
     fileprivate var webView: WKWebView?
 
@@ -340,7 +341,14 @@ extension MonkeyKing {
         }
 
         // Alipay
-        if urlScheme.hasPrefix("ap") {
+        var canHandleAlipay = false
+        if let customScheme = sharedMonkeyKing.customAlipayOrderScheme {
+            if urlScheme == customScheme { canHandleAlipay = true }
+        } else if urlScheme.hasPrefix("ap") {
+            canHandleAlipay = true
+        }
+        
+        if canHandleAlipay {
 
             let urlString = url.absoluteString
 
@@ -704,8 +712,17 @@ extension MonkeyKing {
                     qqSchemeURLString += "&objectlocation=pasteboard&description=\(encodedDescription)"
                 }
 
+                qqSchemeURLString += "&sdkv=2.9"
+
             } else { // Share Text
-                qqSchemeURLString += "text&file_data="
+
+                // fix #75
+                switch type {
+                case .zone:
+                    qqSchemeURLString += "qzone&title="
+                default:
+                    qqSchemeURLString += "text&file_data="
+                }
 
                 if let encodedDescription = type.info.description?.monkeyking_base64AndURLEncodedString {
                     qqSchemeURLString += "\(encodedDescription)"
@@ -737,18 +754,22 @@ extension MonkeyKing {
                     switch media {
 
                     case .url(let url):
-                        var mediaObject: [String: Any] = [
-                            "__class": "WBWebpageObject",
-                            "objectID": "identifier1"
-                        ]
-                        if let title = info.title {
-                            mediaObject["title"] = title
-                        }
+
                         if let thumbnailData = info.thumbnail?.monkeyking_compressedImageData {
+                            var mediaObject: [String: Any] = [
+                                "__class": "WBWebpageObject",
+                                "objectID": "identifier1"
+                            ]
+                            mediaObject["webpageUrl"] = url.absoluteString
+                            mediaObject["title"] = info.title ?? ""
                             mediaObject["thumbnailData"] = thumbnailData
+                            messageInfo["mediaObject"] = mediaObject
+
+                        } else {
+                            // Deliver text directly.
+                            let text = info.description ?? ""
+                            messageInfo["text"] = text.isEmpty ? url.absoluteString : text + " " + url.absoluteString
                         }
-                        mediaObject["webpageUrl"] = url.absoluteString
-                        messageInfo["mediaObject"] = mediaObject
 
                     case .image(let image):
                         if let imageData = UIImageJPEGRepresentation(image, 1.0) {
@@ -900,8 +921,9 @@ extension MonkeyKing {
 extension MonkeyKing {
     
     public enum Order {
-
-        case alipay(urlString: String)
+        /// You can custom URL scheme. Default "ap" + String(appID)
+        /// ref: https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.piSRlm&treeId=204&articleId=105295&docType=1
+        case alipay(urlString: String, scheme: String?)
         case weChat(urlString: String)
         
         public var canBeDelivered: Bool {
@@ -927,17 +949,19 @@ extension MonkeyKing {
         sharedMonkeyKing.payCompletionHandler = completionHandler
         
         switch order {
-
+            
         case .weChat(let urlString):
             if !openURL(urlString: urlString) {
                 completionHandler(false)
             }
             
-        case .alipay(let urlString):
+        case let .alipay(urlString, scheme):
+            sharedMonkeyKing.customAlipayOrderScheme = scheme
             if !openURL(urlString: urlString) {
                 completionHandler(false)
             }
         }
+        
     }
 }
 
@@ -1095,23 +1119,40 @@ extension MonkeyKing {
 extension MonkeyKing: WKNavigationDelegate {
 
     public func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-
+        
         // Pocket OAuth
         if let errorString = (error as NSError).userInfo["ErrorFailingURLStringKey"] as? String, errorString.hasSuffix(":authorizationFinished") {
             removeWebView(webView, tuples: (nil, nil, nil))
+            return
         }
+        
+        // Failed to connect network
+        activityIndicatorViewAction(webView, stop: true)
+        addCloseButton()
+        
+        let detailLabel = UILabel()
+        detailLabel.text = "无法连接，请检查网络后重试"
+        detailLabel.textColor = UIColor.gray
+        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        let centerX = NSLayoutConstraint(item: detailLabel, attribute: .centerX, relatedBy: .equal, toItem: webView, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let centerY = NSLayoutConstraint(item: detailLabel, attribute: .centerY, relatedBy: .equal, toItem: webView, attribute: .centerY, multiplier: 1.0, constant: -50.0)
+        webView.addSubview(detailLabel)
+        webView.addConstraints([centerX,centerY])
+        webView.scrollView.alwaysBounceVertical = false
+        
     }
-
+    
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 
         activityIndicatorViewAction(webView, stop: true)
+        addCloseButton()
 
         guard let urlString = webView.url?.absoluteString else {
             return
         }
-
-        var scriptString = "var button = document.createElement('a'); button.setAttribute('href', 'about:blank'); button.innerHTML = '关闭'; button.setAttribute('style', 'width: calc(100% - 40px); background-color: gray;display: inline-block;height: 40px;line-height: 40px;text-align: center;color: #777777;text-decoration: none;border-radius: 3px;background: linear-gradient(180deg, white, #f1f1f1);border: 1px solid #CACACA;box-shadow: 0 2px 3px #DEDEDE, inset 0 0 0 1px white;text-shadow: 0 2px 0 white;position: fixed;left: 0;bottom: 0;margin: 20px;font-size: 18px;'); document.body.appendChild(button);"
-
+        
+        var scriptString = ""
+        
         if urlString.contains("getpocket.com") {
             scriptString += "document.querySelector('div.toolbar').style.display = 'none';"
             scriptString += "document.querySelector('a.extra_action').style.display = 'none';"
@@ -1129,13 +1170,6 @@ extension MonkeyKing: WKNavigationDelegate {
 
         guard let url = webView.url else {
             webView.stopLoading()
-            return
-        }
-
-        // Close Button
-        if url.absoluteString.contains("about:blank") {
-            let error = NSError(domain: "User Cancelled", code: -1, userInfo: nil)
-            removeWebView(webView, tuples: (nil, nil, error))
             return
         }
 
@@ -1210,14 +1244,14 @@ extension MonkeyKing {
     fileprivate class func generateWebView() -> WKWebView {
         
         let webView = WKWebView()
-        webView.frame = UIScreen.main.bounds
-        webView.frame.origin.y = UIScreen.main.bounds.height
+        let screenBounds = UIScreen.main.bounds
+        webView.frame = CGRect(origin: CGPoint(x: 0, y: screenBounds.height),
+                               size: CGSize(width: screenBounds.width, height: screenBounds.height - 20))
         
         webView.navigationDelegate = sharedMonkeyKing
         webView.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
-        webView.scrollView.frame.origin.y = 20
         webView.scrollView.backgroundColor = webView.backgroundColor
-        
+
         UIApplication.shared.keyWindow?.addSubview(webView)
         
         return webView
@@ -1458,21 +1492,40 @@ extension MonkeyKing {
         guard let url = URL(string: urlString), let webView = MonkeyKing.sharedMonkeyKing.webView else {
             return
         }
-        
+
         webView.load(URLRequest(url: url))
-        
-        let activityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        activityIndicatorView.center = CGPoint(x: webView.bounds.midX, y: webView.bounds.midY+30)
+
+        let activityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0.0, y: 0.0, width: 20.0, height: 20.0))
+        activityIndicatorView.center = CGPoint(x: webView.bounds.midX, y: webView.bounds.midY + 30.0)
         activityIndicatorView.activityIndicatorViewStyle = .gray
 
         webView.scrollView.addSubview(activityIndicatorView)
         activityIndicatorView.startAnimating()
 
         UIView.animate(withDuration: 0.32, delay: 0.0, options: .curveEaseOut, animations: {
-            webView.frame.origin.y = 0
+            webView.frame.origin.y = 20.0
         }, completion: nil)
     }
 
+    fileprivate func addCloseButton() {
+
+        guard webView != nil else {
+            return
+        }
+
+        let closeButton = CloseButton(type: .custom)
+        closeButton.frame = CGRect(origin: CGPoint(x: UIScreen.main.bounds.width - 50.0, y: 4.0),
+                                   size: CGSize(width: 44.0, height: 44.0))
+        closeButton.addTarget(self, action: #selector(closeOuathView), for: .touchUpInside)
+        webView!.addSubview(closeButton)
+    }
+
+    @objc fileprivate func closeOuathView() {
+        guard webView != nil else { return }
+        let error = NSError(domain: "User Cancelled", code: -1, userInfo: nil)
+        removeWebView(webView!, tuples: (nil, nil, error))
+    }
+    
     fileprivate func removeWebView(_ webView: WKWebView, tuples: ([String: Any]?, URLResponse?, Error?)?) {
 
         activityIndicatorViewAction(webView, stop: true)
@@ -1519,7 +1572,6 @@ extension MonkeyKing {
         return UIApplication.shared.canOpenURL(url)
     }
 }
-
 
 // MARK: Private Extensions
 
@@ -1618,7 +1670,9 @@ private extension Bundle {
         var info = infoDictionary
 
         if let localizedInfo = localizedInfoDictionary, !localizedInfo.isEmpty {
-            info = localizedInfo
+            for (key, value) in localizedInfo {
+                info?[key] = value
+            }
         }
 
         guard let unwrappedInfo = info else {
@@ -1771,3 +1825,26 @@ private extension UIImage {
     }
 }
 
+class CloseButton: UIButton {
+
+    override func draw(_ rect: CGRect) {
+
+        let circleWidth: CGFloat = 28.0
+        let circlePathX = (rect.width - circleWidth) / 2.0
+        let circlePathY = (rect.height - circleWidth) / 2.0
+        let circlePathRect = CGRect(x: circlePathX, y: circlePathY, width: circleWidth, height: circleWidth)
+        let circlePath = UIBezierPath(ovalIn: circlePathRect)
+        UIColor(white: 0.8, alpha: 1.0).setFill()
+        circlePath.fill()
+
+        let xPath = UIBezierPath()
+        xPath.lineWidth = 2.0
+        let offset: CGFloat = (bounds.width - circleWidth) / 2.0
+        xPath.move(to: CGPoint(x: offset + circleWidth / 4.0, y: offset + circleWidth / 4.0))
+        xPath.addLine(to: CGPoint(x: offset + 3.0 * circleWidth / 4.0, y: offset + 3.0 * circleWidth / 4.0))
+        xPath.move(to: CGPoint(x: offset + circleWidth / 4.0, y: offset + 3.0 * circleWidth / 4.0))
+        xPath.addLine(to: CGPoint(x: offset + 3.0 * circleWidth / 4.0, y: offset + circleWidth / 4.0))
+        UIColor.white.setStroke()
+        xPath.stroke()
+    }
+}
