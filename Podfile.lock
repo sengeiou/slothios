@@ -6,23 +6,27 @@ PODS:
   - AwesomeCache (5.0)
   - MJRefresh (3.1.12)
   - MonkeyKing (1.2.3)
-  - ObjectMapper (2.2.5)
-  - PKHUD (3.2.1)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - ObjectMapper (2.2.6)
+  - PKHUD (4.2.1)
   - R.swift (3.2.0):
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
-  - RongCloudIM/IMKit (2.8.8):
+  - RongCloudIM/IMKit (2.8.10):
     - RongCloudIM/IMLib
-  - RongCloudIM/IMLib (2.8.8)
+  - RongCloudIM/IMLib (2.8.10)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
   - Timberjack (0.0.3)
-  - XCGLogger (4.0.0):
-    - XCGLogger/Core (= 4.0.0)
-  - XCGLogger/Core (4.0.0)
+  - XCGLogger (5.0.1):
+    - XCGLogger/Core (= 5.0.1)
+  - XCGLogger/Core (5.0.1):
+    - ObjcExceptionBridging
 
 DEPENDENCIES:
   - Alamofire
@@ -30,20 +34,18 @@ DEPENDENCIES:
   - AwesomeCache (from `https://github.com/aschuch/AwesomeCache.git`)
   - MJRefresh
   - MonkeyKing
-  - PKHUD (from `https://github.com/toyship/PKHUD.git`)
+  - PKHUD
   - R.swift
   - RongCloudIM/IMKit
   - SDWebImage
   - SnapKit
   - SwiftyJSON
   - Timberjack (from `https://github.com/andysmart/Timberjack`)
-  - XCGLogger (~> 4.0.0)
+  - XCGLogger
 
 EXTERNAL SOURCES:
   AwesomeCache:
     :git: https://github.com/aschuch/AwesomeCache.git
-  PKHUD:
-    :git: https://github.com/toyship/PKHUD.git
   Timberjack:
     :git: https://github.com/andysmart/Timberjack
 
@@ -51,9 +53,6 @@ CHECKOUT OPTIONS:
   AwesomeCache:
     :commit: 592a9e8e8e421de8b29fbc8464ada1aaf8d0d5d7
     :git: https://github.com/aschuch/AwesomeCache.git
-  PKHUD:
-    :commit: 28fb970b41d63134e962f9da766b96670c0f55f0
-    :git: https://github.com/toyship/PKHUD.git
   Timberjack:
     :commit: 303b398d5ead5d5fc4dbf86a476b09a856dda4ec
     :git: https://github.com/andysmart/Timberjack
@@ -64,17 +63,18 @@ SPEC CHECKSUMS:
   AwesomeCache: c4a73e97b03901ea46084902b61cd5902a54dd88
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   MonkeyKing: 1cfd8fb7984f1d747c1f7c1179d755f8cc58e9b4
-  ObjectMapper: fb30f71e08470d1e5a20b199fafe1246281db898
-  PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  ObjectMapper: '042708195cc46c20871cbcbec0453826398273fd'
+  PKHUD: 957ce2a68b3c97a51839b30216120c1dbc0c3a78
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
-  RongCloudIM: bf728368e7bb0740eab72a175a9f8f4cc52e23b9
+  RongCloudIM: 654e9893b94f6e5a085e832335532ed2a8ea5930
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   Timberjack: 20de84a2c135134de6821d1ea90cd57709567e2d
-  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
+  XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
 
-PODFILE CHECKSUM: a101f5c5cb70cde84a2db2cc23534939618dde02
+PODFILE CHECKSUM: '09405026304e069bdcbbd7a1c33b8a5dd27503e4'
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
