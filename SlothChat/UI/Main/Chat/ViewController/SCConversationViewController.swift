@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManager
 
 class SCConversationViewController: RCConversationViewController {
     var officialGroupUuid: String?
@@ -18,14 +19,14 @@ class SCConversationViewController: RCConversationViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        IQKeyboardManager.sharedManager().enable = false
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.shared().isEnabled = false
+        IQKeyboardManager.shared().isEnableAutoToolbar = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.shared().isEnableAutoToolbar = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()

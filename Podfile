@@ -17,6 +17,7 @@ use_frameworks!
   pod 'MonkeyKing'
   pod 'R.swift'
   pod 'XCGLogger'
+  pod 'IQKeyboardManager'
   # Pods for SlothChat
 
   target 'SlothChatTests' do

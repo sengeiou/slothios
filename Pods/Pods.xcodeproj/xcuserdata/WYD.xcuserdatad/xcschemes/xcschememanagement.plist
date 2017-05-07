@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -92,7 +97,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0F2F5F95DF229319CFAA1B2D2D8B0E94</key>
+		<key>2E13F0FDAB263298CF83A78FDA7E80F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>53D370658E251AD6253545CB4B9BD508</key>
+		<key>58FB39E0AE708C88BCD30DD421AE7CFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,11 +127,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>741DFBF12BF95DF3B113D677B4819A4F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
@@ -137,17 +137,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CEA81962413181D8859BC6D4CAC9456</key>
+		<key>A4B0D56DCBA3B662FCFC58B4401D76BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D5A975264FE26BBE5087A7FA48F52E0</key>
+		<key>A8C5125804BC3ADCF576E2CF73C9E64F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B24747223D6502BE6B98F326F1860FB8</key>
+		<key>B4623365F8DC66F9B7DBD551DDDAD5B7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1418685B43B075768B3C7436D7B5B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C36CB2CB977A4E7D954935096D00A1ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CCAF4388A278B6EAA15D39BC96039340</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -158,11 +173,6 @@
 			<true/>
 		</dict>
 		<key>D7A75F149082140741FC1E0B5B2863C8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DB9E3A9F6E587203DDB3B304561F5E20</key>
 		<dict>
 			<key>primary</key>
 			<true/>

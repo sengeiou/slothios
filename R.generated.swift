@@ -21,12 +21,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 11 files.
+  /// This `R.file` struct is generated, and contains static references to 10 files.
   struct file {
     /// Resource file `EULA.html`.
     static let eULAHtml = Rswift.FileResource(bundle: R.hostingBundle, name: "EULA", pathExtension: "html")
-    /// Resource file `IQKeyboardManager.bundle`.
-    static let iQKeyboardManagerBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "IQKeyboardManager", pathExtension: "bundle")
     /// Resource file `NSDateTimeAgo.bundle`.
     static let nSDateTimeAgoBundle = Rswift.FileResource(bundle: R.hostingBundle, name: "NSDateTimeAgo", pathExtension: "bundle")
     /// Resource file `checkmark.png`.
@@ -49,12 +47,6 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "EULA", withExtension: "html")`
     static func eULAHtml(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.eULAHtml
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-    
-    /// `bundle.url(forResource: "IQKeyboardManager", withExtension: "bundle")`
-    static func iQKeyboardManagerBundle(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.iQKeyboardManagerBundle
       return fileResource.bundle.url(forResource: fileResource)
     }
     

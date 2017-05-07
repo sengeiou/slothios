@@ -10,6 +10,7 @@ import UIKit
 import AwesomeCache
 import MonkeyKing
 import XCGLogger
+import IQKeyboardManager
 
 public func SGLog<N>(message:N,fileName:String = #file,methodName:String = #function,lineNumber:Int = #line){
     #if DEBUG
@@ -46,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         addNoticeObserver()
-        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared().isEnabled = true
         manager.startLocationCity()
         ThirdManager.startThirdLib()
         configRemote(application)
