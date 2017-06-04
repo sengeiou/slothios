@@ -44,7 +44,7 @@ class ThirdManager: NSObject {
         }
         
         RCIM.shared().connect(withToken: token, success: { (userId : String?) -> Void in
-            SGLog(message: "登陆成功。当前登录的用户ID：\(userId)")
+            SGLog(message: "登陆成功。当前登录的用户ID：\(String(describing: userId))")
         }, error: { (status) -> Void in
             SGLog(message: "登陆的错误码为:\(status.rawValue)")
         }, tokenIncorrect: { () -> Void in
